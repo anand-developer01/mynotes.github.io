@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="John Doe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <style>
+        /* javascript css */
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-size: 18px;
+        }
+
+        .table-res {
+            overflow-x: scroll;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .title {
+            color: red;
+        }
+
+
+
+        .list-style-remove {
+            list-style: none;
+            padding: 0;
+        }
+
+        .notes-text {
+            background-color: antiquewhite;
+            text-align: left;
+            white-space: pre-wrap;
+            padding: 15px;
+            width: 100%;
+            word-wrap: break-word;
+            display: inline-block;
+        }
+
+        .left-menu-box {
+            height: 100%;
+            width: 100%;
+            background-color: #E7E9EB;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+
+        /* Left menu */
+        .left-menu-box {
+            height: 100%;
+            width: 100%;
+            background-color: #E7E9EB;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .left-menu-list {
+            padding: 7px;
+        }
+
+
+        /* Tool Tip styles */
+        .top-of-site-link[data-visible=true] {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .top-of-site-link {
+            visibility: hidden;
+            opacity: 0;
+            transition: .2s;
+            position: fixed;
+            bottom: 1.8rem;
+            left: 38.5rem;
+            z-index: 15;
+
+            border-radius: 50%;
+            height: 53px;
+            width: 53px;
+
+            background-color: rgb(104, 159, 243);
+            padding: 5px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        @media (min-width:320px) and (max-width: 600px) {
+            .top-of-site-link {
+                z-index: 15;
+                left: 13.5rem;
+                bottom: 0.8rem;
+            }
+        }
+
+
+        /* Header Nav Bar */
+
+
+        .nav {
+            width: 100%;
+            background-color: #1A237E;
+            display: flex;
+            align-items: center;
+            height: 57px;
+        }
+
+        .nav>.nav-header {
+            flex: 0.95;
+            padding-left: 1rem;
+        }
+
+        .nav>.nav-header>.nav-title {
+            font-size: 22px;
+            color: #fff;
+        }
+
+        .nav>.nav-list {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav>.nav-list>li {
+            list-style-type: none;
+        }
+
+        .nav>.nav-list>li a {
+            text-decoration: none;
+            color: #efefef;
+            cursor: pointer;
+        }
+
+        .nav>#nav-check {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            
+            .nav {
+                padding: 1rem;
+            }
+
+            .nav>.nav-btn {
+                display: inline-block;
+                position: absolute;
+                right: 0;
+                top: 0;
+                padding-top: 0.2rem;
+            }
+
+            .nav>.nav-btn>label {
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+                padding: 13px;
+            }
+
+            .nav>.nav-btn>label>span {
+                display: block;
+                width: 25px;
+                height: 10px;
+                border-top: 2px solid #eee;
+            }
+
+            .nav>.nav-list {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                background-color: #1A237E;
+                height: 0;
+                transition: all 0.3s ease-in;
+                top: 56px;
+                left: 0;
+                overflow: hidden;
+                z-index: 99999;
+            }
+
+            .nav>.nav-list>li {
+                width: 100%;
+                margin-top: 1.5rem;
+            }
+
+            .nav>#nav-check:checked~.nav-list {
+                height: calc(100vh - 50px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-header">
+            <div class="nav-title">
+                Logo
+            </div>
+        </div>
+        <div class="nav-btn">
+            <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+
+        <ul class="nav-list">
+            <li><a href="./index.html">Javascript</a></li>
+            <li><a href="./react-notes.html"> React </a></li>
+            <li><a href="./vue-notes.html"> Vue js </a></li>
+            <li><a href="./typescript.html"> typescript </a></li>
+            <li><a href="./css.html"> css </a></li>
+            <li><a href="./english.html">English</a></li>
+        </ul>
+    </nav>
+
+    <div class="">
+        <div class="row">
+            <div class='col-lg-3 col-sm-12'>
+                <div class='left-menu-box'>
+                    <div id="myLinks"></div>
+                </div>
+            </div>
+            <div class='col-lg-9 col-sm-12'>
+                <div id="myList"></div>
+            </div>
+        </div>
+        <div>
+            <a href="#top" class='top-of-site-link' data-visible="true">
+                <p style="font-size: 39px; margin: -9px auto; padding-left: 10px;">&#8593;</p>
+            </a>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="main.js"></script>
+    <script src="./notes-data/english-notes.js"></script>
+    <script>
+
+
+        let list = document.getElementById("myList");
+        let leftLinks = document.getElementById("myLinks");
+        for (let i = 0; i < SubjectList.Structures.length; ++i) {
+
+            let listDiv = document.createElement('div');
+
+            let mainListDiv = document.createElement('div');
+            let contentDiv = document.createElement('p');
+
+            mainListDiv.className = 'notes-text'
+            mainListDiv.id = `title${i}`
+
+            let strongT = document.createElement('h3');
+            let pT = document.createElement('p');
+
+            strongT.textContent = SubjectList.Structures[i].topic;
+            pT.textContent = SubjectList.Structures[i].explain;
+            contentDiv.textContent = SubjectList.Structures[i].content;
+
+            // for (let j = 0; j < SubjectList.Structures[i].content.length; ++j) {
+            //     console.log(SubjectList.Structures[i].content[j].eng)
+            //     contentDiv.innerHTML = `<p>${j} ) ${SubjectList.Structures[i].content[j].eng}</p> <p>${SubjectList.Structures[i].content[j].tel}</p>`
+            // }
+
+            
+
+            listDiv.appendChild(strongT)
+            listDiv.appendChild(pT)
+            listDiv.appendChild(contentDiv)
+
+            let liT = document.createElement('li');
+
+
+
+            let ulT = document.createElement('ul')
+            ulT.className = 'list-style-remove'
+
+            liT.appendChild(listDiv)
+            ulT.appendChild(liT)
+            mainListDiv.appendChild(ulT)
+
+            list.appendChild(mainListDiv)
+
+
+            // left menu links
+            let leftMenuListDiv = document.createElement('div');
+            let leftMenuD_FlexDiv = document.createElement('div');
+            let a = document.createElement('a');
+            let linkText = document.createTextNode(SubjectList.Structures[i].topic);
+
+            leftMenuD_FlexDiv.className = 'd-flex'
+            leftMenuD_FlexDiv.appendChild(leftMenuListDiv);
+
+            leftMenuListDiv.className = 'left-menu-list'
+            leftMenuListDiv.appendChild(a);
+
+            a.appendChild(linkText);
+            a.title = SubjectList.Structures[i].topic;
+            a.href = `#title${i}`;
+            leftLinks.appendChild(leftMenuD_FlexDiv)
+
+        }
+    </script>
+</body>
+
+</html>
