@@ -2092,7 +2092,190 @@ The following shows the syntax of defining a private instance method:
           code1: ``
         },
       ]
+    },
+      {
+      id: 1,
+      title: "instanceof operator",
+      note: [
+        {
+          text1: `In object-oriented programming, an instance is a concrete realization of a class. When you define a class, you're essentially creating a blueprint. An instance, then, is an object built from that blueprint. It has all the characteristics defined in the class, but with specific values.
+          
+          In JavaScript, the <b>instanceof</b> operator is used to check if an object belongs to a particular class or constructor function. It evaluates to <b>true</b> if the object is an instance of the specified class or a subclass of it, otherwise <b>false</b>.
+
+
+          `,
+          code1:`
+          object instanceof Class
+
+
+          // Ex:
+          class Animal {}
+
+          class Dog extends Animal {}
+
+          const animal = new Animal();
+          const dog = new Dog();
+
+          console.log(animal instanceof Animal); // true
+          console.log(dog instanceof Animal);    // true, because Dog extends Animal
+          console.log(dog instanceof Dog);      // true
+          console.log(animal instanceof Dog);    // false
+
+
+
+
+          In this example, animal instanceof Animal returns true because animal is an instance of Animal. Similarly, dog instanceof Animal returns true because dog is an instance of Dog, which is a subclass of Animal. However, animal instanceof Dog returns false because animal is not an instance of Dog.
+
+          `
+        },
+        {
+          text1: `The <b>instanceof</b> operator returns <b>true</b> if a prototype of a constructor (<b>constructor.prototype</b>) appears in the prototype chain of an <b>object</b>.
+
+          The following shows the syntax of the instanceof operator:
+          
+          <span style="color:red">object instanceof contructor</span>
+
+          In this syntax:
+          
+          <b>object</b> is the object to test.
+          <b>constructor</b> is a function to test against.
+
+          <b>JavaScript instanceof operator example</b>
+          The following example defines the <b>Person</b> type and uses the <b>instanceof</b> operator to check if an object is an instance of that type:`,
+          code1: `function Person(name) {
+            this.name = name;
+          }
+          
+          let p1 = new Person('John');
+          
+          console.log(p1 instanceof Person); // true
+
+
+//           How it works.
+
+// First, define a Person type using the constructor function pattern:
+
+function Person(name) {
+  this.name = name;
+}
+
+// Second, create a new object of the 'Person' type:
+
+let p1 = new Person('John Doe');
+
+// Third, check if the 'person' is an instance of the 'Person' type:
+
+console.log(p1 instanceof Person); // true
+          
+          `
+        },
+        {
+          text1: `It returns <b>true</b> because the <b>Person.prototype</b> appears on the prototype chain of the <b>p1</b> object. The prototype chain of the <b>p1</b> is the link between <b>p1, Person.prototype</b>, and <b>Object.prototype:</b>
+          
+          The following also returns true because the Object.prototype appears on the prototype chain of the p1 object:
+
+          <span style="color:red"> console.log(p1 instanceof Object); // true </span>
+
+          <b> ES6 class and instanceof operator </b>
+          The following example defines the <b>Person</b> class and uses the <b>instanceof</b> operator to check if an object is an instance of the class:
+`,
+          code1: `
+          class Person {
+            constructor(name) {
+              this.name = name;
+            }
+          }
+          
+          let p1 = new Person('John');
+          
+          console.log(p1 instanceof Person); // true
+
+          
+          // First, define the 'Person' class:
+
+          class Person {
+            constructor(name) {
+              this.name = name;
+            }
+          }
+
+          // Second, create a new instance of the 'Person' class:
+
+          let p1 = new Person('John');
+
+          // Third, check if p1 is an instance of the 'Person' class:
+
+          console.log(p1 instanceof Person); // true
+
+          `
+        },
+        {
+          text1: `<b>-> The instanceof operator and inheritance</b>
+          The following example defines the <b>Employee</b> class that extends the <b>Person</b> class:`,
+          code1: `
+          class Person {
+            constructor(name) {
+              this.name = name;
+            }
+          }
+          
+          class Employee extends Person {
+            constructor(name, title) {
+              super(name);
+              this.title = title;
+            }
+          }
+          
+          let e1 = new Employee();
+          
+          console.log(e1 instanceof Employee); // true
+          console.log(e1 instanceof Person); // true
+          console.log(e1 instanceof Object); // true
+          `
+        },
+        {
+          text1:`Since <b>e1</b> is an instance of the <b>Employee</b> class, it's also an instance of the <b>Person</b> and <b>Object</b> classes (base classes).
+
+          <b>-> Symbol.hasInstance</b>
+          In ES6, the <b>instanceof</b> operator uses the <b>Symbol.hasInstance</b> function to check the relationship. The <b>Symbol.hasInstance()</b> accepts an object and returns <b>true</b> if a type has that object as an instance. For example:`,
+          code1:`class Person {
+            constructor(name) {
+              this.name = name;
+            }
+          }
+          
+          let p1 = new Person('John');
+          
+          console.log(Person[Symbol.hasInstance](p1)); // true`
+        },
+        {
+          text1:`Since the <b>Symbol.hasInstance</b> is defined on the Function prototype, it's automatically available by default in all functions and classes
+
+          You can redefine the <b>Symbol.hasInstance</b> on a subclass as a static method. For example:`,
+          code1:`class Person {
+            constructor(name) {
+              this.name = name;
+            }
+          }
+          
+          class Android extends Person {
+            static [Symbol.hasInstance]() {
+              return false;
+            }
+          }
+          
+          let a1 = new Android('Sonny');
+          
+          console.log(a1 instanceof Android); // false
+          console.log(a1 instanceof Person); // false`
+        },
+        {
+          text1:``,
+          code1:``
+        },
+      ]
     }
+
 
   ]
 }
