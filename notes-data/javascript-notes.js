@@ -5,12 +5,12 @@ const javascriptData = {
       title: "Array destructuring",
       note: [
         {
-          text1 : `//Array destructuring is a unique technique that allows you to neatly extract an array's value into new variables.
+          text1: `//Array destructuring is a unique technique that allows you to neatly extract an array's value into new variables.
 
           //Array destructuring in JavaScript is a syntax that allows you to extract values from arrays and assign them to variables in a concise way. It's a shorthand syntax for extracting multiple values from an array simultaneously.
           
           // Data needed for first part of the section`,
-          code1 : `const restaurant = {
+          code1: `const restaurant = {
             name: 'Classico Italiano',
             location: 'Via Angelo Tavanti 23, Firenze, Italy',
             categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
@@ -37,9 +37,9 @@ const javascriptData = {
           };`
         },
         {
-          text1 : `// Multi-level array destructuring in JavaScript allows you to extract values not only from the top level of an array but also from nested arrays within it. This is particularly useful when working with arrays of arrays (also known as nested arrays or multidimensional arrays).
+          text1: `// Multi-level array destructuring in JavaScript allows you to extract values not only from the top level of an array but also from nested arrays within it. This is particularly useful when working with arrays of arrays (also known as nested arrays or multidimensional arrays).
           `,
-          code1 : `console.log(restaurant.order(2, 0))
+          code1: `console.log(restaurant.order(2, 0))
 
           const copy2ar = [...restaurant.starterMenu, ...restaurant.mainMenu];
           console.log(copy2ar);
@@ -60,16 +60,16 @@ const javascriptData = {
           ({ a, b } = obb) // => 4 6`
         },
         {
-          text1 : ``,
-          code1 : ``
+          text1: ``,
+          code1: ``
         },
         {
-          text1 : ``,
-          code1 : ``
+          text1: ``,
+          code1: ``
         },
         {
-          text1 : ``,
-          code1 : ``
+          text1: ``,
+          code1: ``
         }
       ]
     },
@@ -78,7 +78,7 @@ const javascriptData = {
       title: "Object destructuring",
       note: [
         {
-          text1 : `//Object destructuring is a unique technique that allows you to neatly extract an Object value into new variables.
+          text1: `//Object destructuring is a unique technique that allows you to neatly extract an Object value into new variables.
 
           //Object destructuring in JavaScript is a syntax that allows you to extract values from Object and assign them to variables in a concise way. It's a shorthand syntax for extracting multiple values from an Object simultaneously.
           
@@ -87,7 +87,7 @@ const javascriptData = {
           //Object destructuring is a unique technique that allows you to neatly extract an Object value into new variables.
           
           //Object destructuring in JavaScript is a syntax that allows you to extract values from Object and assign them to variables in a concise way. It's a shorthand syntax for extracting multiple values from an Object simultaneously.`,
-          code1 : `const restaurant = {
+          code1: `const restaurant = {
             name: 'Classico Italiano',
             location: 'Via Angelo Tavanti 23, Firenze, Italy',
             categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
@@ -124,15 +124,15 @@ const javascriptData = {
           };`
         },
         {
-          text1 : `Multi-level array destructuring in JavaScript allows you to extract values not only from the top level of an array but also from nested arrays within it. This is particularly useful when working with arrays of arrays (also known as nested arrays or multidimensional arrays).`,
-          code1 : `console.log("order ", restaurant.order(2, 0))
+          text1: `Multi-level array destructuring in JavaScript allows you to extract values not only from the top level of an array but also from nested arrays within it. This is particularly useful when working with arrays of arrays (also known as nested arrays or multidimensional arrays).`,
+          code1: `console.log("order ", restaurant.order(2, 0))
 
           const copy2ar = [...restaurant.starterMenu, ...restaurant.mainMenu];
           console.log(copy2ar);`
         },
         {
-          text1 : `if we wanted the variable names to be different from the property names?`,
-          code1 : `const {
+          text1: `if we wanted the variable names to be different from the property names?`,
+          code1: `const {
             name: restaurantName,
             categories: cats,
             starterMenu: breakFast
@@ -199,7 +199,7 @@ console.log(op1, cl1);
       title: "rest operator",
       note: [
         {
-          text1 : `//rest operator is to pack elements into an array
+          text1: `//rest operator is to pack elements into an array
 
           // The operator is used to put some user-supplied values into an Array. The text after the rest operator references the values you wish to encase inside an array. You can only use it before the last parameter in a function definition.
           
@@ -207,14 +207,14 @@ console.log(op1, cl1);
           
           // Rest Parameter (...args) Details:
           
-          // Collecting Function Arguments: The rest parameter syntax allows a function to accept an indefinite number of arguments as an array. This is particularly useful when you want to create functions that can accept a variable number of arguments.
+          // <b>Collecting Function Arguments</b>: The rest parameter syntax allows a function to accept an indefinite number of arguments as an array. This is particularly useful when you want to create functions that can accept a variable number of arguments.
           
-          // Collecting Remaining Array Elements: In array destructuring, the rest parameter collects the remaining elements into a new array. This can be helpful when you want to extract certain elements from an array and gather the rest into a separate variable.
+          // <b>Collecting Remaining Array Elements</b>: In array destructuring, the rest parameter collects the remaining elements into a new array. This can be helpful when you want to extract certain elements from an array and gather the rest into a separate variable.
           
-          // Combining with Destructuring: Rest parameters can be combined with array destructuring to collect remaining elements into a separate array. This allows for flexible handling of arrays, especially when the length of the array is not fixed.
+          // <b>Combining with Destructuring</b>: Rest parameters can be combined with array destructuring to collect remaining elements into a separate array. This allows for flexible handling of arrays, especially when the length of the array is not fixed.
           
-          // Function Signatures: Rest parameters are commonly used in function signatures to indicate that a function can accept multiple arguments and gather them into an array within the function body.`,
-          code1 : ``
+          // <b>Function Signatures</b>: Rest parameters are commonly used in function signatures to indicate that a function can accept multiple arguments and gather them into an array within the function body.`,
+          code1: ``
         },
       ]
     },
@@ -223,21 +223,65 @@ console.log(op1, cl1);
       title: "spread operator",
       note: [
         {
-          text1 : `//The spread operator is to unpack an array
+          text1: `//The spread operator is to unpack an array
           // The spread operator, denoted by three consecutive dots (...), is primarily used for expanding iterables like arrays into individual elements. This operator allows us to efficiently merge, copy, or pass array elements to functions without explicitly iterating through them.
           
-          // Expanding Iterables:- The spread operator is primarily used to expand an iterable (like arrays, strings, etc.) into individual elements. It essentially spreads the values of an iterable into a new context.
+          // <b>Expanding Iterables</b>:- The spread operator is primarily used to expand an iterable (like arrays, strings, etc.) into individual elements. It essentially spreads the values of an iterable into a new context.
           
-          // Copying Arrays:- When used with arrays, the spread operator creates a shallow copy of the array. This means it creates a new array and copies over the values from the original array.
+          // <b>Copying Arrays</b>:- When used with arrays, the spread operator creates a shallow copy of the array. This means it creates a new array and copies over the values from the original array.
+
+          he spread operator in JavaScript creates a shallow copy of an object or an array.
+
+          For objects, it copies the object's properties, but if those properties are themselves objects, they are not cloned. Instead, references to those nested objects are copied. This means changes to nested objects in the copied object will also affect the original object, as they refer to the same objects in memory.
+
+          Similarly, for arrays, it creates a shallow copy. The elements themselves are copied, but if those elements are objects, they are not cloned. Changes to these nested objects within the copied array will also affect the original array.
+
+          To perform a deep copy, where nested objects are also cloned, you would need to use techniques like <b>recursion or specialized libraries such as Lodash's cloneDeep</b> function.`,
+          code1: `function deepCopy(obj) {
+            if (obj === null || typeof obj !== 'object') {
+                return obj;
+            }
+            
+            let copy = Array.isArray(obj) ? [] : {};
+            
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    copy[key] = deepCopy(obj[key]);
+                }
+            }
+            
+            return copy;
+        }
+        
+        const originalObject = {
+            name: 'John',
+            age: 30,
+            address: {
+                city: 'New York',
+                country: 'USA'
+            }
+        };
+        
+        const deepCopyObject = deepCopy(originalObject);
+        
+        // Modify the deep copy
+        deepCopyObject.name = 'Alice';
+        deepCopyObject.address.city = 'Los Angeles';
+        
+        console.log(originalObject); // { name: 'John', age: 30, address: { city: 'New York', country: 'USA' } }
+        console.log(deepCopyObject); // { name: 'Alice', age: 30, address: { city: 'Los Angeles', country: 'USA' } }
+        `
+        },
+        {
+          text1: `
+          // <b>Concatenating Arrays</b>:- It allows for easily concatenating or merging multiple arrays into a single array.
           
-          // Concatenating Arrays:- It allows for easily concatenating or merging multiple arrays into a single array.
+          // <b>Passing Arguments</b>:- Spread is frequently used when calling functions that expect a variable number of arguments. It can pass each element of an array as an argument to the function.
           
-          // Passing Arguments:- Spread is frequently used when calling functions that expect a variable number of arguments. It can pass each element of an array as an argument to the function.
+          // <b>Object Literals</b>:- It can also be used to merge properties of objects into a new object.
           
-          // Object Literals:- It can also be used to merge properties of objects into a new object.
-          
-          // Iterating Over Strings: With strings, the spread operator can be used to split the string into individual characters.`,
-          code1 : `const restaurant = {
+          // <b>Iterating Over Strings</b>: With strings, the spread operator can be used to split the string into individual characters.`,
+          code1: `const restaurant = {
             name: 'Classico Italiano',
             location: 'Via Angelo Tavanti 23, Firenze, Italy',
             categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
@@ -289,9 +333,27 @@ console.log(op1, cl1);
           `
         },
         {
-          text1 : `// hallow copy Using spread operator
+          text1: ` As mentioned in the comments <b>...</b> is bound to specific use cases. <b>\${...args}</b> wouldn't even make much sense. What should be the result? E.g. if <b>\${...args}</b> would be equivalent to <b>\${args[0],args[1]}</b>, then it would evaluate to the value of <b>args[1]</b>, because here <b style="color:red;"> ,</b> is a comma operator.`,
+          code1: `    const myName = "anand";
+          const myNameCopy = [...myName];
+          console.log('my name is \${ [...myName] } - \${ myNameCopy }')
+          Output:
+          my name is a,n,a,n,d - a,n,a,n,d
+           
+          --------------------------------
+           
+          var values = [25, 50, 75, 100]
+          // This:
+          console.log(Math.max(25, 50, 75, 100)); // => 100
+           
+          // Is the same as this:
+          console.log(Math.max(...values)); // => 100
+          console.log([...values].toString()); // => 25,50,75,100 in string form`
+        },
+        {
+          text1: `// hallow copy Using spread operator
           // hallow copy is a bit-wise copy of an object which makes a new object by copying the memory address of the original object. That is, it makes a new object by which memory addresses are the same as the original object.`,
-          code1 : `const newRestaurant = { since: 1992, ...restaurant, founder: 'annd' };
+          code1: `const newRestaurant = { since: 1992, ...restaurant, founder: 'annd' };
           console.log(newRestaurant)
           
           const restaurantCopy = { ...restaurant }
@@ -300,11 +362,11 @@ console.log(op1, cl1);
           console.log("old restaurant", restaurant)`
         },
         {
-          text1 : `// Deep copy, copies all the fields with dynamically allocated memory. That is, every value of the copied object gets a new memory address rather than the original object.
+          text1: `// Deep copy, copies all the fields with dynamically allocated memory. That is, every value of the copied object gets a new memory address rather than the original object.
 
           // How do I deep copy an object.
           // There are several ways I think. A common and popular way is to use JSON.stringify() and JSON.parse().`,
-          code1 : `const oldObj = { a: { b: 10 }, c: 2 };
+          code1: `const oldObj = { a: { b: 10 }, c: 2 };
           const newObj = JSON.parse(JSON.stringify(oldObj));
           
           oldObj.a.b = 3;
@@ -327,8 +389,8 @@ console.log(op1, cl1);
           restaurant.orderPasta(...ingredients)`
         },
         {
-          text1 : ``,
-          code1 : ``
+          text1: ``,
+          code1: ``
         },
       ]
     },
@@ -337,11 +399,11 @@ console.log(op1, cl1);
       title: "for...of loop",
       note: [
         {
-          text1 : `// A for...of loop operates on the values sourced from an iterable one by one in sequential order. Each operation of the loop on a value is called an iteration, and the loop is said to iterate over the iterable. Each iteration executes statements that may refer to the current sequence value.
+          text1: `// A <b>for...of loop</b> operates on the values sourced from an iterable one by one in sequential order. Each operation of the loop on a value is called an iteration, and the loop is said to iterate over the iterable. Each iteration executes statements that may refer to the current sequence value.
 
           // The for..of loop in JavaScript allows you to iterate over iterable objects (arrays, sets, maps, strings etc).
           `,
-          code1 : `const students = ['John', 'Sara', 'Jack', 'red', 'green', 'blue'];
+          code1: `const students = ['John', 'Sara', 'Jack', 'red', 'green', 'blue'];
 
           // using for...of
           for (let item of students) {
@@ -382,8 +444,328 @@ console.log(op1, cl1);
           }`
         },
         {
-          text1 : ``,
-          code1 : ``
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Short-Circuiting with the Logical OR (||) Operator",
+      note: [
+        {
+          text1: `Short circuiting works by evaluating an expression from left to right and returning the value of the first operand that determines the final result.
+          
+          In the case of OR, the expression is evaluated until we get one true result because the result will always be true, independent of the further conditions. If there is an expression with ||(logical OR), and the first operand itself is true, then a short circuit occurs, evaluation stops, and true is returned. OR short-circuiting can also be used to replace if else statements just like AND short-circuiting in JavaScript. In JavaScript true||expression always returns true and the false || expression always returns the expression.
+
+        The logical OR operator (<b>||</b>) returns <b>true</b> if at least one of its operands is <b>true</b>, and it returns <b>false</b> only if both operands are <b>false</b>. Like the <b>&&</b> operator, it also short-circuits its evaluation. If the left operand is <b>true</b>, there's no need to evaluate the right operand because the result is already determined to be <b>true</b>.
+
+        <b>Logical OR (||)</b>: When using ||, if the first operand evaluates to true, the second operand is not evaluated because the result of the OR operation will always be true regardless of the second operand's value. Again, this is short-circuiting. For example:
+        <span style="color:red">
+        if (condition1 || condition2) {
+        Code block
+        }
+        </span>
+        // Here, if <b>condition1</b> evaluates to true, <b>condition2</b> will not be evaluated because the overall result of the <b>||</b> operation will be true anyway.
+
+        // Short circuiting can be useful for improving performance and preventing potential errors, especially when the evaluation of the second operand involves complex or expensive operations, or when evaluating it could lead to unintended side effects.
+
+        // in the case of the OR operator, short circuiting means that if the first value is a truthy value, it will immediately return that first value.
+`,
+          code1: `// First operand is true and operator is ||,
+          // evaluation stops and true is returned.
+          console.log(true || false || false)
+          // Evaluation stops at the second operand(true).
+          console.log(false || true || true || false)
+          
+          console.log(3 || 'ram') // 3
+          console.log('' || 'ram') // ram
+          console.log(true || 0) // true
+          console.log(undefined || null) // null
+          console.log(undefined || 0 || '' || 'hello' || 23 || null) // hello
+          `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Short-Circuiting with the Logical AND && Operator",
+      note: [
+        {
+          text1: `//Short circuiting works by evaluating an expression from left to right and returning the value of the first operand that determines the final result.
+
+
+        // Falsy Values
+        // <b>'' (empty string)</b>: An empty string in JavaScript is considered falsy. Therefore, the condition evaluates to false, and the code block inside the if statement will not be executed.
+        
+        // <b> 0 </b>: The number zero is considered falsy in JavaScript. Therefore, the condition evaluates to false, and the code block inside the if statement will not be executed.
+        
+        // <b>null</b>: The null value is considered falsy in JavaScript. Therefore, the condition evaluates to false, and the code block inside the if statement will not be executed.
+        
+        // In JavaScript, values other than false, 0, '' (empty string), null, undefined, and NaN are considered truthy. Understanding these truthy and falsy values is crucial when writing conditional statements and logical operations in JavaScript.
+        
+        // Understanding truthy and falsy values is crucial as they play a significant role in conditional statements and logical operations.
+        
+        // Short circuiting refers to the behavior of logical operators && (logical AND) and || (logical OR) in programming languages.
+        
+        // Logical AND (&&): When using &&, if the first operand evaluates to false, the second operand is not evaluated because the result of the AND operation will always be false regardless of the second operand's value. This is known as short-circuiting. For example:
+        
+        // if (condition1 && condition2) {
+        // Code block
+        // }
+        
+        // In this case, if condition1 evaluates to false, condition2 will not be evaluated because the overall result of the && operation will be false anyway.
+        
+        // In JavaScript, short-circuit evaluation occurs when using logical operators like <b>&&</b> (AND) and <b>||</b> (OR). Let's take a closer look at each of these operators.
+        
+        // Short-Circuiting with the Logical AND (&&) Operator
+        
+        // The logical AND operator (<b>&&</b>) returns <b>true</b> if both of its operands are <b>true</b>, and it returns <b>false</b> if at least one of them is <b>false</b>. However, it doesn't necessarily evaluate both operands. If the left operand is <b>false</b>, there's no need to evaluate the right operand because the result is already determined to be <b>false</b>. This is where short-circuiting comes into play.
+        
+        // The logical AND expression is a short-circuit operator. As each operand is converted to a boolean, if the result of one conversion is found to be false, the AND operator stops and returns the original value of that falsy operand; it does not evaluate any of the remaining operands.`,
+          code1: `
+        const a1 = 10;
+        const b1 = 'a';
+        const c1 = null;
+        const d1 = 'c'
+        
+        console.log(a1 && b1 && c1 && d1) // null
+        `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Nullish coalescing operator (??)",
+      note: [
+        {
+          text1: `// Nullish coalescing operator (??)
+
+        // The nullish coalescing (??) operator is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
+        
+        // Remember that a nullish value and a falsy value are different concepts. While <b>null, undefined, 0, '', false, and NaN</b> are considered falsy values, only <b>null</b> and <b>undefined</b> are considered nullish values.
+        `,
+          code1: `       
+        const foo = null ?? 'default value';
+        console.log(foo); // expected output: "default value" 
+        const baz = 0 ?? 42;
+        console.log(baz); // expected output: 0 
+        `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "logical assignment operator (&&=) (||=) (??=)",
+      note: [
+        {
+          text1: `
+          Logical OR assignment operator (||=)
+Logical AND assignment operator (&&=)
+Nullish coalescing assignment operator (??=)
+
+        <div class='table-res'>
+        <table>
+        <thead>
+        <tr>
+        <th>Logical Assignment Operators</th>
+        <th>Logical Operators</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>x ||= y</td><td>x || (x = y)</td>
+        </tr>
+        <tr><td>x &amp;&amp;= y</td><td>x &amp;&amp; (x = y)</td></tr>
+        <tr><td>x ??= y</td><td>x ?? (x = y);</td></tr>
+        </tbody>
+        </table>
+        </div>
+        `,
+          code1: `const rest1 = {
+          name: 'maa wanta gadhi',
+          numGuests: 20
+        }
+        const rest2 = {
+          name: 'mana biryani',
+          numGuests: 0
+        }
+        const rest3 = {
+          name: 'rajavaaru',
+          owner: 'ramu'
+        }
+        
+        // OR Assignment operator:--
+        rest1.numGuests = rest1.numGuests || 10
+        rest2.numGuests = rest2.numGuests || 10
+        
+        // using OR Assignment operator
+        rest1.numGuests ||= 10
+        rest2.numGuests ||= 10
+        
+        console.log(rest1) // {name: 'maa wanta gadhi', numGuests: 20}
+        console.log(rest2) // {name: 'mana biryani', numGuests: 10}
+        
+        //-----------------
+
+        // nullish assignment operator(null or undefined):--
+        rest1.numGuests ??= 10
+        rest2.numGuests ??= 10
+        
+        console.log(rest1) // {name: 'maa wanta gadhi', numGuests: 20}
+        console.log(rest2) // {name: 'mana biryani', numGuests: 10}
+        
+        //-----------------
+
+        // AND assignment operator:--
+        rest1.owner = rest1.owner && "value available"
+        rest3.owner = rest3.owner && "value available"
+        
+        // using AND assignment operator
+        rest1.owner &&= "value available"
+        rest2.owner &&= "value available"
+        
+        console.log(rest1) // {name: 'maa wanta gadhi', numGuests: 20, owner: undefined}
+        console.log(rest2) // {name: 'mana biryani', numGuests: 10}
+        
+        `
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Optional chaining (?.)",
+      note: [
+        {
+          text1: `// is a feature that simplifies the process of accessing properties and methods of nested objects or arrays when intermediate properties may be null or undefined.
+
+        // let user = {}; // user has no address
+        
+        `,
+          code1: `        
+        console.log(user.address ? user.address.street ? user.address.street.name : null : null);
+        console.log(restaurant.hours.mon?.open)
+        console.log(restaurant.openingHours?.mon?.open)
+        
+        
+        const weeks = ['mod','tue','wed','thu','fri','sat','sun'];
+
+for(let day of weeks){
+    const openH = restaurant.hours[day]?.open ?? 'Closed'
+    console.log('On \${day} we open at \${openH}')
+}
+
+//Methods
+console.log(restaurant.order(2,0) ?? 'Method does not exist')
+console.log(restaurant.orderMaaVandaGadhi?.(2,1) ?? 'Method does not exist')
+
+
+// Array
+// const users = [{uname:'ram', area:'wgl'}];
+const users = [];
+console.log(users[0]?.area ?? "User Array Empty");
+
+// old use case
+if(users.length > 0) { console.log(users[0].area) } else { console.log("User Array Empty") }
+        `
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Object Literal",
+      note: [
+        {
+          text1: `JavaScript Object Literal is a data type used to define objects in JavaScript. It is a syntax for creating an object in JavaScript that is composed of key-value pairs. It is a lightweight and efficient way to create and store data. It is a great way to store related data in an organized manner.`,
+          code1: `const hours = {
+            thu: {
+              open: 12,
+              close: 22,
+            },
+            fri: {
+              open: 11,
+              close: 23,
+            },
+            sat: {
+              open: 0, // Open 24 hours
+              close: 24,
+            },
+          }
+          
+          const restaurant = {
+            name: 'Classico Italiano',
+            location: 'Via Angelo Tavanti 23, Firenze, Italy',
+            categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+            starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+            mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+          
+            order(startIndex, mainIndex) {
+              return [this.starterMenu[startIndex], this.mainMenu[mainIndex]]
+            },
+          
+            hours,
+            orderDelivery({
+              time = "8:40",
+              startIndex,
+              mainIndex = 0,
+              address
+            }) {
+              // object Parameters destructuring
+              // default values
+              return 'Food item \${this.starterMenu[startIndex]} and \${this.mainMenu[mainIndex]} scheduled to delivey on \${time} at address : \${address} '
+            }
+          };
+          
+          console.log(restaurant)
+
+// Output : --
+
+          {name: 'Classico Italiano', location: 'Via Angelo Tavanti 23, Firenze, Italy', categories: Array(4), starterMenu: Array(4), mainMenu: Array(3), …}
+categories
+: 
+(4) ['Italian', 'Pizzeria', 'Vegetarian', 'Organic']
+hours
+: 
+{thu: {…}, fri: {…}, sat: {…}}
+location
+: 
+"Via Angelo Tavanti 23, Firenze, Italy"
+mainMenu
+: 
+(3) ['Pizza', 'Pasta', 'Risotto']
+name
+: 
+"Classico Italiano"
+order
+: 
+ƒ order(startIndex, mainIndex)
+orderDelivery
+: 
+ƒ orderDelivery({ time = "8:40", startIndex, mainIndex = 0, address })
+starterMenu
+: 
+(4) ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
+[[Prototype]]
+: 
+Object
+
+          `
         },
       ]
     },
@@ -392,12 +774,8 @@ console.log(op1, cl1);
       title: "Prototypes",
       note: [
         {
-          text1 : ``,
-          code1 : ``
-        },
-        {
-          text1 : ``,
-          code1 : ``
+          text1: ``,
+          code1: ``
         },
       ]
     },
@@ -1581,7 +1959,6 @@ console.log(op1, cl1);
           text1: `<b>Combining with Other ES6 Features</b>
           Computed properties can be combined with other ES6 features like template literals and destructuring:`,
           code1: `Template Literals
-          javascript
           Copy code
           const prefix = "user";
           const id = 42;
@@ -1593,7 +1970,7 @@ console.log(op1, cl1);
           console.log(user.user_id); // Outputs: 42
 
 
-          // <b>Destructuring</b>
+          // Destructuring
           //--------------
           Copy code
           const propName = "age";
@@ -2093,7 +2470,7 @@ The following shows the syntax of defining a private instance method:
         },
       ]
     },
-      {
+    {
       id: 1,
       title: "instanceof operator",
       note: [
@@ -2104,7 +2481,7 @@ The following shows the syntax of defining a private instance method:
 
 
           `,
-          code1:`
+          code1: `
           object instanceof Class
 
 
@@ -2234,11 +2611,11 @@ console.log(p1 instanceof Person); // true
           `
         },
         {
-          text1:`Since <b>e1</b> is an instance of the <b>Employee</b> class, it's also an instance of the <b>Person</b> and <b>Object</b> classes (base classes).
+          text1: `Since <b>e1</b> is an instance of the <b>Employee</b> class, it's also an instance of the <b>Person</b> and <b>Object</b> classes (base classes).
 
-          <b>-> Symbol.hasInstance</b>
+          <b> -> Symbol.hasInstance</b>
           In ES6, the <b>instanceof</b> operator uses the <b>Symbol.hasInstance</b> function to check the relationship. The <b>Symbol.hasInstance()</b> accepts an object and returns <b>true</b> if a type has that object as an instance. For example:`,
-          code1:`class Person {
+          code1: `class Person {
             constructor(name) {
               this.name = name;
             }
@@ -2249,10 +2626,10 @@ console.log(p1 instanceof Person); // true
           console.log(Person[Symbol.hasInstance](p1)); // true`
         },
         {
-          text1:`Since the <b>Symbol.hasInstance</b> is defined on the Function prototype, it's automatically available by default in all functions and classes
+          text1: `Since the <b>Symbol.hasInstance</b> is defined on the Function prototype, it's automatically available by default in all functions and classes
 
           You can redefine the <b>Symbol.hasInstance</b> on a subclass as a static method. For example:`,
-          code1:`class Person {
+          code1: `class Person {
             constructor(name) {
               this.name = name;
             }
@@ -2270,8 +2647,8 @@ console.log(p1 instanceof Person); // true
           console.log(a1 instanceof Person); // false`
         },
         {
-          text1:``,
-          code1:``
+          text1: ``,
+          code1: ``
         },
       ]
     }

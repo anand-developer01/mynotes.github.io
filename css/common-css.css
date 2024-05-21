@@ -1,0 +1,126 @@
+ /* javascript css */
+
+ .list-style-remove {
+    list-style: none;
+    padding: 0;
+}
+
+.notes-text {
+    background-color: antiquewhite;
+    text-align: left;
+    white-space: pre-line;
+    padding: 2px 17px;
+    width: 100%;
+    /* word-wrap: break-word;
+    display: inline-block; */
+}
+
+.left-menu-box {
+    height: 100%;
+    width: 100%;
+    background-color: #E7E9EB;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+
+/* Left menu */
+.left-menu-box {
+    height: 100%;
+    width: 100%;
+    background-color: #E7E9EB;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left-menu-list {
+    padding: 7px;
+}
+
+
+/* Tool Tip styles */
+.top-of-site-link[data-visible=true] {
+    opacity: 1;
+    visibility: visible;
+}
+
+.top-of-site-link {
+    visibility: hidden;
+    opacity: 0;
+    transition: .2s;
+    position: fixed;
+    bottom: 1.8rem;
+    left: 38.5rem;
+    z-index: 15;
+
+    border-radius: 50%;
+    height: 53px;
+    width: 53px;
+
+    background-color: rgb(104, 159, 243);
+    padding: 5px;
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.li-main-box {
+    padding: 10px;
+    background-color: #d4f19d;
+    margin-bottom: 30px;
+}
+
+.code-prre {
+    padding: 0 5px;
+    background-color: transparent;
+    margin: 0;
+}
+
+
+
+@media (min-width:320px) and (max-width: 600px) {
+    .top-of-site-link {
+        z-index: 15;
+        left: 13.5rem;
+        bottom: 0.8rem;
+
+    }
+}
+
+/* Table horizontal scroll  */
+
+.table-res {
+    overflow-x: scroll;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+pre {
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
+        Liberation Mono, monospace;
+    background-color: #f6f8fa;
+}
+
+code {
+    border-radius: 6px;
+    word-break: normal;
+    white-space: pre-line;
+    border: 0;
+}

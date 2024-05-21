@@ -15,6 +15,13 @@ const navHeader = `
 
 <ul class="nav-list">
     <li><a href="./index.html">Home</a></li>
+    <li><a href="./javascript-notes.html">Javascript</a></li>
     <li><a href="react-notes.html"> React </a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="#">Vue</a></li>
+    <li><a href="#">TypeScript</a></li>
+    <li><a href="#">css & bootstrap</a></li>
+    <li><a href="#">GraphQL</a></li>
+    <li><a href="#">redux</a></li>
+    <li><a href="#">VS</a></li>
+    <li><a href="./js-code-challenges.html">Code Challenges</a></li>
 </ul>`

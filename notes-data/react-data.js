@@ -1,34 +1,5 @@
 const reactData = {
     reactNote: [
-
-        {
-            id: 1,
-            title: "aff intro",
-            note: `
-            AFF 
-            ===========
-            American First Finance provides finance service and help consumers obtain payment plans to purchase the goods and services that they want and at the same time help merchants and service suppliers increase sales. They can approve up to 80% of consumers, and offer a world class customer service experience.
-            
-            American First Finance helps consumers obtain payment plans to purchase what they want and at the same time help merchants increase sales. We can approve up to 80% of consumers, and offer a world class customer service experience.
-            
-            AFF offer programs with over 86% approval rates. In most cases our customers can be approved instantly by filling out a simple one page application.
-            ----------
-            Get approval amounts from $300 up to $5,000† and enjoy a network of 20,000+ stores to choose from.
-            Simply find a store and apply online with AFF. If approved, we’ll give you the ability to transact at the store you selected.
-            Our network of fine merchants includes stores you already know and love – here are just a few!
-            ---------
-            RISA Retail Installment Sales Agreement (closed-end, interest-bearing)
-            Lease-to-own (“LTO”) (uses a “turn” or multiple)
-            Bank Installment Loan – Merchant Funded (closed-end, interest-bearing)
-            Bank Installment Loan – Consumer Funded (closed-end, interest-bearing)
-            Bank 2-Tier “true-secondary” point-of-sale (“POS”) Installment Loan (closed-end, interest-bearing)
-            Bank Line of Credit (open-end, fee-based) – launching 2020!
-            -----------
-            A rent-to-own lease refers to an alternative method of acquiring quality household items like furniture (including mattresses), appliances, electronics, or other consumer goods. Also known as a lease-to-own payment plan, this option can allow consumers with bad credit an option to access products without making substantial upfront payments.
-            ===========
-            `,
-            // showHtml:() => (<h1>this is HTML</h1>)
-        },
         {
             id: 2,
             title: "aff intro",
@@ -41,7 +12,9 @@ const reactData = {
         {
             id: 3,
             title: "What are props in React?",
-            note: `
+            note: [
+                {
+                    text1: ` 
             In React, "props" is short for "properties," and it is a mechanism for passing data from a parent component to a child component. Props are a way to provide input to a React component, allowing it to render dynamically based on the received data.
             They can be single-valued or objects having a set of values that will be passed to components of React during creation by using a naming convention that almost looks similar to HTML-tag attributes. 
             
@@ -54,110 +27,125 @@ const reactData = {
             Inside the components, we can add attributes called props. 
             These attributes are available in the component as this. props and can be used to render dynamic data in our render method.
             `
+            }
+        ]
         },
         {
             id: 4,
             title: "Explain about types of side effects in React component.?",
-            note: `
+            note: [
+                {
+                    text1: ` #) A "side effect" is anything that affects something outside the scope of the function being executed. These can be, say, a network request, which has your code communicating with a third party
 
-            #) A "side effect" is anything that affects something outside the scope of the function being executed. These can be, say, a network request, which has your code communicating with a third party
-
-            In React components, side effects are operations that affect the outside world :
-
-            > such as modifying the DOM or manually changing the DOM in React components,
-            > setting up a subscription,
-            > making API calls for Data fetching, or updating global state,
-            > Using unpredictable timing functions like setTimeout or setInterval
-            
-            Side effects can be classified into two types:
-            
-            Synchronous side effects: 
-            -------------------------
-            Synchronous side effects are the effects that happen immediately after the state of the component changes. These side effects are straightforward to manage, as they don't require any asynchronous processing or waiting for data.
-            Examples of synchronous side effects include:
-            
-            Changing the visibility of a component
-            Updating the text or content of a component
-            Showing or hiding an error message
-            
-            Asynchronous side effects: 
-            --------------------------
-            Asynchronous side effects are the effects that happen after a delay or as a result of some external event, such as a user input or a network request. These side effects can be more complicated to manage than synchronous side effects, as they require asynchronous processing and state management.
-            Examples of asynchronous side effects include:
-            
-            Making an API call to fetch data
-            Updating the application state after receiving data from an API call
-            Setting a timer to run a function after a specified delay
-            To manage side effects in React components, developers can use the useEffect hook. The useEffect hook allows developers to perform side effects after rendering the component and to clean up any resources used by the effect. By using the useEffect hook, developers can manage both synchronous and asynchronous side effects in their components.
-            
-            `,
-            showHtml: `                <div className='table-res'>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Lifecycle Methods</th>
-                        <th>Hook</th>
-                        <th>Renders</th>
-                    </tr>
-                    <tr>
-                        <td>1) componentDidMount</td>
-                        <td>{'useEffect(()=>{ ... }, [ ])'}</td>
-                        <td>after first render only</td>
-                    </tr>
-                    <tr>
-                        <td>2) componentDidUpdate</td>
-                        <td>{'useEffect(()=>{... }, [dependency1, dependency2])'}</td>
-                        <td>after first render AND subsequent renders caused by a change in a dependency</td>
-                    </tr>
-                    <tr>
-                        <td>3) componentWillUnmount</td>
-                        <td>{'useEffect(() => { ... return ()=> {...cleanup}})'}</td>
-                        <td>So as a cleanup method to improve your application, you can clean up (cancel) the asynchronous request so that it’s not completed.</td>
-                    </tr>
-                    <tr>
-                        <td>4) shouldComponentUpdate</td>
-                        <td>{'no comparable hook, instead, wrap function component in React.memo(List)'}</td>
-                        <td>renders only if a prop changes</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>`
-
+                    In React components, side effects are operations that affect the outside world :
+        
+                    => such as modifying the DOM or manually changing the DOM in React components,
+                    => setting up a subscription,
+                    => making API calls for Data fetching, or updating global state,
+                    => Using unpredictable timing functions like setTimeout or setInterval
                     
+                    Side effects can be classified into two types:
+                    
+                    <b> Synchronous side effects: </b> 
+                    Synchronous side effects are the effects that happen immediately after the state of the component changes. These side effects are straightforward to manage, as they don't require any asynchronous processing or waiting for data.
+                    Examples of synchronous side effects include:
+                    
+                    Changing the visibility of a component
+                    Updating the text or content of a component
+                    Showing or hiding an error message
+                    
+                    <b>Asynchronous side effects: </b>
+                    Asynchronous side effects are the effects that happen after a delay or as a result of some external event, such as a user input or a network request. These side effects can be more complicated to manage than synchronous side effects, as they require asynchronous processing and state management.
+                    Examples of asynchronous side effects include:
+                    
+                    Making an API call to fetch data
+                    Updating the application state after receiving data from an API call
+                    Setting a timer to run a function after a specified delay
+                    To manage side effects in React components, developers can use the useEffect hook. The useEffect hook allows developers to perform side effects after rendering the component and to clean up any resources used by the effect. By using the useEffect hook, developers can manage both synchronous and asynchronous side effects in their components.
+                    
+                    <div class='table-res'>
+                    <table border=1 >
+                        <tbody>
+                            <tr>
+                                <th>Lifecycle Methods</th>
+                                <th>Hook</th>
+                                <th>Renders</th>
+                            </tr>
+                            <tr>
+                                <td>1) componentDidMount</td>
+                                <td>{'useEffect(()=>{ ... }, [ ])'}</td>
+                                <td>after first render only</td>
+                            </tr>
+                            <tr>
+                                <td>2) componentDidUpdate</td>
+                                <td>{'useEffect(()=>{... }, [dependency1, dependency2])'}</td>
+                                <td>after first render AND subsequent renders caused by a change in a dependency</td>
+                            </tr>
+                            <tr>
+                                <td>3) componentWillUnmount</td>
+                                <td>{'useEffect(() => { ... return ()=> {...cleanup}})'}</td>
+                                <td>So as a cleanup method to improve your application, you can clean up (cancel) the asynchronous request so that it's not completed.</td>
+                            </tr>
+                            <tr>
+                                <td>4) shouldComponentUpdate</td>
+                                <td>{'no comparable hook, instead, wrap function component in React.memo(List)'}</td>
+                                <td>renders only if a prop changes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                    
+                    `,
+                    code1: `               `
+                },
+            ]
         },
-                    {
-                        id: 5,
-                    title: "Data Binding",
-                    note: `
-                    Data binding is a concept in web development that establishes a connection between the data in an application and the user interface (UI) elements that display that data. The purpose of data binding is to ensure that changes in one part of the application are automatically reflected in another part, creating synchronization between the data and the UI.
-                    `
+        {
+            id: 5,
+            title: "Data Binding",
+            note: [
+                {
+                    text1: `
+                    Data binding is a concept in web development that establishes a connection between the data in an application and the user interface (UI) elements that display that data. The purpose of data binding is to ensure that changes in one part of the application are automatically reflected in another part, creating synchronization between the data and the UI.`,
+                    code1:``
+                }
+            ]
         },
-                    {
-                        id: 6,
-                    title: "JSX",
-                    note: `
-                    JSX stands for JavaScript XML. It is a syntax extension for JavaScript that looks similar to XML or HTML but allows you to write JavaScript code in a more declarative way, especially when defining UI components in React.js.
+        {
+            id: 6,
+            title: "JSX",
+            note: [
+                {
+                    text1: `JSX stands for JavaScript XML. It is a syntax extension for JavaScript that looks similar to XML or HTML but allows you to write JavaScript code in a more declarative way, especially when defining UI components in React.js.
 
                     JSX makes it easier to describe the structure of UI components in a syntax that resembles HTML. While it might look like a template language, JSX is ultimately just syntactic sugar over regular JavaScript. It gets transpiled into JavaScript code that creates and manipulates React elements
 
                     As stated in the official docs of React, JSX provides syntactic sugar for React.createElement( ) function.
-                    ------------
-                    const element = <h1>Hello, JSX!</h1>;
-                    ------------
-                    In the above example, the syntax <h1>Hello, JSX!</h1> is JSX. It represents a React element (a virtual representation of a DOM element) and is equivalent to the following JavaScript code:
-                    ------------
-                    const element = React.createElement('h1', null, 'Hello, JSX!');
-                    ------------
+                   
+                    <b> const element = &lt; h1 &gt; Hello, JSX !&lt; /h1 &gt; </b>
+                   
+                    In the above example, the syntax <b>&lt; h1 &gt; Hello, JSX !&lt; /h1 &gt;</b> is JSX. It represents a React element (a virtual representation of a DOM element) and is equivalent to the following JavaScript code:
+                   
+                    <b> const element = React.createElement('h1', null, 'Hello, JSX!'); </b>
+                    <span style="color:#aa1099">
                     Behind the scenes, tools like Babel are used to transpile JSX into regular JavaScript code that uses React.createElement to create React elements. The resulting JavaScript is what actually gets executed in the browser.
-
+                    </span>
                     why can't browser read jsx
-                    JSX isn't directly supported by browsers, requiring conversion by tools like Babel to transform JSX into valid JavaScript. This transpilation ensures browsers can interpret and execute the JSX-embedded code in React applications.
-                    `
+                    JSX isn't directly supported by browsers, requiring conversion by tools like Babel to transform JSX into valid JavaScript. This transpilation ensures browsers can interpret and execute the JSX-embedded code in React applications.`,
+                    code1:`const element = React.createElement('h1', null, 'Hello, JSX!'); </b>`
+                }
+            ]
         },
-                    {
-                        id: 7,
-                    title: "vue js vs React js",
-                    note: `
+        {
+            id: 7,
+            title: "vue js vs React js",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     Vue.js and React.js are both popular JavaScript frameworks for building user interfaces, but they have some differences in terms of design philosophy, syntax, and approach to certain features. Here are some key distinctions between Vue.js and React.js:
 
                     Learning Curve:
@@ -218,44 +206,50 @@ const reactData = {
                     </div>
 
                     `,
-                    // showHtml: () => (
-                    //     <div className='table-res'>
-                    //         <table>
-                    //             <tbody>
-                    //                 <tr>
-                    //                     <th>feature</th>
-                    //                     <th>vue</th>
-                    //                     <th>react</th>
-                    //                 </tr>
-                    //                 <tr>
-                    //                     <td>Component</td>
-                    //                     <td>It uses Templates to build different components</td>
-                    //                     <td>It uses JSX as a component format</td>
-                    //                 </tr>
-                    //                 <tr>
-                    //                     <td>Architecture</td>
-                    //                     <td>It features an adaptable architecture for various complex features.</td>
-                    //                     <td>It supports different state management libraries for complex features.</td>
-                    //                 </tr>
-                    //                 <tr>
-                    //                     <td>Features</td>
-                    //                     <td>It is used to develop progressive web applications.</td>
-                    //                     <td>It is used to develop single-page applications and mobile apps.</td>
-                    //                 </tr>
-                    //                 <tr>
-                    //                     <td>CSS</td>
-                    //                     <td>It supports CSS in JS by writing CSS code inside JS</td>
-                    //                     <td>It supports CSS by including script files in the JS file or by importing in component</td>
-                    //                 </tr>
-                    //             </tbody>
-                    //         </table>
-                    //     </div>
-                    //         )
+            // showHtml: () => (
+            //     <div className='table-res'>
+            //         <table>
+            //             <tbody>
+            //                 <tr>
+            //                     <th>feature</th>
+            //                     <th>vue</th>
+            //                     <th>react</th>
+            //                 </tr>
+            //                 <tr>
+            //                     <td>Component</td>
+            //                     <td>It uses Templates to build different components</td>
+            //                     <td>It uses JSX as a component format</td>
+            //                 </tr>
+            //                 <tr>
+            //                     <td>Architecture</td>
+            //                     <td>It features an adaptable architecture for various complex features.</td>
+            //                     <td>It supports different state management libraries for complex features.</td>
+            //                 </tr>
+            //                 <tr>
+            //                     <td>Features</td>
+            //                     <td>It is used to develop progressive web applications.</td>
+            //                     <td>It is used to develop single-page applications and mobile apps.</td>
+            //                 </tr>
+            //                 <tr>
+            //                     <td>CSS</td>
+            //                     <td>It supports CSS in JS by writing CSS code inside JS</td>
+            //                     <td>It supports CSS by including script files in the JS file or by importing in component</td>
+            //                 </tr>
+            //             </tbody>
+            //         </table>
+            //     </div>
+            //         )
         },
-                    {
-                        id: 8,
-                    title: "Virtual DOM",
-                    note: `
+        {
+            id: 8,
+            title: "Virtual DOM",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The representation of a UI is kept in memory and synced with the "real" DOM. It's a step that happens between the render function being called and the displaying of elements on the screen. This entire process is called reconciliation.
                     The virtual DOM gets compared to what it looked like before you updated it. React figures out which objects have changed.
 
@@ -290,31 +284,49 @@ const reactData = {
                     -For example, the componentDidUpdate lifecycle method is called after the component has been updated in the DOM.
                     `
         },
-                    {
-                        id: 9,
-                    title: "What are controlled components?",
-                    note: `
+        {
+            id: 9,
+            title: "What are controlled components?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     -A controlled component is a component that is controlled by React state
                     -A component that controls the input elements within the forms on subsequent user input is called Controlled Component, i.e, every state mutation will have an associated handler function.
-                    -Controlled Components are those in which form’s data is handled by the component’s state. It takes its current value through props and makes changes through callbacks like onClick, onChange, etc. A parent component manages its own state and passes the new values as props to the controlled component.
+                    -Controlled Components are those in which form's data is handled by the component's state. It takes its current value through props and makes changes through callbacks like onClick, onChange, etc. A parent component manages its own state and passes the new values as props to the controlled component.
 
                     In most cases, we recommend using controlled components to implement forms. In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.
                     `
         },
-                    {
-                        id: 10,
-                    title: "Uncontrolled Components",
-                    note: `
+        {
+            id: 10,
+            title: "Uncontrolled Components",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     Uncontrolled Components are the components that are not controlled by the React state and are handled by the DOM (Document Object Model). So in order to access any value that has been entered we take the help of refs.
                     You query the DOM using a ref to find its current value when you need it.
 
                     In most cases, it's recommend to use controlled components to implement forms. In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.
                     `
         },
-                    {
-                        id: 11,
-                    title: "What is the difference between createElement and cloneElement?",
-                    note: `
+        {
+            id: 11,
+            title: "What is the difference between createElement and cloneElement?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     JSX elements will be transpiled to React.createElement() functions to create React elements which are going to be used for the object representation of UI. Whereas cloneElement is used to clone an element and pass it new props.
 
                     createElement:
@@ -364,10 +376,16 @@ const reactData = {
                     );
                     `
         },
-                    {
-                        id: 12,
-                    title: "What is Lifting State Up in React?",
-                    note: `
+        {
+            id: 12,
+            title: "What is Lifting State Up in React?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     When several components need to share the same changing data then it is recommended to lift the shared state up to their closest common ancestor. That means if two child components share the same data from its parent, then move the state to parent instead of maintaining local state in both of the child components.
 
                     A
@@ -376,10 +394,16 @@ const reactData = {
 
                     `
         },
-                    {
-                        id: 13,
-                    title: "What are the different phases of component lifecycle?",
-                    note: `
+        {
+            id: 13,
+            title: "What are the different phases of component lifecycle?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     The component lifecycle has three distinct lifecycle phases:
 
                     Mounting:
@@ -401,10 +425,16 @@ const reactData = {
 
                     `
         },
-                    {
-                        id: 14,
-                    title: "What are the lifecycle methods of React?",
-                    note: `
+        {
+            id: 14,
+            title: "What are the lifecycle methods of React?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     Before React 16.3
 
                     componentWillMount: Executed before rendering and is used for App level configuration in your root component.
@@ -427,10 +457,16 @@ const reactData = {
 
                     `
         },
-                    {
-                        id: 15,
-                    title: "What are Higher-Order Components?",
-                    note: `
+        {
+            id: 15,
+            title: "What are Higher-Order Components?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     A higher-order component (HOC) is a function that takes a component and returns a new component. Basically, it's a pattern that is derived from React's compositional nature.
 
                     We call them pure components because they can accept any dynamically provided child component but they won't modify or copy any behavior from their input components.
@@ -453,10 +489,16 @@ const reactData = {
                     r
                     `
         },
-                    {
-                        id: 16,
-                    title: "How to create props proxy for HOC component?",
-                    note: `
+        {
+            id: 16,
+            title: "How to create props proxy for HOC component?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     You can add/edit props passed to the component using props proxy pattern like this:
 
 
@@ -479,10 +521,16 @@ const reactData = {
             }
                     `
         },
-                    {
-                        id: 17,
-                    title: "What is the use of react-dom package?",
-                    note: `
+        {
+            id: 17,
+            title: "What is the use of react-dom package?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     The react-dom package provides DOM-specific methods that can be used at the top level of your app. Most of the components are not required to use this module. Some of the methods of this package are:
 
                     render()
@@ -579,10 +627,16 @@ const reactData = {
 
                     `
         },
-                    {
-                        id: 18,
-                    title: "What is the purpose of render method of react-dom?",
-                    note: `
+        {
+            id: 18,
+            title: "What is the purpose of render method of react-dom?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     This method is used to render a React element into the DOM in the supplied container and return a reference to the component. If the React element was previously rendered into container, it will perform an update on it and only mutate the DOM as necessary to reflect the latest changes.
 
                     ReactDOM.render(element, container, [callback])
@@ -590,28 +644,46 @@ const reactData = {
                     If the optional callback is provided, it will be executed after the component is rendered or updated.
                     `
         },
-                    {
-                        id: 19,
-                    title: "What is prop drilling in React",
-                    note: `
+        {
+            id: 19,
+            title: "What is prop drilling in React",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     Prop drilling in React refers to the process of passing down props (properties) through multiple levels of nested components. When a component deep in the component tree needs access to a prop that is originally provided by a parent component, these props have to be passed down through the intermediate components, even if those intermediate components do not use or need the props themselves.
 
                     Prop drilling can become a challenge in large applications as the component tree grows, and passing down props through multiple levels might make the code harder to maintain. To address this, there are advanced state management solutions in React, such as context API, Redux, or Recoil, which can help manage global or shared state without the need for prop drilling.
                     `
         },
-                    {
-                        id: 20,
-                    title: "what is usestate in react js?",
-                    note: `
+        {
+            id: 20,
+            title: "what is usestate in react js?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     In React, useState is a Hook that allows functional components to manage state. The useState Hook is used to declare state variables and provides a way to update them within functional components.
 
                     using array destructuring we can set the variable name and function name
                     `
         },
-                    {
-                        id: 21,
-                    title: "What are error boundaries?",
-                    note: `
+        {
+            id: 21,
+            title: "What are error boundaries?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     Error boundaries are a feature in React that allows you to catch JavaScript errors anywhere in a component tree and log those errors, display a fallback UI, or perform other actions. Error boundaries are useful for preventing unhandled errors from crashing the entire React application.
 
                     In React, errors that occur during rendering, in lifecycle methods, or in the constructors of the whole tree below them are considered uncaught errors. By default, if an error occurs in a component, it will propagate up the component tree until it reaches the root, causing the entire application to unmount.
@@ -632,14 +704,20 @@ const reactData = {
 
                     The React docs are clear about that, although you're free to reuse them as many times as you wish:
 
-                    The componentDidCatch() method works like a JavaScript catch { } block, but for components. Only class components can be error boundaries. In practice, most of the time you’ll want to declare an error boundary component once and use it throughout your application.
+                    The componentDidCatch() method works like a JavaScript catch { } block, but for components. Only class components can be error boundaries. In practice, most of the time you'll want to declare an error boundary component once and use it throughout your application.
 
                     `
         },
-                    {
-                        id: 22,
-                    title: "What is React Hooks?",
-                    note: `
+        {
+            id: 22,
+            title: "What is React Hooks?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     Hooks allow functional components to have local component state, access context, perform side effects, and more.
 
                     1) useState:
@@ -772,10 +850,16 @@ const reactData = {
 
                     `
         },
-                    {
-                        id: 23,
-                    title: "What is the use of useEffect React Hooks?",
-                    note: `
+        {
+            id: 23,
+            title: "What is the use of useEffect React Hooks?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
 
                     The useEffect hook in React is used to perform side effects in functional components. Side effects can include data fetching, subscriptions, manual DOM manipulations, or any operation that needs to be performed after the component has been rendered to the screen.
 
@@ -863,10 +947,16 @@ const reactData = {
     }, [dependencies]);
                     `
         },
-                    {
-                        id: 24,
-                    title: "useRef",
-                    note: `
+        {
+            id: 24,
+            title: "useRef",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     The useRef Hook allows you to persist values between renders.
                     It can be used to store a mutable value that does not cause a re-render when updated.
                     It can be used to access a DOM element directly.
@@ -877,9 +967,9 @@ const reactData = {
 
                     ============
                     useRef is one of the standard hooks provided by React. It will return an object that you can use during the whole lifecycle of the component.
-                    The main use case for the useRef hook is to access a DOM child directly. I’ll show exactly how to do that in another section.
+                    The main use case for the useRef hook is to access a DOM child directly. I'll show exactly how to do that in another section.
 
-                    Although accessing the DOM is the main use case, it doesn’t mean it’s the only one! useRef can also be very useful to hold a mutable value across different renders of your component.
+                    Although accessing the DOM is the main use case, it doesn't mean it's the only one! useRef can also be very useful to hold a mutable value across different renders of your component.
                     ===============
                     The useRef Hook is a function that returns a mutable ref object whose '.current' property is initialized with the passed argument (initialValue). The returned object will persist for the full lifetime of the component.
 
@@ -898,15 +988,21 @@ const reactData = {
                     References can also access DOM elements. Assign the reference to ref attribute of the element you'd like to access: <div ref={reference}>Element</div> — and the element is available at reference.current.
                     `
         },
-                    {
-                        id: 26,
-                    title: "What are Custom Hooks?",
-                    note: `
+        {
+            id: 26,
+            title: "What are Custom Hooks?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     React custom hooks are reusable functions that a React JS developer can use to add special and unique functionality to the React applications.
 
                     React that allows you to extract and reuse stateful logic from functional components. By creating custom hooks, you can encapsulate complex logic into reusable functions and share that logic across different components. Custom Hooks follow a naming convention: their names start with "use" (e.g., useCustomHook).
 
-                    A Custom Hook is a function in Javascript whose name begins with ‘use’ and which calls other hooks. It is a part of React v16.8 hook update and permits you for reusing the stateful logic without any need for component hierarchy restructuring.
+                    A Custom Hook is a function in Javascript whose name begins with ‘use' and which calls other hooks. It is a part of React v16.8 hook update and permits you for reusing the stateful logic without any need for component hierarchy restructuring.
 
                     In almost all of the cases, custom hooks are considered to be sufficient for replacing render props and HoCs (Higher-Order components) and reducing the amount of nesting required. Custom Hooks will allow you for avoiding multiple layers of abstraction or wrapper hell that might come along with Render Props and HoCs.
 
@@ -976,29 +1072,47 @@ const reactData = {
           };
                     `
         },
-                    {
-                        id: 27,
-                    title: "Explain Strict Mode in React?",
-                    note: `
+        {
+            id: 27,
+            title: "Explain Strict Mode in React?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     StrictMode is a tool for highlighting potential problems in an application. Like Fragment, StrictMode does not render any visible UI. It activates additional checks and warnings for its descendants.
 
 
                     StrictMode is a development mode feature in React that helps identify common problems in your application and supports you in fixing them. It performs additional checks and warnings to aid developers in writing better code and finding potential issues.
                     `
         },
-                    {
-                        id: 27,
-                    title: "Lazy loading",
-                    note: `
+        {
+            id: 27,
+            title: "Lazy loading",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     Lazy loading is a strategy that delays the loading of some assets (e.g., images) until they are needed by the user based on the user's activity and navigation pattern; typically, these assets are only loaded when they are scrolled into view.
 
-                    lazy loading is an optimization technique or a design pattern in which the loading of an item, whether it’s a picture, video, web page, music file, or document, is delayed until it is required, saving bandwidth and precious computing resources.
+                    lazy loading is an optimization technique or a design pattern in which the loading of an item, whether it's a picture, video, web page, music file, or document, is delayed until it is required, saving bandwidth and precious computing resources.
                     `
         },
-                    {
-                        id: 28,
-                    title: "Which method would you use to handle events in React?",
-                    note: `
+        {
+            id: 28,
+            title: "Which method would you use to handle events in React?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     In React, handling events is a crucial aspect of building interactive user interfaces. There are a few methods for handling events in React, and the appropriate method depends on the context and your specific requirements. Here are the commonly used approaches:
 
                     Inline Event Handling (JSX Syntax):
@@ -1049,10 +1163,16 @@ const reactData = {
                     This is useful for optimizing performance in scenarios where the event handler doesn't depend on changing variables.
                     `
         },
-                    {
-                        id: 29,
-                    title: "In which situation would you use refs in React?",
-                    note: `
+        {
+            id: 29,
+            title: "In which situation would you use refs in React?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
 
                     Refs in React are used to get references to a DOM element or to a React component instance created using React.createRef(). They provide a way to interact with the underlying DOM elements or with the methods and properties of a class component. Here are some common situations where you might use refs in React:
 
@@ -1173,10 +1293,16 @@ const reactData = {
       }
                     `
         },
-                    {
-                        id: 30,
-                    title: "Why would you use super constructors with props arguments?",
-                    note: `
+        {
+            id: 30,
+            title: "Why would you use super constructors with props arguments?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     In JavaScript, when you extend a class using the class keyword, the child class needs to call the super() method in its constructor to invoke the constructor of the parent class. This is essential for setting up the inheritance relationship and initializing the properties and methods defined in the parent class.
 
                     The super() method is particularly important when working with React components that extend React.Component. Here are a couple of reasons why you would use super(props) in a React component:
@@ -1238,10 +1364,16 @@ const reactData = {
                     In summary, using super(props) is crucial in React class components to ensure proper inheritance and to provide the props object to both the parent and child constructors. It allows you to access and initialize properties based on the incoming props within the context of the component's lifecycle.
                     `
         },
-                    {
-                        id: 31,
-                    title: "How would you use validation on props?",
-                    note: `
+        {
+            id: 31,
+            title: "How would you use validation on props?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                     In React, you can use PropTypes or TypeScript to perform prop validation and ensure that the components receive the expected types of props. Prop validation helps catch potential issues early in the development process and makes your code more maintainable. Below, I'll provide examples using both PropTypes and TypeScript:
 
                     Prop Validation with PropTypes:
@@ -1318,10 +1450,16 @@ const reactData = {
                             By using either PropTypes or TypeScript, you can enhance your React components with type checking, making your code more robust and easier to maintain. Choose the approach that best fits your project's requirements and development workflow.
                             `
         },
-                            {
-                                id: 32,
-                            title: "Which method would you use to add attributes to components conditionally?",
-                            note: `
+        {
+            id: 32,
+            title: "Which method would you use to add attributes to components conditionally?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                             In React, you can conditionally add attributes to components using JavaScript expressions within JSX. The key is to use curly braces { } to embed dynamic values or expressions within the JSX. Below are a few examples demonstrating how to conditionally add attributes:
 
                             1. Using Conditional (Ternary) Operator:
@@ -1405,10 +1543,16 @@ const reactData = {
 
                                     `
         },
-                                    {
-                                        id: 33,
-                                    title: "What methods would you use to check and improve slow app rendering in React?",
-                                    note: `
+        {
+            id: 33,
+            title: "What methods would you use to check and improve slow app rendering in React?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     Improving the rendering performance of a React application involves identifying and addressing bottlenecks that slow down the rendering process. Here are some methods to check and improve slow app rendering in React:
 
                                     1. Performance Profiling Tools:
@@ -1529,10 +1673,16 @@ const reactData = {
 
                                     `
         },
-                                    {
-                                        id: 34,
-                                    title: "In which situation would you use useMemo() in React?",
-                                    note: `
+        {
+            id: 34,
+            title: "In which situation would you use useMemo() in React?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     The useMemo hook in React is used to memoize the result of a computation and prevent unnecessary recalculations. It is particularly useful in situations where a computation is expensive or time-consuming, and you want to avoid repeating it on every render. Here are some common situations where you might use useMemo:
 
                                     1. Computations in Functional Components:
@@ -1610,14 +1760,20 @@ const reactData = {
                                     Use useMemo when the performance benefits of memoization outweigh the cost of maintaining the memoized value. It's important to note that useMemo is not a silver bullet, and incorrect usage might lead to performance issues. Always measure and profile your application to ensure that memoization provides the expected performance improvements.
                                     `
         },
-                                    {
-                                        id: 35,
-                                    title: "How would you avoid binding in React?",
-                                    note: `
+        {
+            id: 35,
+            title: "How would you avoid binding in React?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
 
                                     To avoid the need for binding we have something introduced in ES6 as arrow functions. Using the arrow function to call this.setState will lead to avoiding the use of bind. When we use the arrow function it works because of the following reasons:
 
-                                    ● It does not re-scope this, so we don’t need to bind this in the class constructor.
+                                    ● It does not re-scope this, so we don't need to bind this in the class constructor.
                                     ● JavaScript has first-class functions, which means functions are considered as data. Therefore, arrow functions can be assigned to class properties.
 
                                     In React, binding can be avoided through various techniques, especially with the introduction of functional components and the use of arrow functions. Here are some methods to avoid binding in React:
@@ -1706,10 +1862,16 @@ const reactData = {
                                     By adopting these practices, you can write more concise and readable code while avoiding common binding issues in React components. Arrow functions and functional components with hooks offer a more modern and cleaner approach to handling functions and their scope in React applications.
                                     `
         },
-                                    {
-                                        id: 36,
-                                    title: "Explain what a mounted component is.",
-                                    note: `
+        {
+            id: 36,
+            title: "Explain what a mounted component is.",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     React does so by "mounting" (adding nodes to the DOM), "unmounting" (removing them from the DOM), and "updating" (making changes to nodes already in the DOM).
 
                                     Mounting is the process of outputting the virtual representation of a component into the final UI representation (e.g. DOM or Native Components).
@@ -1759,10 +1921,16 @@ const reactData = {
                                     In summary, a mounted component is a component that has completed its initial rendering and is now part of the DOM, allowing you to perform tasks specific to the component's presence in the user interface.
                                     `
         },
-                                    {
-                                        id: 37,
-                                    title: "Explain what an event is in React.",
-                                    note: `
+        {
+            id: 37,
+            title: "Explain what an event is in React.",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     ● Events in React JS allow developers to respond to user interaction within their applications quickly and efficiently.
                                     ● Events are triggered whenever certain actions occur – from clicks to key presses - which then fire off callback functions so that appropriate responses can be made accordingly.
 
@@ -1840,10 +2008,16 @@ const reactData = {
 
                                     `
         },
-                                    {
-                                        id: 38,
-                                    title: "What is a class component?",
-                                    note: `
+        {
+            id: 38,
+            title: "What is a class component?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     The class component uses ES6 class syntax, and it extends React components with a render method that returns React elements.
 
                                     In React, a class component is a type of component that is defined using ES6 class syntax. Class components are also known as stateful components because they have the ability to manage and maintain local state. They were the primary way of creating components in React before the introduction of functional components and hooks.
@@ -1896,10 +2070,16 @@ const reactData = {
                                     Class components extend the React.Component class, inheriting its functionality and methods.
                                     `
         },
-                                    {
-                                        id: 39,
-                                    title: "What is a component?",
-                                    note: `
+        {
+            id: 39,
+            title: "What is a component?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     In React, a component is a reusable, self-contained piece of code that represents a part of a user interface. Components are the building blocks of a React application, and they encapsulate the structure and behavior of a UI element. React applications are typically composed of multiple components that are organized into a hierarchical structure.
 
                                     Components can be classified into two main types:
@@ -1980,10 +2160,16 @@ const reactData = {
                                     In this example, Header, MainContent, and Footer are components that are composed together to create the overall structure of the App component.
                                     `
         },
-                                    {
-                                        id: 40,
-                                    title: "What is the difference between class and functional components?",
-                                    note: `
+        {
+            id: 40,
+            title: "What is the difference between class and functional components?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     Class components and functional components are two different ways of defining React components in a React application. While both types of components serve the same fundamental purpose of representing parts of a user interface, they differ in terms of syntax, features, and best practices. As of the introduction of React Hooks in React 16.8, functional components with hooks have become the more popular and recommended way of writing components.
 
                                     1. Syntax:
@@ -2123,10 +2309,16 @@ const reactData = {
 
                                     `
         },
-                                    {
-                                        id: 41,
-                                    title: "What is a state object?",
-                                    note: `
+        {
+            id: 41,
+            title: "What is a state object?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     In React, a "state object" refers to an object in a component that holds the local state of that component. The state represents data that can change over time and influences the rendering of the component. The concept of state is fundamental in React and allows components to manage and respond to dynamic user interactions, data fetching, or any other scenario where the UI needs to be updated based on changing values.
 
                                     In class components, the state is typically initialized in the constructor using this.state and updated using the setState method. Here's a simple example:
@@ -2200,10 +2392,16 @@ const reactData = {
                                     The use of a state object allows components to maintain and manage multiple pieces of data that can change independently. State is crucial for creating interactive and dynamic user interfaces in React applications.
                                     `
         },
-                                    {
-                                        id: 42,
-                                    title: "What is a props object?",
-                                    note: `
+        {
+            id: 42,
+            title: "What is a props object?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     In React, the "props object" refers to a JavaScript object that holds the properties (props) passed to a React component. Props allow the parent component to pass data down to its child components, enabling communication and customization of child components based on the parent's needs.
 
                                     Functional Components:
@@ -2263,10 +2461,16 @@ const reactData = {
 
                                     `
         },
-                                    {
-                                        id: 43,
-                                    title: "How are state objects different from props objects?",
-                                    note: `
+        {
+            id: 43,
+            title: "How are state objects different from props objects?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     In React, state and props are both mechanisms for managing data in a component, but they serve different purposes and have distinct characteristics.
                                     ------
                                     State:
@@ -2401,10 +2605,16 @@ const reactData = {
 
                                     `
         },
-                                    {
-                                        id: 44,
-                                    title: "Explain what MVC architecture is. ",
-                                    note: `
+        {
+            id: 44,
+            title: "Explain what MVC architecture is. ",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     MVC stands for Model-View-Controller, and it is a software architectural pattern used for designing and organizing code in applications. The MVC architecture separates an application into three interconnected components, each with distinct responsibilities, to enhance modularity, maintainability, and scalability. The three components are as follows:
 
                                     Model (M):
@@ -2446,10 +2656,16 @@ const reactData = {
 
                                     `
         },
-                                    {
-                                        id: 45,
-                                    title: "what is architectural difference between React and Angular.",
-                                    note: `
+        {
+            id: 45,
+            title: "what is architectural difference between React and Angular.",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     React and Angular are both popular JavaScript frameworks/libraries for building web applications, but they have several differences in terms of architecture, approach, language, and other aspects. Here's a summary of the key differences between React and Angular:
 
                                     1. Architecture:
@@ -2566,10 +2782,16 @@ const reactData = {
                                     The choice between React and Angular depends on project requirements, team expertise, and developer preferences. React is known for its simplicity, flexibility, and ease of integration, while Angular provides a more opinionated and structured framework with a full set of features out of the box. Each has its strengths, and the decision often comes down to the specific needs of the project and the development
                                     `
         },
-                                    {
-                                        id: 46,
-                                    title: "How are controlled and uncontrolled components different?",
-                                    note: `
+        {
+            id: 46,
+            title: "How are controlled and uncontrolled components different?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     Controlled components and uncontrolled components are two different approaches to managing and handling form elements and user input in React. The key differences lie in how they handle and manage the state of form elements.
 
                                     Controlled Components:
@@ -2668,10 +2890,16 @@ const reactData = {
                                     The choice between controlled and uncontrolled components depends on the specific requirements and constraints of the application. In many cases, controlled components are the preferred choice in React applications due to their predictability and ease of integration with other React features.
                                     `
         },
-                                    {
-                                        id: 47,
-                                    title: "What are package managers in React.js?",
-                                    note: `
+        {
+            id: 47,
+            title: "What are package managers in React.js?",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     In React.js, package managers are tools that facilitate the installation, management, and dependency resolution of JavaScript packages and libraries. They help developers streamline the process of managing project dependencies, ensuring that the correct versions of packages are installed and available for use in the application. Two popular package managers used in the React.js ecosystem are:
 
 
@@ -2728,10 +2956,16 @@ const reactData = {
                                     Choosing between npm and Yarn often depends on personal preference and the requirements of the project. Both package managers are widely used in the React.js community, and developers can seamlessly switch between them without compatibility issues. It's essential to adhere to the chosen package manager's conventions and use the associated configuration files (package.json and yarn.lock) for managing project dependencies.
                                     `
         },
-                                    {
-                                        id: 48,
-                                    title: "Explain what the Shadow DOM is.",
-                                    note: `
+        {
+            id: 48,
+            title: "Explain what the Shadow DOM is.",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     The Shadow DOM, or Shadow Document Object Model, is a web standard that provides encapsulation for the styling and structure of a web component. It allows developers to create and use self-contained components with their own scoped styles, preventing style leakage and conflicts with the styles of the rest of the document.
 
                                     Here are key concepts and features of the Shadow DOM:
@@ -2798,10 +3032,16 @@ const reactData = {
 
                                     `
         },
-                                    {
-                                        id: 49,
-                                    title: "How is the Shadow DOM different from the virtual DOM?.",
-                                    note: `
+        {
+            id: 49,
+            title: "How is the Shadow DOM different from the virtual DOM?.",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     The Shadow DOM and the virtual DOM are both concepts used in web development, but they serve different purposes and address different concerns. Let's explore the key differences between the Shadow DOM and the virtual DOM:
 
                                     1. Purpose:
@@ -2866,10 +3106,16 @@ const reactData = {
                                     In summary, while both the Shadow DOM and the virtual DOM are related to the DOM and web development, they serve different purposes. The Shadow DOM focuses on encapsulation and isolation of styles and structure, while the virtual DOM is a performance optimization technique for efficiently updating the UI by minimizing direct manipulations of the real DOM. They are often used in combination to achieve both encapsulation and performance benefits in web applications.
                                     `
         },
-                                    {
-                                        id: 50,
-                                    title: "Explain what a pure function is.",
-                                    note: `
+        {
+            id: 50,
+            title: "Explain what a pure function is.",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     A pure function is a function in programming that has two main characteristics:
 
                                     Deterministic:
@@ -2928,10 +3174,16 @@ const reactData = {
 
                                     `
         },
-                                    {
-                                        id: 51,
-                                    title: "Explain what a pure function in react",
-                                    note: `
+        {
+            id: 51,
+            title: "Explain what a pure function in react",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
+            note: `
                                     In React, a pure function refers to a specific type of function that satisfies the principles of functional programming, particularly the characteristics of pure functions. Pure functions in the context of React are often associated with functional components and are essential for building predictable and maintainable UIs.
 
                                     Here are the key characteristics of a pure function in the context of React:
@@ -2990,203 +3242,16 @@ const reactData = {
 
                                     `
         },
-                                    {
-                                        id: 52,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
+        {
+            id: 52,
+            title: "aff intro",
+            note: [
+                {
+                    text1: ``,
+                    code1:``
+                }
+            ],
         },
-                                    {
-                                        id: 53,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 54,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 55,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 56,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 57,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 58,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 59,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 60,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 61,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 62,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 63,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 64,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 65,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 66,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 67,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 68,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 69,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 70,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 71,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 72,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    {
-                                        id: 73,
-                                    title: "aff intro",
-                                    note: `
-                                    npm install @babel/preset-env @babel/preset-react babel-loader
-                                    npm install webpack webpack-cli
-                                    npm install --save html-loader
-                                    `
-        },
-                                    ]
+        
+    ]
 }

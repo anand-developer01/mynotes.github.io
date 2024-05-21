@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="./javascript-static.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/agate.min.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-header">
+            <div class="nav-title">
+                Logo
+            </div>
+        </div>
+        <div class="nav-btn">
+            <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+
+        <ul class="nav-list">
+            <li><a href="./javascript-static-notes.html">Home</a></li>
+            <li><a href="react-notes.html"> React </a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class='col-lg-3 col-sm-12'>
+                <div class='left-menu-box'>
+                    <div id="myLinks"></div>
+                </div>
+            </div>
+            <div class='col-lg-9 col-sm-12'>
+                <div id="myList" class="notes-text">
+                    <ul class="list-style-remove">
+
+                        <li id="JavaScript Event Loop">
+                            <strong> 1) JavaScript Event Loop </strong>
+                            <p>
+                                JavaScript is a single-threaded programming language. This means that JavaScript can
+                                do
+                                only one thing at a single point in time. The JavaScript engine executes a script
+                                from
+                                the top of the file and works its way down.
+                                It creates the execution contexts, and pushes, and pops functions onto and off the
+                                call
+                                stack in the execution phase.
+                                If a function takes a long time to execute, you cannot interact with the web browser
+                                during the function's execution because the page hangs.
+                                A function that takes a long time to complete is called a blocking function.
+                                Technically, a blocking function blocks all the interactions on the webpage, such as
+                                mouse clicks.
+                                An example of a blocking function is a function that calls an API from a remote
+                                server.
+                                The following example uses a big loop to simulate a blocking function:
+                            </p>
+                            <pre>
+                                                        <code class="hljs language-javascript">
+                                                            function task(message) {
+                                                                // emulate time consuming task
+                                                                let n = 10000000000;
+                                                                while (n > 0){
+                                                                    n--;
+                                                                }
+                                                                    console.log(message);
+                                                            }
+
+                                                            console.log('Start script...');
+                                                            task('Call an API');
+                                                            console.log('Done!');
+                                                           <p>
+                                                        </code>
+                                                    </pre>
+                        </li>
+
+                        <li id="hoisting">
+                            <strong> 1) hoisting </strong>
+                            <p>
+
+                            </p>
+                            <pre>
+                                    <code class="hljs language-javascript">
+
+                                    </code>
+                                </pre>
+                        </li>
+
+                        <li id="Prototypes">
+                            <strong> 1) Prototypes </strong>
+                            <p>
+                                // In JavaScript, every object has an internal property called [[Prototype]], which
+                                is
+                                essentially a reference to another object called its prototype. This prototype is a
+                                fundamental concept in JavaScript's object-oriented programming model.
+
+                                // Prototypes: JavaScript is a prototype-based language, which means that it uses
+                                prototypes to inherit properties and methods from one object to another. In
+                                JavaScript,
+                                objects can be linked to other objects, forming a prototype chain. When a property
+                                or
+                                method is accessed on an object, the JavaScript engine first checks if that property
+                                or
+                                method exists on the object itself. If it does not, it will check the object's
+                                prototype, and so on, until it reaches the end of the prototype chain. If the
+                                property
+                                or method is not found, it will return undefined.
+
+                                // Here's a clear breakdown:
+
+                                // Every object has a prototype: When you create an object in JavaScript, it
+                                automatically gets a prototype. This prototype is a regular JavaScript object
+                                itself,
+                                and it can have its own properties and methods.
+
+                                // The prototype chain: When you try to access a property or method on an object,
+                                JavaScript first checks if that property or method exists on the object itself. If
+                                it
+                                doesn't find it, it looks at the object's prototype, and if it's not there, it
+                                continues
+                                up the prototype chain until it finds the property or method or reaches the end of
+                                the
+                                chain (where the prototype is null).
+
+                                // both __proto__ and prototype are related to object inheritance, but they serve
+                                different purposes.
+
+                                // __proto__:
+                                // ----------
+                                // __proto__ is a property that exists on every object in JavaScript.
+                                // It's a reference to the prototype object from which the current object inherits.
+                                // When you access a property or method on an object, JavaScript first checks if
+                                that
+                                property or method exists directly on the object itself.If it doesn't, JavaScript
+                                looks
+                                at the object's __proto__ to find it.This process continues up the prototype chain
+                                until
+                                the property or method is found or until the end of the chain is reached(i.e., when
+                                __proto__ becomes null).
+                                // It's important to note that __proto__ is considered deprecated and should not be
+                                used
+                                for production code. Instead, you should use Object.getPrototypeOf() to get the
+                                prototype of an object, and Object.setPrototypeOf() to set the prototype of an
+                                object.
+
+                                // prototype:
+                                // ----------
+                                // prototype is a property that exists on constructor functions in JavaScript.
+                                // It's used to set up inheritance when you want to create objects using the new
+                                keyword.
+                                // When you create a constructor function and add properties or methods to its
+                                prototype, those properties and methods become available to instances created using
+                                that
+                                constructor function.
+                                // When you use the new keyword to create an instance of a constructor function, the
+                                newly created object's __proto__ is set to the constructor function's prototype.
+                                // In summary, __proto__ is a property that exists on every object and is used to
+                                reference the prototype of the object, while prototype is a property that exists on
+                                constructor functions and is used to set up inheritance for objects created using
+                                those
+                                constructor functions.
+
+                                // Define a constructor function
+                            </p>
+                            <pre>
+                                                        <code class="hljs language-javascript">
+        // Define a constructor function
+                                                            function Person(name, age) {
+                                                                this.name = name;
+                                                            this.age = age;
+        }
+
+                                                            // Add a method to the prototype of the Person constructor
+                                                            Person.prototype.greet = function() {
+                                                                console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+        };
+
+                                                            // Create an instance of Person
+                                                            const john = new Person('John', 30);
+
+                                                            // Accessing properties directly on the object
+                                                            console.log(john.name); // Output: John
+                                                            console.log(john.age); // Output: 30
+
+                                                            // Accessing method defined on the prototype
+                                                            john.greet(); // Output: Hello, my name is John and I am 30 years old.
+
+                                                            // Using __proto__
+                                                            console.log(john.__proto__ === Person.prototype); // Output: true
+                                                            console.log(Object.getPrototypeOf(john) === Person.prototype); // Output: true
+
+                                                            // Changing prototype using __proto__ (not recommended)
+                                                            const newPrototype = {
+                                                                farewell: function() {
+                                                                console.log(`Goodbye, ${this.name}!`);
+            }
+        };
+                                                            john.__proto__ = newPrototype;
+
+                                                            john.farewell(); // Output: Goodbye, John!
+
+
+
+
+
+                                                            // Of course! Let's illustrate with an example:
+
+
+                                                            // Define a constructor function
+                                                            function Person(name, age) {
+                                                                this.name = name;
+                                                            this.age = age;
+        }
+
+                                                            // Add a method to the prototype of the Person constructor
+                                                            Person.prototype.greet = function() {
+                                                                console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+        };
+
+                                                            // Create an instance of Person
+                                                            const john = new Person('John', 30);
+
+                                                            // Accessing properties directly on the object
+                                                            console.log(john.name); // Output: John
+                                                            console.log(john.age); // Output: 30
+
+                                                            // Accessing method defined on the prototype
+                                                            john.greet(); // Output: Hello, my name is John and I am 30 years old.
+
+                                                            // Using __proto__
+                                                            console.log(john.__proto__ === Person.prototype); // Output: true
+                                                            console.log(Object.getPrototypeOf(john) === Person.prototype); // Output: true
+
+                                                            // Changing prototype using __proto__ (not recommended)
+                                                            const newPrototype = {
+                                                                farewell: function() {
+                                                                console.log(`Goodbye, ${this.name}!`);
+            }
+        };
+                                                            john.__proto__ = newPrototype;
+
+                                                            john.farewell(); // Output: Goodbye, John!
+                                                        </code>
+                                                    </pre>
+
+                            <p>// In this example:
+
+                                // > We define a constructor function Person that takes name and age parameters and
+                                sets
+                                them as properties on the created object.
+                                // > We add a greet method to the Person.prototype, which will be shared among all
+                                instances of Person.
+                                // > We create an instance of Person named john.
+                                // > We access properties (name and age) directly on the john object, and the greet
+                                method via the prototype chain.
+                                // > We demonstrate that john.__proto__ points to Person.prototype.
+                                // > We change the prototype of john using __proto__, but this method is not
+                                recommended
+                                for production code.
+                                // > This example showcases how prototype is used to set up inheritance for objects
+                                created with a constructor function and how __proto__ is used to reference the
+                                prototype
+                                of an object.
+                            </p>
+                            <pre>
+                                                        <code class="hljs language-javascript">
+            //EX 2:---
+                                                            // Define a constructor function for a Vehicle
+                                                            function Vehicle(make, model) {
+                                                                this.make = make;
+                                                            this.model = model;
+            }
+
+                                                            // Add a method to the prototype of Vehicle
+                                                            Vehicle.prototype.info = function() {
+                                                                console.log(`This is a ${this.make} ${this.model}.`);
+            };
+
+                                                            // Create a Car constructor function that inherits from Vehicle
+                                                            function Car(make, model, year) {
+                                                                Vehicle.call(this, make, model); // Call the Vehicle constructor within the Car constructor
+                                                            this.year = year;
+            }
+
+                                                            // Set up inheritance: Assign Vehicle's prototype to Car's prototype
+                                                            Car.prototype = Object.create(Vehicle.prototype);
+                                                            Car.prototype.constructor = Car; // Reset constructor property to Car
+
+                                                            // Add a method to the prototype of Car
+                                                            Car.prototype.start = function() {
+                                                                console.log(`Starting the ${this.make} ${this.model}...`);
+            };
+
+                                                            // Create an instance of Car
+                                                            const myCar = new Car('Toyota', 'Camry', 2022);
+
+                                                            // Access methods defined on both Vehicle and Car prototypes
+                                                            myCar.info(); // Output: This is a Toyota Camry.
+                                                            myCar.start(); // Output: Starting the Toyota Camry...
+
+                                                            // Demonstrating the prototype chain
+                                                            console.log(myCar.__proto__ === Car.prototype); // Output: true
+                                                            console.log(Car.prototype.__proto__ === Vehicle.prototype); // Output: true
+                                                            console.log(Vehicle.prototype.__proto__ === Object.prototype); // Output: true
+                                                        </code>
+                                                    </pre>
+
+                            <p>
+                                // In this example:
+                                // We define a 'constructor' function 'Vehicle' to represent a generic vehicle with
+                                make
+                                and model properties.
+                                // We add an info method to the 'Vehicle.prototype' to display vehicle information.
+                                // We define a 'constructor' function Car to represent a specific type of vehicle
+                                that
+                                inherits from Vehicle. It adds a year property.
+                                // We set up inheritance by using Object.create() to link Car.prototype to
+                                'Vehicle.prototype', thus allowing 'Car' instances to access methods defined on
+                                Vehicle.
+                                // We add a start method to the 'Car.prototype' to start the car.
+                                // We create an instance of 'Car' named 'myCar' and demonstrate accessing methods
+                                defined on both Vehicle and Car.
+                                // Finally, we demonstrate the prototype chain, showing how myCar.__proto__ points
+                                to
+                                'Car.prototype', 'Car.prototype.__proto__' points to 'Vehicle.prototype', and
+                                'Vehicle.prototype.__proto__' points to Object.prototype.
+                            </p>
+                            <p>//-----------------
+                                // Function.prototype === Array.prototype and
+                                Function.prototype.isPrototypeOf(Array.prototype) both are false
+                                //----------------
+
+                                // The reason why Function.prototype.isPrototypeOf(Array.prototype) returns false is
+                                because Array.prototype is not directly descended from Function.prototype in the
+                                prototype chain.
+
+                                // In JavaScript, Array.prototype inherits from Object.prototype, not directly from
+                                Function.prototype. The Function constructor function and its prototype properties
+                                are
+                                unrelated to Array.
+
+                                // Let's clarify by looking at the prototype chain:
+
+                                // javascript
+                                // Copy code
+                                // console.log(Object.getPrototypeOf(Array.prototype) === Function.prototype); //
+                                Returns false
+                                // console.log(Object.getPrototypeOf(Array.prototype) === Object.prototype); //
+                                Returns
+                                true
+                                // This confirms that Array.prototype directly inherits from Object.prototype, not
+                                from
+                                Function.prototype.
+                            </p>
+                            <pre>
+                                                        <code class="hljs language-javascript">
+                                                            function Student(name, age) {
+                                                                this.name = name;
+                                                            this.age = age;
+            }
+                                                            Student.prototype.prop = 'I am good to see you'
+
+                                                            var stu1 = new Student("John", 50);
+                                                            var stu2 = new Student("ram", 43);
+
+                                                            Object.setPrototypeOf(stu1, {area: "wgl" })
+
+                                                            console.log(Object.getPrototypeOf(stu2)) // {prop: 'I am good to see you'}
+                                                            console.log(Object.getPrototypeOf(stu1)) // {area: 'wgl'}
+
+                                                            console.log(stu1.__proto__) // {area: 'wgl'}
+                                                            console.log(stu2.__proto__) // {prop: 'I am good to see you'}
+
+                                                            console.log(Student.prototype === stu2.__proto__) // true
+                                                            console.log(Student.prototype === stu1.__proto__) // false
+                                                        </code>
+                                                    </pre>
+                            <p>
+                                // '.prototype' is a special property that all functions have that contains a
+                                reference
+                                to an object.
+                                // When a constructor is used to instantiate a new object, 'Student.prototype' is
+                                set as
+                                the prototype of the new object.
+                                // All instances of that constructor (the objects it creates) can access the
+                                properties
+                                of 'Student.prototype'.
+
+                                //--------------------------
+
+                                // Every thing is an object in javascript. even thou all kind of data like Array,
+                                String, Number, Boolean, Function, Set, Map they have they own prototype object with
+                                usefull properties inside the prototype object these objects call __proto__
+
+                                //Every datatype at the end inherite from one object that is called Object.prototype
+                            <pre>
+                                                    <code class ="hljs language-javascript">
+                                                    // array type / function type
+                                                    // array prototype(or) function prototype -> object prototype -> null
+                                                    // Ex:
+                                                    let cust =[12, 4, 7]
+                                                    // cust.__proto__ points to Array.prototype
+                                                    // cust.__proto__ === Array.prototype // true
+                                                    // Array.prototype.__proto__ points to Object.prototype
+                                                    // Array.prototype.__proto__ === Object.prototype // true
+                                                    // Arrray.prototype.__proto__.__proto__ points to null
+                                                    // Object.prototype.__proto__ points to null
+
+                                                    // Boolean.__proto__ points to Object.prototype
+                                                    // Number.__proto__ === Boolean.__proto__ // true
+                                                    // String.__proto__ points to Object.prototype
+
+                                                    // All datatypes in javascript inheries from Object.prototype at the end
+                                                    // Object.prototype.__proto__ points to null at the end
+                                                    // Object.prototype.__proto__ === null // true
+                                                    // this is end of the chain. This chain is called prototype chain
+                                                    //--------------------------------------
+
+                                                    </code>
+                                                    </pre>
+                            <p>
+                                // Prototypal inheritance: Prototypal inheritance is the mechanism by which objects
+                                can
+                                inherit properties and methods from their prototype.If an object doesn't have a
+                                property or method, JavaScript looks for it in its prototype, and if the prototype
+                                doesn't have it, it looks in the prototype's prototype, and so on.
+
+                                // Prototype inheritance in JavaScript is a way for objects to share properties and
+                                methods with other objects.Each object has a hidden link to another object called
+                                its
+                                prototype.If a property or method is not found on the object itself, JavaScript
+                                looks
+                                for it in its prototype chain.This allows objects to inherit properties and methods
+                                from their prototypes, creating a form of inheritance without classes.
+
+
+                                //-----------------------
+                                // Benifits of Prototype
+                                //-----------------------
+
+                                //------------------>
+                                // They use less memory.
+                                //------------------>
+
+                                // case1 for the userDatails method logic is same if you console user objects every
+                                object has getMarks function so it crates different memory location for
+
+
+                                // When a method is defined using this.this.getMarks a new copy is created every
+                                time a
+                                new object is instantiated.Let's look at an example.
+
+                                // In most Object Oriented programming languages a class has a constructor. A
+                                constructor is a sort of initializing function that is called every time a new
+                                instance
+                                of the class is created.Usually the Constructor function name is defined using the
+                                actual class name or the keyword constructor:
+
+                                // If you add properties to 'this' inside the 'userDetails' class, all future
+                                instances
+                                of 'userDetails' will get its own copy of the properties and methods, which causes
+                                redundancy.On a side note, using 'this' is great for accessing and manipulating
+                                private
+                                variables.But let’s assume we are dealing with public variables.
+
+                                // Each instance of 'userDetails' receives a duplicate copy of the getMarks()
+                                method.
+                                When the getMarks() method is duplicated in every instance, this can become
+                                problematic
+                                as it starts to affect the performance and memory of your app.
+                            </p>
+                            <pre>
+                                                    <code class ="hljs language-javascript">
+                                                    function userDetails(userName, area, m1, m2, m3) {
+                                                    this.userName = userName;
+                                                    this.area = area;
+                                                    this.m1 = m1;
+                                                    this.m2 = m2;
+                                                    this.m3 = m3;
+                                                    this.getMarks = function() {
+                                              return m1 + m2 + m3;
+                                            }
+                                          }
+
+                                                    const user1 = new userDetails("ram", "wgl", 15, 54, 76)
+                                                    const user2 = new userDetails("ravi", "hyd", 65, 54, 76)
+
+                                                    console.log(user1.getMarks())
+                                                    console.log(user2.getMarks())
+
+                                                    console.log(user1.getMarks === user2.getMarks) // false
+
+                                                    // Further, we can see how both of the getMarks() methods are separate and maintain their own copy:
+                                                    </code>
+                                                    </pre>
+                            <p>
+                                / Prototypes are the solution
+                                // Here are some advantages of using prototype methods:
+
+                                // 1) If you added a property to getMarks.prototype , then that property will be
+                                shared
+                                in all objects associated with the class , including all future objects created
+                                using new
+                                userProtoDetails.Sharing the property is different than duplicating.Instances can
+                                borrow this method through the prototype chain, which will be discussed further.
+                                // 2) Changing the property value in the methods inherited through the prototype
+                                chain
+                                will change all values in the associated objects.
+                                // 3) In most cases, using 'prototype' or 'this' would be similar, but 'prototype'
+                                allows you to save memory since there’s only one instance of it, rather than its own
+                                instance for each object.
+                                // Let’s use the same example above, except redacting this.callOrder and using a
+                                'userProtoDetails.prototype.getMarks' instead:
+
+
+                                // When we run our function, every instance of 'userProtoDetails' does not duplicate
+                                our
+                                getMarks() method since it’s now part of the prototype and can’t be copied:
+                            </p>
+                            <pre>
+                                                    <code class ="hljs language-javascript">
+                                                    function userProtoDetails(userName, area, m1, m2, m3) {
+                                                    this.userName = userName;
+                                                    this.area = area;
+                                                    this.m1 = m1;
+                                                    this.m2 = m2;
+                                                    this.m3 = m3;
+                                          }
+
+                                                    userProtoDetails.prototype.getMarks = function() {
+                                            return this.m1 + this.m2 + this.m3;
+                                          }
+
+                                                    const userPro1 = new userProtoDetails("ram", "wgl", 90, 54, 76)
+                                                    const userPro2 = new userProtoDetails("ravi", "hyd", 99, 54, 76)
+
+                                                    console.log(userPro1.getMarks())
+                                                    console.log(userPro2.getMarks())
+
+                                                    console.log(userPro1.getMarks === userPro2.getMarks) // true
+                                                    </code>
+                                                    </pre>
+                            <p>// The prototype chain can be found under '__proto__' , which is an object in each
+                                instance that points to the prototype it was created from.On the other hand, the
+                                'prototype' property is found in every function created in JS.It’s the property of a
+                                class constructor.
+
+                                // __proto__: 'Object' shows us how JavaScript assigns userPro1 and userPro2 to an
+                                object constructor — this is what allows us to access all the methods from the
+                                assigned
+                                prototype.Thus, both the getMarks() methods can be shared:
+                                console.log(userPro1.__proto__)
+
+                                // Prototypes are usually more memory-efficient and faster than creating many
+                                classes.
+                                Additionally, prototypes are useful in situations where you need to create objects
+                                that
+                                inherit from other objects, as JavaScript's prototype-based inheritance system
+                                allows
+                                for easy inheritance and modification.
+
+                                //-----------------------
+                                // inheritance in javascript
+                                //-----------------------
+
+                                // Prototype inheritance in javascript is the linking of prototypes of a parent
+                                object
+                                to a child object to share and utilize the properties of a parent class using a
+                                child
+                                class.
+
+                                // Prototypes are hidden objects that are used to share the properties and methods
+                                of a
+                                parent class to child classes.</p>
+                            <pre>
+                                                    <code class ="hljs language-javascript">
+                                                    function Phone() {
+                                                    this.modalNumber = '';
+                                                    this.getModalNumber = function() {
+                                              return this.modalNumber
+                                            }
+                                          }
+
+                                                    function Samsung(modalNumber) {
+                                                    this.modalNumber = modalNumber;
+                                                    this.latestFeature = function() {
+                                                    console.log("foldable smart phone")
+                                                }
+                                          }
+
+                                                    Samsung.prototype = new Phone;
+
+                                                    const smObj = new Samsung("a123456")
+                                                    console.log(smObj.getModalNumber())
+
+
+                                                    // Example 2
+                                                    // Using Object.create():
+                                                    //...............
+                                                    // Parent object
+                                                    let animal = {
+                                                    speak: function() {
+                                                    console.log(this.sound);
+                                            }
+                                          };
+
+                                                    // Child object inheriting from the parent
+                                                    let cat = Object.create(animal);
+                                                    cat.sound = "Meow";
+
+                                                    // Now, cat has access to the speak method from the animal object
+                                                    cat.speak(); // Output: Meow
+
+
+                                                    // Example 3
+                                                    //--------------------
+                                                    //Constructor Functions:
+                                                    //--------------------
+                                                    // Parent constructor function
+                                                    function Animal(sound) {
+                                                    this.sound = sound;
+                                          }
+
+                                                    // Adding a method to the parent's prototype
+                                                    Animal.prototype.speak = function() {
+                                                    console.log(this.sound);
+                                          };
+
+                                                    // Child constructor function
+                                                    function Cat(sound) {
+                                                    Animal.call(this, sound); // Call parent constructor
+                                          }
+
+                                                    // Inheriting from the parent's prototype
+                                                    Cat.prototype = Object.create(Animal.prototype);
+                                                    Cat.prototype.constructor = Cat; // Set correct constructor
+
+                                                    // Creating a cat object
+                                                    let myCat = new Cat("Meow");
+
+                                                    // Now, myCat has access to the speak method inherited from Animal
+                                                    myCat.speak(); // Output: Meow
+
+
+                                                    // Ex
+                                                    // Class Syntax (ES6):
+                                                    //..................
+                                                    // Parent class
+                                                    class Animal {
+                                                    constructor(sound) {
+                                                    this.sound = sound;
+                                            }
+                                                    speak() {
+                                                    console.log(this.sound);
+                                            }
+                                          }
+
+                                                    // Child class inheriting from Animal
+                                                    class Cat extends Animal {
+                                                    constructor(sound) {
+                                                    super(sound); // Call parent constructor
+                                            }
+                                          }
+
+                                                    // Creating a cat object
+                                                    let myCat = new Cat("Meow");
+
+                                                    // Now, myCat has access to the speak method inherited from Animal
+                                                    myCat.speak(); // Output: Meow
+                                                    </code>
+                                                    </pre>
+                            <p>
+                                // The Object.setPrototypeOf() method in JavaScript is a standard built-in object
+                                which
+                                sets the prototype (i.e., the internal[[Prototype]]property) of a specified object
+                                to
+                                another object or null.
+
+                                // In JavaScript, Object.setPrototypeOf is a method used to set the prototype (i.e.,
+                                the
+                                internal[[Prototype]]property) of a specified object to another object or null.This
+                                method allows you to dynamically change the inheritance chain of an object.</p>
+                        </li>
+
+
+                        <li id="getter and setter">
+                            <strong> 1) getter and setter </strong>
+                            <p>
+                                // In JavaScript, accessor properties are methods that get or set the value of an
+                                object. For that, we use these two keywords:
+
+                                // get - to define a getter method to get the property value
+                                // set - to define a setter method to set the property value
+
+
+                                // In JavaScript, accessor properties are properties that allow you to define custom
+                                behavior for getting and setting a property's value. They are different from data
+                                properties, which have a straightforward value assignment. Accessor properties use
+                                getter and setter functions to control how values are retrieved or modified.
+
+                                //------------------
+                                // Understanding Accessor Properties:--
+                                //------------------
+                                // Accessor properties are defined by providing getter and/or setter methods. These
+                                methods can be defined either within an object literal using special 'get' and 'set'
+                                syntax or by using 'Object.defineProperty'.
+
+                                // Defining Accessor Properties in an Object Literal
+                                // When using object literals, you can define accessor properties directly within
+                                the object by specifying 'get' and 'set' functions.
+
+                            </p>
+                            <pre>
+        <code class="hljs language-javascript">
+            const person = {
+              firstName: 'John',
+              lastName: 'Doe',
+
+              // Getter for fullName
+              get fullName() {
+                return `${this.firstName} ${this.lastName}`;
+              },
+
+              // Setter for fullName
+              set fullName(name) {
+                const parts = name.split(' ');
+                this.firstName = parts[0];
+                this.lastName = parts[1];
+              }
+            };
+
+            console.log(person.fullName); // Outputs: John Doe
+            person.fullName = 'Jane Smith';
+            console.log(person.firstName); // Outputs: Jane
+            console.log(person.lastName);  // Outputs: Smith
+        </code>
+    </pre>
+                            <p>
+                                // In JavaScript, accessor properties are properties that allow you to define custom
+                                behavior for getting and setting a property's value. They are different from data
+                                properties, which have a straightforward value assignment. Accessor properties use
+                                getter and setter functions to control how values are retrieved or modified.
+
+                                //-------------------
+                                // Understanding Accessor Properties
+                                //-------------------
+                                // Accessor properties are defined by providing getter and/or setter methods. These
+                                methods can be defined either within an object literal using special get and set
+                                syntax or by using Object.defineProperty.
+
+                                // Defining Accessor Properties in an Object Literal
+                                // When using object literals, you can define accessor properties directly within
+                                the object by specifying get and set functions.
+                            </p>
+                            <pre>
+        <code class="hljs language-javascript">
+            // Example:
+            // Copy code
+            const person = {
+              firstName: 'John',
+              lastName: 'Doe',
+
+              // Getter for fullName
+              get fullName() {
+                return `${this.firstName} ${this.lastName}`;
+              },
+
+              // Setter for fullName
+              set fullName(name) {
+                const parts = name.split(' ');
+                this.firstName = parts[0];
+                this.lastName = parts[1];
+              }
+            };
+
+            console.log(person.fullName); // Outputs: John Doe
+            person.fullName = 'Jane Smith';
+            console.log(person.firstName); // Outputs: Jane
+            console.log(person.lastName);  // Outputs: Smith
+
+            In this example:
+
+            The 'get' method for 'fullName' constructs a full name by combining 'firstName' and 'lastName'.
+              The 'set' method for 'fullName' splits the provided name into 'firstName' and 'lastName'.
+        </code>
+    </pre>
+                            <p>//----------------
+                                // Defining Accessor Properties with 'Object.defineProperty'
+                                //----------------
+                                // You can also define accessor properties using the 'Object.defineProperty' method,
+                                which allows for more detailed control over the property attributes.
+                            </p>
+                            <pre>
+        <code class="hljs language-javascript">
+            const person = {
+              firstName: 'John',
+              lastName: 'Doe'
+            };
+
+            Object.defineProperty(person, 'fullName', {
+              // Getter for fullName
+              get() {
+                return `${this.firstName} ${this.lastName}`;
+              },
+              // Setter for fullName
+              set(name) {
+                const parts = name.split(' ');
+                this.firstName = parts[0];
+                this.lastName = parts[1];
+              },
+              enumerable: true,
+              configurable: true
+            });
+
+            console.log(person.fullName); // Outputs: John Doe
+            person.fullName = 'Jane Smith';
+            console.log(person.firstName); // Outputs: Jane
+            console.log(person.lastName);  // Outputs: Smith
+        </code>
+    </pre>
+                            <p>
+                                // In this example:
+
+                                // 'Object.defineProperty' is used to define a property 'fullName' with 'get' and
+                                'set' methods.
+                                // 'enumerable: true' makes the 'fullName' property show up during enumeration
+                                (e.g., in 'for...in' loops).
+                                // 'configurable: true' allows the property to be reconfigured or deleted.
+
+                                //---------------------
+                                // Characteristics of Accessor Properties
+                                //---------------------
+                                // Accessor properties have the following characteristics:
+
+                                // Getters: Functions that are called when the property is accessed.
+                                // Setters: Functions that are called when a new value is assigned to the property.
+                                // No Direct Storage: Unlike data properties, accessor properties do not store
+                                values directly. The getter and setter functions handle value retrieval and
+                                assignment.
+                                // Flexibility: Accessor properties provide a way to add logic to the process of
+                                getting and setting property values, which can be useful for validation, computed
+                                properties, and encapsulation.
+
+                                //----------------
+                                // Object.defineProperty()
+                                //----------------
+
+                                // The Object.defineProperty() method adds a property or modifies an existing
+                                property on an object and returns the object.
+
+                                // The syntax of the defineProperty() method is:
+
+                                // Object.defineProperty(obj, prop, descriptor)
+                                // Here, 'defineProperty()' is a static method. Hence, we need to access the method
+                                using the class name, Object.
+
+
+                                // defineProperty() Parameters
+                                // The 'defineProperty()' method takes in:
+
+                                // 'obj' - the object on which to define the property.
+                                // 'prop' - the name or 'Symbol' of the property to be defined or modified.
+                                // 'descriptor' - the descriptor for the property being defined or modified.
+
+                                // Each property value must either be a data descriptor or an accessor
+                                descriptor.They can have the following optional properties:
+
+                                // configurable - the ability to change or delete a property's attributes
+                                // enumerable - the property that is visible in for...in loops and with
+                                Object.keys().
+                                // Data descriptors can also have:
+
+                                // value - the actual data stored in a property, accessible through its key.
+                                // writable - the ability to change the value of a property.If false, the property's
+                                value cannot be changed.
+                            </p>
+                            <pre>
+        <code class="hljs language-javascript">
+
+        </code>
+    </pre>
+                        </li>
+
+
+
+
+
+                        <li id="static methods">
+                            <strong> 1) static methods </strong>
+                            <p>
+                                // static methods are methods that are associated with a class, not an instance of the
+                                class. They are called using the class name.
+
+                                // By definition, static methods are bound to a class, not the instances of that class.
+                                Therefore, static methods are useful for defining helper or utility methods.
+
+                                // Here's an example of a static method:
+
+                                // In JavaScript, creating static methods using the prototype is not a common practice.
+                                Static methods are usually defined directly on the class constructor rather than its
+                                prototype.
+                            </p>
+                            <pre>
+            <code class="hljs language-javascript">
+                function Person(name) {
+                    this.name = name;
+                  }
+                  
+                  Person.prototype.instanceMethodName = function() {
+                    return this.name;
+                  };
+                  
+                  Person.createStatic = function(gender) {
+                    let name = gender == "male" ? "John Doe" : "Jane Doe";
+                    return new Person(name).instanceMethodName();
+                  };
+                  
+                  const ob = new Person('male')
+                  console.log("instance Method", ob.instanceMethodName())
+                  console.log("Static Method", Person.createStatic('male'))
+            </code>
+        </pre>
+                            <p>// The createStatic() method is considered a static method because it doesn’t depend on
+                                any instance of the 'Person' type for its property values.It can be called directly on
+                                the Person class itself, without creating an instance of the class.
+
+                                //----------------------
+                                // JavaScript static methods in ES6
+                                //-----------------------
+                                // In ES6, you define static methods using the static keyword. The following example
+                                defines a static method called createStaticEs6() for the 'Person' class:</p>
+                            <pre>
+            <code class="hljs language-javascript">
+                class Person {
+                    constructor(name) {
+                      this.name = name;
+                    }
+                    instanceMethodNameEs6() {
+                      return this.name;
+                    }
+                    static createStaticEs6(gender) {
+                      let name = gender == "male" ? "John Doe" : "Jane Doe";
+                      return new Person(name);
+                    }
+                  }
+                  
+                  let staticMethodCall = Person.createStaticEs6("male");
+                  
+                  // let person = new Person('James Doe');
+                  // let staticMethodError = person.createStaticEs6("male");
+                  
+                  console.log(staticMethodCall)
+                  // console.log(staticMethodError) // TypeError: person.createAnonymous is not a function
+            </code>
+        </pre>
+                            <pre>
+            <code class="hljs language-javascript">
+                //---------------
+                // Ex: 2
+                //---------------
+                
+                class User {
+                  static staticMethod() {
+                    console.log(this === User);
+                  }
+                }
+                
+                User.staticMethod(); // true
+                
+                
+                class User2 { }
+                
+                User2.staticMethod2 = function() {
+                  console.log(this === User2);
+                };
+                
+                User2.staticMethod2(); // true
+            </code>
+        </pre>
+                            <p> // Class Definition: The 'Article' class is defined with a constructor to initialize
+                                'title' and 'date', and a static method 'compare' to compare articles by date.
+                                // Instance Creation: Three instances of 'Article' are created with different dates.
+                                // Sorting: The 'articles' array is sorted using the 'Article.compar'e static method,
+                                which sorts the articles by their date.
+                                // Result: The sorted array has the earliest date first, so "CSS"(January 1, 2019) is at
+                                index 0 and is displayed in the alert.
+
+                            </p>
+                            <pre>
+            <code class="hljs language-javascript">
+                class Person {
+                    constructor(name, age) {
+                      this.name = name;
+                      this.age = age;
+                    }
+                  
+                    // Instance method
+                    getInfo() {
+                      return `${this.name} is ${this.age} years old.`;
+                    }
+                  
+                    // Static method
+                    static compareAges(person1, person2) {
+                      if (person1.age > person2.age) {
+                        return `${person1.name} is older than ${person2.name}.`;
+                      } else if (person1.age < person2.age) {
+                        return `${person1.name} is younger than ${person2.name}.`;
+                      } else {
+                        return `${person1.name} and ${person2.name} are of the same age.`;
+                      }
+                    }
+                  }
+                  
+                  const alice = new Person('Alice', 25);
+                  const bob = new Person('Bob', 30);
+                  
+                  console.log(alice.getInfo()); // Outputs: Alice is 25 years old.
+                  console.log(bob.getInfo());   // Outputs: Bob is 30 years old.
+                  
+                  console.log(Person.compareAges(alice, bob)); // Outputs: Alice is younger than Bob.
+            </code>
+        </pre>
+                            <p>// Accessing Static Methods within Instance Methods
+                                //------------------------------------------------
+                                // While static methods are typically called on the class itself, you can also call
+                                static methods from within instance methods if needed:</p>
+                            <pre>
+            <code class="hljs language-javascript">
+                class Person {
+                    constructor(name, age) {
+                      this.name = name;
+                      this.age = age;
+                    }
+                  
+                    // Instance method
+                    getInfo() {
+                      return `${this.name} is ${this.age} years old.`;
+                    }
+                  
+                    // Static method
+                    static isAdult(person) {
+                      return person.age >= 18;
+                    }
+                  
+                    // Instance method calling a static method
+                    checkIfAdult() {
+                      return Person.isAdult(this) ? `${this.name} is an adult.` : `${this.name} is not an adult.`;
+                    }
+                  }
+                  
+                  const alice = new Person('Alice', 25);
+                  const bob = new Person('Bob', 16);
+                  
+                  console.log(alice.checkIfAdult()); // Outputs: Alice is an adult.
+                  console.log(bob.checkIfAdult());   // Outputs: Bob is not an adult.
+            </code>
+        </pre>
+                        </li>
+
+
+
+
+                        <li id="static properties">
+                            <strong> 1) static properties </strong>
+
+                            <p>
+                                // In JavaScript, static properties are properties that are defined directly on the class itself rather than on instances of the class. Static properties are shared across all instances of the class and are accessed using the class name, not through individual instances.
+
+// Defining Static Properties
+---------------------------
+
+// Static properties are defined using the static keyword in the class definition. Here's how you can define and use static properties:
+                            </p>
+                            <pre>
+                                <code class="hljs language-javascript">
+                                    class Car {
+                                        // Static property
+                                        static numberOfWheels = 4;
+                                      
+                                        constructor(make, model) {
+                                          this.make = make;
+                                          this.model = model;
+                                        }
+                                      
+                                        // Static method
+                                        static compare(carA, carB) {
+                                          return carA.model === carB.model;
+                                        }
+                                      }
+                                      
+                                      // Accessing the static property
+                                      console.log(Car.numberOfWheels); // Outputs: 4
+                                      
+                                      // Creating instances of Car
+                                      const car1 = new Car('Toyota', 'Corolla');
+                                      const car2 = new Car('Honda', 'Civic');
+                                      
+                                      // Accessing static method
+                                      console.log(Car.compare(car1, car2)); // Outputs: false
+                                      
+                                      // Attempting to access static property from an instance
+                                      console.log(car1.numberOfWheels); // Outputs: undefined
+                                      
+                                </code>
+                            </pre>
+                            <p>
+                                // Key Characteristics of Static Properties
+//--------------- ----------- -----------
+// Class-Level Scope: Static properties are defined at the class level, meaning they are shared among all instances of the class.
+// Access via Class Name: They are accessed using the class name, not through instances.
+// Initialization: They are typically initialized when they are declared.
+// Use Cases for Static Properties
+//-------- ---------- ----------
+// Constants: Use static properties to define constants that are related to the class but do not change per instance.
+// Configuration Values: Store configuration values or default settings that apply to the class as a whole.
+// Counters: Maintain counters or other aggregate data relevant to the class.
+// Example Use Case: Managing Instances
+//---------- ---------- --------
+// Here's an example where static properties are used to keep track of the number of instances created from a class:
+                            </p>
+                            <pre>
+                                <code class="hljs language-javascript">
+                                    class User {
+                                        static count = 0;
+                                      
+                                        constructor(name) {
+                                          this.name = name;
+                                          User.count++; // Increment the static property
+                                        }
+                                      
+                                        static getCount() {
+                                          return User.count;
+                                        }
+                                      }
+                                      
+                                      const user1 = new User('Alice');
+                                      const user2 = new User('Bob');
+                                      const user3 = new User('Charlie');
+                                      
+                                      console.log(User.getCount()); // Outputs: 3
+                                      
+                                </code>
+                            </pre>
+                            <pre>
+                                <code class="hljs language-javascript">
+                                class Item {
+                                    static count = 0;
+                                  }
+                                </code>
+                            </pre>
+                            To access a static property, you use the class name followed by the . operator and the
+                            static property name. For example:</p>
+
+                            console.log(Item.count); // 0
+                            <p>
+                                To access the static property in a static method, you use the class name followed by the
+                                . operator and the static property name. For example:</p>
+                            <pre>
+                                    <code class="hljs language-javascript">
+                                  class Item {
+                                    static count = 0;
+                                    static getCount() {
+                                      return Item.count;
+                                    }
+                                  }
+                                  
+                                  console.log(Item.getCount()); // 0
+                                    </code>
+                                </pre>
+
+                            <p>
+                                To access a static property in a class constructor or instance method, you use the
+                                following syntax:
+                            <pre>
+                                    <code class="hljs language-javascript">
+                                  className.staticPropertyName;
+                                  
+                                  Or
+                                  
+                                  this.constructor.staticPropertyName;
+                                    </code>
+                                </pre>
+
+                            <p></p>The following example increases the count static property in the class constructor:
+                            </p>
+
+                            <pre>
+                                    <code class="hljs language-javascript">  
+                                  class Item {
+                                    constructor(name, quantity) {
+                                      this.name = name;
+                                      this.quantity = quantity;
+                                      this.constructor.count++;
+                                    }
+                                    static count = 0;
+                                    static getCount() {
+                                      return Item.count;
+                                    }
+                                  }
+                                </code>
+                            </pre>
+                            <p>
+                                When you create a new instance of the Item class, the following statement increases the
+                                count static property by one:
+
+                                this.constructor.count++;
+
+                                For example:
+                            <pre>
+                                    <code class="hljs language-javascript">
+                                  // Item class ...
+                                  
+                                  let pen = new Item("Pen", 5);
+                                  let notebook = new Item("notebook", 10);
+                                  
+                                  console.log(Item.getCount()); // 2
+                                </code>
+                            </pre>
+
+                            <p>
+                                This example creates two instances of the Item class, which calls the class constructor.
+                                Since the class constructor increases the count property by one each time it's called,
+                                the value of the count is two.
+
+                                Put it all together.
+
+                            </p>
+
+                            <pre>
+                                    <code class="hljs language-javascript">
+                                        class Item {
+                                            constructor(name, quantity) {
+                                              this.name = name;
+                                              this.quantity = quantity;
+                                              this.constructor.count++;
+                                            }
+                                            static count = 0;
+                                            static getCount() {
+                                              return Item.count;
+                                            }
+                                          }
+                                          
+                                          let pen = new Item('Pen', 5);
+                                          let notebook = new Item('notebook', 10);
+                                          
+                                          console.log(Item.getCount()); // 2
+                                         <p>
+                                    </code>
+                                </pre>
+                            <p>
+                                Summary
+                                A static property of a class is shared by all instances of that class.
+                                Use the static keyword to define a static property.
+                                Use the className.staticPropertyName to access the static property in a static method.
+                                Use the this.constructor.staticPropertyName or className.staticPropertyName to access
+                                the static property in a constructor.
+                            </p>
+                            <pre>
+                                    <code class="hljs language-javascript">
+
+                                    </code>
+                                </pre>
+                        </li>
+
+
+
+
+                        <li id="hoisting">
+                            <strong> 1) hoisting </strong>
+                            <p>
+
+                            </p>
+                            <pre>
+                                    <code class="hljs language-javascript">
+
+                                    </code>
+                                </pre>
+                        </li>
+
+
+
+
+                        <li id="hoisting">
+                            <strong> 1) hoisting </strong>
+                            <p>
+
+                            </p>
+                            <pre>
+                                    <code class="hljs language-javascript">
+
+                                    </code>
+                                </pre>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a href="#top" class='top-of-site-link' data-visible="true">
+                <p style="font-size: 39px; margin: -9px auto; padding-left: 10px;">&#8593;</p>
+            </a>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="main.js"></script>
+    <script src="../notes-data/javascript-notes.js"></script>
+    <script>
+
+
+        // let list = document.getElementById("myList");
+        let leftLinks = document.getElementById("myLinks");
+        for (i = 0; i < javascriptData.javascriptNote.length; ++i) {
+
+            // let listDiv = document.createElement('div');
+
+            // let mainListDiv = document.createElement('div');
+            // mainListDiv.className = 'notes-text'
+            // mainListDiv.id = `title${i}`
+
+            // let strongT = document.createElement('strong');
+            // let pT = document.createElement('p');
+            // let code1 = document.createElement('p');
+
+
+            // let preTagCode1 = document.createElement('pre');
+            // let codeTagCode1 = document.createElement('code');
+            // // let codeList = document.getElementById('codeList')
+
+            // strongT.textContent = javascriptData.javascriptNote[i].title;
+            // pT.textContent = javascriptData.javascriptNote[i].note;
+            // code1.textContent = `${javascriptData.javascriptNote[i].code1}`;
+
+            // listDiv.appendChild(strongT)
+            // listDiv.appendChild(pT)
+
+
+            // codeTagCode1.appendChild(code1)
+            // preTagCode1.appendChild(codeTagCode1)
+            // // codeList.appendChild(code1)
+
+            // let liT = document.createElement('li');
+            // let ulT = document.createElement('ul')
+            // ulT.className = 'list-style-remove'
+
+            // liT.appendChild(listDiv)
+            // liT.appendChild(preTagCode1)
+            // ulT.appendChild(liT)
+            // mainListDiv.appendChild(ulT)
+
+            // list.appendChild(mainListDiv)
+
+
+            // left menu links
+            let leftMenuListDiv = document.createElement('div');
+            let leftMenuD_FlexDiv = document.createElement('div');
+            let a = document.createElement('a');
+            let linkText = document.createTextNode(javascriptData.javascriptNote[i].title);
+
+            leftMenuD_FlexDiv.className = 'd-flex'
+            leftMenuD_FlexDiv.appendChild(leftMenuListDiv);
+
+            leftMenuListDiv.className = 'left-menu-list'
+            leftMenuListDiv.appendChild(a);
+
+            a.appendChild(linkText);
+            a.title = javascriptData.javascriptNote[i].title;
+            a.href = `#${javascriptData.javascriptNote[i].title}`;
+            leftLinks.appendChild(leftMenuD_FlexDiv)
+
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>hljs.highlightElement();</script>
+</body>
+
+</html>

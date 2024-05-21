@@ -1,99 +1,80 @@
-const SubjectList = {
+export const SubjectList = {
     Structures: [
         {
             id: 1,
             topic: "Have to (చేయవలసివున్న పనులు)",
             explain:'చేయవలసి వున్న ఒక పనిని తెలియజేయడానికి Have to అనే Helping Verb ను ఉపయోగిస్తారు',
             formation:'Subject + Helping Verb + Main Verb + Extra Words',
-            content:` 
-                id: 1,
-                eng: "I have to go to Movie",
-                tel:'నేను సినిమాకి వెళ్ళాలి'
-
-                id: 2,
-                eng: "We have to go to Movie",
-                tel:'మనం సినిమాకి వెళ్ళాలి'
-
-                id: 3,
-                eng: "You Have to go to Movie",
-                tel:'మీరు సినిమాకి వెళ్ళాలి'
-
-                id: 4,
-                eng: "They Have to go to Movie",
-                tel:'వారు సినిమాకి వెళ్ళాలి'
-
-                id: 5,
-                eng: "You Have to go to office today",
-                tel:'మీరు ఈ రోజు కార్యాలయానికి వెళ్ళాలి'
-          
-                id: 6,
-                eng: "You Have to try to speak in English",
-                tel:'మీరు ఇంగ్లీషులో మాట్లాడటానికి ప్రయత్నించాలి'
-            `
-            // content:[
-            //     {
-            //         id: 1,
-            //         eng: "I have to go to Movie",
-            //         tel:'నేను సినిమాకి వెళ్ళాలి'
-            //     },
-            //     {
-            //         id: 2,
-            //         eng: "We have to go to Movie",
-            //         tel:'మనం సినిమాకి వెళ్ళాలి'
-            //     },
-            //     {
-            //         id: 3,
-            //         eng: "You Have to go to Movie",
-            //         tel:'మీరు సినిమాకి వెళ్ళాలి'
-            //     },
-            //     {
-            //         id: 4,
-            //         eng: "They Have to go to Movie",
-            //         tel:'వారు సినిమాకి వెళ్ళాలి'
-            //     },
-            //     {
-            //         id: 5,
-            //         eng: "You Have to go to office today",
-            //         tel:'మీరు ఈ రోజు కార్యాలయానికి వెళ్ళాలి'
-            //     },
-            //     {
-            //         id: 6,
-            //         eng: "You Have to try to speak in English",
-            //         tel:'మీరు ఇంగ్లీషులో మాట్లాడటానికి ప్రయత్నించాలి'
-            //     }
-            // ]
+            content:[
+                {
+                    id: 1,
+                    eng: "I have to go to Movie",
+                    tel:'నేను సినిమాకి వెళ్ళాలి'
+                },
+                {
+                    id: 2,
+                    eng: "We have to go to Movie",
+                    tel:'మనం సినిమాకి వెళ్ళాలి'
+                },
+                {
+                    id: 3,
+                    eng: "You Have to go to Movie",
+                    tel:'మీరు సినిమాకి వెళ్ళాలి'
+                },
+                {
+                    id: 4,
+                    eng: "They Have to go to Movie",
+                    tel:'వారు సినిమాకి వెళ్ళాలి'
+                },
+                {
+                    id: 5,
+                    eng: "You Have to go to office today",
+                    tel:'మీరు ఈ రోజు కార్యాలయానికి వెళ్ళాలి'
+                },
+                {
+                    id: 6,
+                    eng: "You Have to try to speak in English",
+                    tel:'మీరు ఇంగ్లీషులో మాట్లాడటానికి ప్రయత్నించాలి'
+                }
+            ]
         },
         {
             id: 2,
             topic: "Don't Have to (చేయవలసిన అవసరం లేని పనులు)",
             explain:'చేయవలసిన అవసరం లేదు అనే సందర్భం లో Don`t Have to అనే Helping Verb ను ఉపయోగిస్తారు',
             formation:'Subject + Helping Verb + Main Verb + Extra Words',
-            content: `
+            content:[
+                {
                     id: 1,
-                    eng: "I don't have to go to office today",
+                    eng: "I don`t have to go to office today",
                     tel:'నేను ఈ రోజు కార్యాలయానికి వెళ్ళవలసిన అవసరం లేదు'
-               
+                },
+                {
                     id: 2,
-                    eng: "I don't have to take your permission",
+                    eng: "I don`t have to take your permission",
                     tel:'నేను మీ అనుమతి తీసుకోవలసిన అవసరం లేదు'
-               
+                },
+                {
                     id: 3,
                     eng: "We don't have to watch this movie",
                     tel:'మేము ఈ సినిమా చూడవలసిన అవసరం లేదు'
-               
+                },
+                {
                     id: 4,
                     eng: "We don't have to go shopping",
                     tel:'మేము షాపింగ్ చేయవలసిన అవసరం లేదు'
-               
+                },
+                {
                     id: 5,
                     eng: "You don't have to do the project",
                     tel:'మీరు ప్రాజెక్ట్ చేయవలసిన అవసరం లేదు'
-               
+                },
+                {
                     id: 6,
                     eng: "She doesn't have to wear my T-shirt",
                     tel:'ఆమె నా టీ షర్టు ధరించాల్సిన అవసరం లేదు'
-                    `
-                
+                }
+            ],
         },
         {
             id: 3,
@@ -136,37 +117,45 @@ const SubjectList = {
             id: 4,
             topic: "Whether Or",
             
-            content:`
+            content:[
+                {
                     id: 1,
                     eng: "I will ask whether he will speack or not",
                     tel:'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-
+                },
+                {
                     id: 2,
                     eng: "I will not ask whether he will speack or not",
                     tel:'అతను మాట్లాడతాడా లేదా అని నేను అడగను'
-
+                },
+                {
                     id: 3,
                     eng: "I don't know whether he came yesterday or not",
                     tel:'అతను నిన్న వచ్చాడో లేదో నాకు తెలియదు'
-
+                },
+                {
                     id: 4,
                     eng: "I don't know whether he will come tomorrow or not",
                     tel:'అతను రేపు వస్తాడో లేదో నాకు తెలియదు'
-
+                },
+                {
                     id: 5,
                     eng: "We Know whether he can speak or not",
                     tel:'అతను మాట్లాడగలడో లేదో మాకు తెలుసు'
-
+                },
+                {
                     id: 6,
                     eng: "I ask him whether they come or not",
                     tel:'వారు వస్తారా లేదా అని నేను అతనిని అడుగుతున్నాను',
                     tense:'simple Present'
-
+                },
+                {
                     id: 7,
                     eng: "I will ask him whether they will come or not",
                     tel:'వారు వస్తారా లేదా అని నేను అతనిని అడుగుతాను',
                     tense:'simple Feature'
-               `,
+                }
+            ],
         },
         {
             id: 5,
@@ -347,43 +336,49 @@ const SubjectList = {
             topic: "Supposed to (బాధ్యత కలిగి - చేయవలసివున్న పనులు)",
             explain:'Rules and Regulations (బాధ్యత) తెలిపే సందర్భం లో ఉపయోగిస్తారు',
             formation:'Subject + am, is, are (was, were - (past tense)) + Supposed to + Verb',
-            content:`
+            content:[
+                {
                     id: 1,
                     eng: "I am Supposed to do that work",
                     tel:'నేను ఆ పని చేయాలి',
                     tense:'Present tense'
-            
+                },
+                {
                     id: 2,
                     eng: "I was supposed to be there",
                     tel:'నేను అక్కడ ఉండాల్సి ఉంది',
                     tense:'Present tense'
-            
+                },
+                {
                     id: 3,
                     eng: "You are Supposed to say that what is the truth",
                     tel:'నిజం ఏమిటో మీరు చెప్పాలి',
                     tense:'Present tense'
-                
+                },                {
                     id: 4,
                     eng: "We are Supposed to follow traffic rules",
                     tel:'మేము ట్రాఫిక్ నియమాలను పాటించాల్సి ఉంది',
                     tense:'Present tense'
-            
+                },
+                {
                     id: 5,
                     eng: "We are Supposed to respect our national flag",
                     tel:'మేము మా జాతీయ జెండాను గౌరవిచాలి',
                     tense:'Present tense'
-            
+                },
+                {
                     id: 6,
                     eng: "Why are you late ? You are Supposed to be here at 9am",
                     tel:'నువ్వు ఎందుకు ఆలస్యం అయ్యావు ? మీరు ఉదయం 9 గంటలకు ఇక్కడ ఉండాల్సింది',
                     tense:'Past tense'
-            
+                },
+                {
                     id: 7,
                     eng: "Why are you doing late ? We were Supposed to be in home",
                     tel:'ఎందుకు మీరు లారే చేస్తున్నారు? మేము ఇంట్లో ఉండాలి',
                     tense:'Past tense'
                 }
-                `,
+            ],
         }
     ],
     Tense: [
