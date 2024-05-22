@@ -56,12 +56,31 @@
                     }
                     return res.json();
                 })
-                .then((data) => 
-                      console.log(data))
-                .catch((error) => 
-                       console.error("Unable to fetch data:", error));
+                .then((data) =>
+                    console.log(data))
+                .catch((error) =>
+                    console.error("Unable to fetch data:", error));
         }
         fetchJSONData();
+
+        //-----------------------
+
+        const newProduct = {
+            id: 1017,
+            description: 'New Phone Z',
+            price: 433
+        }
+
+        // a POST request
+        const response = await fetch('./db/db.json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify(newProduct)
+        })
+
+        console.log('status:', response.status)
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
