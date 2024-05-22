@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/agate.min.css">
     <link rel="stylesheet" href="./header/header.css">
     <style>
-       
+
     </style>
 </head>
 
@@ -22,15 +22,47 @@
 
     <div class="container-fluid">
         <h1><a href="./pages/index.html">Home</a></h1>
+        <button onclick="uploadData()">upload</button>
+
     </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
     <script src="./pages/main.js"></script>
-    <script src="./notes-data/home-notes.js"></script>
+    <!-- <script src="./notes-data/home-notes.js"></script> -->
     <script src="./header/header.js"></script>
+
     <script>
-        mainDom(commonData.commonNote)
+        // mainDom(commonData.commonNote)
+
+        function uploadData() {
+            const fs = require("fs");
+            let usersjson = fs.readFileSync("db.json", "utf-8");
+            console.log(usersjson)
+            // let users = JSON.parse(usersjson);
+            // users.push(obj);
+            // usersjson = JSON.stringify(users);
+            // fs.writeFileSync("db.json",usersjson,"utf-8");
+        }
+
+
+        function fetchJSONData() {
+            fetch("file:///D:/test/plane%20javascript/mynotes.github.io/db/db.json")
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error
+                            (`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) => 
+                      console.log(data))
+                .catch((error) => 
+                       console.error("Unable to fetch data:", error));
+        }
+        fetchJSONData();
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
