@@ -22,8 +22,10 @@
 
     <div class="container-fluid">
         <h1><a href="./pages/index.html">Home</a></h1>
-        <button onclick="uploadData()">upload</button>
-
+        <button onClick="loadInformation()"> 
+            Click to Load 
+        </button> 
+        <div id="container"></div>
     </div>
 
 
@@ -47,21 +49,24 @@
         }
 
 
-        function fetchJSONData() {
-            fetch("./db/db.json")
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error
-                            (`HTTP error! Status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((data) =>
-                    console.log(data))
-                .catch((error) =>
-                    console.error("Unable to fetch data:", error));
+        function loadInformation() {
+            // Request 
+            var request = new XMLHttpRequest();
+            request.open("GET", './db/db.json');
+            request.send();
+
+            // Response 
+            request.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    // Also checked status==200 to  
+                    // verify its status is OK or not 
+                    console.log(this.responseText);
+                    document.getElementById("container")
+                        .innerHTML = this.responseText;
+                }
+            }
         }
-        fetchJSONData();
 
         //-----------------------
 
