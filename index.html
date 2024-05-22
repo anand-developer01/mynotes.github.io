@@ -48,7 +48,7 @@
 
 
         function fetchJSONData() {
-            fetch("file:///D:/test/plane%20javascript/mynotes.github.io/db/db.json")
+            fetch("./db/db.json")
                 .then((res) => {
                     if (!res.ok) {
                         throw new Error
