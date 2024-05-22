@@ -7,7 +7,7 @@ const javascriptData = {
 
       The JavaScript engine executes a script from the top of the file and works its way down. It creates the execution contexts, and pushes, and pops functions onto and off the call stack in the execution phase.
       
-      If a function takes a long time to execute, you cannot interact with the web browser during the function’s execution because the page hangs.
+      If a function takes a long time to execute, you cannot interact with the web browser during the function's execution because the page hangs.
       
       A function that takes a long time to complete is called a blocking function. Technically, a blocking function blocks all the interactions on the webpage, such as mouse clicks.
       
@@ -27,7 +27,7 @@ const javascriptData = {
       console.log('Start script...');
       task('Call an API');
       console.log('Done!');
-      Code language: JavaScript (javascript)
+      
       In this example, we have a big while loop inside the task() function that emulates a time-consuming task. The task() function is a blocking function.
       
       The script hangs for a few seconds (depending on how fast the computer is) and issues the following output:
@@ -37,7 +37,7 @@ const javascriptData = {
       Done!
       To execute the script, the JavaScript engine places the first call console.log() on top of the call stack and executes it. Then, it places the task() function on top of the call stack and executes the function.
       
-      However, it’ll take a while to complete the task() function. Therefore, you’ll see the message 'Download a file.' a little time later. After the task() function completes, the JavaScript engine pops it off the call stack.
+      However, it'll take a while to complete the task() function. Therefore, you'll see the message 'Download a file.' a little time later. After the task() function completes, the JavaScript engine pops it off the call stack.
       
       Finally, the JavaScript engine places the last call to the console.log('Done!') function and executes it, which will be very fast.
 
@@ -51,15 +51,15 @@ const javascriptData = {
       }, 1000);
       
       console.log('Done!');
-      Code language: JavaScript (javascript)
-      In this example, you’ll see the message 'Start script...' and 'Done!' immediately. And after that, you’ll see the message 'Download a file'.
       
-      Here’s the output:
+      In this example, you'll see the message 'Start script...' and 'Done!' immediately. And after that, you'll see the message 'Download a file'.
+      
+      Here's the output:
       
       Start script...
       Done!
       Download a file.
-      As mentioned earlier, the JavaScript engine can do only one thing at a time. However, it’s more precise to say that the JavaScript runtime can do one thing at a time.
+      As mentioned earlier, the JavaScript engine can do only one thing at a time. However, it's more precise to say that the JavaScript runtime can do one thing at a time.
       
       The web browser also has other components, not just the JavaScript engine.
       
@@ -85,14 +85,14 @@ const javascriptData = {
       }, 0);
       
       console.log('Bye!');
-      Code language: JavaScript (javascript)
-      In this example, the timeout is 0 seconds, so the message 'Execute immediately.' should appear before the message 'Bye!'. However, it doesn’t work like that.
+      
+      In this example, the timeout is 0 seconds, so the message 'Execute immediately.' should appear before the message 'Bye!'. However, it doesn't work like that.
       
       The JavaScript engine places the following function call on the callback queue and executes it when the call stack is empty. In other words, the JavaScript engine executes it after the console.log('Bye!').
       
       console.log('Execute immediately.');
-      Code language: JavaScript (javascript)
-      Here’s the output:
+      
+      Here's the output:
       
       Hi!
       Bye!
@@ -127,10 +127,10 @@ Variable hoisting means the JavaScript engine moves the variable declarations to
 
 console.log(counter); // 👉 undefined
 var counter = 1;
-Code language: JavaScript (javascript)
+
 In this example, we reference the counter variable before the declaration.
 
-However, the first line of code doesn’t cause an error. The reason is that the JavaScript engine moves the variable declaration to the top of the script.
+However, the first line of code doesn't cause an error. The reason is that the JavaScript engine moves the variable declaration to the top of the script.
 
 Technically, the code looks like the following in the execution phase:
 
@@ -138,7 +138,7 @@ var counter;
 
 console.log(counter); // 👉 undefined
 counter = 1;
-Code language: JavaScript (javascript)
+
 During the creation phase of the global execution context, the JavaScript engine places the variable counter in the memory and initializes its value to undefined.
 
 The let keyword
@@ -146,23 +146,23 @@ The following declares the variable counter with the let keyword:
 
 console.log(counter);
 let counter = 1;
-Code language: JavaScript (javascript)
+
 The JavaScript issues the following error:
 
 "ReferenceError: Cannot access 'counter' before initialization
-The error message explains that the counter variable is already in the heap memory. However, it hasn’t been initialized.
+The error message explains that the counter variable is already in the heap memory. However, it hasn't been initialized.
 
-Behind the scenes, the JavaScript engine hoists the variable declarations that use the let keyword. However, it doesn’t initialize the let variables.
+Behind the scenes, the JavaScript engine hoists the variable declarations that use the let keyword. However, it doesn't initialize the let variables.
 
-Notice that if you access a variable that doesn’t exist, the JavaScript will throw a different error:
+Notice that if you access a variable that doesn't exist, the JavaScript will throw a different error:
 
 console.log(alien);
 let counter = 1;
-Code language: JavaScript (javascript)
+
 Here is the error:
 
 "ReferenceError: alien is not defined
-Code language: plaintext (plaintext)
+
 Function hoisting
 Like variables, the JavaScript engine also hoists the function declarations. This means that the JavaScript engine also moves the function declarations to the top of the script. For example:
 
@@ -175,7 +175,7 @@ console.log(result); // 👉 30
 function add(a, b) {
   return a + b;
 }
-Code language: JavaScript (javascript)
+
 Output:
 
 30
@@ -190,7 +190,7 @@ let x = 20,
 
 let result = add(x,y);
 console.log(result); // 👉 30
-Code language: JavaScript (javascript)
+
 During the creation phase of the execution context, the JavaScript engine places the add() function declaration in the heap memory. To be precise, the JavaScript engine creates an object of the Function type and a function reference add that refers to the function object.
 
 Function expressions
@@ -205,17 +205,16 @@ console.log(result);
 let add = function(x, y) {
     return x + y;
 }
-Code language: JavaScript (javascript)
-If you execute the code, the following error will occur:
 
+If you execute the code, the following error will occur:
 Uncaught ReferenceError: add is not defined
-Code language: plaintext (plaintext)
+
 During the creation phase of the global execution context, the JavaScript engine creates the add variable in the memory and initializes its value to undefined.
 
-When executing the following code, the add is undefined, hence, it isn’t a function:
+When executing the following code, the add is undefined, hence, it isn't a function:
 
 let result = add(x,y);
-Code language: JavaScript (javascript)
+
 The add variable is assigned to an anonymous function only during the execution phase of the global execution context.
 
 Arrow functions
@@ -228,17 +227,17 @@ let result = add(x,y); // ❌ Uncaught ReferenceError: add is not defined
 console.log(result);
 
 let add = (x, y) => x + y; 
-Code language: JavaScript (javascript)
+
 The code also issues the same error as the function expression example because arrow functions are syntactic sugar for defining function expressions.
 
 Uncaught ReferenceError: add is not defined
-Code language: plaintext (plaintext)
+
 Similar to the functions expressions, arrow functions are not hoisted.
 
 Summary
 > JavaScript hoisting occurs during the creation phase of the execution context that moves the variable and function declarations to the top of the script.
-> The JavaScript engine hoists the variables declared using the let keyword, but it doesn’t initialize them as the variables declared with the var keyword.
-> The JavaScript engine doesn’t hoist the function expressions and arrow functions.
+> The JavaScript engine hoists the variables declared using the let keyword, but it doesn't initialize them as the variables declared with the var keyword.
+> The JavaScript engine doesn't hoist the function expressions and arrow functions.
 
       `,
     },
@@ -247,70 +246,65 @@ Summary
       title: "JavaScript Execution Context",
       note: `
 
-      global execution context:
+      <b>global execution context:</b>
       The global execution context is the top-level context in a JavaScript program. It represents the global scope, encompassing the entire program and all its components. This context sets the stage for the entire code execution process and plays a pivotal role in managing global variables and functions.
 
       There are two phases of JavaScript execution context:
 
-      Creation phase: In this phase, the JavaScript engine creates the execution context and sets up the script's environment. It determines the values of variables and functions and sets up the scope chain for the execution context.
+      <b>Creation phase:</b> In this phase, the JavaScript engine creates the execution context and sets up the script's environment. It determines the values of variables and functions and sets up the scope chain for the execution context.
       
-      Execution phase: In this phase, the JavaScript engine executes the code in the execution context. It processes any statements or expressions in the script and evaluates any function calls.
+      <b>Execution phase:</b> In this phase, the JavaScript engine executes the code in the execution context. It processes any statements or expressions in the script and evaluates any function calls.
 
       Introduction to the JavaScript execution context
-      Let’s start with the following example:
+      Let's start with the following example:
 
       let x = 10;
-
       function timesTen(a){
           return a * 10;
       }
-
       let y = timesTen(x);
-
       console.log(y); // 100
-      Code language: JavaScript (javascript)
+      
       In this example:
-
-      > First, declare the 'x' variable and initialize its value with '10'.
-      > Second, declare the 'timesTen()' function that accepts an argument and returns a value that is the result of the multiplication of the argument with 10.
-      > Third, call the 'timesTen()' function with the argument as the value of the 'x' variable and store result in the variable 'y'.
-      > Finally, output the variable 'y' to the Console.
+      > First, declare the <b>x</b> variable and initialize its value with <b>10</b>.
+      > Second, declare the <b>timesTen()</b> function that accepts an argument and returns a value that is the result of the multiplication of the argument with 10.
+      > Third, call the <b>timesTen()</b> function with the argument as the value of the <b>x</b> variable and store result in the variable <b>y</b>.
+      > Finally, output the variable <b>y</b> to the Console.
 
       Behind the scenes, JavaScript does many things. in this tutorial, you will focus on execution contexts.
-
       When the JavaScript engine executes the JavaScript code, it creates execution contexts.
-
       Each execution context has two phases: the creation phase and the execution phase.
 
-      The creation phase:
-      -------------------
+      <b>The creation phase:</b>
 
       When the JavaScript engine executes a script for the first time, it creates the global execution context. During this phase, the JavaScript engine performs the following tasks:
 
-      > Create the global object i.e., 'window' in the web browser or 'global' in Node.js.
-      > Create the 'this' object and bind it to the global object.
+      > Create the global object i.e., <b>window</b> in the web browser or <b>global</b> in Node.js.
+      > Create the <b>this</b> object and bind it to the global object.
       > Set up a memory heap for storing variables and function references.
-      > Store the function declarations in the memory heap and variables within the global execution context with the initial values as 'undefined'.
+      > Store the function declarations in the memory heap and variables within the global execution context with the initial values as <b>undefined</b>.
 
       When the JavaScript engine executes the code example above, it does the following in the creation phase:
 
-      > First, store the variables 'x' and 'y' and function declaration timesTen() in the global execution context.
-      > Second, initialize the variables 'x' and 'y' to 'undefined'.
+      > First, store the variables <b>x</b> and <b>y</b> and function declaration timesTen() in the global execution context.
+      > Second, initialize the variables <b>x</b> and <b>y</b> to <b>undefined</b>.
 
+      <div style="background:yellow;">
       <------------------------------>
       Global Execution Context: Creation Phase (Web Browser)
       --------------------------------
       <------------------------------>
-      Global Object : Window
+      <p>Global Object : Window</p>
       <------------------------------>
-      this:window
+      <p>this:window</p>
       <------------------------------>
-      x:undefined
+      <p>x:undefined</p>
       <------------------------------>
-      timesTen: function(){...}
+      <p>timesTen: function(){...}</p>
       <------------------------------>
-      y:undefined
+      <p>y:undefined</p>
       <------------------------------>
+      </div>
 
       After the creation phase, the global execution context moves to the execution phase.
 
@@ -336,7 +330,7 @@ Summary
       
       For each function call, the JavaScript engine creates a new function execution context.
 
-      The function execution context is similar to the global execution context. But instead of creating the global object, the JavaScript engine creates the 'arguments' object that is a reference to all the parameters of the function:
+      The function execution context is similar to the global execution context. But instead of creating the global object, the JavaScript engine creates the <b>arguments</b> object that is a reference to all the parameters of the function:
 
       <------------------------------>
       Global Execution Context: Execution Phase (Web Browser)
@@ -365,9 +359,9 @@ Summary
       a:undefined
       <------------------------------>
 
-      In our example, the function execution context creates the 'arguments' object that references all parameters passed into the function, sets 'this' value to the global object, and initializes the a parameter to 'undefined'.
+      In our example, the function execution context creates the <b>arguments</b> object that references all parameters passed into the function, sets <b>this</b> value to the global object, and initializes the a parameter to <b>undefined</b>.
 
-      During the execution phase of the function execution context, the JavaScript engine assigns '10' to the parameter 'a' and returns the result (100) to the global execution context:
+      During the execution phase of the function execution context, the JavaScript engine assigns <b>10</b> to the parameter <b>a</b> and returns the result (100) to the global execution context:
 
       <------------------------------>
       Global Execution Context: Execution Phase (Web Browser)
@@ -420,7 +414,7 @@ Summary
       See the following example:
 
       var message = 'Hi';
-      Code language: JavaScript (javascript)
+      
       The variable message is global-scoped. It can be accessible everywhere in the script.
 
       <----------------------->
@@ -449,7 +443,7 @@ Summary
 
       say();
       console.log(message);
-      Code language: JavaScript (javascript)
+      
 
       Output:
       .......
@@ -551,7 +545,7 @@ Summary
       }
 
       bar();
-      Code language: JavaScript (javascript)
+      
       Output:
 
       200
@@ -570,7 +564,7 @@ Summary
       }
 
       console.log(getCounter());
-      Code language: JavaScript (javascript)
+      
       Output:
 
       10
@@ -580,9 +574,9 @@ Summary
 
       This issue is known as the leaks of the global variables.
 
-      Under the hood, the JavaScript engine first looks up the counter variable in the local scope of the getCounter() function. Because there is no var, let, or const keyword, the counter variable is not available in the local scope. It hasn’t been created.
+      Under the hood, the JavaScript engine first looks up the counter variable in the local scope of the getCounter() function. Because there is no var, let, or const keyword, the counter variable is not available in the local scope. It hasn't been created.
 
-      Then, the JavaScript engine follows the scope chain and looks up the counter variable in the global scope. The global scope also doesn’t have the counter variable, so the JavaScript engine creates the counter variable in the global scope.
+      Then, the JavaScript engine follows the scope chain and looks up the counter variable in the global scope. The global scope also doesn't have the counter variable, so the JavaScript engine creates the counter variable in the global scope.
 
       To fix this “weird” behavior, you use the 'use strict' at the top of the script or at the top of the function:
 
@@ -594,11 +588,11 @@ Summary
       }
 
       console.log(getCounter());
-      Code language: JavaScript (javascript)
+      
       Now, the code throws an error:
 
       ReferenceError: counter is not defined
-      Code language: JavaScript (javascript)
+      
       The following shows how to use the 'use strict' in the function:
 
       function getCounter() {
@@ -608,7 +602,7 @@ Summary
       }
 
       console.log(getCounter());
-      Code language: JavaScript (javascript)
+      
       Block scope
       ES6 provides the let and const keywords that allow you to declare variables in block scope.
 
@@ -626,7 +620,7 @@ Summary
       }
 
       say();
-      Code language: JavaScript (javascript)
+      
       In this example, we reference the variable greeting outside the if block that results in an error.
 
       In this tutorial, you have learned about the JavaScript variable scopes including function scope, global scope, and block scope.
@@ -677,7 +671,7 @@ Summary
       The script will stop when the call stack is empty.
 
       JavaScript call stack example
-      Let’s start with the following example:
+      Let's start with the following example:
 
       function add(a, b) {
           return a + b;
@@ -688,7 +682,7 @@ Summary
       }
 
       let x = average(10, 20);
-      Code language: JavaScript (javascript)
+      
       When the JavaScript engine executes this script, it places the global execution context (denoted by main() or global() function on the call stack.
 
       The global execution context enters the creation phase and moves to the execution phase.
@@ -802,7 +796,7 @@ Summary
       note: `------------
             A pure function is a function that always returns the same output given a specific input.
             
-            A pure function does not change any value or state outside of its scope and it doesn’t depend on any value outside of its scope. It only depends on the input given to the function and does not produce any side effects.
+            A pure function does not change any value or state outside of its scope and it doesn't depend on any value outside of its scope. It only depends on the input given to the function and does not produce any side effects.
             ------------
             
             A pure function in JavaScript is a function that returns the same result if the same arguments(input) are passed in the function. Let's see what makes a function pure in detail:
@@ -926,7 +920,7 @@ Sometimes, you may see an IIFE that starts with a semicolon(;):
 /* */
 })();
 
-Code language: JavaScript (javascript)
+
 In this syntax, the semicolon is used to terminate the statement in case two or more JavaScript files are blindly concatenated into a single file.
 
 For example, you may have two file lib1.js and lib2.js which use IIFEs:
@@ -940,7 +934,7 @@ For example, you may have two file lib1.js and lib2.js which use IIFEs:
     // ...
 })()
 
-Code language: JavaScript (javascript)
+
 If you use a code bundler tool to concatenate code from both files into a single file, without the semicolon (;) the concatenated JavaScript code will cause a syntax error.
 
 
@@ -956,7 +950,7 @@ By encapsulating code within IIFE, you avoid polluting the global namespace. Thi
 IIFE executes code immediately after declaration. This feature is beneficial when you need to perform initialization tasks, configure settings, or kickstart an application. It ensures that your code runs exactly when and where you intend.
 
 4. Data Privacy
-IIFE allows you to create closures, which help maintain data privacy. You can hide variables and functions inside an IIFE, exposing only what’s necessary. This concept is fundamental to the Module Pattern, a widely-used design pattern in JavaScript.
+IIFE allows you to create closures, which help maintain data privacy. You can hide variables and functions inside an IIFE, exposing only what's necessary. This concept is fundamental to the Module Pattern, a widely-used design pattern in JavaScript.
 
 Real-World Scenarios for IIFE
 1. Isolating Code
@@ -1059,8 +1053,8 @@ Named IIFE:--
 
 Anonymous IIFE:-
 - Anonymous IIFE functions are more concise and often preferred for short-lived utility functions.
-- They are generally used when you don’t need to reference the function elsewhere in your code.
-- Anonymous IIFE is suitable for encapsulating code that doesn’t require a name.
+- They are generally used when you don't need to reference the function elsewhere in your code.
+- Anonymous IIFE is suitable for encapsulating code that doesn't require a name.
 
 (function(){
     Anonymous
@@ -1656,7 +1650,7 @@ This process continues until the number becomes 1. Then when the number reaches 
         4
 
         --------------->
-        Limitation of Generators: You can’t yield inside a callback in a generator.
+        Limitation of Generators: You can't yield inside a callback in a generator.
         Example : In this example, we will try to give yield inside a generator function.
         function* generator() { 
             ['a', 'b', 'c'].forEach(value => yield value)  
@@ -1766,7 +1760,7 @@ function createButtonHandler(buttonId) {
     const button = document.getElementById(buttonId);
 
     button.addEventListener('click', function() {
-        console.log(Button \${buttonId} clicked');
+        console.log('Button \${buttonId} clicked');
     });
 }
 
@@ -1862,13 +1856,13 @@ console.log(get_arr[2]());
 console.log(get_arr[3]());
 Output:
 
-Did you guess the right answer? In the above code, we have created four closures that point to the variable i which is the local variable to the function outer. Closure doesn’t remember the value of the variable it only points to the variable or stores the reference of the variable and hence, returns the current value. In the above code when we try to update the value it gets reflected all because the closure stores the reference. 
+Did you guess the right answer? In the above code, we have created four closures that point to the variable i which is the local variable to the function outer. Closure doesn't remember the value of the variable it only points to the variable or stores the reference of the variable and hence, returns the current value. In the above code when we try to update the value it gets reflected all because the closure stores the reference. 
 
 4
 4
 4
 4
-Let’s see the correct way to write the above code so as to get different values of i at different indexes. 
+Let's see the correct way to write the above code so as to get different values of i at different indexes. 
 
 Example 2: This example shows the basic use of closure
 
@@ -1935,7 +1929,7 @@ Note: It may be slightly difficult to get the concept of closure at once but try
 
             Because we need to call the anonymous function later, we assign the anonymous function to the show variable.
 
-            Since the whole assignment of the anonymous function to the show variable makes a valid expression, you don’t need to wrap the anonymous function inside the parentheses ().
+            Since the whole assignment of the anonymous function to the show variable makes a valid expression, you don't need to wrap the anonymous function inside the parentheses ().
             `,
     },
     {
@@ -1943,7 +1937,7 @@ Note: It may be slightly difficult to get the concept of closure at once but try
       title: "lexical scope:",
       note: `A lexical scope in JavaScript means that a variable defined outside a function can be accessible inside another function defined after the variable declaration. But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
             (or)
-    Lexical Scoping: A function scope’s ability to access variables from the parent scope is known as lexical scope.
+    Lexical Scoping: A function scope's ability to access variables from the parent scope is known as lexical scope.
             (or)
     the inner functions have access to the variables and other resources of their parent scope.
     
@@ -2242,11 +2236,11 @@ Note: It may be slightly difficult to get the concept of closure at once but try
       note: `
       
       
-      Bind() allows you to create a new function from an existing function, change the new function’s this context, and provide any arguments you want the new function to be called with. The arguments provided to bind will precede any arguments that are passed to the new function when it is called.
+      Bind() allows you to create a new function from an existing function, change the new function's this context, and provide any arguments you want the new function to be called with. The arguments provided to bind will precede any arguments that are passed to the new function when it is called.
 
       does not immediately invoke the function
 
-      returns a new function that can be invoked later in the code, while maintaining the desired context binding — this is useful for passing functions into other functions, like setTimeout(), which will invoke it later and won’t necessarily bind the invoked function to the correct object without being coerced
+      returns a new function that can be invoked later in the code, while maintaining the desired context binding — this is useful for passing functions into other functions, like setTimeout(), which will invoke it later and won't necessarily bind the invoked function to the correct object without being coerced
 
       first parameter is the context object
 
@@ -2559,11 +2553,11 @@ Note: It may be slightly difficult to get the concept of closure at once but try
               console.log('flying');
           }
       }
-      Code language: JavaScript (javascript)
+      
       Error:
 
       ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
-      Code language: JavaScript (javascript)
+      
       Because the super() initializes the this object, you need to call the super() before accessing the this object. Trying to access this before calling super() also results in an error.
 
       ---------------
@@ -2623,7 +2617,7 @@ Note: It may be slightly difficult to get the concept of closure at once but try
               console.log('flying');
           }
       }
-      Code language: JavaScript (javascript)
+      
       In this example, the Animal class has the helloWorld() static method and this method is available as Bird.helloWorld() and behaves the same as the Animal.helloWorld() method:
 
       Bird.helloWorld(); // Hello World

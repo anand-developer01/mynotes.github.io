@@ -26,6 +26,7 @@ function mainDom(data) {
         leftLinks.appendChild(leftMenuD_FlexDiv)
 
         let coreSnp = typeof el.note === "object" && el.note.map(k => (
+            k.code1 ? 
             `<div>
                 <p class="notes-text">
                     ${k.text1}
@@ -35,6 +36,10 @@ function mainDom(data) {
                             ${k.code1} 
                     </code>
                 </pre>
+            </div>` :  `<div>
+            <p class="notes-text">
+                ${k.text1}
+            </p>
             </div>`
         )) || []
 
