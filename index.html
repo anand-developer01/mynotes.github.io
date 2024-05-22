@@ -22,17 +22,14 @@
 
     <div class="container-fluid">
         <h1><a href="./pages/index.html">Home</a></h1>
-        <button onClick="loadInformation()">
-            Click to Load
-        </button>
         <button onClick="sendInformation()">
             send data
         </button>
-        <div id="container"></div>
     </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- <script src="./require.js"></script> -->
     <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
     <script src="./pages/main.js"></script>
     <!-- <script src="./notes-data/home-notes.js"></script> -->
@@ -41,63 +38,35 @@
     <script>
         // mainDom(commonData.commonNote)
 
-        function uploadData() {
-            const fs = require("fs");
-            let usersjson = fs.readFileSync("db.json", "utf-8");
-            console.log(usersjson)
-            // let users = JSON.parse(usersjson);
-            // users.push(obj);
-            // usersjson = JSON.stringify(users);
-            // fs.writeFileSync("db.json",usersjson,"utf-8");
-        }
-
-
-        function loadInformation() {
-            // Request 
-            var request = new XMLHttpRequest();
-            request.open("GET", './db/db.json');
-            request.send();
-
-            // Response 
-            request.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-
-                    // Also checked status==200 to  
-                    // verify its status is OK or not 
-                    console.log(this.responseText);
-                    document.getElementById("container")
-                        .innerHTML = this.responseText;
-                }
-            }
-        }
-
         function sendInformation() {
-            const xhr = new XMLHttpRequest()
+            const fs = require('fs');
 
-            // listen for `load` event
-            xhr.onload = () => {
-                // print JSON response
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    // parse JSON
-                    const response = JSON.parse(xhr.responseText)
-                    console.log(response)
-                }
-            }
+            // Read the contents of the JSON file
+            const data = fs.readFileSync('./db/db.json');
+            // Parse the JSON data into a JavaScript object
+            const jsonData = JSON.parse(data);
 
-            // create a JSON object
-            const json = {
-                email: 'eve.holt@reqres.in',
-                password: 'cityslicka'
-            }
+            console.log("Before Adding data", JSON.stringify(jsonData, null, 4));
 
-            // open request
-            xhr.open('POST', './db/db.json')
+            // Modify the JavaScript object by adding new data
+            jsonData.users.push({
+                "username": "Ram",
+                "surname": "Brown",
+                "id": [1]
+            });
 
-            // set `Content-Type` header
-            xhr.setRequestHeader('Content-Type', 'application/json')
 
-            // send rquest with JSON payload
-            xhr.send(JSON.stringify(json))
+            // Convert the JavaScript object back into a JSON string
+            const jsonString = JSON.stringify(jsonData);
+
+            fs.writeFileSync('./db/db.json', jsonString, 'utf-8', (err) => {
+                if (err) throw err;
+                console.log('Data added to file');
+            });
+
+            const update_data = fs.readFileSync('./db/db.json');
+            const updated_jsonData = JSON.parse(update_data);
+            console.log("After Adding data", JSON.stringify(updated_jsonData, null, 4));
         }
 
 
