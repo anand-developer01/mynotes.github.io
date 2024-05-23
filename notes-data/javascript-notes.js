@@ -1645,30 +1645,42 @@ myFunction();
           text1: `Global variables can be made local (private) with closures.
           Closure in JavaScript is a form of lexical scoping used to preserve variables from the outer scope of a function in the inner scope of a function.
 
+In JavaScript, a closure is a feature that allows a function to remember and access its lexical scope even when that function is executed outside that lexical scope. In simpler terms, a closure gives you access to an outer function's scope from an inner function even after the outer function has finished executing.
+
+A closure is a function that has access to the variables and parameters of its outer function, even after the outer function has returned. This is possible because the inner function retains a reference to the scope of the outer function, even after the outer function has been executed.
+
           In other words, closure is created when a child function keep the environment of the parent scope even after the parent function has already executed 
 
           Variables created without a declaration keyword <b>(var, let, or const)</b> are always global, even if they are created inside a function.
           In JavaScript, a closure is created when a function is defined within another function, allowing the inner function to access variables from the outer (enclosing) function's scope. Closures have access to the outer function's variables, parameters, and even the outer function's this context. This provides a way to create private variables, maintain state, and create functions with behavior that depends on their lexical environment.
 
           Here are a few examples of closures in JavaScript:`,
-          code1: `Example 1: Basic Closure
-
-          function outerFunction() {
-              let outerVariable = "I am from the outer function";
-          
-              function innerFunction() {
-                  console.log(outerVariable);
-              }
-          
-              return innerFunction;
+          code1: `function outerFunction() {
+            var outerVariable = 'I am from outerFunction';
+            
+            function innerFunction() {
+              console.log(outerVariable); // innerFunction has access to outerVariable
+            }
+            
+            return innerFunction; // Return the inner function
           }
-
-          const closureFunction = outerFunction();
-closureFunction(); // Outputs: "I am from the outer function"
+          
+          var inner = outerFunction(); // inner now holds a reference to innerFunction
+          inner(); // When inner is executed, it still has access to outerVariable through closure
           `
         },
         {
-          text1: `In this example, innerFunction is a closure because it is defined inside outerFunction and has access to outerVariable.`,
+          text1: ` In above example, <b>innerFunction</b> has access to the <b>outerVariable</b> even though it's declared in the <b>outerFunction</b>, and <b>outerFunction</b> has already finished executing. This is possible because of closure.
+
+          <b>Lexical Scope:</b> In JavaScript, variables defined outside of a function are accessible inside the function. This is called lexical scope.
+          
+          <b>Inner Functions:</b> Functions defined inside another function are called inner functions. These inner functions have access to the variables declared in the outer function, as well as to the global scope.
+          
+          <b>Closure:</b> When an inner function is returned from the outer function and survives beyond the life of the outer function, it maintains access to the variables and parameters of that outer function, even though the outer function has completed execution. This phenomenon is called closure.`,
+          code1: ``
+        },
+        {
+          text1: ``,
           code1: `
           // Example 2: Private Variables
 
@@ -1842,7 +1854,226 @@ closureFunction(); // Outputs: "I am from the outer function"
           3
           // Note: It may be slightly difficult to get the concept of closure at once but try experimenting with closure in different scenarios like for creating getter/setter, callbacks, and so on. `
         },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">use case of Closure </span>
+          In this code snippet, you're using <b>setTimeout</b> inside a loop to create three alerts, each displaying the value of i. However, due to the asynchronous nature of <b>setTimeout</b>, the alerts won't display as you might expect.
 
+          Here's what happens:
+          
+          The loop starts, and i is initialized to 0.
+          The first <b>setTimeout</b> is called with a delay of 1000 milliseconds. Since i is 0, the alert function is created to alert 0.
+          The loop continues, and i becomes 1.
+          The second <b>setTimeout</b> is called with a delay of 1001 milliseconds. Now, the alert function captures the current value of i, which is 1.
+          The loop continues, and i becomes 2.
+          The third <b>setTimeout</b> is called with a delay of 1002 milliseconds. Again, the alert function captures the current value of i, which is 2.
+          By the time the alerts are triggered (after the specified delays), the value of i has already been updated to 3 due to the loop completing. Therefore, all three alerts display 3.`,
+          code1: `for (var i = 0; i < 3; i++) {
+            setTimeout(function() { alert(i); }, 1000 + i);
+          }
+          
+          // If you want each alert to display the corresponding value of i (0, 1, 2) after the specified delays, you need to create a closure to capture the current value of i at each iteration. You can achieve this by using an IIFE (Immediately Invoked Function Expression) like this:
+
+          for (var i = 0; i < 3; i++) {
+            setTimeout(function(i_local) { 
+              return function() { console.log(i_local); } 
+            }(i), 1000 + i);
+          }
+          
+          // -- or --
+          
+          for (var i = 0; i < 3; i++) {
+            (function (i) {
+              setTimeout(function() { console.log(i); }, 1000 + i);
+            })(i);
+          }
+          `,
+        },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">Encapsulation and data privacy</span>
+          Encapsulation involves bundling data and methods that operate on that data within a single unit, typically a class or a function. It promotes the idea of hiding the internal state of an object and exposing only the necessary functionalities to interact with that object.
+
+          Closures allow you to create private variables and functions within a scope. This means that you can encapsulate certain data and functionality, preventing them from being accessed or modified from outside the closure. This is particularly useful when you want to hide implementation details and expose only a limited interface to other parts of your code.
+        
+          In Below example, we have a <b>createBook</b> function that takes a <b>title</b> and an <b>author</b> as arguments and returns an object with four methods: <b>getTitle</b>, <b>getAuthor</b>, <b>setTitle</b>, and <b>setAuthor</b>. These methods allow us to retrieve or update the values of the <b>_title</b> and <b>_author</b> variables, which are private to the <b>createBook</b> function and not accessible outside of it.
+          `,
+          code1: `function createBook(title, author) {
+            let _title = title; // Private variable
+            let _author = author; // Private variable
+            return {
+              getTitle: function() {
+                return _title;
+              },
+              getAuthor: function() {
+                return _author;
+              },
+              setTitle: function(newTitle) {
+                _title = newTitle;
+              },
+              setAuthor: function(newAuthor) {
+                _author = newAuthor;
+              }
+            }
+          }
+          
+          const book1 = createBook('Clean Code', 'Robert Cecil Martin');
+          console.log(book1.getTitle()); // 'Clean Code'
+          console.log(book1.getAuthor()); // 'Robert Cecil Martin'
+          book1.setTitle('Code Complete');
+          console.log(book1.getTitle()); // 'Code Complete'`,
+        },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">Persistent state / State Retention</span>
+          Closures allow functions to retain their state even after they have finished executing. This means that variables inside a closure will still be accessible when the closure is invoked later on. This can be particularly useful when dealing with event handlers or asynchronous operations.          
+          <u>Ex: 1---</u>
+          In Below example, the <b>createTimer</b> function creates a closure that increments the <b>seconds</b> variable every second using <b>setInterval</b>. The closure retains the value of <b>seconds</b> even after the <b>createTimer</b> function has finished executing. This allows the timer to continue running and displaying the elapsed time.
+          <u>Ex: 2---</u>
+          In Below example, the <b>createCounter</b> function returns a function that increments and returns the value of the <b>count</b> variable each time it is called. Because the returned function is a closure, it keeps access to the <b>count</b> variable even after the <b>createCounter</b> function has returned, allowing it to maintain states across multiple function calls.
+          `,
+          code1: ` // Ex: 1---
+          function createTimer() {
+            let seconds = 0;
+          
+            setInterval(() => {
+              seconds++;
+              console.log('Elapsed time: \${seconds} seconds');
+            }, 1000);
+          }
+          
+          const timer = createTimer(); // Starts the timer
+
+          // Ex: 2---
+          function createCounter() {
+            let count = 0;
+            return function() {
+              count += 1;
+              return count;
+            }
+          }
+          
+          const counter1 = createCounter();
+          const counter2 = createCounter();
+          const counter3 = createCounter();
+          
+          console.log("counter1", counter1()); // 1
+          console.log("counter1", counter1()); // 2
+          console.log("counter2", counter2()); // 1
+          console.log("counter2", counter2()); // 2
+          console.log("counter3", counter3()); // 1
+          console.log("counter3", counter3()); // 2
+          console.log("counter3", counter3()); // 3`,
+        },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">Memoization </span> 
+          Closures can also be used for memoization, which is a technique to optimize the performance of functions by caching their results. By caching the results of expensive calculations, you can avoid redundant computations and improve the overall performance of your code.
+          
+          Memorization is a technique that involves storing the results of expensive or time-consuming calculations in a cache or lookup table so that they can be quickly retrieved the next time the same calculation is needed. It can greatly improve the performance of a function or algorithm, especially if it is called multiple times with the same arguments.
+          
+          // Ex : 1--
+          In the example above, the <b>memoizedAdd</b> function returns an inner function that calculates the sum of two numbers. The results of previous calculations are stored in the <b>cache</b> object. Before performing a new calculation, the inner function checks if the result for the given input parameters already exists in the cache. If it does, it returns the cached result instead of recomputing it.
+          `,
+          code1 : `
+          // Ex: 1--
+          function memoizedAdd() {
+            const cache = {};
+            
+            return function(x, y) {
+              const key = '\${x}-\${y}';
+              
+              if (cache[key]) {
+                return cache[key];
+              }
+              
+              const result = x + y;
+              cache[key] = result;
+              
+              return result;
+            }
+          }
+          
+          const add = memoizedAdd();
+          console.log(add(2, 3)); // Output: 5
+          console.log(add(2, 3)); // Output: 5 (cached result)
+
+          // Ex: 2--
+          function createFibonacciGenerator() {
+            const cache = {};
+          
+            return function fibonacci(n) {
+              if (n in cache) {
+                return cache[n];
+              } else {
+                let a = 0, b = 1, c;
+                for (let i = 0; i < n; i++) {
+                  c = a + b;
+                  a = b;
+                  b = c;
+                }
+                cache[n] = a;
+                return a;
+              }
+            }
+          }
+          
+          const fibonacciGenerator = createFibonacciGenerator();
+          console.log(fibonacciGenerator(10)); // 55
+          console.log(fibonacciGenerator(10)); // 55 (cached result)
+
+          `,
+        },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">Event handlers </span> 
+          Closures are commonly used in event handlers to preserve the state of variables. When you attach an event handler to an HTML element, you often need to access the element's properties or other variables within the event handler.  Closures allow you to do this by capturing the variables in the lexical environment at the time the event handler is defined.`,
+          code1: `
+          function createButton() {
+            const button = document.createElement('button');
+            button.innerText = 'Click me';
+            
+            let count = 0;
+            
+            button.addEventListener('click', function() {
+              count++;
+              console.log('Button clicked \${count} times');
+            });
+            
+            return button;
+          }
+          
+          const button = createButton();
+          document.body.appendChild(button);
+          `
+        },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">asynchronous operations </span>
+          JavaScript closures are not only useful for encapsulating data and creating private variables, but they are also powerful tools for handling asynchronous operations. In this section, we will explore how closures can be used to manage asynchronous tasks in JavaScript.
+
+          When working with asynchronous operations, such as making API requests or fetching data from a database, it is common to encounter situations where you need to handle the result of the operation once it completes.  Closures can help you manage this by capturing the state of variables at the time the asynchronous operation is initiated.`,
+          code1:`function fetchData(url) {
+            return new Promise((resolve, reject) => {
+              // Simulating an asynchronous API request
+              setTimeout(() => {
+                const data = { name: "John", age: 30 };
+                resolve(data);
+              }, 2000);
+            });
+          }
+          
+          function processData() {
+            // Variable defined outside the closure
+            let processedData = null;
+          
+            fetchData("https://api.example.com/data")
+              .then((data) => {
+                processedData = data;
+                // Closure captures the state of processedData
+                console.log("Data processed:", processedData);
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          }
+          
+          processData();`
+        }
       ]
     },
     {
@@ -1902,6 +2133,563 @@ closureFunction(); // Outputs: "I am from the outer function"
   
   Note:
   Variables created without a declaration keyword (var, let, or const) are always global, even if they are created inside a function.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "call() method",
+      note: [
+        {
+          text1: `The call() method calls a function by passing this and specified values as arguments.
+
+          The syntax of the call() method is:
+    
+          func.call(thisArg, arg1, ... argN)
+   
+          The call() method can take two parameters:
+    
+          <b>thisArg</b> - The thisArg is the object that the this object references inside the function func (or) The value to be passed as the this parameter when the function is called..
+          <b>arg1</b>, ... argN (optional) - Arguments for the function func.
+
+          In JavaScript, the call() method is a built-in method that is used to invoke a function with a specified this value and individual arguments provided as separate arguments. It allows you to call a function and explicitly set the context (the value of this) for that function, as well as pass arguments one by one.`,
+          code1: `function sayHello() {
+            console.log('Hello, \${this.name}!');
+        }
+  
+        const person = {
+            name: 'John'
+        };
+  
+        sayHello.call(person); // Outputs: "Hello, John!"
+        // In this example, sayHello.call(person) calls the 'sayHello' function with person as the value of this, so within the function, this.name refers to John.
+        
+        //----------
+
+        // You can also use call() to borrow methods from one object and apply them to another:
+
+      const person1 = {
+          firstName: 'John',
+          lastName: 'Doe',
+          getFullName: function() {
+              return this.firstName + ' ' + this.lastName;
+          }
+      };
+
+      const person2 = {
+          firstName: 'Jane',
+          lastName: 'Doe'
+      };
+
+      console.log(person1.getFullName.call(person2)); // Outputs: "Jane Doe"
+
+      // In this example, person1.getFullName.call(person2) borrows the 'getFullName' method from person1 and applies it to person2, effectively setting this inside 'getFullName' to refer to person2.
+        `
+        },
+        {
+          text1: `The call() method is one of several methods (including apply() and bind()) that allow you to control the value of this when invoking functions in JavaScript.
+          Using the JavaScript call() method for function borrowing
+          `,
+          code1: ` 
+          // Using the JavaScript call() method for function borrowing
+          
+          const emp = {
+            empDetails(tax) {
+              console.log(this)
+              const taxd = this.salary * tax / 1000
+              return '\${this.firstName} \${this.lastName}, \${taxd} salary tax deduction'
+            }
+          };
+    
+          const empName1 = {
+            firstName: 'suman',
+            lastName: 'kumar',
+            salary: 50000
+          };
+    
+          const empName2 = {
+            firstName: 'ramesh',
+            lastName: 'pavan',
+            salary: 80000
+          };
+    
+          console.log( emp.empDetails.call (empName1, 5))
+          console.log( emp.empDetails.call (empName2, 5))
+          
+    
+          // Ex :2
+          // -----
+          //Using the JavaScript call() method to chain constructors for an object
+    
+          function Box(height, width) {
+            this.height = height;
+            this.width = width;
+          }
+    
+          const ob1 = new Box(3, 6)
+          console.log(ob1)
+    
+          function Widget(height, width, color) {
+            Box.call(this, height, width)
+            this.color = color;
+          }
+    
+          const wid = new Widget('red', 100, 200)
+          console.log(wid)
+
+    
+          // Ex :3
+          //-------
+    
+          const person = {
+            firstName: "John",
+            lastName: "Doe",
+            id: 5566,
+            myFunction: function() {
+              console.log('\${this.firstName} \${this.lastName}')
+            }
+          };
+          
+          // const runFun = person.myFunction.bind(person)
+          
+          function sum(a, b) {
+            console.log(this)
+            this.myFunction();
+            return a + b;
+          }
+          
+          const ob = {
+            Fname: 'mks',
+            maFun: () => {
+              const res = sum.call(person, 4, 5)
+              return res
+            }
+          }
+          console.log(ob.maFun())`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+
+      ]
+    },
+    {
+      id: 1,
+      title: "apply() method",
+      note: [
+        {
+          text1: `The apply() method calls the specified function with a given <b>'this</b> value, and arguments provided as an array  
+          or  
+          The apply() method invokes a function with a given 'this' value and arguments provided as an array.
+    
+          The call() method takes arguments separately.
+          The apply() method takes arguments as an array.
+    
+          The apply() method in JavaScript is a built-in method that allows you to call a function with a specified this value and an array or array-like object of arguments. It is similar to the call() method, but instead of passing arguments one by one, you can pass them as an array.
+    
+          => Using the apply() method to append an array to another
+          => The apply() method allows you to append elements of an array to another:
+
+          In this example, the apply() method modifies the original array arr. Note that the Array.prototype.concat() method also provides the same result except that it returns the new array instead of modifying the original array.
+          
+          The syntax for the apply() method is as follows:
+
+          <span style="color:red"> functionName.apply(thisValue, [arg1, arg2, ...]);</span>
+
+          <b>functionName</b>: The function to be called.
+          <b>thisValue</b>: The value to be passed as the this parameter when the function is called.
+          <b>[arg1, arg2, ...]</b>: An array or array-like object containing the arguments to be passed to the function.
+          `,
+          code1: `      function sayHello(greeting, punctuation) {
+            console.log('\${greeting}, \${this.name} \${punctuation}');
+        }
+  
+        const person = {
+            name: 'John'
+        };
+  
+        sayHello.apply(person, ['Hi', '!']); // Outputs: "Hi, John!"
+        // In this example, sayHello.apply(person, ['Hi', '!']) calls the sayHello function with person as the value of this and the array ['Hi', '!'] as the arguments, resulting in the message "Hi, John!" being logged to the console.`
+        },
+        {
+          text1: `      apply() is particularly useful when you have a function that accepts a variable number of arguments or when you want to pass an array of arguments dynamically.
+
+          It's worth noting that in modern JavaScript, you can often achieve the same result using the spread operator (...) to pass an array of arguments directly to a function:
+ 
+          <span style="color:red">sayHello.call(person, ...['Hi', '!']);</span>
+          Both <b>apply()</b> and <b>call()</b> are similar, but the choice between them depends on how the arguments are structured: 
+          apply() takes an array, while call() takes individual arguments. If you have an array of arguments, apply() can be more convenient.`,
+          code1: `const person = {
+            firstName: 'John',
+            lastName: 'Doe',
+            fullName() {
+              return '-second \${this.firstName} \${this.lastName}'
+            }
+          }
+    
+          function greet(greeting, message) {
+            console.log(this.fullName)
+            return '\${greeting} \${this.firstName}. \${message}';
+          }
+    
+          let result = greet.apply(person, ["-Hi how are you", "Please come to office"])
+          let result1 = person.fullName.apply(person, ["-Hi how are you", "Please come to office"])
+          console.log("----------with out apply-----------")
+          console.log(greet('Hello', 'How are you?'))
+          console.log("--------------with apply-------------------- ")
+          console.log(result);
+          console.log(result1);
+    
+          // Ex:
+          const computer = {
+            name: 'mac',
+            isOs: false,
+            trunOn() {
+              return 'system name \${this.name}'
+            }
+          }
+    
+          console.log(computer.trunOn())
+    
+          const server = {
+            name: 'windows',
+            isOs: false,
+          }
+    
+          let res1 = computer.trunOn.apply(server)
+          console.log(res1)
+
+          // ----------------------->
+    
+          const userFull = {
+            fullName: 'sharath kumer',
+            job: 'manager',
+            area: 'wgl',
+            age: 40,
+            forVote(greet, message) {
+              let elgVote = this.age > 18 ? '\${greet} \${this.fullName} elgable for vote, \${message}' : 'Not elgable for vote'
+              return elgVote
+            }
+          }
+          
+          const user2 = {
+            fullName: 'vamshi',
+            job: 'PA',
+            age: 70
+          }
+          console.log(userFull.forVote())
+          console.log(userFull.forVote.apply(user2, ['hi', 'congratulations']))
+    
+          // ----------------->
+    
+          function greet(greeting, lang) {
+            console.log(lang);
+            console.log('\${greeting}, I am \${this.name} and I am \${this.age} years old');
+          }
+          const john = {
+            name: 'John',
+            age: 24,
+          };
+          const jane = {
+            name: 'Jane',
+            age: 22,
+          };
+          // Hi, I am John and I am 24 years old
+          greet.apply(john, ['Hi', 'en']);
+          // Hi, I am Jane and I am 22 years old
+          greet.apply(jane, ['Hola', 'es']);
+    `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Bind() method",
+      note: [
+        {
+          text1: `Bind() allows you to create a new function from an existing function, change the new function's this context, and provide any arguments you want the new function to be called with. The arguments provided to bind will precede any arguments that are passed to the new function when it is called.
+
+          does not immediately invoke the function
+    
+          returns a new function that can be invoked later in the code, while maintaining the desired context binding — this is useful for passing functions into other functions, like setTimeout(), which will invoke it later and won't necessarily bind the invoked function to the correct object without being coerced
+    
+          first parameter is the context object
+    
+          all other parameters are individually listed, like with call
+    
+          In JavaScript, the <b>bind()</b> method is used to create a new function that, when called, has its <b>this</b> keyword set to a specific value. It allows you to explicitly specify the value of <b>this</b> when a function is executed. The <b>bind()</b> method does not invoke the function immediately; instead, it returns a new function with the specified <b>this</b> value and, optionally, initial arguments.
+    
+          // The bind() method creates a new function, when invoked, has the this sets to a provided value.
+          // The bind() method allows an object to borrow a method from another object without making a copy of that method. This is known as function borrowing in JavaScript.`,
+          code1: `const originalFunction = function() {
+            console.log(this.name);
+          };
+
+          const obj = { name: 'Example' };
+
+          // Using bind to create a new function with a specific 'this' value
+          const boundFunction = originalFunction.bind(obj);
+
+          // Calling the new function
+          boundFunction(); // Output: Example`
+        },
+        {
+          text1: `          In this example, originalFunction is a simple function that logs the name property of whatever object it is called on. We then use bind() to create a new function boundFunction where this is explicitly set to the obj object. When we call boundFunction(), it prints the name property of obj.
+
+          bind() is particularly useful in scenarios where you want to ensure that a function is always called with a specific context, regardless of how it is later used or referenced.
+
+          Note: The bind() method was introduced in ECMAScript 5 (ES5), so it may not be available in very old browsers. If you need to support such browsers, you may want to consider using a polyfill or alternative methods for achieving similar behavior.`,
+          code1: `let person = {
+            name: 'John Doe',
+            getName: function() {
+              console.log(this)
+              console.log(this.name);
+            }
+          };
+          // person.getName()
+          const f = person.getName.bind(person)
+          setTimeout(f, 2000)
+          
+          // The this inside the setTimeout() function is set to the global object in non-strict mode and undefined in the strict mode.
+          // setTimeout(f, 0)
+
+          ------------------->
+          // Using bind() to borrow methods from a different object
+          const runner = {
+            name: 'Runner',
+            run: function(speed) {
+              console.log(' \${this.name} runs at \${speed}');
+            }
+          };
+
+          const flyer = {
+            name: 'Flyer',
+            fly: function() {
+              console.log(' \${this.name} flys at \${speed}');
+            }
+          };
+
+          const checkFR = runner.run.bind(flyer, 40);
+          checkFR();
+
+          -------------------->
+          const car = {
+            brand: 'Honda',
+            getBrand() {
+              return this.brand;
+            }
+          };
+          
+          console.log(car.getBrand());
+          const getBrandName = car.getBrand;
+          console.log('getBrandName = car.getBrand = ', getBrandName());
+
+          //You get undefined instead of "Honda" because when you call a method without specifying its object, JavaScript sets this to the global object in non-strict mode and undefined in the strict mode.
+          
+          //To fix this issue, you use the bind() method of the Function.prototype object. The bind() method creates a new function whose the this keyword is set to a specified value.
+
+          const getBrandName1 = car.getBrand.bind(car);
+          console.log(getBrandName1());
+          `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "this",
+      note: [
+        {
+          text1: `In JavaScript, the <b>this</b> keyword refers to the context within which a function is executed. It represents the current execution context and provides a way to access the properties and methods of the current object.
+
+          In JavaScript, the <b>this</b> keyword always refers to an object. The thing about it is that the object it refers to will vary depending on how and where this is being called.
+    
+          The value of this depends on how a function is called:
+          
+          <b>1) Global Context:</b>
+          When used outside of any function, <b>this</b> refers to the global object. In a browser environment, the global object is <b>window</b>.
+          
+          
+          <b>2) Function Context:</b>
+          When used within a function, the value of <b>this</b> depends on how the function is called.
+          If the function is called as a method of an object, <b>this</b> refers to the object itself.
+          If the function is called as a standalone function, <b>this</b> refers to the global object (<b>window</b> in browsers) in non-strict mode, or it is <b>undefined</b> in strict mode.
+    
+          <b>A note about arrow functions:</b>
+          In arrow functions, JavaScript sets the this lexically. This means that the arrow function doesn't create its own execution context but inherits the this from the outer function where the arrow function is defined.
+    
+          In most cases, this means this will refer to the window object as well:
+    
+          <span style="color:red">const show = () => this</span>
+          console.log('arrow function this', show())
+
+          It's important to notice this because, for example, if we try to implement an arrow function to it as an object method, we won't be able to access the object through the this keyword:`,
+          code1: `      const person = {
+            name: 'Pedro',
+            surname: 'Sanchez',
+            sayName: () => this.name + ' ' + this.surname
+        }
+  
+        console.log(person.sayName());`
+        },
+        {
+          text1: `      3) Constructor Context:
+          When a function is used as a constructor (i.e., called with the 'new' keyword), 'this' refers to the newly created object instance.
+    
+          4) Event Handler Context:
+          When used in event handlers (e.g., in an event listener), this typically refers to the element that triggered the event.
+          
+          <b>A note about strict-mode:</b>
+          When using strict-mode, calling 'this' within a function will return undefined.
+          `,
+          code1: `      "use strict";
+
+          function show() {
+              console.log(this);
+          }
+          show();`
+        },
+        {
+          text1: `As a side comment, if you're not familiar with what strict-mode is, following the MDN docs:
+
+          JavaScript's strict mode is a way to opt in to a restricted variant of JavaScript, thereby implicitly opting-out of "sloppy mode". Strict mode isn't just a subset: it intentionally has different semantics from normal code.
+    
+          Strict mode makes several changes to regular JavaScript semantics:
+    
+          > Eliminates some JavaScript silent errors by changing them to throw errors.
+          > Fixes mistakes that make it difficult for JavaScript engines to perform optimizations: strict mode code can sometimes be made to run faster than identical code that's not strict mode.
+          > Prohibits some syntax likely to be defined in future versions of ECMAScript.
+          How to Use this in an Event Listener
+    
+          When using <b>this</b> in an event listener, this will refer to the DOM element that fired the event.`,
+          code1: `      document.getElementById('testBtn').addEventListener('click', function() {
+            console.log('this in a event', this);
+        })`
+        },
+        {
+          text1: `In our case, we added the event listener to a button element: <button id="testBtn">TEST</button>
+
+          And after clicking it, we get the following in our console:
+    
+          <b>'this' Methods (call, apply and bind):</b>
+          To complicate the subject a little more, javascript provides three native methods that can be used to manipulate the way the this keyword behaves. These methods are <b>call</b>, <b>apply</b> and <b>bind</b>. Let's see how they work.
+    
+          Here are some examples to illustrate the usage of <b>this</b>:`,
+          code1: `      // Global context
+          console.log(this === window); // true
+          
+          // Method context
+          const obj = {
+            name: 'Object',
+            greet() {
+              console.log('Hello, \${this.name}!');
+            }
+          };
+          obj.greet(); // Output: "Hello, Object!"
+          
+          // Constructor context
+          function Person(name) {
+            this.name = name;
+          }
+          const person1 = new Person('John');
+          console.log(person1.name); // Output: "John"
+          
+          // Event handler context (assuming button is an HTML button element)
+          const button = document.querySelector ('button');
+          button.addEventListener ('click', function() {
+            console.log(this); // Output: HTMLButtonElement
+          });`
+        },
+        {
+          text1: `      Understanding the context of <b>this</b> is essential for working effectively with objects, constructors, and event handling in JavaScript. It allows developers to write more flexible and dynamic code by accessing and manipulating object properties within different execution contexts. However, it's important to be cautious when dealing with <b>this</b>, as its behavior can be affected by various factors such as function binding, arrow functions, and strict mode.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Prototypes",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Callback",
+      note: [
+        {
+          text1: `In JavaScript, a callback function is a function that is passed as an argument to another function and is executed after the completion of some asynchronous operation or at a later time. 
+      
+          Callbacks are a fundamental concept in JavaScript, especially in scenarios like event handling, asynchronous operations, and dealing with functions that take time to complete, such as fetching data from a server.
+    
+          We need callback functions because many JavaScript actions are asynchronous, which means they don't really stop the program (or a function) from running until they're completed, as you're probably used to. Instead, it will execute in the background while the rest of the code runs.
+    
+          when we have a function that might take a long time to complete, oftentimes we provide a callback function. This function encapsulates the code we would like to run at a later time when the blocking action (e.g a network call) has been resolved. This allows us to return control to the JS engine and defer the rest of the execution until after the call-stack has been cleared. This is the concept of asynchrony in JavaScript.
+          
+          Here's a simple example of a callback function:`,
+          code1: `      function fetchData(callback) {
+            // Simulating an asynchronous operation (e.g., fetching data from a server)
+            setTimeout(function() {
+              const data = "This is the fetched data";
+              // Calling the callback function and passing the fetched data as an argument
+              callback(data);
+            }, 2000); // Simulating a 2-second delay
+          }
+          
+          function handleData(data) {
+            console.log("Handling data:", data);
+          }`
+        },
+        {
+          text1: `// Calling fetchData and passing handleData as a callback function
+          fetchData(handleData);
+          In this example, fetchData is a function that simulates an asynchronous operation with a 2-second delay. It takes a callback function (handleData) as an argument and calls it with the fetched data after the operation is complete.
+          
+          Callback functions are crucial in scenarios where you want to ensure that certain code runs only after a specific operation is finished, especially when dealing with asynchronous tasks like AJAX requests, file I/O, or timers.
+          
+          It's worth noting that with the introduction of Promises and async/await in JavaScript, there are alternative ways to handle asynchronous operations that often result in more readable and maintainable code. However, understanding callbacks remains important as they are still widely used in JavaScript development.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Prototypes",
+      note: [
+        {
+          text1: ``,
           code1: ``
         },
       ]
