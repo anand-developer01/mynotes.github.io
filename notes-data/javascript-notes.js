@@ -2679,8 +2679,231 @@ A closure is a function that has access to the variables and parameters of its o
     {
       id: 1,
       section: "Array Methods",
-      title: "Adding/removing elements( push(), unshift(), pop(), shift(), splice(), slice())",
+      title: "push()",
       note: [
+        {
+          text1: `The push() method adds zero or more elements to the end of the array.`,
+          code1: `let city = ["New York", "Madrid", "Kathmandu"];
+
+          // add "London" to the array
+          city.push("London");
+          console.log(city);
+          // Output: [ 'New York', 'Madrid', 'Kathmandu', 'London' ]
+          
+          // The syntax of the push() method is:
+          arr.push(element1, element2, ..., elementN)
+
+          // push() Parameters
+          // The push() method takes in an arbitrary number of elements to add to the array.`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "unshift()",
+      note: [
+        {
+          text1: ` In JavaScript, you use the <b>unshift()</b> method to add one or more elements to the beginning of an array and it returns the array's length after the new elements have been added.
+
+          If we have an array of countries and want to add a country before <b>Nigeria</b> which is currently at the first index 0, we can do so with the <b>unshift()</b> method, as shown below:`,
+          code1: `const countries = ["Nigeria", "Ghana", "Rwanda"];
+          countries.unshift("Kenya");
+          console.log(countries); // ["Kenya","Nigeria","Ghana","Rwanda"]
+          
+          // As we said, we can also add more than one element using the unshift() method:
+          
+          const countries2 = ["Nigeria", "Ghana", "Rwanda"];
+          countries2.unshift("South Africa", "Mali", "Kenya");
+          console.log(countries2); // ["South Africa","Mali","Kenya","Nigeria","Ghana","Rwanda"]
+          
+          // In our explanation of the unshift() method, we also stated that it returns the length of the new array, which is true:
+          
+          const countries3 = ["Nigeria", "Ghana", "Rwanda"];
+          let countriesLength = countries3.unshift("South Africa", "Mali", "Kenya");
+          console.log(countriesLength); // 6`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "pop()",
+      note: [
+        {
+          text1: `The pop() method removes the last element from an array and returns that element.`,
+          code1: `let cities = ["Madrid", "New York", "Kathmandu", "Paris"];
+
+          // remove the last element
+          let removedCity = cities.pop();
+          
+          console.log(cities)         // ["Madrid", "New York", "Kathmandu"]
+          console.log(removedCity);   // Paris
+          
+          // pop() Return Value
+          // Removes the last element from array and returns that value.
+          // Returns undefined if the array is empty.
+          // Notes: This method changes the original array and its length.`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "shift()",
+      note: [
+        {
+          text1: `The shift() method removes the first element from an array and returns that element.
+          The syntax of the shift() method is:
+arr.shift()
+
+shift() Parameters
+The shift() method does not accept any arguments.
+
+  shift() Return Value
+  Removes the first element from array and returns that value.
+  Returns undefined if the array is empty.
+  After removing the element at the 0th index, it shifts other values to consecutive indexes down.
+          `,
+          code1: `let languages = ["English", "Java", "Python", "JavaScript"];
+
+          // removes the first element of the array
+          let first = languages.shift();
+          console.log(first);
+          console.log(languages);
+          
+          // Output: English
+          //         [ 'Java', 'Python', 'JavaScript' ]`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "splice() - (adds, removes or replaces elements)",
+      note: [
+        {
+          text1: `<b>The splice() method modifies an array(adds, removes or replaces elements).</b>
+
+          splice() method that allows you to insert new elements into the middle of an array. Also, you can use this method to delete and replace existing elements as well.
+          ---------------------
+          <i><u>Deleting elements using JavaScript Array's splice() method</i></u>
+---------------------
+To  delete elements in an array, you pass two arguments into the splice() method as follows:
+<span style="color:red">Array.splice(position,num);</span>
+The <b>position</b> specifies the position of the first item to delete and the <b>num</b> argument determines the number of elements to delete.
+The splice() method changes the original array and returns an array that contains the deleted elements.
+
+Let's take a look at the following example.
+Suppose, you have an array <b>scores</b> that contains five numbers from 1 to 5.
+`,
+          code1: `let scores = [1, 2, 3, 4, 5];
+          // The following statement deletes three elements of the 'scores' array starting from the first element.
+          
+          let deletedScores = scores.splice(0, 3);
+          // The scores array now contains two elements.
+          
+          console.log(scores); //  [4, 5]
+          // And the deletedScores array contains three elements.
+          
+          console.log(deletedScores); // [1, 2, 3]
+          // The following figure illustrates the scores.splice(0, 3) method call above.
+
+          // The following figure illustrates the scores.splice(0,3) method call above.
+          // 0: The position of the first item to delete
+          // 3: The number of elements to delete`
+        },
+        {
+          text1: `
+          ---------------------
+          <i><u>Inserting elements using the JavaScript Array splice() method</u></i>
+          ---------------------
+
+          You can insert one or more elements into an array by passing three or more arguments to the splice() method with the second argument is zero.
+
+          Consider the following syntax.
+
+          Array.splice(position,0,new_element_1,new_element_2,...);
+
+          In this syntax:
+
+          The <b>position</b> specifies the starting position in the array in which the new elements will be inserted.
+          The second argument is zero (0) which instructs the splice() method to not delete any array elements.
+          The third argument, fourth argument, and so on are the new elements that are inserted into the array.
+          Note that the splice() method changes the original array. Also, the splice() method does not remove any elements, therefore, it returns an empty array. For example:
+
+          `,
+          code1: `// Assuming that you have an array named colors with three strings:
+
+          let colors = ['red', 'green', 'blue'];
+          
+          // The following statement inserts one element after the second element.
+          
+          colors.splice(2, 0, 'purple');
+          // The colors array now has four elements with the new element inserted in the second position.
+          
+          console.log(colors); // ["red", "green", "purple", "blue"]
+          // The following figure demonstrates the method call above.
+          
+          // 2: starting position to Intert
+          // 0: number of elements to delete(not delete any array elements.)
+          // "purple": new element to insert.
+          
+          // You can insert more than one element by passing the fourth argument, the fifth argument, and so on to the splice() method as in the following example.
+          
+          colors.splice(1, 0, 'yellow', 'pink');
+          console.log(colors); 
+          ["red", "yellow", "pink", "green", "purple", "blue"]
+          `
+        },
+        {
+          text1: `---------------------
+          <i><u>Replacing elements using the JavaScript Array splice() method</i></u>
+          ---------------------
+          
+          The splice() method allows you to insert new elements into an array while deleting existing elements simultaneously.
+          
+          To do this, you pass at least three arguments with the second one that specifies the number of items to delete and the third one that indicates the elements to insert.
+          
+          Note that the number of elements to delete needs not be the same as the number of elements to insert.
+          
+          Suppose you have an array of programming languages with four elements as follows:
+          `,
+          code1: `let languages = ['C', 'C++', 'Java', 'JavaScript'];
+          // The following statement replaces the second element with a new one.
+          
+          languages.splice(1, 1, 'Python');
+          // The 'languages' array now still has four elements with the new second argument is 'Python' instead of 'C++'.
+          
+          console.log(languages);
+          // ["C", "Python", "Java", "JavaScript"]
+          // The following figure illustrates the method call above.
+          
+          // You can replace one element with multiple elements by passing more arguments into the splice() method as follows:
+          
+          languages.splice(2, 1, 'C#', 'Swift', 'Go');
+          // The statement deletes one element from the second element i.e., 'Java' and inserts three new elements into the 'languages' array. The result is as follows.
+          
+          console.log(languages); // ["C", "Python", "C#", "Swift", "Go", "JavaScript"]
+          
+          //------------------->
+          const months1 = ['Jan', 'March', 'April', 'June'];
+          months1.splice(1, 0, 'Feb');
+          // 'Feb' Inserts at index 1
+          console.log(months1);
+          // Expected output: Array ["Jan", "Feb", "March", "April", "June"]
+          
+          months1.splice(4, 1, 'May');
+          // 'May' Replaces 1 element at index 4
+          console.log(months1);
+          // Expected output: Array ["Jan", "Feb", "March", "April", "May"]
+          
+          //-------------------->
+          const months = ['Jan', 'Feb', 'Monday', 'Tuesday'];
+          const days = months.splice(2, 2, 'March', 'April');
+          console.log(months) //  ['Jan', 'Feb', 'March', 'April']
+          console.log(days) // ['Monday', 'Tuesday']`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
         {
           text1: ``,
           code1: ``
@@ -2689,7 +2912,550 @@ A closure is a function that has access to the variables and parameters of its o
     },
     {
       id: 1,
-      title: "Prototypes",
+      title: "slice() - copy elements of an array.",
+      note: [
+        {
+          text1: `The slice() method accepts two optional parameters as follows:
+
+          slice(start, stop);
+          Both <b>start</b> and <b>stop</b> parameters are optional.
+          
+          The <b>start</b> parameter determines the zero - based index at which to start extraction.If the <b>start</b> is <b>undefined</b>, slice() begins at 0.
+          
+          The <b>stop</b> parameter, as its name implies, is a zero - based index at which to end extraction.The slice() method extracts up to <b>stop-1</b>.It means that the slice() method doesn't include the element at the <b>stop</b> position in the new array.If you omit the <b>stop</b> parameter, the slice() method will use the length of the array for the <b>stop</b> parameter.
+          
+          The slice() returns a new array that contains the elements of the original array.It's important to keep in mind that the slice() method performs the shallow copy of elements to the new array only.In addition, it doesn't change the source array.
+          
+          
+          Clone an array
+          The slice() is used to clone an array as shown in the following example:
+          `,
+          code1: `var numbers = [1, 2, 3, 4, 5];
+          var newNumbers = numbers.slice();
+          // In this example, the 'newNumbers' array contains all the elements of the 'numbers' array.`
+        },
+        {
+          text1: ` Copy a portion of an array
+The typical use of the slice() method is to copy a portion of an array without modifying the source array.Here is an example:
+`,
+          code1: `function toArray() {
+            return Array.prototype.slice.call(arguments);
+          }
+          var classification = toArray('A', 'B', 'C');
+          console.log(classification); // ["A", "B", "C"]`
+        },
+        {
+          text1: `
+          In this example, the <b>arguments</b> of the toArray() function is an array-like object. Inside the toArray() function, we called the slice() method to convert the arguments object into an array.
+
+          Every argument we pass to the toArray() function will be the elements of the new array.
+          
+          Another typical example that you often see is converting a <b>NodeList</b> into an array as follows:
+          `,
+          code1: `var p = document.querySelectorAll('p');
+          var list = Array.prototype.slice.call(p);
+          
+          // In this example, first, we used the 'document.querySelectorAll()' to get all 'p' nodes of the HTML document.The result of this method is a 'NodeList' object, which is an array - like object.Then, we called the 'slice()' method to convert the 'NodeList' object into an array.
+          
+          //   Sometimes, you see the following syntax:
+          
+          var list = [].slice.call(document.querySelectorAll('p'));
+          
+          // In this example, we instantiated an empty array '[]' and indirectly accessed the 'slice()' method of the 'Array.prototype' method through the empty array.The effect is the same as the one that uses the 'Array.prototype' directly.`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "concat() - merge two arrays into an array",
+      note: [
+        {
+          text1: `To merge two or more arrays, you use the <b>concat()</b> method of an Array object.The <b>concat()</b> method returns a new array and doesn't change the original arrays.For example:`,
+          code1: `let odds = [1, 3, 5];
+          let evens = [2, 4, 6];
+          // merge odds and evens array
+          let combined = odds.concat(evens);
+          
+          console.log('Result:', combined);
+          console.log('Odds:', odds);
+          
+          
+          // Output:
+          // Result: [ 1, 3, 5, 2, 4, 6 ]
+          // Odds: [ 1, 3, 5 ]`
+        },
+        {
+          text1: `In this example, we have two arrays: <b>odds</b> and <b>evens</b>.We call the <b>concat()</b> method of the <b>odds</b> array method to merge elements of the two arrays.The elements of the second array are appended to the elements of the first array.
+
+          Similarly, you can call the <b>concat()</b> method on an empty array denoted by(<b>[]</b>):`,
+          code1: `let odds = [1, 3, 5];
+          let evens = [2, 4, 6];
+          // merge odds and evens array
+          let combined = [].concat(odds, evens);
+          
+          console.log(combined);
+          
+          // Output:
+          // [1, 3, 5, 2, 4, 6]
+          
+
+          //------------------ 
+          // The 'concat()' method allows you to merge more than two arrays as shown in the following example:
+          
+          let upper = ['A', 'B', 'C'];
+          let lower = ['a', 'b', 'c'];
+          let digits = [1, 2, 3];
+          let alphanumerics = upper.concat(lower, digits);
+          
+          // Output:
+          // ['A', 'B', 'C', 'a', 'b', 'c', 1, 2, 3]
+          
+          // In this example, we merge the three arrays: 'upper', 'lower', and 'digits'.
+          
+
+          //-------------------
+          // When you don't pass any argument into the 'concat()' method, it simply clones the array and returns it:
+          
+
+let colors = ['red', 'green', 'blue'];
+let rgb = colors.concat();
+console.log(rgb);
+
+// Output:
+// [ 'red', 'green', 'blue' ]
+
+
+//-----------------------
+// If you pass values that are not arrays, into the 'concat()' method, the method will appends each value to the end of the result array:
+
+let rgb = ['red', 'green', 'blue'];
+let moreColors = rgb.concat('yellow', 'magento');
+console.log(moreColors);
+
+// Output:
+// ['red', 'green', 'blue', 'yellow', 'magento']
+
+
+//---------------------
+// In ES6, you can use spread operator to merge multiple arrays as follows:
+
+let odds = [1, 3, 5];
+let evens = [2, 4, 6];
+let combined = [...odds, ...evens];
+console.log(combined);
+
+// Output:
+// [ 1, 3, 5, 2, 4, 6 ]
+          `
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "of() - improve array creation.",
+      note: [
+        {
+          text1: `when you pass a number to the Array constructor, JavaScript creates an array whose length equals the number.For example:`,
+          code1: `let numbers = new Array(2);
+          console.log(numbers.length); // 2
+          console.log(numbers[0]); // undefined
+          
+          // However, when you pass to the 'Array' constructor a value that is not a number, JavaScript creates an array that contains one element with that value.For example:
+          
+          numbers = new Array("2");
+          console.log(numbers.length); // 1
+          console.log(numbers[0]); // "2"`
+        },        
+        {
+          text1: `This behavior is sometimes confusing and error - prone because you may not know the type of data that you pass to the Array constructor.
+
+          ES6 introduces the <b>Array.of()</b> method to solve this problem.
+          
+          The <b>Array.of()</b> method is similar to the Array constructor except the <b>Array.of()</b> method does not treat a single numeric value special.
+          
+          In other words, the <b>Array.of()</b> method always creates an array that contains the values that you pass to it regardless of the types or the number of arguments.
+          
+          The following shows the syntax of the <b>Array.of()</b> method:
+          
+          <span style="color:red"> Array.of(element0[, element1[, ...[, elementN]]]) </span>
+          <b>JavaScript Array.of() examples</b>
+          `,
+          code1: `// See the following example:
+
+          let numbers = Array.of(3);
+          console.log(numbers.length); // 1
+          console.log(numbers[0]); // 3
+          
+          // In this example, we passed the number 3 to the 'Array.of()' method.The 'Array.of()' method creates an array of one number.
+          
+          // Consider the following example:
+          
+          let chars = Array.of('A', 'B', 'C');
+          console.log(chars.length); // 3
+          console.log(chars); // ['A','B','C']
+          // In this example, we created an array of three strings by passing 'A', 'B', and 'C' to the 'Array.of()' method.The size of the array is 3.
+          `
+        },
+        {
+          text1: `
+         <b>JavaScript Array.of() polyfill:--</b>
+
+If you execute the JavaScript in the environment that doesn’t support the  'Array.of()' method, you can use the following polyfill:
+`,
+          code1: `if (!Array.of) {
+            Array.of = function() {
+              return Array.prototype.slice.call(arguments);
+            };
+          }`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "from() - create arrays from array-like or iterable objects.",
+      note: [
+        {
+          text1: `To create an array from an array-like object in ES5, you iterate over all array elements and add each of them to an intermediate array like this:`,
+          code1: `function arrayFromArgs() {
+            var results = [];
+            for (var i = 0; i < arguments.length; i++) {
+              results.push(arguments[i]);
+            }
+            return results;
+          }
+          var fruits = arrayFromArgs('Apple', 'Orange', 'Banana');
+          console.log(fruits);
+          
+          // Output:
+          // [ 'Apple', 'Orange', 'Banana' ]
+          
+          // To make it more concise, you can use the 'slice()' method of the 'Array.prototype' as follows:
+          
+          function arrayFromArgs() {
+            return Array.prototype.slice.call(arguments);
+          }
+          var fruits = arrayFromArgs('Apple', 'Orange', 'Banana');
+          console.log(fruits);`
+        },
+        {
+          text1: `ES6 introduces the 'Array.from()' method that creates a new instance of the 'Array' from an array-like or iterable object. The following illustrates the syntax of the 'Array.from()' method:
+
+          <span style="color:red">Array.from(target [, mapFn[, thisArg]])</span>
+          
+          In this syntax:
+          
+          > <b>target</b> is an array - like or iterable object to convert to an array.
+          > <b>mapFn</b> is the map function to call on every element of the array
+          > <b>thisArg</b> is the <b>this</b> value when executing the <b>mapFn</b> function.
+          
+          The <b>Array.from()</b> returns a new instance of <b>Array</b> that contains all elements of the <b>target</b> object.
+          
+          ------------------------------
+          <b>JavaScript Array.from() method examples </b>
+          -------------------------------
+          
+          Let's take some examples of using the <b>Array.from()</b> method.
+          
+          1) Create an array from an array - like object:--
+          
+          The following example uses the <b>Array.from()</b> method to create a new array from the <b>arguments</b> object of a function:
+          `,
+          code1: `function arrayFromArgs() {
+            return Array.from(arguments);
+          }
+          
+          console.log(arrayFromArgs(1, 'A'));
+          
+          // Output:
+          // [1, 'A']
+          
+          // In this example, we create an array from the arguments of the 'arrayFromArgs()' function and return it.
+          `
+        },
+        {
+          text1: `<b>2) JavaScript Array Array.from() with a mapping function:--</b>
+
+          The <b>Array.from()</b> method accepts a callback function that allows you to execute the mapping function on every element of the array that is being created.See the following example:`,
+          code1: `function addOne() {
+            return Array.from(arguments, x => x + 1);
+          }
+          console.log(addOne(1, 2, 3));
+          
+          // Output:
+          // [2, 3, 4]
+          // In this example, we increased each argument of the 'addOne()' function by one and add the result to the new array.
+          `
+        },
+        {
+          text1: ` <b>3) JavaScript Array.from() with a this value:--</b>
+           
+          If the mapping function belongs to an object, you can optionally pass the third argument to the <b>Array.from()</b> method.The object will represent the <b>this</b> value inside the mapping function. Consider this example:`,
+          code1: `let doubler = {
+            factor: 2,
+            double(x) {
+              return x * this.factor;
+            }
+          }
+          let scores = [5, 6, 7];
+          let newScores = Array.from(scores, doubler.double, doubler);
+          console.log(newScores);
+          
+          // Output:
+          // [10, 12, 14]
+          `
+        },
+        {
+          text1: `<b>4) Create an array from an iterable object: --</b>
+          
+          Since the <b>Array.from()</b> method also works on an iterable object, you can use it to create an array from any object that has a <b>[symbol.iterator]</b> property.For example:`,
+          code1: `let even = {
+            *[Symbol.iterator]() {
+              for (let i = 0; i < 10; i += 2) {
+                yield i;
+              }
+            }
+          };
+          let evenNumbers = Array.from(even);
+          console.log(evenNumbers);
+          
+          // Output:
+          // [0, 2, 4, 6, 8]
+
+          // > First, define the 'even' object with the '[System.iterator]' that returns even numbers from 0 to 10.
+// > Then, use the 'Array.from()' method to create a new array of even numbers from the 'even' object.
+
+          `
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "flat() - flatten an array recursively up to a specified depth.",
+      note: [
+        {
+          text1: `ES2019 introduced the <b>Array.prototype.flat()</b> method that creates a new array with all the elements of the subarrays concatenated to it recursively up to a specified depth.
+
+          // The following shows the syntax of the <b>flat()</b> method:
+          
+          <span style="color:red"> let newArray = arrayObject.flat([depth]) </span>
+          
+          // The <b>depth</b> parameter specifies how deep the method flats the array structure.It defaults to 1.
+          // The following example shows how to flat an array of numbers:`,
+          code1: `const numbers = [1, 2, [3, 4, 5]];
+          const flatNumbers = numbers.flat();
+          
+          console.log(flatNumbers);
+          
+          // Output:
+          // [1, 2, 3, 4, 5]
+          
+          // In this example, we didn't pass the depth argument into the 'flat()' method therefore the depth is 1 by default. The 'flat()' method concatenated all the elements of the nested array[3, 4, 5] to the elements of the new array.
+          // 'Note' :- that the 'flat()' method creates a new array and doesn't change the original array:
+          console.log(numbers);
+
+// Output:
+// [1, 2, [3, 4, 5]]
+
+// The following example flats an array with two level depth:
+
+const numbers = [1, 2, [3, 4, 5, [6, 7]]];
+const flatNumbers = numbers.flat(2);
+
+console.log(flatNumbers);
+
+// Output:
+// [1, 2, 3, 4, 5, 6, 7]
+
+// When you dont know the depth level, you can pass the 'Infinity' into the 'flat()' method to recursively concatenate all elements of the sub - arrays into the new array:
+
+const numbers = [1, 2, [3, 4, 5, [6, 7, [8, 9]]]];
+const flatNumbers = numbers.flat(Infinity);
+
+console.log(flatNumbers);
+
+// If an array has empty slots, you can use the 'flat()' method to remove the holes, like this:
+
+const numbers = [1, 2, , 4, , 5];
+const sequence = numbers.flat();
+console.log(sequence);
+
+// Output:
+// [1, 2, 4, 5]
+          `
+        },
+        {
+          text1: `<b>Summary</b>
+          => Use the 'Array.prototype.flat()' method to flat an array with the nested arrays.
+          => Use the 'depth' argument to specify how deep the nested arrays should be flattened.The depth is 1 by default.
+          => The 'flat()' also removes the holes in the array with empty slots.
+          `,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "flatMap() - execute a mapping function on every element and flatten the result.",
+      note: [
+        {
+          text1: ` The <b>flat()</b> method creates a new <b>array</b> with the elements of the subarrays concatenated into it.
+
+            The <b>map()</b> method creates a new array whose elements are the results of a mapping function.
+          
+          The <b>flatMap()</b> method is the combination of the <b>map()</b> method followed by the <b>flat()</b> method of depth 1.
+          
+          The <b>flatMap()</b> method first maps each element in an array using a mapping function and then flattens the results into a new array.
+          
+          The following shows the syntax of the <b>flatMap()</b> method:--
+          `,
+          code1: `let newArray = arrayObject.flatMap(callback, thisArg);`
+        },
+        {
+          text1: ` The <b>flatMap()</b> method takes two parameters:
+
+          -------------------------------
+          <b>1) The callback mapping function:--</b>
+          -------------------------------
+          
+           The <b>callback</b> is the mapping function has the same syntax as the one in the <b>map()</b> method:
+          
+          function callback(currentValue [[, index], array]);
+          
+          ----------------------
+          <b> 2) The thisArg argument:--</b>
+          ---------------------
+           The optional <b>thisArg</b> argument is a value to use as <b>this</b> when executing the <b>callback</b>.
+          
+           Note that the <b>flatMap()</b> method doesn’t modify the original array.
+          
+          ----------------------
+          <b> JavaScript Array flatMap() examples </b>
+          ----------------------
+           Let's take some examples of using the <b>flatMap()</b> method.
+          
+          ----------------------
+           1) Creating words from sentences example
+          ----------------------
+           Suppose that you have the following array:
+          
+          <span style="color:red"> let sentences = ["JavaScript Array flatMap()", " ", "is", " ", "Awesome"]; </span>
+          
+           The following <b>map()</b> function splits the words of  sentences:`,
+          code1: `let words = sentences.map(s => s.split(' '));
+          console.log(words);
+          
+          // Output:
+          // [
+          //   ['JavaScript', 'Array', 'flatMap()'],
+          //   [' '],
+          //   ['is'],
+          //   [' '],
+          //   ['Awesome']
+          // ]`
+        },
+        {
+          text1: `The result is an array of nested arrays filled by words.To flatten the result, you can use the 'flat()' method on the result of the 'map()' method.However, it’ll be more concise to use the 'flatMap()' method.
+
+          The 'flatMap()' creates a flattened array by running each sentence in the array through a mapping function and flattening the mapped results:`,
+          code1: `let sentences = [
+            "JavaScript Array flatMap()",
+            " ",
+            "is",
+            " ",
+            "Awesome"
+          ];
+          
+          let words = sentences.flatMap(s => s.split(' '));
+          console.log(words);
+          
+          // Output:
+          // ['JavaScript', 'Array', 'flatMap()', '', '', 'is', '', '', 'Awesome']`
+        },
+        {
+          text1: `----------------------
+           <b>2) Adding and removing elements during mapping example:</b>
+          ----------------------
+          
+           The 'flatMap()' method allows you to add or remove elements during mapping.Consider the following example:
+           Suppose that you have the following shopping cart:`,
+          code1: `let cart = [{
+            name: 'Smartphone',
+            qty: 2,
+            price: 500,
+            freeOfCharge: false
+          },
+          {
+            name: 'Tablet',
+            qty: 1,
+            price: 800,
+            freeOfCharge: false
+          }
+          ];
+          
+          // If customers buy a smartphone, you want to give them a free screen protector.
+          // When the customer adds a smartphone to the cart, you can add a screen protector to the cart using the 'flatMap()' method as follows:
+          
+          let newCart = cart.flatMap(
+            (item) => {
+              if (item.name === 'Smartphone') {
+                return [item, {
+                  name: 'Screen Protector',
+                  qty: item.qty,
+                  price: 5,
+                  freeOfCharge: true
+                }]
+              } else {
+                return [item];
+              }
+            }
+          );
+          
+          console.log(newCart);
+          
+          // The cart will look like this:
+          
+          [
+            { name: 'Smartphone', qty: 2, price: 500, freeOfCharge: false },
+            { name: 'Screen Protector', qty: 2, price: 5, freeOfCharge: true },
+            { name: 'Tablet', qty: 1, price: 800, freeOfCharge: false }
+          ]
+          
+          // The following uses the 'reduce()' method to calculate the total amount from the items in the cart.It ignores the free - of - charge items, like screen protectors:
+          
+          const total = newCart.reduce((sum, item) => {
+            if (!item.freeOfCharge)
+              sum += item.price * item.qty;
+            return sum;
+          }, 0);
+          
+          console.log({ total });
+          
+          // Output:
+          // { total: 1800 }
+        `
+        },
+        {
+          text1: `<b>Summary</b>
+          Use the <b>flatMap()</b> method to create a flattened array of elements by running each element in the collection through a mapping function and flattening the mapped results.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Protojoin() - concatenate all elements of an array into a string separated by a separator.types",
       note: [
         {
           text1: ``,
