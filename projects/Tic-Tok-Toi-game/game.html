@@ -12,7 +12,7 @@
     <style>
         /* javascript css */
         .three-box {
-            width: 500px;
+            width: 294px;
             height: 300px;
         }
 
@@ -38,21 +38,27 @@
             text-align: center;
         }
 
-        .resetButton{
+        .resetButton {
             display: none;
         }
     </style>
 </head>
 
 <body>
-
-    <div class="three-box">
-        <h2>Tic Tok Toi game</h2>
-        <div id="box_div" class="grid"></div>
-        <div id="widder"></div>
-        <button onclick="resetGame()" id="buttonId" class="resetButton">Reset</button>
+    <div class="container-fluid">
+        <div class="row">
+            <div class='col-lg-9 col-sm-12'>
+                <div class="three-box">
+                    <h2>Tic Tok Toi game</h2>
+                    <div id="box_div" class="grid"></div>
+                    <div id="widder"></div>
+                    <button onclick="resetGame()" id="buttonId" class="resetButton">Reset</button>
+                </div>
+            </div>
+        </div>
     </div>
-    
+
+
     <script src="main.js"></script>
     <script>
 
@@ -62,7 +68,7 @@
 
         const widderDiv = document.getElementById('widder')
         const box_div = document.getElementById('box_div');
-        
+
         for (let i = 1; i <= 9; i++) {
             box_div.innerHTML += `<input type="text" class='cell' value="${i}" onClick="fun(b${i});" id="b${i}"/>`
         }
@@ -93,7 +99,7 @@
             buttonDisplay();
         }
 
-        function matchDraw(){
+        function matchDraw() {
             widderDiv.innerHTML = `<h3> draw match </h3>`
             buttonDisplay()
         }
@@ -119,11 +125,11 @@
         }
 
 
-        function buttonDisplay(){
-            document.getElementById( 'buttonId' ).style.display = 'block';
+        function buttonDisplay() {
+            document.getElementById('buttonId').style.display = 'block';
         }
         // reset game
-        function resetGame(){
+        function resetGame() {
             location.reload()
         }
 
