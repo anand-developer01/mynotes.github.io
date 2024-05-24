@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="John Doe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <style>
+        /* javascript css */
+        .three-box {
+            width: 500px;
+            height: 300px;
+        }
+
+        /* flex box */
+
+        .grid {
+            display: flex;
+            /* establish flex container */
+            flex-wrap: wrap;
+            /* enable flex items to wrap */
+            justify-content: space-around;
+
+        }
+
+        .cell {
+            flex: 0 0 32%;
+            /* don't grow, don't shrink, width */
+            height: 80px;
+            width: 80px;
+            margin-bottom: 5px;
+            background-color: #999;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .resetButton{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="three-box">
+        <h2>Tic Tok Toi game</h2>
+        <div id="box_div" class="grid"></div>
+        <div id="widder"></div>
+        <button onclick="resetGame()" id="buttonId" class="resetButton">Reset</button>
+    </div>
+    
+    <script src="main.js"></script>
+    <script>
+
+        let flag = true;
+        const history = [Array(9).fill(null)];
+        let winner;
+
+        const widderDiv = document.getElementById('widder')
+        const box_div = document.getElementById('box_div');
+        
+        for (let i = 1; i <= 9; i++) {
+            box_div.innerHTML += `<input type="text" class='cell' value="${i}" onClick="fun(b${i});" id="b${i}"/>`
+        }
+
+        function fun(v) {
+            if (flag) {
+                document.getElementById(v.id).value = "X";
+                document.getElementById(v.id).disabled = true;
+                flag = !flag;
+                history[v.id[1] - 1] = "X";
+                winner = calculateWinner(history)
+                winner ? disableAll(winner) : history.filter(s => s !== '').length === 9 && !winner ? matchDraw() : ''
+                return;
+            }
+            document.getElementById(v.id).value = "0";
+            document.getElementById(v.id).disabled = true;
+            flag = !flag;
+            history[v.id[1] - 1] = "0";
+            winner = calculateWinner(history)
+            winner ? disableAll(winner) : history.filter(s => s !== '').length === 9 && !winner ? matchDraw() : ''
+        }
+
+        function disableAll() {
+            for (let i = 1; i <= 9; i++) {
+                document.getElementById(`b${i}`).disabled = true;
+            }
+            widderDiv.innerHTML = `<h3> Winner : ${winner}</h3>`;
+            buttonDisplay();
+        }
+
+        function matchDraw(){
+            widderDiv.innerHTML = `<h3> draw match </h3>`
+            buttonDisplay()
+        }
+
+        function calculateWinner(squares) {
+            const lines = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6],
+            ];
+            for (let i = 0; i < lines.length; i++) {
+                const [a, b, c] = lines[i];
+                if (squares[a] === squares[b] && squares[a] === squares[c]) {
+                    return squares[a];
+                }
+            }
+            return null;
+        }
+
+
+        function buttonDisplay(){
+            document.getElementById( 'buttonId' ).style.display = 'block';
+        }
+        // reset game
+        function resetGame(){
+            location.reload()
+        }
+
+    </script>
+</body>
+
+</html>

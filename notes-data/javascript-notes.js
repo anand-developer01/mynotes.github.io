@@ -2,6 +2,7 @@ const javascriptData = {
   javascriptNote: [
     {
       id: 1,
+      section:`JAVASCRIPT RUNTIME`,
       title: "JavaScript Event Loop",
       note: [
         {
@@ -757,6 +758,26 @@ For example, when you execute a recursive function that has no exit condition, t
     },
     {
       id: 1,
+      title: "lexical scope:",
+      note: [
+        {
+          text1: `A lexical scope in JavaScript means that a variable defined outside a function can be accessible inside another function defined after the variable declaration. But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
+          (or)
+  Lexical Scoping: A function scope's ability to access variables from the parent scope is known as lexical scope.
+          (or)
+  the inner functions have access to the variables and other resources of their parent scope.
+  
+  -The global scope is always the last scope of any JavaScript scope chain. In other words, the global scope is where all searches will end.
+  -An inner (child) scope has access to its parent (outer) scope, but an outer scope does not have access to its child scope.
+  
+  Note:
+  Variables created without a declaration keyword (var, let, or const) are always global, even if they are created inside a function.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
       title: "Callback queue",
       note: [
         {
@@ -767,6 +788,7 @@ For example, when you execute a recursive function that has no exit condition, t
     },
     {
       id: 1,
+      section:"ADVANCED FUNCTIONS",
       title: "pure functions",
       note: [
         {
@@ -2119,26 +2141,6 @@ A closure is a function that has access to the variables and parameters of its o
     },
     {
       id: 1,
-      title: "lexical scope:",
-      note: [
-        {
-          text1: `A lexical scope in JavaScript means that a variable defined outside a function can be accessible inside another function defined after the variable declaration. But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
-          (or)
-  Lexical Scoping: A function scope's ability to access variables from the parent scope is known as lexical scope.
-          (or)
-  the inner functions have access to the variables and other resources of their parent scope.
-  
-  -The global scope is always the last scope of any JavaScript scope chain. In other words, the global scope is where all searches will end.
-  -An inner (child) scope has access to its parent (outer) scope, but an outer scope does not have access to its child scope.
-  
-  Note:
-  Variables created without a declaration keyword (var, let, or const) are always global, even if they are created inside a function.`,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
       title: "call() method",
       note: [
         {
@@ -2633,16 +2635,6 @@ A closure is a function that has access to the variables and parameters of its o
     },
     {
       id: 1,
-      title: "Prototypes",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
       title: "Callback",
       note: [
         {
@@ -2686,7 +2678,8 @@ A closure is a function that has access to the variables and parameters of its o
     },
     {
       id: 1,
-      title: "Prototypes",
+      section: "Array Methods",
+      title: "Adding/removing elements( push(), unshift(), pop(), shift(), splice(), slice())",
       note: [
         {
           text1: ``,
@@ -2706,6 +2699,17 @@ A closure is a function that has access to the variables and parameters of its o
     },
     {
       id: 1,
+      title: "Prototypes",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      section: "JAVASCRIPT OBJECTS",
       title: "Array destructuring",
       note: [
         {
@@ -3475,6 +3479,7 @@ Object
     },
     {
       id: 1,
+      section: "CLASSES",
       title: "Class",
       note: [
         {
