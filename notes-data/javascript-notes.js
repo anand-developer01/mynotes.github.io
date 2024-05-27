@@ -2,7 +2,7 @@ const javascriptData = {
   javascriptNote: [
     {
       id: 1,
-      section:`JAVASCRIPT RUNTIME`,
+      section: `JAVASCRIPT RUNTIME`,
       title: "JavaScript Event Loop",
       note: [
         {
@@ -788,7 +788,7 @@ For example, when you execute a recursive function that has no exit condition, t
     },
     {
       id: 1,
-      section:"ADVANCED FUNCTIONS",
+      section: "ADVANCED FUNCTIONS",
       title: "pure functions",
       note: [
         {
@@ -1993,7 +1993,7 @@ A closure is a function that has access to the variables and parameters of its o
           // Ex : 1--
           In the example above, the <b>memoizedAdd</b> function returns an inner function that calculates the sum of two numbers. The results of previous calculations are stored in the <b>cache</b> object. Before performing a new calculation, the inner function checks if the result for the given input parameters already exists in the cache. If it does, it returns the cached result instead of recomputing it.
           `,
-          code1 : `
+          code1: `
           // Ex: 1--
           function memoizedAdd() {
             const cache = {};
@@ -2069,7 +2069,7 @@ A closure is a function that has access to the variables and parameters of its o
           JavaScript closures are not only useful for encapsulating data and creating private variables, but they are also powerful tools for handling asynchronous operations. In this section, we will explore how closures can be used to manage asynchronous tasks in JavaScript.
 
           When working with asynchronous operations, such as making API requests or fetching data from a database, it is common to encounter situations where you need to handle the result of the operation once it completes.  Closures can help you manage this by capturing the state of variables at the time the asynchronous operation is initiated.`,
-          code1:`function fetchData(url) {
+          code1: `function fetchData(url) {
             return new Promise((resolve, reject) => {
               // Simulating an asynchronous API request
               setTimeout(() => {
@@ -3065,7 +3065,7 @@ console.log(combined);
           numbers = new Array("2");
           console.log(numbers.length); // 1
           console.log(numbers[0]); // "2"`
-        },        
+        },
         {
           text1: `This behavior is sometimes confusing and error - prone because you may not know the type of data that you pass to the Array constructor.
 
@@ -3455,8 +3455,1121 @@ console.log(sequence);
     },
     {
       id: 1,
-      title: "Protojoin() - concatenate all elements of an array into a string separated by a separator.types",
+      title: "join() - concatenate all elements of an array into a string separated by a separator.types",
       note: [
+        {
+          text1: ` The <b>join()</b> method allows you to concatenate all elements of an array and returns a new string:
+          <span style="color:red"> Array.prototype.join([separator]) </span>
+          
+          The <b>join()</b> method accepts a optional argument <b>separator</b> which is a string that separates each pair of adjacent elements of the array in the result string.
+          
+            The <b>separator</b> defaults to a comma if you don't pass it to the <b>join()</b> method.
+          
+          In case the array has one element, the <b>join()</b> method returns that element as a string without using the <b>separator</b>.
+          
+          And if the array is empty, the <b>join()</b> method returns an empty string.
+          
+          When the elements of the array aren't strings, the <b>join()</b> method converts them to strings before joining.
+          
+          Note that the <b>join()</b> method converts <b>undefined, null</b>, and empty array[] to an empty string.
+          `,
+          code1: `Ex: 
+          const cssClasses = ['btn', 'btn-primary', 'btn-active'];
+          const btnClass = cssClasses.join(' ');
+          
+          console.log(btnClass);
+          
+          // Output:
+          // btn btn - primary btn - active
+          
+          // In this example, we have an array that holds a list of CSS classes.And we use the 'join()' method joins all elements of the 'cssClasses' array and return a string of the CSS classes separated by a space.
+          `
+        },
+        {
+          text1: `<b>2) Using the JavaScript Array 'join()' method to replace all occurrences of a string</b>
+          
+          This example uses the JavaScript Array 'join()' method to replace all occurrences of the space ' ' by the hyphen(-):`,
+          code1: `const title = 'JavaScript array join example';
+          const url = title.split(' ')
+            .join('-')
+            .toLowerCase();
+          
+          console.log(url);
+          
+          // Output:
+          // javascript - array - join - example
+          
+          // > First, split the title string by the space into an array by using the 'split()' string method.
+          // > Second, concatenate all elements in the result array into a string by using the 'join()' method.
+          // > Third, convert the result string to lower case by using the 'toLowerCase()' method.`
+        },
+        {
+          text1: `=> Summary
+          Use the JavaScript Array 'join()' method to concatenate all elements of an array into a string separated by a separator.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+
+      ]
+    },
+    {
+      id: 1,
+      title: "at() - access array elements using both positive and negative indexes.",
+      note: [
+        {
+          text1: `In JavaScript, you can use the square bracket <b>[]</b> to access an element of an array. For example, the <b>arr[0]</b> returns the first element in the array <b>arr</b>, the <b>arr[1]</b> returns the second element, and so on.
+
+          To get the last element in an array, you use the <b>length</b> property like this:
+          
+          arr[length - 1]
+          
+          JavaScript doesn't allow you to use a negative index to access the last element like other languages e.g., Python.For example, the following returns undefined:
+          
+          arr[-1]
+          
+          The reason is that JavaScript also uses square brackets <b>[]</b> for accessing a property of an object.
+          
+          For example, the <b>obj[1]</b> returns a property of the object <b>obj</b> with the key "1".Hence, the <b>obj[-1]</b> returns the property of an object with the key "-1".
+          
+          In the above example, the <b>arr[-1]</b> returns the property of the <b>arr</b> object with the key "-1".Note that the type of an array is <b>object</b>.Since the "-1" property doesn't exist in the <b>arr</b> object, it returns <b>undefined</b>.
+          
+          For this reason, ES2022 introduced a new method <b>at()</b> added to the <b>prototype</b> of <b>Array</b>, <b>String</b>, and <b>TypeArray</b>.This tutorial focuses on the <b>at()</b> method of the <b>Array.prototype</b>.
+          
+          The <b>at()</b> method accepts an index and returns an element at that index.Here's the syntax of the <b>at()</b> method:
+          
+          arr.at(index)
+          
+          In this syntax, the <b>index</b> specifies an array element to return.It can be zero, positive, or negative.
+          If the index is zero or positive, the <b>at()</b> method works like the <b>[]</b>.
+          
+          However, if you use a negative index, the method returns an element from the end of the array.For example, the <b>arr.at(-1)</b> returns the last element, <b>arr.at(-2)</b> returns the second last element, and so on.`,
+          code1: `//The following example shows how to use the 'at()' method to return an array element:
+          const scores = [5, 6, 7];
+          console.log(scores.at(1)); // same as scores[1] 
+          // get the last element
+          console.log(scores.at(-1)); // 7
+          console.log(scores.at(-1) === scores[scores.length - 1]); // true
+          
+          // Output:
+          // 6
+          // 7
+          // true
+`
+        },
+      ]
+    },
+    {
+      id: 1,
+      section: `Reversing elements`,
+      title: "reverse() - reverse the order of elements in place and return the same array with the elements in the reversed order.",
+      note: [
+        {
+          text1: `The reverse() method of TypedArray instances reverses a typed array in place and returns the reference to the same typed array, the first typed array element now becoming the last, and the last typed array element becoming the first.In other words, elements order in the typed array will be turned towards the direction opposite to that previously stated.This method has the same algorithm as Array.prototype.reverse().
+
+          Using a for loop (or any other type of loop), we can loop through an array from the last time to the first item, and push those values to a new array which becomes the reversed version. Here's how:`,
+          code1: `const array = [1, 2, 3, 4]
+
+          const reversedArray = []
+          
+          for (let i = array.length - 1; i >= 0; i--) {
+            const valueAtIndex = array[i]
+            reversedArray.push(valueAtIndex)
+          }
+          
+          console.log(reversedArray)
+          // [4, 3, 2, 1]
+          
+          //By using a 'for' loop, we start looping from the index of the last 'value (array.length - 1)' to the index of the first 'value (0)'.Then we push the values accordingly to 'reversedArray'.
+
+          const array = [1, 2, 3, 4]
+          
+          array.reverse()
+          
+          console.log(array)
+          // [ 4, 3, 2, 1 ]
+          `
+        },
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "toReversed() - reverse the order of elements of an array and return the new array with the elements in the reversed order.",
+      note: [
+        {
+          text1: ` The <b>toReversed()</b> method reverses the order of elements in an array and returns a new array with the elements in reversed order.
+
+           Unlike the <b>reversed()</b> method that reverses the elements of the array in place, the <b>toReversed()</b> method does not modify the original array.Instead, it creates a new array with the elements of the original array in the reversed order.
+          
+          Here's the basic syntax of the <b>toReversed()</b> method:
+          
+             <span style="color:red">Array.prototype.toReversed()</span>
+          
+           The <b>toReversed()</b> method takes no parameters and returns a new array containing the elements in reversed order.
+          
+           When you call the <b>toReversed()</b> method on a sparse array, it treats empty slots as if they have the value <b>undefined</b>.
+          
+           This method is generic, meaning that you can call it on a non - array object that has a length property and integer - keyed properties.
+          
+          JavaScript Array toReversed() method examples
+          Let's explore some examples of using the JavaScript array toReverse() method.
+          
+          <b> 1) Using JavaScript Array toReversed() method on string arrays </b>
+          The following example uses the toReverse() method to reverse an array of strings:`,
+          code1: `const colors = ['red', 'green', 'blue'];
+          const reversedColors = colors.toReversed();
+          
+          console.log(colors);
+          console.log(reversedColors);
+          
+          // Output:
+          // ['red', 'green', 'blue']
+          // ['blue', 'green', 'red']
+          `
+        },
+        {
+          text1: `<b>3) Using JavaScript Array toReversed() method on arrays of objects</b>
+          The following example uses the toReversed() method to reverse the order of objects in an array:`,
+          code1: `const contacts = [{ name: 'John' }, { name: 'Alice' }, { name: 'Bob' }];
+          const reversedContacts = contacts.toReversed();
+          
+          console.log(contacts);
+          console.log(reversedContacts);
+          
+          // Output:
+          // [{ name: 'John' }, { name: 'Alice' }, { name: 'Bob' }]
+          // [{ name: 'Bob' }, { name: 'Alice' }, { name: 'John' }]
+          `
+        },
+        {
+          text1: `<b>4) Calling toReversed() method on sparse arrays</b>
+          When you call the toReversed() method on a sparse array, the result array remains sparse.The toReversed() method copies empty slots over their respective indices as empty slots:`,
+          code1: `const scores = [1, , 7, 5];
+          const reversedScores = scores.toReversed();
+          
+          console.log(scores);
+          console.log(reversedScores);
+          
+          // Output:
+          // [1, , 7, 5]
+          // [5, 7, undefined, 1]
+          `
+        },
+        {
+          text1: `<b>5) Calling toReversed() method on non - array objects</b>
+          The following example illustrates how to call the toReversed() method on an object that has the length property and integer - keyed properties:`,
+          code1: `const arrayLike = {
+            length: 3,
+            unrelated: "bar",
+            2: 2,
+            3: 3, // ignored because the length is 3
+          };
+          
+          const result = Array.prototype.reverse.call(arrayLike);
+          
+          console.log(result);
+          
+          // Output:
+          // { 0: 2, 3: 3, length: 3, unrelated: 'bar' }
+          `
+        },
+        {
+          text1: `In this example, the toReversed() method does the following:
+
+          First, access the length property of the object.
+            Second, iterate through each property with an integer key ranging from 0 to length / 2.
+          Third, swap the values at corresponding indices on both ends of the array.Additionally, remove any destination property without a corresponding source property.
+            Finally, return a new object with the order of the elements(or properties) in the reversed order.
+          <b>Summary</b>
+          Use the JavaScript array toReversed() method to reverse the order of elements within an array and return a new reversed array.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "map() - transform array elements.",
+      note: [
+        {
+          text1: `In JavaScript, map() is a higher-order function that is used to iterate over elements of an array and execute a callback function on each element. It creates a new array based on the results of the callback function.
+          <span style="color:red"> const numbers = [1, 2, 3, 4, 5]; </span>
+        
+          Multiply each number by 2
+          const multipliedNumbers = numbers.map((num) => num * 2);
+          
+          console.log(numbers); // Output: [1, 2, 3, 4, 5]
+          console.log(multipliedNumbers); // Output: [2, 4, 6, 8, 10]
+          
+          Sometimes, you need to take an array, transform its elements, and include the results in a new array.
+          
+          Typically, you use a <b>for</b> loop to iterate over the elements, transform each individual one, and push the results into a new array.
+          
+          Let's take a look at an example.
+          
+          Suppose that you have an array of numbers where each element represents the radius of a circle as follows:
+          `,
+          code1: `let circles = [
+            10, 30, 50
+          ];
+          
+          // The following illustrates how to calculate the area of each circle and push the result into a new array.
+          
+          let areas = []; // to store areas of circles
+          let area = 0;
+          for (let i = 0; i < circles.length; i++) {
+            area = Math.floor(Math.PI * circles[i] * circles[i]);
+            areas.push(area);
+          }
+          console.log(areas);
+
+          // Output:
+          // [314, 2827, 7853]
+          // It takes a quite amount of code to accomplish this.
+
+// Starting from ES5, JavaScript Array type provides the map() method that allows you to transform the array elements in a cleaner way.
+
+function circleArea(radius) {
+  return Math.floor(Math.PI * radius * radius);
+}
+let areas = circles.map(circleArea);
+console.log(areas);
+
+// Output
+// [314, 2827, 7853]
+
+
+//   First, define a function that calculates the area of a circle.
+//     Then, pass the 'circleArea' function to the 'map()' method.The 'map()' method will call the 'circleArea' function on each element of the circles array and return a new array with the elements that have been transformed.
+// To make it shorter, you can pass in the 'map()' method an anonymous function as follows.
+
+let areas = circles.map(function(radius) {
+  return Math.floor(Math.PI * radius * radius);
+});
+console.log(areas);
+          `
+        },
+        {
+          text1: `Also, you can make use of the arrow function in ES6 to achieve the same result with a cleaner code:
+
+          let areas = circles.map(radius => Math.floor(Math.PI * radius * radius));
+          console.log(areas);
+          
+          JavaScript Array <b>map()</b> method in detail
+          The following illustrates the <b>map()</b> method.
+          
+            arrayObject.map(callback[, contextObject]);
+          
+          The <b>map()</b> method calls a callback function on every element of an array and returns a new array that contains the results.
+          
+            The <b>map()</b> method takes two named arguments, the first one is required whereas the second one is optional.
+          
+          Similar to the other iterative method such as <b>every()</b>, <b>some()</b>, <b>filter()</b>, <b>forEach()</b> and  <b>sort()</b>, the <b>callback()</b> function has the following form:
+          
+          function callback(currentElement, index, array) {
+            ... 
+          }
+          
+          The <b>callback()</b> function takes three arguments:
+          
+          The <b>currentElement</b> is the current element of the array that is being processed.
+          The <b>index</b> is the index of the <b>currentElement</b>.
+          The <b>array</b> is the array object being traversed.
+          The <b>currentElement</b> is required while the <b>index</b> and <b>array</b> arguments are optional.
+          
+          If you pass the <b>contextObject</b> to the <b>map()</b> method, you can reference the <b>contextObject</b> inside the <b>callback()</b> function using the <b>this</b> keyword.
+          
+          It's important to note that the <b>map()</b> method does not change the original array, it creates a new array of all elements that have been transformed by the callback function.
+          
+          More JavaScript Array map() examples: -
+          
+            The following example shows how to transform an array of numbers by using a built -in method of the <b>Math</b> type as the <b>callback()</b> function.`,
+          code1: `let numbers = [16, 25, 36];
+          let results = numbers.map(Math.sqrt);
+          console.log(results);
+          
+          // Output
+          // [4, 5, 6]
+          
+          // The new array contains the square roots of the numbers in the 'numbers' array.
+          
+          // In this tutorial, you have learned how to use the JavaScript Array 'map()' method to transform elements of an array according to a provided function.
+          
+          // Excercies:---
+          
+          const userDetails = [
+            {
+              fullName: "American First Finance",
+              area: 'yes',
+            },
+            {
+              fullName: "World Health",
+              area: 'yes',
+            }
+          ]
+          
+          // returning new array :-
+          const newARR = userDetails.map(acc => {
+              const shortOb =  {...acc, shordName : acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('') }
+              return shortOb
+          })
+          console.log(newARR) //
+          // output:-
+          // [
+          //     { fullName: 'American First Finance', area: 'yes' },
+          //     { fullName: 'World Health', area: 'yes'}
+          // ]
+          
+          // mutated original array :-
+          userDetails.forEach(acc => {
+              acc.shortName = acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('')
+          })
+          console.log(userDetails)
+          // output:-
+          // [
+          //     { fullName: 'American First Finance', area: 'yes', shordName: 'aff' },
+          //     { fullName: 'World Health', area: 'yes', shordName: 'wh' }
+          // ]
+          `
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "filter() - filter elements in an array.",
+      note: [
+        {
+          text1: `The filter() method of Array instances creates a shallow copy of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided function.
+
+          The filter() method takes a function as an argument. The function is called for each element in the array to determine
+          
+          The filter method in JavaScript is designed as a higher-order function that iterates over each element of an array, allowing developers to apply a specific condition to filter out elements.
+          
+          The filter method doesn't modify the original array, but instead creates and returns a new array containing only the elements that meet the specified condition.
+          
+          
+          One of the most common tasks when working with an array is to create a new array that contains a subset of elements of the original array.
+          
+          Suppose you have an array of city objects where each object contains two properties: 'name' and 'population'.`,
+          code1: `let cities = [
+            { name: 'Los Angeles', population: 3792621 },
+            { name: 'New York', population: 8175133 },
+            { name: 'Chicago', population: 2695598 },
+            { name: 'Houston', population: 2099451 },
+            { name: 'Philadelphia', population: 1526006 }
+          ];
+          
+          // To find the city whose population is greater than 3 million, you typically loop over the array elements using a for loop and test if the value of the 'population' property satisfies the condition, like this:
+          
+          let bigCities = [];
+          for (let i = 0; i < cities.length; i++) {
+            if (cities[i].population > 3000000) {
+              bigCities.push(cities[i]);
+            }
+          }
+          console.log(bigCities);
+          
+          // Output:
+          // [
+          //   { name: 'Los Angeles', population: 3792621 },
+          //   { name: 'New York', population: 8175133 }
+          // ]`
+        },
+        {
+          text1: `JavaScript Array provides the 'filter()' method that allows you to do this task in a shorter and cleaner way.
+          The following example returns the same result as the example above:`,
+          code1: `let bigCities = cities.filter(function(e) {
+            return e.population > 3000000;
+          });
+          console.log(bigCities);`
+        },
+        {
+          text1: `In this example, we call the <b>filter()</b> method of the <b>cities</b> array object and pass a function that tests each element.
+
+          Inside the function, we check if the <b>population</b> of each city in the array is greater than 3 million.If it is the case, the function returns <b>true</b> or <b>false</b> otherwise.
+          
+            The <b>filter()</b> method includes the only elements in the result array if they satisfy the test in the callback function.
+          
+          Starting with ES6, you can use the arrow function to make it more concise:`,
+          code1: `let bigCities = cities.filter(city => city.population > 3000000);
+          console.log(bigCities);`
+        },
+        {
+          text1: `JavaScript Array filter() method in detail: --
+
+          <span style="color:red"> arrayObject.filter(callback, contextObject); </span>
+          
+          The <b>filter()</b> method creates a new array with all the elements that pass the test implemented by the <b>callback()</b> function.
+          
+          Internally, the <b>filter()</b> method iterates over each element of the array and passes each element to the <b>callback</b> function. If the <b>callback</b> function returns <b>true</b>, it includes the element in the return array.
+          
+            The <b>filter()</b> method accepts two named arguments: a callback function and an optional object.
+          
+          Like other iterative methods of the Array object such as <b>every()</b>, <b>some()</b>, <b>map()</b> and <b>forEach()</b>, the <b>callback</b> function has the following form:
+          
+          <span style="color:red">
+          function callback(currentElement, index, array) {
+            ...
+          }
+          </span>
+          
+          The <b>callback</b> function takes three arguments:
+          
+          The <b>currentElement</b> argument is the current element in the array that is being processed by the <b>callback</b> function.
+          The <b>index</b> of the <b>currentElement</b> that is being processed by the <b>callback</b> function.
+          The <b>array</b> object being traversed.
+          
+          The <b>index</b> and <b>array</b> arguments are optional.
+          
+          The <b>contexObject</b> argument of the <b>filter()</b> method is optional.If you pass the <b>this</b> value, you can reference it by using <b>this</b> keyword inside the <b>callback</b> function.
+          
+          It is important to note that the <b>filter()</b> method does not change the original array.
+          
+          More JavaScript Array filter() method examples: -
+          
+          Because the <b>filter()</b> method returns a new array, you can chain the result with other array methods such as <b>sort()</b> and <b>map()</b>.
+          
+          For example, the following illustrates how to chain the three methods: <b>filter()</b>, <b>sort()</b>, and <b>map()</b>:
+          `,
+          code1: `let cities = [
+            { name: 'Los Angeles', population: 3792621 },
+            { name: 'New York', population: 8175133 },
+            { name: 'Chicago', population: 2695598 },
+            { name: 'Houston', population: 2099451 },
+            { name: 'Philadelphia', population: 1526006 }
+          ];
+
+          cities
+  .filter(city => city.population < 3000000)
+  .sort((c1, c2) => c1.population - c2.population)
+  .map(city => console.log(city.name + ':' + city.population));
+
+// Output:
+// Philadelphia: 1526006
+// Houston: 2099451
+// Chicago: 2695598
+          `
+        },
+        {
+          text1: `  > First, filter the cities whose populations are less than 3 million using the <b>filter()</b> method.
+            > Second, sort the resulting cities by the populations in descending order using the <b>sort()</b> method.
+            > Third, output array element to the console using the <b>map()</b> method.
+          
+          The following example illustrates the use of the <b>contextObject</b> argument that specifies an object which can be referenced in the <b>callback()</b> function using the <b>this</b> keyword`,
+          code1: `function isInRange(value) {
+            if (typeof value !== 'number') {
+              return false;
+            }
+            return value >= this.lower && value <= this.upper;
+          }
+          
+          let data = [10, 20, "30", 1, 5, 'JavaScript filter', undefined, 'example'];
+          
+          let range = {
+            lower: 1,
+            upper: 10
+          };
+          
+          let numberInRange = data.filter(isInRange, range);
+          console.log(numberInRange); // [10, 1, 5]
+          
+          // Output:
+          // [10, 1, 5]
+          `
+        },
+        {
+          text1: `> First, define the <b>isInRange()</b> function that checks if its argument is a number and in the range specified by the <b>lower</b> and <b>upper</b> properties of an object.
+          > Next, define an array of mixed data that contains numbers, strings, and undefined.
+          > Then, define the <b>range</b> object with two properties <b>lower</b> and <b>upper</b>.
+          > After that, call the <b>filter()</b> methods of the <b>data</b> array and pass in the <b>isInRange()</b> function and the <b>range</b> object.Because we pass in the <b>range</b> object, inside the <b>isInRange()</b> function, the <b>this</b> keyword references to the <b>range</b> object.
+          > Finally, show the result array in the console.
+          
+          In this tutorial, you have learned how to use the JavaScript Array <b>filter()</b> method to filter elements in an array based on a test provided by a callback function.
+          `,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "redu",
+      note: [
+        {
+          text1: ` `,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "reduce() - reduce elements of an array to a value.",
+      note: [
+        {
+          text1: `The reduce() method executes a reducer function on each element of the array and returns a single output value.
+
+          The array reduce in JavaScript is a predefined method used to reduce an array to a single value by passing a callback function on each element of the array.It accepts a function executed on all the items of the specified array in the left - to - right sequence.The returned single value is stored in the accumulator.Thus, array reduce JavaScript is a non - mutating method.This means that instead of changing the actual value variable, it will hold the computed value in the accumulator without changing the original value variable.
+          
+            reduce() Parameters: -
+            The <b>reduce()</b> method takes in:
+          
+           1) => callback - The callback function to execute on each array element(except the first element if no <b>initialValue</b> is provided). It takes in
+          
+            > <b>accumulator</b> - It accumulates the callback's return values.
+            > <b>currentValue</b> - The current element being passed from the array.
+          
+          2) => <b>initialValue</b>(optional) - A value that will be passed to <b>callback()</b> on first call.If not provided, the first element acts as the <b>accumulator</b> on the first call and <b>callback()</b> won't execute on it.
+          
+          <b>Note: </b> Calling reduce() on an empty array without initialValue will throw TypeError.
+          
+          <b>reduce() Return Value:- </b>
+            Returns the single value resulting after reducing the array.
+
+          Notes:
+          > <b>reduce()</b> executes the given function for each value from left to right.
+          > <b>reduce()</b> does not change the original array.
+          > It is almost always safer to provide <b>initialValue</b>.
+
+          <b>Accumulator:</b> This contains the value calculated from the previous iteration. On the first iteration, if an <b>initialValue</b> will be provided, the accumulator will be set to the value of <b>initialValue</b>.
+          <b>CurrentValue:</b> The current value of the element is processed in the array.
+          <b>CurrentIndex:</b> The index of the current element is processed in the array.
+          <b>Array:</b> The original array on which the <b>reduce()</b> method was called.
+
+          When to Use the reduce() Method:--
+          As shown above, the reduce() method is recommended when you need to have a single value returned from iterating over your array.
+          
+          This includes:
+          
+          > Summarizing your values into a single value
+          > Grouping similar items together
+          > Removing duplicates from an array
+          
+          The single value returned by the method can also be an array of objects, therefore containing multiple values.
+          
+          Suppose that you have an array of numbers, like this:
+          let numbers = [1, 2, 3];
+
+          // and you want to calculate the total of elements of the array. Typically, you use a 'for' loop to iterate over the elements and add them up as shown in the following example:
+          
+          let numbers = [1, 2, 3];
+          let sum = 0;
+          for (let i = 0; i < numbers.length; i++) {
+            sum += numbers[i];
+          }
+          console.log(sum);
+          
+          // Output:
+          // 6
+          `,
+          code1: ``
+        },
+        {
+          text1: ` The script is simple and straightforward:--
+
+          > First, declare an array of three numbers 1, 2 and 3.
+            > Second, declare the sum variable and set its value to zero.
+          > Third, in the for loop, add up the elements of the numbers array to the sum variable.After the loop, the value of the sum variable is 6.
+          
+          What we have done was to 'reduce' an array into a value.
+          
+          The 'Array.prototype' allows you to reduce an array to a single value using the 'reduce()' method like this:
+          `,
+          code1: `let numbers = [1, 2, 3];
+          let sum = numbers.reduce(function(previousValue, currentValue) {
+            return previousValue + currentValue;
+          });
+          console.log(sum);`
+        },
+        {
+          text1: `JavaScript Array reduce() method in detail: --
+            The following illustrates the syntax of the 'reduce()' method:
+          
+          array.reduce(callbackFn[, initialValue])
+          
+          The 'reduce()' method takes two arguments:
+          
+          > A callback function 'callbackFn'.The function is often referred to as a reducer.
+          > An optional initial value.
+            The 'reduce()' method calls the 'callbackFn()' function for every element in the array.
+          
+              The 'reducer()' function returns a value that results from executing the 'callbackFn' to completion over the entire array.
+              1) The callbackFn() function argument
+
+               The 'callbackFn' function has the following syntax:
+              
+               function callbackFn(previousValue, currentValue, currentIndex, array) { /**/ }
+              
+              
+               The 'callbackFn' function takes four arguments:
+              
+               'previousValue':
+               The value returned from the previous call of the 'callbackFn' function. On the first call, the 'initialValue' is the 'previousValue' if you pass the 'initialValue'.Otherwise, its value is the 'array[0]'.
+              
+                 currentValue:
+               The value of the current array element.On the first call, it is 'array[0]' if you pas the 'initialValue' or 'array[1]' otherwise.
+              
+                 currentIndex:
+               The index of the currentValue in the array.On the first call, it’s '0' if you pass the 'initialValue' or '1' otherwise.
+              
+               'array':
+               The array to loop through.
+
+               <b>2) The initialValue argument</b>
+               The 'initialValue' argument is optional.
+               
+               If you specify the 'initialValue', the 'callbackFn' function will initialize the 'previousValue' to the 'initialValue' and 'currentValue' to the first array’s element on the first call.
+               
+               If you don’t specify the 'initialValue', the the 'callbackFn' function will initialize the 'previousValue' to the first array’s element(array[0]) in the array and the 'currentValue' to the second array’s element(array[1]).
+               
+               The following table illustrates the logic when the 'reduce()' method executes the 'callbackFn()' function for the first time according to the 'initialValue' argument:
+
+               <div class='table-res'>
+                    <table border=1 >
+                        <tbody>
+                            <tr>
+                              <th>initialValue</th>
+                              <th>previousValue</th>
+                              <th>currentValue</th>
+                            </tr>
+
+                            <tr>
+                              <td>passed</td>
+                              <td>initialValue</td>
+                              <td>array[0]</td>
+                            </tr>
+
+                            <tr>
+                              <td>not passed</td>
+                              <td>array[0]</td>
+                              <td>array[1]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              `,
+          code1: `// The following example shows the progress of the reduce() function with an 'initialValue' as 100:
+
+          let numbers = [1, 2, 3];
+          
+          function getOrdinalSuffix(i) {
+            let j = i % 10, k = i % 100;
+            if (j == 1 && k != 11) return i + 'st';
+            if (j == 2 && k != 12) return i + 'nd';
+            if (j == 3 && k != 13) return i + 'rd';
+            return i + 'th';
+          }
+          
+          let call = 1;
+          let sum = numbers.reduce(function(previousValue, currentValue, currentIndex, array) {
+            let result = previousValue + currentValue;
+          
+            // show the 1st call, 2nd call, etc.
+            console.log('\${getOrdinalSuffix(call)} call');
+            call++;
+          
+            // show the immediate values
+            console.table({ previousValue, currentValue, currentIndex, result });
+          
+            return result;
+          }, 100);
+          
+          console.log('Result: \${sum}');
+          `
+        },
+        {
+          text1: `Output:
+          1st call
+
+          <div class='table-res'>
+            <table border=1 >
+                <tbody>
+                    <tr>
+                      <th> (index)  </th>
+                      <th> Values </th>
+                    </tr>
+
+                    <tr>
+                      <td>previousValue</td>
+                      <td>100</td>
+                    </tr>
+
+                    <tr>
+                      <td>currentValue</td>
+                      <td>1</td>
+                    </tr>
+
+                    <tr>
+                      <td>currentIndex</td>
+                      <td> 0 </td>
+                    </tr>
+
+                    <tr>
+                      <td>result</td>
+                      <td> 101 </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        2nd call
+
+          <div class='table-res'>
+            <table border=1 >
+                <tbody>
+                    <tr>
+                      <th> (index)  </th>
+                      <th> Values </th>
+                    </tr>
+
+                    <tr>
+                      <td>previousValue</td>
+                      <td>101</td>
+                    </tr>
+
+                    <tr>
+                      <td>currentValue</td>
+                      <td>2</td>
+                    </tr>
+
+                    <tr>
+                      <td>currentIndex</td>
+                      <td> 1 </td>
+                    </tr>
+
+                    <tr>
+                      <td>result</td>
+                      <td> 103 </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        3rd call
+
+          <div class='table-res'>
+          <table border=1 >
+              <tbody>
+                  <tr>
+                    <th> (index)  </th>
+                    <th> Values </th>
+                  </tr>
+
+                  <tr>
+                    <td>previousValue</td>
+                    <td>103</td>
+                  </tr>
+
+                  <tr>
+                    <td>currentValue</td>
+                    <td> 3 </td>
+                  </tr>
+
+                  <tr>
+                    <td>currentIndex</td>
+                    <td> 2 </td>
+                  </tr>
+
+                  <tr>
+                    <td>result</td>
+                    <td> 106 </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+
+        Result: 106
+          `,
+          code1: ``
+        },
+        {
+          text1: ` And the following illustrates the 'reduce()' method without the 'initialValue' argument:
+        1st call
+
+          <div class='table-res'>
+          <table border=1 >
+              <tbody>
+                  <tr>
+                    <th> (index) </th>
+                    <th> Values </th>
+                  </tr>
+
+                  <tr>
+                    <td>previousValue</td>
+                    <td>1</td>
+                  </tr>
+
+                  <tr>
+                    <td>currentValue</td>
+                    <td> 2 </td>
+                  </tr>
+
+                  <tr>
+                    <td>currentIndex</td>
+                    <td> 1 </td>
+                  </tr>
+
+                  <tr>
+                    <td>result</td>
+                    <td> 3 </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+        2nd call
+
+          <div class='table-res'>
+          <table border=1 >
+              <tbody>
+                  <tr>
+                    <th> (index) </th>
+                    <th> Values </th>
+                  </tr>
+
+                  <tr>
+                    <td>previousValue</td>
+                    <td> 3 </td>
+                  </tr>
+
+                  <tr>
+                    <td>currentValue</td>
+                    <td> 3 </td>
+                  </tr>
+
+                  <tr>
+                    <td>currentIndex</td>
+                    <td> 2 </td>
+                  </tr>
+
+                  <tr>
+                    <td>result</td>
+                    <td> 6 </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+
+          // Result: 6
+          // More JavaScript Array reduce() examples: --
+          // Suppose that you have the following 'shoppingCart' array of product objects:`,
+          code1: `let shoppingCart = [
+            {
+              product: 'phone',
+              qty: 1,
+              price: 500,
+            },
+            {
+              product: 'Screen Protector',
+              qty: 1,
+              price: 10,
+            },
+            {
+              product: 'Memory Card',
+              qty: 2,
+              price: 20,
+            },
+          ];
+          
+          // To calculate the total amount of the products in the shopping cart, you can use the 'reduce()' method, like this:
+          
+          let total = shoppingCart.reduce(function(previousValue, currentValue) {
+            return previousValue + currentValue.qty * currentValue.price;
+          }, 0);
+          
+          // Output:
+          // 550
+          `
+        },
+        {
+          text1: `Notice that in this example, we passed in the 'initialValue' argument to the 'reduce()' method.
+
+          If we didn’t do so, the 'reduce()' method would take the first element of the 'shoppingCart' array, which is an object, as an initial value and perform the calculation on this object.Hence, it would cause an incorrect result.
+          
+          
+          JavaScript Array reduceRight() method: --
+            The 'reduceRight()' method works in the same way as the 'reduce()' method, but in the opposite direction.
+          
+              The 'reduce()' method starts at the first element and travels toward the last, whereas the 'reduceRight()' method starts at the last element and travels backward the first.
+          
+          See the following example:`,
+          code1: `let numbers = [1, 2, 3];
+
+          let sum = numbers.reduceRight(function(previousValue, currentValue) {
+            console.log({ previousValue, currentValue });
+            return previousValue + currentValue;
+          });
+          
+          console.log('Result: \${sum}');
+          
+          // Output
+          
+          // { previousValue: 3, currentValue: 2 }
+          // { previousValue: 5, currentValue: 1 }
+          // Result:6
+          
+          // reduceRight() methods to reduce an array into a value.
+
+// Map
+function double(x){
+    return x * 2
+}
+const ar = [2,4,7,9];
+const dValues = ar.map(double)
+console.log(dValues)
+
+
+function total(arr) {
+   return arr.reduce(function(tot, acc, i, arrr){
+    console.log("tot ",tot)
+    console.log("acc ",acc)
+    return tot + acc
+   }, 0)
+}
+
+console.log(total([1,2,3])); // 6
+
+const userDetails = [
+    {
+        fullName: "American First Finance",
+        area: 'yes',
+    },
+    {
+        fullName: "World Health",
+        area: 'yes',
+    }
+]
+
+//-----------------
+// returning new array
+const newARR = userDetails.map(acc => {
+    const shortOb =  {...acc, shordName : acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('') }
+    return shortOb
+})
+console.log(newARR) //
+output
+[
+    { fullName: 'American First Finance', area: 'yes' },
+    { fullName: 'World Health', area: 'yes'}
+]
+
+//------------------------
+// mutated original array
+userDetails.forEach(acc => {
+    acc.shortName = acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('')
+})
+console.log(userDetails)
+output
+[
+    { fullName: 'American First Finance', area: 'yes', shordName: 'aff' },
+    { fullName: 'World Health', area: 'yes', shordName: 'wh' }
+]
+
+// ========================================
+
+
+
+// Example 1:
+const bankMovementsInDollars = [130, -50, 2000, -500, 1200, 2000, -400, -200, 500]
+const rupees = 83.64
+const credis = bankMovementsInDollars.filter(mov => mov > 0)
+                                    .map(doll => doll * rupees)
+                                    .reduce((acc, mov) => acc + mov, 0)
+console.log("total credits in rupees ",credis)
+
+// ---------
+// Example 2:   
+// For example, here is the code for getting the total number of occurrences for each fruit in an array of fruits:
+const fruits = ['Banana', 'Orange', 'Apple', 'Orange', 'Pear', 'Banana', 'Pear', 'Banana']
+
+const occursFruits = fruits.reduce((acc, currFruit) => {
+    return { ...acc, [currFruit]: (acc[currFruit] || 0) + 1 }
+    // return 1
+}, {})
+console.log(occursFruits)
+
+// Note that at each step of the iteration, the accumulator will be a hash map (i.e. a JavaScript object) with a key for each fruit in the array so far, and the values will be the number of times each fruit has occurred. This is the expression where we update the accumulator:
+
+// {...acc, [currFruit]: (acc[currFruit] || 0) + 1 }
+// Let's break this down a little. First, using the spread operator, ...acc copies over all the existing values from the accumulator.
+
+// Then, [currFruit]: sets the value for the current fruit in the array. For example, on the very first iteration over the fruits collection, this will create the Banana property. acc[currFruit] || 0 retrieves the value for that fruit from the previous version of the accumulator. If the fruit doesn't exist in the accumulator, it will start with a value of zero. 
+
+// Finally, we add 1 to the value of that fruit and return the new accumulator.
+
+// -----------
+// Example 3:
+// For example, suppose we want to get just the names of each student from an array of objects. We can reduce the array from an array of objects to an array of string values, like so:
+
+const students = [
+    { name: "Kingsley", score: 70 },
+    { name: "Jack", score: 80 },
+    { name: "Joe", score: 63 },
+    { name: "Beth", score: 75 },
+    { name: "Kareem", score: 59 },
+    { name: "Sarah", score: 93 }
+]
+
+const stuNames = students.map((stu) => {
+    return stu.name
+})
+console.log(stuNames)
+
+const stuNamesReduce = students.reduce((acc, stu) => {
+    return [...acc, stu.name]
+},[])
+console.log(stuNamesReduce)
+
+// ----------
+// Example 4:
+// total marks
+const studentsArray = [
+    { name: "Kingsley", sub1: 45, sub2: 45, sub3: 45 },
+    { name: "Jack", sub1: 41, sub2: 44, sub3: 85 },
+    { name: "Joe", sub1: 57, sub2: 49, sub3: 45 },
+    { name: "Beth", sub1: 45, sub2: 85, sub3: 65 },
+    { name: "Kareem", sub1: 15, sub2: 65, sub3: 95 },
+    { name: "Sarah", sub1: 35, sub2: 65, sub3: 5 }
+]
+
+const sutMarks = studentsArray.reduce((acc, currStu) => {
+    // return { ...acc, [currStu.name]: currStu.sub1 + currStu.sub2 + currStu.sub3 }
+    return [...acc, {...currStu, total: currStu.sub1 + currStu.sub2 + currStu.sub3 }]
+}, [])
+
+console.log(sutMarks)
+console.log(studentsArray)
+
+const students = [
+    { name: "Kingsley", score: 70 },
+    { name: "Jack", score: 80 },
+    { name: "Joe", score: 63 },
+    { name: "Beth", score: 75 },
+    { name: "Kareem", score: 59 },
+    { name: "Sarah", score: 93 }
+]
+
+const max = students.reduce((acc, currStu) => {
+    console.log(acc, currStu.score)
+    return acc ?? currStu.score > acc ? currStu.score : acc
+}, null)
+
+// console.log(max)
+
+// ---------
+// Example 5:
+let ArrayList = ["Gun", "Hat", "Hate", "Apple", "Animals", "Ball", "Bat", "Cat", "Candy", "Dog", "Dare", "Exam", "Earth", "Air"];
+const chOb = ArrayList.reduce((acc, let) => {
+    return { ...acc, [let[0]]: acc[let[0]] ? acc[let[0]].concat([let]) : [let] }
+}, {})
+
+// console.log(chOb)
+
+// // {"A":["Animals","Apple"],"B":["Ball","Bat"],"C":["Candy","Cat"],"D":["Dare","Dog"],"E":["Earth","Exam"],"G":["Gang","Gun"],"H":["Hat","Hate"]}
+          `
+        },
         {
           text1: ``,
           code1: ``
@@ -3465,12 +4578,197 @@ console.log(sequence);
     },
     {
       id: 1,
-      title: "Prototypes",
+      title: "every() - check if every element in an array passes a test.",
+      note: [
+        {
+          text1: `Checking array elements using the for loop:--
+          Sometimes, you need to test whether every element of an array satisfies a specified condition.
+          
+          Typically, you use a  'for' loop to iterate all elements and check each individual element against the condition. Suppose that you have an array 'numbers' with three elements:
+          
+          let numbers = [1, 3, 5];
+          The following code checks if every element in the 'numbers' array is greater than zero:`,
+          code1: `let numbers = [1, 3, 5];
+          let result = true;
+          for (let i = 0; i < numbers.length; i++) {
+            if (numbers[i] <= 0) {
+              result = false;
+              break;
+            }
+          }
+          console.log(result);
+          // Output:
+          // true
+          // How it works:`
+        },
+        {
+          text1: `> First, initialize the  'result' variable to 'true'.
+          > Second, iterate over the elements of the 'numbers' array and check whether each element is less than or equal zero.If it is the case, set the 'result' variable to 'false' and terminate the loop immediately using the 'break' statement.In case no element is less than or equal zero, the value of the 'result' variable remains  'true'.
+          
+          This code is simple and straight forward.However, it is quite verbose.
+          
+            JavaScript 'Array' type provides the 'every()' method that allows you to check if every element of an array pass a test in a shorter and cleaner way.
+          
+          
+          Introduction to JavaScript Array every() method: --
+          
+            Starting from ES5, JavaScript Array type provides a method 'every()' that tests every element in an array.
+          
+          The following example uses the 'every()' to check if every element of the numbers array is greater than zero:`,
+          code1: `let numbers = [1, 3, 5];
+          let result = numbers.every(function(e) {
+            return e > 0;
+          });
+          
+          console.log(result);
+          
+          // Output:
+          // true
+          
+          // By using the ES6 arrow functions, the code can be even shorter:
+
+let numbers = [1, 3, 5];
+let result = numbers.every(e => e > 0);
+console.log(result);
+          `
+        },
+        {
+          text1: `  The following illustrates the syntax of the 'every()' method.
+
+              arrayObject.every(callback[, thisArg])
+          
+          The 'every()' method accepts two named arguments: 'callback' and 'thisArg'.
+          
+          1) The callback argument
+          The 'callback' is a function that tests each element of the array.The 'callback()' function has the following form:
+          
+          function callback(currentElement, index, array) {
+            //...
+          }
+          
+          The 'callback()' function takes three arguments:
+          
+          First, the 'currentElement' is the current element that is being processed.
+            Second, the 'index' is the index  of the 'currentElement'.
+              Third, the 'array' is the array that the 'every()' method was called upon.
+                The 'currentElement' argument is required whereas the 'index' and 'array' arguments are optional.
+                  2) The thisArg argument
+  The 'thisArg' argument of the 'every()' method is optional.If you pass the 'thisArg' argument into the method, the this value inside the callback function will reference the 'thisArg' argument.
+
+  The 'every()' method returns 'true' if the 'callback' function returns a truthy value for every array element; otherwise, it returns 'false'.
+
+  Note that the 'every()' method executes the 'callback()' function on every element in the array until it finds the one that causes the 'callback()' return a falsy value.
+
+  In other words, the 'every()' will stop calling the 'callback()' function and return 'false' once there is an array element that causes 'callback()' to return a falsy value.
+
+  Let’s take a look at some more examples of using the 'every()' method.
+
+More JavaScript Array every() method examples
+The following example tests whether all the array elements are the even numbers
+          `,
+          code1: `let numbers = [1, 3, 5];
+          let isEven = numbers.every(function(e) {
+            return e % 2 == 0;
+          });
+          
+          console.log(isEven);
+          
+          // Output:
+          // false
+          
+          // In contrast, the following example tests if all the array elements are the odd numbers.
+
+let numbers = [1, 3, 5];
+let isOdd = numbers.every(function(e) {
+  return Math.abs(e % 2) == 1;
+});
+
+console.log(isOdd);
+
+// Output:
+// true
+
+// Suppose that you have an object with two properties: 'min' and 'max':
+
+let range = {
+  min: 0,
+  mas: 10
+};
+
+// The following example tests whether all elements in the 'numbers' array is in the range specified by the 'min' and 'max' of the 'range' object.
+
+
+let numbers = [1, 3, 5];
+
+let range = {
+  min: 0,
+  max: 10
+};
+
+let isInRange = numbers.every(function(e) {
+  return e >= this.min && e <= this.max;
+}, range);
+
+// Output:
+// true
+
+          `
+        },
+        {
+          text1: `In this example, we pass the 'range' object to the 'every()' method as the second argument.And inside the 'callback()' function, we reference the 'range' object using the this keyword.
+
+            Caution: Empty arrays: --
+              If you call the 'every()' method on an empty array, the method will always return true for any condition.For example:`,
+          code1: `let gtZero = [].every(e => e > 0); // any condition
+          let ltZero = [].every(e => e < 0); // any condition
+          
+          console.log('gtZero:', gtZero);
+          console.log('ltZero:', ltZero);
+          
+          // Output:
+          // gtZero: true
+          // ltZero: true`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "aa",
       note: [
         {
           text1: ``,
           code1: ``
-        },
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "aa",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "aa",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "aa",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
       ]
     },
     {
@@ -4250,16 +5548,6 @@ Object
       note: [
         {
           text1: `Classes are a core concept in object-oriented programming, and TypeScript has full support for them. Classes allow developers to define blueprints for objects that share the same properties and methods. They can also include constructors, access modifiers, and inheritance.`,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "Prototypes",
-      note: [
-        {
-          text1: ``,
           code1: ``
         },
       ]

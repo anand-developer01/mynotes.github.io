@@ -17,19 +17,6 @@ function mainDom(data) {
                     <a href="#${el.title}">${el.title}</a>
                 </div>
                 `
-        // let leftMenuListDiv = document.createElement('div');
-        // let a = document.createElement('a');
-        // let linkText = document.createTextNode(el.title);
-
-        // leftMenuD_FlexDiv.className = 'd-flex'
-        // // leftMenuD_FlexDiv.appendChild(leftMenuListDiv);
-
-        // leftMenuListDiv.className = 'left-menu-list'
-        // leftMenuListDiv.appendChild(a);
-
-        // a.appendChild(linkText);
-        // a.title = el.title;
-        // a.href = `#${el.title}`;
         leftMenuD_FlexDiv.innerHTML = leftMenu;
         leftLinks.appendChild(leftMenuD_FlexDiv)
 
