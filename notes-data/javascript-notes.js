@@ -297,7 +297,7 @@ The following declares the variable counter with the let keyword:`,
           > First, store the variables <b>x</b> and <b>y</b> and function declaration timesTen() in the global execution context.
           > Second, initialize the variables <b>x</b> and <b>y</b> to <b>undefined</b>.
     
-          <span style="background:yellow; width:300px; padding:10px;" class="text-center d-flex flex-column">
+          <span style="background:yellow; width:100%; padding:10px;" class="text-center d-flex flex-column">
           <b>Global Execution Context</b> </br>Creation Phase (Web Browser)
           <span style="background:#8989ac; padding:10px; margin:3px;">Global Object : Window</span>
           <span style="background:#8989ac; padding:10px; margin:3px;">this : window</span>
@@ -789,6 +789,158 @@ For example, when you execute a recursive function that has no exit condition, t
     {
       id: 1,
       section: "ADVANCED FUNCTIONS",
+      title: "Functions are First-Class Citizens",
+      note: [
+        {
+          text1: `A programming language is said to have First-class functions if functions in that language are treated like other variables. So the functions can be assigned to any other variable or passed as an argument or can be returned by another function.
+          JavaScript treats function as a first-class citizen. This means that functions are simply a value and are just another type of object.
+          
+          Functions are first-class citizens in JavaScript. In other words, you can treat functions like values of other types.
+
+          The following defines the <b>add()</b> function and assigns the function name to the variable <b>sum</b>:
+          `,
+          code1: `function add(a, b) {
+                    return a + b;
+                }
+        
+        let sum = add;
+        
+        // In the assignment statement, we don’t include the opening and closing parentheses at the end of the 'add' identifier. We also don’t execute the function but reference the function.
+
+        // By doing this, we can have two ways to execute the same function. For example, we can call it normally as follows:
+
+        let result = add(10, 20);
+        // Alternatively, we can all the 'add()' function via the 'sum' variable like this:
+
+        let result = sum(10,20);
+        `
+        },
+        {
+          text1: `<b>Passing a function to another function</b>
+          Because functions are values, you can pass a function as an argument into another function.
+
+The following declares the <b>average()</b> function that takes three arguments. The third argument is a function:
+          `,
+          code1: `function average(a, b, fn) {
+            return fn(a, b) / 2;
+        }
+        
+        // Now, you can pass the 'sum' function to the 'average()' function as follows:
+
+let result = average(10, 20, sum);
+
+// Put it all together:
+function add(a, b) {
+    return a + b;
+}
+
+let sum = add;
+
+function average(a, b, fn) {
+    return fn(a, b) / 2;
+}
+
+let result = average(10, 20, sum);
+
+console.log(result);
+// Output:
+// 15
+        `
+        },
+        {
+          text1: `<b>Returning functions from functions</b>
+          Since functions are values, you can return a function from another function.
+
+The following <b>compareBy()</b> function returns a function that compares two objects by a property:
+
+
+          `,
+          code1: `function compareBy(propertyName) {
+            return function (a, b) {
+              let x = a[propertyName],
+                y = b[propertyName];
+          
+              if (x > y) {
+                return 1;
+              } else if (x < y) {
+                return -1;
+              } else {
+                return 0;
+              }
+            };
+          }`
+        },
+        {
+          text1: `<b> More JavaScript Functions are First-Class Citizens example </b>
+          The following <b>convert()</b> function has two parameters. The first parameter is a function and the second one is the length that will be converted based on the first argument:
+
+          To convert <b>cm</b> to <b>in</b>, you can call the <b>convert()</b> function and pass the <b>cmToIn</b> function into the <b>convert()</b> functio
+
+          Similarly, to convert a length from inches to centimeters, you can pass the <b>inToCm</b> function into the <b>convert()</b> function, like this:
+          `,
+          code1: `function cmToIn(length) {
+            return length / 2.54;
+          }
+          
+          function inToCm(length) {
+            return length * 2.54;
+          }
+          
+          function convert(fn, length) {
+            return fn(length);
+          }
+          
+          let inches = convert(cmToIn, 10);
+          console.log(inches);
+          
+          let cm = convert(inToCm, 10);
+          console.log(cm);`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Higher-Order Function",
+      note: [
+        {
+          text1: `A function that receives another function as an argument or that returns a new function or both is called Higher-order function. Higher-order functions are only possible because of the First-class function.
+          
+          A higher order function is a function that takes one or more functions as arguments, or returns a function as its result.
+          `,
+          code1: `
+          const greet =  function(name){
+            return function(m){
+          
+                console.log('Hi!! \${name}, \${m}');
+            }
+        }
+        
+        const greet_message = greet('ABC');
+        greet_message("Welcome To GeeksForGeeks")
+
+        //--------------------------------
+
+          // Custom higher-order function: multiplyBy
+          const multiplyBy = (multiplier) => {
+            // Returned function takes a number and multiplies it by the multiplier
+            return (number) => {
+              return number * multiplier;
+            };
+          };
+          
+          // Create custom multiplier functions
+          const multiplyByTwo = multiplyBy(2);
+          const multiplyByFive = multiplyBy(5);
+          
+          // Use custom multiplier functions
+          console.log(multiplyByTwo(3));   // Output: 6 (3 * 2)
+          console.log(multiplyByFive(4));  // Output: 20 (4 * 5)
+          `
+        },
+      ]
+    },
+    {
+      id: 1,
       title: "pure functions",
       note: [
         {
@@ -2524,117 +2676,6 @@ A closure is a function that has access to the variables and parameters of its o
     },
     {
       id: 1,
-      title: "this",
-      note: [
-        {
-          text1: `In JavaScript, the <b>this</b> keyword refers to the context within which a function is executed. It represents the current execution context and provides a way to access the properties and methods of the current object.
-
-          In JavaScript, the <b>this</b> keyword always refers to an object. The thing about it is that the object it refers to will vary depending on how and where this is being called.
-    
-          The value of this depends on how a function is called:
-          
-          <b>1) Global Context:</b>
-          When used outside of any function, <b>this</b> refers to the global object. In a browser environment, the global object is <b>window</b>.
-          
-          
-          <b>2) Function Context:</b>
-          When used within a function, the value of <b>this</b> depends on how the function is called.
-          If the function is called as a method of an object, <b>this</b> refers to the object itself.
-          If the function is called as a standalone function, <b>this</b> refers to the global object (<b>window</b> in browsers) in non-strict mode, or it is <b>undefined</b> in strict mode.
-    
-          <b>A note about arrow functions:</b>
-          In arrow functions, JavaScript sets the this lexically. This means that the arrow function doesn't create its own execution context but inherits the this from the outer function where the arrow function is defined.
-    
-          In most cases, this means this will refer to the window object as well:
-    
-          <span style="color:red">const show = () => this</span>
-          console.log('arrow function this', show())
-
-          It's important to notice this because, for example, if we try to implement an arrow function to it as an object method, we won't be able to access the object through the this keyword:`,
-          code1: `      const person = {
-            name: 'Pedro',
-            surname: 'Sanchez',
-            sayName: () => this.name + ' ' + this.surname
-        }
-  
-        console.log(person.sayName());`
-        },
-        {
-          text1: `      3) Constructor Context:
-          When a function is used as a constructor (i.e., called with the 'new' keyword), 'this' refers to the newly created object instance.
-    
-          4) Event Handler Context:
-          When used in event handlers (e.g., in an event listener), this typically refers to the element that triggered the event.
-          
-          <b>A note about strict-mode:</b>
-          When using strict-mode, calling 'this' within a function will return undefined.
-          `,
-          code1: `      "use strict";
-
-          function show() {
-              console.log(this);
-          }
-          show();`
-        },
-        {
-          text1: `As a side comment, if you're not familiar with what strict-mode is, following the MDN docs:
-
-          JavaScript's strict mode is a way to opt in to a restricted variant of JavaScript, thereby implicitly opting-out of "sloppy mode". Strict mode isn't just a subset: it intentionally has different semantics from normal code.
-    
-          Strict mode makes several changes to regular JavaScript semantics:
-    
-          > Eliminates some JavaScript silent errors by changing them to throw errors.
-          > Fixes mistakes that make it difficult for JavaScript engines to perform optimizations: strict mode code can sometimes be made to run faster than identical code that's not strict mode.
-          > Prohibits some syntax likely to be defined in future versions of ECMAScript.
-          How to Use this in an Event Listener
-    
-          When using <b>this</b> in an event listener, this will refer to the DOM element that fired the event.`,
-          code1: `      document.getElementById('testBtn').addEventListener('click', function() {
-            console.log('this in a event', this);
-        })`
-        },
-        {
-          text1: `In our case, we added the event listener to a button element: <button id="testBtn">TEST</button>
-
-          And after clicking it, we get the following in our console:
-    
-          <b>'this' Methods (call, apply and bind):</b>
-          To complicate the subject a little more, javascript provides three native methods that can be used to manipulate the way the this keyword behaves. These methods are <b>call</b>, <b>apply</b> and <b>bind</b>. Let's see how they work.
-    
-          Here are some examples to illustrate the usage of <b>this</b>:`,
-          code1: `      // Global context
-          console.log(this === window); // true
-          
-          // Method context
-          const obj = {
-            name: 'Object',
-            greet() {
-              console.log('Hello, \${this.name}!');
-            }
-          };
-          obj.greet(); // Output: "Hello, Object!"
-          
-          // Constructor context
-          function Person(name) {
-            this.name = name;
-          }
-          const person1 = new Person('John');
-          console.log(person1.name); // Output: "John"
-          
-          // Event handler context (assuming button is an HTML button element)
-          const button = document.querySelector ('button');
-          button.addEventListener ('click', function() {
-            console.log(this); // Output: HTMLButtonElement
-          });`
-        },
-        {
-          text1: `      Understanding the context of <b>this</b> is essential for working effectively with objects, constructors, and event handling in JavaScript. It allows developers to write more flexible and dynamic code by accessing and manipulating object properties within different execution contexts. However, it's important to be cautious when dealing with <b>this</b>, as its behavior can be affected by various factors such as function binding, arrow functions, and strict mode.`,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
       title: "Callback",
       note: [
         {
@@ -2819,7 +2860,7 @@ Suppose, you have an array <b>scores</b> that contains five numbers from 1 to 5.
 
           Consider the following syntax.
 
-          Array.splice(position,0,new_element_1,new_element_2,...);
+          Array.splice(position, 0, new_element_1, new_element_2, ...);
 
           In this syntax:
 
@@ -3694,6 +3735,7 @@ console.log(sequence);
     },
     {
       id: 1,
+      section: `High-order methods`,
       title: "map() - transform array elements.",
       note: [
         {
@@ -3991,16 +4033,6 @@ console.log(areas);
           
           In this tutorial, you have learned how to use the JavaScript Array <b>filter()</b> method to filter elements in an array based on a test provided by a callback function.
           `,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "redu",
-      note: [
-        {
-          text1: ` `,
           code1: ``
         },
       ]
@@ -4733,7 +4765,672 @@ let isInRange = numbers.every(function(e) {
     },
     {
       id: 1,
-      title: "aa",
+      title: "some() - check if at least one element in an array passed a test.",
+      note: [
+        {
+          text1: ` The some() method of Array instances tests whether at least one element in the array passes the test implemented by the provided function. It returns true if, in the array, it finds an element for which the provided function returns true; otherwise it returns false. It doesn't modify the array.
+
+           The some() method is an Array.propotype (built-in) method which takes in a callback function and will test that function  on each iteration against the current item.
+          
+           The method takes in three parameters:
+          
+           > currentItem: This is the element inside of the array which is currently being iterated over
+           > index: This is the index position of the currentItem inside of the array
+           > array: This represents the array collection to which the some() method is bound
+          
+           Sometimes, you want to check if an array has at least one element that meets a specified condition.
+          
+           For example, to check if the following array has at least one element less than 5:`,
+          code1: `let marks = [4, 5, 7, 9, 10, 3];
+
+           …you typically use a 'for' loop, like this:
+          
+          let marks = [4, 5, 7, 9, 10, 3];
+          
+          let lessThanFive = false;
+          
+          for (let index = 0; index < marks.length; index++) {
+            if (marks[index] < 5) {
+              lessThanFive = true;
+              break;
+            }
+          }
+          
+          console.log(lessThanFive);
+          
+          //  Output:
+          //  true
+
+          //  > First, declare a flag variable 'lessThanFive' and set its value to 'false'.
+          //  > Second, iterate over the elements.If an element is less than 5, set the flag to 'true' and immediately exit the loop using the 'break' statement.
+          //  The code works as expected.However, it is quite verbose.
+           
+           //---------------------------
+           let marks = [4, 5, 7, 9, 10, 3];
+
+lessThanFive = marks.some(function(e) {
+  return e < 5;
+});
+
+console.log(lessThanFive);
+
+// Output
+// true
+
+// The condition is implemented via a callback function passed into the 'some()' method.
+// Now, the code is shorter.To make it more expressive, you can use the arrow function syntax in ES6:
+
+let marks = [4, 5, 7, 9, 10, 3];
+let lessThanFive = marks.some(e => e < 5);
+console.log(lessThanFive);
+           `
+        },
+        {
+          text1: ` JavaScript Array 'some()' syntax: --
+          
+           arrayObject.some(callback[, thisArg]);
+          
+           The 'some()' method accepts two arguments:
+          
+           1) The callback argument
+           The 'some()' function executes the 'callback' function once for each element in the array until it finds the one where the 'callback' function returns a 'true'.The 'some()' method immediately returns 'true' and doesn’t evaluate the remaining elements.
+          
+           If no element causes the 'callback()' to return 'true', the 'some()' method returns 'false'.
+          
+             The 'callback' function takes three arguments:
+          
+           function callback(currentElement [[, currentIndex], array]) {  ...}
+          
+           > The 'currentElement' is the current element being processed in the array.
+           > The 'currentIndex' is the index of the current element being processed in the array.
+           > The 'array' is array that 'some()' was called upon.
+          
+           2) The thisArg argument: --
+             The 'thisArg' argument is optional.If you pass the 'thisArg' into the method, you can use the 'thisArg' as the 'this' value inside the 'callback' function.
+          
+           JavaScript Array some() examples: --
+           Let’s take some more examples of using the 'some()' method.
+          
+           1) Check if an element exists in the array:
+           The following 'exists()' function uses the 'some()' method to check if a value exists in an array:`,
+          code1: `function exists(value, array) {
+            return array.some(e => e === value);
+          }
+          
+          let marks = [4, 5, 7, 9, 10, 2];
+          
+          console.log(exists(4, marks));
+          console.log(exists(11, marks));
+          
+          // Output:
+          // true
+          // false`
+        },
+        {
+          text1: `2) Check if an array has one element that is in a range: --
+          The following example shows how to check if any number in the 'marks' array is in the range of(8, 10):`,
+          code1: `let marks = [4, 5, 7, 9, 10, 2];
+          const range = {
+            min: 8,
+            max: 10
+          };
+          
+          let result = marks.some(function(e) {
+            return e >= this.min && e <= this.max;
+          }, range);
+          
+          console.log(result);
+          
+          // Output:
+          // true
+          
+          // > First, define a range object with min and max properties.
+// > Second, call the 'some()' method on the marks array object and pass the callback and range object.Because we pass the range object as the second argument('thisArg'), we can reference it inside the callback via the 'this' value.
+          `
+        },
+        {
+          text1: `<b>Notice</b> that if you use the arrow function in this example, the 'this' value inside the callback function doest not bind to the range 'object' but the 'global' object.
+          Caution: Empty arrays
+If you call the some() method on an empty array, the result is always false regardless of any condition. 
+For example:
+          `,
+          code1: `let result = [].some(e => e > 0);
+          console.log(result);
+          
+          result = [].some(e => e <= 0);
+          console.log(result);
+          
+          //   Output:
+          //   false
+          //   false`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "sort() - sort elements in an array.",
+      note: [
+        {
+          text1: `The sort() function allows you to sort an array object by either the default sorting order, or by a custom sorting function.
+
+          By default, it sorts the elements in the array in ascending order based on their string Unicode values. The function takes the inputs, converts them to strings, and then sorts them using Unicode values.
+
+          The 'sort()' method allows you to sort elements of an array in place.Besides returning the sorted array, the 'sort()' method changes the positions of the elements in the original array.
+          
+          By default, the 'sort()' method sorts the array elements in ascending order with the smallest value first and largest value last.
+          
+          The 'sort()' method casts elements to strings and compares the strings to determine the orders.
+          
+          Consider the following example:`,
+          code1: `let numbers = [0, 1, 2, 3, 10, 20, 30];
+          numbers.sort();
+          console.log(numbers);
+          
+          // The output is:
+          // [0, 1, 10, 2, 20, 3, 30]`
+        },
+        {
+          text1: `In this example, the 'sort()' method places 10 before 2 because the string “10” comes before “2” when doing a string comparison.
+
+          To fix this, you need to pass a compare function to the 'sort()' method.The 'sort()' method will use the compare function to determine the orders of elements.
+          
+          The following illustrates the syntax of the 'sort()' method:
+          
+          array.sort(comparefunction)
+          
+          The 'sort()' method accepts an optional argument which is a function that compares two elements of the array.
+          
+          If you omit the compare function, the 'sort()' method sorts the elements with the sort order based on the Unicode code point values of elements as mentioned earlier.
+          
+          The compare function of the 'sort()' method accepts two arguments and returns a value that determines the sort order.The following illustrates the syntax of the compare function:
+          
+            function compare(a, b) {
+            // ...
+          }
+          
+          The 'compare()' function accepts two arguments 'a' and 'b'.The 'sort()' method will sort elements based on the return value of the 'compare()' function with the following rules:
+          
+          1). If 'compare(a, b)' is less than zero, the 'sort()' method sorts 'a' to a lower index than 'b'.In other words, a will come first.
+          2). If 'compare(a, b)' is greater than zero, the 'sort()' method sort 'b' to a lower index than 'a', i.e., b will come first.
+          3). If 'compare(a, b)' returns zero, the 'sort()' method considers a equals b and leaves their positions unchanged.
+          To fix the issue of sorting the number, you can use the following syntax:
+          `,
+          code1: `let numbers = [0, 1, 2, 3, 10, 20, 30];
+          numbers.sort(function(a, b) {
+            if (a > b) return 1;
+            if (a < b) return -1;
+            return 0;
+          });
+          
+          console.log(numbers);
+          
+          // Output:
+          // [0, 1, 2, 3, 10, 20, 30]
+          
+          // Or you can define the comparison function using the arrow function syntax:
+          
+          let numbers = [0, 1, 2, 3, 10, 20, 30];
+          numbers.sort((a, b) => {
+            if (a > b) return 1;
+            if (a < b) return -1;
+            return 0;
+          });
+          
+          console.log(numbers);
+          
+          // And the following is the simplest since the elements of the array are numbers:
+          
+          let numbers = [0, 1, 2, 3, 10, 20, 30];
+          numbers.sort((a, b) => a - b);
+          
+          console.log(numbers);
+          
+          // Sorting an array of strings: --
+          // ----------------------------
+          // Suppose you have an array of string named 'animals' as follows:
+          
+          let animals = [
+            'cat', 'dog', 'elephant', 'bee', 'ant'
+          ];
+          
+          // To sort the elements of the 'animals' array in ascending order alphabetically, you use the 'sort()' method without passing the compare function as shown in the following example:
+          
+          let animals = [
+            'cat', 'dog', 'elephant', 'bee', 'ant'
+          ];
+          animals.sort();
+          
+          console.log(animals);
+          
+          // Output:
+          // ['ant', 'bee', 'cat', 'dog', 'elephant']
+          
+          
+          // To sort the 'animals' array in descending order, you need to change the logic of the compare function and pass it to the 'sort()' method as the following example.
+          
+          let animals = [
+            'cat', 'dog', 'elephant', 'bee', 'ant'
+          ];
+          
+          animals.sort((a, b) => {
+            if (a > b)
+              return -1;
+            if (a < b)
+              return 1;
+            return 0;
+          });
+          
+          console.log(animals);
+          
+          Output:
+          ['elephant', 'dog', 'cat', 'bee', 'ant']
+          
+          // Suppose you have an array that contains elements in both uppercase and lowercase as follows:
+          
+          // sorting array with mixed cases
+          let mixedCaseAnimals = [
+            'Cat', 'dog', 'Elephant', 'bee', 'ant'
+          ];
+          
+          // To sort this array alphabetically, you need to use a custom compare function to convert all elements to the same case e.g., uppercase for comparison and pass that function to the 'sort()' method.
+          
+          let mixedCaseAnimals = [
+            'Cat', 'dog', 'Elephant', 'bee', 'ant'
+          ];
+          
+          mixedCaseAnimals.sort(function(a, b) {
+            let x = a.toUpperCase(),
+              y = b.toUpperCase();
+            return x == y ? 0 : x > y ? 1 : -1;
+          
+          });
+          
+          // Output:
+          // ['ant', 'bee', 'Cat', 'dog', 'Elephant']`
+        },
+        {
+          text1: `Sorting an array of strings with non-ASCII characters:--
+          
+          The 'sort()' method is working fine with the strings with ASCII characters.However, for the strings with non - ASCII characters e.g., é, è, etc., the 'sort()' method will not work correctly.For example:`,
+          code1: `let animaux = ['zèbre', 'abeille', 'écureuil', 'chat'];
+          animaux.sort();
+          console.log(animaux);
+
+          // As you see, the 'écureuil' string should come before the 'zèbre' string.
+          
+          // To resolve this, you use the 'localeCompare()' method of the 'String' object to compare strings in a specific locale, like this:
+          
+          animaux.sort(function(a, b) {
+            return a.localeCompare(b);
+          });
+          console.log(animaux);
+          
+          // Output:
+          // ['abeille', 'chat', 'écureuil', 'zèbre']
+          
+          // The elements of the 'animaux' array now are in the correct order.
+          
+// Sorting an array of numbers: --
+// ------- -- ----- -- --------
+//   Suppose you have an array of numbers named 'scores' as in the following example.
+
+let scores = [
+  9, 80, 10, 20, 5, 70
+];
+
+// To sort an array of numbers numerically, you need to pass into a custom comparison function that compares two numbers.
+
+// The following example sorts the 'scores' array numerically in ascending order.
+
+let scores = [
+  9, 80, 10, 20, 5, 70
+];
+// sort numbers in ascending order
+scores.sort((a, b) => a - b);
+
+console.log(scores);
+
+// Output:
+// [5, 9, 10, 20, 70, 80]
+
+
+// To sort an array of numbers numerically in descending order, you just need to reverse the logic in the compare function as shown in the following example:
+
+let scores = [
+  9, 80, 10, 20, 5, 70
+];
+// descending order
+scores.sort((a, b) => b - a);
+console.log(scores);
+
+// Output:
+// [80, 70, 20, 10, 9, 5]
+
+
+// Sorting an array of objects by a specified property: --
+// ------- -- ----- -- ------- -- - --------- --------
+//   The following is an array of 'employee' objects, where each object contains three properties: 'name', 'salary' and 'hireDate'.
+
+let employees = [
+  { name: 'John', salary: 90000, hireDate: "July 1, 2010" },
+  { name: 'David', salary: 75000, hireDate: "August 15, 2009" },
+  { name: 'Ana', salary: 80000, hireDate: "December 12, 2011" }
+];
+
+// Sorting objects by a numeric property
+// The following example shows how to sort the employees by 'salary' in ascending order.
+
+// sort by salary
+employees.sort(function(x, y) {
+  return x.salary - y.salary;
+});
+
+console.table(employees);
+
+Output: <table>
+
+
+// This example is similar to the example of sorting an array of numbers in ascending order.The difference is that it compares the 'salary' property of two objects instead.
+
+// Sorting objects by a string property:
+// ------- ------- -- - ------ --------
+// To sort the 'employees' array by 'name' property case-insensitively, you pass the compare function that compares two strings case-insensitively as follows:
+
+employees.sort(function(x, y) {
+  let a = x.name.toUpperCase(),
+    b = y.name.toUpperCase();
+  return a == b ? 0 : a > b ? 1 : -1;
+});
+
+console.table(employees);
+
+// Sorting objects by the date property:--
+// ------- ------- -- --- ---- --------
+// Suppose, you wish to sort employees based on each employee’s hire date.
+
+// The hire date data is stored in the 'hireDate' property of the employee object. However, it is just a string that represents a valid date, not the 'Date' object. 
+
+// Therefore, to sort employees by hire date, you first have to create a valid 'Date' object from the date string, and then compare two dates, which is the same as comparing two numbers.
+
+// Here is the solution:
+
+employees.sort(function(x, y) {
+  let a = new Date(x.hireDate),
+    b = new Date(y.hireDate);
+  return a - b;
+});
+
+console.table(employees);
+
+// Optimizing JavaScript Array sort() method:--
+// ---------- ---------- ----- ------ ------
+// In fact, the 'sort()' method calls the compare function multiple times for each element in the array.
+
+// See the following example:
+
+let rivers = ['Nile', 'Amazon', 'Congo', 'Mississippi', 'Rio-Grande'];
+
+rivers.sort(function(a, b) {
+  console.log(a, b);
+  return a.length - b.length;
+});
+
+// Output:
+// Amazon Nile
+// Congo Amazon
+// Congo Amazon
+// Congo Nile
+// Mississippi Congo
+// Mississippi Amazon
+// Rio - Grande Amazon
+// Rio - Grande Mississippi
+          `
+        },
+        {
+          text1: `> First, declare an array 'rivers' that consists of the famous river names.
+          > Second, sort the 'rivers' array by the length of its element using the 'sort()' method.We output the elements of the 'rivers' array to the web console whenever the 'sort()' method invokes the comparison function .
+          
+          As shown in the output above, each element has been evaluated multiple times e.g., Amazon 4 times, Congo 2 times, etc.
+          
+          If the number of array elements is increasing, it will potentially decrease the performance.
+          
+          You cannot reduce the number of times that comparison function is executed. However, you can reduce the work that the comparison has to do. This technique is called Schwartzian Transform.
+          
+          To implement this, you follow these steps:
+          
+          1) First, extract the actual values into a temporary array using the map() method.
+          2) Second, sort the temporary array with the elements that are already evaluated(or transformed).
+          3) Third, walk the temporary array to get an array with the right order.
+          `,
+          code1: `// Here is the solution:
+
+          // temporary array holds objects with position
+          // and length of element
+          var lengths = rivers.map(function(e, i) {
+            return { index: i, value: e.length };
+          });
+          
+          // sorting the lengths array containing the lengths of
+          // river names
+          lengths.sort(function(a, b) {
+            return +(a.value > b.value) || +(a.value === b.value) - 1;
+          });
+          
+          // copy element back to the array
+          var sortedRivers = lengths.map(function(e) {
+            return rivers[e.index];
+          });
+          
+          console.log(sortedRivers);
+          
+          // Output:
+          // [ 'Nile', 'Congo', 'Amazon', 'Rio-Grande', 'Mississippi' ]
+          
+          // In this tutorial, you have learned how to use the JavaScript Array 'sort()' method to sort arrays of strings, numbers, dates, and objects.`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "forEach() - loop through array elements.",
+      note: [
+        {
+          text1: ` The forEach() array method loops through any array, executing a provided function once for each array element in ascending index order. This function is referred to as a callback function.
+
+             The forEach method passes a callback function for each element of an array together with the following parameters:
+          
+            > Current Value (required) - The value of the current array element
+            > Index (optional) - The current element's index number
+            > Array (optional) - The array object to which the current element belongs
+          
+           Typically, when you want to execute a 'function' on every element of an 'array', you use a for 'loop' statement.
+          
+           For example, the following code shows every element of an array to console:`,
+          code1: `let ranks = ['A', 'B', 'C'];
+          for (let i = 0; i < ranks.length; i++) {
+            console.log(ranks[i]);
+          }
+          
+          // Output:
+          // A
+          // B
+          // C
+          
+          // JavaScript Array provides the 'forEach()' method that allows you to run a function on every element.
+          // The following code uses the 'forEach()' method that is equivalent to the code above:
+          
+          let ranks = ['A', 'B', 'C'];
+          
+          ranks.forEach(function(e) {
+            console.log(e);
+          });
+          
+          // Output:
+          // A
+          // B
+          // C`
+        },
+        {
+          text1: ` The 'forEach()' method iterates over elements in an array and executes a predefined function once per element.
+           The following illustrates the syntax of the 'forEach()' method.
+          
+           Array.forEach(callback[, thisArg]);
+          
+           The 'forEach()' method takes two arguments:
+          
+           1) callback:
+          ------------
+           The 'callback' function that the 'forEach()' method uses to execute on every element.
+          
+           The callback accepts the following arguments:
+          
+           'currentElement': is the current array element being processed.
+           'index': the index of the 'currentElement' in the array.
+           'array': the array that calls the 'forEach()' method.
+          
+           The index and array are optional.
+          
+           2) thisArg:
+          -----------
+           The 'thisArg' is a value to use as this when executing the callback.
+          
+           Note that the 'forEach()' function returns 'undefined' therefore it is not chainable like other iterative methods: 'filter()', 'map()', 'some()', 'every()', and 'sort()'.
+          
+           One limitation of the 'forEach()' method in comparison with the for loop is that you cannot use the break or continue statement to control the loop.
+          
+           To terminate the loop in the 'forEach()' method, you must throw an exception inside the callback function.
+          
+           More JavaScript Array 'forEach()' method example: --
+           ------------------------------------------------
+           Let’s take a look at an example of the 'forEach()' method that uses a 'contextObject'.
+          
+           The following illustrates 'Counter' constructor function:`,
+          code1: `function Counter() {
+            this.count = 0;
+            let self = this;
+            return {
+              increase: function() {
+                self.count++;
+              },
+              current: function() {
+                return self.count;
+              },
+              reset: function() {
+                self.count = 0;
+              }
+            }
+          }
+          
+          // This example shows how to pass the counter object to the 'forEach()' method.
+          
+          var counter = new Counter();
+          var numbers = [1, 2, 3];
+          var sum = 0;
+          numbers.forEach(function(e) {
+            sum += e;
+            this.increase();
+          }, counter);
+          
+          console.log(sum); // 6
+          console.log(counter.current()); // 3
+          
+          // How it works.
+          
+          // > First, create a new 'Counter' object.
+          // > Next, define an array of three numbers.
+          // > Then, declare a variable 'sum' and assign it a value of zero.
+          // > After that, call the 'forEach()' method on the 'numbers' array.In the callback function, add the element to the 'sum' variable and call the 'increase()' method of the 'counter' object.Notice that the 'counter' object is referred to as 'this' inside the callback function.
+          // > Finally, log the value of the sum and current value of the counter in the web console.
+          
+          // In this tutorial, you have learned how to use the JavaScript Array 'forEach()' method to execute a callback on every element of an array.`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "find",
+      note: [
+        {
+          text1: `First Filter returns all the elements that match the condition while the Find method only returns the first one and second and even more important, the Filter method returns a new array while Find only returns the element itself and not an array,
+          
+          The find method returns the first element in the array that satisfies a given test function. If no elements meet the criteria, it returns <b>undefined</b>.
+
+          The find() method returns the value of the first array element that satisfies the provided test function.
+
+          Syntax:
+          <span style="color:red"> array.find(function(currentValue, index, arr), thisValue) </span>
+
+          <b>currentValue</b>: The current element being processed in the array.
+          <b>index (optional)</b>: The index of the current element being processed in the array.
+          <b>arr (optional)</b>: The array find() was called upon.
+
+          <b>thisArg (optional)</b>: An object to which the this keyword can refer in the callback function. If not provided, <b>undefined</b> is used.
+          `,
+          code1: `let numbers = [1, 3, 4, 9, 8];
+
+          // function to check even number
+          function isEven(element) {
+            return element % 2 == 0;
+          }
+          
+          // get the first even number
+          let evenNumber = numbers.find(isEven);
+          console.log(evenNumber);
+          
+          // Output: 4`
+        },
+        {
+          text1: `The <b>thisArg</b> parameter in the <b>find()</b> method allows you to specify a value to be used as <>bthis</b> when executing the callback function. `,
+          code1: `const person = {
+            name: 'John',
+            age: 30,
+            hobbies: ['reading', 'gardening', 'cooking'],
+            findHobby(hobbyToFind) {
+              return this.hobbies.find(function(hobby) {
+                return hobby === hobbyToFind;
+              }, this); // using thisArg to bind 'this' to the 'person' object
+            }
+          };
+          
+          console.log(person.findHobby('gardening')); // Output: gardening
+          console.log(person.findHobby('swimming'));  // Output: undefined
+
+
+          //-------------
+
+          const thresholdFilter = {
+            threshold: 25,
+            numbers: [10, 20, 30, 40, 50],
+            filterNumber: function(number) {
+              return number > this.threshold;
+            },
+            filteredNumbers: function() {
+              return this.numbers.find(this.filterNumber, this);
+            }
+          };
+          
+          console.log(thresholdFilter.filteredNumbers()); // Output: 30
+          
+          `
+        },
+        {
+          text1: `
+          > We have an object called <b>person</b> with properties <b>name, age</b>, and <b>hobbies</b>.
+          > <b>findHobby</b> is a method of the <b>person</b> object. It takes a <b>hobbyToFind</b> parameter and searches for it within the <b>hobbies</b> array.
+          > Inside the <b>find()</b> method, we use a regular function (not an arrow function) for the callback. This function references <b>this</b> to access the <b>hobbies</b> array of the <b>person</b> object.
+          > We use <b>this</b> as the second argument to <b>find()</b>, binding it to the <b>person</b> object. This ensures that <b>this</b> inside the callback function refers to the <b>person</b> object.
+          `,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "find",
       note: [
         {
           text1: ``,
@@ -4743,27 +5440,7 @@ let isInRange = numbers.every(function(e) {
     },
     {
       id: 1,
-      title: "aa",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "aa",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "aa",
+      title: "find",
       note: [
         {
           text1: ``,
@@ -4774,6 +5451,841 @@ let isInRange = numbers.every(function(e) {
     {
       id: 1,
       section: "JAVASCRIPT OBJECTS",
+      title: "object methods",
+      note: [
+        {
+          text1: `An object is a collection of key/value pairs or properties. When the value is a function, the property becomes a method. Typically, you use methods to describe the object’s behaviors.
+
+          In JavaScript, object methods are functions that are defined as properties of an object. These methods allow objects to perform actions or computations related to their properties and behavior. 
+          
+          <b>Defining Object Methods</b>:
+Object methods are defined within the object literal notation or added to an object after it's created using dot notation or square bracket notation.
+          `,
+          code1: `const myObject = {
+            property1: value1,
+            property2: value2,
+            method1: function() {
+              // method1 implementation
+            },
+            method2() {
+              // method2 implementation (ES6 shorthand)
+            }
+          };
+
+
+          //In this example, 'method1' and 'method2' are object methods.
+
+          //-------------------
+
+          For example, the following adds the 'greet' method to the 'person' object:
+
+          let person = {
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+        
+        person.greet = function () {
+            console.log('Hello!');
+        }
+        
+        person.greet();
+
+        // Output:
+        // Hello!
+          `
+        },
+        {
+          text1: `<b>Accessing Object Methods</b>:
+          Object methods are accessed using dot notation or square bracket notation, followed by parentheses () to invoke them.
+          
+          Example:
+          myObject.<span style="color:red">method1</span>(); <span style="color:gray"> // Invoke method1 </span>
+          myObject[<span style="color:green">'method2'</span>](); <span style="color:gray"> // Invoke method2 using square bracket notation </span>
+          </span>
+          <b>this</b> Keyword in Object Methods:
+          Inside an object method, the <b>this</b> keyword refers to the object itself. It allows the method to access other properties and methods of the object.`,
+          code1: `const person = {
+            firstName: 'John',
+            lastName: 'Doe',
+            fullName() {
+              return this.firstName + ' ' + this.lastName;
+            }
+          };
+          
+          console.log(person.fullName()); // Output: John Doe
+          `
+        },
+        {
+          text1: `<b>Using Object Methods</b>:
+          Object methods are used to encapsulate functionality related to the object. They can access and modify the object's properties, perform computations based on those properties, and interact with other objects or functions.`,
+          code1: `const calculator = {
+            operand1: 0,
+            operand2: 0,
+            add() {
+              return this.operand1 + this.operand2;
+            },
+            setOperands(op1, op2) {
+              this.operand1 = op1;
+              this.operand2 = op2;
+            }
+          };
+          
+          calculator.setOperands(5, 3);
+          console.log(calculator.add()); // Output: 8
+
+          // In this example, 'add' is an object method of 'calculator', used to perform addition based on its properties. The 'setOperands' method is used to set the operands before performing the addition.
+
+          `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+        {
+      id: 1,
+      title: "Constructor Function",
+      note: [
+        {
+          text1: `It seems there might be a slight confusion in terminology. In JavaScript, constructors and constructor functions typically refer to the same concept. A constructor function is a regular JavaScript function used to create and initialize objects within a class or a constructor function.
+          
+          <b>Constructor Function</b>:
+A constructor function is a regular JavaScript function that is used to create instances of objects. It's called a constructor because it's invoked using the new keyword to construct or create new objects.
+
+<b>Purpose of Constructor Functions</b>:
+Constructor functions serve as blueprints for creating objects with similar properties and methods. They encapsulate the initialization logic for objects, allowing for the creation of multiple instances with shared behaviors. Constructor functions are fundamental to object-oriented programming in JavaScript and are used extensively to define object types and their behavior.
+
+Technically speaking, a constructor function is a regular function with the following convention:
+
+> The name of a constructor function starts with a capital letter like <b>Person, Document</b>, etc.
+> A constructor function should be called only with the <b>new</b> operator.
+          `,
+          code1: `The following example defines a constructor function called Person:
+
+          function Person(firstName, lastName) {
+              this.firstName = firstName;
+              this.lastName = lastName;
+          }`
+        },
+        {
+          text1: `In this example, the <b>Person</b> is the same as a regular function except that its name starts with the capital letter <b>P</b>.
+
+          To create a new instance of the <b>Person</b>, you use the <b>new</b> operator:
+          
+          let person = new Person('John','Doe');
+          Basically, the <b>new</b> operator does the following:
+          
+          > Create a new empty object and assign it to the <b>this</b> variable.
+          > Assign the arguments <b>John</b> and <b>Doe</b> to the <b>firstName</b> and <b>lastName</b> properties of the object.
+          > Return the <b>this</b> value.
+
+          It’s functionally equivalent to the following:`,
+          code1: `function Person(firstName, lastName) {
+            // this = {};
+        
+            // add properties to this
+            this.firstName = firstName;
+            this.lastName = lastName;
+        
+            // return this;
+        }
+       
+        // Therefore, the following statement:
+        
+        let person = new Person('John','Doe');
+       
+        // … returns the same result as the following statement:
+        
+        let person = {
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+       
+        // However, the constructor function 'Person' allows you to create multiple similar objects. For example:
+        
+        let person1 = new Person('Jane','Doe')
+        let person2 = new Person('James','Smith')`
+        },
+        {
+          text1: `<b>Adding methods to JavaScript constructor functions</b>
+          An object may have methods that manipulate its data. To add a method to an object created via the constructor function, you can use the <b>this</b> keyword. For example:`,
+          code1: `function Person(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        
+            this.getFullName = function () {
+                return this.firstName + " " + this.lastName;
+            };
+
+            Now, you can create a new 'Person' object and invoke the 'getFullName()' method:
+
+let person = new Person("John", "Doe");
+console.log(person.getFullName());
+
+// Output:
+// John Doe
+
+        }`
+        },
+        {
+          text1: `The problem with the constructor function is that when you create multiple instances of the <b>Person</b>, the <b>this.getFullName()</b> is duplicated in every instance, which is not memory efficient.
+
+          To resolve this, you can use the <a href="#Prototypes">prototype</a> so that all instances of a custom type can share the same methods.
+          
+         <b> Returning from constructor functions</b>
+Typically, a constructor function implicitly returns <b>this</b> that set to the newly created object. But if it has a <b>return</b> statement, then here are the rules:
+
+If <b>return</b> is called with an object, the constructor function returns that object instead of <b>this</b>.
+If <b>return</b> is called with a value other than an object, it is ignored.
+
+<b>Calling a constructor function without the new keyword</b>
+Technically, you can call a constructor function like a regular function without using the new keyword like this:
+
+<span style="color:red"> let person = Person('John','Doe');</span>
+
+In this case, the <b>Person</b> just executes like a regular function. Therefore, the <b>this</b> inside the <b>Person</b> function doesn’t bind to the <b>person</b> variable but the global object.
+
+If you attempt to access the <b>firstName</b> or <b>lastName</b> property, you’ll get an error:
+
+console.log(person.firstName);
+Error:
+
+TypeError: Cannot read property 'firstName' of undefined
+Similarly, you cannot access the <b>getFullName()</b> method since it’s bound to the global object.
+
+person.getFullName();
+Error:
+TypeError: Cannot read property 'getFullName' of undefined
+
+To prevent a constructor function from being invoked without the <b>new</b> keyword, ES6 introduced the new.target property.
+
+If a constructor function is called with the <b>new</b> keyword, the <b>new.target</b> returns a reference of the function. Otherwise, it returns <b>undefined</b>.
+
+The following adds a statement to the <b>Person</b> function to show the <b>new.target</b> to the console:
+          `,
+          code1: `function Person(firstName, lastName) {
+            console.log(new.target);
+        
+            this.firstName = firstName;
+            this.lastName  = lastName;
+        
+            this.getFullName = function () {
+                return this.firstName + " " + this.lastName;
+            };
+        }
+        
+        
+        // The following returns 'undefined' because the 'Person' constructor function is called like a regular function:
+
+let person = Person("John", "Doe");
+// Output:
+// undefined
+
+// However, the following returns a reference to the 'Person' function because it’s called the 'new' keyword:
+
+let person = new Person("John", "Doe");
+Output:
+[Function: Person]
+
+// By using the 'new.target', you can force the callers of the constructor function to use the 'new' keyword. Otherwise, you can throw an error like this:
+
+function Person(firstName, lastName) {
+    if (!new.target) {
+        throw Error("Cannot be called without the new keyword");
+    }
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+// Alternatively, you can make the syntax more flexible by creating a new 'Person' object if the users of the constructor function don’t use the 'new' keyword:
+
+function Person(firstName, lastName) {
+    if (!new.target) {
+        return new Person(firstName, lastName);
+    }
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+let person = Person("John", "Doe");
+
+console.log(person.firstName);
+
+// This pattern is often used in JavaScript libraries and frameworks to make the syntax more flexible.
+        `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Prototypes",
+      note: [{
+        text1: `// In JavaScript, every object has an internal property called [[Prototype]], which is essentially a reference to another object called its prototype. This prototype is a  fundamental concept in JavaScript's object-oriented programming model.
+
+        <b>prototype:</b>: JavaScript is a prototype-based language, which means that it uses
+        prototypes to inherit properties and methods from one object to another. In
+        JavaScript,
+        objects can be linked to other objects, forming a prototype chain. When a property
+        or
+        method is accessed on an object, the JavaScript engine first checks if that property
+        or
+        method exists on the object itself. If it does not, it will check the object's
+        prototype, and so on, until it reaches the end of the prototype chain. If the
+        property
+        or method is not found, it will return undefined.
+
+        // Here's a clear breakdown:
+        <b>Every object has a prototype</b>: When you create an object in JavaScript, it
+        automatically gets a prototype. This prototype is a regular JavaScript object
+        itself,
+        and it can have its own properties and methods.
+
+        <b>The prototype chain</b>: When you try to access a property or method on an object,
+        JavaScript first checks if that property or method exists on the object itself. If it
+        doesn't find it, it looks at the object's prototype, and if it's not there, it continues
+        up the prototype chain until it finds the property or method or reaches the end of  the
+        chain (where the prototype is null).
+
+        // both __proto__ and prototype are related to object inheritance, but they serve
+        different purposes.
+
+        <b>__proto__:</b>
+        <b>__proto__</b> is a property that exists on every object in JavaScript.
+        It's a reference to the prototype object from which the current object inherits.
+        When you access a property or method on an object, JavaScript first checks if
+        that
+        property or method exists directly on the object itself.If it doesn't, JavaScript
+        looks
+        at the object's <b>__proto__</b> to find it.This process continues up the prototype chain
+        until
+        the property or method is found or until the end of the chain is reached(i.e., when
+        <b>__proto__</b> becomes null).
+        It's important to note that <b>__proto__</b> is considered deprecated and should not be
+        used
+        for production code. Instead, you should use Object.getPrototypeOf() to get the
+        prototype of an object, and Object.setPrototypeOf() to set the prototype of an
+        object.
+
+        <b>prototype:</b>
+        // prototype is a property that exists on constructor functions in JavaScript.
+        // It's used to set up inheritance when you want to create objects using the new
+        keyword.
+        // When you create a constructor function and add properties or methods to its
+        prototype, those properties and methods become available to instances created using
+        that
+        constructor function.
+        // When you use the new keyword to create an instance of a constructor function, the
+        newly created object's __proto__ is set to the constructor function's prototype.
+        // In summary, __proto__ is a property that exists on every object and is used to
+        reference the prototype of the object, while prototype is a property that exists on
+        constructor functions and is used to set up inheritance for objects created using
+        those
+        constructor functions.
+
+        // Define a constructor function`,
+        code1: `// Define a constructor function
+        function Person(name, age) {
+            this.name = name;
+        this.age = age;
+}
+
+        // Add a method to the prototype of the Person constructor
+        Person.prototype.greet = function() {
+            console.log('Hello, my name is \${this.name} and I am \${this.age} years old.');
+};
+
+        // Create an instance of Person
+        const john = new Person('John', 30);
+
+        // Accessing properties directly on the object
+        console.log(john.name); // Output: John
+        console.log(john.age); // Output: 30
+
+        // Accessing method defined on the prototype
+        john.greet(); // Output: Hello, my name is John and I am 30 years old.
+
+        // Using __proto__
+        console.log(john.__proto__ === Person.prototype); // Output: true
+        console.log(Object.getPrototypeOf(john) === Person.prototype); // Output: true
+
+        // Changing prototype using __proto__ (not recommended)
+        const newPrototype = {
+            farewell: function() {
+            console.log('Goodbye, \${this.name}!');
+}
+};
+        john.__proto__ = newPrototype;
+
+        john.farewell(); // Output: Goodbye, John!
+
+        // Of course! Let's illustrate with an example:
+
+
+        // Define a constructor function
+        function Person(name, age) {
+            this.name = name;
+        this.age = age;
+}
+
+        // Add a method to the prototype of the Person constructor
+        Person.prototype.greet = function() {
+            console.log('Hello, my name is \${this.name} and I am \${this.age} years old.');
+};
+
+        // Create an instance of Person
+        const john = new Person('John', 30);
+
+        // Accessing properties directly on the object
+        console.log(john.name); // Output: John
+        console.log(john.age); // Output: 30
+
+        // Accessing method defined on the prototype
+        john.greet(); // Output: Hello, my name is John and I am 30 years old.
+
+        // Using __proto__
+        console.log(john.__proto__ === Person.prototype); // Output: true
+        console.log(Object.getPrototypeOf(john) === Person.prototype); // Output: true
+
+        // Changing prototype using __proto__ (not recommended)
+        const newPrototype = {
+            farewell: function() {
+            console.log('Goodbye, \${this.name}!');
+}
+};
+        john.__proto__ = newPrototype;
+
+        john.farewell(); // Output: Goodbye, John!`
+      },
+      {
+        text1: `// '.prototype' is a special property that all functions have that contains a
+        reference
+        to an object.
+        // When a constructor is used to instantiate a new object, 'Student.prototype' is
+        set as
+        the prototype of the new object.
+        // All instances of that constructor (the objects it creates) can access the
+        properties
+        of 'Student.prototype'.
+
+        //--------------------------
+
+        // Every thing is an object in javascript. even thou all kind of data like Array,
+        String, Number, Boolean, Function, Set, Map they have they own prototype object with
+        usefull properties inside the prototype object these objects call __proto__
+
+        //Every datatype at the end inherite from one object that is called Object.prototype  `,
+        code1: `// array type / function type
+        // array prototype(or) function prototype -> object prototype -> null
+        // Ex:
+        let cust =[12, 4, 7]
+        // cust.__proto__ points to Array.prototype
+        // cust.__proto__ === Array.prototype // true
+        // Array.prototype.__proto__ points to Object.prototype
+        // Array.prototype.__proto__ === Object.prototype // true
+        // Arrray.prototype.__proto__.__proto__ points to null
+        // Object.prototype.__proto__ points to null
+
+        // Boolean.__proto__ points to Object.prototype
+        // Number.__proto__ === Boolean.__proto__ // true
+        // String.__proto__ points to Object.prototype
+
+        // All datatypes in javascript inheries from Object.prototype at the end
+        // Object.prototype.__proto__ points to null at the end
+        // Object.prototype.__proto__ === null // true
+        // this is end of the chain. This chain is called prototype chain
+        `
+      },
+      {
+        text1: `// In this example:
+
+      // > We define a constructor function Person that takes name and age parameters and
+      sets
+      them as properties on the created object.
+      // > We add a greet method to the Person.prototype, which will be shared among all
+      instances of Person.
+      // > We create an instance of Person named john.
+      // > We access properties (name and age) directly on the john object, and the greet
+      method via the prototype chain.
+      // > We demonstrate that john.__proto__ points to Person.prototype.
+      // > We change the prototype of john using __proto__, but this method is not
+      recommended
+      for production code.
+      // > This example showcases how prototype is used to set up inheritance for objects
+      created with a constructor function and how __proto__ is used to reference the
+      prototype
+      of an object.
+      `,
+        code1: `//EX 2:---
+      // Define a constructor function for a Vehicle
+      function Vehicle(make, model) {
+          this.make = make;
+      this.model = model;
+}
+
+      // Add a method to the prototype of Vehicle
+      Vehicle.prototype.info = function() {
+          console.log('This is a \${this.make} \${this.model}.');
+};
+
+      // Create a Car constructor function that inherits from Vehicle
+      function Car(make, model, year) {
+          Vehicle.call(this, make, model); // Call the Vehicle constructor within the Car constructor
+      this.year = year;
+}
+
+      // Set up inheritance: Assign Vehicle's prototype to Car's prototype
+      Car.prototype = Object.create(Vehicle.prototype);
+      Car.prototype.constructor = Car; // Reset constructor property to Car
+
+      // Add a method to the prototype of Car
+      Car.prototype.start = function() {
+          console.log('Starting the \${this.make} \${this.model}...');
+};
+
+      // Create an instance of Car
+      const myCar = new Car('Toyota', 'Camry', 2022);
+
+      // Access methods defined on both Vehicle and Car prototypes
+      myCar.info(); // Output: This is a Toyota Camry.
+      myCar.start(); // Output: Starting the Toyota Camry...
+
+      // Demonstrating the prototype chain
+      console.log(myCar.__proto__ === Car.prototype); // Output: true
+      console.log(Car.prototype.__proto__ === Vehicle.prototype); // Output: true
+      console.log(Vehicle.prototype.__proto__ === Object.prototype); // Output: true`
+      }, {
+        text1: `// In this example:
+        // We define a 'constructor' function 'Vehicle' to represent a generic vehicle with
+        make
+        and model properties.
+        // We add an info method to the 'Vehicle.prototype' to display vehicle information.
+        // We define a 'constructor' function Car to represent a specific type of vehicle
+        that
+        inherits from Vehicle. It adds a year property.
+        // We set up inheritance by using Object.create() to link Car.prototype to
+        'Vehicle.prototype', thus allowing 'Car' instances to access methods defined on
+        Vehicle.
+        // We add a start method to the 'Car.prototype' to start the car.
+        // We create an instance of 'Car' named 'myCar' and demonstrate accessing methods
+        defined on both Vehicle and Car.
+        // Finally, we demonstrate the prototype chain, showing how myCar.__proto__ points
+        to
+        'Car.prototype', 'Car.prototype.__proto__' points to 'Vehicle.prototype', and
+        'Vehicle.prototype.__proto__' points to Object.prototype.
+
+        
+        //-----------------
+        // Function.prototype === Array.prototype and
+        Function.prototype.isPrototypeOf(Array.prototype) both are false
+        //----------------
+
+        // The reason why Function.prototype.isPrototypeOf(Array.prototype) returns false is
+        because Array.prototype is not directly descended from Function.prototype in the
+        prototype chain.
+
+        // In JavaScript, Array.prototype inherits from Object.prototype, not directly from
+        Function.prototype. The Function constructor function and its prototype properties
+        are
+        unrelated to Array.
+
+        // Let's clarify by looking at the prototype chain:
+
+        // javascript
+        // Copy code
+        // console.log(Object.getPrototypeOf(Array.prototype) === Function.prototype); //
+        Returns false
+        // console.log(Object.getPrototypeOf(Array.prototype) === Object.prototype); //
+        Returns
+        true
+        // This confirms that Array.prototype directly inherits from Object.prototype, not
+        from
+        Function.prototype.`,
+        code1: `function Student(name, age) {
+          this.name = name;
+      this.age = age;
+}
+      Student.prototype.prop = 'I am good to see you'
+
+      var stu1 = new Student("John", 50);
+      var stu2 = new Student("ram", 43);
+
+      Object.setPrototypeOf(stu1, {area: "wgl" })
+
+      console.log(Object.getPrototypeOf(stu2)) // {prop: 'I am good to see you'}
+      console.log(Object.getPrototypeOf(stu1)) // {area: 'wgl'}
+
+      console.log(stu1.__proto__) // {area: 'wgl'}
+      console.log(stu2.__proto__) // {prop: 'I am good to see you'}
+
+      console.log(Student.prototype === stu2.__proto__) // true
+      console.log(Student.prototype === stu1.__proto__) // false`
+      },
+      {
+        text1: `// Prototypal inheritance: Prototypal inheritance is the mechanism by which objects
+        can
+        inherit properties and methods from their prototype.If an object doesn't have a
+        property or method, JavaScript looks for it in its prototype, and if the prototype
+        doesn't have it, it looks in the prototype's prototype, and so on.
+
+        // Prototype inheritance in JavaScript is a way for objects to share properties and
+        methods with other objects.Each object has a hidden link to another object called
+        its
+        prototype.If a property or method is not found on the object itself, JavaScript
+        looks
+        for it in its prototype chain.This allows objects to inherit properties and methods
+        from their prototypes, creating a form of inheritance without classes.
+
+
+        //-----------------------
+        // Benifits of Prototype
+        //-----------------------
+
+        //------------------>
+        // They use less memory.
+        //------------------>
+
+        // case1 for the userDatails method logic is same if you console user objects every
+        object has getMarks function so it crates different memory location for
+
+
+        // When a method is defined using this.this.getMarks a new copy is created every
+        time a
+        new object is instantiated.Let's look at an example.
+
+        // In most Object Oriented programming languages a class has a constructor. A
+        constructor is a sort of initializing function that is called every time a new
+        instance
+        of the class is created.Usually the Constructor function name is defined using the
+        actual class name or the keyword constructor:
+
+        // If you add properties to 'this' inside the 'userDetails' class, all future
+        instances
+        of 'userDetails' will get its own copy of the properties and methods, which causes
+        redundancy.On a side note, using 'this' is great for accessing and manipulating
+        private
+        variables.But let's assume we are dealing with public variables.
+
+        // Each instance of 'userDetails' receives a duplicate copy of the getMarks()
+        method.
+        When the getMarks() method is duplicated in every instance, this can become
+        problematic
+        as it starts to affect the performance and memory of your app.`,
+        code1: `function userDetails(userName, area, m1, m2, m3) {
+          this.userName = userName;
+          this.area = area;
+          this.m1 = m1;
+          this.m2 = m2;
+          this.m3 = m3;
+          this.getMarks = function() {
+    return m1 + m2 + m3;
+  }
+}
+
+          const user1 = new userDetails("ram", "wgl", 15, 54, 76)
+          const user2 = new userDetails("ravi", "hyd", 65, 54, 76)
+
+          console.log(user1.getMarks())
+          console.log(user2.getMarks())
+
+          console.log(user1.getMarks === user2.getMarks) // false
+
+          // Further, we can see how both of the getMarks() methods are separate and maintain their own copy:`
+      },
+      {
+        text1: ` // Prototypes are the solution
+        // Here are some advantages of using prototype methods:
+
+        // 1) If you added a property to getMarks.prototype , then that property will be
+        shared
+        in all objects associated with the class , including all future objects created
+        using new
+        userProtoDetails.Sharing the property is different than duplicating.Instances can
+        borrow this method through the prototype chain, which will be discussed further.
+        // 2) Changing the property value in the methods inherited through the prototype
+        chain
+        will change all values in the associated objects.
+        // 3) In most cases, using 'prototype' or 'this' would be similar, but 'prototype'
+        allows you to save memory since there's only one instance of it, rather than its own
+        instance for each object.
+        // Let's use the same example above, except redacting this.callOrder and using a
+        'userProtoDetails.prototype.getMarks' instead:
+
+
+        // When we run our function, every instance of 'userProtoDetails' does not duplicate
+        our
+        getMarks() method since it's now part of the prototype and can't be copied:`,
+        code1: `function userProtoDetails(userName, area, m1, m2, m3) {
+          this.userName = userName;
+          this.area = area;
+          this.m1 = m1;
+          this.m2 = m2;
+          this.m3 = m3;
+}
+
+          userProtoDetails.prototype.getMarks = function() {
+  return this.m1 + this.m2 + this.m3;
+}
+
+          const userPro1 = new userProtoDetails("ram", "wgl", 90, 54, 76)
+          const userPro2 = new userProtoDetails("ravi", "hyd", 99, 54, 76)
+
+          console.log(userPro1.getMarks())
+          console.log(userPro2.getMarks())
+
+          console.log(userPro1.getMarks === userPro2.getMarks) // true`
+      },
+      {
+        text1: `// The prototype chain can be found under '__proto__' , which is an object in each
+        instance that points to the prototype it was created from.On the other hand, the
+        'prototype' property is found in every function created in JS.It’s the property of a
+        class constructor.
+
+        // __proto__: 'Object' shows us how JavaScript assigns userPro1 and userPro2 to an
+        object constructor — this is what allows us to access all the methods from the
+        assigned
+        prototype.Thus, both the getMarks() methods can be shared:
+        console.log(userPro1.__proto__)
+
+        // Prototypes are usually more memory-efficient and faster than creating many
+        classes.
+        Additionally, prototypes are useful in situations where you need to create objects
+        that
+        inherit from other objects, as JavaScript's prototype-based inheritance system
+        allows
+        for easy inheritance and modification.
+
+        //-----------------------
+        // inheritance in javascript
+        //-----------------------
+
+        // Prototype inheritance in javascript is the linking of prototypes of a parent
+        object
+        to a child object to share and utilize the properties of a parent class using a
+        child
+        class.
+
+        // Prototypes are hidden objects that are used to share the properties and methods
+        of a
+        parent class to child classes.`,
+        code1: `function Phone() {
+                  this.modalNumber = '';
+                  this.getModalNumber = function() {
+                  return this.modalNumber
+                }
+              }
+
+          function Samsung(modalNumber) {
+          this.modalNumber = modalNumber;
+          this.latestFeature = function() {
+          console.log("foldable smart phone")
+      }
+}
+
+          Samsung.prototype = new Phone;
+
+          const smObj = new Samsung("a123456")
+          console.log(smObj.getModalNumber())
+
+
+          // Example 2
+          // Using Object.create():
+          //...............
+          // Parent object
+          let animal = {
+          speak: function() {
+          console.log(this.sound);
+  }
+};
+
+          // Child object inheriting from the parent
+          let cat = Object.create(animal);
+          cat.sound = "Meow";
+
+          // Now, cat has access to the speak method from the animal object
+          cat.speak(); // Output: Meow
+
+
+          // Example 3
+          //--------------------
+          //Constructor Functions:
+          //--------------------
+          // Parent constructor function
+          function Animal(sound) {
+          this.sound = sound;
+}
+
+          // Adding a method to the parent's prototype
+          Animal.prototype.speak = function() {
+          console.log(this.sound);
+};
+
+          // Child constructor function
+          function Cat(sound) {
+          Animal.call(this, sound); // Call parent constructor
+}
+
+          // Inheriting from the parent's prototype
+          Cat.prototype = Object.create(Animal.prototype);
+          Cat.prototype.constructor = Cat; // Set correct constructor
+
+          // Creating a cat object
+          let myCat = new Cat("Meow");
+
+          // Now, myCat has access to the speak method inherited from Animal
+          myCat.speak(); // Output: Meow
+
+
+          // Ex
+          // Class Syntax (ES6):
+          //..................
+          // Parent class
+          class Animal {
+          constructor(sound) {
+          this.sound = sound;
+  }
+          speak() {
+          console.log(this.sound);
+  }
+}
+
+          // Child class inheriting from Animal
+          class Cat extends Animal {
+          constructor(sound) {
+          super(sound); // Call parent constructor
+  }
+}
+
+          // Creating a cat object
+          let myCat = new Cat("Meow");
+
+          // Now, myCat has access to the speak method inherited from Animal
+          myCat.speak(); // Output: Meow
+ `
+      },
+      {
+        text1: `// The Object.setPrototypeOf() method in JavaScript is a standard built-in object
+        which
+        sets the prototype (i.e., the internal[[Prototype]]property) of a specified object
+        to
+        another object or null.
+
+        // In JavaScript, Object.setPrototypeOf is a method used to set the prototype (i.e.,
+        the
+        internal[[Prototype]]property) of a specified object to another object or null.This
+        method allows you to dynamically change the inheritance chain of an object.`,
+        code1: ``
+      },
+      ]
+    },
+    {
+      id: 1,
       title: "Array destructuring",
       note: [
         {
@@ -5543,6 +7055,117 @@ Object
     },
     {
       id: 1,
+      title: "this",
+      note: [
+        {
+          text1: `In JavaScript, the <b>this</b> keyword refers to the context within which a function is executed. It represents the current execution context and provides a way to access the properties and methods of the current object.
+
+          In JavaScript, the <b>this</b> keyword always refers to an object. The thing about it is that the object it refers to will vary depending on how and where this is being called.
+    
+          The value of this depends on how a function is called:
+          
+          <b>1) Global Context:</b>
+          When used outside of any function, <b>this</b> refers to the global object. In a browser environment, the global object is <b>window</b>.
+          
+          
+          <b>2) Function Context:</b>
+          When used within a function, the value of <b>this</b> depends on how the function is called.
+          If the function is called as a method of an object, <b>this</b> refers to the object itself.
+          If the function is called as a standalone function, <b>this</b> refers to the global object (<b>window</b> in browsers) in non-strict mode, or it is <b>undefined</b> in strict mode.
+    
+          <b>A note about arrow functions:</b>
+          In arrow functions, JavaScript sets the this lexically. This means that the arrow function doesn't create its own execution context but inherits the this from the outer function where the arrow function is defined.
+    
+          In most cases, this means this will refer to the window object as well:
+    
+          <span style="color:red">const show = () => this</span>
+          console.log('arrow function this', show())
+
+          It's important to notice this because, for example, if we try to implement an arrow function to it as an object method, we won't be able to access the object through the this keyword:`,
+          code1: `      const person = {
+            name: 'Pedro',
+            surname: 'Sanchez',
+            sayName: () => this.name + ' ' + this.surname
+        }
+  
+        console.log(person.sayName());`
+        },
+        {
+          text1: `      3) Constructor Context:
+          When a function is used as a constructor (i.e., called with the 'new' keyword), 'this' refers to the newly created object instance.
+    
+          4) Event Handler Context:
+          When used in event handlers (e.g., in an event listener), this typically refers to the element that triggered the event.
+          
+          <b>A note about strict-mode:</b>
+          When using strict-mode, calling 'this' within a function will return undefined.
+          `,
+          code1: `      "use strict";
+
+          function show() {
+              console.log(this);
+          }
+          show();`
+        },
+        {
+          text1: `As a side comment, if you're not familiar with what strict-mode is, following the MDN docs:
+
+          JavaScript's strict mode is a way to opt in to a restricted variant of JavaScript, thereby implicitly opting-out of "sloppy mode". Strict mode isn't just a subset: it intentionally has different semantics from normal code.
+    
+          Strict mode makes several changes to regular JavaScript semantics:
+    
+          > Eliminates some JavaScript silent errors by changing them to throw errors.
+          > Fixes mistakes that make it difficult for JavaScript engines to perform optimizations: strict mode code can sometimes be made to run faster than identical code that's not strict mode.
+          > Prohibits some syntax likely to be defined in future versions of ECMAScript.
+          How to Use this in an Event Listener
+    
+          When using <b>this</b> in an event listener, this will refer to the DOM element that fired the event.`,
+          code1: `      document.getElementById('testBtn').addEventListener('click', function() {
+            console.log('this in a event', this);
+        })`
+        },
+        {
+          text1: `In our case, we added the event listener to a button element: <button id="testBtn">TEST</button>
+
+          And after clicking it, we get the following in our console:
+    
+          <b>'this' Methods (call, apply and bind):</b>
+          To complicate the subject a little more, javascript provides three native methods that can be used to manipulate the way the this keyword behaves. These methods are <b>call</b>, <b>apply</b> and <b>bind</b>. Let's see how they work.
+    
+          Here are some examples to illustrate the usage of <b>this</b>:`,
+          code1: `      // Global context
+          console.log(this === window); // true
+          
+          // Method context
+          const obj = {
+            name: 'Object',
+            greet() {
+              console.log('Hello, \${this.name}!');
+            }
+          };
+          obj.greet(); // Output: "Hello, Object!"
+          
+          // Constructor context
+          function Person(name) {
+            this.name = name;
+          }
+          const person1 = new Person('John');
+          console.log(person1.name); // Output: "John"
+          
+          // Event handler context (assuming button is an HTML button element)
+          const button = document.querySelector ('button');
+          button.addEventListener ('click', function() {
+            console.log(this); // Output: HTMLButtonElement
+          });`
+        },
+        {
+          text1: `Understanding the context of <b>this</b> is essential for working effectively with objects, constructors, and event handling in JavaScript. It allows developers to write more flexible and dynamic code by accessing and manipulating object properties within different execution contexts. However, it's important to be cautious when dealing with <b>this</b>, as its behavior can be affected by various factors such as function binding, arrow functions, and strict mode.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
       section: "CLASSES",
       title: "Class",
       note: [
@@ -5552,581 +7175,6 @@ Object
         },
       ]
     },
-    {
-      id: 1,
-      title: "Prototypes",
-      note: [{
-        text1: `// In JavaScript, every object has an internal property called [[Prototype]], which
-        is
-        essentially a reference to another object called its prototype. This prototype is a
-        fundamental concept in JavaScript's object-oriented programming model.
-
-        // Prototypes: JavaScript is a prototype-based language, which means that it uses
-        prototypes to inherit properties and methods from one object to another. In
-        JavaScript,
-        objects can be linked to other objects, forming a prototype chain. When a property
-        or
-        method is accessed on an object, the JavaScript engine first checks if that property
-        or
-        method exists on the object itself. If it does not, it will check the object's
-        prototype, and so on, until it reaches the end of the prototype chain. If the
-        property
-        or method is not found, it will return undefined.
-
-        // Here's a clear breakdown:
-
-        // Every object has a prototype: When you create an object in JavaScript, it
-        automatically gets a prototype. This prototype is a regular JavaScript object
-        itself,
-        and it can have its own properties and methods.
-
-        // The prototype chain: When you try to access a property or method on an object,
-        JavaScript first checks if that property or method exists on the object itself. If
-        it
-        doesn't find it, it looks at the object's prototype, and if it's not there, it
-        continues
-        up the prototype chain until it finds the property or method or reaches the end of
-        the
-        chain (where the prototype is null).
-
-        // both __proto__ and prototype are related to object inheritance, but they serve
-        different purposes.
-
-        // __proto__:
-        // ----------
-        // __proto__ is a property that exists on every object in JavaScript.
-        // It's a reference to the prototype object from which the current object inherits.
-        // When you access a property or method on an object, JavaScript first checks if
-        that
-        property or method exists directly on the object itself.If it doesn't, JavaScript
-        looks
-        at the object's __proto__ to find it.This process continues up the prototype chain
-        until
-        the property or method is found or until the end of the chain is reached(i.e., when
-        __proto__ becomes null).
-        // It's important to note that __proto__ is considered deprecated and should not be
-        used
-        for production code. Instead, you should use Object.getPrototypeOf() to get the
-        prototype of an object, and Object.setPrototypeOf() to set the prototype of an
-        object.
-
-        // prototype:
-        // ----------
-        // prototype is a property that exists on constructor functions in JavaScript.
-        // It's used to set up inheritance when you want to create objects using the new
-        keyword.
-        // When you create a constructor function and add properties or methods to its
-        prototype, those properties and methods become available to instances created using
-        that
-        constructor function.
-        // When you use the new keyword to create an instance of a constructor function, the
-        newly created object's __proto__ is set to the constructor function's prototype.
-        // In summary, __proto__ is a property that exists on every object and is used to
-        reference the prototype of the object, while prototype is a property that exists on
-        constructor functions and is used to set up inheritance for objects created using
-        those
-        constructor functions.
-
-        // Define a constructor function`,
-        code1: `// Define a constructor function
-        function Person(name, age) {
-            this.name = name;
-        this.age = age;
-}
-
-        // Add a method to the prototype of the Person constructor
-        Person.prototype.greet = function() {
-            console.log('Hello, my name is \${this.name} and I am \${this.age} years old.');
-};
-
-        // Create an instance of Person
-        const john = new Person('John', 30);
-
-        // Accessing properties directly on the object
-        console.log(john.name); // Output: John
-        console.log(john.age); // Output: 30
-
-        // Accessing method defined on the prototype
-        john.greet(); // Output: Hello, my name is John and I am 30 years old.
-
-        // Using __proto__
-        console.log(john.__proto__ === Person.prototype); // Output: true
-        console.log(Object.getPrototypeOf(john) === Person.prototype); // Output: true
-
-        // Changing prototype using __proto__ (not recommended)
-        const newPrototype = {
-            farewell: function() {
-            console.log('Goodbye, \${this.name}!');
-}
-};
-        john.__proto__ = newPrototype;
-
-        john.farewell(); // Output: Goodbye, John!
-
-
-
-
-
-        // Of course! Let's illustrate with an example:
-
-
-        // Define a constructor function
-        function Person(name, age) {
-            this.name = name;
-        this.age = age;
-}
-
-        // Add a method to the prototype of the Person constructor
-        Person.prototype.greet = function() {
-            console.log('Hello, my name is \${this.name} and I am \${this.age} years old.');
-};
-
-        // Create an instance of Person
-        const john = new Person('John', 30);
-
-        // Accessing properties directly on the object
-        console.log(john.name); // Output: John
-        console.log(john.age); // Output: 30
-
-        // Accessing method defined on the prototype
-        john.greet(); // Output: Hello, my name is John and I am 30 years old.
-
-        // Using __proto__
-        console.log(john.__proto__ === Person.prototype); // Output: true
-        console.log(Object.getPrototypeOf(john) === Person.prototype); // Output: true
-
-        // Changing prototype using __proto__ (not recommended)
-        const newPrototype = {
-            farewell: function() {
-            console.log('Goodbye, \${this.name}!');
-}
-};
-        john.__proto__ = newPrototype;
-
-        john.farewell(); // Output: Goodbye, John!`
-      },
-      {
-        text1: `// In this example:
-
-      // > We define a constructor function Person that takes name and age parameters and
-      sets
-      them as properties on the created object.
-      // > We add a greet method to the Person.prototype, which will be shared among all
-      instances of Person.
-      // > We create an instance of Person named john.
-      // > We access properties (name and age) directly on the john object, and the greet
-      method via the prototype chain.
-      // > We demonstrate that john.__proto__ points to Person.prototype.
-      // > We change the prototype of john using __proto__, but this method is not
-      recommended
-      for production code.
-      // > This example showcases how prototype is used to set up inheritance for objects
-      created with a constructor function and how __proto__ is used to reference the
-      prototype
-      of an object.
-      `,
-        code1: `//EX 2:---
-      // Define a constructor function for a Vehicle
-      function Vehicle(make, model) {
-          this.make = make;
-      this.model = model;
-}
-
-      // Add a method to the prototype of Vehicle
-      Vehicle.prototype.info = function() {
-          console.log('This is a \${this.make} \${this.model}.');
-};
-
-      // Create a Car constructor function that inherits from Vehicle
-      function Car(make, model, year) {
-          Vehicle.call(this, make, model); // Call the Vehicle constructor within the Car constructor
-      this.year = year;
-}
-
-      // Set up inheritance: Assign Vehicle's prototype to Car's prototype
-      Car.prototype = Object.create(Vehicle.prototype);
-      Car.prototype.constructor = Car; // Reset constructor property to Car
-
-      // Add a method to the prototype of Car
-      Car.prototype.start = function() {
-          console.log('Starting the \${this.make} \${this.model}...');
-};
-
-      // Create an instance of Car
-      const myCar = new Car('Toyota', 'Camry', 2022);
-
-      // Access methods defined on both Vehicle and Car prototypes
-      myCar.info(); // Output: This is a Toyota Camry.
-      myCar.start(); // Output: Starting the Toyota Camry...
-
-      // Demonstrating the prototype chain
-      console.log(myCar.__proto__ === Car.prototype); // Output: true
-      console.log(Car.prototype.__proto__ === Vehicle.prototype); // Output: true
-      console.log(Vehicle.prototype.__proto__ === Object.prototype); // Output: true`
-      }, {
-        text1: `// In this example:
-        // We define a 'constructor' function 'Vehicle' to represent a generic vehicle with
-        make
-        and model properties.
-        // We add an info method to the 'Vehicle.prototype' to display vehicle information.
-        // We define a 'constructor' function Car to represent a specific type of vehicle
-        that
-        inherits from Vehicle. It adds a year property.
-        // We set up inheritance by using Object.create() to link Car.prototype to
-        'Vehicle.prototype', thus allowing 'Car' instances to access methods defined on
-        Vehicle.
-        // We add a start method to the 'Car.prototype' to start the car.
-        // We create an instance of 'Car' named 'myCar' and demonstrate accessing methods
-        defined on both Vehicle and Car.
-        // Finally, we demonstrate the prototype chain, showing how myCar.__proto__ points
-        to
-        'Car.prototype', 'Car.prototype.__proto__' points to 'Vehicle.prototype', and
-        'Vehicle.prototype.__proto__' points to Object.prototype.
-
-        
-        //-----------------
-        // Function.prototype === Array.prototype and
-        Function.prototype.isPrototypeOf(Array.prototype) both are false
-        //----------------
-
-        // The reason why Function.prototype.isPrototypeOf(Array.prototype) returns false is
-        because Array.prototype is not directly descended from Function.prototype in the
-        prototype chain.
-
-        // In JavaScript, Array.prototype inherits from Object.prototype, not directly from
-        Function.prototype. The Function constructor function and its prototype properties
-        are
-        unrelated to Array.
-
-        // Let's clarify by looking at the prototype chain:
-
-        // javascript
-        // Copy code
-        // console.log(Object.getPrototypeOf(Array.prototype) === Function.prototype); //
-        Returns false
-        // console.log(Object.getPrototypeOf(Array.prototype) === Object.prototype); //
-        Returns
-        true
-        // This confirms that Array.prototype directly inherits from Object.prototype, not
-        from
-        Function.prototype.`,
-        code1: `function Student(name, age) {
-          this.name = name;
-      this.age = age;
-}
-      Student.prototype.prop = 'I am good to see you'
-
-      var stu1 = new Student("John", 50);
-      var stu2 = new Student("ram", 43);
-
-      Object.setPrototypeOf(stu1, {area: "wgl" })
-
-      console.log(Object.getPrototypeOf(stu2)) // {prop: 'I am good to see you'}
-      console.log(Object.getPrototypeOf(stu1)) // {area: 'wgl'}
-
-      console.log(stu1.__proto__) // {area: 'wgl'}
-      console.log(stu2.__proto__) // {prop: 'I am good to see you'}
-
-      console.log(Student.prototype === stu2.__proto__) // true
-      console.log(Student.prototype === stu1.__proto__) // false`
-      },
-      {
-        text1: `                                // '.prototype' is a special property that all functions have that contains a
-        reference
-        to an object.
-        // When a constructor is used to instantiate a new object, 'Student.prototype' is
-        set as
-        the prototype of the new object.
-        // All instances of that constructor (the objects it creates) can access the
-        properties
-        of 'Student.prototype'.
-
-        //--------------------------
-
-        // Every thing is an object in javascript. even thou all kind of data like Array,
-        String, Number, Boolean, Function, Set, Map they have they own prototype object with
-        usefull properties inside the prototype object these objects call __proto__
-
-        //Every datatype at the end inherite from one object that is called Object.prototype  `,
-        code1: `// array type / function type
-        // array prototype(or) function prototype -> object prototype -> null
-        // Ex:
-        let cust =[12, 4, 7]
-        // cust.__proto__ points to Array.prototype
-        // cust.__proto__ === Array.prototype // true
-        // Array.prototype.__proto__ points to Object.prototype
-        // Array.prototype.__proto__ === Object.prototype // true
-        // Arrray.prototype.__proto__.__proto__ points to null
-        // Object.prototype.__proto__ points to null
-
-        // Boolean.__proto__ points to Object.prototype
-        // Number.__proto__ === Boolean.__proto__ // true
-        // String.__proto__ points to Object.prototype
-
-        // All datatypes in javascript inheries from Object.prototype at the end
-        // Object.prototype.__proto__ points to null at the end
-        // Object.prototype.__proto__ === null // true
-        // this is end of the chain. This chain is called prototype chain
-        `
-      },
-      {
-        text1: `// Prototypal inheritance: Prototypal inheritance is the mechanism by which objects
-        can
-        inherit properties and methods from their prototype.If an object doesn't have a
-        property or method, JavaScript looks for it in its prototype, and if the prototype
-        doesn't have it, it looks in the prototype's prototype, and so on.
-
-        // Prototype inheritance in JavaScript is a way for objects to share properties and
-        methods with other objects.Each object has a hidden link to another object called
-        its
-        prototype.If a property or method is not found on the object itself, JavaScript
-        looks
-        for it in its prototype chain.This allows objects to inherit properties and methods
-        from their prototypes, creating a form of inheritance without classes.
-
-
-        //-----------------------
-        // Benifits of Prototype
-        //-----------------------
-
-        //------------------>
-        // They use less memory.
-        //------------------>
-
-        // case1 for the userDatails method logic is same if you console user objects every
-        object has getMarks function so it crates different memory location for
-
-
-        // When a method is defined using this.this.getMarks a new copy is created every
-        time a
-        new object is instantiated.Let's look at an example.
-
-        // In most Object Oriented programming languages a class has a constructor. A
-        constructor is a sort of initializing function that is called every time a new
-        instance
-        of the class is created.Usually the Constructor function name is defined using the
-        actual class name or the keyword constructor:
-
-        // If you add properties to 'this' inside the 'userDetails' class, all future
-        instances
-        of 'userDetails' will get its own copy of the properties and methods, which causes
-        redundancy.On a side note, using 'this' is great for accessing and manipulating
-        private
-        variables.But let's assume we are dealing with public variables.
-
-        // Each instance of 'userDetails' receives a duplicate copy of the getMarks()
-        method.
-        When the getMarks() method is duplicated in every instance, this can become
-        problematic
-        as it starts to affect the performance and memory of your app.`,
-        code1: `function userDetails(userName, area, m1, m2, m3) {
-          this.userName = userName;
-          this.area = area;
-          this.m1 = m1;
-          this.m2 = m2;
-          this.m3 = m3;
-          this.getMarks = function() {
-    return m1 + m2 + m3;
-  }
-}
-
-          const user1 = new userDetails("ram", "wgl", 15, 54, 76)
-          const user2 = new userDetails("ravi", "hyd", 65, 54, 76)
-
-          console.log(user1.getMarks())
-          console.log(user2.getMarks())
-
-          console.log(user1.getMarks === user2.getMarks) // false
-
-          // Further, we can see how both of the getMarks() methods are separate and maintain their own copy:`
-      },
-      {
-        text1: ` // Prototypes are the solution
-        // Here are some advantages of using prototype methods:
-
-        // 1) If you added a property to getMarks.prototype , then that property will be
-        shared
-        in all objects associated with the class , including all future objects created
-        using new
-        userProtoDetails.Sharing the property is different than duplicating.Instances can
-        borrow this method through the prototype chain, which will be discussed further.
-        // 2) Changing the property value in the methods inherited through the prototype
-        chain
-        will change all values in the associated objects.
-        // 3) In most cases, using 'prototype' or 'this' would be similar, but 'prototype'
-        allows you to save memory since there's only one instance of it, rather than its own
-        instance for each object.
-        // Let's use the same example above, except redacting this.callOrder and using a
-        'userProtoDetails.prototype.getMarks' instead:
-
-
-        // When we run our function, every instance of 'userProtoDetails' does not duplicate
-        our
-        getMarks() method since it's now part of the prototype and can't be copied:`,
-        code1: `function userProtoDetails(userName, area, m1, m2, m3) {
-          this.userName = userName;
-          this.area = area;
-          this.m1 = m1;
-          this.m2 = m2;
-          this.m3 = m3;
-}
-
-          userProtoDetails.prototype.getMarks = function() {
-  return this.m1 + this.m2 + this.m3;
-}
-
-          const userPro1 = new userProtoDetails("ram", "wgl", 90, 54, 76)
-          const userPro2 = new userProtoDetails("ravi", "hyd", 99, 54, 76)
-
-          console.log(userPro1.getMarks())
-          console.log(userPro2.getMarks())
-
-          console.log(userPro1.getMarks === userPro2.getMarks) // true`
-      },
-      {
-        text1: `// The prototype chain can be found under '__proto__' , which is an object in each
-        instance that points to the prototype it was created from.On the other hand, the
-        'prototype' property is found in every function created in JS.It’s the property of a
-        class constructor.
-
-        // __proto__: 'Object' shows us how JavaScript assigns userPro1 and userPro2 to an
-        object constructor — this is what allows us to access all the methods from the
-        assigned
-        prototype.Thus, both the getMarks() methods can be shared:
-        console.log(userPro1.__proto__)
-
-        // Prototypes are usually more memory-efficient and faster than creating many
-        classes.
-        Additionally, prototypes are useful in situations where you need to create objects
-        that
-        inherit from other objects, as JavaScript's prototype-based inheritance system
-        allows
-        for easy inheritance and modification.
-
-        //-----------------------
-        // inheritance in javascript
-        //-----------------------
-
-        // Prototype inheritance in javascript is the linking of prototypes of a parent
-        object
-        to a child object to share and utilize the properties of a parent class using a
-        child
-        class.
-
-        // Prototypes are hidden objects that are used to share the properties and methods
-        of a
-        parent class to child classes.`,
-        code1: `function Phone() {
-                  this.modalNumber = '';
-                  this.getModalNumber = function() {
-                  return this.modalNumber
-                }
-              }
-
-          function Samsung(modalNumber) {
-          this.modalNumber = modalNumber;
-          this.latestFeature = function() {
-          console.log("foldable smart phone")
-      }
-}
-
-          Samsung.prototype = new Phone;
-
-          const smObj = new Samsung("a123456")
-          console.log(smObj.getModalNumber())
-
-
-          // Example 2
-          // Using Object.create():
-          //...............
-          // Parent object
-          let animal = {
-          speak: function() {
-          console.log(this.sound);
-  }
-};
-
-          // Child object inheriting from the parent
-          let cat = Object.create(animal);
-          cat.sound = "Meow";
-
-          // Now, cat has access to the speak method from the animal object
-          cat.speak(); // Output: Meow
-
-
-          // Example 3
-          //--------------------
-          //Constructor Functions:
-          //--------------------
-          // Parent constructor function
-          function Animal(sound) {
-          this.sound = sound;
-}
-
-          // Adding a method to the parent's prototype
-          Animal.prototype.speak = function() {
-          console.log(this.sound);
-};
-
-          // Child constructor function
-          function Cat(sound) {
-          Animal.call(this, sound); // Call parent constructor
-}
-
-          // Inheriting from the parent's prototype
-          Cat.prototype = Object.create(Animal.prototype);
-          Cat.prototype.constructor = Cat; // Set correct constructor
-
-          // Creating a cat object
-          let myCat = new Cat("Meow");
-
-          // Now, myCat has access to the speak method inherited from Animal
-          myCat.speak(); // Output: Meow
-
-
-          // Ex
-          // Class Syntax (ES6):
-          //..................
-          // Parent class
-          class Animal {
-          constructor(sound) {
-          this.sound = sound;
-  }
-          speak() {
-          console.log(this.sound);
-  }
-}
-
-          // Child class inheriting from Animal
-          class Cat extends Animal {
-          constructor(sound) {
-          super(sound); // Call parent constructor
-  }
-}
-
-          // Creating a cat object
-          let myCat = new Cat("Meow");
-
-          // Now, myCat has access to the speak method inherited from Animal
-          myCat.speak(); // Output: Meow
- `
-      },
-      {
-        text1: `// The Object.setPrototypeOf() method in JavaScript is a standard built-in object
-        which
-        sets the prototype (i.e., the internal[[Prototype]]property) of a specified object
-        to
-        another object or null.
-
-        // In JavaScript, Object.setPrototypeOf is a method used to set the prototype (i.e.,
-        the
-        internal[[Prototype]]property) of a specified object to another object or null.This
-        method allows you to dynamically change the inheritance chain of an object.`,
-        code1: ``
-      },
-      ]
-    },
-
     {
       id: 1,
       title: "getter and setter",
@@ -6949,7 +7997,7 @@ The following redefines the <b>Circle</b> class by adding the <b>radius</b> gett
           <b>The in operator: check private fields exist</b>
           To check if an object has a private field inside a class, you use the <b>in</b>  operator:
           
-          // <span style="color:red">fieldName in objectName</span>
+          // <span style="color:red"> fieldName in objectName</span>
 
           For example, the following adds the <b>hasRadius()</b>  static method to the <b>Circle</b>  class that uses the in</b>  operator to check if the <b>circle</b>  object has the <b>#radius</b>  private field:`,
           code1: `class Circle {
@@ -7026,7 +8074,7 @@ The following redefines the <b>Circle</b> class by adding the <b>radius</b> gett
           
           <span style="color:grey">static #count = 0;</span>
           Second, increase the <b>#count</b> by one in the constructor:
-          <span style="color:grey">Circle.#count++;</span>
+          <span style="color:grey"> Circle.#count++;</span>
           Third, define a static method that returns the value of the <b>#count</b> private static field:
           <span style="color:grey">
           static getCount() {
@@ -7396,7 +8444,7 @@ console.log(p1 instanceof Person); // true
           
           let p1 = new Person('John');
           
-          console.log(Person[Symbol.hasInstance](p1)); // true`
+          console.log( Person[Symbol.hasInstance] (p1)); // true`
         },
         {
           text1: `Since the <b>Symbol.hasInstance</b> is defined on the Function prototype, it's automatically available by default in all functions and classes
@@ -7424,8 +8472,114 @@ console.log(p1 instanceof Person); // true
           code1: ``
         },
       ]
-    }
+    },
+    {
+      id: 1,
+      section: `PROMISES & ASYNC/AWAIT`,
+      title: "Promises",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise Chaining",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.all()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.race()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.any()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.allSettled()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.prototype.finally()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise Error Handling",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "async/await",
+      note: [
+        {
+          text1: `async and await are the keywords used to write the asynchronous code in a synchronous manner where the await keyword waits for the promise to be resolved or rejected and the async keyword is used to wrap all await keywords with a function.`,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Synchronous / Asynchronous",
+      note: [
+        {
+          text1: `<b> Synchronous</b>:
+           Synchronous means the code runs in a particular sequence of instructions given in the program. Each instruction waits for the previous instruction to complete its execution.
+           Instruction in synchronous code executes in a given sequence.
 
+           <b>Asynchronous</b>:
+           Asynchronous code execution allows to execution next instructions immediately and doesn't block the flow because of previous instructions.`,
+          code1: ``
+        }
+      ]
+    },
+   
 
   ]
 }
