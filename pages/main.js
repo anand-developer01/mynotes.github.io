@@ -1,27 +1,30 @@
 function mainDom(data) {
-    // console.log(data)
-    // header
     document.getElementById("header").innerHTML = navHeader
+
+    // let list = document.getElementById("myList");
+    let leftLinks = document.getElementById("myLinks");
+    // for (i = 0; i < javascriptData.javascriptNote.length; ++i) {
+    // }
+    let cardsContainer = document.getElementById("cards");
 
     data.map(el => {
         // left menu links
-        let leftLinks = document.getElementById("myLinks");
+        let leftMenuListDiv = document.createElement('div');
         let leftMenuD_FlexDiv = document.createElement('div');
- 
-        let leftMenu = el.section ?
-                `<div class="left-menu-list">
-                    <div style="background:#aca0a1; padding:3px;">${el.section}</div>
-                    <a href="#${el.title}">${el.title}</a>
-                </div>` : `
-                <div class="left-menu-list">
-                    <a href="#${el.title}">${el.title}</a>
-                </div>
-                `
-        leftMenuD_FlexDiv.innerHTML = leftMenu;
+        let a = document.createElement('a');
+        let linkText = document.createTextNode(el.title);
+
+        leftMenuD_FlexDiv.className = 'd-flex'
+        leftMenuD_FlexDiv.appendChild(leftMenuListDiv);
+
+        leftMenuListDiv.className = 'left-menu-list'
+        leftMenuListDiv.appendChild(a);
+
+        a.appendChild(linkText);
+        a.title = el.title;
+        a.href = `#${el.title}`;
         leftLinks.appendChild(leftMenuD_FlexDiv)
 
-        // main content 
-        let cardsContainer = document.getElementById("cards");
         let coreSnp = typeof el.note === "object" && el.note.map(k => (
             k.code1 ? 
             `<div>
