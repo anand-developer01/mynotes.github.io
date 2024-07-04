@@ -343,10 +343,6 @@
 
 
         SubjectList.Structures.map((en) => {
-
-            
-        const coreSnp = en.content.map(top => {
-
             // left menu links
             let leftMenuListDiv = document.createElement('div');
         let leftMenuD_FlexDiv = document.createElement('div');
@@ -363,9 +359,8 @@
         a.title = en.topic;
         a.href = `#${en.topic}`;
         leftLinks.appendChild(leftMenuD_FlexDiv)
-
-
-
+            
+        const coreSnp = en.content.map(top => {
             return `<div class="main-box">
                         <div class="notes-text">
                             <p class="eng_pad">
