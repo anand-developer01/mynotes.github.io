@@ -21,7 +21,7 @@
             font-size: 18px;
         }
 
-        .table-res {
+        /* .table-res {
             overflow-x: scroll;
         }
 
@@ -44,7 +44,7 @@
 
         .title {
             color: red;
-        }
+        } */
 
 
 
@@ -53,14 +53,22 @@
             padding: 0;
         }
 
-        .notes-text {
+        .main-box {
+            background-color: rgb(186, 241, 172);
+            padding:4px;
+        }
+        .main-box .notes-text {
             background-color: antiquewhite;
             text-align: left;
-            white-space: pre-wrap;
-            padding: 15px;
+            /* white-space: pre-wrap; */
+            padding: 5px;
+            margin: 2px;
             width: 100%;
-            word-wrap: break-word;
+            /* word-wrap: break-word; */
             display: inline-block;
+        }
+        .main-box .notes-text .eng_pad{
+            margin:0;
         }
 
         .left-menu-box {
@@ -244,7 +252,7 @@
         </ul>
     </nav>
 
-    <div class="">
+    <div class="container-fluid">
         <div class="row">
             <div class='col-lg-3 col-sm-12'>
                 <div class='left-menu-box'>
@@ -265,72 +273,125 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="main.js"></script>
-    <script src="./notes-data/english-notes.js"></script>
+    <script src="../notes-data/english-notes.js"></script>
     <script>
 
 
         let list = document.getElementById("myList");
         let leftLinks = document.getElementById("myLinks");
-        for (let i = 0; i < SubjectList.Structures.length; ++i) {
+        // for (let i = 0; i < SubjectList.Structures.length; ++i) {
 
-            let listDiv = document.createElement('div');
+        //     let listDiv = document.createElement('div');
 
-            let mainListDiv = document.createElement('div');
-            let contentDiv = document.createElement('p');
+        //     let mainListDiv = document.createElement('div');
+        //     let contentDiv = document.createElement('p');
 
-            mainListDiv.className = 'notes-text'
-            mainListDiv.id = `title${i}`
+        //     mainListDiv.className = 'notes-text'
+        //     mainListDiv.id = `title${i}`
 
-            let strongT = document.createElement('h3');
-            let pT = document.createElement('p');
+        //     let strongT = document.createElement('h3');
+        //     let pT = document.createElement('p');
 
-            strongT.textContent = SubjectList.Structures[i].topic;
-            pT.textContent = SubjectList.Structures[i].explain;
-            contentDiv.textContent = SubjectList.Structures[i].content;
+        //     strongT.textContent = SubjectList.Structures[i].topic;
+        //     pT.textContent = SubjectList.Structures[i].explain;
+        //     contentDiv.textContent = SubjectList.Structures[i].content;
 
-            // for (let j = 0; j < SubjectList.Structures[i].content.length; ++j) {
-            //     console.log(SubjectList.Structures[i].content[j].eng)
-            //     contentDiv.innerHTML = `<p>${j} ) ${SubjectList.Structures[i].content[j].eng}</p> <p>${SubjectList.Structures[i].content[j].tel}</p>`
-            // }
+        //     // for (let j = 0; j < SubjectList.Structures[i].content.length; ++j) {
+        //     //     console.log(SubjectList.Structures[i].content[j].eng)
+        //     //     contentDiv.innerHTML = `<p>${j} ) ${SubjectList.Structures[i].content[j].eng}</p> <p>${SubjectList.Structures[i].content[j].tel}</p>`
+        //     // }
 
             
 
-            listDiv.appendChild(strongT)
-            listDiv.appendChild(pT)
-            listDiv.appendChild(contentDiv)
+        //     listDiv.appendChild(strongT)
+        //     listDiv.appendChild(pT)
+        //     listDiv.appendChild(contentDiv)
 
-            let liT = document.createElement('li');
+        //     let liT = document.createElement('li');
 
 
 
-            let ulT = document.createElement('ul')
-            ulT.className = 'list-style-remove'
+        //     let ulT = document.createElement('ul')
+        //     ulT.className = 'list-style-remove'
 
-            liT.appendChild(listDiv)
-            ulT.appendChild(liT)
-            mainListDiv.appendChild(ulT)
+        //     liT.appendChild(listDiv)
+        //     ulT.appendChild(liT)
+        //     mainListDiv.appendChild(ulT)
 
-            list.appendChild(mainListDiv)
+        //     list.appendChild(mainListDiv)
 
+
+            // // left menu links
+            // let leftMenuListDiv = document.createElement('div');
+            // let leftMenuD_FlexDiv = document.createElement('div');
+            // let a = document.createElement('a');
+            // let linkText = document.createTextNode(SubjectList.Structures[i].topic);
+
+            // leftMenuD_FlexDiv.className = 'd-flex'
+            // leftMenuD_FlexDiv.appendChild(leftMenuListDiv);
+
+            // leftMenuListDiv.className = 'left-menu-list'
+            // leftMenuListDiv.appendChild(a);
+
+            // a.appendChild(linkText);
+            // a.title = SubjectList.Structures[i].topic;
+            // a.href = `#title${i}`;
+            // leftLinks.appendChild(leftMenuD_FlexDiv)
+
+        // }
+
+
+
+        SubjectList.Structures.map((en) => {
+
+            
+        const coreSnp = en.content.map(top => {
 
             // left menu links
             let leftMenuListDiv = document.createElement('div');
-            let leftMenuD_FlexDiv = document.createElement('div');
-            let a = document.createElement('a');
-            let linkText = document.createTextNode(SubjectList.Structures[i].topic);
+        let leftMenuD_FlexDiv = document.createElement('div');
+        let a = document.createElement('a');
+        let linkText = document.createTextNode(en.topic);
 
-            leftMenuD_FlexDiv.className = 'd-flex'
-            leftMenuD_FlexDiv.appendChild(leftMenuListDiv);
+        leftMenuD_FlexDiv.className = 'd-flex'
+        leftMenuD_FlexDiv.appendChild(leftMenuListDiv);
 
-            leftMenuListDiv.className = 'left-menu-list'
-            leftMenuListDiv.appendChild(a);
+        leftMenuListDiv.className = 'left-menu-list'
+        leftMenuListDiv.appendChild(a);
 
-            a.appendChild(linkText);
-            a.title = SubjectList.Structures[i].topic;
-            a.href = `#title${i}`;
-            leftLinks.appendChild(leftMenuD_FlexDiv)
+        a.appendChild(linkText);
+        a.title = en.topic;
+        a.href = `#${en.topic}`;
+        leftLinks.appendChild(leftMenuD_FlexDiv)
 
-        }
+
+
+            return `<div class="main-box">
+                        <div class="notes-text">
+                            <p class="eng_pad">
+                                ${top.eng}
+                            </p>
+                            <span>${top.tel}</span>
+                        </div>
+                    </div>`
+                }).join('')
+
+            const englishContent = `
+            <li class="li-main-box">
+                <div class="card-content">
+                    <strong id="${en.topic}">${en.topic}</strong>
+                        <div>
+                            <strong>${en.explain}</strong>    
+                        </div>
+                    <div>${coreSnp}</div>
+                </div>
+            </li>
+            `;
+           const card = document.createElement('ul');
+           card.className = 'list-style-remove';
+        card.innerHTML = englishContent;
+        list.appendChild(card);
+        })
     </script>
 </body>
 

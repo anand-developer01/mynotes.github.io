@@ -24,4 +24,5 @@ const navHeader = `
     <li><a href="#">redux</a></li>
     <li><a href="#">VS</a></li>
     <li><a href="./js-code-challenges.html">Code Challenges</a></li>
+    <li><a href="./english.html">English</a></li>
 </ul>`

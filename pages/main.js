@@ -41,7 +41,7 @@ function mainDom(data) {
                 ${k.text1}
             </p>
             </div>`
-        )) || []
+        )).join('') || []
 
         var innerContent = `
             <li class="li-main-box">

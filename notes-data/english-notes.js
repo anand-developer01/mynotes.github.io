@@ -1,4 +1,4 @@
-export const SubjectList = {
+const SubjectList = {
     Structures: [
         {
             id: 1,
