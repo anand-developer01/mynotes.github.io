@@ -2,6 +2,7 @@ const javascriptData = {
   javascriptNote: [
     {
       id: 1,
+      section: `JAVASCRIPT RUNTIME`,
       title: "JavaScript Event Loop",
       note: [
         {
@@ -194,8 +195,7 @@ The following declares the variable counter with the let keyword:`,
         console.log(result); // 👉 30`
         },
         {
-          text1: `
-          During the creation phase of the execution context, the JavaScript engine places the add() function declaration in the heap memory. To be precise, the JavaScript engine creates an object of the Function type and a function reference add that refers to the function object.
+          text1: `During the creation phase of the execution context, the JavaScript engine places the add() function declaration in the heap memory. To be precise, the JavaScript engine creates an object of the Function type and a function reference add that refers to the function object.
           
           Function expressions
           The following example changes the add from a regular function to a function expression:`,
@@ -757,11 +757,184 @@ For example, when you execute a recursive function that has no exit condition, t
     },
     {
       id: 1,
+      title: "lexical scope:",
+      note: [
+        {
+          text1: `A lexical scope in JavaScript means that a variable defined outside a function can be accessible inside another function defined after the variable declaration. But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
+          (or)
+  Lexical Scoping: A function scope's ability to access variables from the parent scope is known as lexical scope.
+          (or)
+  the inner functions have access to the variables and other resources of their parent scope.
+  
+  -The global scope is always the last scope of any JavaScript scope chain. In other words, the global scope is where all searches will end.
+  -An inner (child) scope has access to its parent (outer) scope, but an outer scope does not have access to its child scope.
+  
+  Note:
+  Variables created without a declaration keyword (var, let, or const) are always global, even if they are created inside a function.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
       title: "Callback queue",
       note: [
         {
           text1: ``,
           code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      section: "ADVANCED FUNCTIONS",
+      title: "Functions are First-Class Citizens",
+      note: [
+        {
+          text1: `A programming language is said to have First-class functions if functions in that language are treated like other variables. So the functions can be assigned to any other variable or passed as an argument or can be returned by another function.
+          JavaScript treats function as a first-class citizen. This means that functions are simply a value and are just another type of object.
+          
+          Functions are first-class citizens in JavaScript. In other words, you can treat functions like values of other types.
+
+          The following defines the <b>add()</b> function and assigns the function name to the variable <b>sum</b>:
+          `,
+          code1: `function add(a, b) {
+                    return a + b;
+                }
+        
+        let sum = add;
+        
+        // In the assignment statement, we don’t include the opening and closing parentheses at the end of the 'add' identifier. We also don’t execute the function but reference the function.
+
+        // By doing this, we can have two ways to execute the same function. For example, we can call it normally as follows:
+
+        let result = add(10, 20);
+        // Alternatively, we can all the 'add()' function via the 'sum' variable like this:
+
+        let result = sum(10,20);
+        `
+        },
+        {
+          text1: `<b>Passing a function to another function</b>
+          Because functions are values, you can pass a function as an argument into another function.
+
+The following declares the <b>average()</b> function that takes three arguments. The third argument is a function:
+          `,
+          code1: `function average(a, b, fn) {
+            return fn(a, b) / 2;
+        }
+        
+        // Now, you can pass the 'sum' function to the 'average()' function as follows:
+
+let result = average(10, 20, sum);
+
+// Put it all together:
+function add(a, b) {
+    return a + b;
+}
+
+let sum = add;
+
+function average(a, b, fn) {
+    return fn(a, b) / 2;
+}
+
+let result = average(10, 20, sum);
+
+console.log(result);
+// Output:
+// 15
+        `
+        },
+        {
+          text1: `<b>Returning functions from functions</b>
+          Since functions are values, you can return a function from another function.
+
+The following <b>compareBy()</b> function returns a function that compares two objects by a property:
+
+
+          `,
+          code1: `function compareBy(propertyName) {
+            return function (a, b) {
+              let x = a[propertyName],
+                y = b[propertyName];
+          
+              if (x > y) {
+                return 1;
+              } else if (x < y) {
+                return -1;
+              } else {
+                return 0;
+              }
+            };
+          }`
+        },
+        {
+          text1: `<b> More JavaScript Functions are First-Class Citizens example </b>
+          The following <b>convert()</b> function has two parameters. The first parameter is a function and the second one is the length that will be converted based on the first argument:
+
+          To convert <b>cm</b> to <b>in</b>, you can call the <b>convert()</b> function and pass the <b>cmToIn</b> function into the <b>convert()</b> functio
+
+          Similarly, to convert a length from inches to centimeters, you can pass the <b>inToCm</b> function into the <b>convert()</b> function, like this:
+          `,
+          code1: `function cmToIn(length) {
+            return length / 2.54;
+          }
+          
+          function inToCm(length) {
+            return length * 2.54;
+          }
+          
+          function convert(fn, length) {
+            return fn(length);
+          }
+          
+          let inches = convert(cmToIn, 10);
+          console.log(inches);
+          
+          let cm = convert(inToCm, 10);
+          console.log(cm);`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Higher-Order Function",
+      note: [
+        {
+          text1: `A function that receives another function as an argument or that returns a new function or both is called Higher-order function. Higher-order functions are only possible because of the First-class function.
+          
+          A higher order function is a function that takes one or more functions as arguments, or returns a function as its result.
+          `,
+          code1: `
+          const greet =  function(name){
+            return function(m){
+          
+                console.log('Hi!! \${name}, \${m}');
+            }
+        }
+        
+        const greet_message = greet('ABC');
+        greet_message("Welcome To GeeksForGeeks")
+
+        //--------------------------------
+
+          // Custom higher-order function: multiplyBy
+          const multiplyBy = (multiplier) => {
+            // Returned function takes a number and multiplies it by the multiplier
+            return (number) => {
+              return number * multiplier;
+            };
+          };
+          
+          // Create custom multiplier functions
+          const multiplyByTwo = multiplyBy(2);
+          const multiplyByFive = multiplyBy(5);
+          
+          // Use custom multiplier functions
+          console.log(multiplyByTwo(3));   // Output: 6 (3 * 2)
+          console.log(multiplyByFive(4));  // Output: 20 (4 * 5)
+          `
         },
       ]
     },
@@ -1645,30 +1818,42 @@ myFunction();
           text1: `Global variables can be made local (private) with closures.
           Closure in JavaScript is a form of lexical scoping used to preserve variables from the outer scope of a function in the inner scope of a function.
 
+In JavaScript, a closure is a feature that allows a function to remember and access its lexical scope even when that function is executed outside that lexical scope. In simpler terms, a closure gives you access to an outer function's scope from an inner function even after the outer function has finished executing.
+
+A closure is a function that has access to the variables and parameters of its outer function, even after the outer function has returned. This is possible because the inner function retains a reference to the scope of the outer function, even after the outer function has been executed.
+
           In other words, closure is created when a child function keep the environment of the parent scope even after the parent function has already executed 
 
           Variables created without a declaration keyword <b>(var, let, or const)</b> are always global, even if they are created inside a function.
           In JavaScript, a closure is created when a function is defined within another function, allowing the inner function to access variables from the outer (enclosing) function's scope. Closures have access to the outer function's variables, parameters, and even the outer function's this context. This provides a way to create private variables, maintain state, and create functions with behavior that depends on their lexical environment.
 
           Here are a few examples of closures in JavaScript:`,
-          code1: `Example 1: Basic Closure
-
-          function outerFunction() {
-              let outerVariable = "I am from the outer function";
-          
-              function innerFunction() {
-                  console.log(outerVariable);
-              }
-          
-              return innerFunction;
+          code1: `function outerFunction() {
+            var outerVariable = 'I am from outerFunction';
+            
+            function innerFunction() {
+              console.log(outerVariable); // innerFunction has access to outerVariable
+            }
+            
+            return innerFunction; // Return the inner function
           }
-
-          const closureFunction = outerFunction();
-closureFunction(); // Outputs: "I am from the outer function"
+          
+          var inner = outerFunction(); // inner now holds a reference to innerFunction
+          inner(); // When inner is executed, it still has access to outerVariable through closure
           `
         },
         {
-          text1: `In this example, innerFunction is a closure because it is defined inside outerFunction and has access to outerVariable.`,
+          text1: ` In above example, <b>innerFunction</b> has access to the <b>outerVariable</b> even though it's declared in the <b>outerFunction</b>, and <b>outerFunction</b> has already finished executing. This is possible because of closure.
+
+          <b>Lexical Scope:</b> In JavaScript, variables defined outside of a function are accessible inside the function. This is called lexical scope.
+          
+          <b>Inner Functions:</b> Functions defined inside another function are called inner functions. These inner functions have access to the variables declared in the outer function, as well as to the global scope.
+          
+          <b>Closure:</b> When an inner function is returned from the outer function and survives beyond the life of the outer function, it maintains access to the variables and parameters of that outer function, even though the outer function has completed execution. This phenomenon is called closure.`,
+          code1: ``
+        },
+        {
+          text1: ``,
           code1: `
           // Example 2: Private Variables
 
@@ -1842,7 +2027,226 @@ closureFunction(); // Outputs: "I am from the outer function"
           3
           // Note: It may be slightly difficult to get the concept of closure at once but try experimenting with closure in different scenarios like for creating getter/setter, callbacks, and so on. `
         },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">use case of Closure </span>
+          In this code snippet, you're using <b>setTimeout</b> inside a loop to create three alerts, each displaying the value of i. However, due to the asynchronous nature of <b>setTimeout</b>, the alerts won't display as you might expect.
 
+          Here's what happens:
+          
+          The loop starts, and i is initialized to 0.
+          The first <b>setTimeout</b> is called with a delay of 1000 milliseconds. Since i is 0, the alert function is created to alert 0.
+          The loop continues, and i becomes 1.
+          The second <b>setTimeout</b> is called with a delay of 1001 milliseconds. Now, the alert function captures the current value of i, which is 1.
+          The loop continues, and i becomes 2.
+          The third <b>setTimeout</b> is called with a delay of 1002 milliseconds. Again, the alert function captures the current value of i, which is 2.
+          By the time the alerts are triggered (after the specified delays), the value of i has already been updated to 3 due to the loop completing. Therefore, all three alerts display 3.`,
+          code1: `for (var i = 0; i < 3; i++) {
+            setTimeout(function() { alert(i); }, 1000 + i);
+          }
+          
+          // If you want each alert to display the corresponding value of i (0, 1, 2) after the specified delays, you need to create a closure to capture the current value of i at each iteration. You can achieve this by using an IIFE (Immediately Invoked Function Expression) like this:
+
+          for (var i = 0; i < 3; i++) {
+            setTimeout(function(i_local) { 
+              return function() { console.log(i_local); } 
+            }(i), 1000 + i);
+          }
+          
+          // -- or --
+          
+          for (var i = 0; i < 3; i++) {
+            (function (i) {
+              setTimeout(function() { console.log(i); }, 1000 + i);
+            })(i);
+          }
+          `,
+        },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">Encapsulation and data privacy</span>
+          Encapsulation involves bundling data and methods that operate on that data within a single unit, typically a class or a function. It promotes the idea of hiding the internal state of an object and exposing only the necessary functionalities to interact with that object.
+
+          Closures allow you to create private variables and functions within a scope. This means that you can encapsulate certain data and functionality, preventing them from being accessed or modified from outside the closure. This is particularly useful when you want to hide implementation details and expose only a limited interface to other parts of your code.
+        
+          In Below example, we have a <b>createBook</b> function that takes a <b>title</b> and an <b>author</b> as arguments and returns an object with four methods: <b>getTitle</b>, <b>getAuthor</b>, <b>setTitle</b>, and <b>setAuthor</b>. These methods allow us to retrieve or update the values of the <b>_title</b> and <b>_author</b> variables, which are private to the <b>createBook</b> function and not accessible outside of it.
+          `,
+          code1: `function createBook(title, author) {
+            let _title = title; // Private variable
+            let _author = author; // Private variable
+            return {
+              getTitle: function() {
+                return _title;
+              },
+              getAuthor: function() {
+                return _author;
+              },
+              setTitle: function(newTitle) {
+                _title = newTitle;
+              },
+              setAuthor: function(newAuthor) {
+                _author = newAuthor;
+              }
+            }
+          }
+          
+          const book1 = createBook('Clean Code', 'Robert Cecil Martin');
+          console.log(book1.getTitle()); // 'Clean Code'
+          console.log(book1.getAuthor()); // 'Robert Cecil Martin'
+          book1.setTitle('Code Complete');
+          console.log(book1.getTitle()); // 'Code Complete'`,
+        },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">Persistent state / State Retention</span>
+          Closures allow functions to retain their state even after they have finished executing. This means that variables inside a closure will still be accessible when the closure is invoked later on. This can be particularly useful when dealing with event handlers or asynchronous operations.          
+          <u>Ex: 1---</u>
+          In Below example, the <b>createTimer</b> function creates a closure that increments the <b>seconds</b> variable every second using <b>setInterval</b>. The closure retains the value of <b>seconds</b> even after the <b>createTimer</b> function has finished executing. This allows the timer to continue running and displaying the elapsed time.
+          <u>Ex: 2---</u>
+          In Below example, the <b>createCounter</b> function returns a function that increments and returns the value of the <b>count</b> variable each time it is called. Because the returned function is a closure, it keeps access to the <b>count</b> variable even after the <b>createCounter</b> function has returned, allowing it to maintain states across multiple function calls.
+          `,
+          code1: ` // Ex: 1---
+          function createTimer() {
+            let seconds = 0;
+          
+            setInterval(() => {
+              seconds++;
+              console.log('Elapsed time: \${seconds} seconds');
+            }, 1000);
+          }
+          
+          const timer = createTimer(); // Starts the timer
+
+          // Ex: 2---
+          function createCounter() {
+            let count = 0;
+            return function() {
+              count += 1;
+              return count;
+            }
+          }
+          
+          const counter1 = createCounter();
+          const counter2 = createCounter();
+          const counter3 = createCounter();
+          
+          console.log("counter1", counter1()); // 1
+          console.log("counter1", counter1()); // 2
+          console.log("counter2", counter2()); // 1
+          console.log("counter2", counter2()); // 2
+          console.log("counter3", counter3()); // 1
+          console.log("counter3", counter3()); // 2
+          console.log("counter3", counter3()); // 3`,
+        },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">Memoization </span> 
+          Closures can also be used for memoization, which is a technique to optimize the performance of functions by caching their results. By caching the results of expensive calculations, you can avoid redundant computations and improve the overall performance of your code.
+          
+          Memorization is a technique that involves storing the results of expensive or time-consuming calculations in a cache or lookup table so that they can be quickly retrieved the next time the same calculation is needed. It can greatly improve the performance of a function or algorithm, especially if it is called multiple times with the same arguments.
+          
+          // Ex : 1--
+          In the example above, the <b>memoizedAdd</b> function returns an inner function that calculates the sum of two numbers. The results of previous calculations are stored in the <b>cache</b> object. Before performing a new calculation, the inner function checks if the result for the given input parameters already exists in the cache. If it does, it returns the cached result instead of recomputing it.
+          `,
+          code1: `
+          // Ex: 1--
+          function memoizedAdd() {
+            const cache = {};
+            
+            return function(x, y) {
+              const key = '\${x}-\${y}';
+              
+              if (cache[key]) {
+                return cache[key];
+              }
+              
+              const result = x + y;
+              cache[key] = result;
+              
+              return result;
+            }
+          }
+          
+          const add = memoizedAdd();
+          console.log(add(2, 3)); // Output: 5
+          console.log(add(2, 3)); // Output: 5 (cached result)
+
+          // Ex: 2--
+          function createFibonacciGenerator() {
+            const cache = {};
+          
+            return function fibonacci(n) {
+              if (n in cache) {
+                return cache[n];
+              } else {
+                let a = 0, b = 1, c;
+                for (let i = 0; i < n; i++) {
+                  c = a + b;
+                  a = b;
+                  b = c;
+                }
+                cache[n] = a;
+                return a;
+              }
+            }
+          }
+          
+          const fibonacciGenerator = createFibonacciGenerator();
+          console.log(fibonacciGenerator(10)); // 55
+          console.log(fibonacciGenerator(10)); // 55 (cached result)
+
+          `,
+        },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">Event handlers </span> 
+          Closures are commonly used in event handlers to preserve the state of variables. When you attach an event handler to an HTML element, you often need to access the element's properties or other variables within the event handler.  Closures allow you to do this by capturing the variables in the lexical environment at the time the event handler is defined.`,
+          code1: `
+          function createButton() {
+            const button = document.createElement('button');
+            button.innerText = 'Click me';
+            
+            let count = 0;
+            
+            button.addEventListener('click', function() {
+              count++;
+              console.log('Button clicked \${count} times');
+            });
+            
+            return button;
+          }
+          
+          const button = createButton();
+          document.body.appendChild(button);
+          `
+        },
+        {
+          text1: `<span style="color:#0987ac; font-size:22px;">asynchronous operations </span>
+          JavaScript closures are not only useful for encapsulating data and creating private variables, but they are also powerful tools for handling asynchronous operations. In this section, we will explore how closures can be used to manage asynchronous tasks in JavaScript.
+
+          When working with asynchronous operations, such as making API requests or fetching data from a database, it is common to encounter situations where you need to handle the result of the operation once it completes.  Closures can help you manage this by capturing the state of variables at the time the asynchronous operation is initiated.`,
+          code1: `function fetchData(url) {
+            return new Promise((resolve, reject) => {
+              // Simulating an asynchronous API request
+              setTimeout(() => {
+                const data = { name: "John", age: 30 };
+                resolve(data);
+              }, 2000);
+            });
+          }
+          
+          function processData() {
+            // Variable defined outside the closure
+            let processedData = null;
+          
+            fetchData("https://api.example.com/data")
+              .then((data) => {
+                processedData = data;
+                // Closure captures the state of processedData
+                console.log("Data processed:", processedData);
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          }
+          
+          processData();`
+        }
       ]
     },
     {
@@ -1888,20 +2292,3432 @@ closureFunction(); // Outputs: "I am from the outer function"
     },
     {
       id: 1,
-      title: "lexical scope:",
+      title: "call() method",
       note: [
         {
-          text1: `A lexical scope in JavaScript means that a variable defined outside a function can be accessible inside another function defined after the variable declaration. But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
-          (or)
-  Lexical Scoping: A function scope's ability to access variables from the parent scope is known as lexical scope.
-          (or)
-  the inner functions have access to the variables and other resources of their parent scope.
+          text1: `The call() method calls a function by passing this and specified values as arguments.
+
+          The syntax of the call() method is:
+    
+          func.call(thisArg, arg1, ... argN)
+   
+          The call() method can take two parameters:
+    
+          <b>thisArg</b> - The thisArg is the object that the this object references inside the function func (or) The value to be passed as the this parameter when the function is called..
+          <b>arg1</b>, ... argN (optional) - Arguments for the function func.
+
+          In JavaScript, the call() method is a built-in method that is used to invoke a function with a specified this value and individual arguments provided as separate arguments. It allows you to call a function and explicitly set the context (the value of this) for that function, as well as pass arguments one by one.`,
+          code1: `function sayHello() {
+            console.log('Hello, \${this.name}!');
+        }
   
-  -The global scope is always the last scope of any JavaScript scope chain. In other words, the global scope is where all searches will end.
-  -An inner (child) scope has access to its parent (outer) scope, but an outer scope does not have access to its child scope.
+        const person = {
+            name: 'John'
+        };
   
-  Note:
-  Variables created without a declaration keyword (var, let, or const) are always global, even if they are created inside a function.`,
+        sayHello.call(person); // Outputs: "Hello, John!"
+        // In this example, sayHello.call(person) calls the 'sayHello' function with person as the value of this, so within the function, this.name refers to John.
+        
+        //----------
+
+        // You can also use call() to borrow methods from one object and apply them to another:
+
+      const person1 = {
+          firstName: 'John',
+          lastName: 'Doe',
+          getFullName: function() {
+              return this.firstName + ' ' + this.lastName;
+          }
+      };
+
+      const person2 = {
+          firstName: 'Jane',
+          lastName: 'Doe'
+      };
+
+      console.log(person1.getFullName.call(person2)); // Outputs: "Jane Doe"
+
+      // In this example, person1.getFullName.call(person2) borrows the 'getFullName' method from person1 and applies it to person2, effectively setting this inside 'getFullName' to refer to person2.
+        `
+        },
+        {
+          text1: `The call() method is one of several methods (including apply() and bind()) that allow you to control the value of this when invoking functions in JavaScript.
+          Using the JavaScript call() method for function borrowing
+          `,
+          code1: ` 
+          // Using the JavaScript call() method for function borrowing
+          
+          const emp = {
+            empDetails(tax) {
+              console.log(this)
+              const taxd = this.salary * tax / 1000
+              return '\${this.firstName} \${this.lastName}, \${taxd} salary tax deduction'
+            }
+          };
+    
+          const empName1 = {
+            firstName: 'suman',
+            lastName: 'kumar',
+            salary: 50000
+          };
+    
+          const empName2 = {
+            firstName: 'ramesh',
+            lastName: 'pavan',
+            salary: 80000
+          };
+    
+          console.log( emp.empDetails.call (empName1, 5))
+          console.log( emp.empDetails.call (empName2, 5))
+          
+    
+          // Ex :2
+          // -----
+          //Using the JavaScript call() method to chain constructors for an object
+    
+          function Box(height, width) {
+            this.height = height;
+            this.width = width;
+          }
+    
+          const ob1 = new Box(3, 6)
+          console.log(ob1)
+    
+          function Widget(height, width, color) {
+            Box.call(this, height, width)
+            this.color = color;
+          }
+    
+          const wid = new Widget('red', 100, 200)
+          console.log(wid)
+
+    
+          // Ex :3
+          //-------
+    
+          const person = {
+            firstName: "John",
+            lastName: "Doe",
+            id: 5566,
+            myFunction: function() {
+              console.log('\${this.firstName} \${this.lastName}')
+            }
+          };
+          
+          // const runFun = person.myFunction.bind(person)
+          
+          function sum(a, b) {
+            console.log(this)
+            this.myFunction();
+            return a + b;
+          }
+          
+          const ob = {
+            Fname: 'mks',
+            maFun: () => {
+              const res = sum.call(person, 4, 5)
+              return res
+            }
+          }
+          console.log(ob.maFun())`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+
+      ]
+    },
+    {
+      id: 1,
+      title: "apply() method",
+      note: [
+        {
+          text1: `The apply() method calls the specified function with a given <b>'this</b> value, and arguments provided as an array  
+          or  
+          The apply() method invokes a function with a given 'this' value and arguments provided as an array.
+    
+          The call() method takes arguments separately.
+          The apply() method takes arguments as an array.
+    
+          The apply() method in JavaScript is a built-in method that allows you to call a function with a specified this value and an array or array-like object of arguments. It is similar to the call() method, but instead of passing arguments one by one, you can pass them as an array.
+    
+          => Using the apply() method to append an array to another
+          => The apply() method allows you to append elements of an array to another:
+
+          In this example, the apply() method modifies the original array arr. Note that the Array.prototype.concat() method also provides the same result except that it returns the new array instead of modifying the original array.
+          
+          The syntax for the apply() method is as follows:
+
+          <span style="color:red"> functionName.apply(thisValue, [arg1, arg2, ...]);</span>
+
+          <b>functionName</b>: The function to be called.
+          <b>thisValue</b>: The value to be passed as the this parameter when the function is called.
+          <b>[arg1, arg2, ...]</b>: An array or array-like object containing the arguments to be passed to the function.
+          `,
+          code1: `      function sayHello(greeting, punctuation) {
+            console.log('\${greeting}, \${this.name} \${punctuation}');
+        }
+  
+        const person = {
+            name: 'John'
+        };
+  
+        sayHello.apply(person, ['Hi', '!']); // Outputs: "Hi, John!"
+        // In this example, sayHello.apply(person, ['Hi', '!']) calls the sayHello function with person as the value of this and the array ['Hi', '!'] as the arguments, resulting in the message "Hi, John!" being logged to the console.`
+        },
+        {
+          text1: `      apply() is particularly useful when you have a function that accepts a variable number of arguments or when you want to pass an array of arguments dynamically.
+
+          It's worth noting that in modern JavaScript, you can often achieve the same result using the spread operator (...) to pass an array of arguments directly to a function:
+ 
+          <span style="color:red">sayHello.call(person, ...['Hi', '!']);</span>
+          Both <b>apply()</b> and <b>call()</b> are similar, but the choice between them depends on how the arguments are structured: 
+          apply() takes an array, while call() takes individual arguments. If you have an array of arguments, apply() can be more convenient.`,
+          code1: `const person = {
+            firstName: 'John',
+            lastName: 'Doe',
+            fullName() {
+              return '-second \${this.firstName} \${this.lastName}'
+            }
+          }
+    
+          function greet(greeting, message) {
+            console.log(this.fullName)
+            return '\${greeting} \${this.firstName}. \${message}';
+          }
+    
+          let result = greet.apply(person, ["-Hi how are you", "Please come to office"])
+          let result1 = person.fullName.apply(person, ["-Hi how are you", "Please come to office"])
+          console.log("----------with out apply-----------")
+          console.log(greet('Hello', 'How are you?'))
+          console.log("--------------with apply-------------------- ")
+          console.log(result);
+          console.log(result1);
+    
+          // Ex:
+          const computer = {
+            name: 'mac',
+            isOs: false,
+            trunOn() {
+              return 'system name \${this.name}'
+            }
+          }
+    
+          console.log(computer.trunOn())
+    
+          const server = {
+            name: 'windows',
+            isOs: false,
+          }
+    
+          let res1 = computer.trunOn.apply(server)
+          console.log(res1)
+
+          // ----------------------->
+    
+          const userFull = {
+            fullName: 'sharath kumer',
+            job: 'manager',
+            area: 'wgl',
+            age: 40,
+            forVote(greet, message) {
+              let elgVote = this.age > 18 ? '\${greet} \${this.fullName} elgable for vote, \${message}' : 'Not elgable for vote'
+              return elgVote
+            }
+          }
+          
+          const user2 = {
+            fullName: 'vamshi',
+            job: 'PA',
+            age: 70
+          }
+          console.log(userFull.forVote())
+          console.log(userFull.forVote.apply(user2, ['hi', 'congratulations']))
+    
+          // ----------------->
+    
+          function greet(greeting, lang) {
+            console.log(lang);
+            console.log('\${greeting}, I am \${this.name} and I am \${this.age} years old');
+          }
+          const john = {
+            name: 'John',
+            age: 24,
+          };
+          const jane = {
+            name: 'Jane',
+            age: 22,
+          };
+          // Hi, I am John and I am 24 years old
+          greet.apply(john, ['Hi', 'en']);
+          // Hi, I am Jane and I am 22 years old
+          greet.apply(jane, ['Hola', 'es']);
+    `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Bind() method",
+      note: [
+        {
+          text1: `Bind() allows you to create a new function from an existing function, change the new function's this context, and provide any arguments you want the new function to be called with. The arguments provided to bind will precede any arguments that are passed to the new function when it is called.
+
+          does not immediately invoke the function
+    
+          returns a new function that can be invoked later in the code, while maintaining the desired context binding — this is useful for passing functions into other functions, like setTimeout(), which will invoke it later and won't necessarily bind the invoked function to the correct object without being coerced
+    
+          first parameter is the context object
+    
+          all other parameters are individually listed, like with call
+    
+          In JavaScript, the <b>bind()</b> method is used to create a new function that, when called, has its <b>this</b> keyword set to a specific value. It allows you to explicitly specify the value of <b>this</b> when a function is executed. The <b>bind()</b> method does not invoke the function immediately; instead, it returns a new function with the specified <b>this</b> value and, optionally, initial arguments.
+    
+          // The bind() method creates a new function, when invoked, has the this sets to a provided value.
+          // The bind() method allows an object to borrow a method from another object without making a copy of that method. This is known as function borrowing in JavaScript.`,
+          code1: `const originalFunction = function() {
+            console.log(this.name);
+          };
+
+          const obj = { name: 'Example' };
+
+          // Using bind to create a new function with a specific 'this' value
+          const boundFunction = originalFunction.bind(obj);
+
+          // Calling the new function
+          boundFunction(); // Output: Example`
+        },
+        {
+          text1: `          In this example, originalFunction is a simple function that logs the name property of whatever object it is called on. We then use bind() to create a new function boundFunction where this is explicitly set to the obj object. When we call boundFunction(), it prints the name property of obj.
+
+          bind() is particularly useful in scenarios where you want to ensure that a function is always called with a specific context, regardless of how it is later used or referenced.
+
+          Note: The bind() method was introduced in ECMAScript 5 (ES5), so it may not be available in very old browsers. If you need to support such browsers, you may want to consider using a polyfill or alternative methods for achieving similar behavior.`,
+          code1: `let person = {
+            name: 'John Doe',
+            getName: function() {
+              console.log(this)
+              console.log(this.name);
+            }
+          };
+          // person.getName()
+          const f = person.getName.bind(person)
+          setTimeout(f, 2000)
+          
+          // The this inside the setTimeout() function is set to the global object in non-strict mode and undefined in the strict mode.
+          // setTimeout(f, 0)
+
+          ------------------->
+          // Using bind() to borrow methods from a different object
+          const runner = {
+            name: 'Runner',
+            run: function(speed) {
+              console.log(' \${this.name} runs at \${speed}');
+            }
+          };
+
+          const flyer = {
+            name: 'Flyer',
+            fly: function() {
+              console.log(' \${this.name} flys at \${speed}');
+            }
+          };
+
+          const checkFR = runner.run.bind(flyer, 40);
+          checkFR();
+
+          -------------------->
+          const car = {
+            brand: 'Honda',
+            getBrand() {
+              return this.brand;
+            }
+          };
+          
+          console.log(car.getBrand());
+          const getBrandName = car.getBrand;
+          console.log('getBrandName = car.getBrand = ', getBrandName());
+
+          //You get undefined instead of "Honda" because when you call a method without specifying its object, JavaScript sets this to the global object in non-strict mode and undefined in the strict mode.
+          
+          //To fix this issue, you use the bind() method of the Function.prototype object. The bind() method creates a new function whose the this keyword is set to a specified value.
+
+          const getBrandName1 = car.getBrand.bind(car);
+          console.log(getBrandName1());
+          `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Callback",
+      note: [
+        {
+          text1: `In JavaScript, a callback function is a function that is passed as an argument to another function and is executed after the completion of some asynchronous operation or at a later time. 
+      
+          Callbacks are a fundamental concept in JavaScript, especially in scenarios like event handling, asynchronous operations, and dealing with functions that take time to complete, such as fetching data from a server.
+    
+          We need callback functions because many JavaScript actions are asynchronous, which means they don't really stop the program (or a function) from running until they're completed, as you're probably used to. Instead, it will execute in the background while the rest of the code runs.
+    
+          when we have a function that might take a long time to complete, oftentimes we provide a callback function. This function encapsulates the code we would like to run at a later time when the blocking action (e.g a network call) has been resolved. This allows us to return control to the JS engine and defer the rest of the execution until after the call-stack has been cleared. This is the concept of asynchrony in JavaScript.
+          
+          Here's a simple example of a callback function:`,
+          code1: `      function fetchData(callback) {
+            // Simulating an asynchronous operation (e.g., fetching data from a server)
+            setTimeout(function() {
+              const data = "This is the fetched data";
+              // Calling the callback function and passing the fetched data as an argument
+              callback(data);
+            }, 2000); // Simulating a 2-second delay
+          }
+          
+          function handleData(data) {
+            console.log("Handling data:", data);
+          }`
+        },
+        {
+          text1: `// Calling fetchData and passing handleData as a callback function
+          fetchData(handleData);
+          In this example, fetchData is a function that simulates an asynchronous operation with a 2-second delay. It takes a callback function (handleData) as an argument and calls it with the fetched data after the operation is complete.
+          
+          Callback functions are crucial in scenarios where you want to ensure that certain code runs only after a specific operation is finished, especially when dealing with asynchronous tasks like AJAX requests, file I/O, or timers.
+          
+          It's worth noting that with the introduction of Promises and async/await in JavaScript, there are alternative ways to handle asynchronous operations that often result in more readable and maintainable code. However, understanding callbacks remains important as they are still widely used in JavaScript development.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      section: "Array Methods",
+      title: "push()",
+      note: [
+        {
+          text1: `The push() method adds zero or more elements to the end of the array.`,
+          code1: `let city = ["New York", "Madrid", "Kathmandu"];
+
+          // add "London" to the array
+          city.push("London");
+          console.log(city);
+          // Output: [ 'New York', 'Madrid', 'Kathmandu', 'London' ]
+          
+          // The syntax of the push() method is:
+          arr.push(element1, element2, ..., elementN)
+
+          // push() Parameters
+          // The push() method takes in an arbitrary number of elements to add to the array.`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "unshift()",
+      note: [
+        {
+          text1: ` In JavaScript, you use the <b>unshift()</b> method to add one or more elements to the beginning of an array and it returns the array's length after the new elements have been added.
+
+          If we have an array of countries and want to add a country before <b>Nigeria</b> which is currently at the first index 0, we can do so with the <b>unshift()</b> method, as shown below:`,
+          code1: `const countries = ["Nigeria", "Ghana", "Rwanda"];
+          countries.unshift("Kenya");
+          console.log(countries); // ["Kenya","Nigeria","Ghana","Rwanda"]
+          
+          // As we said, we can also add more than one element using the unshift() method:
+          
+          const countries2 = ["Nigeria", "Ghana", "Rwanda"];
+          countries2.unshift("South Africa", "Mali", "Kenya");
+          console.log(countries2); // ["South Africa","Mali","Kenya","Nigeria","Ghana","Rwanda"]
+          
+          // In our explanation of the unshift() method, we also stated that it returns the length of the new array, which is true:
+          
+          const countries3 = ["Nigeria", "Ghana", "Rwanda"];
+          let countriesLength = countries3.unshift("South Africa", "Mali", "Kenya");
+          console.log(countriesLength); // 6`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "pop()",
+      note: [
+        {
+          text1: `The pop() method removes the last element from an array and returns that element.`,
+          code1: `let cities = ["Madrid", "New York", "Kathmandu", "Paris"];
+
+          // remove the last element
+          let removedCity = cities.pop();
+          
+          console.log(cities)         // ["Madrid", "New York", "Kathmandu"]
+          console.log(removedCity);   // Paris
+          
+          // pop() Return Value
+          // Removes the last element from array and returns that value.
+          // Returns undefined if the array is empty.
+          // Notes: This method changes the original array and its length.`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "shift()",
+      note: [
+        {
+          text1: `The shift() method removes the first element from an array and returns that element.
+          The syntax of the shift() method is:
+arr.shift()
+
+shift() Parameters
+The shift() method does not accept any arguments.
+
+  shift() Return Value
+  Removes the first element from array and returns that value.
+  Returns undefined if the array is empty.
+  After removing the element at the 0th index, it shifts other values to consecutive indexes down.
+          `,
+          code1: `let languages = ["English", "Java", "Python", "JavaScript"];
+
+          // removes the first element of the array
+          let first = languages.shift();
+          console.log(first);
+          console.log(languages);
+          
+          // Output: English
+          //         [ 'Java', 'Python', 'JavaScript' ]`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "splice() - (adds, removes or replaces elements)",
+      note: [
+        {
+          text1: `<b>The splice() method modifies an array(adds, removes or replaces elements).</b>
+
+          splice() method that allows you to insert new elements into the middle of an array. Also, you can use this method to delete and replace existing elements as well.
+          ---------------------
+          <i><u>Deleting elements using JavaScript Array's splice() method</i></u>
+---------------------
+To  delete elements in an array, you pass two arguments into the splice() method as follows:
+<span style="color:red">Array.splice(position,num);</span>
+The <b>position</b> specifies the position of the first item to delete and the <b>num</b> argument determines the number of elements to delete.
+The splice() method changes the original array and returns an array that contains the deleted elements.
+
+Let's take a look at the following example.
+Suppose, you have an array <b>scores</b> that contains five numbers from 1 to 5.
+`,
+          code1: `let scores = [1, 2, 3, 4, 5];
+          // The following statement deletes three elements of the 'scores' array starting from the first element.
+          
+          let deletedScores = scores.splice(0, 3);
+          // The scores array now contains two elements.
+          
+          console.log(scores); //  [4, 5]
+          // And the deletedScores array contains three elements.
+          
+          console.log(deletedScores); // [1, 2, 3]
+          // The following figure illustrates the scores.splice(0, 3) method call above.
+
+          // The following figure illustrates the scores.splice(0,3) method call above.
+          // 0: The position of the first item to delete
+          // 3: The number of elements to delete`
+        },
+        {
+          text1: `
+          ---------------------
+          <i><u>Inserting elements using the JavaScript Array splice() method</u></i>
+          ---------------------
+
+          You can insert one or more elements into an array by passing three or more arguments to the splice() method with the second argument is zero.
+
+          Consider the following syntax.
+
+          Array.splice(position, 0, new_element_1, new_element_2, ...);
+
+          In this syntax:
+
+          The <b>position</b> specifies the starting position in the array in which the new elements will be inserted.
+          The second argument is zero (0) which instructs the splice() method to not delete any array elements.
+          The third argument, fourth argument, and so on are the new elements that are inserted into the array.
+          Note that the splice() method changes the original array. Also, the splice() method does not remove any elements, therefore, it returns an empty array. For example:
+
+          `,
+          code1: `// Assuming that you have an array named colors with three strings:
+
+          let colors = ['red', 'green', 'blue'];
+          
+          // The following statement inserts one element after the second element.
+          
+          colors.splice(2, 0, 'purple');
+          // The colors array now has four elements with the new element inserted in the second position.
+          
+          console.log(colors); // ["red", "green", "purple", "blue"]
+          // The following figure demonstrates the method call above.
+          
+          // 2: starting position to Intert
+          // 0: number of elements to delete(not delete any array elements.)
+          // "purple": new element to insert.
+          
+          // You can insert more than one element by passing the fourth argument, the fifth argument, and so on to the splice() method as in the following example.
+          
+          colors.splice(1, 0, 'yellow', 'pink');
+          console.log(colors); 
+          ["red", "yellow", "pink", "green", "purple", "blue"]
+          `
+        },
+        {
+          text1: `---------------------
+          <i><u>Replacing elements using the JavaScript Array splice() method</i></u>
+          ---------------------
+          
+          The splice() method allows you to insert new elements into an array while deleting existing elements simultaneously.
+          
+          To do this, you pass at least three arguments with the second one that specifies the number of items to delete and the third one that indicates the elements to insert.
+          
+          Note that the number of elements to delete needs not be the same as the number of elements to insert.
+          
+          Suppose you have an array of programming languages with four elements as follows:
+          `,
+          code1: `let languages = ['C', 'C++', 'Java', 'JavaScript'];
+          // The following statement replaces the second element with a new one.
+          
+          languages.splice(1, 1, 'Python');
+          // The 'languages' array now still has four elements with the new second argument is 'Python' instead of 'C++'.
+          
+          console.log(languages);
+          // ["C", "Python", "Java", "JavaScript"]
+          // The following figure illustrates the method call above.
+          
+          // You can replace one element with multiple elements by passing more arguments into the splice() method as follows:
+          
+          languages.splice(2, 1, 'C#', 'Swift', 'Go');
+          // The statement deletes one element from the second element i.e., 'Java' and inserts three new elements into the 'languages' array. The result is as follows.
+          
+          console.log(languages); // ["C", "Python", "C#", "Swift", "Go", "JavaScript"]
+          
+          //------------------->
+          const months1 = ['Jan', 'March', 'April', 'June'];
+          months1.splice(1, 0, 'Feb');
+          // 'Feb' Inserts at index 1
+          console.log(months1);
+          // Expected output: Array ["Jan", "Feb", "March", "April", "June"]
+          
+          months1.splice(4, 1, 'May');
+          // 'May' Replaces 1 element at index 4
+          console.log(months1);
+          // Expected output: Array ["Jan", "Feb", "March", "April", "May"]
+          
+          //-------------------->
+          const months = ['Jan', 'Feb', 'Monday', 'Tuesday'];
+          const days = months.splice(2, 2, 'March', 'April');
+          console.log(months) //  ['Jan', 'Feb', 'March', 'April']
+          console.log(days) // ['Monday', 'Tuesday']`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "slice() - copy elements of an array.",
+      note: [
+        {
+          text1: `The slice() method accepts two optional parameters as follows:
+
+          slice(start, stop);
+          Both <b>start</b> and <b>stop</b> parameters are optional.
+          
+          The <b>start</b> parameter determines the zero - based index at which to start extraction.If the <b>start</b> is <b>undefined</b>, slice() begins at 0.
+          
+          The <b>stop</b> parameter, as its name implies, is a zero - based index at which to end extraction.The slice() method extracts up to <b>stop-1</b>.It means that the slice() method doesn't include the element at the <b>stop</b> position in the new array.If you omit the <b>stop</b> parameter, the slice() method will use the length of the array for the <b>stop</b> parameter.
+          
+          The slice() returns a new array that contains the elements of the original array.It's important to keep in mind that the slice() method performs the shallow copy of elements to the new array only.In addition, it doesn't change the source array.
+          
+          
+          Clone an array
+          The slice() is used to clone an array as shown in the following example:
+          `,
+          code1: `var numbers = [1, 2, 3, 4, 5];
+          var newNumbers = numbers.slice();
+          // In this example, the 'newNumbers' array contains all the elements of the 'numbers' array.`
+        },
+        {
+          text1: ` Copy a portion of an array
+The typical use of the slice() method is to copy a portion of an array without modifying the source array.Here is an example:
+`,
+          code1: `function toArray() {
+            return Array.prototype.slice.call(arguments);
+          }
+          var classification = toArray('A', 'B', 'C');
+          console.log(classification); // ["A", "B", "C"]`
+        },
+        {
+          text1: `
+          In this example, the <b>arguments</b> of the toArray() function is an array-like object. Inside the toArray() function, we called the slice() method to convert the arguments object into an array.
+
+          Every argument we pass to the toArray() function will be the elements of the new array.
+          
+          Another typical example that you often see is converting a <b>NodeList</b> into an array as follows:
+          `,
+          code1: `var p = document.querySelectorAll('p');
+          var list = Array.prototype.slice.call(p);
+          
+          // In this example, first, we used the 'document.querySelectorAll()' to get all 'p' nodes of the HTML document.The result of this method is a 'NodeList' object, which is an array - like object.Then, we called the 'slice()' method to convert the 'NodeList' object into an array.
+          
+          //   Sometimes, you see the following syntax:
+          
+          var list = [].slice.call(document.querySelectorAll('p'));
+          
+          // In this example, we instantiated an empty array '[]' and indirectly accessed the 'slice()' method of the 'Array.prototype' method through the empty array.The effect is the same as the one that uses the 'Array.prototype' directly.`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "concat() - merge two arrays into an array",
+      note: [
+        {
+          text1: `To merge two or more arrays, you use the <b>concat()</b> method of an Array object.The <b>concat()</b> method returns a new array and doesn't change the original arrays.For example:`,
+          code1: `let odds = [1, 3, 5];
+          let evens = [2, 4, 6];
+          // merge odds and evens array
+          let combined = odds.concat(evens);
+          
+          console.log('Result:', combined);
+          console.log('Odds:', odds);
+          
+          
+          // Output:
+          // Result: [ 1, 3, 5, 2, 4, 6 ]
+          // Odds: [ 1, 3, 5 ]`
+        },
+        {
+          text1: `In this example, we have two arrays: <b>odds</b> and <b>evens</b>.We call the <b>concat()</b> method of the <b>odds</b> array method to merge elements of the two arrays.The elements of the second array are appended to the elements of the first array.
+
+          Similarly, you can call the <b>concat()</b> method on an empty array denoted by(<b>[]</b>):`,
+          code1: `let odds = [1, 3, 5];
+          let evens = [2, 4, 6];
+          // merge odds and evens array
+          let combined = [].concat(odds, evens);
+          
+          console.log(combined);
+          
+          // Output:
+          // [1, 3, 5, 2, 4, 6]
+          
+
+          //------------------ 
+          // The 'concat()' method allows you to merge more than two arrays as shown in the following example:
+          
+          let upper = ['A', 'B', 'C'];
+          let lower = ['a', 'b', 'c'];
+          let digits = [1, 2, 3];
+          let alphanumerics = upper.concat(lower, digits);
+          
+          // Output:
+          // ['A', 'B', 'C', 'a', 'b', 'c', 1, 2, 3]
+          
+          // In this example, we merge the three arrays: 'upper', 'lower', and 'digits'.
+          
+
+          //-------------------
+          // When you don't pass any argument into the 'concat()' method, it simply clones the array and returns it:
+          
+
+let colors = ['red', 'green', 'blue'];
+let rgb = colors.concat();
+console.log(rgb);
+
+// Output:
+// [ 'red', 'green', 'blue' ]
+
+
+//-----------------------
+// If you pass values that are not arrays, into the 'concat()' method, the method will appends each value to the end of the result array:
+
+let rgb = ['red', 'green', 'blue'];
+let moreColors = rgb.concat('yellow', 'magento');
+console.log(moreColors);
+
+// Output:
+// ['red', 'green', 'blue', 'yellow', 'magento']
+
+
+//---------------------
+// In ES6, you can use spread operator to merge multiple arrays as follows:
+
+let odds = [1, 3, 5];
+let evens = [2, 4, 6];
+let combined = [...odds, ...evens];
+console.log(combined);
+
+// Output:
+// [ 1, 3, 5, 2, 4, 6 ]
+          `
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "of() - improve array creation.",
+      note: [
+        {
+          text1: `when you pass a number to the Array constructor, JavaScript creates an array whose length equals the number.For example:`,
+          code1: `let numbers = new Array(2);
+          console.log(numbers.length); // 2
+          console.log(numbers[0]); // undefined
+          
+          // However, when you pass to the 'Array' constructor a value that is not a number, JavaScript creates an array that contains one element with that value.For example:
+          
+          numbers = new Array("2");
+          console.log(numbers.length); // 1
+          console.log(numbers[0]); // "2"`
+        },
+        {
+          text1: `This behavior is sometimes confusing and error - prone because you may not know the type of data that you pass to the Array constructor.
+
+          ES6 introduces the <b>Array.of()</b> method to solve this problem.
+          
+          The <b>Array.of()</b> method is similar to the Array constructor except the <b>Array.of()</b> method does not treat a single numeric value special.
+          
+          In other words, the <b>Array.of()</b> method always creates an array that contains the values that you pass to it regardless of the types or the number of arguments.
+          
+          The following shows the syntax of the <b>Array.of()</b> method:
+          
+          <span style="color:red"> Array.of(element0[, element1[, ...[, elementN]]]) </span>
+          <b>JavaScript Array.of() examples</b>
+          `,
+          code1: `// See the following example:
+
+          let numbers = Array.of(3);
+          console.log(numbers.length); // 1
+          console.log(numbers[0]); // 3
+          
+          // In this example, we passed the number 3 to the 'Array.of()' method.The 'Array.of()' method creates an array of one number.
+          
+          // Consider the following example:
+          
+          let chars = Array.of('A', 'B', 'C');
+          console.log(chars.length); // 3
+          console.log(chars); // ['A','B','C']
+          // In this example, we created an array of three strings by passing 'A', 'B', and 'C' to the 'Array.of()' method.The size of the array is 3.
+          `
+        },
+        {
+          text1: `
+         <b>JavaScript Array.of() polyfill:--</b>
+
+If you execute the JavaScript in the environment that doesn’t support the  'Array.of()' method, you can use the following polyfill:
+`,
+          code1: `if (!Array.of) {
+            Array.of = function() {
+              return Array.prototype.slice.call(arguments);
+            };
+          }`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "from() - create arrays from array-like or iterable objects.",
+      note: [
+        {
+          text1: `To create an array from an array-like object in ES5, you iterate over all array elements and add each of them to an intermediate array like this:`,
+          code1: `function arrayFromArgs() {
+            var results = [];
+            for (var i = 0; i < arguments.length; i++) {
+              results.push(arguments[i]);
+            }
+            return results;
+          }
+          var fruits = arrayFromArgs('Apple', 'Orange', 'Banana');
+          console.log(fruits);
+          
+          // Output:
+          // [ 'Apple', 'Orange', 'Banana' ]
+          
+          // To make it more concise, you can use the 'slice()' method of the 'Array.prototype' as follows:
+          
+          function arrayFromArgs() {
+            return Array.prototype.slice.call(arguments);
+          }
+          var fruits = arrayFromArgs('Apple', 'Orange', 'Banana');
+          console.log(fruits);`
+        },
+        {
+          text1: `ES6 introduces the 'Array.from()' method that creates a new instance of the 'Array' from an array-like or iterable object. The following illustrates the syntax of the 'Array.from()' method:
+
+          <span style="color:red">Array.from(target [, mapFn[, thisArg]])</span>
+          
+          In this syntax:
+          
+          > <b>target</b> is an array - like or iterable object to convert to an array.
+          > <b>mapFn</b> is the map function to call on every element of the array
+          > <b>thisArg</b> is the <b>this</b> value when executing the <b>mapFn</b> function.
+          
+          The <b>Array.from()</b> returns a new instance of <b>Array</b> that contains all elements of the <b>target</b> object.
+          
+          ------------------------------
+          <b>JavaScript Array.from() method examples </b>
+          -------------------------------
+          
+          Let's take some examples of using the <b>Array.from()</b> method.
+          
+          1) Create an array from an array - like object:--
+          
+          The following example uses the <b>Array.from()</b> method to create a new array from the <b>arguments</b> object of a function:
+          `,
+          code1: `function arrayFromArgs() {
+            return Array.from(arguments);
+          }
+          
+          console.log(arrayFromArgs(1, 'A'));
+          
+          // Output:
+          // [1, 'A']
+          
+          // In this example, we create an array from the arguments of the 'arrayFromArgs()' function and return it.
+          `
+        },
+        {
+          text1: `<b>2) JavaScript Array Array.from() with a mapping function:--</b>
+
+          The <b>Array.from()</b> method accepts a callback function that allows you to execute the mapping function on every element of the array that is being created.See the following example:`,
+          code1: `function addOne() {
+            return Array.from(arguments, x => x + 1);
+          }
+          console.log(addOne(1, 2, 3));
+          
+          // Output:
+          // [2, 3, 4]
+          // In this example, we increased each argument of the 'addOne()' function by one and add the result to the new array.
+          `
+        },
+        {
+          text1: ` <b>3) JavaScript Array.from() with a this value:--</b>
+           
+          If the mapping function belongs to an object, you can optionally pass the third argument to the <b>Array.from()</b> method.The object will represent the <b>this</b> value inside the mapping function. Consider this example:`,
+          code1: `let doubler = {
+            factor: 2,
+            double(x) {
+              return x * this.factor;
+            }
+          }
+          let scores = [5, 6, 7];
+          let newScores = Array.from(scores, doubler.double, doubler);
+          console.log(newScores);
+          
+          // Output:
+          // [10, 12, 14]
+          `
+        },
+        {
+          text1: `<b>4) Create an array from an iterable object: --</b>
+          
+          Since the <b>Array.from()</b> method also works on an iterable object, you can use it to create an array from any object that has a <b>[symbol.iterator]</b> property.For example:`,
+          code1: `let even = {
+            *[Symbol.iterator]() {
+              for (let i = 0; i < 10; i += 2) {
+                yield i;
+              }
+            }
+          };
+          let evenNumbers = Array.from(even);
+          console.log(evenNumbers);
+          
+          // Output:
+          // [0, 2, 4, 6, 8]
+
+          // > First, define the 'even' object with the '[System.iterator]' that returns even numbers from 0 to 10.
+// > Then, use the 'Array.from()' method to create a new array of even numbers from the 'even' object.
+
+          `
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "flat() - flatten an array recursively up to a specified depth.",
+      note: [
+        {
+          text1: `ES2019 introduced the <b>Array.prototype.flat()</b> method that creates a new array with all the elements of the subarrays concatenated to it recursively up to a specified depth.
+
+          // The following shows the syntax of the <b>flat()</b> method:
+          
+          <span style="color:red"> let newArray = arrayObject.flat([depth]) </span>
+          
+          // The <b>depth</b> parameter specifies how deep the method flats the array structure.It defaults to 1.
+          // The following example shows how to flat an array of numbers:`,
+          code1: `const numbers = [1, 2, [3, 4, 5]];
+          const flatNumbers = numbers.flat();
+          
+          console.log(flatNumbers);
+          
+          // Output:
+          // [1, 2, 3, 4, 5]
+          
+          // In this example, we didn't pass the depth argument into the 'flat()' method therefore the depth is 1 by default. The 'flat()' method concatenated all the elements of the nested array[3, 4, 5] to the elements of the new array.
+          // 'Note' :- that the 'flat()' method creates a new array and doesn't change the original array:
+          console.log(numbers);
+
+// Output:
+// [1, 2, [3, 4, 5]]
+
+// The following example flats an array with two level depth:
+
+const numbers = [1, 2, [3, 4, 5, [6, 7]]];
+const flatNumbers = numbers.flat(2);
+
+console.log(flatNumbers);
+
+// Output:
+// [1, 2, 3, 4, 5, 6, 7]
+
+// When you dont know the depth level, you can pass the 'Infinity' into the 'flat()' method to recursively concatenate all elements of the sub - arrays into the new array:
+
+const numbers = [1, 2, [3, 4, 5, [6, 7, [8, 9]]]];
+const flatNumbers = numbers.flat(Infinity);
+
+console.log(flatNumbers);
+
+// If an array has empty slots, you can use the 'flat()' method to remove the holes, like this:
+
+const numbers = [1, 2, , 4, , 5];
+const sequence = numbers.flat();
+console.log(sequence);
+
+// Output:
+// [1, 2, 4, 5]
+          `
+        },
+        {
+          text1: `<b>Summary</b>
+          => Use the 'Array.prototype.flat()' method to flat an array with the nested arrays.
+          => Use the 'depth' argument to specify how deep the nested arrays should be flattened.The depth is 1 by default.
+          => The 'flat()' also removes the holes in the array with empty slots.
+          `,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "flatMap() - execute a mapping function on every element and flatten the result.",
+      note: [
+        {
+          text1: ` The <b>flat()</b> method creates a new <b>array</b> with the elements of the subarrays concatenated into it.
+
+            The <b>map()</b> method creates a new array whose elements are the results of a mapping function.
+          
+          The <b>flatMap()</b> method is the combination of the <b>map()</b> method followed by the <b>flat()</b> method of depth 1.
+          
+          The <b>flatMap()</b> method first maps each element in an array using a mapping function and then flattens the results into a new array.
+          
+          The following shows the syntax of the <b>flatMap()</b> method:--
+          `,
+          code1: `let newArray = arrayObject.flatMap(callback, thisArg);`
+        },
+        {
+          text1: ` The <b>flatMap()</b> method takes two parameters:
+
+          -------------------------------
+          <b>1) The callback mapping function:--</b>
+          -------------------------------
+          
+           The <b>callback</b> is the mapping function has the same syntax as the one in the <b>map()</b> method:
+          
+          function callback(currentValue [[, index], array]);
+          
+          ----------------------
+          <b> 2) The thisArg argument:--</b>
+          ---------------------
+           The optional <b>thisArg</b> argument is a value to use as <b>this</b> when executing the <b>callback</b>.
+          
+           Note that the <b>flatMap()</b> method doesn’t modify the original array.
+          
+          ----------------------
+          <b> JavaScript Array flatMap() examples </b>
+          ----------------------
+           Let's take some examples of using the <b>flatMap()</b> method.
+          
+          ----------------------
+           1) Creating words from sentences example
+          ----------------------
+           Suppose that you have the following array:
+          
+          <span style="color:red"> let sentences = ["JavaScript Array flatMap()", " ", "is", " ", "Awesome"]; </span>
+          
+           The following <b>map()</b> function splits the words of  sentences:`,
+          code1: `let words = sentences.map(s => s.split(' '));
+          console.log(words);
+          
+          // Output:
+          // [
+          //   ['JavaScript', 'Array', 'flatMap()'],
+          //   [' '],
+          //   ['is'],
+          //   [' '],
+          //   ['Awesome']
+          // ]`
+        },
+        {
+          text1: `The result is an array of nested arrays filled by words.To flatten the result, you can use the 'flat()' method on the result of the 'map()' method.However, it’ll be more concise to use the 'flatMap()' method.
+
+          The 'flatMap()' creates a flattened array by running each sentence in the array through a mapping function and flattening the mapped results:`,
+          code1: `let sentences = [
+            "JavaScript Array flatMap()",
+            " ",
+            "is",
+            " ",
+            "Awesome"
+          ];
+          
+          let words = sentences.flatMap(s => s.split(' '));
+          console.log(words);
+          
+          // Output:
+          // ['JavaScript', 'Array', 'flatMap()', '', '', 'is', '', '', 'Awesome']`
+        },
+        {
+          text1: `----------------------
+           <b>2) Adding and removing elements during mapping example:</b>
+          ----------------------
+          
+           The 'flatMap()' method allows you to add or remove elements during mapping.Consider the following example:
+           Suppose that you have the following shopping cart:`,
+          code1: `let cart = [{
+            name: 'Smartphone',
+            qty: 2,
+            price: 500,
+            freeOfCharge: false
+          },
+          {
+            name: 'Tablet',
+            qty: 1,
+            price: 800,
+            freeOfCharge: false
+          }
+          ];
+          
+          // If customers buy a smartphone, you want to give them a free screen protector.
+          // When the customer adds a smartphone to the cart, you can add a screen protector to the cart using the 'flatMap()' method as follows:
+          
+          let newCart = cart.flatMap(
+            (item) => {
+              if (item.name === 'Smartphone') {
+                return [item, {
+                  name: 'Screen Protector',
+                  qty: item.qty,
+                  price: 5,
+                  freeOfCharge: true
+                }]
+              } else {
+                return [item];
+              }
+            }
+          );
+          
+          console.log(newCart);
+          
+          // The cart will look like this:
+          
+          [
+            { name: 'Smartphone', qty: 2, price: 500, freeOfCharge: false },
+            { name: 'Screen Protector', qty: 2, price: 5, freeOfCharge: true },
+            { name: 'Tablet', qty: 1, price: 800, freeOfCharge: false }
+          ]
+          
+          // The following uses the 'reduce()' method to calculate the total amount from the items in the cart.It ignores the free - of - charge items, like screen protectors:
+          
+          const total = newCart.reduce((sum, item) => {
+            if (!item.freeOfCharge)
+              sum += item.price * item.qty;
+            return sum;
+          }, 0);
+          
+          console.log({ total });
+          
+          // Output:
+          // { total: 1800 }
+        `
+        },
+        {
+          text1: `<b>Summary</b>
+          Use the <b>flatMap()</b> method to create a flattened array of elements by running each element in the collection through a mapping function and flattening the mapped results.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "join() - concatenate all elements of an array into a string separated by a separator.types",
+      note: [
+        {
+          text1: ` The <b>join()</b> method allows you to concatenate all elements of an array and returns a new string:
+          <span style="color:red"> Array.prototype.join([separator]) </span>
+          
+          The <b>join()</b> method accepts a optional argument <b>separator</b> which is a string that separates each pair of adjacent elements of the array in the result string.
+          
+            The <b>separator</b> defaults to a comma if you don't pass it to the <b>join()</b> method.
+          
+          In case the array has one element, the <b>join()</b> method returns that element as a string without using the <b>separator</b>.
+          
+          And if the array is empty, the <b>join()</b> method returns an empty string.
+          
+          When the elements of the array aren't strings, the <b>join()</b> method converts them to strings before joining.
+          
+          Note that the <b>join()</b> method converts <b>undefined, null</b>, and empty array[] to an empty string.
+          `,
+          code1: `Ex: 
+          const cssClasses = ['btn', 'btn-primary', 'btn-active'];
+          const btnClass = cssClasses.join(' ');
+          
+          console.log(btnClass);
+          
+          // Output:
+          // btn btn - primary btn - active
+          
+          // In this example, we have an array that holds a list of CSS classes.And we use the 'join()' method joins all elements of the 'cssClasses' array and return a string of the CSS classes separated by a space.
+          `
+        },
+        {
+          text1: `<b>2) Using the JavaScript Array 'join()' method to replace all occurrences of a string</b>
+          
+          This example uses the JavaScript Array 'join()' method to replace all occurrences of the space ' ' by the hyphen(-):`,
+          code1: `const title = 'JavaScript array join example';
+          const url = title.split(' ')
+            .join('-')
+            .toLowerCase();
+          
+          console.log(url);
+          
+          // Output:
+          // javascript - array - join - example
+          
+          // > First, split the title string by the space into an array by using the 'split()' string method.
+          // > Second, concatenate all elements in the result array into a string by using the 'join()' method.
+          // > Third, convert the result string to lower case by using the 'toLowerCase()' method.`
+        },
+        {
+          text1: `=> Summary
+          Use the JavaScript Array 'join()' method to concatenate all elements of an array into a string separated by a separator.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+
+      ]
+    },
+    {
+      id: 1,
+      title: "at() - access array elements using both positive and negative indexes.",
+      note: [
+        {
+          text1: `In JavaScript, you can use the square bracket <b>[]</b> to access an element of an array. For example, the <b>arr[0]</b> returns the first element in the array <b>arr</b>, the <b>arr[1]</b> returns the second element, and so on.
+
+          To get the last element in an array, you use the <b>length</b> property like this:
+          
+          arr[length - 1]
+          
+          JavaScript doesn't allow you to use a negative index to access the last element like other languages e.g., Python.For example, the following returns undefined:
+          
+          arr[-1]
+          
+          The reason is that JavaScript also uses square brackets <b>[]</b> for accessing a property of an object.
+          
+          For example, the <b>obj[1]</b> returns a property of the object <b>obj</b> with the key "1".Hence, the <b>obj[-1]</b> returns the property of an object with the key "-1".
+          
+          In the above example, the <b>arr[-1]</b> returns the property of the <b>arr</b> object with the key "-1".Note that the type of an array is <b>object</b>.Since the "-1" property doesn't exist in the <b>arr</b> object, it returns <b>undefined</b>.
+          
+          For this reason, ES2022 introduced a new method <b>at()</b> added to the <b>prototype</b> of <b>Array</b>, <b>String</b>, and <b>TypeArray</b>.This tutorial focuses on the <b>at()</b> method of the <b>Array.prototype</b>.
+          
+          The <b>at()</b> method accepts an index and returns an element at that index.Here's the syntax of the <b>at()</b> method:
+          
+          arr.at(index)
+          
+          In this syntax, the <b>index</b> specifies an array element to return.It can be zero, positive, or negative.
+          If the index is zero or positive, the <b>at()</b> method works like the <b>[]</b>.
+          
+          However, if you use a negative index, the method returns an element from the end of the array.For example, the <b>arr.at(-1)</b> returns the last element, <b>arr.at(-2)</b> returns the second last element, and so on.`,
+          code1: `//The following example shows how to use the 'at()' method to return an array element:
+          const scores = [5, 6, 7];
+          console.log(scores.at(1)); // same as scores[1] 
+          // get the last element
+          console.log(scores.at(-1)); // 7
+          console.log(scores.at(-1) === scores[scores.length - 1]); // true
+          
+          // Output:
+          // 6
+          // 7
+          // true
+`
+        },
+      ]
+    },
+    {
+      id: 1,
+      section: `Reversing elements`,
+      title: "reverse() - reverse the order of elements in place and return the same array with the elements in the reversed order.",
+      note: [
+        {
+          text1: `The reverse() method of TypedArray instances reverses a typed array in place and returns the reference to the same typed array, the first typed array element now becoming the last, and the last typed array element becoming the first.In other words, elements order in the typed array will be turned towards the direction opposite to that previously stated.This method has the same algorithm as Array.prototype.reverse().
+
+          Using a for loop (or any other type of loop), we can loop through an array from the last time to the first item, and push those values to a new array which becomes the reversed version. Here's how:`,
+          code1: `const array = [1, 2, 3, 4]
+
+          const reversedArray = []
+          
+          for (let i = array.length - 1; i >= 0; i--) {
+            const valueAtIndex = array[i]
+            reversedArray.push(valueAtIndex)
+          }
+          
+          console.log(reversedArray)
+          // [4, 3, 2, 1]
+          
+          //By using a 'for' loop, we start looping from the index of the last 'value (array.length - 1)' to the index of the first 'value (0)'.Then we push the values accordingly to 'reversedArray'.
+
+          const array = [1, 2, 3, 4]
+          
+          array.reverse()
+          
+          console.log(array)
+          // [ 4, 3, 2, 1 ]
+          `
+        },
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "toReversed() - reverse the order of elements of an array and return the new array with the elements in the reversed order.",
+      note: [
+        {
+          text1: ` The <b>toReversed()</b> method reverses the order of elements in an array and returns a new array with the elements in reversed order.
+
+           Unlike the <b>reversed()</b> method that reverses the elements of the array in place, the <b>toReversed()</b> method does not modify the original array.Instead, it creates a new array with the elements of the original array in the reversed order.
+          
+          Here's the basic syntax of the <b>toReversed()</b> method:
+          
+             <span style="color:red">Array.prototype.toReversed()</span>
+          
+           The <b>toReversed()</b> method takes no parameters and returns a new array containing the elements in reversed order.
+          
+           When you call the <b>toReversed()</b> method on a sparse array, it treats empty slots as if they have the value <b>undefined</b>.
+          
+           This method is generic, meaning that you can call it on a non - array object that has a length property and integer - keyed properties.
+          
+          JavaScript Array toReversed() method examples
+          Let's explore some examples of using the JavaScript array toReverse() method.
+          
+          <b> 1) Using JavaScript Array toReversed() method on string arrays </b>
+          The following example uses the toReverse() method to reverse an array of strings:`,
+          code1: `const colors = ['red', 'green', 'blue'];
+          const reversedColors = colors.toReversed();
+          
+          console.log(colors);
+          console.log(reversedColors);
+          
+          // Output:
+          // ['red', 'green', 'blue']
+          // ['blue', 'green', 'red']
+          `
+        },
+        {
+          text1: `<b>3) Using JavaScript Array toReversed() method on arrays of objects</b>
+          The following example uses the toReversed() method to reverse the order of objects in an array:`,
+          code1: `const contacts = [{ name: 'John' }, { name: 'Alice' }, { name: 'Bob' }];
+          const reversedContacts = contacts.toReversed();
+          
+          console.log(contacts);
+          console.log(reversedContacts);
+          
+          // Output:
+          // [{ name: 'John' }, { name: 'Alice' }, { name: 'Bob' }]
+          // [{ name: 'Bob' }, { name: 'Alice' }, { name: 'John' }]
+          `
+        },
+        {
+          text1: `<b>4) Calling toReversed() method on sparse arrays</b>
+          When you call the toReversed() method on a sparse array, the result array remains sparse.The toReversed() method copies empty slots over their respective indices as empty slots:`,
+          code1: `const scores = [1, , 7, 5];
+          const reversedScores = scores.toReversed();
+          
+          console.log(scores);
+          console.log(reversedScores);
+          
+          // Output:
+          // [1, , 7, 5]
+          // [5, 7, undefined, 1]
+          `
+        },
+        {
+          text1: `<b>5) Calling toReversed() method on non - array objects</b>
+          The following example illustrates how to call the toReversed() method on an object that has the length property and integer - keyed properties:`,
+          code1: `const arrayLike = {
+            length: 3,
+            unrelated: "bar",
+            2: 2,
+            3: 3, // ignored because the length is 3
+          };
+          
+          const result = Array.prototype.reverse.call(arrayLike);
+          
+          console.log(result);
+          
+          // Output:
+          // { 0: 2, 3: 3, length: 3, unrelated: 'bar' }
+          `
+        },
+        {
+          text1: `In this example, the toReversed() method does the following:
+
+          First, access the length property of the object.
+            Second, iterate through each property with an integer key ranging from 0 to length / 2.
+          Third, swap the values at corresponding indices on both ends of the array.Additionally, remove any destination property without a corresponding source property.
+            Finally, return a new object with the order of the elements(or properties) in the reversed order.
+          <b>Summary</b>
+          Use the JavaScript array toReversed() method to reverse the order of elements within an array and return a new reversed array.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      section: `High-order methods`,
+      title: "map() - transform array elements.",
+      note: [
+        {
+          text1: `In JavaScript, map() is a higher-order function that is used to iterate over elements of an array and execute a callback function on each element. It creates a new array based on the results of the callback function.
+          <span style="color:red"> const numbers = [1, 2, 3, 4, 5]; </span>
+        
+          Multiply each number by 2
+          const multipliedNumbers = numbers.map((num) => num * 2);
+          
+          console.log(numbers); // Output: [1, 2, 3, 4, 5]
+          console.log(multipliedNumbers); // Output: [2, 4, 6, 8, 10]
+          
+          Sometimes, you need to take an array, transform its elements, and include the results in a new array.
+          
+          Typically, you use a <b>for</b> loop to iterate over the elements, transform each individual one, and push the results into a new array.
+          
+          Let's take a look at an example.
+          
+          Suppose that you have an array of numbers where each element represents the radius of a circle as follows:
+          `,
+          code1: `let circles = [
+            10, 30, 50
+          ];
+          
+          // The following illustrates how to calculate the area of each circle and push the result into a new array.
+          
+          let areas = []; // to store areas of circles
+          let area = 0;
+          for (let i = 0; i < circles.length; i++) {
+            area = Math.floor(Math.PI * circles[i] * circles[i]);
+            areas.push(area);
+          }
+          console.log(areas);
+
+          // Output:
+          // [314, 2827, 7853]
+          // It takes a quite amount of code to accomplish this.
+
+// Starting from ES5, JavaScript Array type provides the map() method that allows you to transform the array elements in a cleaner way.
+
+function circleArea(radius) {
+  return Math.floor(Math.PI * radius * radius);
+}
+let areas = circles.map(circleArea);
+console.log(areas);
+
+// Output
+// [314, 2827, 7853]
+
+
+//   First, define a function that calculates the area of a circle.
+//     Then, pass the 'circleArea' function to the 'map()' method.The 'map()' method will call the 'circleArea' function on each element of the circles array and return a new array with the elements that have been transformed.
+// To make it shorter, you can pass in the 'map()' method an anonymous function as follows.
+
+let areas = circles.map(function(radius) {
+  return Math.floor(Math.PI * radius * radius);
+});
+console.log(areas);
+          `
+        },
+        {
+          text1: `Also, you can make use of the arrow function in ES6 to achieve the same result with a cleaner code:
+
+          let areas = circles.map(radius => Math.floor(Math.PI * radius * radius));
+          console.log(areas);
+          
+          JavaScript Array <b>map()</b> method in detail
+          The following illustrates the <b>map()</b> method.
+          
+            arrayObject.map(callback[, contextObject]);
+          
+          The <b>map()</b> method calls a callback function on every element of an array and returns a new array that contains the results.
+          
+            The <b>map()</b> method takes two named arguments, the first one is required whereas the second one is optional.
+          
+          Similar to the other iterative method such as <b>every()</b>, <b>some()</b>, <b>filter()</b>, <b>forEach()</b> and  <b>sort()</b>, the <b>callback()</b> function has the following form:
+          
+          function callback(currentElement, index, array) {
+            ... 
+          }
+          
+          The <b>callback()</b> function takes three arguments:
+          
+          The <b>currentElement</b> is the current element of the array that is being processed.
+          The <b>index</b> is the index of the <b>currentElement</b>.
+          The <b>array</b> is the array object being traversed.
+          The <b>currentElement</b> is required while the <b>index</b> and <b>array</b> arguments are optional.
+          
+          If you pass the <b>contextObject</b> to the <b>map()</b> method, you can reference the <b>contextObject</b> inside the <b>callback()</b> function using the <b>this</b> keyword.
+          
+          It's important to note that the <b>map()</b> method does not change the original array, it creates a new array of all elements that have been transformed by the callback function.
+          
+          More JavaScript Array map() examples: -
+          
+            The following example shows how to transform an array of numbers by using a built -in method of the <b>Math</b> type as the <b>callback()</b> function.`,
+          code1: `let numbers = [16, 25, 36];
+          let results = numbers.map(Math.sqrt);
+          console.log(results);
+          
+          // Output
+          // [4, 5, 6]
+          
+          // The new array contains the square roots of the numbers in the 'numbers' array.
+          
+          // In this tutorial, you have learned how to use the JavaScript Array 'map()' method to transform elements of an array according to a provided function.
+          
+          // Excercies:---
+          
+          const userDetails = [
+            {
+              fullName: "American First Finance",
+              area: 'yes',
+            },
+            {
+              fullName: "World Health",
+              area: 'yes',
+            }
+          ]
+          
+          // returning new array :-
+          const newARR = userDetails.map(acc => {
+              const shortOb =  {...acc, shordName : acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('') }
+              return shortOb
+          })
+          console.log(newARR) //
+          // output:-
+          // [
+          //     { fullName: 'American First Finance', area: 'yes' },
+          //     { fullName: 'World Health', area: 'yes'}
+          // ]
+          
+          // mutated original array :-
+          userDetails.forEach(acc => {
+              acc.shortName = acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('')
+          })
+          console.log(userDetails)
+          // output:-
+          // [
+          //     { fullName: 'American First Finance', area: 'yes', shordName: 'aff' },
+          //     { fullName: 'World Health', area: 'yes', shordName: 'wh' }
+          // ]
+          `
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "filter() - filter elements in an array.",
+      note: [
+        {
+          text1: `The filter() method of Array instances creates a shallow copy of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided function.
+
+          The filter() method takes a function as an argument. The function is called for each element in the array to determine
+          
+          The filter method in JavaScript is designed as a higher-order function that iterates over each element of an array, allowing developers to apply a specific condition to filter out elements.
+          
+          The filter method doesn't modify the original array, but instead creates and returns a new array containing only the elements that meet the specified condition.
+          
+          
+          One of the most common tasks when working with an array is to create a new array that contains a subset of elements of the original array.
+          
+          Suppose you have an array of city objects where each object contains two properties: 'name' and 'population'.`,
+          code1: `let cities = [
+            { name: 'Los Angeles', population: 3792621 },
+            { name: 'New York', population: 8175133 },
+            { name: 'Chicago', population: 2695598 },
+            { name: 'Houston', population: 2099451 },
+            { name: 'Philadelphia', population: 1526006 }
+          ];
+          
+          // To find the city whose population is greater than 3 million, you typically loop over the array elements using a for loop and test if the value of the 'population' property satisfies the condition, like this:
+          
+          let bigCities = [];
+          for (let i = 0; i < cities.length; i++) {
+            if (cities[i].population > 3000000) {
+              bigCities.push(cities[i]);
+            }
+          }
+          console.log(bigCities);
+          
+          // Output:
+          // [
+          //   { name: 'Los Angeles', population: 3792621 },
+          //   { name: 'New York', population: 8175133 }
+          // ]`
+        },
+        {
+          text1: `JavaScript Array provides the 'filter()' method that allows you to do this task in a shorter and cleaner way.
+          The following example returns the same result as the example above:`,
+          code1: `let bigCities = cities.filter(function(e) {
+            return e.population > 3000000;
+          });
+          console.log(bigCities);`
+        },
+        {
+          text1: `In this example, we call the <b>filter()</b> method of the <b>cities</b> array object and pass a function that tests each element.
+
+          Inside the function, we check if the <b>population</b> of each city in the array is greater than 3 million.If it is the case, the function returns <b>true</b> or <b>false</b> otherwise.
+          
+            The <b>filter()</b> method includes the only elements in the result array if they satisfy the test in the callback function.
+          
+          Starting with ES6, you can use the arrow function to make it more concise:`,
+          code1: `let bigCities = cities.filter(city => city.population > 3000000);
+          console.log(bigCities);`
+        },
+        {
+          text1: `JavaScript Array filter() method in detail: --
+
+          <span style="color:red"> arrayObject.filter(callback, contextObject); </span>
+          
+          The <b>filter()</b> method creates a new array with all the elements that pass the test implemented by the <b>callback()</b> function.
+          
+          Internally, the <b>filter()</b> method iterates over each element of the array and passes each element to the <b>callback</b> function. If the <b>callback</b> function returns <b>true</b>, it includes the element in the return array.
+          
+            The <b>filter()</b> method accepts two named arguments: a callback function and an optional object.
+          
+          Like other iterative methods of the Array object such as <b>every()</b>, <b>some()</b>, <b>map()</b> and <b>forEach()</b>, the <b>callback</b> function has the following form:
+          
+          <span style="color:red">
+          function callback(currentElement, index, array) {
+            ...
+          }
+          </span>
+          
+          The <b>callback</b> function takes three arguments:
+          
+          The <b>currentElement</b> argument is the current element in the array that is being processed by the <b>callback</b> function.
+          The <b>index</b> of the <b>currentElement</b> that is being processed by the <b>callback</b> function.
+          The <b>array</b> object being traversed.
+          
+          The <b>index</b> and <b>array</b> arguments are optional.
+          
+          The <b>contexObject</b> argument of the <b>filter()</b> method is optional.If you pass the <b>this</b> value, you can reference it by using <b>this</b> keyword inside the <b>callback</b> function.
+          
+          It is important to note that the <b>filter()</b> method does not change the original array.
+          
+          More JavaScript Array filter() method examples: -
+          
+          Because the <b>filter()</b> method returns a new array, you can chain the result with other array methods such as <b>sort()</b> and <b>map()</b>.
+          
+          For example, the following illustrates how to chain the three methods: <b>filter()</b>, <b>sort()</b>, and <b>map()</b>:
+          `,
+          code1: `let cities = [
+            { name: 'Los Angeles', population: 3792621 },
+            { name: 'New York', population: 8175133 },
+            { name: 'Chicago', population: 2695598 },
+            { name: 'Houston', population: 2099451 },
+            { name: 'Philadelphia', population: 1526006 }
+          ];
+
+          cities
+  .filter(city => city.population < 3000000)
+  .sort((c1, c2) => c1.population - c2.population)
+  .map(city => console.log(city.name + ':' + city.population));
+
+// Output:
+// Philadelphia: 1526006
+// Houston: 2099451
+// Chicago: 2695598
+          `
+        },
+        {
+          text1: `  > First, filter the cities whose populations are less than 3 million using the <b>filter()</b> method.
+            > Second, sort the resulting cities by the populations in descending order using the <b>sort()</b> method.
+            > Third, output array element to the console using the <b>map()</b> method.
+          
+          The following example illustrates the use of the <b>contextObject</b> argument that specifies an object which can be referenced in the <b>callback()</b> function using the <b>this</b> keyword`,
+          code1: `function isInRange(value) {
+            if (typeof value !== 'number') {
+              return false;
+            }
+            return value >= this.lower && value <= this.upper;
+          }
+          
+          let data = [10, 20, "30", 1, 5, 'JavaScript filter', undefined, 'example'];
+          
+          let range = {
+            lower: 1,
+            upper: 10
+          };
+          
+          let numberInRange = data.filter(isInRange, range);
+          console.log(numberInRange); // [10, 1, 5]
+          
+          // Output:
+          // [10, 1, 5]
+          `
+        },
+        {
+          text1: `> First, define the <b>isInRange()</b> function that checks if its argument is a number and in the range specified by the <b>lower</b> and <b>upper</b> properties of an object.
+          > Next, define an array of mixed data that contains numbers, strings, and undefined.
+          > Then, define the <b>range</b> object with two properties <b>lower</b> and <b>upper</b>.
+          > After that, call the <b>filter()</b> methods of the <b>data</b> array and pass in the <b>isInRange()</b> function and the <b>range</b> object.Because we pass in the <b>range</b> object, inside the <b>isInRange()</b> function, the <b>this</b> keyword references to the <b>range</b> object.
+          > Finally, show the result array in the console.
+          
+          In this tutorial, you have learned how to use the JavaScript Array <b>filter()</b> method to filter elements in an array based on a test provided by a callback function.
+          `,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "reduce() - reduce elements of an array to a value.",
+      note: [
+        {
+          text1: `The reduce() method executes a reducer function on each element of the array and returns a single output value.
+
+          The array reduce in JavaScript is a predefined method used to reduce an array to a single value by passing a callback function on each element of the array.It accepts a function executed on all the items of the specified array in the left - to - right sequence.The returned single value is stored in the accumulator.Thus, array reduce JavaScript is a non - mutating method.This means that instead of changing the actual value variable, it will hold the computed value in the accumulator without changing the original value variable.
+          
+            reduce() Parameters: -
+            The <b>reduce()</b> method takes in:
+          
+           1) => callback - The callback function to execute on each array element(except the first element if no <b>initialValue</b> is provided). It takes in
+          
+            > <b>accumulator</b> - It accumulates the callback's return values.
+            > <b>currentValue</b> - The current element being passed from the array.
+          
+          2) => <b>initialValue</b>(optional) - A value that will be passed to <b>callback()</b> on first call.If not provided, the first element acts as the <b>accumulator</b> on the first call and <b>callback()</b> won't execute on it.
+          
+          <b>Note: </b> Calling reduce() on an empty array without initialValue will throw TypeError.
+          
+          <b>reduce() Return Value:- </b>
+            Returns the single value resulting after reducing the array.
+
+          Notes:
+          > <b>reduce()</b> executes the given function for each value from left to right.
+          > <b>reduce()</b> does not change the original array.
+          > It is almost always safer to provide <b>initialValue</b>.
+
+          <b>Accumulator:</b> This contains the value calculated from the previous iteration. On the first iteration, if an <b>initialValue</b> will be provided, the accumulator will be set to the value of <b>initialValue</b>.
+          <b>CurrentValue:</b> The current value of the element is processed in the array.
+          <b>CurrentIndex:</b> The index of the current element is processed in the array.
+          <b>Array:</b> The original array on which the <b>reduce()</b> method was called.
+
+          When to Use the reduce() Method:--
+          As shown above, the reduce() method is recommended when you need to have a single value returned from iterating over your array.
+          
+          This includes:
+          
+          > Summarizing your values into a single value
+          > Grouping similar items together
+          > Removing duplicates from an array
+          
+          The single value returned by the method can also be an array of objects, therefore containing multiple values.
+          
+          Suppose that you have an array of numbers, like this:
+          let numbers = [1, 2, 3];
+
+          // and you want to calculate the total of elements of the array. Typically, you use a 'for' loop to iterate over the elements and add them up as shown in the following example:
+          
+          let numbers = [1, 2, 3];
+          let sum = 0;
+          for (let i = 0; i < numbers.length; i++) {
+            sum += numbers[i];
+          }
+          console.log(sum);
+          
+          // Output:
+          // 6
+          `,
+          code1: ``
+        },
+        {
+          text1: ` The script is simple and straightforward:--
+
+          > First, declare an array of three numbers 1, 2 and 3.
+            > Second, declare the sum variable and set its value to zero.
+          > Third, in the for loop, add up the elements of the numbers array to the sum variable.After the loop, the value of the sum variable is 6.
+          
+          What we have done was to 'reduce' an array into a value.
+          
+          The 'Array.prototype' allows you to reduce an array to a single value using the 'reduce()' method like this:
+          `,
+          code1: `let numbers = [1, 2, 3];
+          let sum = numbers.reduce(function(previousValue, currentValue) {
+            return previousValue + currentValue;
+          });
+          console.log(sum);`
+        },
+        {
+          text1: `JavaScript Array reduce() method in detail: --
+            The following illustrates the syntax of the 'reduce()' method:
+          
+          array.reduce(callbackFn[, initialValue])
+          
+          The 'reduce()' method takes two arguments:
+          
+          > A callback function 'callbackFn'.The function is often referred to as a reducer.
+          > An optional initial value.
+            The 'reduce()' method calls the 'callbackFn()' function for every element in the array.
+          
+              The 'reducer()' function returns a value that results from executing the 'callbackFn' to completion over the entire array.
+              1) The callbackFn() function argument
+
+               The 'callbackFn' function has the following syntax:
+              
+               function callbackFn(previousValue, currentValue, currentIndex, array) { /**/ }
+              
+              
+               The 'callbackFn' function takes four arguments:
+              
+               'previousValue':
+               The value returned from the previous call of the 'callbackFn' function. On the first call, the 'initialValue' is the 'previousValue' if you pass the 'initialValue'.Otherwise, its value is the 'array[0]'.
+              
+                 currentValue:
+               The value of the current array element.On the first call, it is 'array[0]' if you pas the 'initialValue' or 'array[1]' otherwise.
+              
+                 currentIndex:
+               The index of the currentValue in the array.On the first call, it’s '0' if you pass the 'initialValue' or '1' otherwise.
+              
+               'array':
+               The array to loop through.
+
+               <b>2) The initialValue argument</b>
+               The 'initialValue' argument is optional.
+               
+               If you specify the 'initialValue', the 'callbackFn' function will initialize the 'previousValue' to the 'initialValue' and 'currentValue' to the first array’s element on the first call.
+               
+               If you don’t specify the 'initialValue', the the 'callbackFn' function will initialize the 'previousValue' to the first array’s element(array[0]) in the array and the 'currentValue' to the second array’s element(array[1]).
+               
+               The following table illustrates the logic when the 'reduce()' method executes the 'callbackFn()' function for the first time according to the 'initialValue' argument:
+
+               <div class='table-res'>
+                    <table border=1 >
+                        <tbody>
+                            <tr>
+                              <th>initialValue</th>
+                              <th>previousValue</th>
+                              <th>currentValue</th>
+                            </tr>
+
+                            <tr>
+                              <td>passed</td>
+                              <td>initialValue</td>
+                              <td>array[0]</td>
+                            </tr>
+
+                            <tr>
+                              <td>not passed</td>
+                              <td>array[0]</td>
+                              <td>array[1]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              `,
+          code1: `// The following example shows the progress of the reduce() function with an 'initialValue' as 100:
+
+          let numbers = [1, 2, 3];
+          
+          function getOrdinalSuffix(i) {
+            let j = i % 10, k = i % 100;
+            if (j == 1 && k != 11) return i + 'st';
+            if (j == 2 && k != 12) return i + 'nd';
+            if (j == 3 && k != 13) return i + 'rd';
+            return i + 'th';
+          }
+          
+          let call = 1;
+          let sum = numbers.reduce(function(previousValue, currentValue, currentIndex, array) {
+            let result = previousValue + currentValue;
+          
+            // show the 1st call, 2nd call, etc.
+            console.log('\${getOrdinalSuffix(call)} call');
+            call++;
+          
+            // show the immediate values
+            console.table({ previousValue, currentValue, currentIndex, result });
+          
+            return result;
+          }, 100);
+          
+          console.log('Result: \${sum}');
+          `
+        },
+        {
+          text1: `Output:
+          1st call
+
+          <div class='table-res'>
+            <table border=1 >
+                <tbody>
+                    <tr>
+                      <th> (index)  </th>
+                      <th> Values </th>
+                    </tr>
+
+                    <tr>
+                      <td>previousValue</td>
+                      <td>100</td>
+                    </tr>
+
+                    <tr>
+                      <td>currentValue</td>
+                      <td>1</td>
+                    </tr>
+
+                    <tr>
+                      <td>currentIndex</td>
+                      <td> 0 </td>
+                    </tr>
+
+                    <tr>
+                      <td>result</td>
+                      <td> 101 </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        2nd call
+
+          <div class='table-res'>
+            <table border=1 >
+                <tbody>
+                    <tr>
+                      <th> (index)  </th>
+                      <th> Values </th>
+                    </tr>
+
+                    <tr>
+                      <td>previousValue</td>
+                      <td>101</td>
+                    </tr>
+
+                    <tr>
+                      <td>currentValue</td>
+                      <td>2</td>
+                    </tr>
+
+                    <tr>
+                      <td>currentIndex</td>
+                      <td> 1 </td>
+                    </tr>
+
+                    <tr>
+                      <td>result</td>
+                      <td> 103 </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        3rd call
+
+          <div class='table-res'>
+          <table border=1 >
+              <tbody>
+                  <tr>
+                    <th> (index)  </th>
+                    <th> Values </th>
+                  </tr>
+
+                  <tr>
+                    <td>previousValue</td>
+                    <td>103</td>
+                  </tr>
+
+                  <tr>
+                    <td>currentValue</td>
+                    <td> 3 </td>
+                  </tr>
+
+                  <tr>
+                    <td>currentIndex</td>
+                    <td> 2 </td>
+                  </tr>
+
+                  <tr>
+                    <td>result</td>
+                    <td> 106 </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+
+        Result: 106
+          `,
+          code1: ``
+        },
+        {
+          text1: ` And the following illustrates the 'reduce()' method without the 'initialValue' argument:
+        1st call
+
+          <div class='table-res'>
+          <table border=1 >
+              <tbody>
+                  <tr>
+                    <th> (index) </th>
+                    <th> Values </th>
+                  </tr>
+
+                  <tr>
+                    <td>previousValue</td>
+                    <td>1</td>
+                  </tr>
+
+                  <tr>
+                    <td>currentValue</td>
+                    <td> 2 </td>
+                  </tr>
+
+                  <tr>
+                    <td>currentIndex</td>
+                    <td> 1 </td>
+                  </tr>
+
+                  <tr>
+                    <td>result</td>
+                    <td> 3 </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+        2nd call
+
+          <div class='table-res'>
+          <table border=1 >
+              <tbody>
+                  <tr>
+                    <th> (index) </th>
+                    <th> Values </th>
+                  </tr>
+
+                  <tr>
+                    <td>previousValue</td>
+                    <td> 3 </td>
+                  </tr>
+
+                  <tr>
+                    <td>currentValue</td>
+                    <td> 3 </td>
+                  </tr>
+
+                  <tr>
+                    <td>currentIndex</td>
+                    <td> 2 </td>
+                  </tr>
+
+                  <tr>
+                    <td>result</td>
+                    <td> 6 </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+
+          // Result: 6
+          // More JavaScript Array reduce() examples: --
+          // Suppose that you have the following 'shoppingCart' array of product objects:`,
+          code1: `let shoppingCart = [
+            {
+              product: 'phone',
+              qty: 1,
+              price: 500,
+            },
+            {
+              product: 'Screen Protector',
+              qty: 1,
+              price: 10,
+            },
+            {
+              product: 'Memory Card',
+              qty: 2,
+              price: 20,
+            },
+          ];
+          
+          // To calculate the total amount of the products in the shopping cart, you can use the 'reduce()' method, like this:
+          
+          let total = shoppingCart.reduce(function(previousValue, currentValue) {
+            return previousValue + currentValue.qty * currentValue.price;
+          }, 0);
+          
+          // Output:
+          // 550
+          `
+        },
+        {
+          text1: `Notice that in this example, we passed in the 'initialValue' argument to the 'reduce()' method.
+
+          If we didn’t do so, the 'reduce()' method would take the first element of the 'shoppingCart' array, which is an object, as an initial value and perform the calculation on this object.Hence, it would cause an incorrect result.
+          
+          
+          JavaScript Array reduceRight() method: --
+            The 'reduceRight()' method works in the same way as the 'reduce()' method, but in the opposite direction.
+          
+              The 'reduce()' method starts at the first element and travels toward the last, whereas the 'reduceRight()' method starts at the last element and travels backward the first.
+          
+          See the following example:`,
+          code1: `let numbers = [1, 2, 3];
+
+          let sum = numbers.reduceRight(function(previousValue, currentValue) {
+            console.log({ previousValue, currentValue });
+            return previousValue + currentValue;
+          });
+          
+          console.log('Result: \${sum}');
+          
+          // Output
+          
+          // { previousValue: 3, currentValue: 2 }
+          // { previousValue: 5, currentValue: 1 }
+          // Result:6
+          
+          // reduceRight() methods to reduce an array into a value.
+
+// Map
+function double(x){
+    return x * 2
+}
+const ar = [2,4,7,9];
+const dValues = ar.map(double)
+console.log(dValues)
+
+
+function total(arr) {
+   return arr.reduce(function(tot, acc, i, arrr){
+    console.log("tot ",tot)
+    console.log("acc ",acc)
+    return tot + acc
+   }, 0)
+}
+
+console.log(total([1,2,3])); // 6
+
+const userDetails = [
+    {
+        fullName: "American First Finance",
+        area: 'yes',
+    },
+    {
+        fullName: "World Health",
+        area: 'yes',
+    }
+]
+
+//-----------------
+// returning new array
+const newARR = userDetails.map(acc => {
+    const shortOb =  {...acc, shordName : acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('') }
+    return shortOb
+})
+console.log(newARR) //
+output
+[
+    { fullName: 'American First Finance', area: 'yes' },
+    { fullName: 'World Health', area: 'yes'}
+]
+
+//------------------------
+// mutated original array
+userDetails.forEach(acc => {
+    acc.shortName = acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('')
+})
+console.log(userDetails)
+output
+[
+    { fullName: 'American First Finance', area: 'yes', shordName: 'aff' },
+    { fullName: 'World Health', area: 'yes', shordName: 'wh' }
+]
+
+// ========================================
+
+
+
+// Example 1:
+const bankMovementsInDollars = [130, -50, 2000, -500, 1200, 2000, -400, -200, 500]
+const rupees = 83.64
+const credis = bankMovementsInDollars.filter(mov => mov > 0)
+                                    .map(doll => doll * rupees)
+                                    .reduce((acc, mov) => acc + mov, 0)
+console.log("total credits in rupees ",credis)
+
+// ---------
+// Example 2:   
+// For example, here is the code for getting the total number of occurrences for each fruit in an array of fruits:
+const fruits = ['Banana', 'Orange', 'Apple', 'Orange', 'Pear', 'Banana', 'Pear', 'Banana']
+
+const occursFruits = fruits.reduce((acc, currFruit) => {
+    return { ...acc, [currFruit]: (acc[currFruit] || 0) + 1 }
+    // return 1
+}, {})
+console.log(occursFruits)
+
+// Note that at each step of the iteration, the accumulator will be a hash map (i.e. a JavaScript object) with a key for each fruit in the array so far, and the values will be the number of times each fruit has occurred. This is the expression where we update the accumulator:
+
+// {...acc, [currFruit]: (acc[currFruit] || 0) + 1 }
+// Let's break this down a little. First, using the spread operator, ...acc copies over all the existing values from the accumulator.
+
+// Then, [currFruit]: sets the value for the current fruit in the array. For example, on the very first iteration over the fruits collection, this will create the Banana property. acc[currFruit] || 0 retrieves the value for that fruit from the previous version of the accumulator. If the fruit doesn't exist in the accumulator, it will start with a value of zero. 
+
+// Finally, we add 1 to the value of that fruit and return the new accumulator.
+
+// -----------
+// Example 3:
+// For example, suppose we want to get just the names of each student from an array of objects. We can reduce the array from an array of objects to an array of string values, like so:
+
+const students = [
+    { name: "Kingsley", score: 70 },
+    { name: "Jack", score: 80 },
+    { name: "Joe", score: 63 },
+    { name: "Beth", score: 75 },
+    { name: "Kareem", score: 59 },
+    { name: "Sarah", score: 93 }
+]
+
+const stuNames = students.map((stu) => {
+    return stu.name
+})
+console.log(stuNames)
+
+const stuNamesReduce = students.reduce((acc, stu) => {
+    return [...acc, stu.name]
+},[])
+console.log(stuNamesReduce)
+
+// ----------
+// Example 4:
+// total marks
+const studentsArray = [
+    { name: "Kingsley", sub1: 45, sub2: 45, sub3: 45 },
+    { name: "Jack", sub1: 41, sub2: 44, sub3: 85 },
+    { name: "Joe", sub1: 57, sub2: 49, sub3: 45 },
+    { name: "Beth", sub1: 45, sub2: 85, sub3: 65 },
+    { name: "Kareem", sub1: 15, sub2: 65, sub3: 95 },
+    { name: "Sarah", sub1: 35, sub2: 65, sub3: 5 }
+]
+
+const sutMarks = studentsArray.reduce((acc, currStu) => {
+    // return { ...acc, [currStu.name]: currStu.sub1 + currStu.sub2 + currStu.sub3 }
+    return [...acc, {...currStu, total: currStu.sub1 + currStu.sub2 + currStu.sub3 }]
+}, [])
+
+console.log(sutMarks)
+console.log(studentsArray)
+
+const students = [
+    { name: "Kingsley", score: 70 },
+    { name: "Jack", score: 80 },
+    { name: "Joe", score: 63 },
+    { name: "Beth", score: 75 },
+    { name: "Kareem", score: 59 },
+    { name: "Sarah", score: 93 }
+]
+
+const max = students.reduce((acc, currStu) => {
+    console.log(acc, currStu.score)
+    return acc ?? currStu.score > acc ? currStu.score : acc
+}, null)
+
+// console.log(max)
+
+// ---------
+// Example 5:
+let ArrayList = ["Gun", "Hat", "Hate", "Apple", "Animals", "Ball", "Bat", "Cat", "Candy", "Dog", "Dare", "Exam", "Earth", "Air"];
+const chOb = ArrayList.reduce((acc, let) => {
+    return { ...acc, [let[0]]: acc[let[0]] ? acc[let[0]].concat([let]) : [let] }
+}, {})
+
+// console.log(chOb)
+
+// // {"A":["Animals","Apple"],"B":["Ball","Bat"],"C":["Candy","Cat"],"D":["Dare","Dog"],"E":["Earth","Exam"],"G":["Gang","Gun"],"H":["Hat","Hate"]}
+          `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "every() - check if every element in an array passes a test.",
+      note: [
+        {
+          text1: `Checking array elements using the for loop:--
+          Sometimes, you need to test whether every element of an array satisfies a specified condition.
+          
+          Typically, you use a  'for' loop to iterate all elements and check each individual element against the condition. Suppose that you have an array 'numbers' with three elements:
+          
+          let numbers = [1, 3, 5];
+          The following code checks if every element in the 'numbers' array is greater than zero:`,
+          code1: `let numbers = [1, 3, 5];
+          let result = true;
+          for (let i = 0; i < numbers.length; i++) {
+            if (numbers[i] <= 0) {
+              result = false;
+              break;
+            }
+          }
+          console.log(result);
+          // Output:
+          // true
+          // How it works:`
+        },
+        {
+          text1: `> First, initialize the  'result' variable to 'true'.
+          > Second, iterate over the elements of the 'numbers' array and check whether each element is less than or equal zero.If it is the case, set the 'result' variable to 'false' and terminate the loop immediately using the 'break' statement.In case no element is less than or equal zero, the value of the 'result' variable remains  'true'.
+          
+          This code is simple and straight forward.However, it is quite verbose.
+          
+            JavaScript 'Array' type provides the 'every()' method that allows you to check if every element of an array pass a test in a shorter and cleaner way.
+          
+          
+          Introduction to JavaScript Array every() method: --
+          
+            Starting from ES5, JavaScript Array type provides a method 'every()' that tests every element in an array.
+          
+          The following example uses the 'every()' to check if every element of the numbers array is greater than zero:`,
+          code1: `let numbers = [1, 3, 5];
+          let result = numbers.every(function(e) {
+            return e > 0;
+          });
+          
+          console.log(result);
+          
+          // Output:
+          // true
+          
+          // By using the ES6 arrow functions, the code can be even shorter:
+
+let numbers = [1, 3, 5];
+let result = numbers.every(e => e > 0);
+console.log(result);
+          `
+        },
+        {
+          text1: `  The following illustrates the syntax of the 'every()' method.
+
+              arrayObject.every(callback[, thisArg])
+          
+          The 'every()' method accepts two named arguments: 'callback' and 'thisArg'.
+          
+          1) The callback argument
+          The 'callback' is a function that tests each element of the array.The 'callback()' function has the following form:
+          
+          function callback(currentElement, index, array) {
+            //...
+          }
+          
+          The 'callback()' function takes three arguments:
+          
+          First, the 'currentElement' is the current element that is being processed.
+            Second, the 'index' is the index  of the 'currentElement'.
+              Third, the 'array' is the array that the 'every()' method was called upon.
+                The 'currentElement' argument is required whereas the 'index' and 'array' arguments are optional.
+                  2) The thisArg argument
+  The 'thisArg' argument of the 'every()' method is optional.If you pass the 'thisArg' argument into the method, the this value inside the callback function will reference the 'thisArg' argument.
+
+  The 'every()' method returns 'true' if the 'callback' function returns a truthy value for every array element; otherwise, it returns 'false'.
+
+  Note that the 'every()' method executes the 'callback()' function on every element in the array until it finds the one that causes the 'callback()' return a falsy value.
+
+  In other words, the 'every()' will stop calling the 'callback()' function and return 'false' once there is an array element that causes 'callback()' to return a falsy value.
+
+  Let’s take a look at some more examples of using the 'every()' method.
+
+More JavaScript Array every() method examples
+The following example tests whether all the array elements are the even numbers
+          `,
+          code1: `let numbers = [1, 3, 5];
+          let isEven = numbers.every(function(e) {
+            return e % 2 == 0;
+          });
+          
+          console.log(isEven);
+          
+          // Output:
+          // false
+          
+          // In contrast, the following example tests if all the array elements are the odd numbers.
+
+let numbers = [1, 3, 5];
+let isOdd = numbers.every(function(e) {
+  return Math.abs(e % 2) == 1;
+});
+
+console.log(isOdd);
+
+// Output:
+// true
+
+// Suppose that you have an object with two properties: 'min' and 'max':
+
+let range = {
+  min: 0,
+  mas: 10
+};
+
+// The following example tests whether all elements in the 'numbers' array is in the range specified by the 'min' and 'max' of the 'range' object.
+
+
+let numbers = [1, 3, 5];
+
+let range = {
+  min: 0,
+  max: 10
+};
+
+let isInRange = numbers.every(function(e) {
+  return e >= this.min && e <= this.max;
+}, range);
+
+// Output:
+// true
+
+          `
+        },
+        {
+          text1: `In this example, we pass the 'range' object to the 'every()' method as the second argument.And inside the 'callback()' function, we reference the 'range' object using the this keyword.
+
+            Caution: Empty arrays: --
+              If you call the 'every()' method on an empty array, the method will always return true for any condition.For example:`,
+          code1: `let gtZero = [].every(e => e > 0); // any condition
+          let ltZero = [].every(e => e < 0); // any condition
+          
+          console.log('gtZero:', gtZero);
+          console.log('ltZero:', ltZero);
+          
+          // Output:
+          // gtZero: true
+          // ltZero: true`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "some() - check if at least one element in an array passed a test.",
+      note: [
+        {
+          text1: ` The some() method of Array instances tests whether at least one element in the array passes the test implemented by the provided function. It returns true if, in the array, it finds an element for which the provided function returns true; otherwise it returns false. It doesn't modify the array.
+
+           The some() method is an Array.propotype (built-in) method which takes in a callback function and will test that function  on each iteration against the current item.
+          
+           The method takes in three parameters:
+          
+           > currentItem: This is the element inside of the array which is currently being iterated over
+           > index: This is the index position of the currentItem inside of the array
+           > array: This represents the array collection to which the some() method is bound
+          
+           Sometimes, you want to check if an array has at least one element that meets a specified condition.
+          
+           For example, to check if the following array has at least one element less than 5:`,
+          code1: `let marks = [4, 5, 7, 9, 10, 3];
+
+           …you typically use a 'for' loop, like this:
+          
+          let marks = [4, 5, 7, 9, 10, 3];
+          
+          let lessThanFive = false;
+          
+          for (let index = 0; index < marks.length; index++) {
+            if (marks[index] < 5) {
+              lessThanFive = true;
+              break;
+            }
+          }
+          
+          console.log(lessThanFive);
+          
+          //  Output:
+          //  true
+
+          //  > First, declare a flag variable 'lessThanFive' and set its value to 'false'.
+          //  > Second, iterate over the elements.If an element is less than 5, set the flag to 'true' and immediately exit the loop using the 'break' statement.
+          //  The code works as expected.However, it is quite verbose.
+           
+           //---------------------------
+           let marks = [4, 5, 7, 9, 10, 3];
+
+lessThanFive = marks.some(function(e) {
+  return e < 5;
+});
+
+console.log(lessThanFive);
+
+// Output
+// true
+
+// The condition is implemented via a callback function passed into the 'some()' method.
+// Now, the code is shorter.To make it more expressive, you can use the arrow function syntax in ES6:
+
+let marks = [4, 5, 7, 9, 10, 3];
+let lessThanFive = marks.some(e => e < 5);
+console.log(lessThanFive);
+           `
+        },
+        {
+          text1: ` JavaScript Array 'some()' syntax: --
+          
+           arrayObject.some(callback[, thisArg]);
+          
+           The 'some()' method accepts two arguments:
+          
+           1) The callback argument
+           The 'some()' function executes the 'callback' function once for each element in the array until it finds the one where the 'callback' function returns a 'true'.The 'some()' method immediately returns 'true' and doesn’t evaluate the remaining elements.
+          
+           If no element causes the 'callback()' to return 'true', the 'some()' method returns 'false'.
+          
+             The 'callback' function takes three arguments:
+          
+           function callback(currentElement [[, currentIndex], array]) {  ...}
+          
+           > The 'currentElement' is the current element being processed in the array.
+           > The 'currentIndex' is the index of the current element being processed in the array.
+           > The 'array' is array that 'some()' was called upon.
+          
+           2) The thisArg argument: --
+             The 'thisArg' argument is optional.If you pass the 'thisArg' into the method, you can use the 'thisArg' as the 'this' value inside the 'callback' function.
+          
+           JavaScript Array some() examples: --
+           Let’s take some more examples of using the 'some()' method.
+          
+           1) Check if an element exists in the array:
+           The following 'exists()' function uses the 'some()' method to check if a value exists in an array:`,
+          code1: `function exists(value, array) {
+            return array.some(e => e === value);
+          }
+          
+          let marks = [4, 5, 7, 9, 10, 2];
+          
+          console.log(exists(4, marks));
+          console.log(exists(11, marks));
+          
+          // Output:
+          // true
+          // false`
+        },
+        {
+          text1: `2) Check if an array has one element that is in a range: --
+          The following example shows how to check if any number in the 'marks' array is in the range of(8, 10):`,
+          code1: `let marks = [4, 5, 7, 9, 10, 2];
+          const range = {
+            min: 8,
+            max: 10
+          };
+          
+          let result = marks.some(function(e) {
+            return e >= this.min && e <= this.max;
+          }, range);
+          
+          console.log(result);
+          
+          // Output:
+          // true
+          
+          // > First, define a range object with min and max properties.
+// > Second, call the 'some()' method on the marks array object and pass the callback and range object.Because we pass the range object as the second argument('thisArg'), we can reference it inside the callback via the 'this' value.
+          `
+        },
+        {
+          text1: `<b>Notice</b> that if you use the arrow function in this example, the 'this' value inside the callback function doest not bind to the range 'object' but the 'global' object.
+          Caution: Empty arrays
+If you call the some() method on an empty array, the result is always false regardless of any condition. 
+For example:
+          `,
+          code1: `let result = [].some(e => e > 0);
+          console.log(result);
+          
+          result = [].some(e => e <= 0);
+          console.log(result);
+          
+          //   Output:
+          //   false
+          //   false`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "sort() - sort elements in an array.",
+      note: [
+        {
+          text1: `The sort() function allows you to sort an array object by either the default sorting order, or by a custom sorting function.
+
+          By default, it sorts the elements in the array in ascending order based on their string Unicode values. The function takes the inputs, converts them to strings, and then sorts them using Unicode values.
+
+          The 'sort()' method allows you to sort elements of an array in place.Besides returning the sorted array, the 'sort()' method changes the positions of the elements in the original array.
+          
+          By default, the 'sort()' method sorts the array elements in ascending order with the smallest value first and largest value last.
+          
+          The 'sort()' method casts elements to strings and compares the strings to determine the orders.
+          
+          Consider the following example:`,
+          code1: `let numbers = [0, 1, 2, 3, 10, 20, 30];
+          numbers.sort();
+          console.log(numbers);
+          
+          // The output is:
+          // [0, 1, 10, 2, 20, 3, 30]`
+        },
+        {
+          text1: `In this example, the 'sort()' method places 10 before 2 because the string “10” comes before “2” when doing a string comparison.
+
+          To fix this, you need to pass a compare function to the 'sort()' method.The 'sort()' method will use the compare function to determine the orders of elements.
+          
+          The following illustrates the syntax of the 'sort()' method:
+          
+          array.sort(comparefunction)
+          
+          The 'sort()' method accepts an optional argument which is a function that compares two elements of the array.
+          
+          If you omit the compare function, the 'sort()' method sorts the elements with the sort order based on the Unicode code point values of elements as mentioned earlier.
+          
+          The compare function of the 'sort()' method accepts two arguments and returns a value that determines the sort order.The following illustrates the syntax of the compare function:
+          
+            function compare(a, b) {
+            // ...
+          }
+          
+          The 'compare()' function accepts two arguments 'a' and 'b'.The 'sort()' method will sort elements based on the return value of the 'compare()' function with the following rules:
+          
+          1). If 'compare(a, b)' is less than zero, the 'sort()' method sorts 'a' to a lower index than 'b'.In other words, a will come first.
+          2). If 'compare(a, b)' is greater than zero, the 'sort()' method sort 'b' to a lower index than 'a', i.e., b will come first.
+          3). If 'compare(a, b)' returns zero, the 'sort()' method considers a equals b and leaves their positions unchanged.
+          To fix the issue of sorting the number, you can use the following syntax:
+          `,
+          code1: `let numbers = [0, 1, 2, 3, 10, 20, 30];
+          numbers.sort(function(a, b) {
+            if (a > b) return 1;
+            if (a < b) return -1;
+            return 0;
+          });
+          
+          console.log(numbers);
+          
+          // Output:
+          // [0, 1, 2, 3, 10, 20, 30]
+          
+          // Or you can define the comparison function using the arrow function syntax:
+          
+          let numbers = [0, 1, 2, 3, 10, 20, 30];
+          numbers.sort((a, b) => {
+            if (a > b) return 1;
+            if (a < b) return -1;
+            return 0;
+          });
+          
+          console.log(numbers);
+          
+          // And the following is the simplest since the elements of the array are numbers:
+          
+          let numbers = [0, 1, 2, 3, 10, 20, 30];
+          numbers.sort((a, b) => a - b);
+          
+          console.log(numbers);
+          
+          // Sorting an array of strings: --
+          // ----------------------------
+          // Suppose you have an array of string named 'animals' as follows:
+          
+          let animals = [
+            'cat', 'dog', 'elephant', 'bee', 'ant'
+          ];
+          
+          // To sort the elements of the 'animals' array in ascending order alphabetically, you use the 'sort()' method without passing the compare function as shown in the following example:
+          
+          let animals = [
+            'cat', 'dog', 'elephant', 'bee', 'ant'
+          ];
+          animals.sort();
+          
+          console.log(animals);
+          
+          // Output:
+          // ['ant', 'bee', 'cat', 'dog', 'elephant']
+          
+          
+          // To sort the 'animals' array in descending order, you need to change the logic of the compare function and pass it to the 'sort()' method as the following example.
+          
+          let animals = [
+            'cat', 'dog', 'elephant', 'bee', 'ant'
+          ];
+          
+          animals.sort((a, b) => {
+            if (a > b)
+              return -1;
+            if (a < b)
+              return 1;
+            return 0;
+          });
+          
+          console.log(animals);
+          
+          Output:
+          ['elephant', 'dog', 'cat', 'bee', 'ant']
+          
+          // Suppose you have an array that contains elements in both uppercase and lowercase as follows:
+          
+          // sorting array with mixed cases
+          let mixedCaseAnimals = [
+            'Cat', 'dog', 'Elephant', 'bee', 'ant'
+          ];
+          
+          // To sort this array alphabetically, you need to use a custom compare function to convert all elements to the same case e.g., uppercase for comparison and pass that function to the 'sort()' method.
+          
+          let mixedCaseAnimals = [
+            'Cat', 'dog', 'Elephant', 'bee', 'ant'
+          ];
+          
+          mixedCaseAnimals.sort(function(a, b) {
+            let x = a.toUpperCase(),
+              y = b.toUpperCase();
+            return x == y ? 0 : x > y ? 1 : -1;
+          
+          });
+          
+          // Output:
+          // ['ant', 'bee', 'Cat', 'dog', 'Elephant']`
+        },
+        {
+          text1: `Sorting an array of strings with non-ASCII characters:--
+          
+          The 'sort()' method is working fine with the strings with ASCII characters.However, for the strings with non - ASCII characters e.g., é, è, etc., the 'sort()' method will not work correctly.For example:`,
+          code1: `let animaux = ['zèbre', 'abeille', 'écureuil', 'chat'];
+          animaux.sort();
+          console.log(animaux);
+
+          // As you see, the 'écureuil' string should come before the 'zèbre' string.
+          
+          // To resolve this, you use the 'localeCompare()' method of the 'String' object to compare strings in a specific locale, like this:
+          
+          animaux.sort(function(a, b) {
+            return a.localeCompare(b);
+          });
+          console.log(animaux);
+          
+          // Output:
+          // ['abeille', 'chat', 'écureuil', 'zèbre']
+          
+          // The elements of the 'animaux' array now are in the correct order.
+          
+// Sorting an array of numbers: --
+// ------- -- ----- -- --------
+//   Suppose you have an array of numbers named 'scores' as in the following example.
+
+let scores = [
+  9, 80, 10, 20, 5, 70
+];
+
+// To sort an array of numbers numerically, you need to pass into a custom comparison function that compares two numbers.
+
+// The following example sorts the 'scores' array numerically in ascending order.
+
+let scores = [
+  9, 80, 10, 20, 5, 70
+];
+// sort numbers in ascending order
+scores.sort((a, b) => a - b);
+
+console.log(scores);
+
+// Output:
+// [5, 9, 10, 20, 70, 80]
+
+
+// To sort an array of numbers numerically in descending order, you just need to reverse the logic in the compare function as shown in the following example:
+
+let scores = [
+  9, 80, 10, 20, 5, 70
+];
+// descending order
+scores.sort((a, b) => b - a);
+console.log(scores);
+
+// Output:
+// [80, 70, 20, 10, 9, 5]
+
+
+// Sorting an array of objects by a specified property: --
+// ------- -- ----- -- ------- -- - --------- --------
+//   The following is an array of 'employee' objects, where each object contains three properties: 'name', 'salary' and 'hireDate'.
+
+let employees = [
+  { name: 'John', salary: 90000, hireDate: "July 1, 2010" },
+  { name: 'David', salary: 75000, hireDate: "August 15, 2009" },
+  { name: 'Ana', salary: 80000, hireDate: "December 12, 2011" }
+];
+
+// Sorting objects by a numeric property
+// The following example shows how to sort the employees by 'salary' in ascending order.
+
+// sort by salary
+employees.sort(function(x, y) {
+  return x.salary - y.salary;
+});
+
+console.table(employees);
+
+Output: <table>
+
+
+// This example is similar to the example of sorting an array of numbers in ascending order.The difference is that it compares the 'salary' property of two objects instead.
+
+// Sorting objects by a string property:
+// ------- ------- -- - ------ --------
+// To sort the 'employees' array by 'name' property case-insensitively, you pass the compare function that compares two strings case-insensitively as follows:
+
+employees.sort(function(x, y) {
+  let a = x.name.toUpperCase(),
+    b = y.name.toUpperCase();
+  return a == b ? 0 : a > b ? 1 : -1;
+});
+
+console.table(employees);
+
+// Sorting objects by the date property:--
+// ------- ------- -- --- ---- --------
+// Suppose, you wish to sort employees based on each employee’s hire date.
+
+// The hire date data is stored in the 'hireDate' property of the employee object. However, it is just a string that represents a valid date, not the 'Date' object. 
+
+// Therefore, to sort employees by hire date, you first have to create a valid 'Date' object from the date string, and then compare two dates, which is the same as comparing two numbers.
+
+// Here is the solution:
+
+employees.sort(function(x, y) {
+  let a = new Date(x.hireDate),
+    b = new Date(y.hireDate);
+  return a - b;
+});
+
+console.table(employees);
+
+// Optimizing JavaScript Array sort() method:--
+// ---------- ---------- ----- ------ ------
+// In fact, the 'sort()' method calls the compare function multiple times for each element in the array.
+
+// See the following example:
+
+let rivers = ['Nile', 'Amazon', 'Congo', 'Mississippi', 'Rio-Grande'];
+
+rivers.sort(function(a, b) {
+  console.log(a, b);
+  return a.length - b.length;
+});
+
+// Output:
+// Amazon Nile
+// Congo Amazon
+// Congo Amazon
+// Congo Nile
+// Mississippi Congo
+// Mississippi Amazon
+// Rio - Grande Amazon
+// Rio - Grande Mississippi
+          `
+        },
+        {
+          text1: `> First, declare an array 'rivers' that consists of the famous river names.
+          > Second, sort the 'rivers' array by the length of its element using the 'sort()' method.We output the elements of the 'rivers' array to the web console whenever the 'sort()' method invokes the comparison function .
+          
+          As shown in the output above, each element has been evaluated multiple times e.g., Amazon 4 times, Congo 2 times, etc.
+          
+          If the number of array elements is increasing, it will potentially decrease the performance.
+          
+          You cannot reduce the number of times that comparison function is executed. However, you can reduce the work that the comparison has to do. This technique is called Schwartzian Transform.
+          
+          To implement this, you follow these steps:
+          
+          1) First, extract the actual values into a temporary array using the map() method.
+          2) Second, sort the temporary array with the elements that are already evaluated(or transformed).
+          3) Third, walk the temporary array to get an array with the right order.
+          `,
+          code1: `// Here is the solution:
+
+          // temporary array holds objects with position
+          // and length of element
+          var lengths = rivers.map(function(e, i) {
+            return { index: i, value: e.length };
+          });
+          
+          // sorting the lengths array containing the lengths of
+          // river names
+          lengths.sort(function(a, b) {
+            return +(a.value > b.value) || +(a.value === b.value) - 1;
+          });
+          
+          // copy element back to the array
+          var sortedRivers = lengths.map(function(e) {
+            return rivers[e.index];
+          });
+          
+          console.log(sortedRivers);
+          
+          // Output:
+          // [ 'Nile', 'Congo', 'Amazon', 'Rio-Grande', 'Mississippi' ]
+          
+          // In this tutorial, you have learned how to use the JavaScript Array 'sort()' method to sort arrays of strings, numbers, dates, and objects.`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "forEach() - loop through array elements.",
+      note: [
+        {
+          text1: ` The forEach() array method loops through any array, executing a provided function once for each array element in ascending index order. This function is referred to as a callback function.
+
+             The forEach method passes a callback function for each element of an array together with the following parameters:
+          
+            > Current Value (required) - The value of the current array element
+            > Index (optional) - The current element's index number
+            > Array (optional) - The array object to which the current element belongs
+          
+           Typically, when you want to execute a 'function' on every element of an 'array', you use a for 'loop' statement.
+          
+           For example, the following code shows every element of an array to console:`,
+          code1: `let ranks = ['A', 'B', 'C'];
+          for (let i = 0; i < ranks.length; i++) {
+            console.log(ranks[i]);
+          }
+          
+          // Output:
+          // A
+          // B
+          // C
+          
+          // JavaScript Array provides the 'forEach()' method that allows you to run a function on every element.
+          // The following code uses the 'forEach()' method that is equivalent to the code above:
+          
+          let ranks = ['A', 'B', 'C'];
+          
+          ranks.forEach(function(e) {
+            console.log(e);
+          });
+          
+          // Output:
+          // A
+          // B
+          // C`
+        },
+        {
+          text1: ` The 'forEach()' method iterates over elements in an array and executes a predefined function once per element.
+           The following illustrates the syntax of the 'forEach()' method.
+          
+           Array.forEach(callback[, thisArg]);
+          
+           The 'forEach()' method takes two arguments:
+          
+           1) callback:
+          ------------
+           The 'callback' function that the 'forEach()' method uses to execute on every element.
+          
+           The callback accepts the following arguments:
+          
+           'currentElement': is the current array element being processed.
+           'index': the index of the 'currentElement' in the array.
+           'array': the array that calls the 'forEach()' method.
+          
+           The index and array are optional.
+          
+           2) thisArg:
+          -----------
+           The 'thisArg' is a value to use as this when executing the callback.
+          
+           Note that the 'forEach()' function returns 'undefined' therefore it is not chainable like other iterative methods: 'filter()', 'map()', 'some()', 'every()', and 'sort()'.
+          
+           One limitation of the 'forEach()' method in comparison with the for loop is that you cannot use the break or continue statement to control the loop.
+          
+           To terminate the loop in the 'forEach()' method, you must throw an exception inside the callback function.
+          
+           More JavaScript Array 'forEach()' method example: --
+           ------------------------------------------------
+           Let’s take a look at an example of the 'forEach()' method that uses a 'contextObject'.
+          
+           The following illustrates 'Counter' constructor function:`,
+          code1: `function Counter() {
+            this.count = 0;
+            let self = this;
+            return {
+              increase: function() {
+                self.count++;
+              },
+              current: function() {
+                return self.count;
+              },
+              reset: function() {
+                self.count = 0;
+              }
+            }
+          }
+          
+          // This example shows how to pass the counter object to the 'forEach()' method.
+          
+          var counter = new Counter();
+          var numbers = [1, 2, 3];
+          var sum = 0;
+          numbers.forEach(function(e) {
+            sum += e;
+            this.increase();
+          }, counter);
+          
+          console.log(sum); // 6
+          console.log(counter.current()); // 3
+          
+          // How it works.
+          
+          // > First, create a new 'Counter' object.
+          // > Next, define an array of three numbers.
+          // > Then, declare a variable 'sum' and assign it a value of zero.
+          // > After that, call the 'forEach()' method on the 'numbers' array.In the callback function, add the element to the 'sum' variable and call the 'increase()' method of the 'counter' object.Notice that the 'counter' object is referred to as 'this' inside the callback function.
+          // > Finally, log the value of the sum and current value of the counter in the web console.
+          
+          // In this tutorial, you have learned how to use the JavaScript Array 'forEach()' method to execute a callback on every element of an array.`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "find",
+      note: [
+        {
+          text1: `First Filter returns all the elements that match the condition while the Find method only returns the first one and second and even more important, the Filter method returns a new array while Find only returns the element itself and not an array,
+          
+          The find method returns the first element in the array that satisfies a given test function. If no elements meet the criteria, it returns <b>undefined</b>.
+
+          The find() method returns the value of the first array element that satisfies the provided test function.
+
+          Syntax:
+          <span style="color:red"> array.find(function(currentValue, index, arr), thisValue) </span>
+
+          <b>currentValue</b>: The current element being processed in the array.
+          <b>index (optional)</b>: The index of the current element being processed in the array.
+          <b>arr (optional)</b>: The array find() was called upon.
+
+          <b>thisArg (optional)</b>: An object to which the this keyword can refer in the callback function. If not provided, <b>undefined</b> is used.
+          `,
+          code1: `let numbers = [1, 3, 4, 9, 8];
+
+          // function to check even number
+          function isEven(element) {
+            return element % 2 == 0;
+          }
+          
+          // get the first even number
+          let evenNumber = numbers.find(isEven);
+          console.log(evenNumber);
+          
+          // Output: 4`
+        },
+        {
+          text1: `The <b>thisArg</b> parameter in the <b>find()</b> method allows you to specify a value to be used as <>bthis</b> when executing the callback function. `,
+          code1: `const person = {
+            name: 'John',
+            age: 30,
+            hobbies: ['reading', 'gardening', 'cooking'],
+            findHobby(hobbyToFind) {
+              return this.hobbies.find(function(hobby) {
+                return hobby === hobbyToFind;
+              }, this); // using thisArg to bind 'this' to the 'person' object
+            }
+          };
+          
+          console.log(person.findHobby('gardening')); // Output: gardening
+          console.log(person.findHobby('swimming'));  // Output: undefined
+
+
+          //-------------
+
+          const thresholdFilter = {
+            threshold: 25,
+            numbers: [10, 20, 30, 40, 50],
+            filterNumber: function(number) {
+              return number > this.threshold;
+            },
+            filteredNumbers: function() {
+              return this.numbers.find(this.filterNumber, this);
+            }
+          };
+          
+          console.log(thresholdFilter.filteredNumbers()); // Output: 30
+          
+          `
+        },
+        {
+          text1: `
+          > We have an object called <b>person</b> with properties <b>name, age</b>, and <b>hobbies</b>.
+          > <b>findHobby</b> is a method of the <b>person</b> object. It takes a <b>hobbyToFind</b> parameter and searches for it within the <b>hobbies</b> array.
+          > Inside the <b>find()</b> method, we use a regular function (not an arrow function) for the callback. This function references <b>this</b> to access the <b>hobbies</b> array of the <b>person</b> object.
+          > We use <b>this</b> as the second argument to <b>find()</b>, binding it to the <b>person</b> object. This ensures that <b>this</b> inside the callback function refers to the <b>person</b> object.
+          `,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "find",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "find",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      section: "JAVASCRIPT OBJECTS",
+      title: "object methods",
+      note: [
+        {
+          text1: `An object is a collection of key/value pairs or properties. When the value is a function, the property becomes a method. Typically, you use methods to describe the object’s behaviors.
+
+          In JavaScript, object methods are functions that are defined as properties of an object. These methods allow objects to perform actions or computations related to their properties and behavior. 
+          
+          <b>Defining Object Methods</b>:
+Object methods are defined within the object literal notation or added to an object after it's created using dot notation or square bracket notation.
+          `,
+          code1: `const myObject = {
+            property1: value1,
+            property2: value2,
+            method1: function() {
+              // method1 implementation
+            },
+            method2() {
+              // method2 implementation (ES6 shorthand)
+            }
+          };
+
+
+          //In this example, 'method1' and 'method2' are object methods.
+
+          //-------------------
+
+          For example, the following adds the 'greet' method to the 'person' object:
+
+          let person = {
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+        
+        person.greet = function () {
+            console.log('Hello!');
+        }
+        
+        person.greet();
+
+        // Output:
+        // Hello!
+          `
+        },
+        {
+          text1: `<b>Accessing Object Methods</b>:
+          Object methods are accessed using dot notation or square bracket notation, followed by parentheses () to invoke them.
+          
+          Example:
+          myObject.<span style="color:red">method1</span>(); <span style="color:gray"> // Invoke method1 </span>
+          myObject[<span style="color:green">'method2'</span>](); <span style="color:gray"> // Invoke method2 using square bracket notation </span>
+          </span>
+          <b>this</b> Keyword in Object Methods:
+          Inside an object method, the <b>this</b> keyword refers to the object itself. It allows the method to access other properties and methods of the object.`,
+          code1: `const person = {
+            firstName: 'John',
+            lastName: 'Doe',
+            fullName() {
+              return this.firstName + ' ' + this.lastName;
+            }
+          };
+          
+          console.log(person.fullName()); // Output: John Doe
+          `
+        },
+        {
+          text1: `<b>Using Object Methods</b>:
+          Object methods are used to encapsulate functionality related to the object. They can access and modify the object's properties, perform computations based on those properties, and interact with other objects or functions.`,
+          code1: `const calculator = {
+            operand1: 0,
+            operand2: 0,
+            add() {
+              return this.operand1 + this.operand2;
+            },
+            setOperands(op1, op2) {
+              this.operand1 = op1;
+              this.operand2 = op2;
+            }
+          };
+          
+          calculator.setOperands(5, 3);
+          console.log(calculator.add()); // Output: 8
+
+          // In this example, 'add' is an object method of 'calculator', used to perform addition based on its properties. The 'setOperands' method is used to set the operands before performing the addition.
+
+          `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+        {
+      id: 1,
+      title: "Constructor Function",
+      note: [
+        {
+          text1: `It seems there might be a slight confusion in terminology. In JavaScript, constructors and constructor functions typically refer to the same concept. A constructor function is a regular JavaScript function used to create and initialize objects within a class or a constructor function.
+          
+          <b>Constructor Function</b>:
+A constructor function is a regular JavaScript function that is used to create instances of objects. It's called a constructor because it's invoked using the new keyword to construct or create new objects.
+
+<b>Purpose of Constructor Functions</b>:
+Constructor functions serve as blueprints for creating objects with similar properties and methods. They encapsulate the initialization logic for objects, allowing for the creation of multiple instances with shared behaviors. Constructor functions are fundamental to object-oriented programming in JavaScript and are used extensively to define object types and their behavior.
+
+Technically speaking, a constructor function is a regular function with the following convention:
+
+> The name of a constructor function starts with a capital letter like <b>Person, Document</b>, etc.
+> A constructor function should be called only with the <b>new</b> operator.
+          `,
+          code1: `The following example defines a constructor function called Person:
+
+          function Person(firstName, lastName) {
+              this.firstName = firstName;
+              this.lastName = lastName;
+          }`
+        },
+        {
+          text1: `In this example, the <b>Person</b> is the same as a regular function except that its name starts with the capital letter <b>P</b>.
+
+          To create a new instance of the <b>Person</b>, you use the <b>new</b> operator:
+          
+          let person = new Person('John','Doe');
+          Basically, the <b>new</b> operator does the following:
+          
+          > Create a new empty object and assign it to the <b>this</b> variable.
+          > Assign the arguments <b>John</b> and <b>Doe</b> to the <b>firstName</b> and <b>lastName</b> properties of the object.
+          > Return the <b>this</b> value.
+
+          It’s functionally equivalent to the following:`,
+          code1: `function Person(firstName, lastName) {
+            // this = {};
+        
+            // add properties to this
+            this.firstName = firstName;
+            this.lastName = lastName;
+        
+            // return this;
+        }
+       
+        // Therefore, the following statement:
+        
+        let person = new Person('John','Doe');
+       
+        // … returns the same result as the following statement:
+        
+        let person = {
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+       
+        // However, the constructor function 'Person' allows you to create multiple similar objects. For example:
+        
+        let person1 = new Person('Jane','Doe')
+        let person2 = new Person('James','Smith')`
+        },
+        {
+          text1: `<b>Adding methods to JavaScript constructor functions</b>
+          An object may have methods that manipulate its data. To add a method to an object created via the constructor function, you can use the <b>this</b> keyword. For example:`,
+          code1: `function Person(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        
+            this.getFullName = function () {
+                return this.firstName + " " + this.lastName;
+            };
+
+            Now, you can create a new 'Person' object and invoke the 'getFullName()' method:
+
+let person = new Person("John", "Doe");
+console.log(person.getFullName());
+
+// Output:
+// John Doe
+
+        }`
+        },
+        {
+          text1: `The problem with the constructor function is that when you create multiple instances of the <b>Person</b>, the <b>this.getFullName()</b> is duplicated in every instance, which is not memory efficient.
+
+          To resolve this, you can use the <a href="#Prototypes">prototype</a> so that all instances of a custom type can share the same methods.
+          
+         <b> Returning from constructor functions</b>
+Typically, a constructor function implicitly returns <b>this</b> that set to the newly created object. But if it has a <b>return</b> statement, then here are the rules:
+
+If <b>return</b> is called with an object, the constructor function returns that object instead of <b>this</b>.
+If <b>return</b> is called with a value other than an object, it is ignored.
+
+<b>Calling a constructor function without the new keyword</b>
+Technically, you can call a constructor function like a regular function without using the new keyword like this:
+
+<span style="color:red"> let person = Person('John','Doe');</span>
+
+In this case, the <b>Person</b> just executes like a regular function. Therefore, the <b>this</b> inside the <b>Person</b> function doesn’t bind to the <b>person</b> variable but the global object.
+
+If you attempt to access the <b>firstName</b> or <b>lastName</b> property, you’ll get an error:
+
+console.log(person.firstName);
+Error:
+
+TypeError: Cannot read property 'firstName' of undefined
+Similarly, you cannot access the <b>getFullName()</b> method since it’s bound to the global object.
+
+person.getFullName();
+Error:
+TypeError: Cannot read property 'getFullName' of undefined
+
+To prevent a constructor function from being invoked without the <b>new</b> keyword, ES6 introduced the new.target property.
+
+If a constructor function is called with the <b>new</b> keyword, the <b>new.target</b> returns a reference of the function. Otherwise, it returns <b>undefined</b>.
+
+The following adds a statement to the <b>Person</b> function to show the <b>new.target</b> to the console:
+          `,
+          code1: `function Person(firstName, lastName) {
+            console.log(new.target);
+        
+            this.firstName = firstName;
+            this.lastName  = lastName;
+        
+            this.getFullName = function () {
+                return this.firstName + " " + this.lastName;
+            };
+        }
+        
+        
+        // The following returns 'undefined' because the 'Person' constructor function is called like a regular function:
+
+let person = Person("John", "Doe");
+// Output:
+// undefined
+
+// However, the following returns a reference to the 'Person' function because it’s called the 'new' keyword:
+
+let person = new Person("John", "Doe");
+Output:
+[Function: Person]
+
+// By using the 'new.target', you can force the callers of the constructor function to use the 'new' keyword. Otherwise, you can throw an error like this:
+
+function Person(firstName, lastName) {
+    if (!new.target) {
+        throw Error("Cannot be called without the new keyword");
+    }
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+// Alternatively, you can make the syntax more flexible by creating a new 'Person' object if the users of the constructor function don’t use the 'new' keyword:
+
+function Person(firstName, lastName) {
+    if (!new.target) {
+        return new Person(firstName, lastName);
+    }
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+let person = Person("John", "Doe");
+
+console.log(person.firstName);
+
+// This pattern is often used in JavaScript libraries and frameworks to make the syntax more flexible.
+        `
+        },
+        {
+          text1: ``,
           code1: ``
         },
       ]
@@ -1909,11 +5725,562 @@ closureFunction(); // Outputs: "I am from the outer function"
     {
       id: 1,
       title: "Prototypes",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        },
+      note: [{
+        text1: `// In JavaScript, every object has an internal property called [[Prototype]], which is essentially a reference to another object called its prototype. This prototype is a  fundamental concept in JavaScript's object-oriented programming model.
+
+        <b>prototype:</b>: JavaScript is a prototype-based language, which means that it uses
+        prototypes to inherit properties and methods from one object to another. In
+        JavaScript,
+        objects can be linked to other objects, forming a prototype chain. When a property
+        or
+        method is accessed on an object, the JavaScript engine first checks if that property
+        or
+        method exists on the object itself. If it does not, it will check the object's
+        prototype, and so on, until it reaches the end of the prototype chain. If the
+        property
+        or method is not found, it will return undefined.
+
+        // Here's a clear breakdown:
+        <b>Every object has a prototype</b>: When you create an object in JavaScript, it
+        automatically gets a prototype. This prototype is a regular JavaScript object
+        itself,
+        and it can have its own properties and methods.
+
+        <b>The prototype chain</b>: When you try to access a property or method on an object,
+        JavaScript first checks if that property or method exists on the object itself. If it
+        doesn't find it, it looks at the object's prototype, and if it's not there, it continues
+        up the prototype chain until it finds the property or method or reaches the end of  the
+        chain (where the prototype is null).
+
+        // both __proto__ and prototype are related to object inheritance, but they serve
+        different purposes.
+
+        <b>__proto__:</b>
+        <b>__proto__</b> is a property that exists on every object in JavaScript.
+        It's a reference to the prototype object from which the current object inherits.
+        When you access a property or method on an object, JavaScript first checks if
+        that
+        property or method exists directly on the object itself.If it doesn't, JavaScript
+        looks
+        at the object's <b>__proto__</b> to find it.This process continues up the prototype chain
+        until
+        the property or method is found or until the end of the chain is reached(i.e., when
+        <b>__proto__</b> becomes null).
+        It's important to note that <b>__proto__</b> is considered deprecated and should not be
+        used
+        for production code. Instead, you should use Object.getPrototypeOf() to get the
+        prototype of an object, and Object.setPrototypeOf() to set the prototype of an
+        object.
+
+        <b>prototype:</b>
+        // prototype is a property that exists on constructor functions in JavaScript.
+        // It's used to set up inheritance when you want to create objects using the new
+        keyword.
+        // When you create a constructor function and add properties or methods to its
+        prototype, those properties and methods become available to instances created using
+        that
+        constructor function.
+        // When you use the new keyword to create an instance of a constructor function, the
+        newly created object's __proto__ is set to the constructor function's prototype.
+        // In summary, __proto__ is a property that exists on every object and is used to
+        reference the prototype of the object, while prototype is a property that exists on
+        constructor functions and is used to set up inheritance for objects created using
+        those
+        constructor functions.
+
+        // Define a constructor function`,
+        code1: `// Define a constructor function
+        function Person(name, age) {
+            this.name = name;
+        this.age = age;
+}
+
+        // Add a method to the prototype of the Person constructor
+        Person.prototype.greet = function() {
+            console.log('Hello, my name is \${this.name} and I am \${this.age} years old.');
+};
+
+        // Create an instance of Person
+        const john = new Person('John', 30);
+
+        // Accessing properties directly on the object
+        console.log(john.name); // Output: John
+        console.log(john.age); // Output: 30
+
+        // Accessing method defined on the prototype
+        john.greet(); // Output: Hello, my name is John and I am 30 years old.
+
+        // Using __proto__
+        console.log(john.__proto__ === Person.prototype); // Output: true
+        console.log(Object.getPrototypeOf(john) === Person.prototype); // Output: true
+
+        // Changing prototype using __proto__ (not recommended)
+        const newPrototype = {
+            farewell: function() {
+            console.log('Goodbye, \${this.name}!');
+}
+};
+        john.__proto__ = newPrototype;
+
+        john.farewell(); // Output: Goodbye, John!
+
+        // Of course! Let's illustrate with an example:
+
+
+        // Define a constructor function
+        function Person(name, age) {
+            this.name = name;
+        this.age = age;
+}
+
+        // Add a method to the prototype of the Person constructor
+        Person.prototype.greet = function() {
+            console.log('Hello, my name is \${this.name} and I am \${this.age} years old.');
+};
+
+        // Create an instance of Person
+        const john = new Person('John', 30);
+
+        // Accessing properties directly on the object
+        console.log(john.name); // Output: John
+        console.log(john.age); // Output: 30
+
+        // Accessing method defined on the prototype
+        john.greet(); // Output: Hello, my name is John and I am 30 years old.
+
+        // Using __proto__
+        console.log(john.__proto__ === Person.prototype); // Output: true
+        console.log(Object.getPrototypeOf(john) === Person.prototype); // Output: true
+
+        // Changing prototype using __proto__ (not recommended)
+        const newPrototype = {
+            farewell: function() {
+            console.log('Goodbye, \${this.name}!');
+}
+};
+        john.__proto__ = newPrototype;
+
+        john.farewell(); // Output: Goodbye, John!`
+      },
+      {
+        text1: `// '.prototype' is a special property that all functions have that contains a
+        reference
+        to an object.
+        // When a constructor is used to instantiate a new object, 'Student.prototype' is
+        set as
+        the prototype of the new object.
+        // All instances of that constructor (the objects it creates) can access the
+        properties
+        of 'Student.prototype'.
+
+        //--------------------------
+
+        // Every thing is an object in javascript. even thou all kind of data like Array,
+        String, Number, Boolean, Function, Set, Map they have they own prototype object with
+        usefull properties inside the prototype object these objects call __proto__
+
+        //Every datatype at the end inherite from one object that is called Object.prototype  `,
+        code1: `// array type / function type
+        // array prototype(or) function prototype -> object prototype -> null
+        // Ex:
+        let cust =[12, 4, 7]
+        // cust.__proto__ points to Array.prototype
+        // cust.__proto__ === Array.prototype // true
+        // Array.prototype.__proto__ points to Object.prototype
+        // Array.prototype.__proto__ === Object.prototype // true
+        // Arrray.prototype.__proto__.__proto__ points to null
+        // Object.prototype.__proto__ points to null
+
+        // Boolean.__proto__ points to Object.prototype
+        // Number.__proto__ === Boolean.__proto__ // true
+        // String.__proto__ points to Object.prototype
+
+        // All datatypes in javascript inheries from Object.prototype at the end
+        // Object.prototype.__proto__ points to null at the end
+        // Object.prototype.__proto__ === null // true
+        // this is end of the chain. This chain is called prototype chain
+        `
+      },
+      {
+        text1: `// In this example:
+
+      // > We define a constructor function Person that takes name and age parameters and
+      sets
+      them as properties on the created object.
+      // > We add a greet method to the Person.prototype, which will be shared among all
+      instances of Person.
+      // > We create an instance of Person named john.
+      // > We access properties (name and age) directly on the john object, and the greet
+      method via the prototype chain.
+      // > We demonstrate that john.__proto__ points to Person.prototype.
+      // > We change the prototype of john using __proto__, but this method is not
+      recommended
+      for production code.
+      // > This example showcases how prototype is used to set up inheritance for objects
+      created with a constructor function and how __proto__ is used to reference the
+      prototype
+      of an object.
+      `,
+        code1: `//EX 2:---
+      // Define a constructor function for a Vehicle
+      function Vehicle(make, model) {
+          this.make = make;
+      this.model = model;
+}
+
+      // Add a method to the prototype of Vehicle
+      Vehicle.prototype.info = function() {
+          console.log('This is a \${this.make} \${this.model}.');
+};
+
+      // Create a Car constructor function that inherits from Vehicle
+      function Car(make, model, year) {
+          Vehicle.call(this, make, model); // Call the Vehicle constructor within the Car constructor
+      this.year = year;
+}
+
+      // Set up inheritance: Assign Vehicle's prototype to Car's prototype
+      Car.prototype = Object.create(Vehicle.prototype);
+      Car.prototype.constructor = Car; // Reset constructor property to Car
+
+      // Add a method to the prototype of Car
+      Car.prototype.start = function() {
+          console.log('Starting the \${this.make} \${this.model}...');
+};
+
+      // Create an instance of Car
+      const myCar = new Car('Toyota', 'Camry', 2022);
+
+      // Access methods defined on both Vehicle and Car prototypes
+      myCar.info(); // Output: This is a Toyota Camry.
+      myCar.start(); // Output: Starting the Toyota Camry...
+
+      // Demonstrating the prototype chain
+      console.log(myCar.__proto__ === Car.prototype); // Output: true
+      console.log(Car.prototype.__proto__ === Vehicle.prototype); // Output: true
+      console.log(Vehicle.prototype.__proto__ === Object.prototype); // Output: true`
+      }, {
+        text1: `// In this example:
+        // We define a 'constructor' function 'Vehicle' to represent a generic vehicle with
+        make
+        and model properties.
+        // We add an info method to the 'Vehicle.prototype' to display vehicle information.
+        // We define a 'constructor' function Car to represent a specific type of vehicle
+        that
+        inherits from Vehicle. It adds a year property.
+        // We set up inheritance by using Object.create() to link Car.prototype to
+        'Vehicle.prototype', thus allowing 'Car' instances to access methods defined on
+        Vehicle.
+        // We add a start method to the 'Car.prototype' to start the car.
+        // We create an instance of 'Car' named 'myCar' and demonstrate accessing methods
+        defined on both Vehicle and Car.
+        // Finally, we demonstrate the prototype chain, showing how myCar.__proto__ points
+        to
+        'Car.prototype', 'Car.prototype.__proto__' points to 'Vehicle.prototype', and
+        'Vehicle.prototype.__proto__' points to Object.prototype.
+
+        
+        //-----------------
+        // Function.prototype === Array.prototype and
+        Function.prototype.isPrototypeOf(Array.prototype) both are false
+        //----------------
+
+        // The reason why Function.prototype.isPrototypeOf(Array.prototype) returns false is
+        because Array.prototype is not directly descended from Function.prototype in the
+        prototype chain.
+
+        // In JavaScript, Array.prototype inherits from Object.prototype, not directly from
+        Function.prototype. The Function constructor function and its prototype properties
+        are
+        unrelated to Array.
+
+        // Let's clarify by looking at the prototype chain:
+
+        // javascript
+        // Copy code
+        // console.log(Object.getPrototypeOf(Array.prototype) === Function.prototype); //
+        Returns false
+        // console.log(Object.getPrototypeOf(Array.prototype) === Object.prototype); //
+        Returns
+        true
+        // This confirms that Array.prototype directly inherits from Object.prototype, not
+        from
+        Function.prototype.`,
+        code1: `function Student(name, age) {
+          this.name = name;
+      this.age = age;
+}
+      Student.prototype.prop = 'I am good to see you'
+
+      var stu1 = new Student("John", 50);
+      var stu2 = new Student("ram", 43);
+
+      Object.setPrototypeOf(stu1, {area: "wgl" })
+
+      console.log(Object.getPrototypeOf(stu2)) // {prop: 'I am good to see you'}
+      console.log(Object.getPrototypeOf(stu1)) // {area: 'wgl'}
+
+      console.log(stu1.__proto__) // {area: 'wgl'}
+      console.log(stu2.__proto__) // {prop: 'I am good to see you'}
+
+      console.log(Student.prototype === stu2.__proto__) // true
+      console.log(Student.prototype === stu1.__proto__) // false`
+      },
+      {
+        text1: `// Prototypal inheritance: Prototypal inheritance is the mechanism by which objects
+        can
+        inherit properties and methods from their prototype.If an object doesn't have a
+        property or method, JavaScript looks for it in its prototype, and if the prototype
+        doesn't have it, it looks in the prototype's prototype, and so on.
+
+        // Prototype inheritance in JavaScript is a way for objects to share properties and
+        methods with other objects.Each object has a hidden link to another object called
+        its
+        prototype.If a property or method is not found on the object itself, JavaScript
+        looks
+        for it in its prototype chain.This allows objects to inherit properties and methods
+        from their prototypes, creating a form of inheritance without classes.
+
+
+        //-----------------------
+        // Benifits of Prototype
+        //-----------------------
+
+        //------------------>
+        // They use less memory.
+        //------------------>
+
+        // case1 for the userDatails method logic is same if you console user objects every
+        object has getMarks function so it crates different memory location for
+
+
+        // When a method is defined using this.this.getMarks a new copy is created every
+        time a
+        new object is instantiated.Let's look at an example.
+
+        // In most Object Oriented programming languages a class has a constructor. A
+        constructor is a sort of initializing function that is called every time a new
+        instance
+        of the class is created.Usually the Constructor function name is defined using the
+        actual class name or the keyword constructor:
+
+        // If you add properties to 'this' inside the 'userDetails' class, all future
+        instances
+        of 'userDetails' will get its own copy of the properties and methods, which causes
+        redundancy.On a side note, using 'this' is great for accessing and manipulating
+        private
+        variables.But let's assume we are dealing with public variables.
+
+        // Each instance of 'userDetails' receives a duplicate copy of the getMarks()
+        method.
+        When the getMarks() method is duplicated in every instance, this can become
+        problematic
+        as it starts to affect the performance and memory of your app.`,
+        code1: `function userDetails(userName, area, m1, m2, m3) {
+          this.userName = userName;
+          this.area = area;
+          this.m1 = m1;
+          this.m2 = m2;
+          this.m3 = m3;
+          this.getMarks = function() {
+    return m1 + m2 + m3;
+  }
+}
+
+          const user1 = new userDetails("ram", "wgl", 15, 54, 76)
+          const user2 = new userDetails("ravi", "hyd", 65, 54, 76)
+
+          console.log(user1.getMarks())
+          console.log(user2.getMarks())
+
+          console.log(user1.getMarks === user2.getMarks) // false
+
+          // Further, we can see how both of the getMarks() methods are separate and maintain their own copy:`
+      },
+      {
+        text1: ` // Prototypes are the solution
+        // Here are some advantages of using prototype methods:
+
+        // 1) If you added a property to getMarks.prototype , then that property will be
+        shared
+        in all objects associated with the class , including all future objects created
+        using new
+        userProtoDetails.Sharing the property is different than duplicating.Instances can
+        borrow this method through the prototype chain, which will be discussed further.
+        // 2) Changing the property value in the methods inherited through the prototype
+        chain
+        will change all values in the associated objects.
+        // 3) In most cases, using 'prototype' or 'this' would be similar, but 'prototype'
+        allows you to save memory since there's only one instance of it, rather than its own
+        instance for each object.
+        // Let's use the same example above, except redacting this.callOrder and using a
+        'userProtoDetails.prototype.getMarks' instead:
+
+
+        // When we run our function, every instance of 'userProtoDetails' does not duplicate
+        our
+        getMarks() method since it's now part of the prototype and can't be copied:`,
+        code1: `function userProtoDetails(userName, area, m1, m2, m3) {
+          this.userName = userName;
+          this.area = area;
+          this.m1 = m1;
+          this.m2 = m2;
+          this.m3 = m3;
+}
+
+          userProtoDetails.prototype.getMarks = function() {
+  return this.m1 + this.m2 + this.m3;
+}
+
+          const userPro1 = new userProtoDetails("ram", "wgl", 90, 54, 76)
+          const userPro2 = new userProtoDetails("ravi", "hyd", 99, 54, 76)
+
+          console.log(userPro1.getMarks())
+          console.log(userPro2.getMarks())
+
+          console.log(userPro1.getMarks === userPro2.getMarks) // true`
+      },
+      {
+        text1: `// The prototype chain can be found under '__proto__' , which is an object in each
+        instance that points to the prototype it was created from.On the other hand, the
+        'prototype' property is found in every function created in JS.It’s the property of a
+        class constructor.
+
+        // __proto__: 'Object' shows us how JavaScript assigns userPro1 and userPro2 to an
+        object constructor — this is what allows us to access all the methods from the
+        assigned
+        prototype.Thus, both the getMarks() methods can be shared:
+        console.log(userPro1.__proto__)
+
+        // Prototypes are usually more memory-efficient and faster than creating many
+        classes.
+        Additionally, prototypes are useful in situations where you need to create objects
+        that
+        inherit from other objects, as JavaScript's prototype-based inheritance system
+        allows
+        for easy inheritance and modification.
+
+        //-----------------------
+        // inheritance in javascript
+        //-----------------------
+
+        // Prototype inheritance in javascript is the linking of prototypes of a parent
+        object
+        to a child object to share and utilize the properties of a parent class using a
+        child
+        class.
+
+        // Prototypes are hidden objects that are used to share the properties and methods
+        of a
+        parent class to child classes.`,
+        code1: `function Phone() {
+                  this.modalNumber = '';
+                  this.getModalNumber = function() {
+                  return this.modalNumber
+                }
+              }
+
+          function Samsung(modalNumber) {
+          this.modalNumber = modalNumber;
+          this.latestFeature = function() {
+          console.log("foldable smart phone")
+      }
+}
+
+          Samsung.prototype = new Phone;
+
+          const smObj = new Samsung("a123456")
+          console.log(smObj.getModalNumber())
+
+
+          // Example 2
+          // Using Object.create():
+          //...............
+          // Parent object
+          let animal = {
+          speak: function() {
+          console.log(this.sound);
+  }
+};
+
+          // Child object inheriting from the parent
+          let cat = Object.create(animal);
+          cat.sound = "Meow";
+
+          // Now, cat has access to the speak method from the animal object
+          cat.speak(); // Output: Meow
+
+
+          // Example 3
+          //--------------------
+          //Constructor Functions:
+          //--------------------
+          // Parent constructor function
+          function Animal(sound) {
+          this.sound = sound;
+}
+
+          // Adding a method to the parent's prototype
+          Animal.prototype.speak = function() {
+          console.log(this.sound);
+};
+
+          // Child constructor function
+          function Cat(sound) {
+          Animal.call(this, sound); // Call parent constructor
+}
+
+          // Inheriting from the parent's prototype
+          Cat.prototype = Object.create(Animal.prototype);
+          Cat.prototype.constructor = Cat; // Set correct constructor
+
+          // Creating a cat object
+          let myCat = new Cat("Meow");
+
+          // Now, myCat has access to the speak method inherited from Animal
+          myCat.speak(); // Output: Meow
+
+
+          // Ex
+          // Class Syntax (ES6):
+          //..................
+          // Parent class
+          class Animal {
+          constructor(sound) {
+          this.sound = sound;
+  }
+          speak() {
+          console.log(this.sound);
+  }
+}
+
+          // Child class inheriting from Animal
+          class Cat extends Animal {
+          constructor(sound) {
+          super(sound); // Call parent constructor
+  }
+}
+
+          // Creating a cat object
+          let myCat = new Cat("Meow");
+
+          // Now, myCat has access to the speak method inherited from Animal
+          myCat.speak(); // Output: Meow
+ `
+      },
+      {
+        text1: `// The Object.setPrototypeOf() method in JavaScript is a standard built-in object
+        which
+        sets the prototype (i.e., the internal[[Prototype]]property) of a specified object
+        to
+        another object or null.
+
+        // In JavaScript, Object.setPrototypeOf is a method used to set the prototype (i.e.,
+        the
+        internal[[Prototype]]property) of a specified object to another object or null.This
+        method allows you to dynamically change the inheritance chain of an object.`,
+        code1: ``
+      },
       ]
     },
     {
@@ -2687,6 +7054,118 @@ Object
     },
     {
       id: 1,
+      title: "this",
+      note: [
+        {
+          text1: `In JavaScript, the <b>this</b> keyword refers to the context within which a function is executed. It represents the current execution context and provides a way to access the properties and methods of the current object.
+
+          In JavaScript, the <b>this</b> keyword always refers to an object. The thing about it is that the object it refers to will vary depending on how and where this is being called.
+    
+          The value of this depends on how a function is called:
+          
+          <b>1) Global Context:</b>
+          When used outside of any function, <b>this</b> refers to the global object. In a browser environment, the global object is <b>window</b>.
+          
+          
+          <b>2) Function Context:</b>
+          When used within a function, the value of <b>this</b> depends on how the function is called.
+          If the function is called as a method of an object, <b>this</b> refers to the object itself.
+          If the function is called as a standalone function, <b>this</b> refers to the global object (<b>window</b> in browsers) in non-strict mode, or it is <b>undefined</b> in strict mode.
+    
+          <b>A note about arrow functions:</b>
+          In arrow functions, JavaScript sets the this lexically. This means that the arrow function doesn't create its own execution context but inherits the this from the outer function where the arrow function is defined.
+    
+          In most cases, this means this will refer to the window object as well:
+    
+          <span style="color:red">const show = () => this</span>
+          console.log('arrow function this', show())
+
+          It's important to notice this because, for example, if we try to implement an arrow function to it as an object method, we won't be able to access the object through the this keyword:`,
+          code1: `      const person = {
+            name: 'Pedro',
+            surname: 'Sanchez',
+            sayName: () => this.name + ' ' + this.surname
+        }
+  
+        console.log(person.sayName());`
+        },
+        {
+          text1: `      3) Constructor Context:
+          When a function is used as a constructor (i.e., called with the 'new' keyword), 'this' refers to the newly created object instance.
+    
+          4) Event Handler Context:
+          When used in event handlers (e.g., in an event listener), this typically refers to the element that triggered the event.
+          
+          <b>A note about strict-mode:</b>
+          When using strict-mode, calling 'this' within a function will return undefined.
+          `,
+          code1: `      "use strict";
+
+          function show() {
+              console.log(this);
+          }
+          show();`
+        },
+        {
+          text1: `As a side comment, if you're not familiar with what strict-mode is, following the MDN docs:
+
+          JavaScript's strict mode is a way to opt in to a restricted variant of JavaScript, thereby implicitly opting-out of "sloppy mode". Strict mode isn't just a subset: it intentionally has different semantics from normal code.
+    
+          Strict mode makes several changes to regular JavaScript semantics:
+    
+          > Eliminates some JavaScript silent errors by changing them to throw errors.
+          > Fixes mistakes that make it difficult for JavaScript engines to perform optimizations: strict mode code can sometimes be made to run faster than identical code that's not strict mode.
+          > Prohibits some syntax likely to be defined in future versions of ECMAScript.
+          How to Use this in an Event Listener
+    
+          When using <b>this</b> in an event listener, this will refer to the DOM element that fired the event.`,
+          code1: `      document.getElementById('testBtn').addEventListener('click', function() {
+            console.log('this in a event', this);
+        })`
+        },
+        {
+          text1: `In our case, we added the event listener to a button element: <button id="testBtn">TEST</button>
+
+          And after clicking it, we get the following in our console:
+    
+          <b>'this' Methods (call, apply and bind):</b>
+          To complicate the subject a little more, javascript provides three native methods that can be used to manipulate the way the this keyword behaves. These methods are <b>call</b>, <b>apply</b> and <b>bind</b>. Let's see how they work.
+    
+          Here are some examples to illustrate the usage of <b>this</b>:`,
+          code1: `      // Global context
+          console.log(this === window); // true
+          
+          // Method context
+          const obj = {
+            name: 'Object',
+            greet() {
+              console.log('Hello, \${this.name}!');
+            }
+          };
+          obj.greet(); // Output: "Hello, Object!"
+          
+          // Constructor context
+          function Person(name) {
+            this.name = name;
+          }
+          const person1 = new Person('John');
+          console.log(person1.name); // Output: "John"
+          
+          // Event handler context (assuming button is an HTML button element)
+          const button = document.querySelector ('button');
+          button.addEventListener ('click', function() {
+            console.log(this); // Output: HTMLButtonElement
+          });`
+        },
+        {
+          text1: `Understanding the context of <b>this</b> is essential for working effectively with objects, constructors, and event handling in JavaScript. It allows developers to write more flexible and dynamic code by accessing and manipulating object properties within different execution contexts. However, it's important to be cautious when dealing with <b>this</b>, as its behavior can be affected by various factors such as function binding, arrow functions, and strict mode.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      section: "CLASSES",
       title: "Class",
       note: [
         {
@@ -2695,591 +7174,6 @@ Object
         },
       ]
     },
-    {
-      id: 1,
-      title: "Prototypes",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "Prototypes",
-      note: [{
-        text1: `// In JavaScript, every object has an internal property called [[Prototype]], which
-        is
-        essentially a reference to another object called its prototype. This prototype is a
-        fundamental concept in JavaScript's object-oriented programming model.
-
-        // Prototypes: JavaScript is a prototype-based language, which means that it uses
-        prototypes to inherit properties and methods from one object to another. In
-        JavaScript,
-        objects can be linked to other objects, forming a prototype chain. When a property
-        or
-        method is accessed on an object, the JavaScript engine first checks if that property
-        or
-        method exists on the object itself. If it does not, it will check the object's
-        prototype, and so on, until it reaches the end of the prototype chain. If the
-        property
-        or method is not found, it will return undefined.
-
-        // Here's a clear breakdown:
-
-        // Every object has a prototype: When you create an object in JavaScript, it
-        automatically gets a prototype. This prototype is a regular JavaScript object
-        itself,
-        and it can have its own properties and methods.
-
-        // The prototype chain: When you try to access a property or method on an object,
-        JavaScript first checks if that property or method exists on the object itself. If
-        it
-        doesn't find it, it looks at the object's prototype, and if it's not there, it
-        continues
-        up the prototype chain until it finds the property or method or reaches the end of
-        the
-        chain (where the prototype is null).
-
-        // both __proto__ and prototype are related to object inheritance, but they serve
-        different purposes.
-
-        // __proto__:
-        // ----------
-        // __proto__ is a property that exists on every object in JavaScript.
-        // It's a reference to the prototype object from which the current object inherits.
-        // When you access a property or method on an object, JavaScript first checks if
-        that
-        property or method exists directly on the object itself.If it doesn't, JavaScript
-        looks
-        at the object's __proto__ to find it.This process continues up the prototype chain
-        until
-        the property or method is found or until the end of the chain is reached(i.e., when
-        __proto__ becomes null).
-        // It's important to note that __proto__ is considered deprecated and should not be
-        used
-        for production code. Instead, you should use Object.getPrototypeOf() to get the
-        prototype of an object, and Object.setPrototypeOf() to set the prototype of an
-        object.
-
-        // prototype:
-        // ----------
-        // prototype is a property that exists on constructor functions in JavaScript.
-        // It's used to set up inheritance when you want to create objects using the new
-        keyword.
-        // When you create a constructor function and add properties or methods to its
-        prototype, those properties and methods become available to instances created using
-        that
-        constructor function.
-        // When you use the new keyword to create an instance of a constructor function, the
-        newly created object's __proto__ is set to the constructor function's prototype.
-        // In summary, __proto__ is a property that exists on every object and is used to
-        reference the prototype of the object, while prototype is a property that exists on
-        constructor functions and is used to set up inheritance for objects created using
-        those
-        constructor functions.
-
-        // Define a constructor function`,
-        code1: `// Define a constructor function
-        function Person(name, age) {
-            this.name = name;
-        this.age = age;
-}
-
-        // Add a method to the prototype of the Person constructor
-        Person.prototype.greet = function() {
-            console.log('Hello, my name is \${this.name} and I am \${this.age} years old.');
-};
-
-        // Create an instance of Person
-        const john = new Person('John', 30);
-
-        // Accessing properties directly on the object
-        console.log(john.name); // Output: John
-        console.log(john.age); // Output: 30
-
-        // Accessing method defined on the prototype
-        john.greet(); // Output: Hello, my name is John and I am 30 years old.
-
-        // Using __proto__
-        console.log(john.__proto__ === Person.prototype); // Output: true
-        console.log(Object.getPrototypeOf(john) === Person.prototype); // Output: true
-
-        // Changing prototype using __proto__ (not recommended)
-        const newPrototype = {
-            farewell: function() {
-            console.log('Goodbye, \${this.name}!');
-}
-};
-        john.__proto__ = newPrototype;
-
-        john.farewell(); // Output: Goodbye, John!
-
-
-
-
-
-        // Of course! Let's illustrate with an example:
-
-
-        // Define a constructor function
-        function Person(name, age) {
-            this.name = name;
-        this.age = age;
-}
-
-        // Add a method to the prototype of the Person constructor
-        Person.prototype.greet = function() {
-            console.log('Hello, my name is \${this.name} and I am \${this.age} years old.');
-};
-
-        // Create an instance of Person
-        const john = new Person('John', 30);
-
-        // Accessing properties directly on the object
-        console.log(john.name); // Output: John
-        console.log(john.age); // Output: 30
-
-        // Accessing method defined on the prototype
-        john.greet(); // Output: Hello, my name is John and I am 30 years old.
-
-        // Using __proto__
-        console.log(john.__proto__ === Person.prototype); // Output: true
-        console.log(Object.getPrototypeOf(john) === Person.prototype); // Output: true
-
-        // Changing prototype using __proto__ (not recommended)
-        const newPrototype = {
-            farewell: function() {
-            console.log('Goodbye, \${this.name}!');
-}
-};
-        john.__proto__ = newPrototype;
-
-        john.farewell(); // Output: Goodbye, John!`
-      },
-      {
-        text1: `// In this example:
-
-      // > We define a constructor function Person that takes name and age parameters and
-      sets
-      them as properties on the created object.
-      // > We add a greet method to the Person.prototype, which will be shared among all
-      instances of Person.
-      // > We create an instance of Person named john.
-      // > We access properties (name and age) directly on the john object, and the greet
-      method via the prototype chain.
-      // > We demonstrate that john.__proto__ points to Person.prototype.
-      // > We change the prototype of john using __proto__, but this method is not
-      recommended
-      for production code.
-      // > This example showcases how prototype is used to set up inheritance for objects
-      created with a constructor function and how __proto__ is used to reference the
-      prototype
-      of an object.
-      `,
-        code1: `//EX 2:---
-      // Define a constructor function for a Vehicle
-      function Vehicle(make, model) {
-          this.make = make;
-      this.model = model;
-}
-
-      // Add a method to the prototype of Vehicle
-      Vehicle.prototype.info = function() {
-          console.log('This is a \${this.make} \${this.model}.');
-};
-
-      // Create a Car constructor function that inherits from Vehicle
-      function Car(make, model, year) {
-          Vehicle.call(this, make, model); // Call the Vehicle constructor within the Car constructor
-      this.year = year;
-}
-
-      // Set up inheritance: Assign Vehicle's prototype to Car's prototype
-      Car.prototype = Object.create(Vehicle.prototype);
-      Car.prototype.constructor = Car; // Reset constructor property to Car
-
-      // Add a method to the prototype of Car
-      Car.prototype.start = function() {
-          console.log('Starting the \${this.make} \${this.model}...');
-};
-
-      // Create an instance of Car
-      const myCar = new Car('Toyota', 'Camry', 2022);
-
-      // Access methods defined on both Vehicle and Car prototypes
-      myCar.info(); // Output: This is a Toyota Camry.
-      myCar.start(); // Output: Starting the Toyota Camry...
-
-      // Demonstrating the prototype chain
-      console.log(myCar.__proto__ === Car.prototype); // Output: true
-      console.log(Car.prototype.__proto__ === Vehicle.prototype); // Output: true
-      console.log(Vehicle.prototype.__proto__ === Object.prototype); // Output: true`
-      }, {
-        text1: `// In this example:
-        // We define a 'constructor' function 'Vehicle' to represent a generic vehicle with
-        make
-        and model properties.
-        // We add an info method to the 'Vehicle.prototype' to display vehicle information.
-        // We define a 'constructor' function Car to represent a specific type of vehicle
-        that
-        inherits from Vehicle. It adds a year property.
-        // We set up inheritance by using Object.create() to link Car.prototype to
-        'Vehicle.prototype', thus allowing 'Car' instances to access methods defined on
-        Vehicle.
-        // We add a start method to the 'Car.prototype' to start the car.
-        // We create an instance of 'Car' named 'myCar' and demonstrate accessing methods
-        defined on both Vehicle and Car.
-        // Finally, we demonstrate the prototype chain, showing how myCar.__proto__ points
-        to
-        'Car.prototype', 'Car.prototype.__proto__' points to 'Vehicle.prototype', and
-        'Vehicle.prototype.__proto__' points to Object.prototype.
-
-        
-        //-----------------
-        // Function.prototype === Array.prototype and
-        Function.prototype.isPrototypeOf(Array.prototype) both are false
-        //----------------
-
-        // The reason why Function.prototype.isPrototypeOf(Array.prototype) returns false is
-        because Array.prototype is not directly descended from Function.prototype in the
-        prototype chain.
-
-        // In JavaScript, Array.prototype inherits from Object.prototype, not directly from
-        Function.prototype. The Function constructor function and its prototype properties
-        are
-        unrelated to Array.
-
-        // Let's clarify by looking at the prototype chain:
-
-        // javascript
-        // Copy code
-        // console.log(Object.getPrototypeOf(Array.prototype) === Function.prototype); //
-        Returns false
-        // console.log(Object.getPrototypeOf(Array.prototype) === Object.prototype); //
-        Returns
-        true
-        // This confirms that Array.prototype directly inherits from Object.prototype, not
-        from
-        Function.prototype.`,
-        code1: `function Student(name, age) {
-          this.name = name;
-      this.age = age;
-}
-      Student.prototype.prop = 'I am good to see you'
-
-      var stu1 = new Student("John", 50);
-      var stu2 = new Student("ram", 43);
-
-      Object.setPrototypeOf(stu1, {area: "wgl" })
-
-      console.log(Object.getPrototypeOf(stu2)) // {prop: 'I am good to see you'}
-      console.log(Object.getPrototypeOf(stu1)) // {area: 'wgl'}
-
-      console.log(stu1.__proto__) // {area: 'wgl'}
-      console.log(stu2.__proto__) // {prop: 'I am good to see you'}
-
-      console.log(Student.prototype === stu2.__proto__) // true
-      console.log(Student.prototype === stu1.__proto__) // false`
-      },
-      {
-        text1: `                                // '.prototype' is a special property that all functions have that contains a
-        reference
-        to an object.
-        // When a constructor is used to instantiate a new object, 'Student.prototype' is
-        set as
-        the prototype of the new object.
-        // All instances of that constructor (the objects it creates) can access the
-        properties
-        of 'Student.prototype'.
-
-        //--------------------------
-
-        // Every thing is an object in javascript. even thou all kind of data like Array,
-        String, Number, Boolean, Function, Set, Map they have they own prototype object with
-        usefull properties inside the prototype object these objects call __proto__
-
-        //Every datatype at the end inherite from one object that is called Object.prototype  `,
-        code1: `// array type / function type
-        // array prototype(or) function prototype -> object prototype -> null
-        // Ex:
-        let cust =[12, 4, 7]
-        // cust.__proto__ points to Array.prototype
-        // cust.__proto__ === Array.prototype // true
-        // Array.prototype.__proto__ points to Object.prototype
-        // Array.prototype.__proto__ === Object.prototype // true
-        // Arrray.prototype.__proto__.__proto__ points to null
-        // Object.prototype.__proto__ points to null
-
-        // Boolean.__proto__ points to Object.prototype
-        // Number.__proto__ === Boolean.__proto__ // true
-        // String.__proto__ points to Object.prototype
-
-        // All datatypes in javascript inheries from Object.prototype at the end
-        // Object.prototype.__proto__ points to null at the end
-        // Object.prototype.__proto__ === null // true
-        // this is end of the chain. This chain is called prototype chain
-        `
-      },
-      {
-        text1: `// Prototypal inheritance: Prototypal inheritance is the mechanism by which objects
-        can
-        inherit properties and methods from their prototype.If an object doesn't have a
-        property or method, JavaScript looks for it in its prototype, and if the prototype
-        doesn't have it, it looks in the prototype's prototype, and so on.
-
-        // Prototype inheritance in JavaScript is a way for objects to share properties and
-        methods with other objects.Each object has a hidden link to another object called
-        its
-        prototype.If a property or method is not found on the object itself, JavaScript
-        looks
-        for it in its prototype chain.This allows objects to inherit properties and methods
-        from their prototypes, creating a form of inheritance without classes.
-
-
-        //-----------------------
-        // Benifits of Prototype
-        //-----------------------
-
-        //------------------>
-        // They use less memory.
-        //------------------>
-
-        // case1 for the userDatails method logic is same if you console user objects every
-        object has getMarks function so it crates different memory location for
-
-
-        // When a method is defined using this.this.getMarks a new copy is created every
-        time a
-        new object is instantiated.Let's look at an example.
-
-        // In most Object Oriented programming languages a class has a constructor. A
-        constructor is a sort of initializing function that is called every time a new
-        instance
-        of the class is created.Usually the Constructor function name is defined using the
-        actual class name or the keyword constructor:
-
-        // If you add properties to 'this' inside the 'userDetails' class, all future
-        instances
-        of 'userDetails' will get its own copy of the properties and methods, which causes
-        redundancy.On a side note, using 'this' is great for accessing and manipulating
-        private
-        variables.But let's assume we are dealing with public variables.
-
-        // Each instance of 'userDetails' receives a duplicate copy of the getMarks()
-        method.
-        When the getMarks() method is duplicated in every instance, this can become
-        problematic
-        as it starts to affect the performance and memory of your app.`,
-        code1: `function userDetails(userName, area, m1, m2, m3) {
-          this.userName = userName;
-          this.area = area;
-          this.m1 = m1;
-          this.m2 = m2;
-          this.m3 = m3;
-          this.getMarks = function() {
-    return m1 + m2 + m3;
-  }
-}
-
-          const user1 = new userDetails("ram", "wgl", 15, 54, 76)
-          const user2 = new userDetails("ravi", "hyd", 65, 54, 76)
-
-          console.log(user1.getMarks())
-          console.log(user2.getMarks())
-
-          console.log(user1.getMarks === user2.getMarks) // false
-
-          // Further, we can see how both of the getMarks() methods are separate and maintain their own copy:`
-      },
-      {
-        text1: ` // Prototypes are the solution
-        // Here are some advantages of using prototype methods:
-
-        // 1) If you added a property to getMarks.prototype , then that property will be
-        shared
-        in all objects associated with the class , including all future objects created
-        using new
-        userProtoDetails.Sharing the property is different than duplicating.Instances can
-        borrow this method through the prototype chain, which will be discussed further.
-        // 2) Changing the property value in the methods inherited through the prototype
-        chain
-        will change all values in the associated objects.
-        // 3) In most cases, using 'prototype' or 'this' would be similar, but 'prototype'
-        allows you to save memory since there's only one instance of it, rather than its own
-        instance for each object.
-        // Let's use the same example above, except redacting this.callOrder and using a
-        'userProtoDetails.prototype.getMarks' instead:
-
-
-        // When we run our function, every instance of 'userProtoDetails' does not duplicate
-        our
-        getMarks() method since it's now part of the prototype and can't be copied:`,
-        code1: `function userProtoDetails(userName, area, m1, m2, m3) {
-          this.userName = userName;
-          this.area = area;
-          this.m1 = m1;
-          this.m2 = m2;
-          this.m3 = m3;
-}
-
-          userProtoDetails.prototype.getMarks = function() {
-  return this.m1 + this.m2 + this.m3;
-}
-
-          const userPro1 = new userProtoDetails("ram", "wgl", 90, 54, 76)
-          const userPro2 = new userProtoDetails("ravi", "hyd", 99, 54, 76)
-
-          console.log(userPro1.getMarks())
-          console.log(userPro2.getMarks())
-
-          console.log(userPro1.getMarks === userPro2.getMarks) // true`
-      },
-      {
-        text1: `// The prototype chain can be found under '__proto__' , which is an object in each
-        instance that points to the prototype it was created from.On the other hand, the
-        'prototype' property is found in every function created in JS.It’s the property of a
-        class constructor.
-
-        // __proto__: 'Object' shows us how JavaScript assigns userPro1 and userPro2 to an
-        object constructor — this is what allows us to access all the methods from the
-        assigned
-        prototype.Thus, both the getMarks() methods can be shared:
-        console.log(userPro1.__proto__)
-
-        // Prototypes are usually more memory-efficient and faster than creating many
-        classes.
-        Additionally, prototypes are useful in situations where you need to create objects
-        that
-        inherit from other objects, as JavaScript's prototype-based inheritance system
-        allows
-        for easy inheritance and modification.
-
-        //-----------------------
-        // inheritance in javascript
-        //-----------------------
-
-        // Prototype inheritance in javascript is the linking of prototypes of a parent
-        object
-        to a child object to share and utilize the properties of a parent class using a
-        child
-        class.
-
-        // Prototypes are hidden objects that are used to share the properties and methods
-        of a
-        parent class to child classes.`,
-        code1: `function Phone() {
-                  this.modalNumber = '';
-                  this.getModalNumber = function() {
-                  return this.modalNumber
-                }
-              }
-
-          function Samsung(modalNumber) {
-          this.modalNumber = modalNumber;
-          this.latestFeature = function() {
-          console.log("foldable smart phone")
-      }
-}
-
-          Samsung.prototype = new Phone;
-
-          const smObj = new Samsung("a123456")
-          console.log(smObj.getModalNumber())
-
-
-          // Example 2
-          // Using Object.create():
-          //...............
-          // Parent object
-          let animal = {
-          speak: function() {
-          console.log(this.sound);
-  }
-};
-
-          // Child object inheriting from the parent
-          let cat = Object.create(animal);
-          cat.sound = "Meow";
-
-          // Now, cat has access to the speak method from the animal object
-          cat.speak(); // Output: Meow
-
-
-          // Example 3
-          //--------------------
-          //Constructor Functions:
-          //--------------------
-          // Parent constructor function
-          function Animal(sound) {
-          this.sound = sound;
-}
-
-          // Adding a method to the parent's prototype
-          Animal.prototype.speak = function() {
-          console.log(this.sound);
-};
-
-          // Child constructor function
-          function Cat(sound) {
-          Animal.call(this, sound); // Call parent constructor
-}
-
-          // Inheriting from the parent's prototype
-          Cat.prototype = Object.create(Animal.prototype);
-          Cat.prototype.constructor = Cat; // Set correct constructor
-
-          // Creating a cat object
-          let myCat = new Cat("Meow");
-
-          // Now, myCat has access to the speak method inherited from Animal
-          myCat.speak(); // Output: Meow
-
-
-          // Ex
-          // Class Syntax (ES6):
-          //..................
-          // Parent class
-          class Animal {
-          constructor(sound) {
-          this.sound = sound;
-  }
-          speak() {
-          console.log(this.sound);
-  }
-}
-
-          // Child class inheriting from Animal
-          class Cat extends Animal {
-          constructor(sound) {
-          super(sound); // Call parent constructor
-  }
-}
-
-          // Creating a cat object
-          let myCat = new Cat("Meow");
-
-          // Now, myCat has access to the speak method inherited from Animal
-          myCat.speak(); // Output: Meow
- `
-      },
-      {
-        text1: `// The Object.setPrototypeOf() method in JavaScript is a standard built-in object
-        which
-        sets the prototype (i.e., the internal[[Prototype]]property) of a specified object
-        to
-        another object or null.
-
-        // In JavaScript, Object.setPrototypeOf is a method used to set the prototype (i.e.,
-        the
-        internal[[Prototype]]property) of a specified object to another object or null.This
-        method allows you to dynamically change the inheritance chain of an object.`,
-        code1: ``
-      },
-      ]
-    },
-
     {
       id: 1,
       title: "getter and setter",
@@ -4102,7 +7996,7 @@ The following redefines the <b>Circle</b> class by adding the <b>radius</b> gett
           <b>The in operator: check private fields exist</b>
           To check if an object has a private field inside a class, you use the <b>in</b>  operator:
           
-          // <span style="color:red">fieldName in objectName</span>
+          // <span style="color:red"> fieldName in objectName</span>
 
           For example, the following adds the <b>hasRadius()</b>  static method to the <b>Circle</b>  class that uses the in</b>  operator to check if the <b>circle</b>  object has the <b>#radius</b>  private field:`,
           code1: `class Circle {
@@ -4179,7 +8073,7 @@ The following redefines the <b>Circle</b> class by adding the <b>radius</b> gett
           
           <span style="color:grey">static #count = 0;</span>
           Second, increase the <b>#count</b> by one in the constructor:
-          <span style="color:grey">Circle.#count++;</span>
+          <span style="color:grey"> Circle.#count++;</span>
           Third, define a static method that returns the value of the <b>#count</b> private static field:
           <span style="color:grey">
           static getCount() {
@@ -4549,7 +8443,7 @@ console.log(p1 instanceof Person); // true
           
           let p1 = new Person('John');
           
-          console.log(Person[Symbol.hasInstance](p1)); // true`
+          console.log( Person[Symbol.hasInstance] (p1)); // true`
         },
         {
           text1: `Since the <b>Symbol.hasInstance</b> is defined on the Function prototype, it's automatically available by default in all functions and classes
@@ -4577,8 +8471,119 @@ console.log(p1 instanceof Person); // true
           code1: ``
         },
       ]
-    }
+    },
+    {
+      id: 1,
+      section: `PROMISES & ASYNC/AWAIT`,
+      title: "Promises",
+      note: [
+        {
+          text1: `<b>Promise</b> : An object that is used as a placeholder for the future result of an asynchronous operation
+          (or)
+          <b>Promise</b> : A container for an asynchronously delivered value.
+          (or)
+          <b>Promise</b> : A container for a future value.
+          `,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise Chaining",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.all()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.race()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.any()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.allSettled()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.prototype.finally()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise Error Handling",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "async/await",
+      note: [
+        {
+          text1: `async and await are the keywords used to write the asynchronous code in a synchronous manner where the await keyword waits for the promise to be resolved or rejected and the async keyword is used to wrap all await keywords with a function.`,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Synchronous / Asynchronous",
+      note: [
+        {
+          text1: `<b> Synchronous</b>:
+           Synchronous means the code runs in a particular sequence of instructions given in the program. Each instruction waits for the previous instruction to complete its execution.
+           Instruction in synchronous code executes in a given sequence.
 
+           <b>Asynchronous</b>:
+           Asynchronous code execution allows to execution next instructions immediately and doesn't block the flow because of previous instructions.`,
+          code1: ``
+        }
+      ]
+    },
+   
 
   ]
 }
