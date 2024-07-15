@@ -22,9 +22,7 @@
 
     <div class="container-fluid">
         <h1><a href="./pages/index.html">Home</a></h1>
-        <button onClick="sendInformation()">
-            send data
-        </button>
+        <h2><a href="./projects/Tic-Tok-Toi-game/game.html">Tic Tok Toi game</a></h2>
     </div>
 
 
@@ -36,40 +34,7 @@
     <script src="./header/header.js"></script>
 
     <script>
-        // mainDom(commonData.commonNote)
-
-        function sendInformation() {
-            const fs = require('fs');
-
-            // Read the contents of the JSON file
-            const data = fs.readFileSync('./db/db.json');
-            // Parse the JSON data into a JavaScript object
-            const jsonData = JSON.parse(data);
-
-            console.log("Before Adding data", JSON.stringify(jsonData, null, 4));
-
-            // Modify the JavaScript object by adding new data
-            jsonData.users.push({
-                "username": "Ram",
-                "surname": "Brown",
-                "id": [1]
-            });
-
-
-            // Convert the JavaScript object back into a JSON string
-            const jsonString = JSON.stringify(jsonData);
-
-            fs.writeFileSync('./db/db.json', jsonString, 'utf-8', (err) => {
-                if (err) throw err;
-                console.log('Data added to file');
-            });
-
-            const update_data = fs.readFileSync('./db/db.json');
-            const updated_jsonData = JSON.parse(update_data);
-            console.log("After Adding data", JSON.stringify(updated_jsonData, null, 4));
-        }
-
-
+       
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
