@@ -13,13 +13,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/agate.min.css">
     <link rel="stylesheet" href="../header/header.css">
     <style>
-       
+        .inside-nav-bar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .inside-nav-bar ul li {
+            float: left;
+        }
+
+        .inside-nav-bar ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .inside-nav-bar ul li a:hover {
+            background-color: #111;
+        }
     </style>
 </head>
 
 <body>
     <nav class="nav" id="header"></nav>
-
+    <div class="inside-nav-bar">
+        <ul>
+            <li><a class="active" href="vue-notes.html">Vue2</a></li>
+            <li><a href="#news">Vue3</a></li>
+            <li><a href="#contact">Project</a></li>
+        </ul>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class='col-lg-3 col-sm-12'>
