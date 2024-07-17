@@ -21,7 +21,6 @@ const navHeader = `
     <li><a href="typescript-notes.html">TypeScript</a></li>
     <li><a href="#">css & bootstrap</a></li>
     <li><a href="./graphql-notes.html">GraphQL</a></li>
-    <li><a href="#">redux</a></li>
     <li><a href="#">VS</a></li>
     <li><a href="./js-code-challenges.html">Code Challenges</a></li>
     <li><a href="./english.html">English</a></li>

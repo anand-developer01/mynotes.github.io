@@ -36,16 +36,21 @@
         .inside-nav-bar ul li a:hover {
             background-color: #111;
         }
+        .inside-nav-bar ul li .active {
+            background-color: #111;
+        }
     </style>
 </head>
 
 <body>
+
     <nav class="nav" id="header"></nav>
     <div class="inside-nav-bar">
         <ul>
-            <li><a class="active" href="vue-notes.html">Vue2</a></li>
-            <li><a href="vue3.html">Vue3</a></li>
-            <li><a href="vue-projects.html">Vue Projects</a></li>
+            <li><a class="" href="react-notes.html">react</a></li>
+            <li><a class="active" href="redux-notes.html">redux</a></li>
+            <li><a href="redux-toolkit.html">redux toolkit</a></li>
+            <li><a href="react-projects.html">React Projects</a></li>
         </ul>
     </div>
     <div class="container-fluid">
@@ -69,10 +74,10 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="./main.js"></script>
-    <script src="../notes-data/vue-notes.js"></script>
+    <script src="../notes-data/redux-data.js"></script>
     <script src="../header/header.js"></script>
     <script>
-        mainDom(vueData.vueNote)
+        mainDom(reduxData.reduxNote)
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
