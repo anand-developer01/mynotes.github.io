@@ -1,3 +1,8 @@
+const reactLinks1 = 'vue-notes'
+const reactLinks2 = 'vue3'
+const reactLinks3 = 'vue-x'
+const reactLinks4 = 'vuejs-projects'
+
 const vue3Data = {
   vue3Note: [
     {

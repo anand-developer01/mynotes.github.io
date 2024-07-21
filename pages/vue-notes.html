@@ -12,42 +12,15 @@
     <link rel="stylesheet" href="../css/common-css.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/agate.min.css">
     <link rel="stylesheet" href="../header/header.css">
+    <link rel="stylesheet" href="../css/sub-header.css">
     <style>
-        .inside-nav-bar ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
 
-        .inside-nav-bar ul li {
-            float: left;
-        }
-
-        .inside-nav-bar ul li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        .inside-nav-bar ul li a:hover {
-            background-color: #111;
-        }
     </style>
 </head>
 
 <body>
     <nav class="nav" id="header"></nav>
-    <div class="inside-nav-bar">
-        <ul>
-            <li><a class="active" href="vue-notes.html">Vue2</a></li>
-            <li><a href="vue3.html">Vue3</a></li>
-            <li><a href="vue-projects.html">Vue Projects</a></li>
-        </ul>
-    </div>
+    <div id="subHeader" class="inside-nav-bar"></div>
     <div class="container-fluid">
         <div class="row">
             <div class='col-lg-3 col-sm-12'>
@@ -71,6 +44,7 @@
     <script src="./main.js"></script>
     <script src="../notes-data/vue-notes.js"></script>
     <script src="../header/header.js"></script>
+    <script src="./subHeader.js"></script>
     <script>
         mainDom(vueData.vueNote)
     </script>

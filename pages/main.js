@@ -2,6 +2,7 @@ function mainDom(data) {
     // console.log(data)
     // header
     document.getElementById("header").innerHTML = navHeader
+    typeof subHeader !== 'undefined' ? document.getElementById('subHeader').innerHTML = subHeader  : ''
 
     data.map(el => {
         // left menu links
