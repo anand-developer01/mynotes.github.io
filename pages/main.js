@@ -1,5 +1,11 @@
 function mainDom(data) {
-    // console.log(data)
+    // console.log()
+    const pathname = new URL(window.location.href).pathname;
+    // url = initial_url .split( '/' );
+console.log(pathname.split( '/' ))
+console.log(pathname.split( '/' ).slice(-1).pop())
+
+// arr.slice(-1)[0] or arr.slice(-1).pop() // reove last eleent
     // header
     document.getElementById("header").innerHTML = navHeader
     typeof subHeader !== 'undefined' ? document.getElementById('subHeader').innerHTML = subHeader  : ''
