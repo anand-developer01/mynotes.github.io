@@ -382,8 +382,9 @@ const SubjectList = {
         },
         {
             id: 18,
-            topic: "would usage",
-            explain:' would like to (కోరుకుంటున్నాను)',
+            section:"would usage",
+            topic: 'would like to (కోరుకుంటున్నాను)',
+            explain:'',
             formation:'If + Subject + had + past Participle - Subject + would have + past Participle',
             note:'Present Tense',
             content:[
@@ -566,8 +567,8 @@ const SubjectList = {
         },
         {
             id: 1,
-            topic: "would / could : Polite / foral Expressions",
-            explain:'',
+            topic: "would / could : Polite Request / foral Expressions",
+            explain:'To ask questions in a very polite way, use: Would you/ Could you (please) + simple verb + ...?',
             formation:'',
             note:'',
             content:[
@@ -603,10 +604,63 @@ const SubjectList = {
                 },
             ],
         },
+        {
+            id: 1,
+            section:"Advanced structures and general phrases",
+            topic: "Will have to (వస్తుంది)",
+            explain:'భవిషత్తులో చేయవలసి వుంటింది / వస్తుంది',
+            formation:'',
+            note:'Present Tense',
+            content:[
+                {
+                    id: 1,
+                    eng: "You will have to marry him in future",
+                    tel:'మీరు భవిష్యత్తులో అతనిని వివాహం చేసుకోవలసి ఉంటుంది',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "I will have to watch that movie tomorrow",
+                    tel:'నేను రేపు ఆ సినిమా చూడాల్సి వస్తుంది',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "you will have to pay",
+                    tel:'మీరు చెల్లించవలసి ఉంటుంది / వస్తుంది',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "you will have to write it after 45 line",
+                    tel:'మీరు దానిని 45 లైన్ తర్వాత వ్రాయవలసి ఉంటుంది',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "He will have to sleep here to night",
+                    tel:'అతడు ఈ రాత్రికి ఇక్కడే పడుకోవాలి / నిద్రిచాల్సి వస్తుంది',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "He will have to do what i said",
+                    tel:'అతను నేను చెప్పినట్టే చేయాల్సి వస్తుంది',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "We will have to win the match at any cost tomorrow",
+                    tel:'రేపటి మ్యాచ్‌లో మనం ఎలాగైనా గెలవాల్సి వస్తుంది',
+                    tense:'Present tense'
+                },
+            ],
+        },
     ],
     Tense: [
         {
             id: 1,
+            section:"Tenses",
             topic: "Simple Present Tense",
             explain:'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
             formation:'If + Subject + had + past Participle - Subject + would have + past Participle',

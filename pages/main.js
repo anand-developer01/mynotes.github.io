@@ -1,3 +1,4 @@
+const logoTitle = 'Srihas notes'
 function mainDom(data) {
     // console.log()///
     //////////////////////////////////////
