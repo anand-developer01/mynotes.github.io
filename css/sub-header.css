@@ -1,4 +1,4 @@
-.inside-nav-bar ul {
+.inside-nav-bar{
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -6,11 +6,11 @@
     background-color: #333;
 }
 
-.inside-nav-bar ul li {
+.inside-nav-bar li {
     float: left;
 }
 
-.inside-nav-bar ul li a {
+.inside-nav-bar li a {
     display: block;
     color: white;
     text-align: center;
@@ -18,9 +18,9 @@
     text-decoration: none;
 }
 
-.inside-nav-bar ul li a:hover {
+.inside-nav-bar li a:hover {
     background-color: #111;
 }
-.inside-nav-bar ul li .active {
+.inside-nav-bar li .active {
     background-color: #111;
 }

@@ -379,7 +379,230 @@ const SubjectList = {
                     tense:'Past tense'
                 }
             ],
-        }
+        },
+        {
+            id: 18,
+            topic: "would usage",
+            explain:' would like to (కోరుకుంటున్నాను)',
+            formation:'If + Subject + had + past Participle - Subject + would have + past Participle',
+            note:'Present Tense',
+            content:[
+                {
+                    id: 1,
+                    eng: "I would like to have a coffee",
+                    tel:'నేను కాఫీ తాగాలనుకుంటున్నాను'
+                },
+                {
+                    id: 2,
+                    eng: "I would like to tell you something (I want to tell you something)",
+                    tel:'నేను మీకు ఒక విషయం చెప్పాలనుకుంటున్నాను'
+                },
+                {
+                    id: 3,
+                    eng: "I thought she would call me",
+                    tel:'ఆమె నాకు ఫోన్ చేస్తదని అనుకున్, ఆమె నన్ను పిలుస్తుందని అనుకున్నాను'
+                },
+                {
+                    id: 4,
+                    eng: "I think she will call me",
+                    tel:'ఆమె నన్ను పిలుస్తుందని నేను అనుకుంటున్నాను'
+                },
+                {
+                    id: 5,
+                    eng: "I thought he would teach english",
+                    tel:'అతను ఇంగ్లీష్ నేర్పిస్తాడని అనుకున్నాను'
+                },
+                {
+                    id: 6,
+                    eng: "I think he will teach english",
+                    tel:'అతను ఇంగ్లీష్ నేర్పిస్తాడని నేను అనుకుంటున్నాను'
+                },
+                {
+                    id: 7,
+                    eng: "I thought he would give a party",
+                    tel:'పార్టీ ఇస్తాడని అనుకున్నాను'
+                },
+                {
+                    id: 8,
+                    eng: "I thought you would eat, you didn't",
+                    tel:'నువ్వు తింటావని అనుకున్నాను, నువ్వు తినలేదు'
+                },
+            ],
+        },
+        {
+            id: 1,
+            topic: "used to / would (గతంలో జరిగిన విషయాలు)",
+            explain:'',
+            formation:'',
+            note:'',
+            content:[
+                {
+                    id: 1,
+                    eng: "I used to write stories",
+                    tel:'నేను కథలు రాసేవాడిని',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "we would go to swimming everyday in summer",
+                    tel:'మేము వేసవిలో ప్రతిరోజూ ఈతకు వెళ్తాము / వెళ్ళేవాలం',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "we would go to relative's place in holidays",
+                    tel:'సెలవుల్లో బంధువుల ఊరికి వెళ్తాం / వెళ్ళేవాలం',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "I would dance very well when I was a kid",
+                    tel:'నేను చిన్నప్పుడు చాలా బాగా డాన్స్ చేస్తాను / చేసేవాడిని',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "He would sing when he was in his childhood",
+                    tel:'అతను చిన్నతనంలో ఉన్నప్పుడు పాడేవాడు',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "I used to eat a lot in my childhood (or) I would eat a lot in my childhood",
+                    tel:'నేను చిన్నతనంలో చాలా తినేవాడిని',
+                    tense:''
+                },
+            ],
+        },
+        {
+            id: 1,
+            topic: "will -> would (indirect speech)",
+            explain:'',
+            formation:'',
+            note:'',
+            content:[
+                {
+                    id: 1,
+                    eng: "raghu said i will learn english // ghu said that he would learn english",
+                    tel:'రఘు ఇంగ్లీష్ నేర్చుకుంటానని చెప్పాడు',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "vinay said, 'we will move to chennai next week'",
+                    tel:'వినయ్, "మేము వచ్చే వారం చెన్నైకి వెళ్తాము" అన్నాడు',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "vinay said that they would move to chennai next week",
+                    tel:'వచ్చే వారం చెన్నైకి వెళ్తామని వినయ్ చెప్పారు',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "madhu sri said to us, 'I will try to save the patient'",
+                    tel:'మధు శ్రీ మాతో అన్నాడు, "నేను రోగిని రక్షించడానికి ప్రయత్నిస్తాను"',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "madhusri told us that she would try to save the patient",
+                    tel:'రోగిని కాపాడేందుకు ప్రయత్నిస్తానని మధుశ్రీ చెప్పింది',
+                    tense:''
+                },
+            ],
+        },
+        {
+            id: 1,
+            topic: "would : conditional statements",
+            explain:'we have to use past verb',
+            formation:'',
+            note:'',
+            content:[
+                {
+                    id: 1,
+                    eng: "if you asked me, i would give you",
+                    tel:'మీరు నన్ను అడిగితే, నేను మీకు ఇచ్చేవాడిని',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "if i were a doctor, i would save the patient",
+                    tel:'నేను డాక్టర్ అయితే, నేను రోగిని కాపాడేవాడిని',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "if we played well, we would win the game",
+                    tel:'మేము బాగా ఆడితే, మేము గేమ్ గెలిచేవాళ్ళం',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "if you had given him, he would have given us",
+                    tel:'మీరు అతనికి ఇచ్చి ఉంటే, అతను మాకు ఇచ్చిఉండేవాడు',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "if they had saved her, she would have lived now",
+                    tel:'వారు ఆమెను రక్షించినట్లయితే, ఆమె ఇప్పుడు జీవించి ఉండేది',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "",
+                    tel:'',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "",
+                    tel:'',
+                    tense:''
+                },
+            ],
+        },
+        {
+            id: 1,
+            topic: "would / could : Polite / foral Expressions",
+            explain:'',
+            formation:'',
+            note:'',
+            content:[
+                {
+                    id: 1,
+                    eng: "Would you please tell this address",
+                    tel:'',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "Would you please help me to solve the issue",
+                    tel:'',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "Would you please move aside",
+                    tel:'',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "Would you please open the door",
+                    tel:'',
+                    tense:''
+                },
+                {
+                    id: 1,
+                    eng: "Would you please explain the topic for me",
+                    tel:'',
+                    tense:''
+                },
+            ],
+        },
     ],
     Tense: [
         {

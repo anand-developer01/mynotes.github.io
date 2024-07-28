@@ -249,23 +249,55 @@
 
         let list = document.getElementById("myList");
         let leftLinks = document.getElementById("myLinks");
+        
         SubjectList.Structures.map((en, eInd) => {
-            // left menu links
-        //     let leftMenuListDiv = document.createElement('div');
-        // let leftMenuD_FlexDiv = document.createElement('div');
-        // let a = document.createElement('a');
-        // let linkText = document.createTextNode(en.topic);
+        let leftLinks = document.getElementById("myLinks");
+        let leftMenuD_FlexDiv = document.createElement('div');
+ 
+        let leftMenu = en.section ?
+                `<div class="left-menu-list">
+                    <div style="background:#aca0a1; padding:3px;">${en.section}</div>
+                    <a href="#${en.topic}">${en.topic}</a>
+                </div>` : `
+                <div class="left-menu-list">
+                    <a href="#${en.topic}">${en.topic}</a>
+                </div>
+                `
+        leftMenuD_FlexDiv.innerHTML = leftMenu;
+        leftLinks.appendChild(leftMenuD_FlexDiv)
+            
+        const coreSnp = en.content.map(top => {
+            return `<div class="main-box">
+                        <div class="notes-text">
+                            <p class="eng_pad">
+                                ${top.eng}
+                            </p>
+                            <span>${top.tel}</span>
+                        </div>
+                    </div>`
+                }).join('')
 
-        // leftMenuD_FlexDiv.className = 'd-flex'
-        // leftMenuD_FlexDiv.appendChild(leftMenuListDiv);
+            const englishContent = `
+            <li class="li-main-box">
+                <div class="card-content">
+                    <div class="main-tit-section">
+                    ${eInd + 1} ) <strong id="${en.topic}">${en.topic}</strong>
+                        <div>
+                             <strong> <i>Explain : ${en.explain ? en.explain : ''}</i> </strong>    
+                        </div>
+                    </div>
+                    <div>${coreSnp}</div>
+                </div>
+            </li>
+            `;
+           const card = document.createElement('ul');
+           card.className = 'list-style-remove';
+        card.innerHTML = englishContent;
+        list.appendChild(card);
+        })
 
-        // leftMenuListDiv.className = 'left-menu-list'
-        // leftMenuListDiv.appendChild(a);
 
-        // a.appendChild(linkText);
-        // a.title = en.topic;
-        // a.href = `#${en.topic}`;
-        // leftLinks.appendChild(leftMenuD_FlexDiv)
+        SubjectList.Tense.map((en, eInd) => {
 
         let leftLinks = document.getElementById("myLinks");
         let leftMenuD_FlexDiv = document.createElement('div');
@@ -299,7 +331,7 @@
                     <div class="main-tit-section">
                     ${eInd + 1} ) <strong id="${en.topic}">${en.topic}</strong>
                         <div>
-                             <strong> <i>Explain:${en.explain ? en.explain : ''}</i> </strong>    
+                             <strong> <i>Explain : ${en.explain ? en.explain : ''}</i> </strong>    
                         </div>
                     </div>
                     <div>${coreSnp}</div>
