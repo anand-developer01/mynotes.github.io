@@ -34,13 +34,13 @@ Library: A library, on the other hand, is a collection of functions, methods, an
 Framework:
 A framework is a more comprehensive and structured collection of pre-written code that provides a skeleton for building applications.
 
-<b>Steeper learning curve</b>: Frameworks may have a steeper learning curve as developers need to understand the framework’s architecture, conventions, and overall structure.
-<b>Less Control/Flexibilty</b>: framework dictates the overall structure and flow of the application. Developers need to follow the framework’s conventions and structure.
+<b>Steeper learning curve</b>: Frameworks may have a steeper learning curve as developers need to understand the framework's architecture, conventions, and overall structure.
+<b>Less Control/Flexibilty</b>: framework dictates the overall structure and flow of the application. Developers need to follow the framework's conventions and structure.
 <b>Higher level of abstraction</b> : Frameworks provide a higher level of abstraction and control the flow of the application.
 <b>Build entire applications</b>: Frameworks are used to build entire applications. They often come with predefined patterns, tools, and best practices for developing within a specific domain, such as web development or mobile app development.
 
                     <b>Key Differences:</b>
-                    <b>Inversion of Control</b>: In a framework, the control flow is inverted. The framework calls the developer’s code, whereas in a library, the developer calls the library’s code.
+                    <b>Inversion of Control</b>: In a framework, the control flow is inverted. The framework calls the developer's code, whereas in a library, the developer calls the library's code.
                     <b>Extensibility</b>: Libraries are more easily replaceable, whereas frameworks are more opinionated and provide a more comprehensive structure for the entire application.
                     <b>Size and Scope</b>: Libraries tend to be smaller and focused on specific tasks, while frameworks are larger and provide a more complete infrastructure for application development.
 
@@ -80,7 +80,7 @@ A framework is a more comprehensive and structured collection of pre-written cod
                          </tr> 
                          <tr> 
                           <td>Inversion of Control</td> 
-                          <td>Framework manages the flow and calls developer’s code</td> 
+                          <td>Framework manages the flow and calls developer's code</td> 
                           <td>Developer decides when and how to use the library</td> 
                          </tr> 
                         </tbody> 
@@ -114,11 +114,11 @@ Every Vue application starts by creating a new Vue instance with the Vue functio
 var vm = new Vue({
   // options
 })
-Although not strictly associated with the MVVM pattern, Vue’s design was partly inspired by it. As a convention, we often use the variable <b>vm (short for ViewModel)</b> to refer to our Vue instance.
+Although not strictly associated with the MVVM pattern, Vue's design was partly inspired by it. As a convention, we often use the variable <b>vm (short for ViewModel)</b> to refer to our Vue instance.
 
 When you create a Vue instance, you pass in an <b>options object</b>. The majority of this guide describes how you can use these options to create your desired behavior. For reference, you can also browse the full list of options in the API reference.
 
-A Vue application consists of a <b>root Vue instance</b> created with <b>new Vue</b>, optionally organized into a tree of nested, reusable components. For example, a todo app’s component tree might look like this:
+A Vue application consists of a <b>root Vue instance</b> created with <b>new Vue</b>, optionally organized into a tree of nested, reusable components. For example, a todo app's component tree might look like this:
 
 `,
           code1: ``
@@ -137,8 +137,8 @@ A Vue application consists of a <b>root Vue instance</b> created with <b>new Vue
                     <b> 1. v-bind </b> 
                     The v-bind  directive, often abbreviated as <b> : </b> , allows you to bind an attribute to an expression. It's useful for dynamically setting HTML attributes, such as <b> src </b> or <b> href</b> .
                     `,
-          code1: `<img v-bind:src="imageURL">
-<a v-bind:href="linkURL">Visit our website</a>`
+          code1: `&lt;img v-bind:src=&quot;imageURL&quot;&gt;
+&lt;a v-bind:href=&quot;linkURL&quot;&gt;Visit our website&lt;/a&gt;`
         },
         {
           text1: `<b>CSS Binding</b>
@@ -599,7 +599,7 @@ Because <b>v-if</b> is a directive, it has to be attached to a single element. B
 
                     The key difference is that v-if <b>conditionally renders</b> elements and v-show <b>conditionally displays</b> elements.
                     This means that <b>v-if</b> will actually destroy and recreate elements when the conditional is toggled. Meanwhile, <b>v-show</b> will always keep the element in the DOM and will only toggle its display by changing its CSS.
-                    We can easily see these by running inspect element for both a <b>v-if</b> and a <b>v-show</b>. So let’s say we have the following code that has both types of conditionals and a button that toggles them.
+                    We can easily see these by running inspect element for both a <b>v-if</b> and a <b>v-show</b>. So let's say we have the following code that has both types of conditionals and a button that toggles them.
                     `,
           code1: ``
         },
@@ -746,12 +746,12 @@ methods: {
 
           DOM event handlers can have modifiers that alter their behaviour. 
 
-          <b>.stop</b>: the click event’s propagation will be stopped
+          <b>.stop</b>: the click event's propagation will be stopped
           <b>.prevent</b>: just the modifier
           <b>.self</b>: not from a child element
           <b>.capture</b>: use capture mode when adding the event listener.
           <b>.once</b>: At most once, the click event will be triggered.
-          <b>.passive</b>: the scroll event’s default behavior (scrolling) will happen
+          <b>.passive</b>: the scroll event's default behavior (scrolling) will happen
 
           <b>stopPropagation</b> prevents further propagation of the current event in the capturing and bubbling phases.
 
@@ -1479,13 +1479,13 @@ export default {
 
           The difference between a <b>computed property and a method is that computed properties are cached</b>, these properties only change when their dependency change. A method will be evaluated every time it is being called.
 
-          Why do we need caching? Imagine we have an expensive computed property <b>A</b>, which requires looping through a huge Array and doing a lot of computations. Then we may have other computed properties that in turn depend on <b>A</b>. Without caching, we would be executing <b>A</b>’s getter many more times than necessary! In cases where you do not want caching, use a method instead.
+          Why do we need caching? Imagine we have an expensive computed property <b>A</b>, which requires looping through a huge Array and doing a lot of computations. Then we may have other computed properties that in turn depend on <b>A</b>. Without caching, we would be executing <b>A</b>'s getter many more times than necessary! In cases where you do not want caching, use a method instead.
           `,
           code1: ``
         },
         {
           text1: `<b>Writable Computed</b>
-By default, Computed properties are getter-only, but it’s possible a declare a setter and make Computed a “Writable Computed”.`,
+By default, Computed properties are getter-only, but it's possible a declare a setter and make Computed a “Writable Computed”.`,
           code1: `
           <script setup>
           import { ref, computed } from 'vue'
@@ -1508,7 +1508,7 @@ By default, Computed properties are getter-only, but it’s possible a declare a
           text1: `<b>Is Computed property always pure functions?</b>
 As shown in the above example, the computed property is a pure function, but what if I want to update any data field value inside the computed property?
 
-In most cases, you will not end in a situation where you need to set some data in computed property and that’s why computed properties by default are getters only. For some rare scenarios, we can write a setter like this to update the data value:
+In most cases, you will not end in a situation where you need to set some data in computed property and that's why computed properties by default are getters only. For some rare scenarios, we can write a setter like this to update the data value:
 
 <b>Best practices</b>
 -> Computed property getters should always be pure functions.
@@ -2320,7 +2320,7 @@ export default {
       note: [
         {
           text1: `Each Vue component instance goes through a series of initialization steps when it's created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it also runs functions called lifecycle hooks, giving users the opportunity to add their own code at specific stages.
-          Lifecycle hooks in Vue.js are special methods that allow you to hook into different stages of a component's life cycle, providing control over the behavior of the component at each stage. Here’s an overview of the most commonly used lifecycle hooks in Vue.js:
+          Lifecycle hooks in Vue.js are special methods that allow you to hook into different stages of a component's life cycle, providing control over the behavior of the component at each stage. Here's an overview of the most commonly used lifecycle hooks in Vue.js:
 
           <b>Lifecycle Diagram</b>
 <b>Creation</b>
@@ -2434,7 +2434,7 @@ Key points about the <b>beforeUnmount</b> hook:
 beforeDestroy
 | (cleanup)
 ↓
-<b>-> destroyed</b>: This hook is called after the component has been destroyed. The component’s data bindings and event listeners are no longer active.
+<b>-> destroyed</b>: This hook is called after the component has been destroyed. The component's data bindings and event listeners are no longer active.
 
 The <b>unmounted</b> hook is the final lifecycle hook in Vue.js, called after the component has been successfully unmounted and destroyed. At this stage, the component's DOM elements have been removed, and any resources or event listeners associated with the component should be released.
 
@@ -2947,6 +2947,103 @@ export default {
   }
   &lt;/style&gt;
 
+
+  //-----------
+
+
+  &lt;template&gt;
+    &lt;div&gt;
+      &lt;h2&gt;Dynamic Form Example&lt;/h2&gt;
+
+      &lt;div v-for=&quot;(field, index) in fields&quot; :key=&quot;index&quot; class=&quot;form-field&quot;&gt;
+        &lt;input type=&quot;text&quot; v-model=&quot;field.value&quot; :placeholder=&quot;&#39;Field &#39; + (index + 1)&quot; ref=&quot;inputFields&quot;&gt;
+        &lt;button @click=&quot;removeField(index)&quot;&gt;Remove&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;button @click=&quot;addField&quot;&gt;Add Field&lt;/button&gt;
+
+      {{ fields }}
+    &lt;/div&gt;
+  &lt;/template&gt;
+
+  &lt;script&gt;
+  export default {
+    data() {
+      return {
+        fields: [{ value: &#39;&#39; }]
+      };
+    },
+    methods: {
+      addField() {
+        this.fields.push({ value: &#39;&#39; });
+        this.$nextTick(() =&gt; {
+          const latestIndex = this.fields.length - 1;
+          this.$refs.inputFields[latestIndex].focus();
+        });
+      },
+      removeField(index) {
+        this.fields.splice(index, 1);
+      }
+    }
+  };
+  &lt;/script&gt;
+
+  &lt;style scoped&gt;
+  .form-field {
+    margin-bottom: 10px;
+  }
+  &lt;/style&gt;
+
+  //--------------------
+  // Animation Example ref
+
+  &lt;!-- AnimatedBox.vue --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+      &lt;button @click=&quot;startAnimation&quot;&gt;Start Animation&lt;/button&gt;
+      &lt;div ref=&quot;animatedBox&quot; class=&quot;animated-box&quot;&gt;Animated Box&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+
+  &lt;script&gt;
+  export default {
+    methods: {
+      startAnimation() {
+        const box = this.$refs.animatedBox;
+        // Add or toggle a class to trigger the animation
+        box.classList.add(&#39;slide-in-animation&#39;);
+        setTimeout(() =&gt; {
+            box.classList.remove(&#39;slide-in-animation&#39;);
+        }, 1000);
+      },
+    }
+  };
+  &lt;/script&gt;
+
+  &lt;style scoped&gt;
+  .animated-box {
+    width: 200px;
+    height: 100px;
+    background-color: lightblue;
+    margin-top: 20px;
+    text-align: center;
+    line-height: 100px;
+  }
+
+  .slide-in-animation {
+    animation: slideIn 1s forwards;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  &lt;/style&gt;
+
   `
         },
         {
@@ -2961,7 +3058,262 @@ export default {
     },
     {
       id: 1,
-      title: "what is difference between framework and library",
+      title: "Components Basics",
+      note: [
+        {
+          text1: `In Vue.js, components are fundamental building blocks that encapsulate reusable parts of your UI. They allow you to create modular and reusable code, making your application more maintainable and organized. Here's a comprehensive guide to understanding the basics of components in Vue.js:
+
+          It's common for an app to be organized into a tree of nested components:
+
+For example, you might have components for a header, sidebar, and content area, each typically containing other components for navigation links, blog posts, etc.
+
+To use these components in templates, they must be registered so that Vue knows about them. There are two types of component registration: global and local. So far, we've only registered components globally, using Vue.component:
+
+Vue.component('my-component-name', {
+  // ... options ...
+})
+Globally registered components can be used in the template of any root Vue instance (new Vue) created afterwards – and even inside all subcomponents of that Vue instance's component tree.
+
+That's all you need to know about registration for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on Component Registration.
+
+<b>1. Creating a Component</b>
+To create a Vue component, you define it using the Vue.component method or by creating a .vue file if you're using single-file components (recommended for larger applications). Here’s a basic example using the Vue.component method:
+
+<b>2. Using the Component</b>
+Once you have defined your component, you can use it in other parts of your application by simply including its tag name:
+<b>3. Props</b>
+Props are custom attributes you can register on a component. They are passed to a component from its parent and allow you to customize a component’s data when it is used. In the HelloWorld example above, name and message are props.
+
+<b>4. Component Communication</b>
+<b>Props</b>: Pass data from parent to child components using props.
+
+<b>Custom Events</b>: Emit events from child components to communicate changes or trigger actions in parent components.
+
+<b>Provide/Inject</b>: Share data between deeply nested components without having to pass props through all levels.
+
+<b>Vuex</b>: For more complex state management needs, Vuex can be used to create a centralized store for all components in an application.
+
+<b>5. Component Lifecycle Hooks</b>
+Vue components have a series of lifecycle hooks you can hook into to perform actions at specific stages of the component's lifecycle:
+
+beforeCreate and created
+beforeMount and mounted
+beforeUpdate and updated
+beforeDestroy and destroyed
+These hooks allow you to perform initialization, data fetching, or cleanup operations at appropriate times.
+
+<b>6. Single File Components (SFC)</b>
+Single File Components (.vue files) encapsulate a component’s template, script, and styles into a single file. This approach improves code organization and enables better component reuse and maintainability.
+
+<b>7. Component Reusability and Composition</b>
+Components can be nested within each other, allowing you to compose complex UIs from simpler components. This promotes reusability and helps in building scalable applications.
+
+<b>8. Scoped Styles</b>
+In Vue.js, <b>&lt;style scoped&gt;</b> allows you to scope your component’s CSS to only affect the component’s template. This prevents styles from leaking out and affecting other parts of your application.
+          `,
+          code1: `&lt;template&gt;
+  &lt;div&gt;
+    &lt;!-- Using HelloWorld component --&gt;
+    &lt;HelloWorld name=&quot;John&quot; /&gt;
+    &lt;HelloWorld name=&quot;Jane&quot; message=&quot;Have a great day!&quot; /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import HelloWorld from &#39;./components/HelloWorld.vue&#39;;
+
+export default {
+  components: {
+    HelloWorld
+  }
+};
+&lt;/script&gt;
+
+&lt;style&gt;
+/* Global styles */
+&lt;/style&gt;
+`
+        },
+        {
+          text1: `In Vue.js, the components option in your Vue component definition is used to register other Vue components that are used within that component. The syntax you provided is related to dynamic import statements, which is a feature introduced in ECMAScript 6 (ES6) and allows for lazy-loading of components.
+
+          components: {
+  accordion: () => import('../components/Cards/accordion')
+}
+
+<b>1) components Object</b>: This is an object where you register your child components. Each key in the object represents the name you'll use to reference the component within the parent component's template, and the value is either the component definition or a function that returns a Promise (more on this below).
+
+<b>2) accordion</b>: This is the name you assign to the imported component. You'll use this name in your parent component's template to refer to the accordion component.
+
+<b>3) () => import('../components/Cards/accordion')</b>: This is a dynamic import statement. In Vue.js, you can use dynamic import statements to asynchronously load a component when it's first referenced. This can help improve initial page load times by only loading components when they are needed.
+
+<b>import('../components/Cards/accordion')</b> is a standard ES6 dynamic import statement. It returns a Promise that resolves to the module's default export (in this case, presumably the Vue component definition).
+When you use </b>accordion</b> in your template (e.g., <b><accordion></accordion></b>), Vue.js will automatically load the component from <b>'../components/Cards/accordion'</b> when it's first encountered in the rendering process.
+
+Whenever it's possible, I'd recommend to use dynamic imports to import components. They will be lazily loaded (by Webpack) when needed.
+          `,
+          code1: `
+          // Statically loaded
+import Article from './components/Article.vue'
+
+// Asynchronously loaded
+const Article = () => import('./components/Article.vue')
+
+// Example :
+
+          &lt;template&gt;
+  &lt;div&gt;
+    &lt;accordion&gt;&lt;/accordion&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  components: {
+    accordion: () =&gt; import(&#39;../components/Cards/accordion&#39;)
+  }
+}
+&lt;/script&gt;
+`
+        },
+        {
+          text1: `Dynamic component tab`,
+          code1: `&lt;template&gt;
+    &lt;!--Where the page displays--&gt;
+    &lt;div&gt;
+        &lt;!-- &lt;input type=&quot;text&quot; v-model=&quot;pageIndex&quot; /&gt; --&gt;
+        &lt;ul&gt;
+            &lt;li v-for=&quot;p in page&quot; :class=&quot;{ &#39;comAct&#39; : p === pageIndex }&quot;&gt;&lt;div class=&quot;comps-links&quot; @click=&quot;changeComp(p)&quot;&gt;{{ p }}&lt;/div&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;component :is=&quot;dynamicComp&quot;&gt;&lt;/component&gt;
+        &lt;select v-model=&quot;pageIndex&quot;&gt;
+            &lt;option disabled value=&quot;&quot;&gt;Please select one&lt;/option&gt;
+            &lt;option&gt;WatchApi&lt;/option&gt;
+            &lt;option&gt;InputComponent&lt;/option&gt;
+            &lt;option&gt;computedProperty&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &#39;ApiInput&#39;,
+    components: {
+        // WatchApi: () =&gt; import(&#39;./WatchApi&#39;),
+    },
+    data() {
+        return {
+            page: [&#39;WatchApi&#39;, &#39;InputComponent&#39;, &#39;computedProperty&#39;],
+            pageIndex: &#39;&#39;
+        }
+    },
+    computed: {
+        dynamicComp() {
+            const pageData = this.pageIndex
+            return pageData ? () =&gt; import('./\${pageData}') : &#39;&#39;
+        }
+    },
+    methods:{
+        changeComp(dComp){
+            this.pageIndex = dComp
+        }
+    }
+};
+&lt;/script&gt;
+&lt;style&gt;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+li {
+  float: left;
+}
+
+li .comps-links {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.comAct{
+    background-color: #111111;
+}
+
+li .comps-links:hover {
+  background-color: #111111;
+}
+&lt;/style&gt;
+`
+        },
+        {
+          text1: `<b>&lt;KeepAlive&gt;</b>
+          In Vue.js, keep-alive is a special built-in component that allows you to preserve the state of components or keep them alive when they are toggled with v-if. It is particularly useful for optimizing performance when you have components that are frequently toggled on and off, such as tabs or modals.
+
+          <b>&lt;KeepAlive&gt;</b> is a built-in component that allows us to conditionally cache component instances when dynamically switching between multiple components.
+
+          By default, an active component instance will be unmounted when switching away from it. This will cause any changed state it holds to be lost. When this component is displayed again, a new instance will be created with only the initial state.
+
+          <b>Include / Exclude</b>
+By default, <b>&lt;KeepAlive&gt;</b> will cache any component instance inside. We can customize this behavior via the <b>include</b> and <b>exclude</b> props. Both props can be a comma-delimited string, a <b>RegExp</b>, or an array containing either types:
+
+The match is checked against the component's <b>name</b> option, so components that need to be conditionally cached by <b>KeepAlive</b> must explicitly declare a <b>name</b> option.
+
+<b>Max Cached Instances</b>
+We can limit the maximum number of component instances that can be cached via the <b>max</b> prop. When <b>max</b> is specified, <b>&lt;KeepAlive&gt;</b> behaves like an LRU cache: if the number of cached instances is about to exceed the specified max count, the least recently accessed cached instance will be destroyed to make room for the new one.
+
+<b>Lifecycle of Cached Instance</b>
+When a component instance is removed from the DOM but is part of a component tree cached by <b>&lt;KeepAlive&gt;</b>, it goes into a <b>deactivated</b> state instead of being unmounted. When a component instance is inserted into the DOM as part of a cached tree, it is <b>activated</b>.
+
+A kept-alive component can register lifecycle hooks for these two states using <b>activated</b> and <b>deactivated</b> hooks:
+          `,
+          code1: ` // Include / Exclude
+          &lt;!-- comma-delimited string --&gt;
+&lt;KeepAlive include=&quot;a,b&quot;&gt;
+  &lt;component :is=&quot;view&quot; /&gt;
+&lt;/KeepAlive&gt;
+
+&lt;!-- regex (use 'v-bind') --&gt;
+&lt;KeepAlive :include=&quot;/a|b/&quot;&gt;
+  &lt;component :is=&quot;view&quot; /&gt;
+&lt;/KeepAlive&gt;
+
+&lt;!-- Array (use 'v-bind') --&gt;
+&lt;KeepAlive :include=&quot;[&#39;a&#39;, &#39;b&#39;]&quot;&gt;
+  &lt;component :is=&quot;view&quot; /&gt;
+&lt;/KeepAlive&gt;
+
+//---------------
+// Max Cached Instances
+&lt;KeepAlive :max=&quot;10&quot;&gt;
+  &lt;component :is=&quot;activeComponent&quot; /&gt;
+&lt;/KeepAlive&gt;
+
+//---------------
+//Lifecycle of Cached Instance
+export default {
+  activated() {
+    // called on initial mount
+    // and every time it is re-inserted from the cache
+  },
+  deactivated() {
+    // called when removed from the DOM into the cache
+    // and also when unmounted
+  }
+}
+`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Async Components",
       note: [
         {
           text1: ``,
@@ -2971,18 +3323,11 @@ export default {
     },
     {
       id: 1,
-      title: "vue",
+      title: "add new topic",
       note: [
         {
-          text1: `
-                   // https://www.vuemastery.com/courses/vuex-fundamentals/vuex4-intro-to-vuex/
-
-                    <b>Computed properties</b>: Unlike methods, they don't accept any arguments, but they do have access to existing state. They're built for performance and track/cache their own dependencies so they're great for creating derived data from your state. 
-
-                    <b>Methods</b>: Unlike computed properties, methods can take arguments, however, the method will not track its dependencies or cache any of the data passed to it. 
-
-                    <b>Watchers</b>: These are particularly for reacting to a change in state that Vue itself won't do automatically (like update the DOM). I try and use watchers very sparingly, but they do have their uses. One instance I sometimes find myself needing is to reapply a jQuery plugin to a set of DOM els whenever data changes. That's just one example. 
-            `
+          text1: ``,
+          code1: ``
         }
       ]
     },
@@ -2991,196 +3336,848 @@ export default {
       title: "Slot",
       note: [
         {
-          text1: `
-Slots are reserved space offered by vuejs to display content passed down from one component to another. There are two types of slot in vuejs namely: named slot and unnamed(default) slot.  
+          text1: `Slots are reserved space offered by vuejs to display content passed down from one component to another. There are two types of slot in vuejs namely: named slot and unnamed(default) slot.  
+
+In some cases, we may want to pass a template fragment to a child component, and let the child component render the fragment within its own template.
+
+In Vue.js, a slot is a placeholder for content that you want to distribute across different parts of your component. Slots allow you to create reusable components that can inject different content based on how the component is used or composed.
+
+Vue slots allow a component to accept dynamic content — known as slot content — and render it in a specific location within the component's template — known as the slot outlet. This location is specified with the <b>&lt;slot&gt;</b> element.
+
+The <b>&lt;slot&gt;</b> element acts as a placeholder for the parent-provided slot content. This solves the problem of having a fixed template in a component, enabling users to add custom content to a Vue component's layout and making it more flexible and reusable.
+
+
+
+Slot content does <b>not</b> have access to the child component's data. Expressions in Vue templates can only access the scope it is defined in, consistent with JavaScript's lexical scoping. In other words:
+
+Expressions in the parent template only have access to the parent scope; expressions in the child template only have access to the child scope.
             `,
-          code1: `
-                    Ex: 1 
-                   &lt;b&gt; Slot.js &lt;/b&gt;
-                    &lt;template&gt; 
-                    &lt;div&gt; 
-                    &lt;test-slot :bgcl=&quot;bgccl&quot;&gt; 
-                    &lt;template v-slot:header&gt;
-                    &lt;h1 v-bind:style=&quot;slotBgColor&quot;&gt;This is Header&lt;/h1&gt; 
-                    {{childMessage}}asa 
-                    &lt;/template&gt; 
+          code1: `// For example, we may have a &lt;FancyButton&gt; component that supports usage like this:
+// Ex : 1
+&lt;FancyButton&gt;
+  Click me! // &lt;!-- slot content --&gt;
+&lt;/FancyButton&gt;
+// The template of &lt;FancyButton&gt; looks like this:
 
-                    &lt;h1&gt;This is slot text&lt;/h1&gt; 
-                    &lt;template v-slot:footer&gt; 
-                    &lt;h1 v-html=&quot;footerMessage&quot; :style=&quot;slotBgColor&quot;&gt;&lt;/h1&gt; 
-                    &lt;/template&gt; 
-                    &lt;/test-slot&gt; 
+&lt;button class=&quot;fancy-btn&quot;&gt;
+  &lt;slot&gt;&lt;/slot&gt; &lt;!-- slot outlet --&gt;
+&lt;/button&gt;
+// The &lt;slot&gt; element is a 'slot outlet' that indicates where the parent-provided 'slot content' should be rendered.
 
+// And the final rendered DOM:
+&lt;button class=&quot;fancy-btn&quot;&gt;Click me!&lt;/button&gt;
 
+// Ex : 2
+//----------
+// Parent.vue
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;test-slot&gt;
+            Parent {{ parentText }} &lt;!-- slot content --&gt;
+        &lt;/test-slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
 
-                    &lt;child-slot v-slot=&quot;{childMessage,idVal}&quot;&gt; 
-                    {{childMessage}} 
-                    {{idVal}} 
-                    &lt;/child-slot&gt; 
-                    &lt;/div&gt; 
-                    &lt;/template&gt; 
+&lt;script&gt;
+import Vue from &quot;vue&quot;;
+export default {
+    name: &quot;NextTick&quot;,
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+    },
+    data() {
+        return {
+            parentText: &#39;slot content&#39;
+        };
 
+    },
+};
+&lt;/script&gt;
 
+//------------
+// TestSlot.vue
 
-                    &lt;script&gt; 
-                    import Vue from &quot;vue&quot;; 
-                    Vue.use(require(&quot;vue-cookies&quot;)); 
-                    export default { 
-                    name: &quot;NextTick&quot;, 
-                    data() { 
-                    return { 
-                    footerMessage: 
-                    &quot;this is &lt;b style=&#39;background-color:#09ccea;padding:12px;border-radius:8px;&#39;&gt;footer&lt;/b&gt;&quot;, 
-                    bgccl: true, 
-                    slotBgColor: { backgroundColor: &quot;orange&quot; }, 
-                    }; 
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;h1&gt;My component : {{ childMessage }}&lt;/h1&gt;
+        &lt;slot&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
 
-                    }, 
-
-                    components: { 
-                    TestSlot: () =&gt; import(&#39;./TestSlot&#39;), 
-                    ChildSlot: () =&gt; import(&#39;./ChildSlot&#39;) 
-                    }, 
-                    mounted() {}, 
-                    methods: { 
-                    showMessage() { 
-                    alert(&quot;This is message&quot;); 
-                    }, 
-                    }, 
-                    }; 
-
-                    &lt;/script&gt; 
-
-&lt;b&gt;TestSlot.js &lt;/b&gt;
-                    &lt;template&gt; 
-                    &lt;div&gt; 
-                    &lt;slot name=&quot;header&quot; :childMessage=&quot;{childMessage}&quot;/&gt; 
-                    &lt;h1 :class=&quot;{ bgColAccBanner: bgcl }&quot;&gt;Test Slot {{ bgcl }}&lt;/h1&gt; 
-                    &lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt; 
-                    &lt;/div&gt; 
-                    &lt;/template&gt; 
-
-                    &lt;script&gt; 
-                    import Vue from &quot;vue&quot;; 
-                    Vue.use(require(&quot;vue-cookies&quot;)); 
-                    export default { 
-                    name: &quot;NextTick&quot;, 
-                    data() { 
-                    return { 
-                    // bgColAccBanner:{backgroundColor:red} 
-                    childMessage:&#39;this message form slot&#39; 
-                    }; 
-                    }, 
-                    props: { 
-                    bgcl: { 
-                    type: Boolean, 
-                    required: false, 
-                    default: false, 
-                    }, 
-                    }, 
-                    components: {}, 
-                    template: &quot;&lt;h1&gt; Ram Ram &lt;/h1&gt;&quot;, 
-                    mounted() {}, 
-                    methods: {}, 
-                    }; 
-
-                    &lt;/script&gt; 
-                    &lt;style&gt; 
-                    .bgColAccBanner { 
-                    background-color: green; 
-                    } 
-
-                    &lt;/style&gt; 
-                    &lt;b&gt;ChildSlot.js&lt;/b&gt; 
-                    &lt;template&gt; 
-                    &lt;div&gt; 
-                    &lt;slot :childMessage=&quot;childMessage&quot; :idVal=&quot;idVal&quot;&gt;&lt;/slot&gt; 
-                    &lt;/div&gt; 
-                    &lt;/template&gt; 
-
-
-
-                    &lt;script&gt; 
-                    import Vue from &quot;vue&quot;; 
-                    Vue.use(require(&quot;vue-cookies&quot;)); 
-                    export default { 
-                    name: &quot;NextTick&quot;, 
-                    data() { 
-                    return { 
-                    // bgColAccBanner:{backgroundColor:red} 
-                    childMessage:&#39;this message form slot&#39;, 
-                    idVal:123 
-                    }; 
-                    }, 
-                    props: { 
-                    }, 
-                    components: {}, 
-                    template: &quot;&lt;h1&gt; Ram Ram &lt;/h1&gt;&quot;, 
-                    mounted() {}, 
-                    methods: {}, 
-                    }; 
-
-                    &lt;/script&gt; 
-                    &lt;style&gt; 
-                    .bgColAccBanner { 
-                    background-color: green; 
-                    } 
-                    &lt;/style&gt; 
+&lt;script&gt;
+export default {
+    name: &quot;TestSlot&quot;,
+    components: {},
+    data() {
+        return { 
+            childMessage: &#39;I am Child&#39;
+        };
+    },
+    props: {
+    },
+};
+&lt;/script&gt;
 `
+        },
+        {
+          text1: `<b>Specifying fallback content for Vue.js slots</b>
+Fallback content refers to the content that is displayed in a slot if there is no content provided for that slot. In Vue, a slot's fallback content is specified using the default content inside the <b>&lt;slot&gt;</b> tag.
+
+In Vue.js, fallback content for slots is a feature that allows you to provide default content that will be displayed if no content is passed into the slot by the parent component. This can be useful for ensuring that your component has a meaningful appearance even if the parent component doesn't provide any content for the slot.
+`,
+          code1: `// Ex : 1
+          &lt;!-- ChildComponent.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;slot&gt;
+      &lt;p&gt;This is the fallback content&lt;/p&gt;
+    &lt;/slot&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+//------------
+// Ex : 2
+
+&lt;!-- ParentComponent.vue --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;TestSlot&gt;
+            &lt;!-- Content for the header slot --&gt;
+            &lt;template v-slot:header&gt;
+                &lt;h1&gt;Custom Header Content&lt;/h1&gt;
+            &lt;/template&gt;
+
+            &lt;!-- Content for the default slot --&gt;
+            &lt;template v-slot:default&gt;
+                &lt;p&gt;Custom Main Content&lt;/p&gt;
+            &lt;/template&gt;
+
+            &lt;!-- Content for the footer slot --&gt;
+            &lt;!-- No content provided for footer, so fallback will be used --&gt;
+        &lt;/TestSlot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &quot;Slot&quot;,
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+    },
+    data() {
+        return {
+            parentText: &#39;slot content&#39;
+        };
+    },
+};
+&lt;/script&gt;
+
+//----------
+
+&lt;!-- ChildComponent.vue --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;header&gt;
+            &lt;slot name=&quot;header&quot;&gt;
+                &lt;h1&gt;This is the default header content&lt;/h1&gt;
+            &lt;/slot&gt;
+        &lt;/header&gt;
+        &lt;main&gt;
+            &lt;slot&gt;
+                &lt;p&gt;This is the default main content&lt;/p&gt;
+            &lt;/slot&gt;
+        &lt;/main&gt;
+        &lt;footer&gt;
+            &lt;slot name=&quot;footer&quot;&gt;
+                &lt;p&gt;This is the default footer content&lt;/p&gt;
+            &lt;/slot&gt;
+        &lt;/footer&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+
+&lt;script&gt;
+export default {
+    name: &quot;TestSlot&quot;,
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+/* Add some basic styling */
+header,
+main,
+footer {
+    padding: 1em;
+    border: 1px solid #ddd;
+    margin-bottom: 1em;
+}
+&lt;/style&gt;
+
+`
+        },
+        {
+          text1: `<b>Working with multiple and named slots</b>
+Sometimes, you may want to have multiple slots in a single component. To do this, you can use named slots.
+
+Named slots allow you to specify a name for a slot, then use that name in the parent component to indicate which slot the content should be inserted into.
+
+<b>Named Slots</b>
+You can have multiple slots in a component, and you can name them to better organize your content:
+`,
+          code1: `&lt;!-- ParentComponent.vue --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+      &lt;TestSlot&gt;
+        &lt;template v-slot:header&gt;
+          &lt;p&gt;This is the header content&lt;/p&gt;
+        &lt;/template&gt;
+        &lt;template v-slot:body&gt;
+          &lt;p&gt;This is the body content&lt;/p&gt;
+        &lt;/template&gt;
+        &lt;template v-slot:footer&gt;
+          &lt;p&gt;This is the footer content&lt;/p&gt;
+        &lt;/template&gt;
+      &lt;/TestSlot&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &quot;Slot&quot;,
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+    },
+    data() {
+        return {
+        };
+    },
+};
+&lt;/script&gt;
+
+&lt;!-- ChildComponent.vue --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+      &lt;h1&gt;My Component&lt;/h1&gt;
+      &lt;slot name=&quot;header&quot;&gt;&lt;/slot&gt;
+      &lt;slot name=&quot;body&quot;&gt;&lt;/slot&gt;
+      &lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &quot;TestSlot&quot;,
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+&lt;/style&gt;
+
+`
+        },
+        {
+          text1: `<b>Using dynamic slot names in Vue.js</b>
+Vue allows you to pass a dynamic value as the name of a slot. This is useful when you want to dynamically decide which slot content to render based on a condition.
+
+To implement dynamic slot names in Vue, you can use the square bracket syntax to bind the slot name to a dynamic value. Here's an example:`,
+          code1: `// Slot.vue
+          &lt;!-- ParentComponent.vue --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;TestSlot v-for=&quot;sl in DmSlots&quot; :slotDetails=&quot;sl&quot;&gt;
+            &lt;template v-slot:[sl.name]=&quot;slotProps&quot;&gt;
+                &lt;p&gt;This is the &lt;b&gt;{{ sl.name }}&lt;/b&gt; content &lt;b&gt;{{ slotProps.childProps }}&lt;/b&gt;&lt;/p&gt;
+            &lt;/template&gt;
+        &lt;/TestSlot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &quot;Slot&quot;,
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+    },
+    data() {
+        return {
+            DmSlots: [
+                { id: 1, name: &#39;Slot 1&#39;, description: &#39;This is the first Slot&#39; },
+                { id: 2, name: &#39;Slot 2&#39;, description: &#39;This is the second Slot&#39; },
+                { id: 3, name: &#39;Slot 3&#39;, description: &#39;This is the third Slot&#39; }
+            ]
+        };
+    },
+};
+&lt;/script&gt;
+
+// TestSlot.vue
+//------------
+&lt;!-- ChildComponent.vue --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;p&gt;Child Component&lt;/p&gt;
+        &lt;slot :name=&quot;slotDetails.name&quot; :childProps=&quot;childProps&quot;&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &quot;TestSlot&quot;,
+    props:{
+        slotDetails:{
+            type : Object,
+            required : false
         }
+    },
+    data() {
+        return {
+            childProps: &#39;header&#39;
+        }
+    }
+}
+&lt;/script&gt;
+
+// Ex : 2
+//----------
+&lt;!-- ParentComponent.vue --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;TestSlot :title=&quot;titProp&quot; :slotName=&quot;slotName&quot;&gt;
+            &lt;template v-slot:[slotName]&gt;
+                {{ slotName }}
+                {{ isCurrentSlot.description }}
+            &lt;/template&gt;
+        &lt;/TestSlot&gt;
+        &lt;!-- //if the value passed to &#39;slotName&#39; above is &#39;image&#39;, an image card is used,
+    //generating the code below: --&gt;
+        &lt;div&gt;
+            &lt;TestSlot :title=&quot;titProp&quot; :slotName=&quot;slotName&quot;&gt;
+                &lt;template v-slot:image&gt;
+                    {{ slotName }}
+                    {{ isCurrentSlot.description }}
+                &lt;/template&gt;
+            &lt;/TestSlot&gt;
+
+            &lt;TestSlot :title=&quot;titProp&quot; :slotName=&quot;slotName&quot;&gt;
+                &lt;template v-slot:list&gt;
+                    &lt;ul&gt;
+                        &lt;li&gt;Item 1&lt;/li&gt;
+                        &lt;li&gt;Item 2&lt;/li&gt;
+                    &lt;/ul&gt;
+                    {{ isCurrentSlot.description }}
+                &lt;/template&gt;
+            &lt;/TestSlot&gt;
+        &lt;/div&gt;
+        &lt;select v-model=&quot;slotName&quot;&gt;
+            &lt;option v-for=&quot;item in slotList&quot;&gt;{{ item.name }}&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+    name: &quot;Slot&quot;,
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+    },
+    computed: {
+        isCurrentSlot(){
+            return  this.slotList.filter(s =&gt; this.slotName === s.name)[0]
+        }
+    },
+    data() {
+        return {
+            titProp: &#39;Card with Image&#39;,
+            slotName: &#39;dymanic&#39;,
+            slotList: [
+                { id: 1, name: &#39;dymanic&#39;, description: &#39;This is the first item&#39; },
+                { id: 2, name: &#39;image&#39;, description: &#39;This is the second item&#39; },
+                { id: 3, name: &#39;list&#39;, description: &#39;This is the third item&#39; }
+            ]
+        };
+    },
+};
+&lt;/script&gt;
+
+// TestSlot.vue
+//--------
+
+&lt;!-- ChildComponent.vue --&gt;
+&lt;template&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;{{ title }}&lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;slot :name=&quot;slotName&quot;&gt;&lt;/slot&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+
+  &lt;script&gt;
+  export default {
+    props: {
+      title: String,
+      slotName: {
+        type: String,
+        default: &#39;default&#39;
+      }
+    }
+  }
+  &lt;/script&gt;
+          `
+        },
+        {
+          text1: `<b>Scoped Slots</b>
+Scoped slots allow you to pass data from the child component to the parent component. This is useful when you want to provide dynamic content based on the child's internal state or computations.
+
+Scoped slots provide a way to pass data from the child component to the parent component. Instead of passing content to the child component, scoped slots allow the child component to pass data back to the parent component, which can then use that data to render the content in the slot.`,
+          code1: `//Ex : 1
+          //Slot.vue
+          &lt;!-- ParentComponent.vue --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;TestSlot v-for=&quot;item in items&quot; :key=&quot;item.id&quot; :item=&quot;item&quot;&gt;
+            &lt;template v-slot=&quot;{ item }&quot;&gt;
+                &lt;p&gt;{{ item.name }}&lt;/p&gt;
+                &lt;p&gt;{{ item.description }}&lt;/p&gt;
+            &lt;/template&gt;
+        &lt;/TestSlot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &quot;Slot&quot;,
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+    },
+    data() {
+        return {
+            items: [
+                { id: 1, name: &#39;Item 1&#39;, description: &#39;This is the first item&#39; },
+                { id: 2, name: &#39;Item 2&#39;, description: &#39;This is the second item&#39; },
+                { id: 3, name: &#39;Item 3&#39;, description: &#39;This is the third item&#39; }
+            ]
+        };
+    },
+};
+&lt;/script&gt;
+
+// TestSlot.vue
+//-----------
+&lt;!-- ChildComponent.vue --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+      &lt;b&gt;Child Component&lt;/b&gt;
+      &lt;slot :item=&quot;item&quot;&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+
+  &lt;script&gt;
+  export default {
+    props: {
+      item: Object
+    }
+  }
+  &lt;/script&gt;
+
+  //-------------------
+  // Ex : 2
+          //Slot.vue
+          &lt;template&gt;
+    &lt;div&gt;
+        &lt;test-slot :bgcl=&quot;bgclProp&quot;&gt;
+            &lt;template v-slot:header=&quot;slotProps&quot;&gt;
+                &lt;h1 v-bind:style=&quot;slotBgColor&quot;&gt;This is Header&lt;/h1&gt;
+                {{ slotProps.childMessage }} A
+            &lt;/template&gt;
+
+            &lt;h1&gt;This is slot text&lt;/h1&gt;
+            &lt;template v-slot:footer&gt;
+                &lt;h1 v-html=&quot;footerMessage&quot; :style=&quot;slotBgColor&quot;&gt;&lt;/h1&gt;
+            &lt;/template&gt;
+        &lt;/test-slot&gt;
+
+        &lt;child-slot v-slot=&quot;{ childMessage, idVal }&quot;&gt;
+            {{ childMessage }}
+            {{ idVal }}
+        &lt;/child-slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import Vue from &quot;vue&quot;;
+export default {
+    name: &quot;NextTick&quot;,
+    props:{
+        childMessage: {
+            type:String,
+            required: false
+        }
+    },
+    data() {
+        return {
+            footerMessage:
+                &quot;this is &lt;b style=&#39;background-color:#09ccea;padding:12px;border-radius:8px;&#39;&gt;footer&lt;/b&gt;&quot;,
+                bgclProp: true,
+            slotBgColor: { backgroundColor: &quot;orange&quot; },
+        };
+
+    },
+
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+        ChildSlot: () =&gt; import(&#39;./ChildSlot&#39;)
+    },
+    mounted() { },
+    methods: {
+        showMessage() {
+            alert(&quot;This is message&quot;);
+        },
+    },
+};
+&lt;/script&gt;
+
+//---------------
+// TestSlot.vue
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;slot name=&quot;header&quot; :childMessage=&quot;childMessage&quot; /&gt;
+        &lt;h1 :class=&quot;{ bgColAccBanner: bgcl }&quot;&gt;Test Slot {{ bgcl }}&lt;/h1&gt;
+        &lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import Vue from &quot;vue&quot;;
+export default {
+    name: &quot;TestSlot&quot;,
+    data() {
+        return {
+            // bgColAccBanner:{backgroundColor:red} 
+            childMessage: &#39;this message form slot&#39;
+        };
+    },
+    props: {
+        bgcl: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
+    },
+    components: {},
+    template: &quot;&lt;h1&gt; Ram Ram &lt;/h1&gt;&quot;,
+    mounted() { },
+    methods: {},
+};
+
+&lt;/script&gt;
+&lt;style&gt;
+.bgColAccBanner {
+    background-color: green;
+}
+&lt;/style&gt;
+
+//----------
+// ChildSlot.vue
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;slot :childMessage=&quot;childMessage&quot; :idVal=&quot;idVal&quot;&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &quot;ChildSlot&quot;,
+    data() {
+        return {
+            // bgColAccBanner:{backgroundColor:red} 
+            childMessage: &#39;this message form slot&#39;,
+            idVal: 123
+        };
+    },
+    props: {
+    },
+    components: {},
+    template: &quot;&lt;h1&gt; Ram Ram &lt;/h1&gt;&quot;,
+    mounted() { },
+    methods: {},
+};
+&lt;/script&gt;
+
+&lt;style&gt;
+.bgColAccBanner {
+    background-color: green;
+}
+&lt;/style&gt;
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
       ]
     },
     {
       id: 1,
-      title: "nextTick ",
+      title: "nextTick",
       note: [
         {
-          text1: ``,
-          code1: `<div> 
+          text1: `In Vue.js, <b>nextTick</b> is a method that allows you to execute code after the DOM has been updated. It is useful when you need to perform actions that depend on the updated DOM, such as measuring elements or interacting with third-party libraries that require a fully rendered view.
 
-        <p ref="myRef">No</p> 
+<b>What nextTick Does</b>
+Vue.js batches DOM updates and performs them asynchronously to optimize performance. This means that when you change reactive data, Vue does not immediately update the DOM. Instead, it schedules the update to be performed later. <b>nextTick</b> is a way to run code after these updates have been applied to the DOM.
 
-      </div> 
+A change to Vue component's data (props or state) isn't immediately reflected in the DOM. Rather, Vue updates DOM asynchronously.
 
+As Vue component data changes, the DOM is updated asynchronously. Vue collects multiple updates to virtual DOM from all the components, and then creates a single batch to update the DOM.
 
+Defer the callback to be executed after the next DOM update cycle. Use it immediately after you’ve changed some data to wait for the DOM update.
 
-    <script> 
+<b>Syntax</b>: <span style="color:red"> Vue.nextTick( [callback, context] ) </span>
+`,
+          code1: `
+          // modify data
+vm.msg = 'Hello'
+// DOM not updated yet
+Vue.nextTick(function () {
+  // DOM updated
+})
 
-    export default { 
+// usage as a promise (2.1.0+, see note below)
+Vue.nextTick()
+  .then(function () {
+    // DOM updated
+  })
 
-      created() { 
+  //-----------------
 
-        if (!this.$refs.myRef) { 
+          //Ex : 1
+&lt;template&gt;
+  &lt;div class=&quot;hello&quot;&gt;
+    {{ msg }}
+  &lt;/div&gt;
+&lt;/template&gt;
 
-          console.log("This doesn't exist yet!"); 
+&lt;script&gt;
+export default {
+  name: &#39;HelloWorld&#39;,
+  data() {
+    return {
+        msg: &#39;One&#39;
+    }
+  },
+  mounted() {
+      this.msg = &#39;Two&#39;;
 
-        } 
+      this.$nextTick(() =&gt; {
+          this.msg = &#39;Three&#39;;
+      });
+  }
+}
+&lt;/script&gt;
 
+// Run your local server. You will see the message "Three" being displayed.
+// Now, replace "this.$nextTick" with "setTimeout":
 
+setTimeout(() => {
+    this.msg = 'Three';
+}, 0);
 
-        this.$nextTick(() => { 
+// Reload the browser. You will see "Two" before you see "Three".
 
-          if (this.$refs.myRef) { 
+// That's because, with "setTimeout":
 
-            console.log("Now it does!"); 
+// Vue updated the vDOM to say "Two"
+// Vue gave control to the browser
+// The browser displayed "Two"
+// Callback was called
+// Vue updated the vDOM to say "Three"
+// Vue gave control to the browser
+// The browser displayed "Three"
+// But with nextTick, we skip steps 2 and 3! Instead of passing over control after the first vDOM update, Vue calls the callback immediately, which prevents the browser from updating until the callback is finished. In this example, that means "Two" is never actually displayed.
 
-          } 
+// To understand how Vue implements this, you need to understand the concept of the JavaScript "Event Loop" and "microtasks".
 
-        }); 
+//---------------
+    // Ex : 2
+    &lt;template&gt;
+    &lt;div&gt;
+      &lt;button @click=&quot;toggleVisibility&quot;&gt;Toggle Element&lt;/button&gt;
+      &lt;div v-if=&quot;isVisible&quot; ref=&quot;myElement&quot; class=&quot;my-element&quot;&gt;
+        This is a toggleable element
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
 
-      }, 
+  &lt;script&gt;
+  export default {
+    data() {
+      return {
+        isVisible: false
+      };
+    },
+    methods: {
+      toggleVisibility() {
+        this.isVisible = !this.isVisible;
+        this.$nextTick(() =&gt; {
+          // Code here will run after the DOM has been updated
+          if (this.isVisible) {
+            const element = this.$refs.myElement;
+            if (element) {
+              element.scrollIntoView({ behavior: &#39;smooth&#39; });
+            }
+          }
+        });
+      }
+    }
+  }
+  &lt;/script&gt;
 
-      mounted() { 
+  &lt;style scoped&gt;
+  .my-element {
+    margin-top: 1000px; /* Just to ensure we can scroll to it */
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+  }
+  &lt;/style&gt;
 
-        this.$refs.myRef.innerHTML = "🥑"; 
+  //-----------------------
+  // Ex : 3
+  &lt;template&gt;
+  &lt;div&gt;
+    &lt;button @click=&quot;addItem&quot;&gt;Add Item&lt;/button&gt;
+    &lt;ul&gt;
+      &lt;li v-for=&quot;(item, index) in items&quot; :key=&quot;index&quot; ref=&quot;item&quot;&gt;
+        {{ item }}
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 
-        console.log("Now its mounted"); 
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      items: []
+    };
+  },
+  methods: {
+    addItem() {
+      // Add a new item to the list
+      this.items.push('Item \${this.items.length + 1}');
 
-      } 
+      // Use nextTick to wait for the DOM update
+      this.$nextTick(() =&gt; {
+        // Get the last item added
+        const lastItem = this.$refs.item[this.items.length - 1];
 
-    }; 
+        if (lastItem) {
+          // Scroll the last item into view
+          lastItem.scrollIntoView({ behavior: &#39;smooth&#39;, block: &#39;end&#39; });
 
-    </script> `
+          // Apply an animation class
+          lastItem.classList.add(&#39;animate&#39;);
+        }
+      });
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+/* Basic styling for the list */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+}
+
+/* Animation class */
+.animate {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Keyframes for the animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+&lt;/style&gt;
+
+//----------------
+// Ex : 4
+
+&lt;template&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;div ref=&quot;scrolledList&quot;
+            class=&quot;scroll-style&quot;&gt;
+            &lt;ul ref=&quot;scrolledHeight&quot; style=&quot;margin: 0; padding: 0;&quot;&gt;
+                &lt;li v-for=&quot;msg in messages&quot;&gt;
+                    {{ msg }}
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;input type=&quot;text&quot; placeholder=&quot;Add Message&quot; v-model=&quot;message&quot; /&gt;
+        &lt;button @click=&quot;addMessage&quot; @keyup.enter=&quot;addMessage&quot;&gt; Add Message&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &#39;Slot1&#39;,
+    data() {
+        return {
+            message: &#39;&#39;,
+            messages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }
+    },
+    mounted() {
+        this.updateScrollNextTick()
+    },
+    methods: {
+        addMessage() {
+            if (this.message == &#39;&#39;) {
+                return
+            }
+            this.messages.push(this.message)
+            this.message = &quot;&quot;
+            this.updateScrollNextTick()
+        },
+        updateScrollNextTick() {
+            this.$nextTick(() =&gt; {
+                let scrolledHeight = this.$refs.scrolledHeight.clientHeight
+                this.$refs.scrolledList.scrollTo({
+                    behavior: &#39;smooth&#39;,
+                    top: scrolledHeight
+                })
+            })
+        }
+    },
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+.scroll-style {
+    height: 100px; 
+    width: 150px; 
+    border:1px solid red; 
+    overflow: auto; 
+    margin-bottom: 15px; 
+    padding: 5px;
+}
+&lt;/style&gt;
+`
         }
       ]
     }
