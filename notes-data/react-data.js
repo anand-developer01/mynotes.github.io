@@ -460,67 +460,29 @@ const reactData = {
                     findDOMNode()
                     createPortal()
 
-                    <b>render()</b>:
+                    <b><span style="color:red">render()</span></b>:
                     render function renders a piece of JSX (“React node”) into a browser DOM node.
-
                     In React 18, render was replaced by createRoot. Please use createRoot for React 18 and beyond.
 
                     <b>Syntax </b>:
                     render(reactNode, domNode, callback?)
                     Parameters</b>:
                     <b>reactNode</b>: A React node that you want to display. This will usually be a piece of JSX like <App />, but you can also pass a React element constructed with createElement(), a string, a number, null, or undefined.
-
                     <b>domNode</b>: A DOM element. React will display the reactNode you pass inside this DOM element. From this moment, React will manage the DOM inside the domNode and update it when your React tree changes.
-
                     <b>optional callback</b>: A function. If passed, React will call it after your component is placed into the DOM.
-
                     
-                    <b>findDOMNode</b>:
+                    <b><span style="color:red">findDOMNode</span></b>:
                     findDOMNode finds the browser DOM node for a React class component instance.
-                    <b>Syntax<b>:-
+                    <b>Syntax</b>:-
                     const domNode = findDOMNode(componentInstance)
 
-                    Ex:-----
-        // Defining our App Component 
-        const App = () => {
-
-                        // Function to get element from findDOMNode() 
-                        function find() {
-                            let node = document.getElementById("node");
-                            let a = ReactDOM.findDOMNode(node);
-                            console.log(a);
-                            a.style.color = 'green';
-                            a.style.fontSize = "x-large";
-                        } 
-          // Returning our JSX code 
-          return <>
-                        <div>
-                            <div id='node'>DOM Node</div>
-                            <button onClick={find}>Click to find</button>
-                        </div>
-                    </>; 
-        }
-                    --------------
-                    ==============
-
-                    unmountComponentAtNode():----------
-                    ------------------------
+                    <b><span style="color:red">unmountComponentAtNode()</span></b>:
                     unmountComponentAtNode removes a mounted React component from the DOM.
                     unmountComponentAtNode returns true if a component was unmounted and false otherwise.
 
-                    App.js
-                    -------
-                    const domNode = document.getElementById('root');
-        
-        document. getElementById('render'). addEventListener ( 'click', () => {
-                        render(<App />, domNode);
-        });
-        
-        document. getElementById('unmount'). addEventListener ( 'click', () => {
-                        unmountComponentAtNode(domNode);
-        });
+
 `,
-                    code1:`Ex:-----------
+                    code1:`//Ex:-----------
                     import React from "react";
                     import {render, unmountComponentAtNode} from "react-dom";
 
@@ -536,7 +498,43 @@ const reactData = {
                         }, 2000)
                     }
 
-                    render(&lt;App /&gt;, rootElement,  CBFun() );`
+                    render(&lt;App /&gt;, rootElement,  CBFun() );
+                    
+                    //--------- 
+                    // findDOMNode Ex:
+                    // Defining our App Component 
+                    const App = () => {
+            
+                                    // Function to get element from findDOMNode() 
+                                    function find() {
+                                        let node = document.getElementById("node");
+                                        let a = ReactDOM.findDOMNode(node);
+                                        console.log(a);
+                                        a.style.color = 'green';
+                                        a.style.fontSize = "x-large";
+                                    } 
+                      // Returning our JSX code 
+                      return &lt;&gt;
+                      &lt;div&gt;
+                          &lt;div id=&#39;node&#39;&gt;DOM Node&lt;/div&gt;
+                          &lt;button onClick={find}&gt;Click to find&lt;/button&gt;
+                      &lt;/div&gt;
+                  &lt;/&gt;; 
+                    }
+
+
+                    App.js
+                    -------
+                    const domNode = document.getElementById('root');
+        
+        document. getElementById('render'). addEventListener ( 'click', () => {
+                        render(&lt;App /&gt;, domNode);
+        });
+        
+        document. getElementById('unmount'). addEventListener ( 'click', () => {
+                        unmountComponentAtNode(domNode);
+        });
+                    `
                 },
                 {
                     text1: ``,
@@ -563,7 +561,7 @@ const reactData = {
                 {
                     text1: `This method is used to render a React element into the DOM in the supplied container and return a reference to the component. If the React element was previously rendered into container, it will perform an update on it and only mutate the DOM as necessary to reflect the latest changes.
 
-                    ReactDOM.render(element, container, [callback])
+                    <span style="color:red">ReactDOM.render(element, container, [callback])</span>
 
                     If the optional callback is provided, it will be executed after the component is rendered or updated.`,
                     code1:``
@@ -613,13 +611,13 @@ const reactData = {
                     Inside a lifecycle method
                     Inside the constructor
 
-                    With error boundaries: As mentioned above, error boundary is a component using one or both of the following methods: static getDerivedStateFromError and componentDidCatch.
+                    With error boundaries: As mentioned above, error boundary is a component using one or both of the following methods: static <b>getDerivedStateFromError</b> and <b>componentDidCatch.</b>
 
                     As of v16.2.0, there's no way to turn a functional component into an error boundary.
 
                     The React docs are clear about that, although you're free to reuse them as many times as you wish:
 
-                    The componentDidCatch() method works like a JavaScript catch { } block, but for components. Only class components can be error boundaries. In practice, most of the time you'll want to declare an error boundary component once and use it throughout your application.`,
+                    The <b>componentDidCatch()</b> method works like a JavaScript catch <b>{ }</b> block, but for components. Only class components can be error boundaries. In practice, most of the time you'll want to declare an error boundary component once and use it throughout your application.`,
                     code1:``
                 }
             ],
@@ -631,63 +629,57 @@ const reactData = {
                 {
                     text1: `Hooks allow functional components to have local component state, access context, perform side effects, and more.
 
-                    1) useState:
+                    <b>1) useState</b>
                     Manages state in functional components.
-
                     const [state, setState] = useState(initialState);
 
-
-                    2) useEffect:
-
-                    Performs side effects in functional components, such as data fetching or subscriptions.
-    useEffect(() => {
-      // Side effect code here
-      return () => {
-                        // Cleanup code here
-                    };
-    }, [dependencies]);
-
-                    3) useContext:
+                    <b>2) useEffect</b>
+                    Performs side effects in functional components, such as data fetching or subscriptions.`,
+                    code1:`useEffect(() => {
+                        // Side effect code here
+                        return () => {
+                            // Cleanup code here
+                        };
+                        }, [dependencies]);`
+                },
+                {
+                    text1: `<b>3) useContext</b>
                     Instead of passing the props down through each component, React Context allows you to broadcast data to the components below.
                     Accesses the value of a React context within a functional component.
 
-                    const contextValue = useContext(MyContext);
-
-                    4) useReducer:
-
+                    const contextValue = useContext(MyContext);`,
+                    code1:``
+                },
+                {
+                    text1: `<b>4) useReducer</b>
                     Manages more complex state logic by combining useState and useEffect in a single hook.
-                    const [state, dispatch] = useReducer(reducer, initialState);
-
-
-                    5) useCallback:
-
-                    Memoizes a callback function to prevent unnecessary renders in child components.
-    
-    const memoizedCallback = useCallback(() => {
+                    const [state, dispatch] = useReducer(reducer, initialState);`,
+                    code1:``
+                },
+                {
+                    text1: `<b>5) useCallback</b>
+                    Memoizes a callback function to prevent unnecessary renders in child components.`,
+                    code1:`    const memoizedCallback = useCallback(() => {
                         // Callback code here
-                    }, [dependencies]);
-
-
-                    6) useMemo:
-
+                    }, [dependencies]);`
+                },
+                {
+                    text1: `<b>6) useMemo</b>
                     Memoizes the result of a computation to prevent unnecessary recalculations.
-    
-    const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
-
-
-                    7) useRef:
-
+                    const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);`,
+                    code1:``
+                },
+                {
+                    text1: `<b>7) useRef</b>
                     Creates a mutable object that persists across renders and does not trigger re-renders when mutated.
 
-                    const myRef = useRef(initialValue);
-
-
-
-                    8) forwardRef : -
-                    Ref forwarding is a technique for automatically passing a ref through a component to one of its children. This is typically not necessary for most components in the application. However, it can be useful for some kinds of components, especially in reusable component libraries.
-
-
-                    import React, {forwardRef, useRef, useImperativeHandle} from 'react';
+                    const myRef = useRef(initialValue);`,
+                    code1:``
+                },
+                {
+                    text1: `<b>8) forwardRef </b> -
+                    Ref forwarding is a technique for automatically passing a ref through a component to one of its children. This is typically not necessary for most components in the application. However, it can be useful for some kinds of components, especially in reusable component libraries.`,
+                    code1:`                    import React, {forwardRef, useRef, useImperativeHandle} from 'react';
 
                     const RefCustomInput = forwardRef(function RefCustomInput(props, ref) {
         const inputRef = useRef(null);
@@ -695,71 +687,69 @@ const reactData = {
             return {
                         focus() {
                         inputRef.current.focus();
-                },
-                    scrollIntoView() {
-                        console.log(inputRef.current.value)
                     },
-            };
-        }, []);
+                        scrollIntoView() {
+                            console.log(inputRef.current.value)
+                        },
+                        };
+                    }, []);
 
                     return (
-                    <>
-                        <input type="text" {...props} ref={inputRef} />
-                    </>
+                        &lt;&gt;
+                        &lt;input type=&quot;text&quot; {...props} ref={inputRef} /&gt;
+                    &lt;/&gt;
                     )
-    });
+                });
 
-                    export default RefCustomInput;
-
-                    9) useImperativeHandle:
+                export default RefCustomInput;`
+                },
+                {
+                    text1: `<b>9) useImperativeHandle</b>
 
                     Customizes the instance value exposed when using React.forwardRef.
-    
-    useImperativeHandle(ref, () => ({
+                    useImperativeHandle(ref, () => ({
                         // Exposed methods or properties
-                    }), [dependencies]);
-
-
-                    10) useLayoutEffect:
+                    }), [dependencies]);`,
+                    code1:``
+                },
+                {
+                    text1: `<b>10) useLayoutEffect</b>
 
                     Similar to useEffect, but fires synchronously after all DOM mutations.
 
                     useLayoutEffect fires synchronously after all DOM loading is done loading. This is useful for synchronously re-rendering the DOM and also to read the layout from the DOM. But to prevent blocking the page loading, we should always use the useEffect hook.
 
-
                     useLayoutEffect is a hook in React that is similar to useEffect, but it fires synchronously after all DOM mutations. It is often used when you need to read from the DOM or perform other actions that require layout before the browser paint
 
-                    Synchronous Execution:
+                    Synchronous Execution
                     Unlike useEffect, which runs asynchronously after the browser paints, useLayoutEffect runs synchronously immediately after all DOM mutations. This makes it suitable for tasks that need to be executed before the browser paints.
     
-    useLayoutEffect(() => {
+                    useLayoutEffect(() => {
                         // DOM mutation code here
-                    }, [dependencies]);
-
-                    ----------------------
-                    Ex:-
-
+                    }, [dependencies]);`,
+                    code1:`//Ex:-
                     const ref = useRef('This is dom')
       
-      useEffect(() => {
+                    useEffect(() => {
                         ref.current = 'some value'
                     })
 
-      // then, elsewhere in that hook or something, later
-      useLayoutEffect(() => {
+                    // then, elsewhere in that hook or something, later
+                    useLayoutEffect(() => {
                         console.log(ref.current) // <-- this logs an old value because this runs first!
-                    })
-
-                    ----------------------
-
-
-                    11) useDebugValue:
+                    })`
+                },
+                {
+                    text1: `<b>11) useDebugValue</b>:
 
                     Customizes the display of a custom hook in React DevTools.
-
                     useDebugValue(value);`,
                     code1:``
-                }
+                },
+                {
+                    text1: ``,
+                    code1:``
+                },
             ],
         },
         {
@@ -771,87 +761,74 @@ const reactData = {
 
                     The typical use case for useEffect is to manage asynchronous or non-blocking code within a functional component. It allows you to perform actions that are not directly related to rendering but are necessary for the component's behavior.
 
-
-                    1)Asynchronous Execution:
+                    <b>1)Asynchronous Execution</b>:
                     The function passed to useEffect runs asynchronously after the render cycle. It does not block the rendering of the component.
 
-                    2)Dependencies Array:
-
+                    <b>2)Dependencies Array</b>:
                     The second parameter is an array of dependencies. If any of these dependencies change between renders, the useEffect function will run again. If the dependencies array is empty, the useEffect will only run once after the initial render.
 
-                    3)Cleanup Function:
-
+                    <b>3)Cleanup Function</b>:
                     The function returned inside useEffect can be used for cleanup. It will be invoked when the component is about to unmount or when the dependencies specified in the array change.
-                    Cleanup:--
-                    -------
+                    
+                    Cleanup:-
                     If the effect involves any cleanup, such as unsubscribing from a subscription or clearing a timer, you can return a cleanup function. This cleanup function will be executed when the component is unmounted or when the dependencies change and the effect is re-run.
 
-                    4)Common Use Cases:
-
+                    <b>4)Common Use Cases</b>:
                     Fetching data from an API.
                     Subscribing to external data sources (e.g., websockets).
                     Manually changing the DOM or interacting with external libraries.
 
-
                     One thing to keep in mind is that useEffect only runs after React renders your component, so your effect callback will not prevent browser painting. This is different from how class components behave
 
                     Here is the basic syntax of the useEffect hook:
+`,
+                    code1:`useEffect(() => {
+                    // Side effect code here
+                    
+                    return () => {
+                                // Cleanup code (optional)
+                            };
+                    }, [dependencies]);
+                    //-------------
 
-                    ------------------
-    useEffect(() => {
-      // Side effect code here
-    
-      return () => {
-                        // Cleanup code (optional)
-                    };
-    }, [dependencies]);
-                    -------------------
+                    // The first argument is a function that contains the code for the side effect.
+                    // The second argument is an array of dependencies. If any of the dependencies change between renders, the effect is re-run. If the array is empty, the effect runs only once (similar to componentDidMount in class components).
 
-                    The first argument is a function that contains the code for the side effect.
-                    The second argument is an array of dependencies. If any of the dependencies change between renders, the effect is re-run. If the array is empty, the effect runs only once (similar to componentDidMount in class components).
-
-                    -------------------
-                    Example: Fetching Data
-
+                    // Example: Fetching Data
                     import React, {useState, useEffect} from 'react';
     
-    const ExampleComponent = () => {
-      const [data, setData] = useState(null);
-    
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await fetch('https://api.example.com/data');
-                    const result = await response.json();
-                    setData(result);
-          } catch (error) {
-                        console.error('Error fetching data:', error);
-          }
-        };
+                    const ExampleComponent = () => {
+                    const [data, setData] = useState(null);
+                    
+                    useEffect(() => {
+                        const fetchData = async () => {
+                        try {
+                            const response = await fetch(\`https://api.example.com/data\`);
+                                    const result = await response.json();
+                                    setData(result);
+                        } catch (error) {
+                                        console.error('Error fetching data:', error);
+                        }
+                        };
 
-                    fetchData();
-      }, []); // Empty dependency array means run the effect once on mount
+                                    fetchData();
+                    }, []); // Empty dependency array means run the effect once on mount
 
-                    return <p>Data: {data}</p>;
-    };
-                    ------------------------
+                                    return &lt;p&gt;Data: {data}&lt;/p&gt;;
+                    };
+                   
+                    // In this example, the useEffect hook is used to fetch data from an API. The effect runs once when the component mounts (due to the empty dependency array), and it updates the data state when the fetch is successful.
 
-                    In this example, the useEffect hook is used to fetch data from an API. The effect runs once when the component mounts (due to the empty dependency array), and it updates the data state when the fetch is successful.
-
-
-
-                    ---------------
-    useEffect(() => {
-      const subscription = externalService.subscribe(data => {
-                        // Handle incoming data
-                    });
-    
-      return () => {
+                    useEffect(() => {
+                    const subscription = externalService.subscribe(data => {
+                            // Handle incoming data
+                        });
+                    
+                    return () => {
                         // Cleanup: Unsubscribe when the component unmounts or when dependencies change
                         subscription.unsubscribe();
-      };
-    }, [dependencies]);`,
-                    code1:``
+                    };
+                    }, [dependencies]);`
                 }
             ],
         },
@@ -860,35 +837,30 @@ const reactData = {
             title: "useRef",
             note: [
                 {
-                    text1: `The useRef Hook allows you to persist values between renders.
-                    It can be used to store a mutable value that does not cause a re-render when updated.
-                    It can be used to access a DOM element directly.
+                    text1: `-> The useRef Hook allows you to persist values between renders.
+                    -> It can be used to store a mutable value that does not cause a re-render when updated.
+                    -> It can be used to access a DOM element directly.
 
-                    useRef() only returns one item. It returns an Object called current.
-                    When we initialize useRef we set the initial value: useRef(0).
-                    It's like doing this: const count = {current: 0}. We can access the count by using count.current.
+                    <b>useRef()</b> only returns one item. It returns an Object called <b>current</b>.
+                    When we initialize useRef we set the initial value: <b>useRef(0)</b>.
+                    It's like doing this: <b>const count = {current: 0}</b>. We can access the count by using count.current.
 
-                    ============
                     useRef is one of the standard hooks provided by React. It will return an object that you can use during the whole lifecycle of the component.
                     The main use case for the useRef hook is to access a DOM child directly. I'll show exactly how to do that in another section.
 
                     Although accessing the DOM is the main use case, it doesn't mean it's the only one! useRef can also be very useful to hold a mutable value across different renders of your component.
-                    ===============
-                    The useRef Hook is a function that returns a mutable ref object whose '.current' property is initialized with the passed argument (initialValue). The returned object will persist for the full lifetime of the component.
+
+                    The useRef Hook is a function that returns a mutable ref object whose <b>.current</b> property is initialized with the passed argument (<b>initialValue</b>). The returned object will persist for the full lifetime of the component.
 
                     There are two main uses of useRef that are explained in the following sections:
-                    - Accessing the DOM nodes or React elements
-                    - keeping a mutable variable.
-                    ---------------
-                    useRef() hook creates references.
+                    - > Accessing the DOM nodes or React elements
+                    - > keeping a mutable variable.
+                    <b>useRef() hook creates references.</b>
+                    Calling <b>const reference = useRef(initialValue)</b> with the initial value returns a special object named reference. The reference object has a property current: you can use this property to read the reference value reference.current, or update reference.current = newValue.
 
-                    Calling const reference = useRef(initialValue) with the initial value returns a special object named reference. The reference object has a property current: you can use this property to read the reference value reference.current, or update reference.current = newValue.
-
-                    Between the component re-renderings, the value of the reference is persistent.
-
-                    Updating a reference, contrary to updating state, doesn't trigger component re-rendering.
-
-                    References can also access DOM elements. Assign the reference to ref attribute of the element you'd like to access: <div ref={reference}>Element</div> — and the element is available at reference.current.`,
+                    - > Between the component re-renderings, the value of the reference is persistent.
+                    - > Updating a reference, contrary to updating state, doesn't trigger component re-rendering.
+                    - > References can also access DOM elements. Assign the reference to ref attribute of the element you'd like to access: <b> &lt;div ref={reference}&gt;Element&lt;/div&gt;</b> - and the element is available at reference.current.`,
                     code1:``
                 }
             ],
@@ -900,20 +872,16 @@ const reactData = {
                 {
                     text1: `React custom hooks are reusable functions that a React JS developer can use to add special and unique functionality to the React applications.
 
-                    React that allows you to extract and reuse stateful logic from functional components. By creating custom hooks, you can encapsulate complex logic into reusable functions and share that logic across different components. Custom Hooks follow a naming convention: their names start with "use" (e.g., useCustomHook).
+                    React that allows you to extract and reuse stateful logic from functional components. By creating custom hooks, you can encapsulate complex logic into reusable functions and share that logic across different components. Custom Hooks follow a naming convention: their names start with <b>use</b> (e.g., useCustomHook).
 
-                    A Custom Hook is a function in Javascript whose name begins with ‘use' and which calls other hooks. It is a part of React v16.8 hook update and permits you for reusing the stateful logic without any need for component hierarchy restructuring.
+                    A Custom Hook is a function in Javascript whose name begins with <b>use</b> and which calls other hooks. It is a part of React v16.8 hook update and permits you for reusing the stateful logic without any need for component hierarchy restructuring.
 
                     In almost all of the cases, custom hooks are considered to be sufficient for replacing render props and HoCs (Higher-Order components) and reducing the amount of nesting required. Custom Hooks will allow you for avoiding multiple layers of abstraction or wrapper hell that might come along with Render Props and HoCs.
 
                     The disadvantage of Custom Hooks is it cannot be used inside of the classes.
 
-
-
-                    Here's a basic example of a custom hook:
-
-
-                    // useCounter.js
+                    Here's a basic example of a custom hook:`,
+                    code1:`                    // useCounter.js
                     import {useState} from 'react';
           
           const useCounter = (initialValue, step) => {
@@ -933,11 +901,9 @@ const reactData = {
                         decrement,
             };
           };
-
                     export default useCounter;
-                    Now, you can use this custom hook in multiple components:
 
-
+                    // Now, you can use this custom hook in multiple components:
                     // ExampleComponent1.js
                     import React from 'react';
                     import useCounter from './useCounter';
@@ -946,14 +912,13 @@ const reactData = {
             const counter1 = useCounter(0, 1);
 
                     return (
-                    <div>
-                        <p>Count: {counter1.count}</p>
-                        <button onClick={counter1.increment}>Increment</button>
-                        <button onClick={counter1.decrement}>Decrement</button>
-                    </div>
+                    &lt;div&gt;
+                        &lt;p&gt;Count: {counter1.count}&lt;/p&gt;
+                        &lt;button onClick={counter1.increment}&gt;Increment&lt;/button&gt;
+                        &lt;button onClick={counter1.decrement}&gt;Decrement&lt;/button&gt;
+                    &lt;/div&gt;
                     );
           };
-
 
                     // ExampleComponent2.js
                     import React from 'react';
@@ -963,14 +928,13 @@ const reactData = {
             const counter2 = useCounter(10, 2);
 
                     return (
-                    <div>
-                        <p>Count: {counter2.count}</p>
-                        <button onClick={counter2.increment}>Increment</button>
-                        <button onClick={counter2.decrement}>Decrement</button>
-                    </div>
+                        &lt;div&gt;
+                        &lt;p&gt;Count: {counter2.count}&lt;/p&gt;
+                        &lt;button onClick={counter2.increment}&gt;Increment&lt;/button&gt;
+                        &lt;button onClick={counter2.decrement}&gt;Decrement&lt;/button&gt;
+                    &lt;/div&gt;
                     );
-          };`,
-                    code1:``
+          };`
                 }
             ],
         },
@@ -980,7 +944,6 @@ const reactData = {
             note: [
                 {
                     text1: `StrictMode is a tool for highlighting potential problems in an application. Like Fragment, StrictMode does not render any visible UI. It activates additional checks and warnings for its descendants.
-
 
                     StrictMode is a development mode feature in React that helps identify common problems in your application and supports you in fixing them. It performs additional checks and warnings to aid developers in writing better code and finding potential issues.`,
                     code1:``
@@ -1006,19 +969,18 @@ const reactData = {
                 {
                     text1: `In React, handling events is a crucial aspect of building interactive user interfaces. There are a few methods for handling events in React, and the appropriate method depends on the context and your specific requirements. Here are the commonly used approaches:
 
-                    Inline Event Handling (JSX Syntax):
+                    Inline Event Handling (JSX Syntax):`,
+                    code1:`//You can handle events directly in the JSX using inline event handlers. This is similar to traditional HTML event handling.
 
-                    You can handle events directly in the JSX using inline event handlers. This is similar to traditional HTML event handling.
-
-                    <button onClick={handleClick}>Click me</button>
+                    &lt;button onClick={handleClick}&gt;Click me&lt;/button&gt;
       
       const handleClick = () => {
                         console.log('Button clicked!');
       };
-                    This approach is straightforward and suitable for simple cases. However, it can become less maintainable in more complex applications.
-                    Class Methods:
+                    // This approach is straightforward and suitable for simple cases. However, it can become less maintainable in more complex applications.
 
-                    You can define class methods to handle events, especially in class components.
+                    // <b>Class Methods:</b>
+                    // You can define class methods to handle events, especially in class components.
 
                     class MyComponent extends React.Component {
                         handleClick() {
@@ -1026,33 +988,32 @@ const reactData = {
         }
 
                     render() {
-          return <button onClick={this.handleClick}>Click me</button>;
+          return &lt;button onClick={this.handleClick}&gt;Click me&lt;/button&gt;;
         }
       }
-                    Class methods are useful when you need access to the component instance (e.g., for updating state).
-                    Arrow Functions (Inline Callbacks):
+                    // Class methods are useful when you need access to the component instance (e.g., for updating state).
+                    // Arrow Functions (Inline Callbacks):
 
-                    You can use arrow functions as inline callbacks. This is a concise way to define callback functions directly in the JSX.
+                    // You can use arrow functions as inline callbacks. This is a concise way to define callback functions directly in the JSX.
 
-                    <button onClick={() => console.log('Button clicked!')}>Click me</button>
-                    While concise, be cautious with arrow functions in render methods, especially for performance reasons, as a new function is created on every render.
-                    Passing Parameters to Event Handlers:
+                    &lt;button onClick={() =&gt; console.log(&#39;Button clicked!&#39;)}&gt;Click me&lt;/button&gt;
+                    // While concise, be cautious with arrow functions in render methods, especially for performance reasons, as a new function is created on every render.
+                    // Passing Parameters to Event Handlers:
 
-                    If you need to pass additional parameters to your event handler, you can use arrow functions or the bind method.
+                    // If you need to pass additional parameters to your event handler, you can use arrow functions or the bind method.
 
-                    <button onClick={() => handleClick(param)}>Click me</button>
+                    &lt;button onClick={() =&gt; handleClick(param)}&gt;Click me&lt;/button&gt;
 
-                    <button onClick={handleClick.bind(this, param)}>Click me</button>
-                    Ensure that you are mindful of potential performance implications when using arrow functions for this purpose.
-                    Using useCallback Hook (Functional Components):
+                    &lt;button onClick={handleClick.bind(this, param)}&gt;Click me&lt;/button&gt;
+                    // Ensure that you are mindful of potential performance implications when using arrow functions for this purpose.
+                    // Using useCallback Hook (Functional Components):
 
-                    In functional components, you can use the useCallback hook to memoize event handler functions, preventing unnecessary re-creation.
-      
-      const handleClick = useCallback(() => {
+                    // In functional components, you can use the useCallback hook to memoize event handler functions, preventing unnecessary re-creation.
+
+                    const handleClick = useCallback(() => {
                         console.log('Button clicked!');
       }, []); // Empty dependency array means it won't change between renders
-                    This is useful for optimizing performance in scenarios where the event handler doesn't depend on changing variables.`,
-                    code1:``
+                    // This is useful for optimizing performance in scenarios where the event handler doesn't depend on changing variables.`
                 }
             ],
         },
@@ -1065,9 +1026,8 @@ const reactData = {
 
                     Accessing DOM Elements:
 
-                    Refs are often used to interact with or manipulate the properties of DOM elements directly. This can include tasks like focusing on an input field, measuring the size of an element, or triggering imperative animations.
-
-                    class MyComponent extends React.Component {
+                    Refs are often used to interact with or manipulate the properties of DOM elements directly. This can include tasks like focusing on an input field, measuring the size of an element, or triggering imperative animations.`,
+                    code1:`                    class MyComponent extends React.Component {
                         constructor(props) {
                         super(props);
                     this.myInput = React.createRef();
@@ -1079,12 +1039,12 @@ const reactData = {
         }
 
                     render() {
-          return <input ref={this.myInput} />;
+          return &lt;input ref={this.myInput} /&gt;;
         }
       }
-                    Managing Focus, Text Selection, and Media Playback:
+                    // Managing Focus, Text Selection, and Media Playback:
 
-                    Refs are useful for managing user interactions, such as setting focus on an input field, selecting text, or controlling media playback.
+                    // Refs are useful for managing user interactions, such as setting focus on an input field, selecting text, or controlling media playback.
 
                     class AutoFocusInput extends React.Component {
                         constructor(props) {
@@ -1097,12 +1057,12 @@ const reactData = {
         }
 
                     render() {
-          return <input ref={this.inputRef} />;
+          return &lt;input ref={this.inputRef} /&gt;;
         }
       }
-                    Interacting with Third-Party Libraries:
+                    // Interacting with Third-Party Libraries:
 
-                    When working with third-party libraries that operate on DOM elements, refs can be used to get references to those elements and interact with them within your React components.
+                    // When working with third-party libraries that operate on DOM elements, refs can be used to get references to those elements and interact with them within your React components.
 
                     class ThirdPartyIntegration extends React.Component {
                         constructor(props) {
@@ -1116,12 +1076,12 @@ const reactData = {
         }
 
                     render() {
-          return <div ref={this.thirdPartyElement}></div>;
+          return &lt;div ref={this.thirdPartyElement}&gt;&lt;/div&gt;;
         }
       }
-                    Triggering Animations or Measurements:
+                    // Triggering Animations or Measurements:
 
-                    Refs can be used to trigger animations or perform measurements (e.g., getting the height or width of an element) when needed.
+                    // Refs can be used to trigger animations or perform measurements (e.g., getting the height or width of an element) when needed.
 
                     class MeasureElement extends React.Component {
                         constructor(props) {
@@ -1137,16 +1097,16 @@ const reactData = {
 
                     render() {
           return (
-                    <div>
-                        <div ref={this.myElement}>Resizable Element</div>
-                        <button onClick={() => this.handleButtonClick()}>Measure Height</button>
-                    </div>
+            &lt;div&gt;
+            &lt;div ref={this.myElement}&gt;Resizable Element&lt;/div&gt;
+            &lt;button onClick={() =&gt; this.handleButtonClick()}&gt;Measure Height&lt;/button&gt;
+        &lt;/div&gt;
                     );
         }
       }
-                    Accessing Class Component Methods:
+                    // Accessing Class Component Methods:
 
-                    Refs can be used to access methods or properties of a class component directly, although this approach is less common due to the availability of other state management techniques.
+                    // Refs can be used to access methods or properties of a class component directly, although this approach is less common due to the availability of other state management techniques.
 
                     class MyClassComponent extends React.Component {
                         myMethod() {
@@ -1154,7 +1114,7 @@ const reactData = {
         }
 
                     render() {
-          return <div>Class Component</div>;
+          return &lt;div&gt;Class Component&lt;/div&gt;;
         }
       }
 
@@ -1171,14 +1131,13 @@ const reactData = {
 
                     render() {
           return (
-                    <div>
-                        <MyClassComponent ref={this.myComponentRef} />
-                        <button onClick={() => this.handleButtonClick()}>Call Method</button>
-                    </div>
+            &lt;div&gt;
+            &lt;MyClassComponent ref={this.myComponentRef} /&gt;
+            &lt;button onClick={() =&gt; this.handleButtonClick()}&gt;Call Method&lt;/button&gt;
+        &lt;/div&gt;
                     );
         }
-      }`,
-                    code1:``
+      }`
                 }
             ],
         },
