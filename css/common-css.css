@@ -78,6 +78,10 @@
     margin: 0;
 }
 
+/* .align-code {
+    white-space: pre;
+} */
+
 
 
 @media (min-width:320px) and (max-width: 600px) {

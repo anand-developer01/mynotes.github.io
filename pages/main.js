@@ -54,7 +54,7 @@ const collection = document.getElementsByClassName("inside-nav-bar");
                     ${k.text1}
                 </p>
                 <pre class="code-prre">
-                    <code class="hljs language-javascript py-0 px-2"> 
+                    <code class="align-code hljs language-javascript py-0 px-2"> 
                             ${k.code1} 
                     </code>
                 </pre>

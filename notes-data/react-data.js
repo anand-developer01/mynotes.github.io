@@ -142,59 +142,47 @@ const reactData = {
                 {
                     text1: `Vue.js and React.js are both popular JavaScript frameworks for building user interfaces, but they have some differences in terms of design philosophy, syntax, and approach to certain features. Here are some key distinctions between Vue.js and React.js:
 
-                    Learning Curve:
-                    ---------------
-
+                    <b>Learning Curve</b>:
                     Vue.js: Vue has a gentle learning curve, making it relatively easy for beginners to pick up. Its template syntax is similar to HTML, which can be advantageous for developers familiar with web development basics.
                     React.js: React has a steeper learning curve, especially for beginners. Concepts like JSX (JavaScript XML) and the emphasis on a unidirectional data flow may require some adjustment for developers new to the framework.
 
-                    Syntax:
-                    --------
-
+                    <b>Syntax</b>:
                     Vue.js: Vue.js uses an HTML-based template syntax that is familiar to many developers. Templates are written in plain HTML with Vue-specific directives.
                     React.js: React uses JSX, which is a syntax extension for JavaScript. JSX allows you to write HTML elements and components directly within your JavaScript code, providing a more expressive way to describe the UI.
 
-                    Data Binding:
-                    ------------
-
+                    <b>Data Binding</b>:
                     Vue.js: Vue supports both one-way and two-way data binding. It has a v-model directive for two-way binding and provides easy syntax for handling state changes in components.
                     React.js: React primarily uses one-way data binding. Data flows from parent components to child components through props. React does not have built-in two-way binding, emphasizing a unidirectional data flow.
 
-                    State Management:
-                    -----------------
-
+                    <b>State Management</b>:
                     Vue.js: Vue has a built-in state management system that allows you to manage local component state. For more complex state management, Vue can be integrated with Vuex, a state management library.
                     React.js: React uses a unidirectional data flow and relies on state and props to manage component data. For larger applications, Redux or other state management libraries are commonly used with React.
 
-                    Component Structure:
-                    --------------------
-
+                    <b>Component Structure</b>:
                     Vue.js: Vue components are more flexible in terms of structure, and the framework provides a clear and concise way to define components, templates, and styles.
                     React.js: React components are typically written using JSX and often include separate files for CSS styles. React encourages a modular and reusable component structure.
 
-                    Community and Ecosystem:
-                    -----------------------
-
+                    <b>Community and Ecosystem</b>:
                     Vue.js: Vue has a growing and active community, but it is generally smaller than the React community. However, it has gained popularity rapidly, and there is a good ecosystem of libraries and tools.
                     React.js: React has a large and well-established community with a rich ecosystem of libraries, tools, and resources. It is widely adopted by many large companies and has strong community support.
                     Ultimately, the choice between Vue.js and React.js often depends on factors such as personal preference, project requirements, and the specific needs of the development team. Both frameworks are capable of building powerful and efficient user interfaces.
 
-                    vue js :
-                    -----------------
-                    var V = new Vue({
+                    <b>vue js </b>:
+                  
+                    `,
+                    code1:`  var V = new Vue({
                         el:'#vue-instance',
                     data:{
                         name:'Niklesh'
               }
             })
-                    <script src=" https://cdnjs.cloudflare.com /ajax/libs/vue/2.5.4/vue.js"> </script>
-                    <div id="vue-instance">
-                        <div>One Way binding with input box <input type="text" :value="name"></div>
-                        <div>One Way binding as text {{ name }}</div>
+            &lt;script src=&quot; https://cdnjs.cloudflare.com /ajax/libs/vue/2.5.4/vue.js&quot;&gt; &lt;/script&gt;
+                    &lt;div id=&quot;vue-instance&quot;&gt;
+                        &lt;div&gt;One Way binding with input box &lt;input type=&quot;text&quot; :value=&quot;name&quot;&gt;&lt;/div&gt;
+                        &lt;div&gt;One Way binding as text {{ name }}&lt;/div&gt;
 
-                        <div>Two way binding : <input type="text" v-model="name"></div>
-                    </div>`,
-                    code1:``
+                        &lt;div&gt;Two way binding : &lt;input type=&quot;text&quot; v-model=&quot;name&quot;&gt;&lt;/div&gt;
+                    &lt;/div&gt;`
                 }
             ],
             // showHtml: () => (
@@ -244,30 +232,25 @@ const reactData = {
 
                     Here are the key steps in the reconciliation process:
 
-                    1)Rendering:
+                    <b>1)Rendering</b>:
+                    =>When a React component's state or props change, the component is re-rendered.
+                    =>During the re-render, the component returns a new Virtual DOM representation of its UI.
 
-                    -When a React component's state or props change, the component is re-rendered.
-                    -During the re-render, the component returns a new Virtual DOM representation of its UI.
+                    <b>2)Virtual DOM Comparison</b>:
+                    =>React compares the new Virtual DOM with the previous snapshot of the Virtual DOM.
+                    =>It identifies the differences (diffs) between the new and old Virtual DOM. This process is often referred to as the "diffing algorithm."
 
-                    2)Virtual DOM Comparison:
+                    <b>3)Reconciliation Algorithm</b>:
+                    =>React uses a reconciliation algorithm to efficiently determine how to update the real DOM based on the identified differences.
+                    =>The algorithm aims to minimize the number of manipulations needed in the actual DOM, optimizing the update process.
 
-                    -React compares the new Virtual DOM with the previous snapshot of the Virtual DOM.
-                    -It identifies the differences (diffs) between the new and old Virtual DOM. This process is often referred to as the "diffing algorithm."
+                    <b>4)Updating the DOM</b>:
+                    =>After determining the differences, React applies the changes to the real DOM.
+                    =>React updates only the parts of the DOM that have changed, rather than re-rendering the entire DOM.
 
-                    3)Reconciliation Algorithm:
-
-                    React uses a reconciliation algorithm to efficiently determine how to update the real DOM based on the identified differences.
-                    The algorithm aims to minimize the number of manipulations needed in the actual DOM, optimizing the update process.
-
-                    4)Updating the DOM:
-
-                    -After determining the differences, React applies the changes to the real DOM.
-                    -React updates only the parts of the DOM that have changed, rather than re-rendering the entire DOM.
-
-                    5)Component Lifecycle Methods:
-
-                    -During the reconciliation process, React invokes specific lifecycle methods on the components, allowing them to perform actions at different stages of the update cycle.
-                    -For example, the componentDidUpdate lifecycle method is called after the component has been updated in the DOM.`,
+                    <b>5)Component Lifecycle Methods</b>:
+                    =>During the reconciliation process, React invokes specific lifecycle methods on the components, allowing them to perform actions at different stages of the update cycle.
+                    =>For example, the componentDidUpdate lifecycle method is called after the component has been updated in the DOM.`,
                     code1:``
                 }
             ],
@@ -307,52 +290,46 @@ const reactData = {
                 {
                     text1: `JSX elements will be transpiled to React.createElement() functions to create React elements which are going to be used for the object representation of UI. Whereas cloneElement is used to clone an element and pass it new props.
 
-                    createElement:
+                    <b>1) createElement</b>:
                     The createElement method is the fundamental way to create a React element. It is a function that takes three arguments:
-
-                    Type: This can be either a string representing the HTML tag name or a reference to a component.
-                    Props: This is an object containing the properties that will be assigned to the element.
+                    <b>Type</b>: This can be either a string representing the HTML tag name or a reference to a component.
+                    <b>Props</b>: This is an object containing the properties that will be assigned to the element.
                     Children: This can be a string, a React element, or an array of React elements.
 
-                    ------------
-                    Syntax:-
-                    const element = React.createElement('h1', {className: 'title'}, 'Hello, world!');
-                    ------------
+                    <b>Syntax</b>:-
+                    <span style="color:red">const element = React.createElement('h1', {className: 'title'}, 'Hello, world!');</span>
 
-                    cloneElement:
+                    <b>2) cloneElement</b>:
                     The cloneElement method is used to clone and modify an existing React element. It takes two arguments:
+                    <b>Element</b>: This is the React element that you want to clone.
+                    <b>Props</b>: This is an object containing the properties that you want to add or override.
 
-                    Element: This is the React element that you want to clone.
-                    Props: This is an object containing the properties that you want to add or override.
-
-                    ------------
-                    Syntax:-
-                    React.cloneElement(
+                    <b>Syntax</b>:-
+                    <span style="color:red">React.cloneElement(
                     element,
                     [props],
                     [...children]
-                    )
-                    Element: the element that we want to clone.
-                    [props]: The additional props that we want to add to the element.
-                    […children]: The children of the cloned object. Note that the children of the existing object are not copied
-
-                    Ex:-
+                    )</span>
+                    <b>Element</b>: the element that we want to clone.
+                    <b>[props]</b>: The additional props that we want to add to the element.
+                    <b>[…children]</b>: The children of the cloned object. Note that the children of the existing object are not copied
+`,
+                    code1:`//Ex:-
                     const originalElement = React.createElement('h1', {className: 'title'}, 'Hello, world!');
 
                     const clonedElement = React.cloneElement(originalElement, {className: 'subtitle'},'MKS');
 
-                    Ex2:-
+                    //Ex2:-
                     const originalElement = React.createElement('div', {className: 'title', style:{backgroundColor: "#9acf75" } }, 'Hello, world!');
                     const originalPara = React.createElement('p', {className: 'para', style:{backgroundColor: "#989fac" } }, 'Hello, world!');
-
                     const clonedElement = React.cloneElement(originalElement, {className: 'App-header', style:{backgroundColor: "#9acf75" } }, originalPara );
                     return (
-                    <div>
-                        {originalElement}
-                        {clonedElement}
-                    </div>
-                    );`,
-                    code1:``
+                        &lt;div&gt;
+                            {originalElement}
+                            {clonedElement}
+                        &lt;/div&gt;
+                        );
+`
                 }
             ],
         },
@@ -376,21 +353,17 @@ const reactData = {
                 {
                     text1: `The component lifecycle has three distinct lifecycle phases:
 
-                    Mounting:
-                    ---------The component is ready to mount in the browser DOM. This phase covers initialization from constructor(), getDerivedStateFromProps(), render(), and componentDidMount() lifecycle methods.
+                    <b>Mounting</b>:The component is ready to mount in the browser DOM. This phase covers initialization from constructor(), getDerivedStateFromProps(), render(), and componentDidMount() lifecycle methods.
 
-                    Updating:
-                    -------- In this phase, the component gets updated in two ways, sending the new props and updating the state either from setState() or forceUpdate(). This phase covers getDerivedStateFromProps(), shouldComponentUpdate(), render(), getSnapshotBeforeUpdate() and componentDidUpdate() lifecycle methods.
+                    <b>Updating</b>: In this phase, the component gets updated in two ways, sending the new props and updating the state either from setState() or forceUpdate(). This phase covers getDerivedStateFromProps(), shouldComponentUpdate(), render(), getSnapshotBeforeUpdate() and componentDidUpdate() lifecycle methods.
 
-                    Unmounting:
-                    -----------
-                    In this last phase, the component is not needed and gets unmounted from the browser DOM. This phase includes componentWillUnmount() lifecycle method.
+                    <b>Unmounting</b>: In this last phase, the component is not needed and gets unmounted from the browser DOM. This phase includes componentWillUnmount() lifecycle method.
 
                     It's worth mentioning that React internally has a concept of phases when applying changes to the DOM. They are separated as follows Render The component will render without any side effects. This applies to Pure components and in this phase, React can pause, abort, or restart the render.
 
-                    Pre-commit Before the component actually applies the changes to the DOM, there is a moment that allows React to read from the DOM through the getSnapshotBeforeUpdate().
+                    Pre-commit Before the component actually applies the changes to the DOM, there is a moment that allows React to read from the DOM through the <b>getSnapshotBeforeUpdate()</b>.
 
-                    Commit React works with the DOM and executes the final lifecycles respectively componentDidMount() for mounting, componentDidUpdate() for updating, and componentWillUnmount() for unmounting.`,
+                    Commit React works with the DOM and executes the final lifecycles respectively <b>componentDidMount()</b> for mounting, <b>componentDidUpdate()</b> for updating, and <b>componentWillUnmount()</b> for unmounting.`,
                     code1:``
                 }
             ],
@@ -402,22 +375,22 @@ const reactData = {
                 {
                     text1: `Before React 16.3
 
-                    componentWillMount: Executed before rendering and is used for App level configuration in your root component.
-                    componentDidMount: Executed after first rendering and here all AJAX requests, DOM or state updates, and set up event listeners should occur.
-                    componentWillReceiveProps: Executed when particular prop updates to trigger state transitions.
-                    shouldComponentUpdate: Determines if the component will be updated or not. By default it returns true. If you are sure that the component doesn't need to render after state or props are updated, you can return false value. It is a great place to improve performance as it allows you to prevent a re-render if component receives new prop.
-                    componentWillUpdate: Executed before re-rendering the component when there are props & state changes confirmed by shouldComponentUpdate() which returns true.
-                    componentDidUpdate: Mostly it is used to update the DOM in response to prop or state changes.
-                    componentWillUnmount: It will be used to cancel any outgoing network requests, or remove all event listeners associated with the component.
+                    <b>componentWillMount</b>: Executed before rendering and is used for App level configuration in your root component.
+                    <b>componentDidMount</b>: Executed after first rendering and here all AJAX requests, DOM or state updates, and set up event listeners should occur.
+                    <b>componentWillReceiveProps</b>: Executed when particular prop updates to trigger state transitions.
+                    <b>shouldComponentUpdate</b>: Determines if the component will be updated or not. By default it returns true. If you are sure that the component doesn't need to render after state or props are updated, you can return false value. It is a great place to improve performance as it allows you to prevent a re-render if component receives new prop.
+                    <b>componentWillUpdate</b>: Executed before re-rendering the component when there are props & state changes confirmed by shouldComponentUpdate() which returns true.
+                    <b>componentDidUpdate</b>: Mostly it is used to update the DOM in response to prop or state changes.
+                    <b>componentWillUnmount</b>: It will be used to cancel any outgoing network requests, or remove all event listeners associated with the component.
 
                     React 16.3+
 
-                    getDerivedStateFromProps: Invoked right before calling render() and is invoked on every render. This exists for rare use cases where you need a derived state. Worth reading if you need derived state.
-                    componentDidMount: Executed after first rendering and where all AJAX requests, DOM or state updates, and set up event listeners should occur.
-                    shouldComponentUpdate: Determines if the component will be updated or not. By default, it returns true. If you are sure that the component doesn't need to render after the state or props are updated, you can return a false value. It is a great place to improve performance as it allows you to prevent a re-render if component receives a new prop.
-                    getSnapshotBeforeUpdate: Executed right before rendered output is committed to the DOM. Any value returned by this will be passed into componentDidUpdate(). This is useful to capture information from the DOM i.e. scroll position.
-                    componentDidUpdate: Mostly it is used to update the DOM in response to prop or state changes. This will not fire if shouldComponentUpdate() returns false.
-                    componentWillUnmount It will be used to cancel any outgoing network requests, or remove all event listeners associated with the component.`,
+                    <b>getDerivedStateFromProps</b>: Invoked right before calling render() and is invoked on every render. This exists for rare use cases where you need a derived state. Worth reading if you need derived state.
+                    <b>componentDidMount</b>: Executed after first rendering and where all AJAX requests, DOM or state updates, and set up event listeners should occur.
+                    <b>shouldComponentUpdate</b>: Determines if the component will be updated or not. By default, it returns true. If you are sure that the component doesn't need to render after the state or props are updated, you can return a false value. It is a great place to improve performance as it allows you to prevent a re-render if component receives a new prop.
+                    <b>getSnapshotBeforeUpdate</b>: Executed right before rendered output is committed to the DOM. Any value returned by this will be passed into componentDidUpdate(). This is useful to capture information from the DOM i.e. scroll position.
+                    <b>componentDidUpdate</b>: Mostly it is used to update the DOM in response to prop or state changes. This will not fire if shouldComponentUpdate() returns false.
+                    <b>componentWillUnmount</b>: It will be used to cancel any outgoing network requests, or remove all event listeners associated with the component.`,
                     code1:``
                 }
             ],
@@ -432,16 +405,15 @@ const reactData = {
                     We call them pure components because they can accept any dynamically provided child component but they won't modify or copy any behavior from their input components.
 
                     Benefits of Using Higher-Order Components in React
-                    Reusability: HOCs allow you to reuse component logic across multiple components, which can save time and reduce code duplication.
-                    Flexibility: HOCs can take additional arguments, which allows you to customize the behavior of the HOC. This makes them a flexible way to add functionality to your components.
-                    Separation of concerns: HOCs can help separate concerns in your code by encapsulating certain functionality in a separate component. This can make the code easier to read and maintain.
-                    Composition: HOCs can be composed together to create more complex functionality. This allows you to build up functionality from smaller, reusable pieces.
+                    <b>Reusability</b>: HOCs allow you to reuse component logic across multiple components, which can save time and reduce code duplication.
+                    <b>Flexibility</b>: HOCs can take additional arguments, which allows you to customize the behavior of the HOC. This makes them a flexible way to add functionality to your components.
+                    <b>Separation of concerns</b>: HOCs can help separate concerns in your code by encapsulating certain functionality in a separate component. This can make the code easier to read and maintain.
+                    <b>Composition</b>: HOCs can be composed together to create more complex functionality. This allows you to build up functionality from smaller, reusable pieces.
                     Higher-order components can be used to implement cross-cutting concerns in your application such as authentication, error handling, logging, performance tracking, and many other features.
 
-                    const EnhancedComponent = higherOrderComponent (WrappedComponent);
+                    <span style="color:red">const EnhancedComponent = higherOrderComponent (WrappedComponent);</span>
 
-                    HOC can be used for many use cases:
-
+                    <b>HOC can be used for many use cases</b>:
                     Code reuse, logic and bootstrap abstraction.
                     Render hijacking.
                     State abstraction and manipulation.
@@ -457,30 +429,28 @@ const reactData = {
                 {
                     text1: `You can add/edit props passed to the component using props proxy pattern like this:
 
-                    This approach enables the addition of props to wrapped components before rendering, proving useful in various scenarios such as logging, modifying data passed to components, and managing authentication in diverse applications.
-
-                    function HOC(WrappedComponent) {
-              return class Test extends Component {
-                        render() {
-                  const newProps = {
-                        title: "New Header",
-                    footer: false,
-                    showFeatureX: false,
-                    showFeatureY: true,
-                  };
-
-                    return <WrappedComponent {...this.props} {...newProps} />;
-                }
-              };
-            }`,
-                    code1:``
+                    This approach enables the addition of props to wrapped components before rendering, proving useful in various scenarios such as logging, modifying data passed to components, and managing authentication in diverse applications.`,
+                    code1:`  function HOC(WrappedComponent) {
+                        return class Test extends Component {
+                                  render() {
+                            const newProps = {
+                                  title: "New Header",
+                              footer: false,
+                              showFeatureX: false,
+                              showFeatureY: true,
+                            };
+          
+                              return  &lt;WrappedComponent {...this.props} {...newProps} /&gt;;
+                          }
+                        };
+                      }`
                 }
             ],
         },
         {
             id: 17,
-            title: "What is the use of react-dom package?",
-            note: [
+                    title: "What is the use of react-dom package?",
+                    note: [
                 {
                     text1: `The react-dom package provides DOM-specific methods that can be used at the top level of your app. Most of the components are not required to use this module. Some of the methods of this package are:
 
@@ -490,47 +460,24 @@ const reactData = {
                     findDOMNode()
                     createPortal()
 
-                    render():--
-                    -----------
+                    <b>render()</b>:
                     render function renders a piece of JSX (“React node”) into a browser DOM node.
 
                     In React 18, render was replaced by createRoot. Please use createRoot for React 18 and beyond.
 
-                    Syntax :
+                    <b>Syntax </b>:
                     render(reactNode, domNode, callback?)
-                    --------------
-                    Parameters:--
-                    reactNode: A React node that you want to display. This will usually be a piece of JSX like <App />, but you can also pass a React element constructed with createElement(), a string, a number, null, or undefined.
+                    Parameters</b>:
+                    <b>reactNode</b>: A React node that you want to display. This will usually be a piece of JSX like <App />, but you can also pass a React element constructed with createElement(), a string, a number, null, or undefined.
 
-                    domNode: A DOM element. React will display the reactNode you pass inside this DOM element. From this moment, React will manage the DOM inside the domNode and update it when your React tree changes.
+                    <b>domNode</b>: A DOM element. React will display the reactNode you pass inside this DOM element. From this moment, React will manage the DOM inside the domNode and update it when your React tree changes.
 
-                    optional callback: A function. If passed, React will call it after your component is placed into the DOM.
-                    Ex:-----------
-                    import React from "react";
-                    import {render, unmountComponentAtNode} from "react-dom";
+                    <b>optional callback</b>: A function. If passed, React will call it after your component is placed into the DOM.
 
-                    -------------
-                    import App from "./App";
-
-                    const rootElement = document.getElementById("root");
-        
-        
-        const CBFun = () => {
-                        setTimeout(() => {
-                            console.log("call")
-                            unmountComponentAtNode(rootElement);
-                        }, 2000)
-                    }
-
-                    render(<App />, rootElement,  CBFun() );
-
-
-                    =============
-
-                    findDOMNode:-----
-                    -----------
+                    
+                    <b>findDOMNode</b>:
                     findDOMNode finds the browser DOM node for a React class component instance.
-                    Syntax:-
+                    <b>Syntax<b>:-
                     const domNode = findDOMNode(componentInstance)
 
                     Ex:-----
@@ -573,8 +520,40 @@ const reactData = {
                         unmountComponentAtNode(domNode);
         });
 `,
+                    code1:`Ex:-----------
+                    import React from "react";
+                    import {render, unmountComponentAtNode} from "react-dom";
+
+                    import App from "./App";
+
+                    const rootElement = document.getElementById("root");
+        
+        
+        const CBFun = () => {
+                        setTimeout(() => {
+                            console.log("call")
+                            unmountComponentAtNode(rootElement);
+                        }, 2000)
+                    }
+
+                    render(&lt;App /&gt;, rootElement,  CBFun() );`
+                },
+                {
+                    text1: ``,
                     code1:``
-                }
+                },
+                {
+                    text1: ``,
+                    code1:``
+                },
+                {
+                    text1: ``,
+                    code1:``
+                },
+                {
+                    text1: ``,
+                    code1:``
+                },
             ],
         },
         {
@@ -2469,7 +2448,7 @@ return <p>{props.message}</p>;
         },
         {
             id: 44,
-            title: "Explain what MVC architecture is. ",
+            title: "Explain what MVC architecture is",
             note: [
                 {
                     text1: `MVC stands for Model-View-Controller, and it is a software architectural pattern used for designing and organizing code in applications. The MVC architecture separates an application into three interconnected components, each with distinct responsibilities, to enhance modularity, maintainability, and scalability. The three components are as follows:

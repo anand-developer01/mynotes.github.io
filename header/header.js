@@ -2,7 +2,7 @@ const navHeader = `
 <input type="checkbox" id="nav-check">
 <div class="nav-header">
     <div class="nav-title">
-        Logo
+        ${logoTitle}
     </div>
 </div>
 <div class="nav-btn">
