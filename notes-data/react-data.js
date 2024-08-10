@@ -1154,34 +1154,37 @@ const reactData = {
 
                     When you want to access the props object inside the constructor of a class component, you need to pass props to super(props). This ensures that the this.props object is available within the constructor.
 
-                    class MyComponent extends React.Component {
+                    `,
+                    code1:`class MyComponent extends React.Component {
                         constructor(props) {
                         super(props);
                     // Now, you can access this.props in the constructor
                     console.log(this.props.someProp);
-        }
+                        }
 
-                    render() {
-          return <div>{this.props.someProp}</div>;
-        }
-      }
-                    Without passing props to super(props), this.props would be undefined inside the constructor, potentially leading to unexpected behavior or errors.
+                                    render() {
+                        return &lt;div&gt;{this.props.someProp}&lt;/div&gt;;
+                        }
+                    }
+                    `
+                },        
+                {
+                    text1: `Without passing props to super(props), this.props would be undefined inside the constructor, potentially leading to unexpected behavior or errors.
                     Passing props to the Parent Constructor:
 
-                    If the parent class has its own constructor that takes props as an argument, it's important to pass props to super(props) in the child class constructor. This ensures that the parent class can initialize its properties based on the provided props.
-
-                    class ParentComponent extends React.Component {
+                    If the parent class has its own constructor that takes props as an argument, it's important to pass props to super(props) in the child class constructor. This ensures that the parent class can initialize its properties based on the provided props.`,
+                    code1: `class ParentComponent extends React.Component {
                         constructor(props) {
                         super(props);
                     this.state = {
                         parentState: props.initialValue,
-          };
-        }
+                        };
+                        }
 
-                    render() {
-          return <div>{this.state.parentState}</div>;
-        }
-      }
+                                render() {
+                    return &lt;div&gt;{this.state.parentState}&lt;/div&gt;;
+                    }
+                }
 
                     class ChildComponent extends ParentComponent {
                         constructor(props) {
@@ -1189,24 +1192,29 @@ const reactData = {
                     // Child-specific initialization
                     this.state = {
                         childState: 'Child State',
-          };
-        }
+                    };
+                    }
 
-                    render() {
-          return (
-                    <div>
+                                render() {
+                    return (
+                        &lt;div&gt;
                         {this.state.parentState}
                         {this.state.childState}
-                    </div>
-                    );
-        }
-      }
-
-                    By passing props to super(props) in the child constructor, you ensure that the parent constructor correctly receives and processes the props necessary for its initialization.
+                    &lt;/div&gt;
+                                );
+                    }
+                }`
+                },        
+                {
+                    text1: `By passing props to super(props) in the child constructor, you ensure that the parent constructor correctly receives and processes the props necessary for its initialization.
 
                     In summary, using super(props) is crucial in React class components to ensure proper inheritance and to provide the props object to both the parent and child constructors. It allows you to access and initialize properties based on the incoming props within the context of the component's lifecycle.`,
-                    code1:``
-                }
+                    code1: ``
+                },        
+                {
+                    text1: ``,
+                    code1: ``
+                },
             ],
         },
         {
@@ -1218,39 +1226,41 @@ const reactData = {
 
                     Prop Validation with PropTypes:
                     Install PropTypes:
-
                     If you haven't already, you need to install the prop-types library:
 
-
-                    npm install prop-types
+                    <b>npm install prop-types</b>
                     Using PropTypes:
 
                     Define the PropTypes for your component by specifying the expected types for each prop.
 
-
-                    import React from 'react';
+`,
+                    code1:`                    import React from 'react';
                     import PropTypes from 'prop-types';
 
                     const MyComponent = ({name, age, isActive}) => {
-        // Component logic
-      
-        return <div>{/* Component JSX */}</div>;
-      };
+                        // Component logic
+                    
+                        return &lt;div&gt;{/* Component JSX */}&lt;/div&gt;;
+                    };
 
                     MyComponent.propTypes = {
                         name: PropTypes.string.isRequired,
-                    age: PropTypes.number.isRequired,
-                    isActive: PropTypes.bool.isRequired,
-      };
+                        age: PropTypes.number.isRequired,
+                        isActive: PropTypes.bool.isRequired,
+                    };
 
                     export default MyComponent;
-                    In this example, PropTypes.string, PropTypes.number, and PropTypes.bool are used to specify the expected types of the name, age, and isActive props, respectively. The isRequired validator indicates that these props must be provided.
+                    `
+                },          
+                {
+                    text1: `In this above, PropTypes.string, PropTypes.number, and PropTypes.bool are used to specify the expected types of the name, age, and isActive props, respectively. The isRequired validator indicates that these props must be provided.
                     Prop Validation with TypeScript:
                     Using TypeScript:
 
                     If you are using TypeScript, you can define an interface for your props and specify the types.
 
-                    ---------------
+                    `,
+                    code1: `---------------
                     TSX
                     --------------
                     import React from 'react';
@@ -1262,34 +1272,46 @@ const reactData = {
       }
 
                     const MyComponent: React.FC<MyComponentProps> = ({name, age, isActive}) => {
-        // Component logic
-      
-        return <div>{/* Component JSX */}</div>;
-      };
+                        // Component logic
+                    
+                        return &lt;div&gt;{/* Component JSX */}&lt;/div&gt;;
+                    };
 
-                        export default MyComponent;
-                        In this example, the MyComponentProps interface defines the expected types for name, age, and isActive. The React.FC type is used for functional components.
-                        Default Props (Optional):
+                    export default MyComponent;
+                    
+                    // In this example, the MyComponentProps interface defines the expected types for name, age, and isActive. The React.FC type is used for functional components.
+                    Default Props (Optional):
 
-                        You can also provide default values for props using defaultProps in PropTypes or by assigning default values directly in TypeScript.
+                    // You can also provide default values for props using defaultProps in PropTypes or by assigning default values directly in TypeScript.
 
 
-                        // PropTypes with Default Props
-                        MyComponent.defaultProps = {
-                            isActive: false,
-      };
+                    // PropTypes with Default Props
+                    MyComponent.defaultProps = {
+                        isActive: false,
+                        };
 
 
                         // TypeScript with Default Values
                         const MyComponent: React.FC<MyComponentProps> = ({name, age, isActive = false}) => {
-        // Component logic
-      
-        return <div>{/* Component JSX */}</div>;
-      };
-                            Default values ensure that if a prop is not provided, the default value will be used.
-                            By using either PropTypes or TypeScript, you can enhance your React components with type checking, making your code more robust and easier to maintain. Choose the approach that best fits your project's requirements and development workflow.`,
-                    code1:``
-                }
+                            // Component logic
+                        
+                            return &lt;div&gt;{/* Component JSX */}&lt;/div&gt;;
+                        };
+                    `
+                },
+                {
+                    text1: `Default values ensure that if a prop is not provided, the default value will be used.
+                    By using either PropTypes or TypeScript, you can enhance your React components with type checking, making your code more robust and easier to maintain. Choose the approach that best fits your project's requirements and development workflow.`,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
             ],
         },
         {

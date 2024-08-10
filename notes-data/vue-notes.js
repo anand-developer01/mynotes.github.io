@@ -757,8 +757,7 @@ methods: {
 
 <b>preventDefault</b> prevents the default action the browser makes on that event.
 
-Event modifiers are pre-set modifications that you can chain to your event listener via dot notation. There will be times (especially with single page applications) where you need to use <b>stopPropogation()</b>. You can do this very easily with Vanilla JavaScript, but Vue.js makes event modifiers very easy. The <b>stopPropogation()</b> method can be recreated with <b>@click.stop="functionName"</b
-
+Event modifiers are pre-set modifications that you can chain to your event listener via dot notation. There will be times (especially with single page applications) where you need to use <b>stopPropogation()</b>. You can do this very easily with Vanilla JavaScript, but Vue.js makes event modifiers very easy. The <b>stopPropogation()</b> method can be recreated with <b>@click.stop="functionName"</b>
 
 <b>preventDefault</b> — calls <b>event.preventDefault()</b> before running the handler. Useful for client-side form handling, for example.
 <b>stopPropagation</b> — calls event.stopPropagation(), preventing the event reaching the next element
@@ -3072,17 +3071,17 @@ To use these components in templates, they must be registered so that Vue knows 
 Vue.component('my-component-name', {
   // ... options ...
 })
-Globally registered components can be used in the template of any root Vue instance (new Vue) created afterwards – and even inside all subcomponents of that Vue instance's component tree.
+Globally registered components can be used in the template of any root Vue instance (new Vue) created afterwards - and even inside all subcomponents of that Vue instance's component tree.
 
 That's all you need to know about registration for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on Component Registration.
 
 <b>1. Creating a Component</b>
-To create a Vue component, you define it using the Vue.component method or by creating a .vue file if you're using single-file components (recommended for larger applications). Here’s a basic example using the Vue.component method:
+To create a Vue component, you define it using the Vue.component method or by creating a .vue file if you're using single-file components (recommended for larger applications). Here's a basic example using the Vue.component method:
 
 <b>2. Using the Component</b>
 Once you have defined your component, you can use it in other parts of your application by simply including its tag name:
 <b>3. Props</b>
-Props are custom attributes you can register on a component. They are passed to a component from its parent and allow you to customize a component’s data when it is used. In the HelloWorld example above, name and message are props.
+Props are custom attributes you can register on a component. They are passed to a component from its parent and allow you to customize a component's data when it is used. In the HelloWorld example above, name and message are props.
 
 <b>4. Component Communication</b>
 <b>Props</b>: Pass data from parent to child components using props.
@@ -3103,13 +3102,13 @@ beforeDestroy and destroyed
 These hooks allow you to perform initialization, data fetching, or cleanup operations at appropriate times.
 
 <b>6. Single File Components (SFC)</b>
-Single File Components (.vue files) encapsulate a component’s template, script, and styles into a single file. This approach improves code organization and enables better component reuse and maintainability.
+Single File Components (.vue files) encapsulate a component's template, script, and styles into a single file. This approach improves code organization and enables better component reuse and maintainability.
 
 <b>7. Component Reusability and Composition</b>
 Components can be nested within each other, allowing you to compose complex UIs from simpler components. This promotes reusability and helps in building scalable applications.
 
 <b>8. Scoped Styles</b>
-In Vue.js, <b>&lt;style scoped&gt;</b> allows you to scope your component’s CSS to only affect the component’s template. This prevents styles from leaking out and affecting other parts of your application.
+In Vue.js, <b>&lt;style scoped&gt;</b> allows you to scope your component's CSS to only affect the component's template. This prevents styles from leaking out and affecting other parts of your application.
           `,
           code1: `&lt;template&gt;
   &lt;div&gt;
@@ -3314,16 +3313,6 @@ export default {
     {
       id: 1,
       title: "Async Components",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "add new topic",
       note: [
         {
           text1: ``,
@@ -3930,7 +3919,7 @@ A change to Vue component's data (props or state) isn't immediately reflected in
 
 As Vue component data changes, the DOM is updated asynchronously. Vue collects multiple updates to virtual DOM from all the components, and then creates a single batch to update the DOM.
 
-Defer the callback to be executed after the next DOM update cycle. Use it immediately after you’ve changed some data to wait for the DOM update.
+Defer the callback to be executed after the next DOM update cycle. Use it immediately after you've changed some data to wait for the DOM update.
 
 <b>Syntax</b>: <span style="color:red"> Vue.nextTick( [callback, context] ) </span>
 `,
@@ -4180,33 +4169,1185 @@ export default {
 `
         }
       ]
+    },
+    {
+      id: 1,
+      title: "Vue Template",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Component Events ($emit() Method)",
+      note: [
+        {
+          text1: `In Vue.js, the $emit method is used to trigger an event from a child component and send data to its parent component. This is a fundamental part of the communication process in Vue, allowing child components to communicate with their parents and vice versa.
+
+          <b>Basics of $emit</b>
+The $emit method is used to create a custom event in a child component. This event can be listened for by a parent component to respond to actions or changes made in the child component.
+
+<b>How does Vue Emit Work?</b>
+When we emit an event, we invoke a method with one or more arguments:
+<b>eventName: string</b> - the name of our event. Our parent component will listen for this.
+<b>values: any </b> - any value(s) that we want to pass with our event
+Here's an example of an inline emit, <b>&lt;button @click=&quot;$emit(&#39;add&#39;, Math.random())&quot;&gt;</b>. We are emitting an event called <b>add</b> and passing it a value of <b>Math.random()</b>
+Then, using the <b>v-on</b> or <b>@</b> directive, a parent component can listen to our custom <b>add</b> event and receive the value.
+          `,
+          code1: `// Child.vue
+&lt;!-- ChildComponent.vue --&gt;
+&lt;template&gt;
+    &lt;button @click=&quot;$emit(&#39;add&#39;, Math.random())&quot;&gt;
+        Add Math.random()
+    &lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    props: {
     }
+}
+&lt;/script&gt;
+
+// Parent.vue
+&lt;!-- Parent --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;TestSlot @add=&quot;(i) =&gt; count += i&quot; /&gt;
+        &lt;p&gt;Count: {{ count }}&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &#39;Slot1&#39;,
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+    },
+    data() {
+        return {
+            count: 0
+        };
+    },
+}
+&lt;/script&gt;
+
+//--------------
+// Ex : 2
+&lt;!-- Parent --&gt;
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;TestSlot @buttonClicked=&quot;handleButtonClick&quot; /&gt;
+        &lt;p&gt;{{ message }}&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+
+export default {
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+    },
+    data() {
+        return {
+            message: &#39;&#39;
+        };
+    },
+    methods: {
+        handleButtonClick(data) {
+            // Handle the custom event and update the message
+            this.message = data;
+        }
+    }
+}
+&lt;/script&gt;
+
+
+&lt;!-- Child --&gt;
+&lt;template&gt;
+    &lt;button @click=&quot;notifyParent&quot;&gt;Click Me&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    methods: {
+        notifyParent() {
+            // Emit a custom event &#39;buttonClicked&#39; to the parent component
+            this.$emit(&#39;buttonClicked&#39;, &#39;Hello from child!&#39;);
+        }
+    }
+}
+&lt;/script&gt;
+          `
+        },
+        {
+          text1: `Every time we click our button, <b>Child.vue</b> emits an event called <b></b> with a random value between 0 and 1. Then, <b>Parent.vue</b> captures this event and adds that value to <b>count</b>
+
+We can pass as many arguments as we want and our listener will receive all of them.
+Child - <b>$emit('add', Math.random(), 44, 50)</b>
+Parent - <b>@add="(i, j, k) => count += i + j + k" </b>
+
+<b>Event Naming</b>
+Custom Events: You can name custom events anything you like. It's a good practice to use descriptive names.
+Event Namespacing: Use kebab-case for event names (e.g., <b>my-event-name</b>).
+<b>Event Bubbling</b>
+Vue events don't bubble like native DOM events. If you need to propagate an event up from a deeply nested component, you should use <b>$emit</b> in each level of the component hierarchy.
+
+Example of Event Bubbling:
+`,
+          code1: `// Parent.vue:
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;TestSlot @childEvent=&quot;handleChildEvent&quot; /&gt;
+        {{ grandChildData }}
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+    },
+    data(){
+        return {
+            grandChildData : &#39;&#39;
+        }
+    },
+    methods: {
+        handleChildEvent(data) {
+            this.grandChildData = data; // &#39;Data from grandchild&#39;
+        }
+    }
+}
+&lt;/script&gt;
+
+//Child.vue:
+&lt;template&gt;
+    &lt;ChildSlot @grandchildEvent=&quot;handleGrandchildEvent&quot; /&gt;
+  &lt;/template&gt;
+
+  &lt;script&gt;
+  import ChildSlot from &#39;./ChildSlot.vue&#39;;
+
+  export default {
+    components: {
+        ChildSlot
+    },
+    methods: {
+      handleGrandchildEvent(data) {
+        this.$emit(&#39;childEvent&#39;, data);
+      }
+    }
+  }
+  &lt;/script&gt;
+
+// Grandchild.vue:
+&lt;template&gt;
+    &lt;button @click=&quot;notifyParent&quot;&gt;Click Me&lt;/button&gt;
+  &lt;/template&gt;
+
+  &lt;script&gt;
+  export default {
+    methods: {
+      notifyParent() {
+        this.$emit(&#39;grandchildEvent&#39;, &#39;Data from grandchild&#39;);
+      }
+    }
+  }
+  &lt;/script&gt;
+
+`
+        },
+        {
+          text1: `<b>Events Validation</b>
+Similar to prop type validation, an emitted event can be validated if it is defined with the object syntax instead of the array syntax.
+
+To add validation, the event is assigned a function that receives the arguments passed to the <b>this.$emit</b> call and returns a boolean to indicate whether the event is valid or not.
+
+In Vue 2, the emits option with validation functions, as seen in Vue 3, is not available. Vue 2 does not natively support the emits option or any built-in mechanism for event validation. Instead, you'll need to manage event validation manually in your Vue 2 application.
+
+Here's how you can handle custom event validation in Vue 2 by manually checking the emitted data in the parent component:`,
+          code1: `// Parent.vue
+&lt;template&gt;
+    &lt;TestSlot @submit=&quot;handleSubmit&quot; /&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    components: {
+        TestSlot: () =&gt; import(&#39;./TestSlot&#39;),
+    },
+    methods: {
+        handleSubmit(payload) {
+            // Manually validate the payload
+            if (this.isValidPayload(payload)) {
+                console.log(&#39;Valid payload:&#39;, payload);
+                // Handle valid payload
+            } else {
+                console.warn(&#39;Invalid payload:&#39;, payload);
+            }
+        },
+        isValidPayload(payload) {
+            // Check that payload has the expected structure
+            return (
+                payload &amp;&amp;
+                typeof payload === &#39;object&#39; &amp;&amp;
+                typeof payload.email === &#39;string&#39; &amp;&amp;
+                payload.email.trim() !== &#39;&#39; &amp;&amp; // Ensure email is not an empty string
+                typeof payload.password === &#39;string&#39; &amp;&amp;
+                payload.password.trim() !== &#39;&#39; // Ensure password is not an empty string
+            );
+        }
+    }
+}
+&lt;/script&gt;
+
+// Child.vue
+&lt;template&gt;
+    &lt;form v-on:submit.prevent=&quot;submitForm&quot;&gt;
+        &lt;p&gt;Add user&lt;/p&gt;
+        &lt;p&gt;email: &lt;input type=&quot;text&quot; v-model=&quot;email&quot;/&gt;&lt;/p&gt;
+        &lt;p&gt;password: &lt;input type=&quot;text&quot; v-model=&quot;password&quot;/&gt;&lt;/p&gt;
+        &lt;button type=&quot;submit&quot;&gt;Add item&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    data() {
+        return {
+            email : &#39;&#39;,
+            password : &#39;&#39;
+        }
+    },
+    methods: {
+        submitForm() {
+            // Emit the &#39;submit&#39; event with payload
+            this.$emit(&#39;submit&#39;, { email: this.email, password: this.password });
+            this.email = &#39;&#39;
+            this.password = &#39;&#39;
+        }
+    }
+}
+&lt;/script&gt;`
+        },
+        {
+          text1: `Why Use $emit?
+<b>Component Communication</b>: $emit is a standard way for child components to communicate with parent components.
+<b>Separation of Concerns</b>: It keeps the child component reusable and independent by not directly manipulating the parent component's state.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Vue.js Routing",
+      note: [
+        {
+          text1: `In Vue 2, routing refers to the process of navigating between different views or pages in a single-page application (SPA). This is typically managed using a dedicated library called Vue Router, which integrates seamlessly with Vue.js to handle client-side routing.
+
+<b>Key Concepts of Vue Router</b>
+<b>Router</b>: The Vue Router library provides the core functionality for routing in Vue.js applications.
+<b>Routes</b>: Routes define the mapping between URL paths and the components that should be displayed.
+<b>Router View</b>: A <b>&lt;router-view&gt;</b> component is used to render the matched component for the current route.
+<b>Router Link</b>: The <b>&lt;router-link&gt;</b> component is used to create links that navigate to different routes.
+
+<b>1. Install Vue Router</b>
+<span style="color:red"> npm install vue-router</span>
+
+<b>2. Configure Vue Router</b>
+Create a <b>router.js</b> file (or another name of your choice) to define your routes and configure the router:
+<b>Vue.use(Router)</b>: This installs the Vue Router plugin.
+<b>new Router({...})</b>: Configures the router with routes.
+<b>mode: 'history'</b>: Uses HTML5 History API to remove the hash (#) from URLs.
+
+<b>3. Add Router to Vue Instance</b>
+Integrate the router into your Vue application: (in <b>main.js</b> file)
+
+<b>4) Define Routes in Components</b>
+In your main component or wherever you want to use routing, include <b>&lt;router-view&gt;</b> to display the routed components and <b>&lt;router-link&gt;</b> to create navigation links.`,
+          code1: `
+          // router.vue
+          import Vue from &#39;vue&#39;;
+import Router from &#39;vue-router&#39;;
+import Home from &#39;./components/Home.vue&#39;; // Import components
+import About from &#39;./components/About.vue&#39;;
+
+Vue.use(Router);
+
+export default new Router({
+  mode: &#39;history&#39;, // Use HTML5 History API for cleaner URLs
+  routes: [
+    {
+      path: &#39;/&#39;,
+      name: &#39;Home&#39;,
+      component: Home
+    },
+    {
+      path: &#39;/about&#39;,
+      name: &#39;About&#39;,
+      component: About
+    }
+  ]
+});
+
+//--------
+// main.vue
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router'; // Import the router configuration
+
+new Vue({
+  router, // Inject the router into the Vue instance
+  render: h => h(App)
+}).$mount('#app');
+
+//---------
+//App.vue
+&lt;template&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;nav&gt;
+      &lt;router-link to=&quot;/&quot;&gt;Home&lt;/router-link&gt;
+      &lt;router-link to=&quot;/about&quot;&gt;About&lt;/router-link&gt;
+    &lt;/nav&gt;
+    &lt;router-view&gt;&lt;/router-view&gt; &lt;!-- Routed components will be displayed here --&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &#39;App&#39;
+}
+&lt;/script&gt;`
+        },
+        {
+          text1: `<b> <span style="color:red">Key Features of Vue Router</span> </b>
+          <b>1) Dynamic Routing</b>: You can define routes that include dynamic segments.
+          <b>2) Nested Routes</b>: Vue Router supports nested routes, allowing you to create complex route hierarchies.
+          <b>3) Route Guards</b>: You can define route guards to control access to routes.
+          <b>4) Named Routes</b>: You can assign names to routes and use them for navigation.
+
+            <b>Dynamic Segments</b>: Use <b>:paramName</b> in the route path to define dynamic segments.
+<b>Access Parameters</b>: Access dynamic parameters using <b>this.$route.params</b> in the component.
+<b>Nested Routes</b>: Define nested routes to handle sub-paths and render child components within the parent component's <b>&lt;router-view&gt;</b>.
+<b>Navigation</b>: Use <b>&lt;router-link&gt;</b> to create links that navigate to routes with dynamic segments.
+          `,
+          code1: `// Dynamic Routing
+          // router.js:
+          import Vue from &#39;vue&#39;;
+import Router from &#39;vue-router&#39;;
+import User from &#39;./components/User.vue&#39;; // Import components
+import UserProfile from &#39;./components/UserProfile.vue&#39;;
+import UserPosts from &#39;./components/UserPosts.vue&#39;;
+
+Vue.use(Router);
+
+export default new Router({
+  mode: &#39;history&#39;, // Use HTML5 History API for cleaner URLs
+  routes: [
+    {
+      path: &#39;/user/:id&#39;, // Dynamic segment :id
+      name: &#39;User&#39;,
+      component: User,
+      children: [
+        {
+          path: &#39;profile&#39;, // Nested route
+          component: UserProfile
+        },
+        {
+          path: &#39;posts&#39;, // Nested route
+          component: UserPosts
+        }
+      ]
+    }
+  ]
+});
+
+// In this setup:
+// The 'User' route has a dynamic segment ':id', which means it will match any URL like '/user/1', '/user/2', etc.
+// The 'User' route has nested routes for 'profile' and 'posts'.
+
+//Define Components
+// -----------------
+// User.vue:
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;h1&gt;User Page&lt;/h1&gt;
+    &lt;p&gt;User ID: {{ userId }}&lt;/p&gt;
+    &lt;router-link :to=&quot;\`/user/\${userId}/profile\`&quot;&gt;Profile&lt;/router-link&gt;
+    &lt;router-link :to=&quot;\`/user/\${userId}/posts\`&quot;&gt;Posts&lt;/router-link&gt;
+    &lt;router-view&gt;&lt;/router-view&gt; &lt;!-- Render nested routes here --&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  computed: {
+    userId() {
+      return this.$route.params.id; // Access dynamic segment :id
+    }
+  }
+}
+&lt;/script&gt;
+
+//UserProfile.vue:
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;h2&gt;User Profile&lt;/h2&gt;
+    &lt;p&gt;Details of the user profile will be shown here.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &#39;UserProfile&#39;
+}
+&lt;/script&gt;
+
+//UserPosts.vue:
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;h2&gt;User Posts&lt;/h2&gt;
+    &lt;p&gt;List of user posts will be shown here.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &#39;UserPosts&#39;
+}
+&lt;/script&gt;
+
+// Use Router Links and View
+// Make sure your main component ('App.vue') uses &lt;router-view&gt; and &lt;router-link&gt; to manage navigation.
+// App.vue
+&lt;template&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;nav&gt;
+      &lt;router-link to=&quot;/&quot;&gt;Home&lt;/router-link&gt;
+      &lt;router-link to=&quot;/user/1&quot;&gt;User 1&lt;/router-link&gt;
+      &lt;router-link to=&quot;/user/2&quot;&gt;User 2&lt;/router-link&gt;
+    &lt;/nav&gt;
+    &lt;router-view&gt;&lt;/router-view&gt; &lt;!-- Routed components will be displayed here --&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &#39;App&#39;
+}
+&lt;/script&gt;
+          `
+        },
+        {
+          text1: `In Vue.js with Vue Router, the <b>router.beforeEach</b> method is used to define a global navigation guard that is called before each route is resolved. This method allows you to perform checks or actions before a route is entered, such as authentication checks, logging, or redirection.
+
+<b><span style="color:red">How router.beforeEach Works</span></b>
+<b>Purpose</b>: It is used to perform actions or checks before navigating to a route.
+<b>Signature</b>: <span style="color:red"> router.beforeEach((to, from, next) => { ... })</span>
+<b>to</b>: The target Route Object being navigated to.
+<b>from</b>: The current Route Object being navigated away from.
+<b>next</b>: A function that must be called to resolve the navigation. It can accept a route path or object to redirect to, or <b>false</b> to abort navigation.
+<b>Example Use Cases</b>
+1) Authentication Check
+2) Logging Navigation
+3) Dynamic Route Handling`,
+          code1: `//Route.vue
+          import Vue from 'vue'
+import Router from 'vue-router'
+import HelloWorld from '@/components/HelloWorld'
+import computedProperty from '@/components/computedProperty'
+
+//dynamic route
+import User from '../components/dynamic-route/User.vue'
+import UserPosts from '../components/dynamic-route/UserPosts.vue'
+import UserProfile from '../components/dynamic-route/UserProfile.vue'
+import Login from '../components/dynamic-route/login.vue'
+import Profile from '../components/dynamic-route/Profile.vue'
+
+import { isAuthenticated } from '../components/dynamic-route/auth'; // Import the authentication state
+
+Vue.use(Router)
+
+const router =  new Router({
+  mode: 'history',
+  routes: [
+    {
+      path: '/',
+      name: 'HelloWorld',
+      component: HelloWorld
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: computedProperty
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile,
+      meta: { requiresAuth: true } // Meta field for route guard
+    },
+    {
+      path: '/user/:id', // Dynamic segment :id
+      name: 'User',
+      component: User,
+      children: [
+        {
+          path: 'profile', // Nested route
+          component: UserProfile
+        },
+        {
+          path: 'posts', // Nested route
+          component: UserPosts
+        }
+      ]
+    }
+  ]
+})
+
+// Global Before Guard
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!isAuthenticated) {
+      // If already trying to redirect to login, do not redirect again
+      if (from.name !== 'Login') {
+        next({ name: 'Login' });
+      } else {
+        next(false); // Prevent further navigation
+      }
+    } else {
+      next(); // Allow navigation
+    }
+  } else {
+    next(); // Allow navigation
+  }
+});
+
+
+// Global After Guard (Optional)
+router.afterEach((to, from) => {
+  console.log(\`Navigated to \${to.path}\`);
+});
+
+export default router;
+
+// Login.vue
+
+&lt;template&gt;
+    &lt;div&gt;
+      &lt;p&gt;Login Page&lt;/p&gt;
+      &lt;button @click=&quot;login&quot;&gt;Login&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+
+  &lt;script&gt;
+  import { login } from &#39;./auth&#39;; // Import login function
+
+  export default {
+    name: &#39;Login&#39;,
+    methods: {
+      login() {
+        login(); // Simulate login
+        this.$router.push({ name: &#39;Profile&#39; }); // Navigate to profile after login
+      }
+    }
+  }
+  &lt;/script&gt;
+
+  //Profile.vue
+  &lt;template&gt;
+  &lt;div&gt;
+    &lt;p&gt;Profile Page&lt;/p&gt;
+    &lt;router-link to=&quot;/&quot;&gt;Go to Home&lt;/router-link&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &#39;Profile&#39;
+}
+&lt;/script&gt;
+
+// Header.vue (Nav)
+&lt;nav&gt;
+&lt;li&gt;&lt;router-link to=&quot;/login&quot;&gt;login&lt;/router-link&gt;&lt;/li&gt;
+&lt;/nav&gt;
+
+//--------
+// auth.js
+export let isAuthenticated = false; // Default to false
+
+export function login() {
+  isAuthenticated = true; // Set to true on successful login
+}
+
+export function logout() {
+  isAuthenticated = false; // Set to false on logout
+}
+
+//-------
+
+
+          `
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Mixins",
+      note: [
+        {
+          text1: `Mixins are a flexible way to distribute reusable functionalities for Vue components. A mixin object can contain any component options. When a component uses a mixin, all options in the mixin will be “mixed” into the component's own options.
+
+          In Vue.js, mixins are a way to reuse a set of component options and logic across multiple components. A mixin is a JavaScript object that contains reusable component options like data, methods, lifecycle hooks, and more. When a mixin is used in a component, Vue merges the mixin's options with those of the component.
+
+          <b>1) Define a Mixin</b>: Create a mixin object that contains the logic you want to reuse.
+          <b>2) Use the Mixin in a Component</b>: Import the mixin and include it in the <b>mixins</b> option of your Vue component.
+          `,
+          code1: `// myMixin.js
+export const myMixin = {
+  data() {
+    return {
+      sharedData: 'This is shared data'
+    };
+  },
+  methods: {
+    sharedMethod() {
+      console.log('This is a shared method');
+    }
+  },
+  created() {
+    console.log('Mixin created hook');
+  }
+};
+
+// MyComponent.vue
+&lt;template&gt;
+  &lt;div&gt;
+    {{ sharedData }}
+    &lt;button @click=&quot;sharedMethod&quot;&gt;Call Shared Method&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { myMixin } from &#39;./myMixin&#39;;
+
+export default {
+  mixins: [myMixin],
+  data() {
+    return {
+      componentSpecificData: &#39;This is specific to the component&#39;
+    };
+  },
+  created() {
+    console.log(&#39;Component created hook&#39;);
+  }
+};
+&lt;/script&gt;
+
+`
+        },
+        {
+          text1: `<b>Key Points About Mixins</b>:
+<b>Merge Behavior</b>: Vue merges mixin options with those of the component. If there are conflicts (e.g., multiple <b>created</b> hooks), Vue combines them.
+<b>Reusability</b>: Mixins help in creating reusable and modular code. Instead of duplicating logic in multiple components, you can define it once in a mixin.
+<b>Naming Conflicts</b>: Be cautious of naming conflicts. If a component and a mixin have properties or methods with the same name, the component's properties or methods will override the mixin's.
+
+<b><span style="color:red">How Option Merging Works</span></b>
+When a mixin and the component itself contain overlapping options, they will be "merged" using appropriate strategies.
+
+When you include a mixin in a Vue component, Vue merges the mixin's options with those of the component. This merging process follows specific rules to handle conflicts and prioritize component-specific options over mixin options.
+
+ <b>1) Data</b>
+<b>Merge Strategy</b>: Data objects from mixins are merged with the component's data. If there are conflicts (i.e., properties with the same name), the component's data will take precedence.
+`,
+          code1: `// myMixin.js
+export const myMixin = {
+  data() {
+    return {
+      sharedData: 'Mixin data'
+    };
+  }
+};
+
+// MyComponent.vue
+          &lt;script&gt;
+import { myMixin } from &#39;./myMixin&#39;;
+
+export default {
+  mixins: [myMixin],
+  data() {
+    return {
+      sharedData: &#39;Component data&#39;,
+      componentSpecificData: &#39;Component specific data&#39;
+    };
+  }
+};
+&lt;/script&gt;
+
+// In this case, 'sharedData' in 'MyComponent' will be 'Component data', overriding the mixin's 'sharedData'.
+          `
+        },
+        {
+          text1: `<b>2. Methods</b>
+<b>Merge Strategy</b>: Methods from mixins and components are merged. If there are methods with the same name, the component's methods will override those from mixins.
+
+In this case, calling <b>sharedMethod()</b> will log <b>Component method</b>.
+`,
+          code1: `export const myMixin = {
+    methods: {
+      sharedMethod() {
+        console.log('Mixin method');
+      }
+    }
+  };
+
+// MyComponent.vue
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;button @click=&quot;sharedMethod&quot;&gt;Call Shared Method&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { myMixin } from './myMixin';
+
+export default {
+  mixins: [myMixin],
+  methods: {
+    sharedMethod() {
+      console.log('Component method');
+    }
+  }
+};
+&lt;/script&gt;`
+        },
+        {
+          text1: `<b>3. Lifecycle Hooks</b>
+<b>Merge Strategy</b>: Lifecycle hooks are merged. If multiple hooks of the same type exist (e.g., multiple <b>created</b> hooks), Vue will call them in the order they are defined. The component's hooks will execute after the mixin's hooks.`,
+          code1: `// myMixin.js
+          export const myMixin = {
+    created() {
+      console.log('Mixin created');
+    }
+  };
+
+  // MyComponent.vue
+          &lt;template&gt;
+    &lt;div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { myMixin } from &#39;./myMixin&#39;;
+
+export default {
+    mixins: [myMixin],
+    created() {
+        console.log(&#39;Component created&#39;);
+    }
+};
+&lt;/script&gt;
+
+// In this case, the console output will be:
+          //Output:
+//           Mixin created
+// Component created
+          `
+        },
+        {
+          text1: `<b>4. Computed Properties</b>
+<b>Merge Strategy</b>: Computed properties from mixins and components are merged. If there are conflicts, component properties will override mixin properties.
+
+In this case, <b>sharedComputed</b> will return <b>Component computed</b>.
+`,
+          code1: `// myMixin.js
+export const myMixin = {
+  computed: {
+    sharedComputed() {
+      return 'Mixin computed';
+    }
+  }
+};
+
+// MyComponent.vue
+&lt;script&gt;
+import { myMixin } from &#39;./myMixin&#39;;
+
+export default {
+  mixins: [myMixin],
+  computed: {
+    sharedComputed() {
+      return &#39;Component computed&#39;;
+    }
+  }
+};
+&lt;/script&gt;
+          `
+        },
+        {
+          text1: `<b>5. Components</b>
+<b>Merge Strategy</b>: Components are merged, but with child components, the component's definitions will take precedence if they overlap with those from mixins.
+
+In this case, <b>MyChildComponent</b> in <b>MyComponent</b> will be the one with the template <b>Component Child</b>.
+`,
+          code1: `// myMixin.js
+          export const myMixin = {
+    components: {
+      MyChildComponent: {
+        template: '&lt;div&gt;Mixin Child&lt;/div&gt;'
+      }
+    }
+  };
+
+          // MyComponent.vue
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;MyChildComponent/&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { myMixin } from './myMixin';
+
+export default {
+  mixins: [myMixin],
+  components: {
+    MyChildComponent: {
+      template: '<div>Component Child</div>'
+    }
+  }
+};
+&lt;/script&gt;
+
+// Output:
+// Component Child
+          `
+        },
+        {
+          text1: `<b>Summary</b>
+<b>Component-Specific Priority</b>: Component options take precedence over mixin options if there are conflicts.
+<b>Merge Order</b>: Vue merges mixin options first and then the component's options, giving the component's options final priority.
+<b>Lifecycle Hooks</b>: Vue combines hooks from mixins and components, executing mixin hooks before the component's hooks.`,
+          code1: ``
+        },
+        {
+          text1: `<b>Global Mixin</b>
+          In Vue.js, a global mixin is a mixin that is applied to every Vue component across your entire application. This can be useful for applying common functionality or behavior universally, but it should be used with caution as it affects all components, potentially leading to unintended side effects or conflicts.
+
+          <b>Defining a Global Mixin</b>
+To define a global mixin, you use the <b>Vue.mixin</b> method. This method accepts a mixin object and applies it globally to all components.
+
+Here's a step-by-step example of how to define and use a global mixin:
+
+<b>1. Create a Global Mixin</b>
+Create a JavaScript file for your global mixin if you haven't already.
+
+<b>2. Register the Global Mixin</b>
+Import and register the global mixin in your main application file (usually <b>main.js</b> or <b>app.js</b>).
+
+<b>3. Use the Global Mixin in Components</b>
+Now, any component within your application will have access to the global mixin's data, methods, and lifecycle hooks.
+
+In below example:
+<b>globalData</b> and <b>globalMethod</b> are accessible in <b>MyComponent</b>.
+The <b>created</b> hook from the global mixin will be executed before <b>MyComponent</b>'s <b>created</b> hook.
+`,
+          code1: `// globalMixin.js
+export const globalMixin = {
+  data() {
+    return {
+      globalData: 'This is global data'
+    };
+  },
+  methods: {
+    globalMethod() {
+      console.log('This is a global method');
+    }
+  },
+  created() {
+    console.log('Global mixin created hook');
+  }
+};
+
+
+// main.js
+import Vue from 'vue';
+import App from './App.vue';
+//----
+import { globalMixin } from './globalMixin';
+
+// Register the global mixin
+Vue.mixin(globalMixin);
+//--
+
+new Vue({
+  render: h => h(App),
+}).$mount('#app');
+
+// MyComponent.vue
+&lt;template&gt;
+  &lt;div&gt;
+    {{ globalData }}
+    &lt;button @click=&quot;globalMethod&quot;&gt;Call Global Method&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  created() {
+    console.log('MyComponent created hook');
+  }
+};
+&lt;/script&gt;
+`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Filters",
+      note: [
+        {
+          text1: `A Vue.js filter is essentially a function that takes a value, processes it, and then returns the processed value. In the markup it is denoted by a <b>single pipe (|)</b> and can be followed by one or more arguments:
+
+          <b>1. Defining Filters</b>
+Filters are defined in the filters option of a Vue component. You can define them globally or locally.
+ `,
+          code1: `// Global Filter:
+// In main.js or a similar entry file
+Vue.filter('uppercase', function (value) {
+  if (!value) return ''
+  return value.toString().toUpperCase()
+})
+
+// Local Filter:
+// In a component
+export default {
+  filters: {
+    uppercase(value) {
+      if (!value) return ''
+      return value.toString().toUpperCase()
+    }
+  }
+}
+
+          // Ex :
+          // MyComponent.vue
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;input v-model=&quot;message&quot;/&gt;
+    {{ message | camelcase }}
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data(){
+    return {
+      message : ''
+    }
+  },
+  filters: {
+    camelcase(value){
+      if(!value) return;
+      const charArr = value.toLowerCase().split(' ')
+      const newStr = charArr.map(s => {
+        return s.charAt(0).toUpperCase() + s.slice(1)
+      })
+      return newStr.join(" ")
+    }
+  }
+};
+&lt;/script&gt;
+`
+        },
+        {
+          text1: `The filter's function always receives the expression's value (the result of the former chain) as its first argument. 
+
+<b>Filters can be chained:</b>
+
+<span style="color:red">{{ message | filterA | filterB }}</span>
+
+In this case, <b>filterA</b>, defined with a single argument, will receive the value of <b>message</b>, and then the <b>filterB</b> function will be called with the result of <b>filterA</b> passed into <b>filterB</b>'s single argument.
+`,
+          code1: `&lt;template&gt;
+  &lt;div&gt;
+    &lt;p&gt;Original Text: {{ longText }}&lt;/p&gt;
+    &lt;p&gt;Lowercase Text: {{ longText | lowercase }}&lt;/p&gt;
+    &lt;p&gt;Truncated Text: {{ longText | truncate }}&lt;/p&gt;
+    &lt;p&gt;Lowercase and Truncated Text: {{ longText | lowercase | truncate(20) }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  filters: {
+    // Filter to convert text to lowercase
+    lowercase(value) {
+      if (!value) return ''
+      return value.toString().toLowerCase()
+    },
+    // Filter to truncate text to a specified length
+    truncate(value, length) {
+      if (!value) return ''
+      length = length || 10  // Default length if not provided
+      return value.length > length
+        ? value.substring(0, length) + '...'
+        : value
+    }
+  },
+  data() {
+    return {
+      longText: 'This is a very long text string that we want to truncate.'
+    }
+  }
+}
+&lt;/script&gt;
+
+// Ex : 2
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;p&gt;Original Words Array: {{ words }}&lt;/p&gt;
+    &lt;p&gt;Comma-Separated Words: {{ words | commaSeparated }}&lt;/p&gt;
+    &lt;p&gt;Comma-Separated and Uppercase: {{ words | commaSeparated | uppercase }}&lt;/p&gt;
+    &lt;p&gt;Comma-Separated, Uppercase, and Lowercase: {{ words | commaSeparated | uppercase | lowercase }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  filters: {
+    // Filter to convert text to uppercase
+    uppercase(value) {
+      if (!value) return ''
+      return value.toString().toUpperCase()
+    },
+    // Filter to convert text to lowercase
+    lowercase(value) {
+      if (!value) return ''
+      return value.toString().toLowerCase()
+    },
+    // Filter to convert an array of words into a comma-separated string
+    commaSeparated(value) {
+      if (!Array.isArray(value)) return ''
+      return value.join(', ')
+    }
+  },
+  data() {
+    return {
+      words: ['Apple', 'Banana', 'Cherry', 'Date']
+    }
+  }
+}
+&lt;/script&gt;
+`
+        },
+        {
+          text1: `<b>4. Filters and Arguments</b>
+          Filters are JavaScript functions, therefore they can take arguments:
+
+<span style="color:red">{{ message | filterA('arg1', arg2) }}</span>
+Here filterA is defined as a function taking three arguments. The value of <b>message</b> will be passed into the first argument. The plain string <b>arg1</b> will be passed into the <b>filterA</b> as its second argument, and the value of expression <b>arg2</b> will be evaluated and passed in as the third argument.
+          `,
+          code1: `&lt;template&gt;
+  &lt;div&gt;
+    &lt;p&gt;Original message: {{ message }}&lt;/p&gt;
+    &lt;p&gt;Uppercased message: {{ message | uppercase(&#39; Ram&#39;) }}&lt;/p&gt;
+    &lt;p&gt;Formatted amount: {{ amount | currency(&#39;$&#39;) }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+
+export default {
+  data() {
+    return {
+      message: 'hello',
+      amount: 123.45
+    }
+  },
+  filters: {
+    uppercase(value, userName='') {
+      if (!value) return ''
+      return value.toString().toUpperCase() + userName
+    },
+    currency(value, symbol) {
+      if (!value) return ''
+      return symbol + value.toFixed(2)
+    }
+  }
+}
+  &lt;/script&gt;
+
+  // Ex : 2
+  &lt;template&gt;
+  &lt;div&gt;
+    &lt;p&gt;Original message: {{ message }}&lt;/p&gt;
+    &lt;p&gt;Sum of message characters and values: {{ message | sumValue(2,7) }}&lt;/p&gt;
+    &lt;p&gt;Multiplay : {{ message | mulValue(2,2) }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+
+export default {
+  data() {
+    return {
+      message: 'hello',
+      amount: 123.45
+    }
+  },
+  filters: {
+    sumValue(value, a = 0, b = 0) {
+      if (!value) return ''
+      return value.length + a + b
+    },
+    mulValue(value, a = 0, b = 0) {
+      if (!value) return ''
+      return a * b
+    }
+  }
+}
+  &lt;/script&gt;
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "add new topic",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
   ]
 }
 
 
 
-
-
-
-
-// =====================
-// indusInd
-// ----------------
-// A/C 100054551294
-
-
-// card :
-// 4213 2423 0723 5567
-// cvv : 251
-// Ex Date : 03/27
-// pin: 3841
-// ----
-// Password : Kansas@123#
-
-
-
-// >( ) Axios - Promise based HTTP client
-//  ( ) Progressive Web App (PWA)
-//  ( ) Content - Git-based headless CMS
 

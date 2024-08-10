@@ -2,39 +2,39 @@ const logoTitle = 'Srihas notes'
 function mainDom(data) {
     // console.log()///
     //////////////////////////////////////
-const pathname = new URL(window.location.href).pathname;
+    const pathname = new URL(window.location.href).pathname;
     // url = initial_url .split( '/' );
-// console.log(pathname.split( '/' ))
-console.log(pathname.split( '/' ).slice(-1).pop())
+    // console.log(pathname.split( '/' ))
+    // console.log(pathname.split('/').slice(-1).pop())
 
-const collection = document.getElementsByClassName("inside-nav-bar");
-// let docs = document.getElementById('subHeader');
-// let elements = docs.getElementsByClassName('get-el');
-// getElements[0].style.backgroundColor = "red";
-// console.log(elements)
-// for(box of docs) {
-//     console.log(box); // div.box, div.box, div.box, div.box, div.box
-//   }
-  //////////////////////////////////////
+    const collection = document.getElementsByClassName("inside-nav-bar");
+    // let docs = document.getElementById('subHeader');
+    // let elements = docs.getElementsByClassName('get-el');
+    // getElements[0].style.backgroundColor = "red";
+    // console.log(elements)
+    // for(box of docs) {
+    //     console.log(box); // div.box, div.box, div.box, div.box, div.box
+    //   }
+    //////////////////////////////////////
 
-// for (var i = 0; i < getElements.length; ++i) {
-//     var item = getElements[i];  
-//     item.innerHTML = 'this is value';
-// }
+    // for (var i = 0; i < getElements.length; ++i) {
+    //     var item = getElements[i];  
+    //     item.innerHTML = 'this is value';
+    // }
 
 
-// arr.slice(-1)[0] or arr.slice(-1).pop() // reove last eleent
+    // arr.slice(-1)[0] or arr.slice(-1).pop() // reove last eleent
     // header
     document.getElementById("header").innerHTML = navHeader
-    typeof subHeader !== 'undefined' ? document.getElementById('subHeader').innerHTML = subHeader  : ''
+    typeof subHeader !== 'undefined' ? document.getElementById('subHeader').innerHTML = subHeader : ''
 
     data.map(el => {
         // left menu links
         let leftLinks = document.getElementById("myLinks");
         let leftMenuD_FlexDiv = document.createElement('div');
- 
+
         let leftMenu = el.section ?
-                `<div class="left-menu-list">
+            `<div class="left-menu-list">
                     <div style="background:#aca0a1; padding:3px;">${el.section}</div>
                     <a href="#${el.title}">${el.title}</a>
                 </div>` : `
@@ -47,23 +47,26 @@ const collection = document.getElementsByClassName("inside-nav-bar");
 
         // main content 
         let cardsContainer = document.getElementById("cards");
-        let coreSnp = typeof el.note === "object" && el.note.map(k => (
-            k.code1 ? 
-            `<div>
+        let coreSnp = typeof el.note === "object" && el.note.map(k => {
+            const isImgExist = typeof k.img !== 'undefined' ? `<img src="${k.img}"/>` : ''
+            return (
+                k.code1 ?
+                    `<div>
                 <p class="notes-text">
-                    ${k.text1}
+                    ${k.text1} ${isImgExist}
                 </p>
                 <pre class="code-prre">
                     <code class="align-code hljs language-javascript py-0 px-2"> 
                             ${k.code1} 
                     </code>
                 </pre>
-            </div>` :  `<div>
+            </div>` : `<div>
             <p class="notes-text">
-                ${k.text1}
+                ${k.text1} ${isImgExist}
             </p>
             </div>`
-        )).join('') || []
+            )
+        }).join('') || []
 
         let innerContent = `
             <li class="li-main-box">
