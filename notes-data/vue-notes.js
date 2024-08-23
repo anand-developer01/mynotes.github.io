@@ -1,7 +1,9 @@
-const reactLinks1 = 'vue-notes'
-const reactLinks2 = 'vue3'
-const reactLinks3 = 'vue-x'
-const reactLinks4 = 'vuejs-projects'
+const Links1 = 'vue-notes'
+const Links2 = 'vue3'
+const Links3 = 'vue-x'
+const Links4 = 'vuejs-projects'
+
+const isHighlighted = 'vue-notes'
 
 const vueData = {
   vueNote: [

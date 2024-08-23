@@ -1,7 +1,9 @@
-const reactLinks1 = 'react-notes'
-const reactLinks2 = 'redux-notes'
-const reactLinks3 = 'redux-toolkit'
-const reactLinks4 = 'react-projects'
+const Links1 = 'react-notes'
+const Links2 = 'redux-notes'
+const Links3 = 'redux-toolkit'
+const Links4 = 'react-projects'
+
+const isHighlighted = 'react-notes'
 
 const reactData = {
     reactNote: [

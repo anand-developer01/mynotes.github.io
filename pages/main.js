@@ -1,32 +1,27 @@
 const logoTitle = 'Srihas notes'
 function mainDom(data) {
-    // console.log()///
-    //////////////////////////////////////
-    const pathname = new URL(window.location.href).pathname;
-    // url = initial_url .split( '/' );
-    // console.log(pathname.split( '/' ))
-    // console.log(pathname.split('/').slice(-1).pop())
 
     const collection = document.getElementsByClassName("inside-nav-bar");
-    // let docs = document.getElementById('subHeader');
-    // let elements = docs.getElementsByClassName('get-el');
-    // getElements[0].style.backgroundColor = "red";
-    // console.log(elements)
-    // for(box of docs) {
-    //     console.log(box); // div.box, div.box, div.box, div.box, div.box
-    //   }
-    //////////////////////////////////////
-
-    // for (var i = 0; i < getElements.length; ++i) {
-    //     var item = getElements[i];  
-    //     item.innerHTML = 'this is value';
-    // }
 
 
     // arr.slice(-1)[0] or arr.slice(-1).pop() // reove last eleent
     // header
     document.getElementById("header").innerHTML = navHeader
     typeof subHeader !== 'undefined' ? document.getElementById('subHeader').innerHTML = subHeader : ''
+
+    if(document.getElementById('link1') || document.getElementById('link2')) {
+        const eleLink1 = document.getElementById('link1').getAttribute("href");
+        console.log(eleLink1.split('.')[0] === isHighlighted)
+        if(eleLink1.split('.')[0] === isHighlighted){
+            document.getElementById('link1').setAttribute("class","active"); 
+        }
+    
+        const eleLink2 = document.getElementById('link2').getAttribute("href");
+        console.log(eleLink2.split('.')[0] === isHighlighted)
+        if(eleLink2.split('.')[0] === isHighlighted){
+            document.getElementById('link2').setAttribute("class","active"); 
+        }
+    }
 
     data.map(el => {
         // left menu links
