@@ -43,7 +43,7 @@ function mainDom(data) {
         // main content 
         let cardsContainer = document.getElementById("cards");
         let coreSnp = typeof el.note === "object" && el.note.map(k => {
-            const isImgExist = typeof k.img !== 'undefined' ? `<img src="${k.img}"/>` : ''
+            const isImgExist = typeof k.img !== 'undefined' ? `<img style="width:100%;" src="${k.img}"/>` : ''
             return (
                 k.code1 ?
                     `<div>

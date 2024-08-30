@@ -8483,9 +8483,98 @@ console.log(p1 instanceof Person); // true
           <b>Promise</b> : A container for an asynchronously delivered value.
           (or)
           <b>Promise</b> : A container for a future value.
+
+          In JavaScript, a <b>Promise</b> is a special object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. Promises are a way to handle asynchronous operations more elegantly compared to traditional callback functions.
+
+<b>What is a Promise?</b>
+A Promise has three states:
+<b>Pending</b>: The initial state. The operation is ongoing, and the final value isn’t available yet.
+<b>Fulfilled</b>: The operation completed successfully, and the promise has a resolved value.
+<b>Rejected</b>: The operation failed, and the promise has a reason for the failure.
+Creating a Promise
+You create a promise using the Promise constructor, which takes a function with two arguments: resolve and reject. These are functions you call to transition the promise from the pending state to either fulfilled or rejected.
+
+A promise starts in a pending state. That means the process is not complete. If the operation is successful, the process ends in a fulfilled state. And, if an error occurs, the process ends in a rejected state.
+
+For example, when you request data from the server by using a promise, it will be in a pending state. When the data arrives successfully, it will be in a fulfilled state. If an error occurs, then it will be in a rejected state.
           `,
+          code1: ``,
+          img : `../assets/images/javascript/Promise.webp`
+        },
+        {
+          text1: `<table border="0">
+          <tbody>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><code>all(iterable)</code></td>
+              <td>Waits for all promises to be resolved or any one to be rejected</td>
+            </tr>
+            <tr>
+              <td><code>allSettled(iterable)</code></td>
+              <td>Waits until all promises are either resolved or rejected</td>
+            </tr>
+            <tr>
+              <td><code>any(iterable)</code></td>
+              <td>Returns the promise value as soon as any one of the promises is fulfilled</td>
+            </tr>
+            <tr>
+              <td><code>race(iterable)</code></td>
+              <td>Wait until any of the promises is resolved or rejected</td>
+            </tr>
+            <tr>
+              <td><code>reject(reason)</code></td>
+              <td>Returns a new Promise object that is rejected for the given reason</td>
+            </tr>
+            <tr>
+              <td><code>resolve(value)</code></td>
+              <td>Returns a new Promise object that is resolved with the given value</td>
+            </tr>
+            <tr>
+              <td><code>catch()</code></td>
+              <td>Appends the rejection handler callback</td>
+            </tr>
+            <tr>
+              <td><code>then()</code></td>
+              <td>Appends the resolved handler callback</td>
+            </tr>
+            <tr>
+              <td><code>finally()</code></td>
+              <td>Appends a handler to the promise</td>
+            </tr>
+          </tbody>
+        </table>`,
           code1: ``
-        }
+        },        
+        {
+          text1: `Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a function. Imagine a function, createAudioFileAsync(), which asynchronously generates a sound file given a configuration record and two callback functions: one called if the audio file is successfully created, and the other called if an error occurs.`,
+          code1: `function successCallback(result) {
+            console.log(\`Audio file ready at URL: \${result}\`);
+          }
+          
+          function failureCallback(error) {
+            console.error(\`Error generating audio file: \${error}\`);
+          }
+          
+          createAudioFileAsync(audioSettings, successCallback, failureCallback);
+
+          //----
+          // If 'createAudioFileAsync()' were rewritten to return a promise, you would attach your callbacks to it instead:
+      
+          Copy to Clipboard
+          createAudioFileAsync(audioSettings).then(successCallback, failureCallback);`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+
       ]
     },
     {
@@ -8495,7 +8584,7 @@ console.log(p1 instanceof Person); // true
         {
           text1: ``,
           code1: ``
-        }
+        },
       ]
     },
     {
