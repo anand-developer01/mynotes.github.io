@@ -8492,7 +8492,7 @@ A Promise has three states:
 <b>Fulfilled</b>: The operation completed successfully, and the promise has a resolved value.
 <b>Rejected</b>: The operation failed, and the promise has a reason for the failure.
 Creating a Promise
-You create a promise using the Promise constructor, which takes a function with two arguments: resolve and reject. These are functions you call to transition the promise from the pending state to either fulfilled or rejected.
+You create a promise using the Promise constructor, which takes a function with two arguments: <u>resolve</u> and <u>reject</u>. These are functions you call to transition the promise from the pending state to either fulfilled or rejected.
 
 A promise starts in a pending state. That means the process is not complete. If the operation is successful, the process ends in a fulfilled state. And, if an error occurs, the process ends in a rejected state.
 
@@ -8582,7 +8582,7 @@ For example, when you request data from the server by using a promise, it will b
       title: "Promise Chaining",
       note: [
         {
-          text1: ``,
+          text1: `Chaining: When you chain promises, you can perform a series of asynchronous operations in a specific order. Each .then() method returns a new promise, which can be used to perform the next asynchronous operation.`,
           code1: ``
         },
       ]
