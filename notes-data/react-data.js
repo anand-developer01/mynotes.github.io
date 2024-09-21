@@ -19,7 +19,7 @@ const reactData = {
             title: "What are props in React?",
             note: [
                 {
-            text1: ` In React, "props" is short for "properties," and it is a mechanism for passing data from a parent component to a child component. Props are a way to provide input to a React component, allowing it to render dynamically based on the received data.
+                    text1: ` In React, "props" is short for "properties," and it is a mechanism for passing data from a parent component to a child component. Props are a way to provide input to a React component, allowing it to render dynamically based on the received data.
             They can be single-valued or objects having a set of values that will be passed to components of React during creation by using a naming convention that almost looks similar to HTML-tag attributes. 
 
             Props stand for "Properties." They are read-only values. 
@@ -31,8 +31,8 @@ const reactData = {
             Inside the components, we can add attributes called props. 
             These attributes are available in the component as this. props and can be used to render dynamic data in our render method.
             `
-            }
-        ]
+                }
+            ]
         },
         {
             id: 4,
@@ -109,7 +109,7 @@ const reactData = {
             note: [
                 {
                     text1: `Data binding is a concept in web development that establishes a connection between the data in an application and the user interface (UI) elements that display that data. The purpose of data binding is to ensure that changes in one part of the application are automatically reflected in another part, creating synchronization between the data and the UI.`,
-                    code1:``
+                    code1: ``
                 }
             ]
         },
@@ -134,7 +134,7 @@ const reactData = {
                     </span>
                     why can't browser read jsx
                     JSX isn't directly supported by browsers, requiring conversion by tools like Babel to transform JSX into valid JavaScript. This transpilation ensures browsers can interpret and execute the JSX-embedded code in React applications.`,
-                    code1:`const element = React.createElement('h1', null, 'Hello, JSX!'); </b>`
+                    code1: `const element = React.createElement('h1', null, 'Hello, JSX!'); </b>`
                 }
             ]
         },
@@ -173,7 +173,7 @@ const reactData = {
                     <b>vue js </b>:
 
                     `,
-                    code1:`  var V = new Vue({
+                    code1: `  var V = new Vue({
                         el:'#vue-instance',
                     data:{
                         name:'Niklesh'
@@ -254,7 +254,7 @@ const reactData = {
                     <b>5)Component Lifecycle Methods</b>:
                     =>During the reconciliation process, React invokes specific lifecycle methods on the components, allowing them to perform actions at different stages of the update cycle.
                     =>For example, the componentDidUpdate lifecycle method is called after the component has been updated in the DOM.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -269,7 +269,7 @@ const reactData = {
 
                     In most cases, we recommend using controlled components to implement forms. In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.
                     `,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -282,7 +282,7 @@ const reactData = {
                     You query the DOM using a ref to find its current value when you need it.
 
                     In most cases, it's recommend to use controlled components to implement forms. In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -317,7 +317,7 @@ const reactData = {
                     <b>[props]</b>: The additional props that we want to add to the element.
                     <b>[…children]</b>: The children of the cloned object. Note that the children of the existing object are not copied
 `,
-                    code1:`//Ex:-
+                    code1: `//Ex:-
                     const originalElement = React.createElement('h1', {className: 'title'}, 'Hello, world!');
 
                     const clonedElement = React.cloneElement(originalElement, {className: 'subtitle'},'MKS');
@@ -345,7 +345,7 @@ const reactData = {
                      A
                     / |
                     B   C`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -367,7 +367,7 @@ const reactData = {
                     Pre-commit Before the component actually applies the changes to the DOM, there is a moment that allows React to read from the DOM through the <b>getSnapshotBeforeUpdate()</b>.
 
                     Commit React works with the DOM and executes the final lifecycles respectively <b>componentDidMount()</b> for mounting, <b>componentDidUpdate()</b> for updating, and <b>componentWillUnmount()</b> for unmounting.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -394,7 +394,7 @@ const reactData = {
                     <b>getSnapshotBeforeUpdate</b>: Executed right before rendered output is committed to the DOM. Any value returned by this will be passed into componentDidUpdate(). This is useful to capture information from the DOM i.e. scroll position.
                     <b>componentDidUpdate</b>: Mostly it is used to update the DOM in response to prop or state changes. This will not fire if shouldComponentUpdate() returns false.
                     <b>componentWillUnmount</b>: It will be used to cancel any outgoing network requests, or remove all event listeners associated with the component.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -421,7 +421,7 @@ const reactData = {
                     Render hijacking.
                     State abstraction and manipulation.
                     Props manipulation.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -433,7 +433,7 @@ const reactData = {
                     text1: `You can add/edit props passed to the component using props proxy pattern like this:
 
                     This approach enables the addition of props to wrapped components before rendering, proving useful in various scenarios such as logging, modifying data passed to components, and managing authentication in diverse applications.`,
-                    code1:`  function HOC(WrappedComponent) {
+                    code1: `  function HOC(WrappedComponent) {
                         return class Test extends Component {
                                   render() {
                             const newProps = {
@@ -452,8 +452,8 @@ const reactData = {
         },
         {
             id: 17,
-                    title: "What is the use of react-dom package?",
-                    note: [
+            title: "What is the use of react-dom package?",
+            note: [
                 {
                     text1: `The react-dom package provides DOM-specific methods that can be used at the top level of your app. Most of the components are not required to use this module. Some of the methods of this package are:
 
@@ -485,7 +485,7 @@ const reactData = {
 
 
 `,
-                    code1:`//Ex:-----------
+                    code1: `//Ex:-----------
                     import React from "react";
                     import {render, unmountComponentAtNode} from "react-dom";
 
@@ -541,19 +541,19 @@ const reactData = {
                 },
                 {
                     text1: ``,
-                    code1:``
+                    code1: ``
                 },
                 {
                     text1: ``,
-                    code1:``
+                    code1: ``
                 },
                 {
                     text1: ``,
-                    code1:``
+                    code1: ``
                 },
                 {
                     text1: ``,
-                    code1:``
+                    code1: ``
                 },
             ],
         },
@@ -567,7 +567,7 @@ const reactData = {
                     <span style="color:red">ReactDOM.render(element, container, [callback])</span>
 
                     If the optional callback is provided, it will be executed after the component is rendered or updated.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -579,27 +579,7 @@ const reactData = {
                     text1: `Prop drilling in React refers to the process of passing down props (properties) through multiple levels of nested components. When a component deep in the component tree needs access to a prop that is originally provided by a parent component, these props have to be passed down through the intermediate components, even if those intermediate components do not use or need the props themselves.
 
                     Prop drilling can become a challenge in large applications as the component tree grows, and passing down props through multiple levels might make the code harder to maintain. To address this, there are advanced state management solutions in React, such as context API, Redux, or Recoil, which can help manage global or shared state without the need for prop drilling.`,
-                    code1:``
-                }
-            ],
-        },
-        {
-            id: 20,
-            title: "what is useState in react js?",
-            note: [
-                {
-                    text1: `useState is React Hook that allows you to add state to a functional component. It returns an array with two values: the current state and a function to update it. The Hook takes an initial state value as an argument and returns an updated state value whenever the setter function is called. 
-
-                    <span style="color:red"> const [state, setState] = useState(initialValue); </span>
-                    using array destructuring we can set the variable name and function name
-
-                    <b>What does the React.useState Hook do?</b>
-As stated previously, <b>useState</b> enables you to add state to function components. Calling React.useState inside a function component generates a single piece of state associated with that component.
-
-Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the state can be any type. Each piece of state holds a single value: an object, an array, a Boolean, or any other type you can imagine.
-
-                    `,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -629,7 +609,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     The React docs are clear about that, although you're free to reuse them as many times as you wish:
 
                     The <b>componentDidCatch()</b> method works like a JavaScript catch <b>{ }</b> block, but for components. Only class components can be error boundaries. In practice, most of the time you'll want to declare an error boundary component once and use it throughout your application.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -646,7 +626,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     <b>2) useEffect</b>
                     Performs side effects in functional components, such as data fetching or subscriptions.`,
-                    code1:`useEffect(() => {
+                    code1: `useEffect(() => {
                         // Side effect code here
                         return () => {
                             // Cleanup code here
@@ -659,18 +639,18 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     Accesses the value of a React context within a functional component.
 
                     const contextValue = useContext(MyContext);`,
-                    code1:``
+                    code1: ``
                 },
                 {
                     text1: `<b>4) useReducer</b>
                     Manages more complex state logic by combining useState and useEffect in a single hook.
                     const [state, dispatch] = useReducer(reducer, initialState);`,
-                    code1:``
+                    code1: ``
                 },
                 {
                     text1: `<b>5) useCallback</b>
                     Memoizes a callback function to prevent unnecessary renders in child components.`,
-                    code1:`    const memoizedCallback = useCallback(() => {
+                    code1: `    const memoizedCallback = useCallback(() => {
                         // Callback code here
                     }, [dependencies]);`
                 },
@@ -678,19 +658,19 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     text1: `<b>6) useMemo</b>
                     Memoizes the result of a computation to prevent unnecessary recalculations.
                     const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);`,
-                    code1:``
+                    code1: ``
                 },
                 {
                     text1: `<b>7) useRef</b>
                     Creates a mutable object that persists across renders and does not trigger re-renders when mutated.
 
                     const myRef = useRef(initialValue);`,
-                    code1:``
+                    code1: ``
                 },
                 {
                     text1: `<b>8) forwardRef </b> -
                     Ref forwarding is a technique for automatically passing a ref through a component to one of its children. This is typically not necessary for most components in the application. However, it can be useful for some kinds of components, especially in reusable component libraries.`,
-                    code1:`                    import React, {forwardRef, useRef, useImperativeHandle} from 'react';
+                    code1: `                    import React, {forwardRef, useRef, useImperativeHandle} from 'react';
 
                     const RefCustomInput = forwardRef(function RefCustomInput(props, ref) {
         const inputRef = useRef(null);
@@ -721,7 +701,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     useImperativeHandle(ref, () => ({
                         // Exposed methods or properties
                     }), [dependencies]);`,
-                    code1:``
+                    code1: ``
                 },
                 {
                     text1: `<b>10) useLayoutEffect</b>
@@ -738,7 +718,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     useLayoutEffect(() => {
                         // DOM mutation code here
                     }, [dependencies]);`,
-                    code1:`//Ex:-
+                    code1: `//Ex:-
                     const ref = useRef('This is dom')
 
                     useEffect(() => {
@@ -755,20 +735,72 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     Customizes the display of a custom hook in React DevTools.
                     useDebugValue(value);`,
-                    code1:``
+                    code1: ``
                 },
                 {
                     text1: ``,
-                    code1:``
+                    code1: ``
                 },
             ],
         },
         {
-            id: 23,
-            title: "What is the use of useEffect React Hooks?",
+            id: 20,
+            section: `Hooks`,
+            title: "useState",
             note: [
                 {
-                    text1: `The useEffect hook in React is used to perform side effects in functional components. Side effects can include data fetching, subscriptions, manual DOM manipulations, or any operation that needs to be performed after the component has been rendered to the screen.
+                    text1: `useState is React Hook that allows you to add state to a functional component. It returns an array with two values: the current state and a function to update it. The Hook takes an initial state value as an argument and returns an updated state value whenever the setter function is called. 
+
+                    <span style="color:red"> const [state, setState] = useState(initialValue); </span>
+                    using array destructuring we can set the variable name and function name
+
+                    <b>What does the React.useState Hook do?</b>
+As stated previously, <b>useState</b> enables you to add state to function components. Calling React.useState inside a function component generates a single piece of state associated with that component.
+
+Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the state can be any type. Each piece of state holds a single value: an object, an array, a Boolean, or any other type you can imagine.
+
+<b>useState</b> returns an array where the first item is the getter and the second item is the setter. useState can also take an initial state by passing your desired value as the params. It is a common practice to prefix the setter with set followed by the state name like the example above.
+                    `,
+                    code1: `const App = () => {
+    const [count, setCount] = useState(0);
+
+    const incrementCount = () => {
+        setCount(count + 1);
+    };
+
+    return (
+        &lt;div&gt;
+            &lt;p&gt;{count}&lt;/p&gt;
+            &lt;button type=&quot;button&quot; onClick={incrementCount}&gt;
+                Increment Count
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+};`
+                }
+            ],
+        },
+        {
+            id: 23,
+            title: "useEffect",
+            note: [
+                {
+                    text1: `<b>Side Effect</b>
+                    Most React components are <a href="./javascript-notes.html#pure functions">pure functions</a>, meaning they receive an input and produce a predictable output of JSX.
+
+                    In React.js, a side effect refers to any operation that interacts with the outside world or has an impact beyond the component itself. This includes operations such as:
+
+    <b>Data fetching</b>: Making API calls to retrieve or send data.
+    <b>Direct DOM manipulation</b>: Changing elements or attributes directly, rather than using React's declarative approach.
+    <b>ubscriptions</b>: Setting up listeners or subscriptions to external data sources.
+    <b>Timers</b>: Using functions like <u>setTimeout</u> or <u>setInterval</u> to schedule tasks.
+    <b>Logging</b>: Writing to the console or other external systems for debugging purposes.
+
+To handle side effects in React, you use the <u>useEffect</u> hook (or <u>componentDidMount, componentDidUpdate</u>, and <u>componentWillUnmount</u> lifecycle methods in class components). The useEffect hook allows you to perform side effects in functional components and gives you a way to clean up after the effects when the component unmounts or when dependencies change.
+
+                    In React, <b>side effects</b> refer to any operations or behaviors that occur in a component after rendering, and that don't directly impact the current component render cycle. These side effects can include tasks such as data fetching, subscriptions, manually changing the DOM, or other interactions with the outside world.
+
+                    The useEffect hook in React is used to perform side effects in functional components. Side effects can include data fetching, subscriptions, manual DOM manipulations, or any operation that needs to be performed after the component has been rendered to the screen.
 
                     The typical use case for useEffect is to manage asynchronous or non-blocking code within a functional component. It allows you to perform actions that are not directly related to rendering but are necessary for the component's behavior.
 
@@ -777,12 +809,39 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     <b>2)Dependencies Array</b>:
                     The second parameter is an array of dependencies. If any of these dependencies change between renders, the useEffect function will run again. If the dependencies array is empty, the useEffect will only run once after the initial render.
+                   <u> Mounting Phase</u>:
+<b>Initialisation</b>: useEffect with an empty dependency array runs once after the initial render. It simulates <b>componentDidMount</b> in class components.
+<u>Effect Runs on Every Render</u>: Since there is no dependency array, the effect function provided to useEffect will execute after every render of the component. This can be useful for operations that need to occur on every update, but it may lead to performance issues if the effect involves expensive operations or if it causes additional renders.
+If you do not pass a dependency array to the useEffect hook, it will execute the effect after every render of the component. This is because the effect does not have a specified dependency array, meaning it will run every time the component updates.
+An empty dependency array ([]) the effect will only run once after the initial render and not on any subsequent renders.
 
+<u>1. Skipping the argument</u>:
+We may skip passing the second argument. If we choose to do so then our hook will trigger the callback function on each re-render of the component. Any unrelated state change will trigger the callback function to execute inducing bugs, and compromising performance.
+<span style="color:red">
+useEffect(() => {
+    // Runs in each re-render of the component
+})
+</span>
+<u>2. Empty Array ( [] )</u>
+An empty array simply means that there are no dependencies that will trigger the callback within it. Our code inside the callback will run once when the component gets registered, and that is it. The useEffect hook acts like componentDidMount method if an empty array is passed as the dependency array.
+<span style="color:red">
+useEffect(() => {
+    // Runs only when the component is registered
+}, [])
+</span>
+<u>3. Array of dependencies ( [variable1, variable2] )</u>
+This might be the most common form used with useEffect. We pass an array filled with all the dependencies that should trigger the callback function to run. Change in any of the variable in the list will execute the callback.
+
+Often these include the states that have been created using useState hook.
+<span style="color:red">
+const [x, setX] = useState();
+const [y, setY] = useState();
+useEffect(() => {
+    // Runs if x or y changes
+}, [x, y])
+</span>
                     <b>3)Cleanup Function</b>:
                     The function returned inside useEffect can be used for cleanup. It will be invoked when the component is about to unmount or when the dependencies specified in the array change.
-
-                    Cleanup:-
-                    If the effect involves any cleanup, such as unsubscribing from a subscription or clearing a timer, you can return a cleanup function. This cleanup function will be executed when the component is unmounted or when the dependencies change and the effect is re-run.
 
                     <b>4)Common Use Cases</b>:
                     Fetching data from an API.
@@ -793,7 +852,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     Here is the basic syntax of the useEffect hook:
 `,
-                    code1:`useEffect(() => {
+                    code1: `useEffect(() => {
                     // Side effect code here
 
                     return () => {
@@ -840,7 +899,271 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                         subscription.unsubscribe();
                     };
                     }, [dependencies]);`
-                }
+                },
+                {
+                    text1: `<b>Cleanup</b>:-
+                    If the effect involves any cleanup, such as unsubscribing from a subscription or clearing a timer, you can return a cleanup function. This cleanup function will be executed when the component is unmounted or when the dependencies change and the effect is re-run.
+
+                    This is where the useEffect cleanup function comes in. The cleanup function is a function that is called when the component is unmounted (i.e., when it is no longer being rendered). It allows you to perform any necessary cleanup tasks, such as cancelling an ongoing API request.
+To use the cleanup function, you can pass it as a return value from the useEffect hook. For example:
+                    `,
+                    code1: `useEffect(() => {
+  // actions performed when component mounts
+  return () => {
+    // actions to be performed when component unmounts
+  }
+}, []);
+
+//--------
+
+useEffect(() => {
+  const fetchData = async () => {
+    const response = await fetch(url);
+    // do something with the response
+  };
+  fetchData();
+  return () => {
+    // cleanup function goes here
+  };
+}, [url]);
+
+// In this example, the 'fetchData' function is called when the component is rendered. When the component is unmounted, the cleanup function is called, allowing you to cancel the ongoing fetch request if necessary.
+
+//--------
+import { useEffect, useState } from 'react';
+
+function ExampleComponent() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount(count + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [count]);
+
+  return <div>{count}</div>;
+}
+
+// In this example, the 'useEffect' hook sets up an interval that increments the 'count' state variable every second. The cleanup function returned by the 'useEffect' hook cancels this interval by calling 'clearInterval' when the component unmounts or re-renders. This ensures that the interval is not still running in the background after the component is no longer being used.
+
+// Example :
+function App() {
+    const [timer, setTimer] = useState(100)
+    const [isRunning, setIsRunning] = useState(false)
+    const [resetTime, setResetTime] = useState(900)
+
+    let time = new Date(timer * 1000).toISOString().substr(11, 8);
+
+    function resetTimer() {
+      setIsRunning(false)
+      setTimer(resetTime)
+    }
+
+    function increment() {
+      const newTime = timer + 1
+      setIsRunning(false);
+      setTimer(newTime);
+    }
+
+    function decrement() {
+      const newTime = timer - 1
+      setIsRunning(false);
+      setTimer(newTime);
+    }
+
+    useEffect(() => {
+      if (isRunning) {
+        const interval = setInterval(() => {
+          setTimer(prevTimer => prevTimer > 0 && prevTimer - 1)
+        }, 1000);
+
+        return () => clearInterval(interval)
+      }
+    }, [isRunning, timer])
+
+    useEffect(() => {
+      setResetTime(timer)
+    }, [])
+
+    return (
+        &lt;div className=&quot;App&quot;&gt;
+        &lt;h1&gt;{time}&lt;/h1&gt;
+        &lt;button onClick={() =&gt; setIsRunning(false)} &gt;Pause&lt;/button&gt;
+        &lt;button onClick={() =&gt; setIsRunning(true)}&gt;Start&lt;/button&gt;
+        &lt;button onClick={() =&gt; resetTimer()}&gt;Reset&lt;/button&gt;
+        &lt;button onClick={() =&gt; decrement()}&gt;-&lt;/button&gt;
+        &lt;button onClick={() =&gt; increment()}&gt;+&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+
+  export default App;
+
+//   Example: 2
+  //Countdown
+  import React, { useRef, useEffect, useState } from "react";
+
+export default function Countdown() {
+  const [num, setNum] = useState(100);
+  const [pause, setPause] = useState(false);
+
+  let intervalRef = useRef();
+
+  const decreaseNum = () => setNum((prev) => prev - 1);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(decreaseNum, 1000);
+
+    return () => clearInterval(intervalRef.current);
+  }, []);
+
+  const handleClick = () => {
+    if (!pause) {
+      clearInterval(intervalRef.current);
+    } else {
+      intervalRef.current = setInterval(decreaseNum, 1000);
+    }
+    setPause((prev) => !prev);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;div&gt;{num}&lt;/div&gt;
+      &lt;button onClick={handleClick}&gt;{pause ? &quot;Run&quot; : &quot;Pause&quot;}&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+`
+                },
+                {
+                    text1: `<b>Canceling a fetch request</b>
+                    By using a <b>useEffect cleanup</b> function, you can cancel the ongoing API request when the component is unmounted, like so:
+
+                    <b>AbortError</b> error Handling:
+
+                    The <u>AbortError: signal is aborted without reason</u> typically occurs in JavaScript when using the Fetch API or other asynchronous operations that support aborting via an AbortController. This error indicates that an operation (like a fetch request) was aborted, but the reason for the abort was not specified or is not explicitly clear.
+
+<b>Understanding the Error</b>
+    <b>AbortController</b>: The <u>AbortController</u> API allows you to abort ongoing fetch requests or other asynchronous operations. You create an <u>AbortController</u> instance, pass its <u>signal</u> to the fetch request, and then call <u>abort()</u> on the controller when you want to cancel the request.
+    <b>AbortError</b>: When an operation is aborted, the JavaScript runtime throws an <u>AbortError</u>. This is a standard error used to indicate that the operation was canceled.
+
+<b>Common Causes</b>
+    <b>Manual Abort Without Reason</b>: If you manually call <u>abort()</u> on an <u>AbortController</u> instance without providing a reason or message, you might see this error. While <u>AbortError</u> itself doesn't require a reason, it's helpful for debugging to understand why the abort occurred.
+    <b>Fetch Requests Aborted</b>: If a fetch request is aborted (e.g., due to a component unmounting), the error may occur. This is especially common in React applications when using <u>useEffect</u> to manage data fetching and cleanup.
+
+    <b>Key Points</b>
+    <b>Handling AbortError</b>: When catching errors, check if the error is an <u>AbortError</u> to handle it specifically and distinguish it from other types of errors.
+    <b>Clean-Up</b>: Always ensure you abort ongoing requests in the cleanup function of <u>useEffect</u> or similar lifecycle methods to avoid memory leaks and unwanted operations.
+    <b>Debugging</b>: If you encounter this error frequently, ensure that abort operations are done intentionally and investigate why the abort might be happening unexpectedly.
+                    `,
+                    code1: `// child component
+                    import React, { useState, useEffect } from 'react';
+
+function UserProfile({userId}) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    fetch(\`https://jsonplaceholder.typicode.com/users/\${userId}\`, { signal })
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(err => {
+        if (err.name === 'AbortError') {
+          console.log('Fetch request was aborted');
+        } else {
+          setError(err);
+        }
+      });
+
+    // Cleanup function to abort the fetch request if the component unmounts
+    return () => {
+      controller.abort();
+    };
+  }, [userId]); // Empty dependency array means this runs once after the initial render
+
+  if (error) {
+    return &lt;div&gt;Error: {error.message}&lt;/div&gt;;
+  }
+
+  return &lt;div&gt;Data: {data ? JSON.stringify(data) : &#39;Loading...&#39;}&lt;/div&gt;;
+}
+export default UserProfile;
+
+
+// parent component
+import { useState, useEffect } from 'react';
+import './App.css';
+import CircleComponent from './components/circle game/CircleComponent';
+function App() {
+
+  const [user, setUsername] = useState('ram')
+  const [userId, setUserId] = useState(1)
+
+  useEffect(() => {
+    let mounted = true;
+    setTimeout(() => {
+      if (mounted) {
+        setUsername('hello world');
+      }
+    }, 4000);
+
+    return () => mounted = false;
+  }, []);
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;input type=&#39;text&#39; value={userId} name=&#39;userId&#39; onChange={e =&gt; {setUserId(e.target.value)}}/&gt;
+      &lt;CircleComponent userId = {userId}/&gt;
+      { user }
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+
+// In this version of the "UserProfile" component, the "useEffect" cleanup function cancels the ongoing API request by calling the "abort" method on the "AbortController" instance. This ensures that the request is stopped when the component is unmounted, helping to prevent unnecessary network traffic and data inconsistencies.
+`
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: `When you begin writing code in React to fetch data from an API, you may encounter an issue where your application enters into an infinite rendering loop. This occurs because updating the state triggers a re-render, leading to the execution of the same code again.
+
+                    The below code will lead to an infinite rendering of our application. So what I am trying to achieve here is, I tried to fetching data from an API and once I will the get the data I am updating the state and once a state is updated in the a component a re-render will happen. When the component will re-render same code will execute again which will lead my application to infinite re-render. Now let's discuss how to handle these kind of scenarios in React.
+                    `,
+                    code1: `import React, { useState, useEffect } from "react";
+
+function App() {
+  const [studentList, setStudentList] = useState([]);
+  const api = "https://hp-api.onrender.com/api/characters/house/gryffindor";
+  //Fetching data from the API
+  fetch(api)
+    .then((response) => response.json())
+    .then((data) => {
+      setStudentList(data);
+    })
+    .catch((error) => {
+      console.log("Error while fetcing data: ", error);
+    });
+  return (
+    &lt;&gt;
+      &lt;h1&gt;List of students in Howarts&lt;/h1&gt;
+      {studentList.map((student) =&gt; (
+        &lt;&gt;
+          &lt;h4&gt;{student.name}&lt;/h4&gt;
+        &lt;/&gt;
+      ))}
+    &lt;/&gt;
+  );
+}`
+                },
             ],
         },
         {
@@ -854,7 +1177,9 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     <b>useRef()</b> only returns one item. It returns an Object called <b>current</b>.
                     When we initialize useRef we set the initial value: <b>useRef(0)</b>.
-                    It's like doing this: <b>const count = {current: 0}</b>. We can access the count by using count.current.
+                    It's like doing this: <b>const count = {current: 0}</b>. We can access the count by using <u>count.current</u>.
+
+                    The useRef hook is one of the built-in hooks in React. You can use it to persist or preserve values between re-renders. The useRef hook takes an initial value of any type as argument and returns an object with a single current property.
 
                     useRef is one of the standard hooks provided by React. It will return an object that you can use during the whole lifecycle of the component.
                     The main use case for the useRef hook is to access a DOM child directly. I'll show exactly how to do that in another section.
@@ -871,9 +1196,2106 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     - > Between the component re-renderings, the value of the reference is persistent.
                     - > Updating a reference, contrary to updating state, doesn't trigger component re-rendering.
-                    - > References can also access DOM elements. Assign the reference to ref attribute of the element you'd like to access: <b> &lt;div ref={reference}&gt;Element&lt;/div&gt;</b> - and the element is available at reference.current.`,
-                    code1:``
+                    - > References can also access DOM elements. Assign the reference to ref attribute of the element you'd like to access: <b> &lt;div ref={reference}&gt;Element&lt;/div&gt;</b> - and the element is available at reference.current.
+
+                    <b>useRef</b> is like you said different from normal state variables managed with <b>useState</b> in React. While <b>useState</b> is designed to store state that causes re-renders when updated, <b>useRef</b> is designed to store mutable values that persist across renders without causing a re-render.
+
+
+                    React will set the <b>initialValue</b> you pass to the <b>useRef</b> hook as the value of the <b>current</b> property of the returned <b>ref</b> object. As an example, if the <b>initialValue</b> is the boolean value <b>true</b>, then the <b>ref</b> object returned by the <b>useRef</b> hook will be <b>{ current: true }</b>. If you don't pass an initial value, the <b>current</b> property will be <b>undefined</b>.
+
+The returned <b>ref</b> object is mutable. You can update and reference its value directly as in the example below. However, unlike react state, mutating the <b>ref</b> object doesn't re-render the Component.
+                    `,
+                    code1: `import React, { useRef, useEffect, useState } from "react";
+const MyComponent = () => {
+    const ref = useRef(true);
+
+    const eventHandler = () => {
+        ref.current = !ref.current;
+        console.log(ref.current)
+    };
+
+    console.log(ref.current); // true
+
+    return (
+        &lt;&gt;
+            &lt;button onClick={eventHandler}&gt;change ref&lt;/button&gt;
+        &lt;/&gt;
+    );
+};
+
+export default MyComponent`
+                },
+                {
+                    text1: `<b>What is createRef function?</b>
+The <b>createRef</b> function is one of the built-in functions in React. You can use it to create refs in class Components. Unlike <b>useRef</b>, the <b>createRef</b> function doesn't take an argument. It returns a ref object with the current property initially set to <b>null</b>.
+
+The ref object is a plain JavaScript object. Therefore, you can change its value from <b>null</b> to any data type. Similar to the <b>useRef</b> hook, changing its value doesn't re-render a React component.
+
+Unlike the <b>useRef</b> hook, the <b>createRef</b> function always returns a new object. It's worth emphasizing that the <b>createRef</b> function is considered a legacy API. You can use it in legacy codebase that uses class components. For new code, use functional components and the <b>useRef</b> hook.
+`,
+                    code1: `import { createRef } from "react";
+
+class MyComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.ref = createRef();
+    this.ref.current = true;
+  }
+
+  eventHandler = () => {
+    this.ref.current = !this.ref.current;
+  };
+
+  render() {
+    console.log(this.ref.current);
+    return &lt;&gt;&lt;/&gt;;
+  }
+}`
+                },
+                {
+                    text1: `<b>Using refs to Access DOM Elements in React</b>
+One of the use cases of refs in React is to access DOM elements. React is declarative by design. However, sometimes you may need to access a DOM element imperatively.
+
+You can use refs to access a rendered DOM element in your React Component instead of using methods such as <b>document.getElementById</b> or <b>document.querySelector</b>.
+
+To access a DOM element, you can use the <b>ref</b> attribute of the element's corresponding JSX as in the example below. The value of theref attribute should be the <b>ref</b> object returned by the <b>useRef</b> hook in React functional components.`,
+                    code1: `import { useRef } from "react";
+
+const MyComponent = () => {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  return &lt;input ref={inputRef} type=&quot;text&quot; /&gt;;
+};
+
+// In the example above, we accessed the "input" element inside the "useEffect" hook and invoked the "focus" method. You can also access the DOM element from an event handler.
+
+//------------
+
+// Because it's a hook, you can't use "useRef" in class components. As explained above, you use the "createRef" function to create refs in class components. In the code below, I've refactored the previous example to use ES6 class.
+
+import { createRef } from "react";
+
+class MyComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = createRef();
+  }
+
+  componentDidMount() {
+    this.inputRef.current.focus();
+  }
+
+  render() {
+    return &lt;input ref={this.inputRef} type=&quot;text&quot; /&gt;;
+  }
+}
+`
+                },
+                {
+                    text1: `<b>Differences between the useRef hook and the createRef function</b>
+As discussed in the previous sections, you can create refs using either the <b>useRef</b> hook or the createRef function. However, there are differences between the two.
+
+The <b>useRef</b> hook is for creating refs in React functional components. On the other hand, the <b>createRef</b> function is for creating refs in ES6 classes. The <b>createRef</b> function is considered a legacy API. Only use it if you're maintaining legacy codebase that uses class components.
+
+The <b>useRef</b> hook takes an initial value as an argument and returns a ref object. React will set the ref object's <b>current</b> property to the initial value. If you don't pass an initial value, the value of the <b>current</b> property will initially be <b>undefined</b>. On the other hand, the <b>createRef</b> function doesn't take an argument. The ref object's <b>current</b> property will initially be set to <b>null</b>.
+
+The </b>useRef</b> hook will always return the same ref object when a functional component re-renders. On the other hand, the </b>createRef</b> function returns a different object on every render.
+
+<b>Best practices when working with refs</b>
+As hinted above, the useRef hook comes in handy for persisting values of any type between re-renders. Be sure to follow the best practices below while using it.
+
+=> Avoid over-reliance on refs. You should use refs as an escape hatch to access DOM elements, browser APIs, and work with systems external to your React application. If you find yourself over-relying on refs, probably there is something you're doing wrong.
+=> Do not access or mutate refs during render. Accessing a ref during render leads to unpredictable results.
+
+In addition to the best practices highlighted above, the <b>useRef</b> hook is like any other React hook. You must follow all the rules of hooks while using it.
+
+These rules include invoking <b>useRef</b> at the top level in React functional components. You shouldn't use hooks inside conditional statements, loops, and event handlers. However, you can mutate the ref object inside conditional statements, loops, and event handlers.
+`,
+                    code1: `// useClickAway.js
+                    import React, { useEffect } from "react";
+
+export default function useClickAway(eventRef, targetElement, callback) {
+    useEffect(() => {
+        function handleClickAway(event) {
+            if (targetElement.current && targetElement.current.contains(event.target)) {
+                callback(event.target.src);
+            }
+        }
+        eventRef.current.addEventListener("mousedown", handleClickAway);
+        return () => {
+            (eventRef.current)?.removeEventListener("mousedown", handleClickAway);
+        };
+    }, [targetElement, eventRef]);
+}
+
+// App.js
+import React, { useRef } from "react";
+import useClickAway from './useClickAway'
+
+
+export default function Storefront() {
+    const targetElement = useRef(null);
+    const eventRef = useRef(null);
+
+    const alertClickAway = (elementVal) => {
+        alert("you click on image", elementVal);
+        // console.log(elementVal);
+    };
+
+    useClickAway(eventRef, targetElement, alertClickAway);
+
+    return (
+        &lt;div className=&quot;gallery&quot; ref={eventRef}&gt;
+            &lt;div className=&quot;col&quot;&gt;
+                &lt;img src=&quot;https://i.postimg.cc/G207QNV7/image.png&quot; alt=&quot;Product 1&quot; width=&quot;80&quot; height=&quot;80&quot; ref={targetElement} /&gt;
+                &lt;p&gt;iWatch Series 6&lt;/p&gt;
+                &lt;div className=&quot;btns&quot;&gt;
+                    &lt;button&gt;
+                        &lt;img
+                            src=&quot;https://api.iconify.design/flat-color-icons:like.svg?color=%23888888&quot;
+                            alt=&quot;like&quot;
+                        /&gt;
+                    &lt;/button&gt;
+                    &lt;button&gt;
+                        &lt;img
+                            src=&quot;https://api.iconify.design/icon-park:buy.svg?color=%23888888&quot;
+                            alt=&quot;add&quot;
+                        /&gt;
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+}
+export default App;
+`
+                },
+                {
+                    text1: `<b>When to use React useRef hook?</b>
+1) <u>Accessing DOM Elements</u>: useRef is often used to directly access a DOM element in your JSX. This is useful for things like focusing on an input field upon a component mounting.
+
+2) <u>Storing Mutable Data</u>: It allows you to store data that persists across renders but doesn't cause a re-render when updated, unlike useState.
+
+3) <u>Referencing Interval or Timeout IDs</u>: Useful for keeping track of <u>setInterval</u> or <u>setTimeout</u> IDs, so you can clear them (like with <u>clearInterval or clearTimeout</u>) when needed.
+
+4) <u>Tracking Previous State or Props</u>: It helps in keeping track of a component's previous state or props to compare with current values.
+
+5) <u>Implementing Custom Hooks</u>: useRef can be used within custom hooks to retain stateful values or references across renders without triggering re-renders.
+
+<b>Use-cases of refs in React</b>
+The following are some ref use-cases in React:
+=> <u>Interacting with input elements</u>: You can use refs to access input elements and implement functionalities like focus and auto-completion.
+=> <u>Interacting with third-party UI libraries</u>: You can use refs to interact with third-party UI libraries that might be difficult to access using standard DOM methods. For instance, if you use a third-party library to generate sliders, you can use ref to reference the sliders' DOM element without accessing the library's source code.
+=> <u>Media playback</u>: You may also access media assets like images, audio, and videos using refs. For instance, auto-playing videos and lazy loading images when an element enters the viewport.
+=> <u>Complex animation triggering</u>: Traditionally, CSS keyframes or timeouts are used to determine when to initiate animations. You can also use refs to observe DOM elements and determine when to start an animation.
+
+<b>You shouldn't use refs in the following cases</b>:
+=> <u>Declarative cases</u>: As highlighted above, React is declarative by design. Do not use refs if you can write declarative code.
+=> <u>Elements affecting state</u>: Mutating a ref doesn't re-render a component. Therefore, don't use refs when state changes need to trigger a re-render.
+=> <u>Accessing functional components</u>: You can reference DOM elements and class components using refs because they have instances. On the other hand, functional components do not have instances. Therefore, the code below will not work.`,
+                    code1: `
+                    // Storing Mutable Data:(doesn't cause a re-render)
+                    import React, { useRef } from 'react';
+
+function MyComponent() {
+  const countRef = useRef(0);
+
+  const handleClick = () => {
+    countRef.current += 1;
+    console.log(\`Current count: \${countRef.current}\`);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={handleClick}&gt;Increment Count&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default MyComponent;
+
+//--------------------------
+// Referencing Interval or Timeout IDs (like with clearInterval or clearTimeout)
+
+import React, { useRef, useEffect, useState } from 'react';
+
+function TimerComponent() {
+  const [count, setCount] = useState(0);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    // Start the interval
+    intervalRef.current = setInterval(() => {
+      setCount(prevCount => prevCount + 1);
+    }, 1000);
+
+    // Cleanup function to clear the interval
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+export default TimerComponent;
+
+
+//--------------------------
+// Tracking Previous State or Props
+// State tracking
+import React, { useState, useRef, useEffect } from 'react';
+
+function PreviousStateExample() {
+  const [count, setCount] = useState(0);
+  const prevCountRef = useRef();
+
+  // Update the ref value with the current state on every render
+  useEffect(() => {
+    prevCountRef.current = count;
+  }, [count]);
+
+  // Access the previous state value
+  const prevCount = prevCountRef.current;
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Current count: {count}&lt;/p&gt;
+      &lt;p&gt;Previous count: {prevCount !== undefined ? prevCount : &#39;N/A&#39;}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+export default PreviousStateExample;
+
+//-----------------
+// Prop tracking
+// Parent
+import React, { useState } from 'react';
+import PropTracker from './ChildRef';
+
+function ParentComponent() {
+  const [value, setValue] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;PropTracker value={value} /&gt;
+      &lt;button onClick={() =&gt; setValue(value + 1)}&gt;Increment&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+export default ParentComponent;
+
+
+// Child
+import React, { useEffect, useRef } from 'react';
+function PropTracker({ value }) {
+  // Create a ref to store the previous value of the prop
+  const prevValueRef = useRef();
+  // Update the ref with the current value on every render
+  useEffect(() => {
+    prevValueRef.current = value;
+  }, [value]);
+  // Access the previous prop value
+  const prevValue = prevValueRef.current;
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Current value: {value}&lt;/p&gt;
+      &lt;p&gt;Previous value: {prevValue !== undefined ? prevValue : &#39;N/A&#39;}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+export default PropTracker;
+
+
+//-------
+// Parent:-
+import React, { useState } from 'react';
+import usePrevious from './ChildRef'; // Import the custom hook
+function ExampleComponent() {
+  const [count, setCount] = useState(0);
+  const prevCount = usePrevious(count); // Use the custom hook
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Current count: {count}&lt;/p&gt;
+      &lt;p&gt;Previous count: {prevCount !== undefined ? prevCount : &#39;N/A&#39;}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+export default ExampleComponent;
+
+// custom hook
+import { useRef, useEffect } from 'react';
+// Custom hook to track the previous value
+function usePrevious(value) {
+  // Create a ref to store the previous value
+  const ref = useRef();
+  // Update the ref with the current value after each render
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  // Return the previous value from the ref
+  return ref.current;
+}
+export default usePrevious;
+
+`
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+            ],
+        },
+        {
+            id: 52,
+            title: "forwardRef",
+            note: [
+                {
+                    text1: `<b>forwardRef</b> is a utility function that passes down a <b>ref</b> through a component to one of its children. This is particularly useful when you need to access a DOM element or component instance directly in a parent component but the desired child element is wrapped by a higher-order component or a component that doesn't expose the <b>ref</b> by default.
+
+<b>forwardRef</b> takes a functional component as its argument and returns a new component with a forwarded <b>ref</b> attribute. This allows you to directly access the underlying child DOM node or instance from a parent component using the <b>ref</b>.
+
+<b>React.forwardRef</b> is a higher-order component in React that allows you to forward a ref to a child component. This is particularly useful when you need to access the DOM nodes or component instances of a child component from a parent component.
+
+<b>When to Use React.forwardRef</b>:
+    <b>Accessing DOM Elements</b>: When you want to give a parent component access to a child component's DOM node.
+    <b>Component Libraries</b>: When building reusable component libraries where the parent might need to interact directly with a component's DOM.
+    <b>Higher-Order Components</b>: When wrapping components in higher-order components and you need to forward refs through them.
+
+<b>Basic Usage of React.forwardRef</b>
+Here's a step-by-step guide on how to use <b>React.forwardRef</b>:
+    <b>1) Create a Component Using forwardRef</b>: Define a component that accepts ref as a second argument in addition to its props. This ref will be forwarded to the underlying DOM element or component.
+`,
+                    code1: `//Child
+                    import React, { forwardRef } from 'react';
+// Create a button component that forwards its ref
+const FancyButton = forwardRef((props, ref) => {
+  return (
+    &lt;input ref={ref} className=&quot;fancy-button&quot; defaultValue={props.children}/&gt;
+  );
+});
+export default FancyButton;
+
+//------------
+// Parent
+import React, { useRef } from 'react';
+import FancyButton from './ChildRef';
+
+function ParentComponent() {
+  const buttonRef = useRef();
+  const handleClick = () => {
+    if (buttonRef.current) {
+      buttonRef.current.focus(); // Focus the button when clicking the "Focus" button
+    }
+  };
+  return (
+    &lt;div&gt;
+      &lt;FancyButton ref={buttonRef}&gt;Click me!&lt;/FancyButton&gt;
+      &lt;button onClick={handleClick}&gt;Focus the fancy button&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+export default ParentComponent;
+
+
+                    `
+                },
+                {
+                    text1: `<b>Key Points to Remember</b>:
+
+    <b>Function Signature: React.forwardRef</b> takes a render function that receives <b>props</b> and <b>ref</b>. The ref should be passed down to a DOM element or another component that you want to expose.
+    <b>Handling Refs</b>: If the ref is forwarded to another component, that component must be able to handle refs, typically by using React.
+    forwardRef itself.
+    <b>Ref Forwarding and Functional Components</b>: React.forwardRef is most commonly used with functional components, but you can also use it with 
+    class components if necessary.
+    <b>Default Props and Context</b>: React.forwardRef does not affect how you set default props or use context. It only changes how refs are forwarded.
+
+<b>Practical Use Cases</b>:
+    <u>Integrating with Third-Party Libraries</u>: Forward refs to integrate with third-party libraries that require direct DOM manipulation.
+    <u>Custom Input Components</u>: Build custom input components that need to expose their internal DOM elements (e.g., focus, selection).`,
+                    code1: `const Component = forwardRef((props, ref) => {
+      // Use ref on a DOM element or pass it to another component
+    });`
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+            ],
+        },
+        {
+            id: 52,
+            title: "useContext",
+            note: [
+                {
+                    text1: `<b>1. Introduction to React and useContext</b>:
+
+                    <b>2. What is Context in React?</b>
+                    Instead of passing the props down through each component, React Context allows you to broadcast data to the components below.
+                Accesses the value of a React context within a functional component.
+
+                The <b>useContext</b> hook is used to consume values from a React context. Context provides a way to pass data through the component tree without having to pass props manually at every level. 
+
+                 <b>context</b> refers to a mechanism that allows data to be shared across multiple components without explicitly passing it through props. 
+
+                 <b>3. Why useContext is Important</b>
+<u>Sharing Data Across Components</u>
+One of the main benefits of using context is the ability to share data across multiple components. This is especially useful when dealing with data that needs to be accessed by several components at different levels of the component tree.
+
+<u>Avoiding Prop Drilling</u>
+Prop drilling is the process of passing data from one component to another through props. This can become cumbersome and difficult to manage when data needs to be passed through multiple levels of components. Context eliminates the need for prop drilling by providing a centralized way to share data.
+
+<b>4. Creating a Context in React</b>
+To create a context in React, we use the <b>React.createContext</b> method. This method returns a context object that can be used to provide and consume values within the component tree.
+
+<b>5. Using the useContext Hook</b>
+<u>Accessing Context Values</u>
+The <u>useContext</u> hook allows us to access the value of a context within a functional component. By passing the context object to the useContext hook, we can retrieve the current value of the context.
+<u>Updating Context Values</u>
+To update the value of a context, we use the context provider. The provider allows us to define the value that should be made available to all components that consume the context. 
+
+<b>=> Parameters </b>
+<b>SomeContext</b>: The context that you've previously created with <b>createContext</b>. The context itself does not hold the information, it only represents the kind of information you can provide or read from components.
+<b>=> Returns </b>
+<b>useContext</b> returns the context value for the calling component. It is determined as the value passed to the closest <b>SomeContext.Provider</b> above the calling component in the tree. If there is no such provider, then the returned value will be the <b>defaultValue</b> you have passed to <b>createContext</b> for that context. The returned value is always up-to-date. React automatically re-renders components that read some context if it changes.
+
+<b>=> Caveats </b>
+<b>useContext()</b> call in a component is not affected by providers returned from the same component. The corresponding <b> <Context.Provider>  </b>needs to be above the component doing the <b>useContext()</b> call.
+React automatically re-renders all the children that use a particular context starting from the provider that receives a different <b>value</b>. The previous and the next values are compared with the <b>Object.is</b> comparison. Skipping re-renders with <b>memo</b> does not prevent the children receiving fresh context values.
+If your build system produces duplicates modules in the output (which can happen with symlinks), this can break context. Passing something via context only works if <b>SomeContext</b> that you use to provide context and <b>SomeContext</b> that you use to read it are exactly the same object, as determined by a <b>===</b> comparison.
+`,
+                    code1: `import { useContext } from 'react';
+function Button() {
+  const theme = useContext(ThemeContext);
+  // ...`
+                },
+                {
+                    text1: `<b>Practical Example: Theme Switcher</b>
+                    <b>Adding a Theme Provider</b>
+Then we'll add a ThemeProvider component that will provide the context value to the child components.
+
+<b>Implementing a Theme Switcher Child Component</b>
+Next, we'll create a theme switcher component that allows users to toggle between light and dark themes with a button press. This component will consume the ThemeContext through useContext.
+
+<b>Wrapping with the ThemeProvider</b>
+In all React applications we have a functional component named <b>App</b> that serves as the root component of the React application. The <b>App</b> component is responsible for rendering the <b>ThemeSwitcher</b> component, which is a child component that allows users to switch between different themes (e.g., light and dark themes).
+
+The <b>ThemeProvider</b> component is a context provider that is used to make the theme-related data and functionality available to all of its child components. The <b>ThemeProvider</b> component is created using the React context API and is responsible for managing the theme state and providing a function to toggle the theme.
+
+The <b>ThemeSwitcher</b> component is wrapped inside the <b>ThemeProvider</b> component, which means that the <b>ThemeSwitcher</b> component (and any other child components inside the <b>ThemeProvider</b>) will have access to the theme context. This access is achieved using the <b>useContext hook</b>.
+`,
+                    code1: `//ThemeProvider.js
+                    import React, { createContext, useContext, useState } from 'react';
+
+export const ThemeContext = createContext({
+    theme: 'light',
+    toggleTheme : () => {},
+})
+
+export const ThemeProvider = ({children}) => {
+    const [theme, setTheme] = useState('dark')
+    const toggleTheme = () => {
+        setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
+    }
+
+    return (
+        &lt;ThemeContext.Provider value={{theme, toggleTheme}}&gt;{children}&lt;/ThemeContext.Provider&gt;
+    )
+}
+
+
+// ThemeSwitcher.js
+import { useContext } from "react";
+import { ThemeContext } from "./ThemeProvider";
+import './Theme.css'
+const ThemeSwitcher = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext)
+    return (
+        &lt;div &gt;
+            &lt;p className=&#39;themeTitleText&#39;&gt;Current theme: {theme}&lt;/p&gt;
+            &lt;button onClick={toggleTheme} className={theme + &#39;ButtonTheme&#39;} &gt;Toggle Theme&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}
+export default ThemeSwitcher
+
+
+// App.js
+import Mainroute from './Mainroute'
+
+import { ThemeProvider } from './components/UseContext/theme-switch/ThemeProvider';
+function App() {
+    return (
+      &lt;div&gt;
+        &lt;ThemeProvider&gt; 
+          &lt;Mainroute/&gt;
+        &lt;/ThemeProvider&gt;
+      &lt;/div&gt;
+    );
+  }
+export default App;
+
+
+//Mainroute.js
+function App() {
+    const {theme} = useContext(ThemeContext)
+    return (
+        &lt;div className={theme + &#39;Theme&#39;}&gt;
+            ...
+        &lt;/div&gt;
+    );
+}
+
+// Theme.css
+.lightTheme {
+    background-color: #fff;
+    color: #000;
+}
+.darkTheme {
+    background-color: #000;
+    color: #fff;
+}
+.darkButtonTheme {
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #fff;  
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.darkButtonTheme:hover {
+    background-color: #ddd; /* Change the background color on hover */
+    color: #000;
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+}
+.lightButtonTheme {
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+.lightButtonTheme:hover {
+    background-color: #ddd; /* Change the background color on hover */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+}
+.themeTitleText {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 20px;
+}
+
+// TypeScript
+// https://dev.to/nas5w/toggling-light-dark-theme-in-react-with-usecontext-39hn
+`
+                },
+                {
+                    text1: ``,
+                    code1: `//Updating a value via context(ThemeContext )
+                    // Example : 1
+                    import { createContext, useContext, useState } from 'react';
+
+const ThemeContext = createContext(null);
+
+export default function MyApp() {
+  const [theme, setTheme] = useState('light');
+  return (
+    &lt;ThemeContext.Provider value={theme}&gt;
+      &lt;Form /&gt;
+      &lt;label&gt;
+        &lt;input
+          type=&quot;checkbox&quot;
+          checked={theme === &#39;dark&#39;}
+          onChange={(e) =&gt; {
+            setTheme(e.target.checked ? &#39;dark&#39; : &#39;light&#39;)
+          }}
+        /&gt;
+        Use dark mode
+      &lt;/label&gt;
+    &lt;/ThemeContext.Provider&gt;
+  )
+}
+
+function Form({ children }) {
+  return (
+    &lt;Panel title=&quot;Welcome&quot;&gt;
+      &lt;Button&gt;Sign up&lt;/Button&gt;
+      &lt;Button&gt;Log in&lt;/Button&gt;
+    &lt;/Panel&gt;
+  );
+}
+
+function Panel({ title, children }) {
+  const theme = useContext(ThemeContext);
+  const className = 'panel-' + theme;
+  return (
+    &lt;section className={className}&gt;
+      &lt;h1&gt;{title}&lt;/h1&gt;
+      {children}
+    &lt;/section&gt;
+  )
+}
+
+function Button({ children }) {
+  const theme = useContext(ThemeContext);
+  const className = 'button-' + theme;
+  return (
+    &lt;button className={className}&gt;
+      {children}
+    &lt;/button&gt;
+  );
+}
+
+//////////////
+// Updating an object via context (login)
+/////////////
+
+import { createContext, useContext, useState } from 'react';
+
+const CurrentUserContext = createContext(null);
+
+export default function MyApp() {
+  const [currentUser, setCurrentUser] = useState(null);
+  return (
+    &lt;CurrentUserContext.Provider
+      value={{
+        currentUser,
+        setCurrentUser
+      }}
+    &gt;
+      &lt;Form /&gt;
+    &lt;/CurrentUserContext.Provider&gt;
+  );
+}
+
+
+function Form({ children }) {
+    return (
+        &lt;Panel title=&quot;Welcome&quot;&gt;
+        &lt;LoginButton /&gt;
+      &lt;/Panel&gt;
+    );
+  }
+
+  function LoginButton() {
+    const {
+      currentUser,
+      setCurrentUser
+    } = useContext(CurrentUserContext);
+
+    if (currentUser !== null) {
+      return <p>You logged in as {currentUser.name}.</p>;
+    }
+
+    return (
+        &lt;Button onClick={() =&gt; {
+            setCurrentUser({ name: &#39;Advika&#39; })
+          }}&gt;Log in as Advika&lt;/Button&gt;
+    );
+  }
+
+  function Panel({ title, children }) {
+    return (
+        &lt;section className=&quot;panel&quot;&gt;
+        &lt;h1&gt;{title}&lt;/h1&gt;
+        {children}
+      &lt;/section&gt;
+    )
+  }
+
+  function Button({ children, onClick }) {
+    return (
+        &lt;button className=&quot;button&quot; onClick={onClick}&gt;
+        {children}
+      &lt;/button&gt;
+    );
+  }
+
+
+/////////////////
+// Multiple contexts
+// In this example, there are two independent contexts. "ThemeContext" provides the current theme, which is a string, while "CurrentUserContext" holds the object representing the current user.
+////////////////
+import { createContext, useContext, useState } from 'react';
+
+const ThemeContext = createContext(null);
+const CurrentUserContext = createContext(null);
+
+export default function MultipleContexts() {
+  const [theme, setTheme] = useState('light');
+  const [currentUser, setCurrentUser] = useState(null);
+  return (
+    &lt;ThemeContext.Provider value={theme}&gt;
+      &lt;CurrentUserContext.Provider
+        value={{
+          currentUser,
+          setCurrentUser
+        }}
+      &gt;
+        &lt;WelcomePanel /&gt;
+        &lt;label&gt;
+          &lt;input
+            type=&quot;checkbox&quot;
+            checked={theme === &#39;dark&#39;}
+            onChange={(e) =&gt; {
+              setTheme(e.target.checked ? &#39;dark&#39; : &#39;light&#39;)
+            }}
+          /&gt;
+          Use dark mode
+        &lt;/label&gt;
+      &lt;/CurrentUserContext.Provider&gt;
+    &lt;/ThemeContext.Provider&gt;
+  )
+}
+
+function WelcomePanel({ children }) {
+  const {currentUser} = useContext(CurrentUserContext);
+  return (
+    &lt;Panel title=&quot;Welcome&quot;&gt;
+      {currentUser !== null ?
+        &lt;Greeting /&gt; :
+        &lt;LoginForm /&gt;
+      }
+    &lt;/Panel&gt;
+  );
+}
+
+function Greeting() {
+  const {currentUser} = useContext(CurrentUserContext);
+  return (
+    &lt;p&gt;You logged in as {currentUser.name}.&lt;/p&gt;
+  )
+}
+
+function LoginForm() {
+  const {setCurrentUser} = useContext(CurrentUserContext);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const canLogin = firstName.trim() !== '' && lastName.trim() !== '';
+  return (
+    &lt;&gt;
+      &lt;label&gt;
+        First name{&#39;: &#39;}
+        &lt;input
+          required
+          value={firstName}
+          onChange={e =&gt; setFirstName(e.target.value)}
+        /&gt;
+      &lt;/label&gt;
+      &lt;label&gt;
+        Last name{&#39;: &#39;}
+        &lt;input
+        required
+          value={lastName}
+          onChange={e =&gt; setLastName(e.target.value)}
+        /&gt;
+      &lt;/label&gt;
+      &lt;Button
+        disabled={!canLogin}
+        onClick={() =&gt; {
+          setCurrentUser({
+            name: firstName + &#39; &#39; + lastName
+          });
+        }}
+      &gt;
+        Log in
+      &lt;/Button&gt;
+      {!canLogin &amp;&amp; &lt;i&gt;Fill in both fields.&lt;/i&gt;}
+    &lt;/&gt;
+  );
+}
+
+function Panel({ title, children }) {
+  const theme = useContext(ThemeContext);
+//   const className = 'panel-' + theme;
+  const className = theme + 'Theme';
+  return (
+    &lt;section className={className}&gt;
+      &lt;h1&gt;{title}&lt;/h1&gt;
+      {children}
+    &lt;/section&gt;
+  )
+}
+
+function Button({ children, disabled, onClick }) {
+  const theme = useContext(ThemeContext);
+  const className = 'button-' + theme;
+  return (
+    &lt;button
+      className={className}
+      disabled={disabled}
+      onClick={onClick}
+    &gt;
+      {children}
+    &lt;/button&gt;
+  );
+}
+
+///////////////////
+// Extracting providers to a component 
+//////////////////
+import { createContext, useContext, useState } from 'react';
+
+const ThemeContext = createContext(null);
+const CurrentUserContext = createContext(null);
+
+export default function MyApp() {
+  const [theme, setTheme] = useState('light');
+  return (
+    &lt;MyProviders theme={theme} setTheme={setTheme}&gt;
+      &lt;WelcomePanel /&gt;
+      &lt;label&gt;
+        &lt;input
+          type=&quot;checkbox&quot;
+          checked={theme === &#39;dark&#39;}
+          onChange={(e) =&gt; {
+            setTheme(e.target.checked ? &#39;dark&#39; : &#39;light&#39;)
+          }}
+        /&gt;
+        Use dark mode
+      &lt;/label&gt;
+    &lt;/MyProviders&gt;
+  );
+}
+
+function MyProviders({ children, theme, setTheme }) {
+  const [currentUser, setCurrentUser] = useState(null);
+  return (
+    &lt;ThemeContext.Provider value={theme}&gt;
+      &lt;CurrentUserContext.Provider
+        value={{
+          currentUser,
+          setCurrentUser
+        }}
+      &gt;
+        {children}
+      &lt;/CurrentUserContext.Provider&gt;
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+function WelcomePanel({ children }) {
+  const {currentUser} = useContext(CurrentUserContext);
+  return (
+    &lt;Panel title=&quot;Welcome&quot;&gt;
+      {currentUser !== null ?
+        &lt;Greeting /&gt; :
+        &lt;LoginForm /&gt;
+      }
+    &lt;/Panel&gt;
+  );
+}
+
+function Greeting() {
+  const {currentUser} = useContext(CurrentUserContext);
+  return (
+    &lt;p&gt;You logged in as {currentUser.name}.&lt;/p&gt;
+  )
+}
+
+function LoginForm() {
+  const {setCurrentUser} = useContext(CurrentUserContext);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const canLogin = firstName !== '' && lastName !== '';
+  return (
+    &lt;&gt;
+      &lt;label&gt;
+        First name{&#39;: &#39;}
+        &lt;input
+          required
+          value={firstName}
+          onChange={e =&gt; setFirstName(e.target.value)}
+        /&gt;
+      &lt;/label&gt;
+      &lt;label&gt;
+        Last name{&#39;: &#39;}
+        &lt;input
+        required
+          value={lastName}
+          onChange={e =&gt; setLastName(e.target.value)}
+        /&gt;
+      &lt;/label&gt;
+      &lt;Button
+        disabled={!canLogin}
+        onClick={() =&gt; {
+          setCurrentUser({
+            name: firstName + &#39; &#39; + lastName
+          });
+        }}
+      &gt;
+        Log in
+      &lt;/Button&gt;
+      {!canLogin &amp;&amp; &lt;i&gt;Fill in both fields.&lt;/i&gt;}
+    &lt;/&gt;
+  );
+}
+
+function Panel({ title, children }) {
+  const theme = useContext(ThemeContext);
+  const className = theme + 'Theme';
+  return (
+    &lt;section className={className}&gt;
+      &lt;h1&gt;{title}&lt;/h1&gt;
+      {children}
+    &lt;/section&gt;
+  )
+}
+
+function Button({ children, disabled, onClick }) {
+  const theme = useContext(ThemeContext);
+  const className =  theme + 'Button' + 'Theme';
+  return (
+    &lt;button
+      className={className}
+      disabled={disabled}
+      onClick={onClick}
+    &gt;
+      {children}
+    &lt;/button&gt;
+  );
+}
+
+//////////////////
+// Scaling up with context and a reducer
+//////////////////
+// TaskApp.js
+import AddTask from './AddTask.js';
+import TaskList from './TaskList.js';
+import { TasksProvider } from './TasksContext.js';
+
+export default function TaskApp() {
+  return (
+    &lt;TasksProvider&gt;
+      &lt;h1&gt;Day off in Kyoto&lt;/h1&gt;
+      &lt;AddTask /&gt;
+      &lt;TaskList /&gt;
+    &lt;/TasksProvider&gt;
+  );
+}
+
+//TasksContext.js
+import { createContext, useContext, useReducer } from 'react';
+const TasksContext = createContext(null);
+const TasksDispatchContext = createContext(null);
+
+export function TasksProvider({ children }) {
+  const [tasks, dispatch] = useReducer(
+    tasksReducer,
+    initialTasks
+  );
+
+  return (
+    &lt;TasksContext.Provider value={tasks}&gt;
+      &lt;TasksDispatchContext.Provider value={dispatch}&gt;
+        {children}
+      &lt;/TasksDispatchContext.Provider&gt;
+    &lt;/TasksContext.Provider&gt;
+  );
+}
+
+export function useTasks() {
+  return useContext(TasksContext);
+}
+
+export function useTasksDispatch() {
+  return useContext(TasksDispatchContext);
+}
+
+function tasksReducer(tasks, action) {
+  switch (action.type) {
+    case 'added': {
+      return [...tasks, {
+        id: action.id,
+        text: action.text,
+        done: false
+      }];
+    }
+    case 'changed': {
+      return tasks.map(t => {
+        if (t.id === action.task.id) {
+          return action.task;
+        } else {
+          return t;
+        }
+      });
+    }
+    case 'deleted': {
+      return tasks.filter(t => t.id !== action.id);
+    }
+    default: {
+      throw Error('Unknown action: ' + action.type);
+    }
+  }
+}
+
+const initialTasks = [
+  { id: 0, text: 'Philosophers Path', done: true },
+  { id: 1, text: 'Visit the temple', done: false },
+  { id: 2, text: 'Drink matcha', done: false }];
+
+
+// AddTask.js
+import { useState, useContext } from 'react';
+import { useTasksDispatch } from './TasksContext.js';
+export default function AddTask() {
+  const [text, setText] = useState('');
+  const dispatch = useTasksDispatch();
+  return (
+    &lt;&gt;
+      &lt;input
+        placeholder=&quot;Add task&quot;
+        value={text}
+        onChange={e =&gt; setText(e.target.value)}
+      /&gt;
+      &lt;button onClick={() =&gt; {
+        setText(&#39;&#39;);
+        dispatch({
+          type: &#39;added&#39;,
+          id: nextId++,
+          text: text,
+        }); 
+      }}&gt;Add&lt;/button&gt;
+    &lt;/&gt;
+  );
+}
+
+let nextId = 3;
+
+
+//TaskList.js
+import { useState, useContext } from 'react';
+import { useTasks, useTasksDispatch } from './TasksContext.js';
+
+export default function TaskList() {
+  const tasks = useTasks();
+  return (
+    &lt;ul&gt;
+      {tasks.map(task =&gt; (
+        &lt;li key={task.id}&gt;
+          &lt;Task task={task} /&gt;
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}
+
+function Task({ task }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const dispatch = useTasksDispatch();
+  let taskContent;
+  if (isEditing) {
+    taskContent = (
+        &lt;&gt;
+        &lt;input
+          value={task.text}
+          onChange={e =&gt; {
+            dispatch({
+              type: &#39;changed&#39;,
+              task: {
+                ...task,
+                text: e.target.value
+              }
+            });
+          }} /&gt;
+        &lt;button onClick={() =&gt; setIsEditing(false)}&gt;
+          Save
+        &lt;/button&gt;
+      &lt;/&gt;
+    );
+  } else {
+    taskContent = (
+        &lt;&gt;
+        {task.text}
+        &lt;button onClick={() =&gt; setIsEditing(true)}&gt;
+          Edit
+        &lt;/button&gt;
+      &lt;/&gt;
+    );
+  }
+  return (
+    &lt;label&gt;
+      &lt;input
+        type=&quot;checkbox&quot;
+        checked={task.done}
+        onChange={e =&gt; {
+          dispatch({
+            type: &#39;changed&#39;,
+            task: {
+              ...task,
+              done: e.target.checked
+            }
+          });
+        }}
+      /&gt;
+      {taskContent}
+      &lt;button onClick={() =&gt; {
+        dispatch({
+          type: &#39;deleted&#39;,
+          id: task.id
+        });
+      }}&gt;
+        Delete
+      &lt;/button&gt;
+    &lt;/label&gt;
+  );
+}
+
+`
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+            ],
+        },
+        {
+            id: 52,
+            title: "useReducer",
+            note: [
+                {
+                    text1: `<b>useReducer</b> is a React Hook that lets you add a reducer to your component.
+
+                    Components with many state updates spread across many event handlers can get overwhelming. For these cases, you can consolidate all the state update logic outside your component in a single function, called a reducer.
+    <span style="color:red">const [state, dispatch] = useReducer(reducer, initialArg, init?)</span>
+
+Although reducers can <b>reduce</b> the amount of code inside your component, they are actually named after the <a href="javascript-notes.html#reduce() - reduce elements of an array to a value." target="_blank">reduce()</a> operation that you can perform on arrays.
+
+The <b>reduce()</b> operation lets you take an array and <b>accumulate</b> a single value out of many:
+<span style="color:red">
+const arr = [1, 2, 3, 4, 5];
+const sum = arr.reduce(
+  (result, number) => result + number
+); // 1 + 2 + 3 + 4 + 5 = 15
+</span>
+The function you pass to reduce is known as a <b>reducer</b>. It takes the result so far and the current item, then it returns the <u>next result</u>. React reducers are an example of the same idea: they take the state so far and the action, and return the next state. In this way, they accumulate actions over time into state.
+
+You could even use the <b>reduce()</b> method with an <b>initialState</b> and an array of <b>actions</b> to calculate the final state by passing your reducer function to it:
+
+<span style="color:red"> useReducer(reducer, initialArg, init?) </span>
+Call useReducer at the top level of your component to manage its state with a reducer.
+
+<b>What is a Reducer?</b>
+A reducer is a pure function that takes the current state and an action as arguments and returns a new state. The reducer function is responsible for updating the state based on the action received. It's a core concept in the Redux library and also used with useReducer in React.
+
+    <b>How Reducers Work</b>
+    <b>Current State</b>: The current state of the application or a component.
+    <b>Action</b>: An object that describes what happened and often contains additional data (payload).
+    <b>New State</b>: The state after the action has been processed by the reducer.
+
+<b>Parameters </b>
+<u>reducer</u>: The reducer function that specifies how the state gets updated. It must be pure, should take the state and action as arguments, and should return the next state. State and action can be of any types.
+<u>initialArg</u>: The value from which the initial state is calculated. It can be a value of any type. How the initial state is calculated from it depends on the next init argument.
+<u>optional init</u>: The initializer function that should return the initial state. If it's not specified, the initial state is set to initialArg. Otherwise, the initial state is set to the result of calling init(initialArg).
+
+<b>Returns </b>
+useReducer returns an array with exactly two values:
+1) The current state. During the first render, it's set to init(initialArg) or initialArg (if there's no init).
+2) The dispatch function that lets you update the state to a different value and trigger a re-render.
+
+<b>Caveats </b>
+=> <b>useReducer</b> is a Hook, so you can only call it <b>at the top level of your component</b> or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+=> In Strict Mode, React will <b>call your reducer and initializer twice</b> in order to <a href="https://react.dev/reference/react/useReducer#my-reducer-or-initializer-function-runs-twice" target="_blank"> help you find accidental impurities</a>. This is development-only behavior and does not affect production. If your reducer and initializer are pure (as they should be), this should not affect your logic. The result from one of the calls is ignored.
+
+                    `,
+                    code1: `import React, { useReducer } from 'react';
+
+// Initial state
+const initialState = { count: 0 };
+
+// Reducer function
+function reducer(state, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { ...state, count: state.count + 1 };
+    case 'DECREMENT':
+      return { ...state, count: state.count - 1 };
+    default:
+      throw new Error('Unknown action type');
+  }
+}
+
+function Counter() {
+  // Use useReducer hook
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {state.count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: &#39;INCREMENT&#39; })}&gt;Increment&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: &#39;DECREMENT&#39; })}&gt;Decrement&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Counter;
+`
+                },
+                {
+                    text1: `<b>dispatch function </b>
+The <b>dispatch</b> function returned by <b>useReducer</b> lets you update the state to a different value and trigger a re-render. You need to pass the action as the only argument to the <b>dispatch</b> function:
+<span style="color:red"> const [state, dispatch] = useReducer(reducer, { age: 42 });
+function handleClick() {
+  dispatch({ type: 'incremented_age' });
+  // ... </span>
+React will set the next state to the result of calling the <b>reducer</b> function you've provided with the current <b>state</b> and the action you've passed to <b>dispatch</b>.
+
+<b>Parameters </b>
+<b>action</b>: The action performed by the user. It can be a value of any type. By convention, an action is usually an object with a <b>type</b> property identifying it and, optionally, other properties with additional information.
+
+<b>Returns </b>
+<b>dispatch</b> functions do not have a return value.
+
+<b>Caveats </b>
+The <u>dispatch</u> function <b>only updates the state variable for the next render</b>. If you read the state variable after calling the <u>dispatch</u> function, <a href="https://react.dev/reference/react/useReducer#ive-dispatched-an-action-but-logging-gives-me-the-old-state-value" target="_blank">you will still get the old value</a> that was on the screen before your call.
+
+If the new value you provide is identical to the current <u>state</u>, as determined by an <u>Object.is</u> comparison, React will <b>skip re-rendering the component and its children</b>. This is an optimization. React may still need to call your component before ignoring the result, but it shouldn't affect your code.
+
+React <a href="https://react.dev/learn/queueing-a-series-of-state-updates" target="_blank">batches state updates</a>. It updates the screen <b>after all the event handlers have run</b> and have called their <b>set</b> functions. This prevents multiple re-renders during a single event. In the rare case that you need to force React to update the screen earlier, for example to access the DOM, you can use <a href="https://react.dev/reference/react-dom/flushSync" target="_blank">flushSync</a>.
+
+
+Then you need to fill in the code that will calculate and return the next state. By convention, it is common to write it as a <b>switch statement</b>. For each <b>case</b> in the <b>switch</b>, calculate and return some next state.
+
+Actions can have any shape. By convention, it's common to pass objects with a <b>type</b> property identifying the action. It should include the minimal necessary information that the reducer needs to compute the next state.
+
+Read <a href="https://react.dev/learn/updating-objects-in-state" target="_blank"> updating objects in state </a> and <a href="https://react.dev/learn/updating-arrays-in-state" target="_blank">updating arrays in state</a> to learn more.
+`,
+                    code1: `//function reducer(state, action) {
+//   switch (action.type) {
+//     case 'incremented_age': {
+      return {
+        name: state.name,
+        age: state.age + 1
+      };
+    // }
+    // case 'changed_name': {
+      return {
+        name: action.nextName,
+        age: state.age
+      };
+//     }
+//   }
+//   throw Error('Unknown action: ' + action.type);
+//}
+
+//-----------
+
+// function Form() {
+//   const [state, dispatch] = useReducer(reducer, { name: 'Taylor', age: 42 });
+
+//   function handleButtonClick() {
+    dispatch({ type: 'incremented_age' });
+//   }
+
+//   function handleInputChange(e) {
+    dispatch({
+      type: 'changed_name',
+      nextName: e.target.value
+    });
+//   }
+  // ...
+
+
+//------------
+//   State is read-only. Don't modify any objects or arrays in state:
+
+// function reducer(state, action) {
+//   switch (action.type) {
+//     case 'incremented_age': {
+      🚩 Dont mutate an object in state like this:
+      state.age = state.age + 1;
+    //   return state;
+    // }
+// Instead, always return new objects from your reducer:
+
+// function reducer(state, action) {
+//   switch (action.type) {
+//     case 'incremented_age': {
+      ✅ Instead, return a new object
+      return {
+        ...state,
+        age: state.age + 1
+      };
+//     }
+
+`
+                },
+                {
+                    text1: ``,
+                    code1: ` // Form (object) 
+// In this example, the reducer manages a state object with two fields: "name" and "age".
+
+import { useReducer } from 'react';
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'incremented_age': {
+      return {
+        name: state.name,
+        age: state.age + 1
+      };
+    }
+    case 'changed_name': {
+      return {
+        name: action.nextName,
+        age: state.age
+      };
+    }
+  }
+  throw Error('Unknown action: ' + action.type);
+}
+
+const initialState = { name: 'Taylor', age: 42 };
+
+export default function Form() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  function handleButtonClick() {
+    dispatch({ type: 'incremented_age' });
+  }
+
+  function handleInputChange(e) {
+    dispatch({
+      type: 'changed_name',
+      nextName: e.target.value
+    }); 
+  }
+
+  return (
+    &lt;&gt;
+      &lt;input
+        value={state.name}
+        onChange={handleInputChange}
+      /&gt;
+      &lt;button onClick={handleButtonClick}&gt;
+        Increment age
+      &lt;/button&gt;
+      &lt;p&gt;Hello, {state.name}. You are {state.age}.&lt;/p&gt;
+    &lt;/&gt;
+  );
+}
+
+//------------
+// Todo list (array) 
+
+import { useReducer, useState } from 'react';
+
+function tasksReducer(tasks, action) {
+  switch (action.type) {
+    case 'added': {
+      return [...tasks, {
+        id: action.id,
+        text: action.text,
+        done: false
+      }];
+    }
+    case 'changed': {
+      return tasks.map(t => {
+        if (t.id === action.task.id) {
+          return action.task;
+        } else {
+          return t;
+        }
+      });
+    }
+    case 'deleted': {
+      return tasks.filter(t => t.id !== action.id);
+    }
+    default: {
+      throw Error('Unknown action: ' + action.type);
+    }
+  }
+}
+
+function TaskApp({ tasks, handleAddTask, handleChangeTask, handleDeleteTask }) {
+  const [text, setText] = useState('');
+  return (
+    &lt;&gt;
+      &lt;input type=&#39;text&#39; onChange={e =&gt; setText(e.target.value)} /&gt;
+      &lt;button onClick={() =&gt; {
+        setText(&#39;&#39;);
+        handleAddTask(text)
+      }}&gt;Add&lt;/button&gt;
+      &lt;ul&gt;
+        {tasks.map(task =&gt; (
+          &lt;li key={task.id}&gt;
+            &lt;Task task={task} handleChangeTask={handleChangeTask} handleDeleteTask={handleDeleteTask} /&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/&gt;
+  );
+}
+
+function Task({ task, handleAddTask, handleChangeTask, handleDeleteTask }) {
+
+  const [isEditing, setIsEditing] = useState(false);
+  // const dispatch = useTasksDispatch();
+  let taskContent;
+  if (isEditing) {
+    taskContent = (
+      &lt;&gt;
+        &lt;input
+          value={task.text}
+          onChange={e =&gt; {
+            handleChangeTask({
+              ...task,
+              text: e.target.value
+            })
+          }} /&gt;
+        &lt;button onClick={() =&gt; setIsEditing(false)}&gt;
+          Save
+        &lt;/button&gt;
+      &lt;/&gt;
+    );
+  } else {
+    taskContent = (
+      &lt;&gt;
+        {task.text}
+        &lt;button onClick={() =&gt; { setIsEditing(true); }}&gt;
+          Edit
+        &lt;/button&gt;
+      &lt;/&gt;
+    );
+  }
+  return (
+    &lt;&gt;
+    &lt;label&gt;
+      &lt;input
+        type=&quot;checkbox&quot;
+        checked={task.done}
+        onChange={e =&gt; {
+          handleChangeTask({
+            ...task,
+            done: e.target.checked
+          })
+        }}
+      /&gt;
+      {taskContent}
+      &lt;button onClick={() =&gt; {
+        handleDeleteTask(task.id);
+      }}&gt;
+        Delete
+      &lt;/button&gt;
+    &lt;/label&gt;
+  &lt;/&gt;
+  );
+}
+
+
+export default function Home() {
+  const [tasks, dispatch] = useReducer(
+    tasksReducer,
+    initialTasks
+  );
+
+  function handleAddTask(text) {
+    dispatch({
+      type: 'added',
+      id: nextId++,
+      text: text,
+    });
+  }
+
+  function handleChangeTask(task) {
+    dispatch({
+      type: 'changed',
+      task: task
+    });
+  }
+
+  function handleDeleteTask(taskId) {
+    dispatch({
+      type: 'deleted',
+      id: taskId
+    });
+  }
+
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Prague itinerary&lt;/h1&gt;
+      &lt;TaskApp
+        handleAddTask={handleAddTask}
+        tasks={tasks}
+        handleChangeTask={handleChangeTask}
+        handleDeleteTask={handleDeleteTask}
+      /&gt;
+    &lt;/&gt;
+  );
+}
+
+let nextId = 3;
+const initialTasks = [
+  { id: 0, text: 'Visit Kafka Museum', done: true },
+  { id: 1, text: 'Watch a puppet show', done: false },
+  { id: 2, text: 'Lennon Wall pic', done: false }
+];
+
+`
+                },
+                {
+                    text1: `Next refer <a href="https://react.dev/reference/react/useReducer#avoiding-recreating-the-initial-state" target="_block"> Avoiding recreating the initial state </a>`,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+            ],
+        },
+        {
+            id: 52,
+            title: "useCallback",
+            note: [
+                {
+                    text1: `<b>useCallback</b> is a React Hook that lets you cache a function definition between re-renders.
+                    <b>useCallback</b> is a hook that will return a <b>memoized</b> version of the callback function that only changes if one of the dependencies has changed.
+                    <b>Memoization</b> is a way to cache a result so that it doesn't need to be computed again. This can boost performance.
+                    <span style="color:red"> useCallback(fn, dependencies) </span>
+Call <b>useCallback</b> at the top level of your component to cache a function definition between re-renders:
+
+<b>Parameters</b> 
+<b>fn</b> : The function value that you want to cache. It can take any arguments and return any values. React will return (not call!) your function back to you during the initial render. On next renders, React will give you the same function again if the <b>dependencies</b> have not changed since the last render. Otherwise, it will give you the function that you have passed during the current render, and store it in case it can be reused later. React will not call your function. The function is returned to you so you can decide when and whether to call it.
+<b>dependencies</b> : The list of all reactive values referenced inside of the <b>fn</b> code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is configured for React, it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like <b>[dep1, dep2, dep3]</b>. React will compare each dependency with its previous value using the Object.is comparison algorithm.
+
+<b>Returns</b> 
+On the initial render, <b>useCallback</b> returns the <b>fn</b> function you have passed.
+
+During subsequent renders, it will either return an already stored fn  function from the last render (if the dependencies haven't changed), or return the fn function you have passed during this render.
+
+<b>Caveats</b> 
+=> <b>useCallback</b> is a Hook, so you can only call it <u>at the top level of your component</u> or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+=> React <u>will not throw away the cached function unless there is a specific reason to do that</u>. For example, in development, React throws away the cache when you edit the file of your component. Both in development and in production, React will throw away the cache if your component suspends during the initial mount. In the future, React may add more features that take advantage of throwing away the cache—for example, if React adds built-in support for virtualized lists in the future, it would make sense to throw away the cache for items that scroll out of the virtualized table viewport. This should match your expectations if you rely on useCallback as a performance optimization. Otherwise, a <b>state variable</b> or a <b>ref</b> may be more appropriate.
+
+<b>You need to pass two things to useCallback</b>:
+1) A function definition that you want to cache between re-renders.
+2) A <b>list of dependencies</b> including every value within your component that's used inside your function.
+On the initial render, the <b>returned function</b> you'll get from <b>useCallback</b> will be the function you passed.
+
+On the following renders, React will compare the <b>dependencies</b> with the dependencies you passed during the previous render. If none of the dependencies have changed (compared with <b>Object.is</b>), <b>useCallback</b> will return the same function as before. Otherwise, <b>useCallback</b> will return the function you passed on this render.
+In other words, <b>useCallback</b> caches a function between re-renders until its dependencies change.
+
+
+<b>What is useCallback?</b>
+The useCallback hook is a performance optimization mechanism in React that helps prevent unnecessary re-renders of child components when their parent component re-renders. It achieves this by memoizing (caching) callback functions based on their dependencies. If the dependencies haven't changed, the same function reference is returned, avoiding the creation of a new function object on every render.
+
+<b>When to Use useCallback</b>:
+<b>Passing callbacks as props to child components</b>: When a parent component passes a callback function as a prop to a child component, and the child component relies on the same callback reference across renders (e.g., for event handlers), useCallback can prevent the child from re-rendering unnecessarily due to a change in the parent's state or props.
+<b>Callbacks that are expensive to create</b>: If creating the callback function involves complex calculations or fetching data, using useCallback can improve performance by ensuring it's only created when its dependencies change.
+
+<b>Let's walk through an example to see when this is useful.</b>
+Say you're passing a <b>handleSubmit</b> function down from the <b>ProductPage</b> to the <b>ShippingForm</b> component:
+
+You've noticed that toggling the <b>theme</b> prop freezes the app for a moment, but if you remove <b> <ShippingForm /> </b>from your JSX, it feels fast. This tells you that it's worth trying to optimize the <b> ShippingForm </b> component.
+
+<b>By default, when a component re-renders, React re-renders all of its children recursively</b>. This is why, when <b>ProductPage</b> re-renders with a different <b>theme</b>, the <b>ShippingForm</b> component also re-renders. This is fine for components that don't require much calculation to re-render. But if you verified a re-render is slow, you can tell <b>ShippingForm</b> to skip re-rendering when its props are the same as on last render by wrapping it in  <a href="https://react.dev/reference/react/memo" target="_block"> memo </a>:
+
+<b>With this change, "ShippingForm" will skip re-rendering if all of its props are the same as on the last render.</b> This is when caching a function becomes important! Let's say you defined <b>handleSubmit</b> without <b>useCallback</b>:
+                    `,
+                    code1: `function ProductPage({ productId, referrer, theme }) {
+  // ...
+  return (
+    &lt;div className={theme}&gt;
+      &lt;ShippingForm onSubmit={handleSubmit} /&gt;
+    &lt;/div&gt;
+  );
+
+  //----------
+  import { memo } from 'react';
+
+const ShippingForm = memo(function ShippingForm({ onSubmit }) {
+  // ...
+});
+
+//---------
+
+function ProductPage({ productId, referrer, theme }) {
+  // Every time the theme changes, this will be a different function...
+  function handleSubmit(orderDetails) {
+    post('/product/' + productId + '/buy', {
+      referrer,
+      orderDetails,
+    });
+  }
+
+  return (
+    &lt;div className={theme}&gt;
+    // {/* ... so ShippingForm's props will never be the same, and it will re-render every time */}
+      &lt;ShippingForm onSubmit={handleSubmit} /&gt;
+    &lt;/div&gt;
+  );
+}
+  `
+                },
+                {
+                    text1: `<b>In JavaScript, a function () {} or () => {} always creates a different function</b>, similar to how the {} object literal always creates a new object. Normally, this wouldn't be a problem, but it means that <b>ShippingForm</b> props will never be the same, and your memo optimization won't work. This is where <b>useCallback</b> comes in handy:
+
+                    As <b>{}</b> notation creates a new Object, the function notation like <b> function () {} or () => {} </b> creates a new function
+
+Normally this isn't an issue but creating new function on every re render defeats the purpose of caching
+
+                    <b>By wrapping "handleSubmit" in "useCallback", you ensure that it's the same function between the re-renders</b> (until dependencies change). You don't have to wrap a function in <b>useCallback</b> unless you do it for some specific reason. In this example, the reason is that you pass it to a component wrapped in memo, and this lets it skip re-rendering. There are other reasons you might need <b>useCallback</b> which are described further on this page.
+Note:-
+<b>You should only rely on <u>useCallback</u> as a performance optimization</b>. If your code doesn't work without it, find the underlying problem and fix it first. Then you may add useCallback back.
+
+<b>useCallback caches the function itself</b>. Unlike <b>useMemo</b>, it does not call the function you provide. Instead, it caches the function you provided so that <b>handleSubmit</b> itself doesn't change unless <b>productId</b> or <b>referrer</b> has changed. This lets you pass the <b>handleSubmit</b> function down without unnecessarily re-rendering <b>ShippingForm</b>. Your code won't run until the user submits the form.
+                    `,
+                    code1: `function ProductPage({ productId, referrer, theme }) {
+  // Tell React to cache your function between re-renders...
+  const handleSubmit = useCallback((orderDetails) => {
+    post('/product/' + productId + '/buy', {
+      referrer,
+      orderDetails,
+    });
+  }, [productId, referrer]); // ...so as long as these dependencies don't change...
+
+  return (
+    &lt;div className={theme}&gt;
+      {/* ...ShippingForm will receive the same props and can skip re-rendering */}
+      &lt;ShippingForm onSubmit={handleSubmit} /&gt;
+    &lt;/div&gt;
+  );
+}`
+                },
+                {
+                    text1: `<b>When Not to Use useCallback</b>:
+<b>Simple callbacks without dependencies</b>: If a callback function is simple and doesn't have any dependencies that change frequently, using useCallback might not be necessary. The overhead of memoization could outweigh the potential performance benefit.
+<b>Callbacks used within the same component</b>: If a callback is only used within the same component where it's created, there's no need for useCallback as React already handles component re-renders efficiently.`,
+                    code1: ``
+                },
+                {
+                    text1: `Let's implement a function called <b>sumFunctionFactory()</b>, which returns another function that sums numbers. Then let's use that function to create two functions <b>function1</b> and <b>function2</b>.
+
+                    The functions <b>function1</b> and <b>function2</b> share the same code source, but they are distinct separate function objects, meaning they refer to different instances, thus Comparing them evaluates to false and that's just how JavaScript works.
+
+                    <b>The useCallback() hook</b>
+                    Going back to React, when a component re-renders, every function inside of the component is recreated and therefore these function's references change between renders.
+
+<b>useCallback(callback, dependencies)</b> will return a memoized instance of the callback that only changes if one of the dependencies has changed. This means that instead of recreating the function object on every re-render, we can use the same function object between renders.
+                    `,
+                    code1: `// factory function
+function sumFunctionFactory() {
+  return (a, b) => a + b;
+}
+
+const function1 = sumFunctionFactory();
+const function2 = sumFunctionFactory();
+
+function1(2, 3);
+// expected output: 5
+function2(2, 3);
+// expected output: 5
+
+console.log(function1 === function2);
+// expected output: false`
+                },
+                {
+                    text1: `To prevent unnecessary expensive list re-renderings, you wrap it into <b>React.memo()</b>.
+The parent component <b> &lt;ParentComponent&gt; </b> provides a handler function to the child component <b>&lt;MyList&gt;</b>:`,
+                    code1: `// MyList.js
+                    import React,{ useEffect } from 'react';
+
+function MyList({ handler, changeDep }) {
+    const items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    useEffect(() => {
+      console.log("Child Component redered");
+    }, []);
+    console.log("Child render----");
+    return (
+        &lt;&gt;
+        {items.map((item, index) =&gt; {
+          return (
+            &lt;div key={index} onClick={handler}&gt;
+              {item}
+            &lt;/div&gt;
+          );
+        })}
+      &lt;/&gt;
+    );
+  }
+
+  export default React.memo(MyList);
+
+  //---------
+// ParentComponent.js
+
+  import React, { useState, useCallback, useEffect } from 'react';
+import MyList from './MyList';
+
+export default function ParentComponent() {
+    const [state, setState] = useState(false);
+    const [dep, setDep] = useState(0);
+    // console.log("Parent Component redered");
+
+    const increment = () => {
+        setDep(e => e + 1)
+    }
+
+    // const handler = (event) => {
+    //     console.log("You clicked ", event.currentTarget);
+    // }
+    const handler = useCallback(
+        (event) => {
+            console.log("You clicked ", event.currentTarget);
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [dep]);
+
+    const statehanddler = () => {
+        setState(!state);
+    };
+
+    return (
+        &lt;&gt;
+            &lt;button onClick={statehanddler}&gt;Change State Of Parent Component&lt;/button&gt;
+            &lt;button onClick={increment}&gt;increment&lt;/button&gt;
+            {dep}
+            &lt;MyList handler={handler} /&gt;
+        &lt;/&gt;
+    );
+} 
+
+
+//------------
+
+
+import React, { useState, useCallback } from 'react';
+
+// Main Task Manager Component
+const TaskManager = () => {
+  const [tasks, setTasks] = useState([]);
+  const [taskInput, setTaskInput] = useState('');
+  const [filter, setFilter] = useState('all'); // 'all', 'active', 'completed'
+
+  // Add a new task
+  const addTask = useCallback(() => {
+    if (taskInput.trim()) {
+      setTasks(prevTasks => [...prevTasks, { text: taskInput, completed: false }]);
+      setTaskInput('');
+    }
+  }, [taskInput]);
+
+  // Toggle task completion
+  const toggleTaskCompletion = useCallback((index) => {
+    setTasks(prevTasks =>
+      prevTasks.map((task, i) =>
+        i === index ? { ...task, completed: !task.completed } : task
+      )
+    );
+  }, []);
+
+  // Filter tasks based on the selected filter
+  const filteredTasks = useCallback(() => {
+    switch (filter) {
+      case 'completed':
+        return tasks.filter(task => task.completed);
+      case 'active':
+        return tasks.filter(task => !task.completed);
+      default:
+        return tasks;
+    }
+  }, [tasks, filter]);
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Task Manager&lt;/h1&gt;
+      &lt;input
+        type=&quot;text&quot;
+        value={taskInput}
+        onChange={(e) =&gt; setTaskInput(e.target.value)}
+        placeholder=&quot;Add a new task...&quot;
+      /&gt;
+      &lt;button onClick={addTask}&gt;Add Task&lt;/button&gt;
+
+      &lt;div&gt;
+        &lt;button onClick={() =&gt; setFilter(&#39;all&#39;)}&gt;All&lt;/button&gt;
+        &lt;button onClick={() =&gt; setFilter(&#39;active&#39;)}&gt;Active&lt;/button&gt;
+        &lt;button onClick={() =&gt; setFilter(&#39;completed&#39;)}&gt;Completed&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;ul&gt;
+        {filteredTasks().map((task, index) =&gt; (
+          &lt;TaskItem
+            key={index}
+            task={task}
+            onToggle={() =&gt; toggleTaskCompletion(index)}
+          /&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+};
+
+// Task Item Component
+const TaskItem = React.memo(({ task, onToggle }) => {
+  console.log(\`Rendering: \${task.text}\`);
+  return (
+    &lt;li onClick={onToggle} style={{ textDecoration: task.completed ? &#39;line-through&#39; : &#39;none&#39; }}&gt;
+      {task.text}
+    &lt;/li&gt;
+  );
+});
+
+export default TaskManager;
+
+`
+                },
+                {
+                    text1: `<a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/" target="_blank">usecallback-guide-use-cases-and-examples</a>`,
+                    code1: ``
+                },
+            ],
+        },
+        {
+            id: 52,
+            title: "useMemo",
+            note: [
+                {
+                    text1: `<b>useMemo</b> is one of the built-in hooks provided by React. It's used for memoization, which is an optimization technique to improve the performance of React components.
+
+Memoization involves caching the results of complex logic so that they can be reused instead of being reimplemented on every render.
+With useMemo, React can store the result of a function call and reuse it when the dependencies of that function haven't changed, rather than recalculating the value on every render.
+
+<b>memoValue</b>: This is the variable that holds the memoized result of the function.
+The first argument is a function that contains the code you want to memorize.
+The second argument is an array of dependencies. If any of these dependencies change between renders, the memoized value will be changed.
+
+But with <b>useMemo</b>, React remembers the result of that function as long as its inputs stay the same. So, if your inputs don't change, React just grabs the stored result instead of recalculating it every time. This saves time and makes your app snappier.
+`,
+                    code1: `const memoValue = useMemo(() => {
+  // complex logic code will goes here
+  return result;
+}, [dependency]);
+
+
+import React, { useState, useMemo } from 'react';
+
+function ShoppingCart() {
+  // State to store the items in the shopping cart
+  const [cartItems, setCartItems] = useState([
+    { id: 1, name: 'Product A', price: 10 },
+    { id: 2, name: 'Product B', price: 15 },
+    { id: 3, name: 'Product C', price: 20 },
+  ]);
+
+  // Calculate the total price of items in the cart
+  const totalPrice = useMemo(() => {
+    console.log('Calculating total price...');
+    return cartItems.reduce((sum, item) => sum + item.price, 0);
+  }, [cartItems]);
+
+  // Function to add an item to the cart
+  const addItemToCart = (item) => {
+    setCartItems([...cartItems, item]);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Shopping Cart&lt;/h1&gt;
+      &lt;ul&gt;
+        {cartItems.map((item) =&gt; (
+          &lt;li key={item.id}&gt;
+            {item.name}: \${item.price}
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+      &lt;p&gt;Total Price: \${totalPrice}&lt;/p&gt;
+      &lt;p&gt;Length of cart - {cartItems.length}&lt;/p&gt;
+      &lt;button onClick={() =&gt; addItemToCart({ id: cartItems.length + 1, name: &#39;Product D&#39;, price: 25 })}&gt;
+        Add Product D
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default ShoppingCart;
+
+//-------------
+
+// Parent.js
+import React, { useEffect, useState } from 'react';
+import ChildMemo from './ChildMemo'
+
+const ParentComponent = () => {
+
+  const [pname, setPname] = useState('')
+  const [product, setProduct] = useState([])
+
+  const [val, setVal] = useState(0)
+
+  const SubmitForm = (e) => {
+    e.preventDefault()
+    setProduct([...product, {id:product.length + 1, pname:pname}])
+    setPname('')
+  }
+
+  const increment = () => {
+    setVal(prev => prev + 1)
+  }
+
+  return (
+    &lt;&gt;
+      &lt;div&gt;
+        &lt;form onSubmit={SubmitForm}&gt;
+          &lt;input type=&#39;text&#39; name=&#39;pname&#39; value={pname} onChange={(e) =&gt; setPname(e.target.value)}/&gt;
+          &lt;button&gt;Submit&lt;/button&gt;
+        &lt;/form&gt;
+        &lt;ChildMemo items = {product} val={val} increment={increment}/&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+};
+
+export default ParentComponent;
+
+//---------
+
+// Child.js
+import React, { useMemo } from 'react';
+
+const ListComponent = ({ items, val, increment }) => {
+    // Expensive computation
+
+    const processItems = useMemo(() => {
+        console.log("memo rendered inside method")
+        return items.map(item => ({ id: item.id, pname: item.pname?.toUpperCase() }));
+    },[items])
+
+    // const processItems = (items) => {
+    //     // Expensive computation
+    //     // Imagine some heavy processing here
+    //     console.log("memo rendered inside method")
+    //     return items.map(item => ({ id: item.id, pname: item.pname?.toUpperCase() }));
+    // };
+    // const processedItems = processItems(items);
+
+    return (
+        &lt;&gt;
+            &lt;ul&gt;
+                {processItems.map(item =&gt; (
+                    &lt;li key={item.id}&gt;{item.pname}&lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+            &lt;p&gt;{val}&lt;/p&gt;
+            &lt;button onClick={increment}&gt;increment&lt;/button&gt;
+        &lt;/&gt;
+    );
+};
+
+export default ListComponent;
+`
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+            ],
+        },
+        {
+            id: 52,
+            title: "useImperativeHandle",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
                 }
+            ],
+        },
+        {
+            id: 52,
+            title: "useLayoutEffect",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ],
+        },
+        {
+            id: 52,
+            title: "useDebugValue",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ],
+        },
+        {
+            id: 52,
+            title: "React.memo()",
+            note: [
+                {
+                    text1: `<b>How to Memoize a React Component</b>
+                    In React, we implement memoization via <b>React.memo()</b>, which is a higher-order component. The React.memo serves as a wrapper for a component and returns a memoized output of that component, which prevents the component or sub-components from unnecessary re-rendering.
+
+There are two ways by which we can use <b>React.memo</b> in our component. We can either use it to wrap the entire component or add it to the part where we export the component.
+
+In the example below you will find the first way of using it:`,
+                    code1: `const newComponent = React.memo((props) => {
+    return (
+      //render with props
+    );
+});
+
+export default newComponent;`
+                },
+                {
+                    text1: `In the syntax above, the <b>newComponent</b> component is wrapped with <b>React.memo()</b>, which creates a memoized version of the component. This memoized version of the component will only re-render if the props passed to it have changed.
+
+And here is the second way you can use <b>React.memo</b>:`,
+                    code1: `const newComponent = (props) => {
+  //render with props
+}
+
+export default React.memo(newComponent);`
+                },
+                {
+                    text1: `The syntax above denotes that we can memoize a component by simply passing it as an argument to React.memo and exporting the result.
+
+<b>Note</b>: React.memo has nothing to do with React hooks. It is an in-built method in React used to aid the optimization of our React applications. If you prefer using a hook to memoize your component, you can use memo in place of React.memo.`,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
             ],
         },
         {
@@ -892,7 +3314,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     The disadvantage of Custom Hooks is it cannot be used inside of the classes.
 
                     Here's a basic example of a custom hook:`,
-                    code1:`                    // useCounter.js
+                    code1: `                    // useCounter.js
                     import {useState} from 'react';
 
           const useCounter = (initialValue, step) => {
@@ -957,7 +3379,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     text1: `StrictMode is a tool for highlighting potential problems in an application. Like Fragment, StrictMode does not render any visible UI. It activates additional checks and warnings for its descendants.
 
                     StrictMode is a development mode feature in React that helps identify common problems in your application and supports you in fixing them. It performs additional checks and warnings to aid developers in writing better code and finding potential issues.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -969,7 +3391,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     text1: `Lazy loading is a strategy that delays the loading of some assets (e.g., images) until they are needed by the user based on the user's activity and navigation pattern; typically, these assets are only loaded when they are scrolled into view.
 
                     lazy loading is an optimization technique or a design pattern in which the loading of an item, whether it's a picture, video, web page, music file, or document, is delayed until it is required, saving bandwidth and precious computing resources.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -981,7 +3403,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     text1: `In React, handling events is a crucial aspect of building interactive user interfaces. There are a few methods for handling events in React, and the appropriate method depends on the context and your specific requirements. Here are the commonly used approaches:
 
                     Inline Event Handling (JSX Syntax):`,
-                    code1:`//You can handle events directly in the JSX using inline event handlers. This is similar to traditional HTML event handling.
+                    code1: `//You can handle events directly in the JSX using inline event handlers. This is similar to traditional HTML event handling.
 
                     &lt;button onClick={handleClick}&gt;Click me&lt;/button&gt;
 
@@ -1038,7 +3460,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     Accessing DOM Elements:
 
                     Refs are often used to interact with or manipulate the properties of DOM elements directly. This can include tasks like focusing on an input field, measuring the size of an element, or triggering imperative animations.`,
-                    code1:`                    class MyComponent extends React.Component {
+                    code1: `                    class MyComponent extends React.Component {
                         constructor(props) {
                         super(props);
                     this.myInput = React.createRef();
@@ -1166,7 +3588,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     When you want to access the props object inside the constructor of a class component, you need to pass props to super(props). This ensures that the this.props object is available within the constructor.
 
                     `,
-                    code1:`class MyComponent extends React.Component {
+                    code1: `class MyComponent extends React.Component {
                         constructor(props) {
                         super(props);
                     // Now, you can access this.props in the constructor
@@ -1178,7 +3600,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                         }
                     }
                     `
-                },        
+                },
                 {
                     text1: `Without passing props to super(props), this.props would be undefined inside the constructor, potentially leading to unexpected behavior or errors.
                     Passing props to the Parent Constructor:
@@ -1215,13 +3637,13 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                                 );
                     }
                 }`
-                },        
+                },
                 {
                     text1: `By passing props to super(props) in the child constructor, you ensure that the parent constructor correctly receives and processes the props necessary for its initialization.
 
                     In summary, using super(props) is crucial in React class components to ensure proper inheritance and to provide the props object to both the parent and child constructors. It allows you to access and initialize properties based on the incoming props within the context of the component's lifecycle.`,
                     code1: ``
-                },        
+                },
                 {
                     text1: ``,
                     code1: ``
@@ -1245,7 +3667,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     Define the PropTypes for your component by specifying the expected types for each prop.
 
 `,
-                    code1:`                    import React from 'react';
+                    code1: `                    import React from 'react';
                     import PropTypes from 'prop-types';
 
                     const MyComponent = ({name, age, isActive}) => {
@@ -1262,7 +3684,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     export default MyComponent;
                     `
-                },          
+                },
                 {
                     text1: `In this above, PropTypes.string, PropTypes.number, and PropTypes.bool are used to specify the expected types of the name, age, and isActive props, respectively. The isRequired validator indicates that these props must be provided.
                     Prop Validation with TypeScript:
@@ -1333,7 +3755,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     text1: `In React, you can conditionally add attributes to components using JavaScript expressions within JSX. The key is to use curly braces { } to embed dynamic values or expressions within the JSX. Below are a few examples demonstrating how to conditionally add attributes:
 
                     `,
-                    code1:`//1. Using Conditional (Ternary) Operator:
+                    code1: `//1. Using Conditional (Ternary) Operator:
                             //----------------------------------
 
                     import React from 'react';
@@ -1465,7 +3887,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     <span style="color:red">npx source-map-explorer build/static/js/main.*.js</span>
 
                     By employing these methods, you can identify and address performance bottlenecks, optimize your application, and ensure a smoother user experience. Remember to measure the impact of changes using performance profiling tools and adjust accordingly.`,
-                    code1:`//1. Performance Profiling Tools:
+                    code1: `//1. Performance Profiling Tools:
                                         import React from 'react';
                     import {unstable_trace as trace} from 'scheduler/tracing';
 
@@ -1576,7 +3998,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     By memoizing the handleClick function, you ensure that the child component doesn't re-render unnecessarily when the parent re-renders.
 
                     Use <b>useMemo</b> when the performance benefits of memoization outweigh the cost of maintaining the memoized value. It's important to note that useMemo is not a silver bullet, and incorrect usage might lead to performance issues. Always measure and profile your application to ensure that memoization provides the expected performance improvements.`,
-                    code1:`
+                    code1: `
                     // 1. Computations in Functional Components
                     //--------------------------------
                     import React, {useMemo} from 'react';
@@ -1666,7 +4088,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     In functional components using hooks, you don't need to worry about binding issues. Hooks preserve the lexical scope, making it easy to use functions without binding.
 
                     By adopting these practices, you can write more concise and readable code while avoiding common binding issues in React components. Arrow functions and functional components with hooks offer a more modern and cleaner approach to handling functions and their scope in React applications.`,
-                    code1:`//1. Arrow Functions in Class Components
+                    code1: `//1. Arrow Functions in Class Components
                             //---------------------------
                     class MyComponent extends React.Component {
                         handleClick = () => {
@@ -1779,7 +4201,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     The <b>mounted</b> phase is crucial for performing actions that should only occur once the component is visible in the DOM. For example, you might use componentDidMount to initiate data fetching, subscribe to events, set up timers, or perform other side effects.
 
                     In summary, a mounted component is a component that has completed its initial rendering and is now part of the DOM, allowing you to perform tasks specific to the component's presence in the user interface.`,
-                    code1:`// In a functional component with hooks, the equivalent to componentDidMount is the useEffect hook with an empty dependency array:
+                    code1: `// In a functional component with hooks, the equivalent to componentDidMount is the useEffect hook with an empty dependency array:
 
                     import React, {useEffect} from 'react';
                     const MyComponent = () => {
@@ -1835,7 +4257,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     &lt;button onClick={handleClick.bind(this, param)}&gt;Click me&lt;/button&gt;
 
                     In summary, events in React are interactions triggered by users or the system that can be handled by React components. Event handling is an essential aspect of building interactive and dynamic user interfaces in React applications.`,
-                    code1:`//Event Handling in Class Components
+                    code1: `//Event Handling in Class Components
                     //--------------------------------
                     import React, {Component} from 'react';
 
@@ -1897,7 +4319,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     <b>Class Inheritance</b>:
                     Class components extend the React.Component class, inheriting its functionality and methods.`,
-                    code1:`//Here's a basic example of a class component in React:
+                    code1: `//Here's a basic example of a class component in React:
 
                     import React, {Component} from 'react';
 
@@ -1978,7 +4400,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     React components describe what the UI should look like at any point in time. This declarative approach makes it easier to understand and reason about the UI.
 
                     In this example, Header, MainContent, and Footer are components that are composed together to create the overall structure of the App component.`,
-                    code1:`//Functional Components:
+                    code1: `//Functional Components:
                     //------------------
                     import React from 'react';
                     const MyComponent = () => {
@@ -2145,7 +4567,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     As of React 16.8, functional components with hooks are the recommended way of writing components in React.
                     They simplify component logic, encourage better code organization, and offer improved performance optimizations.
                     In summary, while class components are still valid and widely used, functional components with hooks have become the standard in modern React development due to their simplicity, readability, and the benefits brought by React Hooks. Functional components are now the preferred choice for writing new components in React.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -2220,7 +4642,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     In both examples, the state object contains properties (count and message in this case), and when the button is clicked, the setState function is used to update the state, triggering a re-render of the component with the new state values.
 
                     The use of a state object allows components to maintain and manage multiple pieces of data that can change independently. State is crucial for creating interactive and dynamic user interfaces in React applications.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -2256,7 +4678,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     In this example, the ParentComponent is passing a prop named "message" with the value "Hello from Parent!" to the ChildComponent. The ChildComponent then displays the value of this prop.
 
                     Props provide a way to make components more dynamic and reusable, as the same component can be used with different sets of data in different parts of the application. The props object is an integral part of the parent-child communication in React.`,
-                    code1:`//Example Usage:
+                    code1: `//Example Usage:
                     // ParentComponent.js:
                     //----------------
                     import React from 'react';
@@ -2334,7 +4756,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     Changes to props do not trigger re-renders. Components re-render only if their own state or props change.
                     In summary, state is internal and mutable data managed by a component, while props are external and immutable data passed from parent components to child components. Understanding when to use state and when to use props is crucial for building effective and maintainable React applications.
 `,
-                    code1:`                    //Example of State:
+                    code1: `                    //Example of State:
                     // Class Component:
                     import React, {Component} from 'react';
 
@@ -2442,7 +4864,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     For example, in a web application using a framework like Django (Python) or Ruby on Rails (Ruby), the framework often follows an MVC architecture. The Model handles database operations, the View handles rendering HTML and presenting data, and the Controller manages the flow of data between the Model and the View.
 
                     Overall, the MVC architecture provides a structured and organized approach to building applications, facilitating better code organization, maintainability, and collaboration among developers.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -2537,7 +4959,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     Conclusion:
                     The choice between React and Angular depends on project requirements, team expertise, and developer preferences. React is known for its simplicity, flexibility, and ease of integration, while Angular provides a more opinionated and structured framework with a full set of features out of the box. Each has its strengths, and the decision often comes down to the specific needs of the project and the development`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -2583,7 +5005,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     Useful in scenarios where you want to integrate React with non-React code or libraries.
                     Can be simpler in some cases, especially when dealing with large and dynamic forms.
                     The choice between controlled and uncontrolled components depends on the specific requirements and constraints of the application. In many cases, controlled components are the preferred choice in React applications due to their predictability and ease of integration with other React features.`,
-                    code1:` // Example:
+                    code1: ` // Example:
                     // Controlled Components
                     import React, {useState} from 'react';
 
@@ -2655,7 +5077,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     <u>Yarn.lock</u>:
                     Similar to package.json, the yarn.lock file is generated by Yarn and locks down the versions of dependencies to ensure consistency across different environments.
                     Choosing between npm and Yarn often depends on personal preference and the requirements of the project. Both package managers are widely used in the React.js community, and developers can seamlessly switch between them without compatibility issues. It's essential to adhere to the chosen package manager's conventions and use the associated configuration files (package.json and yarn.lock) for managing project dependencies.`,
-                    code1:`//npm
+                    code1: `//npm
                     // Example Commands:
                     // # Install a package
                     npm install package-name
@@ -2719,7 +5141,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     The Shadow DOM is a crucial feature for building reusable, encapsulated components in web development. It enhances the modularity and maintainability of web applications by providing a way to create components with encapsulated styles and structure. The Shadow DOM is commonly used in conjunction with custom elements and web components.
 `,
-                    code1:`class MyComponent extends HTMLElement {
+                    code1: `class MyComponent extends HTMLElement {
                         constructor() {
                         super();
 
@@ -2805,7 +5227,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     Widely used in libraries and frameworks like React and Vue.js. The virtual DOM is a key concept in these frameworks for optimizing UI updates.
 
                     In summary, while both the Shadow DOM and the virtual DOM are related to the DOM and web development, they serve different purposes. The Shadow DOM focuses on encapsulation and isolation of styles and structure, while the virtual DOM is a performance optimization technique for efficiently updating the UI by minimizing direct manipulations of the real DOM. They are often used in combination to achieve both encapsulation and performance benefits in web applications.`,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
@@ -2838,7 +5260,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
 
                     By adhering to the principles of pure functions, developers can write code that is more modular, easier to understand, and less error-prone, especially in functional programming paradigms.
 `,
-                    code1:` //Examples of Pure Functions:
+                    code1: ` //Examples of Pure Functions:
                     // Pure Function Example 1
                     function add(x, y) {
                     return x + y;
@@ -2892,7 +5314,7 @@ Whereas the <b>state in a class</b> is always an <b>object</b>, with Hooks, the 
                     <b>Facilitates Memoization</b>:
                     Memoization techniques, such as React's React.memo or custom memoization strategies, work well with pure components.
                     In summary, pure functions in React, often represented by functional components, adhere to the principles of functional programming. They contribute to a more predictable, modular, and maintainable codebase, and they play a key role in React's performance optimizations.`,
-                    code1:` //Here's an example of a pure function in React:
+                    code1: ` //Here's an example of a pure function in React:
                     import React from 'react';
                     // Pure Function Component
 const PureComponent = (props) => {
@@ -2920,10 +5342,9 @@ export default PureComponent;
             note: [
                 {
                     text1: ``,
-                    code1:``
+                    code1: ``
                 }
             ],
         },
-
     ]
 }
