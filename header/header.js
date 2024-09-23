@@ -6,7 +6,7 @@ const navHeader = `
     </div>
 </div>
 <div class="nav-btn">
-    <label for="nav-check">0
+    <label for="nav-check">
         <span></span>
         <span></span>
         <span></span>
