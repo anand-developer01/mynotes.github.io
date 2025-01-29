@@ -19,10 +19,10 @@ const navHeader = `
     <li><a href="react-notes.html"> React </a></li>
     <li><a href="vue-notes.html">Vue</a></li>
     <li><a href="typescript-notes.html">TypeScript</a></li>
-    <li><a href="#">css & bootstrap</a></li>
+    <li><a href="css-notes.html">css & bootstrap</a></li>
     <li><a href="./graphql-notes.html">GraphQL</a></li>
-    <li><a href="./python-notes.html">python</a></li>
     <li><a href="#">VS</a></li>
     <li><a href="./js-code-challenges.html">Code Challenges</a></li>
+    <li><a href="./python-notes.html">Python</a></li>
     <li><a href="./english.html">English</a></li>
 </ul>`

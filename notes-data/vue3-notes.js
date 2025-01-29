@@ -109,7 +109,7 @@ const vue3Data = {
         {
           text1: `The Composition API is a new feature introduced in Vue 3 that provides a different way of organizing and building Vue components. It allows developers to extract logic from components and 
           reuse it across multiple components, which can improve the readability and maintainability of the code.
-
+          
           One of the main benefits is that it makes it easier to manage state and logic within a component by allowing you to define reactive properties and functions directly within it. This not only improves the readability and maintainability of the code but can also make it easier to understand how a component works and what its dependencies are.
 
           With Composition API, logic is written using imported Vue functions instead of using the Vue instance structure that we are used to from Options API.
@@ -377,7 +377,7 @@ const { x, y } = useMouse()
 
     <b>Debugging</b>:
     When debugging Vue applications, you might need to confirm whether certain reactive objects are readonly. This helps ensure that your application respects immutability constraints.
-
+    
     <b>Enforcing Immutability</b>:
 In scenarios where you want to ensure that data is not modified, <b>isReadonly</b> can be used to verify the immutability of objects.
     `,
@@ -552,9 +552,9 @@ export default {
 <b>slots</b>: Provides access to the component's slots.
 <b>emit</b>: A function to emit events from the component.
 Example Using setup with props and context
-
+          
           The first argument in the <b>setup</b> function is the <b>props</b> argument. Just as you would expect in a standard component, <b>props</b> inside of a <b>setup</b> function are reactive and will be updated when new props are passed in.
-
+          
           Note that if you destructure the <b>props</b> object, the destructured variables will lose reactivity. It is therefore recommended to always access props in the form of <b>props.xxx</b>.
 
 If you really need to destructure the props, or need to pass a prop into an external function while retaining reactivity, you can do so with the <a href="">toRefs()</a> and <a href="">toRef()</a> utility APIs:
@@ -673,7 +673,7 @@ export default {
           <span style="color:red">The context object is not reactive and can be safely destructured:</span>
 
           <b>attrs</b> and <b>slots</b> are stateful objects that are always updated when the component itself is updated. This means you should avoid destructuring them and always reference properties as <b>attrs.x</b> or <b>slots.x</b>. Also note that, unlike <b>props</b>, the properties of <b>attrs</b> and <b>slots</b> are not reactive. If you intend to apply side effects based on changes to attrs or slots, you should do so inside an <b>onBeforeUpdate</b> lifecycle hook.
-
+          
           <b><span style="color:red">context:</span></b>
 <b>Type</b>: Object
 <b>Purpose</b>: Provides additional properties related to the component instance. It includes</b>:
@@ -703,7 +703,7 @@ export default {
     ...
   }
 }
-
+  
 // Ex : 1
 // Parent.vue
 &lt;script&gt;
@@ -950,7 +950,7 @@ const computedProperty = computed(() => {
   // Computed value logic
 });
 //-------------
-
+          
           //Creating a readonly computed ref:
 const count = ref(1)
 const plusOne = computed(() => count.value + 1)
@@ -1220,7 +1220,7 @@ export default {
 
     <b>4) Usage in Components</b>:
         In the setup function of a Vue component, you can define and return reactive objects that you can use in the template and other methods.
-
+        
         <span style="color:red">Reactive System Internals</span>
 
 Vue 3 uses <b>Proxy objects</b> to implement its reactivity system. The reactive() function creates a Proxy for the provided object. The Proxy intercepts operations such as property access and assignment, allowing Vue to track changes and trigger updates efficiently.
@@ -1262,7 +1262,7 @@ Primitive values like strings, numbers, and booleans are not directly handled by
       note: [
         {
           text1: `Takes an object (reactive or plain) or a ref and returns a readonly proxy to the original.
-
+          
           A readonly proxy is deep: any nested property accessed will be readonly as well. It also has the same ref-unwrapping behavior as <b>reactive()</b>, except the unwrapped values will also be made readonly.
 
 To avoid the deep conversion, use <a>shallowReadonly()</a> instead.
@@ -1428,7 +1428,7 @@ interface WatchEffectOptions {
 type StopHandle = () => void
 
 //-----------------
-
+          
           const count = ref(0)
 
 watchEffect(() => console.log(count.value))
@@ -1481,7 +1481,7 @@ watchEffect(() => {}, {
 
           <b>4) Cleanup</b>:
           If you need to perform cleanup tasks (e.g., removing event listeners or stopping timers), you can return a cleanup function from the watchEffect() callback. This function will be called before the effect runs again and when the component is unmounted.
-
+          
           <b>5) Use Cases</b>:
     <b>Side Effects</b>: watchEffect() is ideal for scenarios where you need to react to changes in reactive data by performing side effects, such as logging, API calls, or DOM manipulations.
     <b>Reactive Computations</b>: If you want to compute values based on reactive data and perform actions based on these computations, watchEffect() can be very useful.
@@ -1522,7 +1522,7 @@ export default {
   }
 };
 &lt;/script&gt;
-
+          
 //------------
 
 // Composition API
@@ -1557,8 +1557,8 @@ watchEffect(() => {
   // Cleanup function
   return () => clearInterval(timer);
 });
-
-
+          
+          
           &lt;template&gt;
   &lt;div&gt;
     &lt;input v-model=&quot;searchTerm&quot; placeholder=&quot;Enter post ID&quot; /&gt;
@@ -1716,7 +1716,7 @@ export default {
     // Function to fetch data using XMLHttpRequest
     const fetchData = (query) => {
       status.value = 'Loading...';
-
+      
       // Abort any ongoing request
       if (xhr) {
         xhr.abort();
@@ -1725,7 +1725,7 @@ export default {
       // Create a new XMLHttpRequest
       xhr = new XMLHttpRequest();
       xhr.open('GET', \`https://jsonplaceholder.typicode.com/posts/\${query}\`);
-
+      
       xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           data.value = JSON.parse(xhr.responseText);
@@ -1734,11 +1734,11 @@ export default {
           status.value = \`Error: \${xhr.statusText}\`;
         }
       };
-
+      
       xhr.onerror = () => {
         status.value = \`Error: \${xhr.statusText}\`;
       };
-
+      
       xhr.onabort = () => {
         status.value = 'Aborted';
       };
@@ -1755,7 +1755,7 @@ export default {
         data.value = null;
         status.value = 'Idle';
       }
-
+      
       // Cleanup function
       return () => {
         if (xhr) {
@@ -1816,7 +1816,7 @@ Once <b>abort</b> is called, any operations that are using the <b>signal</b> wil
     <b>Network Requests</b>: Canceling a <b>fetch</b> request if a user navigates away from the page or if a new request is made that renders the old one obsolete.
     <b>Long-Running Tasks</b>: Aborting operations like file uploads or downloads if they are no longer needed.
     <b>UI Interaction</b>: Stopping tasks in response to user interactions, such as clicking a <b>Cancel</b> button.    
-
+    
     //-------------
 
     <b>Why Use AbortController?</b>
@@ -1900,12 +1900,12 @@ Ex :
       note: [
         {
           text1: `In Vue 3, watchPostEffect is a part of the Composition API that allows you to execute a callback function after the DOM has been updated in response to reactive data changes. It's particularly useful when you need to perform operations that depend on the updated DOM, such as measuring element sizes or interacting with third-party libraries that need to operate on the rendered DOM.
-
+    
     <b>How watchPostEffect Works</b>
     <b>Purpose</b>: It runs a callback after the DOM updates have been applied, which ensures that you are working with the latest rendered state of your components.
     <b>Usage</b>: It is called inside the <b>setup</b> function of a Vue component.
     <b>Behavior</b>: Unlike <b>watchEffect</b>, which runs immediately when reactive dependencies change, <b>watchPostEffect</b> will run after the DOM update cycle, making it suitable for tasks that need to interact with or measure the DOM.
-
+    
     <b>When to Use watchPostEffect</b>
     <b>DOM Measurement</b>: When you need to measure or interact with the DOM after updates.
     <b>Third-Party Libraries</b>: When integrating with libraries that require knowledge of the DOM state after updates.
@@ -2020,7 +2020,7 @@ button {
       note: [
         {
           text1: `Alias of <a href="#watchEffect()">watchEffect()</a> with flush: 'sync' option.
-
+          
           In Vue 3, watchSyncEffect is a utility function that was introduced to handle scenarios where you need to synchronize side effects with changes in reactive state. It is part of Vue's Composition API, which provides advanced reactivity and lifecycle management.
 
           <b>watchSyncEffect Overview</b>
@@ -2187,7 +2187,7 @@ watch(id, async (newId, oldId, onCleanup) => {
     <b>Getter Function</b>: A getter is a function that derives or computes a value from reactive sources. It can be used to encapsulate complex logic for deriving values based on reactive data.
 
     <b>Reactive Source</b>: The source in the <b>watch</b> function can be a reactive reference <b>(ref)</b>, a reactive object <b>(reactive)</b>, or a getter function that returns a derived value.
-
+    
     <b>Using Getters in watch</b>
 You can use a getter function to observe changes in derived values. This is useful for watching computed properties or values that depend on multiple reactive sources. Here's how you can use getters in the watch function:
     `,
@@ -2282,7 +2282,7 @@ export default {
     },
     {
       id: 1,
-      section: `Reactivity: Utilities`,
+      section:`Reactivity: Utilities`,
       title: "isRef",
       note: [
         {
@@ -2340,7 +2340,7 @@ export default {
       note: [
         {
           text1: `Returns the inner value if the argument is a ref, otherwise return the argument itself. This is a sugar function for <span style="color:red"> val = isRef(val) ? val.value : val. </span>
-
+          
           In Vue 3, the <b>unref</b> function is part of the Composition API and is used to extract the underlying value from a <b>ref</b> or return the value directly if it's not a <b>ref</b>. This function simplifies working with reactive references by allowing you to access the raw value in a more straightforward way.
 
     <b>What unref Does</b>
@@ -2469,10 +2469,10 @@ export default {
       firstName: 'John',
       lastName: 'Doe'
     });
-
+    
     const firstNameRef = toRef(user, 'firstName');
     const lastNameRef = toRef(user, 'lastName');
-
+  
     return {
       firstNameRef,
       lastNameRef
@@ -2563,7 +2563,7 @@ console.log(toValue(myReactive.count)); // 5
           text1: `<b>Practical Use Cases</b>
     <b>1) Uniform Value Access</b>:
     When dealing with functions or computations that may receive either <b>ref</b> objects or plain values, <b>toValue</b> allows you to handle them uniformly without manually checking their types.
-
+    
     <b>2) Simplified Computed Properties</b>:
 When creating computed properties, you may need to handle <b>ref</b> objects or reactive properties. Using <b>toValue</b> helps in accessing their values more straightforwardly.
     `,
@@ -2609,7 +2609,7 @@ console.log(doubled.value); // 20
       note: [
         {
           text1: `Converts a reactive object to a plain object where each property of the resulting object is a ref pointing to the corresponding property of the original object. Each individual ref is created using <a href="toRef()" target="_blank">toRef()</a>.
-
+          
           <b>toRefs</b> is useful when returning a reactive object from a composable function so that the consuming component can destructure/spread the returned object without losing reactivity:
 
           In Vue 3, the <b>toRefs</b> function is part of the Composition API and is used to convert the properties of a reactive object into individual <b>ref</b> instances. This is useful when you want to work with each property of a reactive object as a <b>ref</b> in a more granular way, especially when you need to pass these properties as <b>refs</b> to child components or use them in a setup function.
@@ -2761,7 +2761,7 @@ console.log(doubled.value); // 0 initially
       note: [
         {
           text1: `Checks if an object is a proxy created by <b>reactive(), readonly(), shallowReactive() or shallowReadonly()</b>.
-
+          
           n Vue 3, <b>isProxy</b> is a utility function provided by the Vue reactivity system to determine whether a given object is a reactive proxy created by Vue. Reactivity in Vue 3 relies on the Proxy API to create reactive objects, and <b>isProxy</b> helps to identify whether an object is a Vue-created reactive proxy.
 
     <b>What isProxy Does</b>
@@ -2788,7 +2788,7 @@ console.log(isProxy(plainObject)); // false
           text1: `<b>Practical Use Cases</b>
     <b>1) Debugging</b>:
     When debugging Vue applications, you might want to confirm whether certain objects are reactive proxies. <b>isProxy</b> can help verify this, especially in complex applications where objects are passed around and their reactivity status needs to be checked.
-
+    
     <b>2)Type Checking</b>:
 In TypeScript or JavaScript code, you might want to ensure that certain objects are reactive proxies before performing operations that depend on reactivity.
 
@@ -2857,7 +2857,7 @@ updateData(plainData);   // Logs: Updating non-reactive data...
       note: [
         {
           text1: `Checks if an object is a proxy created by reactive() or shallowReactive()
-
+          
           isReactive() is a function provided by the Vue Composition API to check if a given object is reactive.
 
 <b> What is Reactivity in Vue 3? </b>
@@ -2934,7 +2934,7 @@ console.log(isReadonly(readonlyObj)); // true
     },
     {
       id: 1,
-      section: 'Composition API: Lifecycle Hooks',
+      section:'Composition API: Lifecycle Hooks',
       title: "onMounted()",
       note: [
         {
@@ -2973,7 +2973,7 @@ export default {
     onMounted(() => {
       // This code runs after the component is mounted
       console.log('Component has been mounted to the DOM');
-
+      
       // For example, you could fetch data or manipulate the DOM here
       fetchData();
     });
@@ -3011,7 +3011,7 @@ export default {
     onMounted(() => {
       // This code runs after the component is mounted
       console.log('Component has been mounted to the DOM');
-
+      
       // For example, you could fetch data or manipulate the DOM here
       fetchData();
     });
@@ -3403,7 +3403,7 @@ export default {
           console.log(res)
           data.value = res;
         })
-
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -3768,7 +3768,7 @@ export default {
         {
           text1: `Registers a debug hook to be called when a reactive dependency triggers the component's render effect to be re-run.
               <b>This hook is development-mode-only and not called during server-side rendering.</b>
-
+              
               In Vue 3, the <b>onRenderTriggered()</b> lifecycle hook is part of the Composition API and is used to track changes to reactive dependencies that occur during the rendering process of a component. It allows developers to gain insights into how reactive properties are changing and being accessed during rendering, which can be useful for debugging and performance optimization.
 
               <b>Purpose of onRenderTriggered()</b>
@@ -3983,7 +3983,7 @@ import { defineComponent, onDeactivated, ref } from 'vue';
 
 export default defineComponent({
   setup() {
-
+    
     const incVal = ref(0)
     onDeactivated(() => {
       console.log('Component has been deactivated', incVal.value);
@@ -4059,7 +4059,7 @@ onMounted(async () => {
     },
     {
       id: 1,
-      section: `Dependency Injection`,
+      section:`Dependency Injection`,
       title: "provide()",
       note: [
         {
@@ -4190,10 +4190,10 @@ export default defineComponent({
     };
   }
 });
-&lt;/script&gt;`
-        },
-        {
-          text1: `<b>Explanation</b>
+&lt;/script&gt;`       
+      },
+      {
+        text1: `<b>Explanation</b>
     <b>1) provide() in ParentComponent</b>:
         -> In <b>ParentComponent.vue, provide()</b> is used to make a reactive reference message available to all descendant components.
         -> The key <b>sharedMessage</b> is used to identify the provided value.
@@ -4201,8 +4201,8 @@ export default defineComponent({
     <b>2) inject() in ChildComponent and GrandchildComponent</b>:
         -> In <b>ChildComponent.vue</b> and <b>GrandchildComponent.vue</b>, <b>inject()</b> is used to access the value provided by the ancestor component.
         -> Both <b>ChildComponent</b> and <b>GrandchildComponent</b> can access the <b>sharedMessage</b> value without needing to pass it through props.`,
-          code1: ``
-        }
+        code1: ``
+      }
       ]
     },
     {
@@ -4211,7 +4211,7 @@ export default defineComponent({
       note: [
         {
           text1: `Injects a value provided by an ancestor component or the application (via <b>app.provide()</b>).
-
+          
           In Vue.js, the <b>inject()</b> function is part of the Composition API and is used to access properties or methods that have been provided by an ancestor component using the provide() function. This mechanism allows for dependency injection within the component tree, which can simplify state and method sharing among components.
 
     <b>Purpose of inject()</b>
@@ -4266,7 +4266,7 @@ const baz = inject('factory', () => new ExpensiveObject(), true)
       note: [
         {
           text1: `Returns true if <b>inject()</b> can be used without warning about being called in the wrong place (e.g. outside of <b>setup()</b>). This method is designed to be used by libraries that want to use <b>inject()</b> internally without triggering a warning to the end user.
-
+          
           <b>ts</b> <span style="color:red"> function hasInjectionContext(): boolean </span>
 
           n Vue 3, <b>hasInjectionContext()</b> is a utility function that allows you to determine whether the current component has an injection context. This is useful for scenarios where you need to check if a component is within a context where values have been provided using Vue's provide() function.

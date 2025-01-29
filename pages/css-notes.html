@@ -13,41 +13,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/agate.min.css">
     <link rel="stylesheet" href="../header/header.css">
     <link rel="stylesheet" href="../css/sub-header.css">
+
     <style>
-       
+
     </style>
 </head>
 
 <body>
-    <nav class="nav" id="header"></nav>
-
-    <ul id="subHeader" class="inside-nav-bar"></ul>
     <div class="container-fluid">
-        <div class="row">
-            <div class='col-lg-3 col-sm-12'>
-                <div class='left-menu-box'>
-                    <div id="myLinks"></div>
+        <nav class="nav" id="header"></nav>
+        <ul id="subHeader" class="inside-nav-bar"></ul>
+        <div>
+            <div class="row">
+                <div class='col-lg-3 col-sm-12'>
+                    <div class='left-menu-box'>
+                        <div id="myLinks"></div>
+                    </div>
+                </div>
+                <div class='col-lg-9 col-sm-12'>
+                    <div id="cards"></div>
                 </div>
             </div>
-            <div class='col-lg-9 col-sm-12'>
-                <div id="cards"></div>
+            <div>
+                <a href="#top" class='top-of-site-link' data-visible="true">
+                    <p style="font-size: 39px; margin: -9px auto; padding-left: 10px;">&#8593;</p>
+                </a>
             </div>
-        </div>
-        <div>
-            <a href="#top" class='top-of-site-link' data-visible="true">
-                <p style="font-size: 39px; margin: -9px auto; padding-left: 10px;">&#8593;</p>
-            </a>
         </div>
     </div>
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="./main.js"></script>
-    <script src="../notes-data/javascript-notes.js"></script>
+    <script src="../notes-data/css-notes.js"></script>
     <script src="../header/header.js"></script>
     <script src="./subHeader.js"></script>
     <script>
-        mainDom(javascriptData.javascriptNote)
+        mainDom(cssData.cssNote)
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 

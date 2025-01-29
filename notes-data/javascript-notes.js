@@ -1,3 +1,9 @@
+const isHighlighted = 'javascript-notes'
+const Links1 = 'javascript-notes'
+const Links2 = 'javascript-code-challenge'
+const Links3 = 'javascript-builtin-function'
+const Links4 = 'javascript-projects'
+
 const javascriptData = {
   javascriptNote: [
     {
@@ -389,7 +395,7 @@ The following declares the variable counter with the let keyword:`,
           code1: ``
         },
         {
-          text1: ` `
+          text1: ``
         }
       ]
     },
@@ -398,7 +404,7 @@ The following declares the variable counter with the let keyword:`,
       title: "variable scope",
       note: [
         {
-          text1: `      Scope determines the visibility and accessibility of a variable. JavaScript has three scopes:
+          text1: `Scope determines the visibility and accessibility of a variable. JavaScript has three scopes:
 
           > The global scope
           > Local scope
@@ -746,7 +752,8 @@ For example, when you execute a recursive function that has no exit condition, t
       title: "Web APIs",
       note: [
         {
-          text1: `An Application Programming Interface (API) is a software interface that allows two or more programs to communicate by acting as an intermediary between them.
+          text1: `<a href="https://www.javascripttutorial.net/web-apis/" target="_blank">Web API</a>
+          An Application Programming Interface (API) is a software interface that allows two or more programs to communicate by acting as an intermediary between them.
 
           API stands for Application Programming Interface, which is a set of protocols and definitions that allows communication between two software.
     
@@ -760,18 +767,110 @@ For example, when you execute a recursive function that has no exit condition, t
       title: "lexical scope:",
       note: [
         {
-          text1: `A lexical scope in JavaScript means that a variable defined outside a function can be accessible inside another function defined after the variable declaration. But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
+          text1: `<b>Scope</b> in JavaScript refers to the current context of code, which determines the accessibility of variables to JavaScript
+          Scope determines the accessibility (visibility) of variables
+          scope in JavaScript refers to the context or environment in which variables are declared and can be accessed.
+          Scope of variables refers to the accessibility of a particular variable within the program.
+          <b>Scope</b> refers to the area where an item (such as a function or variable) is visible and accessible to other code.
+
+
+          In lexical scope, the scope of a variable is defined by where it is written or declared in the source code, rather than by where the function is called. Essentially, lexical scope refers to the context in which the code is written, and this context determines how variables are accessed during the program's execution.
+
+          <b>Types of Scope in JavaScript</b>:
+There are different types of scope, and understanding them is crucial to avoiding issues like accidental variable overwriting, unintended side effects, and understanding closures.
+    => Global Scope
+    => Function Scope
+    => Block Scope
+    => Lexical Scope (Closures)
+
+    <b>lexical</b> is term hierarchy or in a sequence
+          A lexical scope in JavaScript means that a variable defined outside a function can be accessible inside another function defined after the variable declaration. But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
+
+          function parentFun(){
+            var b=10;
+            sub();
+            function sub(){
+              console.log(b)
+            }
+          }
+            Here sub() function lexically setting inside main() function 
+            Here sub() function lexically inside main() function that means lexical in order or hierarchy
+            
+                        The term lexical refers to the structure or arrangement of words or symbols in a language. In programming, especially in the context of lexical scope, it refers to the physical location of code elements (such as variables, functions, and blocks) in the source code itself.
+
+            Here sub() function physically inside main() function
+            main() function lexically inside global scope
+
+
+           <b> Step-by-Step Breakdown of the Execution Flow</b>:
+<b>1. Global Execution Context</b>:
+Before parentFun() is called, JavaScript starts in the global execution context.
+    <b>Global context</b>:
+        parentFun is declared and is available to be called in the global scope.
+        The JavaScript engine is ready to execute parentFun() when invoked.
+
+<b>2. Execution Context for parentFun()</b>:
+When parentFun() is called, a new execution context is created for parentFun. The steps in this context are as follows:
+    <b>Creation Phase (for parentFun)</b>:
+        The variable b is hoisted to the top of the parentFun() execution context, but its value is initially set to undefined.
+        The function sub is hoisted, so it is available to be invoked throughout the entire scope of parentFun().
+   <b> Execution Phase (for parentFun)</b>:
+        The variable b is set to 10 during the execution phase, so b = 10 is executed.
+        sub() is called. At this point, the lexical environment of parentFun() is still active, so sub() can access variables from the parentFun() scope, including b.
+
+<b>3. Execution Context for sub()</b>:
+When sub() is invoked, a new execution context is created for sub. This context has the following behavior:
+    <b>Creation Phase (for sub)</b>:
+        There are no variables declared inside sub(), so the variable environment for sub() is empty.
+        The scope chain for sub() includes</b>:
+            sub()'s own scope (empty in this case).
+            The lexical scope of parentFun(), which has access to b.
+            The global scope.
+    <b>Execution Phase (for sub)</b>:
+        The console.log(b) statement inside sub() is executed. It refers to b from the lexical scope of parentFun(), where b was set to 10.
+        Since sub() forms a closure over its lexical environment, it has access to b even though parentFun() has finished execution.
+        <b>Closure in Action</b>:
+        The closure in this case is the function sub(), which "remembers" and has access to the variable b from its lexical environment (the parentFun() function) even after parentFun() finishes executing.
+
+<b>4. Returning to parentFun()</b>:
+After sub() finishes executing and logging b, its execution context is popped off the stack and the program returns to parentFun(). Since parentFun() has no further code to execute, its execution context is also popped off the stack.
+
+Finally, the program finishes executing and returns to the global context.
+
           (or)
   Lexical Scoping: A function scope's ability to access variables from the parent scope is known as lexical scope.
           (or)
   the inner functions have access to the variables and other resources of their parent scope.
   
+  <b>Lexical scoping in JavaScript</b>
+JavaScript uses lexical scoping to resolve the variable names when a function is created inside another function. It determines the function's parent scope by looking at where the function was created instead of where it was invoked.
+
   -The global scope is always the last scope of any JavaScript scope chain. In other words, the global scope is where all searches will end.
   -An inner (child) scope has access to its parent (outer) scope, but an outer scope does not have access to its child scope.
   
   Note:
   Variables created without a declaration keyword (var, let, or const) are always global, even if they are created inside a function.`,
-          code1: ``
+          code1: `var a = 10;  // Global variable 'a' is declared
+
+var func = function () {  // 'func' is a function declared in the global scope
+  var b = 20;  // 'b' is declared inside 'func', so it's scoped to 'func'
+  
+  console.log("a and b are accessible (outer):", a, b);  // 'a' from global scope and 'b' from 'func' scope
+
+  var innerFunc = function () {  // 'innerFunc' is declared inside 'func'
+    var c = 30;  // 'c' is declared inside 'innerFunc', so it's scoped to 'innerFunc'
+    
+    console.log("a, b, and c are accessible (inner):", a, b, c);  // 'a' from global, 'b' from 'func', 'c' from 'innerFunc'
+  }
+
+  innerFunc();  // Calls 'innerFunc', which logs all three variables
+  return;
+}
+
+func();  // Calls 'func', which also calls 'innerFunc' inside it
+
+console.log("only a is accessible (global):", a);  // Only 'a' is accessible here in the global scope
+`
         },
       ]
     },
@@ -781,6 +880,105 @@ For example, when you execute a recursive function that has no exit condition, t
       note: [
         {
           text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      section: `ecmascript vs es6`,
+      title: "ES Module Systems",
+      note: [
+        {
+          text1: `ES6 modules are automatically strict-mode code, even if you don't write <b>use strict</b>; in them.
+          You can use <u>import</u> and <u>export</u> in modules.
+
+          Let’s talk about export first. Everything declared inside a module is local to the module, by default. If you want something declared in a module to be public, so that other modules can use it, you must export that feature. There are a few ways to do this. The simplest way is to add the export keyword.
+
+          You can <u>export</u> any top-level <u>function, class, var, let</u>, or <u>const</u>.
+
+          When you run a module containing an import declaration, the modules it imports are loaded first, then each module body is executed in a depth-first traversal of the dependency graph, avoiding cycles by skipping anything already executed.
+
+          The new standard is designed to interoperate with existing CommonJS and AMD modules. So suppose you have a Node project and you’ve done npm install lodash. Your ES6 code can import individual functions from Lodash:
+
+import {each, map} from "lodash";
+each([3, 2, 1], x => console.log(x));
+
+
+1) Named Exports
+2) Default Exports
+
+<b>Named Exports</b>
+Named exports allow you to export multiple values (functions, variables, objects, etc.) from a module. You <b>export</b> each item explicitly by using the <u>export</u> keyword, either inline with the declaration or at the end of the module. When importing these values into another module, you must use the exact names used in the export.
+          `,
+          code1: `//Named Exports
+//You can export multiple values from a file using named exports.
+// mathUtils.js
+export const add = (a, b) => a + b;
+export const subtract = (a, b) => a - b;  
+
+// Named Imports
+// When importing named exports, use curly braces {} with the exact names.
+// app.js
+
+import { add, subtract } from './mathUtils.js';
+console.log(add(5, 3)); // Output: 8
+console.log(subtract(5, 3)); // Output: 2 
+
+//------------------ -----------
+
+// Default Export
+//Default exports allow you to export a single value or function.
+// greeting.js
+export default function greet(name) {
+  return Hello, \${name}!;
+}      
+  
+// Default Import
+// When importing a default export, you can use any name.
+// app.js
+ import greet from './greeting.js';
+console.log(greet('Raj')); // Output: Hello, Raj! 
+
+
+<b>Named Exports</b>
+<b>Multiple</b> Exports Yes
+<b>Import</b> Syntax Curly braces {} required
+<b>Renaming</b> Possible during import
+<b>Code Readability</b> Easy to identify exported items
+
+<b>Default Export</b>
+<b>Multiple</b> Exports No
+<b>Import</b> Syntax No curly braces needed
+<b>Renaming Import name can be chosen
+<b>Code Readability</b> Less obvious, single value
+
+<b>Benefits of ES6 Modules</b>
+<b>Encapsulation</b>: Keeps code organized and avoids polluting the global namespace.
+<b>Reusability</b>: Easily reuse logic across files.
+<b>Lazy Loading</b>: Modules can be loaded on demand for performance optimization.
+<b>Improved Readability</b>: Clear dependency management makes code easier to understand.
+`
+        },
+        {
+          text1: `<b>Import vs. Require</b>
+Before ES modules were standardized, Node.js used the CommonJS require syntax to load modules. While require served its purpose, it had some limitations, such as being synchronous and not supporting static analysis. ES modules address these limitations and offer a more flexible and efficient way to work with modules.
+          `,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "ES Module Systems",
+      note: [
+        {
+          text1: `arrow functions
+          Template literals
+          promises
+          fetch API
+          ES Module Systems
+          `,
           code1: ``
         },
       ]
@@ -804,7 +1002,7 @@ For example, when you execute a recursive function that has no exit condition, t
         
         let sum = add;
         
-        // In the assignment statement, we don’t include the opening and closing parentheses at the end of the 'add' identifier. We also don’t execute the function but reference the function.
+        // In the assignment statement, we don't include the opening and closing parentheses at the end of the 'add' identifier. We also don't execute the function but reference the function.
 
         // By doing this, we can have two ways to execute the same function. For example, we can call it normally as follows:
 
@@ -851,9 +1049,7 @@ console.log(result);
           Since functions are values, you can return a function from another function.
 
 The following <b>compareBy()</b> function returns a function that compares two objects by a property:
-
-
-          `,
+`,
           code1: `function compareBy(propertyName) {
             return function (a, b) {
               let x = a[propertyName],
@@ -1820,14 +2016,23 @@ myFunction();
 
 In JavaScript, a closure is a feature that allows a function to remember and access its lexical scope even when that function is executed outside that lexical scope. In simpler terms, a closure gives you access to an outer function's scope from an inner function even after the outer function has finished executing.
 
+A closure is created when a function retains access to its lexical scope even when the function is executed outside that scope. This characteristic allows functions to maintain a private state and preserve variable values without exposing them globally, making closures particularly useful for data encapsulation.
+Exactly! One of the powerful features of closures in JavaScript is their ability to encapsulate and hide variables from the global scope, making them private.
+
 A closure is a function that has access to the variables and parameters of its outer function, even after the outer function has returned. This is possible because the inner function retains a reference to the scope of the outer function, even after the outer function has been executed.
 
           In other words, closure is created when a child function keep the environment of the parent scope even after the parent function has already executed 
 
-          Variables created without a declaration keyword <b>(var, let, or const)</b> are always global, even if they are created inside a function.
+         <u> Variables created without a declaration keyword <b>(var, let, or const)</b> are always global, even if they are created inside a function.</u>
           In JavaScript, a closure is created when a function is defined within another function, allowing the inner function to access variables from the outer (enclosing) function's scope. Closures have access to the outer function's variables, parameters, and even the outer function's this context. This provides a way to create private variables, maintain state, and create functions with behavior that depends on their lexical environment.
 
-          Here are a few examples of closures in JavaScript:`,
+        
+          A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the <b>lexical environment</b>). In other words, a closure gives a function access to its outer scope. In JavaScript, closures are created every time a function is created, at function creation time.
+
+          <b>Understanding Closures</b>
+A closure occurs when a function retains access to the variables and parameters of its outer function even after the outer function has finished execution. This means that the inner function can still access and modify variables that were in its surrounding scope at the time the closure was created.
+
+ Here are a few examples of closures in JavaScript:`,
           code1: `function outerFunction() {
             var outerVariable = 'I am from outerFunction';
             
@@ -1850,42 +2055,47 @@ A closure is a function that has access to the variables and parameters of its o
           <b>Inner Functions:</b> Functions defined inside another function are called inner functions. These inner functions have access to the variables declared in the outer function, as well as to the global scope.
           
           <b>Closure:</b> When an inner function is returned from the outer function and survives beyond the life of the outer function, it maintains access to the variables and parameters of that outer function, even though the outer function has completed execution. This phenomenon is called closure.`,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: `
-          // Example 2: Private Variables
+          code1: `// Example 2: Private Variables
+function counter() {
+  let count = 0;  // This is the "private" variable
 
-          function counter() {
-              let count = 0;
-          
-              return function() {
-                  count++;
-                  console.log(count);
-              };
-          }
-          
-          const increment = counter();
-          increment(); // Outputs: 1
-          increment(); // Outputs: 2
+  return function() {
+    count++;  // The inner function has access to \`count\`
+    console.log(count);  // Prints the updated value of \`count\`
+  };
+}
+
+const increment = counter();  // \`increment\` is a reference to the inner function
+increment();  // Outputs: 1
+increment();  // Outputs: 2
+
           // Here, the inner function within counter forms a closure, and count is a private variable accessible only within that closure. This creates a way to have private state in JavaScript.
           
-          Example 3: Function Factory
-          
+    //      **** How It Works: ****
+    // *** Outer Function (counter): ***
+    //     The "counter" function defines a variable "count" initialized to 0.
+    //     It returns an inner function that increments "count" and prints its value.
+    // *** The Closure: ***
+    //     The inner function returned by counter() forms a "closure" because it "remembers" the environment in which it was created. In this case, it "remembers" the variable "count" from the outer counter() function.
+    // *** Calling increment(): ***
+    //     When increment() is called for the first time, it increases "count" from 0 to 1 and logs 1 to the console.
+    //     When increment() is called a second time, "count" has persisted from the previous call (because of the closure) and is now 1. It increments it to 2 and logs 2 to the console.
+
+
+          //--------------------
+          // Example 3: Function Factory
           function createMultiplier(factor) {
               return function(number) {
                   return number * factor;
               };
           }
-          
           const double = createMultiplier(2);
           console.log(double(5)); // Outputs: 10
-
           // In this example, createMultiplier is a function factory that generates closure functions. The closure function (double) created with a specific factor retains access to that factor when invoked later.
           
+
+          //----------------
           // Example 4: Event Handling
-          
           function createButtonHandler(buttonId) {
               const button = document.getElementById(buttonId);
           
@@ -1893,14 +2103,13 @@ A closure is a function that has access to the variables and parameters of its o
                   console.log('Button \${buttonId} clicked');
               });
           }
-          
           createButtonHandler('btn1');
           createButtonHandler('btn2');
-
           // In this example, createButtonHandler is a function that creates event handlers for different buttons. Each handler forms a closure, capturing the buttonId parameter and referencing the button variable from the outer function.
           
+
+          //---------------
           // Example 5: Closure with Parameters
-          
           function multiplier(factor) {
               return function (number) {
                   return factor * number;
@@ -1909,12 +2118,10 @@ A closure is a function that has access to the variables and parameters of its o
           
           const multiplyByTwo = multiplier(2);
           console.log(multiplyByTwo(5)); // Outputs: 10
-
-
           // Here, multiplier returns a function that can be used to multiply a number by a specified factor. The inner function retains access to the factor parameter of its outer function, creating a closure.
           
+          //---------------
           // Example 6: Counter using Closure
-          
           function createCounter() {
               let count = 0;
           
@@ -1927,12 +2134,11 @@ A closure is a function that has access to the variables and parameters of its o
           console.log(counter()); // Outputs: 1
           console.log(counter()); // Outputs: 2
           console.log(counter()); // Outputs: 3
-          
           // The createCounter function returns a closure that increments and returns a counter value. The inner function retains access to the count variable, allowing it to persist across multiple calls.
           
+
+          //----------------
           // Example 7: Private Variables
-          
-          Copy code
           function createPerson(name) {
               let age = 0;
           
@@ -1954,13 +2160,36 @@ A closure is a function that has access to the variables and parameters of its o
           console.log(person.getAge());  // Outputs: 0
           person.incrementAge();
           console.log(person.getAge());  // Outputs: 1
+          //  Here, createPerson returns an object with methods that have access to both name and age, creating private variables. The closure allows these variables to be accessed and modified only through the methods provided.
+`
+        },
+        {
+          text1: `<b>Key Things to Consider In Below example</b>:
+    <b>setTimeout Delays</b>: The <b>setTimeout()</b> function schedules the callback to run after a certain delay, and it does not block the rest of the code execution. This means that the loop will <b>complete</b> first, and then the callbacks (for <b>setTimeout</b>) will be executed <b>after the loop finishes</b>.
+
+    <b>Loop with var</b>: When you use <b>var</b>, the variable <b>i</b> is shared across all iterations of the loop. However, the callbacks inside <b>setTimeout()</b> are scheduled for later execution. By the time they are executed, the value of <b>i</b> has already been updated to <b>4</b> in the last iteration, and each <b>setTimeout</b> callback will reference this <b>final value</b> of <b>i</b>.
     
+    <b>Why It Might Work in Your Case</b>:
+Your code works as expected (producing 1 2 3 4) because the setTimeout() callbacks are using the <b>inc argument</b>, which correctly captures the value of <b>i</b> at the time the <b>clo(i)</b> function was called. In this case, the value of <b>inc</b> (which is equal to <b>i</b> when passed to <b>clo()</b>) remains <b>stably bound</b> within each <b>closure</b>, and <b>does not reference <i>i</i> after the loop ends</b>.
+
+<u>So, the output order becomes</u>:
+    After the first second, 1 is printed.
+    After the second second, 2 is printed.
+    After the third second, 3 is printed.
+    After the fourth second, 4 is printed.
+    `,
+          code1: `for(var i=0; i<=3; i++){
+    function clo(inc){
+        setTimeout(function(){
+        console.log(inc)
+    }, inc * 1000)
+    }
+clo(i)
+}
           `
         },
         {
-          text1: ` Here, createPerson returns an object with methods that have access to both name and age, creating private variables. The closure allows these variables to be accessed and modified only through the methods provided.
-
-          Closures in JavaScript provide a powerful mechanism for creating modular and encapsulated code, enabling the creation of private variables, maintaining state, and implementing various programming patterns.
+          text1: `Closures in JavaScript provide a powerful mechanism for creating modular and encapsulated code, enabling the creation of private variables, maintaining state, and implementing various programming patterns.
           
           In this example, we would store an anonymous function at every index of an array. 
           
@@ -2219,7 +2448,8 @@ A closure is a function that has access to the variables and parameters of its o
           text1: `<span style="color:#0987ac; font-size:22px;">asynchronous operations </span>
           JavaScript closures are not only useful for encapsulating data and creating private variables, but they are also powerful tools for handling asynchronous operations. In this section, we will explore how closures can be used to manage asynchronous tasks in JavaScript.
 
-          When working with asynchronous operations, such as making API requests or fetching data from a database, it is common to encounter situations where you need to handle the result of the operation once it completes.  Closures can help you manage this by capturing the state of variables at the time the asynchronous operation is initiated.`,
+          When working with asynchronous operations, such as making API requests or fetching data from a database, it is common to encounter situations where you need to handle the result of the operation once it completes.  Closures can help you manage this by capturing the state of variables at the time the asynchronous operation is initiated.
+          `,
           code1: `function fetchData(url) {
             return new Promise((resolve, reject) => {
               // Simulating an asynchronous API request
@@ -2459,7 +2689,7 @@ A closure is a function that has access to the variables and parameters of its o
           <b>thisValue</b>: The value to be passed as the this parameter when the function is called.
           <b>[arg1, arg2, ...]</b>: An array or array-like object containing the arguments to be passed to the function.
           `,
-          code1: `      function sayHello(greeting, punctuation) {
+          code1: `function sayHello(greeting, punctuation) {
             console.log('\${greeting}, \${this.name} \${punctuation}');
         }
   
@@ -2471,7 +2701,7 @@ A closure is a function that has access to the variables and parameters of its o
         // In this example, sayHello.apply(person, ['Hi', '!']) calls the sayHello function with person as the value of this and the array ['Hi', '!'] as the arguments, resulting in the message "Hi, John!" being logged to the console.`
         },
         {
-          text1: `      apply() is particularly useful when you have a function that accepts a variable number of arguments or when you want to pass an array of arguments dynamically.
+          text1: `apply() is particularly useful when you have a function that accepts a variable number of arguments or when you want to pass an array of arguments dynamically.
 
           It's worth noting that in modern JavaScript, you can often achieve the same result using the spread operator (...) to pass an array of arguments directly to a function:
  
@@ -2601,7 +2831,7 @@ A closure is a function that has access to the variables and parameters of its o
           boundFunction(); // Output: Example`
         },
         {
-          text1: `          In this example, originalFunction is a simple function that logs the name property of whatever object it is called on. We then use bind() to create a new function boundFunction where this is explicitly set to the obj object. When we call boundFunction(), it prints the name property of obj.
+          text1: `In this example, originalFunction is a simple function that logs the name property of whatever object it is called on. We then use bind() to create a new function boundFunction where this is explicitly set to the obj object. When we call boundFunction(), it prints the name property of obj.
 
           bind() is particularly useful in scenarios where you want to ensure that a function is always called with a specific context, regardless of how it is later used or referenced.
 
@@ -2678,7 +2908,8 @@ A closure is a function that has access to the variables and parameters of its o
       title: "Callback",
       note: [
         {
-          text1: `In JavaScript, a callback function is a function that is passed as an argument to another function and is executed after the completion of some asynchronous operation or at a later time. 
+          text1: `<a href="https://javascript.info/callbacks" target="_blank">callbacks</a>
+          In JavaScript, a callback function is a function that is passed as an argument to another function and is executed after the completion of some asynchronous operation or at a later time. 
       
           Callbacks are a fundamental concept in JavaScript, especially in scenarios like event handling, asynchronous operations, and dealing with functions that take time to complete, such as fetching data from a server.
     
@@ -2687,7 +2918,7 @@ A closure is a function that has access to the variables and parameters of its o
           when we have a function that might take a long time to complete, oftentimes we provide a callback function. This function encapsulates the code we would like to run at a later time when the blocking action (e.g a network call) has been resolved. This allows us to return control to the JS engine and defer the rest of the execution until after the call-stack has been cleared. This is the concept of asynchrony in JavaScript.
           
           Here's a simple example of a callback function:`,
-          code1: `      function fetchData(callback) {
+          code1: `function fetchData(callback) {
             // Simulating an asynchronous operation (e.g., fetching data from a server)
             setTimeout(function() {
               const data = "This is the fetched data";
@@ -2743,7 +2974,7 @@ A closure is a function that has access to the variables and parameters of its o
       title: "unshift()",
       note: [
         {
-          text1: ` In JavaScript, you use the <b>unshift()</b> method to add one or more elements to the beginning of an array and it returns the array's length after the new elements have been added.
+          text1: `In JavaScript, you use the <b>unshift()</b> method to add one or more elements to the beginning of an array and it returns the array's length after the new elements have been added.
 
           If we have an array of countries and want to add a country before <b>Nigeria</b> which is currently at the first index 0, we can do so with the <b>unshift()</b> method, as shown below:`,
           code1: `const countries = ["Nigeria", "Ghana", "Rwanda"];
@@ -2816,282 +3047,6 @@ The shift() method does not accept any arguments.
     },
     {
       id: 1,
-      title: "splice() - (adds, removes or replaces elements)",
-      note: [
-        {
-          text1: `<b>The splice() method modifies an array(adds, removes or replaces elements).</b>
-
-          splice() method that allows you to insert new elements into the middle of an array. Also, you can use this method to delete and replace existing elements as well.
-          ---------------------
-          <i><u>Deleting elements using JavaScript Array's splice() method</i></u>
----------------------
-To  delete elements in an array, you pass two arguments into the splice() method as follows:
-<span style="color:red">Array.splice(position,num);</span>
-The <b>position</b> specifies the position of the first item to delete and the <b>num</b> argument determines the number of elements to delete.
-The splice() method changes the original array and returns an array that contains the deleted elements.
-
-Let's take a look at the following example.
-Suppose, you have an array <b>scores</b> that contains five numbers from 1 to 5.
-`,
-          code1: `let scores = [1, 2, 3, 4, 5];
-          // The following statement deletes three elements of the 'scores' array starting from the first element.
-          
-          let deletedScores = scores.splice(0, 3);
-          // The scores array now contains two elements.
-          
-          console.log(scores); //  [4, 5]
-          // And the deletedScores array contains three elements.
-          
-          console.log(deletedScores); // [1, 2, 3]
-          // The following figure illustrates the scores.splice(0, 3) method call above.
-
-          // The following figure illustrates the scores.splice(0,3) method call above.
-          // 0: The position of the first item to delete
-          // 3: The number of elements to delete`
-        },
-        {
-          text1: `
-          ---------------------
-          <i><u>Inserting elements using the JavaScript Array splice() method</u></i>
-          ---------------------
-
-          You can insert one or more elements into an array by passing three or more arguments to the splice() method with the second argument is zero.
-
-          Consider the following syntax.
-
-          Array.splice(position, 0, new_element_1, new_element_2, ...);
-
-          In this syntax:
-
-          The <b>position</b> specifies the starting position in the array in which the new elements will be inserted.
-          The second argument is zero (0) which instructs the splice() method to not delete any array elements.
-          The third argument, fourth argument, and so on are the new elements that are inserted into the array.
-          Note that the splice() method changes the original array. Also, the splice() method does not remove any elements, therefore, it returns an empty array. For example:
-
-          `,
-          code1: `// Assuming that you have an array named colors with three strings:
-
-          let colors = ['red', 'green', 'blue'];
-          
-          // The following statement inserts one element after the second element.
-          
-          colors.splice(2, 0, 'purple');
-          // The colors array now has four elements with the new element inserted in the second position.
-          
-          console.log(colors); // ["red", "green", "purple", "blue"]
-          // The following figure demonstrates the method call above.
-          
-          // 2: starting position to Intert
-          // 0: number of elements to delete(not delete any array elements.)
-          // "purple": new element to insert.
-          
-          // You can insert more than one element by passing the fourth argument, the fifth argument, and so on to the splice() method as in the following example.
-          
-          colors.splice(1, 0, 'yellow', 'pink');
-          console.log(colors); 
-          ["red", "yellow", "pink", "green", "purple", "blue"]
-          `
-        },
-        {
-          text1: `---------------------
-          <i><u>Replacing elements using the JavaScript Array splice() method</i></u>
-          ---------------------
-          
-          The splice() method allows you to insert new elements into an array while deleting existing elements simultaneously.
-          
-          To do this, you pass at least three arguments with the second one that specifies the number of items to delete and the third one that indicates the elements to insert.
-          
-          Note that the number of elements to delete needs not be the same as the number of elements to insert.
-          
-          Suppose you have an array of programming languages with four elements as follows:
-          `,
-          code1: `let languages = ['C', 'C++', 'Java', 'JavaScript'];
-          // The following statement replaces the second element with a new one.
-          
-          languages.splice(1, 1, 'Python');
-          // The 'languages' array now still has four elements with the new second argument is 'Python' instead of 'C++'.
-          
-          console.log(languages);
-          // ["C", "Python", "Java", "JavaScript"]
-          // The following figure illustrates the method call above.
-          
-          // You can replace one element with multiple elements by passing more arguments into the splice() method as follows:
-          
-          languages.splice(2, 1, 'C#', 'Swift', 'Go');
-          // The statement deletes one element from the second element i.e., 'Java' and inserts three new elements into the 'languages' array. The result is as follows.
-          
-          console.log(languages); // ["C", "Python", "C#", "Swift", "Go", "JavaScript"]
-          
-          //------------------->
-          const months1 = ['Jan', 'March', 'April', 'June'];
-          months1.splice(1, 0, 'Feb');
-          // 'Feb' Inserts at index 1
-          console.log(months1);
-          // Expected output: Array ["Jan", "Feb", "March", "April", "June"]
-          
-          months1.splice(4, 1, 'May');
-          // 'May' Replaces 1 element at index 4
-          console.log(months1);
-          // Expected output: Array ["Jan", "Feb", "March", "April", "May"]
-          
-          //-------------------->
-          const months = ['Jan', 'Feb', 'Monday', 'Tuesday'];
-          const days = months.splice(2, 2, 'March', 'April');
-          console.log(months) //  ['Jan', 'Feb', 'March', 'April']
-          console.log(days) // ['Monday', 'Tuesday']`
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "slice() - copy elements of an array.",
-      note: [
-        {
-          text1: `The slice() method accepts two optional parameters as follows:
-
-          slice(start, stop);
-          Both <b>start</b> and <b>stop</b> parameters are optional.
-          
-          The <b>start</b> parameter determines the zero - based index at which to start extraction.If the <b>start</b> is <b>undefined</b>, slice() begins at 0.
-          
-          The <b>stop</b> parameter, as its name implies, is a zero - based index at which to end extraction.The slice() method extracts up to <b>stop-1</b>.It means that the slice() method doesn't include the element at the <b>stop</b> position in the new array.If you omit the <b>stop</b> parameter, the slice() method will use the length of the array for the <b>stop</b> parameter.
-          
-          The slice() returns a new array that contains the elements of the original array.It's important to keep in mind that the slice() method performs the shallow copy of elements to the new array only.In addition, it doesn't change the source array.
-          
-          
-          Clone an array
-          The slice() is used to clone an array as shown in the following example:
-          `,
-          code1: `var numbers = [1, 2, 3, 4, 5];
-          var newNumbers = numbers.slice();
-          // In this example, the 'newNumbers' array contains all the elements of the 'numbers' array.`
-        },
-        {
-          text1: ` Copy a portion of an array
-The typical use of the slice() method is to copy a portion of an array without modifying the source array.Here is an example:
-`,
-          code1: `function toArray() {
-            return Array.prototype.slice.call(arguments);
-          }
-          var classification = toArray('A', 'B', 'C');
-          console.log(classification); // ["A", "B", "C"]`
-        },
-        {
-          text1: `
-          In this example, the <b>arguments</b> of the toArray() function is an array-like object. Inside the toArray() function, we called the slice() method to convert the arguments object into an array.
-
-          Every argument we pass to the toArray() function will be the elements of the new array.
-          
-          Another typical example that you often see is converting a <b>NodeList</b> into an array as follows:
-          `,
-          code1: `var p = document.querySelectorAll('p');
-          var list = Array.prototype.slice.call(p);
-          
-          // In this example, first, we used the 'document.querySelectorAll()' to get all 'p' nodes of the HTML document.The result of this method is a 'NodeList' object, which is an array - like object.Then, we called the 'slice()' method to convert the 'NodeList' object into an array.
-          
-          //   Sometimes, you see the following syntax:
-          
-          var list = [].slice.call(document.querySelectorAll('p'));
-          
-          // In this example, we instantiated an empty array '[]' and indirectly accessed the 'slice()' method of the 'Array.prototype' method through the empty array.The effect is the same as the one that uses the 'Array.prototype' directly.`
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "concat() - merge two arrays into an array",
-      note: [
-        {
-          text1: `To merge two or more arrays, you use the <b>concat()</b> method of an Array object.The <b>concat()</b> method returns a new array and doesn't change the original arrays.For example:`,
-          code1: `let odds = [1, 3, 5];
-          let evens = [2, 4, 6];
-          // merge odds and evens array
-          let combined = odds.concat(evens);
-          
-          console.log('Result:', combined);
-          console.log('Odds:', odds);
-          
-          
-          // Output:
-          // Result: [ 1, 3, 5, 2, 4, 6 ]
-          // Odds: [ 1, 3, 5 ]`
-        },
-        {
-          text1: `In this example, we have two arrays: <b>odds</b> and <b>evens</b>.We call the <b>concat()</b> method of the <b>odds</b> array method to merge elements of the two arrays.The elements of the second array are appended to the elements of the first array.
-
-          Similarly, you can call the <b>concat()</b> method on an empty array denoted by(<b>[]</b>):`,
-          code1: `let odds = [1, 3, 5];
-          let evens = [2, 4, 6];
-          // merge odds and evens array
-          let combined = [].concat(odds, evens);
-          
-          console.log(combined);
-          
-          // Output:
-          // [1, 3, 5, 2, 4, 6]
-          
-
-          //------------------ 
-          // The 'concat()' method allows you to merge more than two arrays as shown in the following example:
-          
-          let upper = ['A', 'B', 'C'];
-          let lower = ['a', 'b', 'c'];
-          let digits = [1, 2, 3];
-          let alphanumerics = upper.concat(lower, digits);
-          
-          // Output:
-          // ['A', 'B', 'C', 'a', 'b', 'c', 1, 2, 3]
-          
-          // In this example, we merge the three arrays: 'upper', 'lower', and 'digits'.
-          
-
-          //-------------------
-          // When you don't pass any argument into the 'concat()' method, it simply clones the array and returns it:
-          
-
-let colors = ['red', 'green', 'blue'];
-let rgb = colors.concat();
-console.log(rgb);
-
-// Output:
-// [ 'red', 'green', 'blue' ]
-
-
-//-----------------------
-// If you pass values that are not arrays, into the 'concat()' method, the method will appends each value to the end of the result array:
-
-let rgb = ['red', 'green', 'blue'];
-let moreColors = rgb.concat('yellow', 'magento');
-console.log(moreColors);
-
-// Output:
-// ['red', 'green', 'blue', 'yellow', 'magento']
-
-
-//---------------------
-// In ES6, you can use spread operator to merge multiple arrays as follows:
-
-let odds = [1, 3, 5];
-let evens = [2, 4, 6];
-let combined = [...odds, ...evens];
-console.log(combined);
-
-// Output:
-// [ 1, 3, 5, 2, 4, 6 ]
-          `
-        },
-      ]
-    },
-    {
-      id: 1,
       title: "of() - improve array creation.",
       note: [
         {
@@ -3140,7 +3095,7 @@ console.log(combined);
           text1: `
          <b>JavaScript Array.of() polyfill:--</b>
 
-If you execute the JavaScript in the environment that doesn’t support the  'Array.of()' method, you can use the following polyfill:
+If you execute the JavaScript in the environment that doesn't support the  'Array.of()' method, you can use the following polyfill:
 `,
           code1: `if (!Array.of) {
             Array.of = function() {
@@ -3378,7 +3333,7 @@ console.log(sequence);
           ---------------------
            The optional <b>thisArg</b> argument is a value to use as <b>this</b> when executing the <b>callback</b>.
           
-           Note that the <b>flatMap()</b> method doesn’t modify the original array.
+           Note that the <b>flatMap()</b> method doesn't modify the original array.
           
           ----------------------
           <b> JavaScript Array flatMap() examples </b>
@@ -3406,7 +3361,7 @@ console.log(sequence);
           // ]`
         },
         {
-          text1: `The result is an array of nested arrays filled by words.To flatten the result, you can use the 'flat()' method on the result of the 'map()' method.However, it’ll be more concise to use the 'flatMap()' method.
+          text1: `The result is an array of nested arrays filled by words.To flatten the result, you can use the 'flat()' method on the result of the 'map()' method.However, it'll be more concise to use the 'flatMap()' method.
 
           The 'flatMap()' creates a flattened array by running each sentence in the array through a mapping function and flattening the mapped results:`,
           code1: `let sentences = [
@@ -3598,6 +3553,268 @@ console.log(sequence);
           // 7
           // true
 `
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Object.freeze()",
+      note: [
+        {
+          text1: `const prevents reassignment.
+<b>Object.freeze()</b> prevents mutability.
+
+The <b>Object.freeze()</b> static method freezes an object. Freezing an object prevents extensions and makes existing properties non-writable and non-configurable. A frozen object can no longer be changed: new properties cannot be added, existing properties cannot be removed, their enumerability, configurability, writability, or value cannot be changed, and the object's prototype cannot be re-assigned. freeze() returns the same object that was passed in.
+
+<b>freeze()</b> returns the same object that was passed into the function. It does not create a frozen copy.
+
+The Object.freeze() method is shallow, meaning that it can freeze the properties of the object, not the objects referenced by the properties. 
+
+The <u>Object.freeze()</u> method freezes an object i.e. it prevents the object from being modified.
+
+Object.freeze method makes the object completely read-only, but it's only doing a shallow freeze, which means that it will only freeze the immediate properties of the object itself. If the object contains an array or object as a property, those properties can still be modified.
+
+<u>Object.freeze</u> makes an object completely immutable, while <u>Object.seal</u> allows existing properties to be modified, but prevents the addition and deletion of new properties.
+
+-> <b>freeze() </b> is a static method. Hence, we need to access the method using the class name, Object.
+
+Notes: A frozen object can no longer be changed. Freezing an object prevents:
+=> New properties from being added to the object.
+=> Existing properties to be removed from the object.
+=> Changing the enumerability, configurability, or writability of existing properties.
+=> Changing the values of existing object properties and prototypes.
+
+<b>Description</b>
+The <u>Object.freeze()</u> method prevents any changes to an object.
+The <u>Object.freeze()</u> method will fail silently in non-strict mode.
+The <u>Object.freeze()</u> method will throw a TypeError in strict mode.
+Frozen objects are read-only. No modification, addition or deletion of properties are allowed.
+The Object.isFrozen() method can be used to check if an object is frozen.
+
+<b>Note</b>: Object.freeze(obj) only applies to the immediate properties of obj. If the values of those properties are objects themselves, those objects are not frozen and may be the target of property addition, removal, or value reassignment operations.
+
+The Object.isFrozen() method can be used to check if an object is frozen.
+Object.isFrozen(frozenStudent); // === true
+ `,
+          code1: `syntax : Object.freeze(obj)
+          
+          //-------------------
+          let obj = {
+  prop: function () {},
+  foo: "bar",
+};
+
+// freeze the object
+Object.freeze(obj)
+
+// changes will not occur
+obj.foo = "bar1";
+console.log(obj.foo);
+
+// Output: bar
+
+
+//------------------- TypeError in strict mode. ------------
+        "use strict"
+        // Create Object
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 50,
+            eyeColor: "blue"
+        };
+        // Freeze Object
+        Object.freeze(person)
+        // Test Error
+        let text;
+        try {
+            person.age = 51;
+            text = Object.values(person);
+            console.log(text)
+        }
+        catch (err) {
+            console.log(err)
+            text = err;
+        }
+        console.log(person)
+
+        Output : ----
+        TypeError: Cannot assign to read only property 'age' of object '#<Object>'
+
+        //--------------------
+
+        let obj = {
+  prop: function () {},
+  foo: "bar",
+};
+
+// freeze the obj object
+let o = Object.freeze(obj);
+
+// changes will fail silently
+obj.foo = "bar1";
+console.log(obj.foo); 
+
+// cannot add a new property 
+obj.new_foo = "bar";
+console.log(obj.new_foo); 
+console.log(obj); 
+
+// In the above example, we have created an object "obj" with two properties: "prop" and "foo".
+
+// We then used the "Object.freeze()" method to freeze "obj", which makes it immutable. Once an object is frozen, its properties cannot be modified or deleted.
+
+// The output indicates that any attempt to modify a property or add a new property on a frozen object will fail silently without throwing an error.
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Object.seal()",
+      note: [
+        {
+          text1: `Object.seal()
+On the other hand, The Object.seal() method prevents the addition and deletion of properties from an object, but it does not prevent the modification of the values of existing properties.
+The <b>Object.seal()</b> method seals the given object. This prevents new properties from being added to the object and marks all the existing properties as non-configurable.
+
+The <b>seal()</b> method, being a static method, is called using the Object class name.
+
+<b>seal() Parameters</b>
+The <u>seal()</u> method takes in:
+<u>obj</u> - the object that is to be sealed.
+
+
+<b>seal() Return Value</b>
+The <u>seal()</u> method returns the object being sealed i.e. <u>obj</u>.
+
+Object.isSealed() can be used to check if an object is sealed or not.
+Object.isSealed(student); // === true`,
+          code1: `const person = {
+    name: 'Geeksforgeeks',
+    address: {
+        city:"Noida"
+    }
+}
+Object.freeze(person)
+person.address.city = "India"
+person.name = "India"
+console.log(person.address.city)
+console.log(person.name)
+
+
+//--------------
+        let obj = {
+            foo: "bar",
+            func: function () { },
+        };
+
+        // before sealing, properties can be
+        // added, modified, or removed
+        obj.foo = "JavaScript";
+        obj.value = 5;
+        delete obj.func;
+
+        console.log(obj);
+        // Output: { foo: 'JavaScript', value: 5 } 
+
+
+        // seal the object
+        let o = Object.seal(obj);
+
+        // can still change property values
+        // as it is writable by default
+        obj.foo = "bar1";
+        console.log(obj);
+        // Output: { foo: 'bar1', value: 5 }
+
+
+        // no other change happens, fails silently
+        obj.foo1 = "bar";
+        delete obj.foo;
+
+        console.log(obj);
+        // Output: { foo: 'bar1', value: 5 }
+
+//         From the example above, it is clear that we can add, modify, or remove properties from the "obj" object before it is sealed.
+// After sealing "obj" with the "seal()" method, we
+// can modify existing writable properties like "foo" and "value",
+// cannot add new properties to "obj" (attempt fails silently in non-strict mode)
+// Uncaught TypeError: Cannot add property foo1, object is not extensible (In non-strict mode)
+`
+        },
+        {
+          text1: `<b>Key differences</b>:
+=> <u>Object.seal()</u> allows modification of existing properties, but does not permit addition or deletion of properties. <u>Object.freeze()</u>, on the other hand, prevents any modifications, additions, or deletions to properties.
+=> <u>Object.seal()</u> creates a <u>sealed</u> object, while <u>Object.freeze()</u> creates a <u>frozen</u> object.
+=> Sealed objects are still mutable, whereas frozen objects are completely immutable.
+=> <u>Both methods return the modified object itself.
+=> <u>Object.seal()</u> allows checking if an object is sealed using <u>Object.isSealed()</u>, and <u>Object.freeze()</u> allows checking if an object is frozen using Object.isFrozen().
+
+<b>Conclusion</b> : <u>Object.seal() and <u>Object.freeze()</u> are methods in JavaScript that provide different levels of object immutability and control over object modifications.
+
+=> <u>Object.seal()</u> allows the modification of existing properties while preventing the addition or deletion of properties. Sealed objects are still mutable, and the <u>Object.isSealed()</u> method can be used to check if an object is sealed.
+=> <u>Object.freeze()</u> creates completely immutable objects where no modifications, additions, or deletions of properties are allowed. Frozen objects are read-only, and the <u>Object.isFrozen()</u> method can be used to check if an object is frozen.
+
+the choice between <u>Object.seal()</u> and <u>Object.freeze()</u> depends on the desired level of immutability and control required for the object. If you want to allow modification of existing properties but prevent structural changes, <u>Object.seal()</u> is suitable. If you need to create fully immutable objects, ensuring that no modifications are possible, <u>Object.freeze()</u> is the appropriate choice.
+
+By understanding the differences and capabilities of <u>Object.seal()</u> and <u>Object.freeze()</u>, you can effectively manage object mutability and ensure the desired level of data integrity and security in your JavaScript applications.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "( in ) - Operator",
+      note: [
+        {
+          text1: `JavaScript <b>in operator</b> is an inbuilt operator which is used to check whether a particular property exists in an object or not. It returns a boolean value true if the specified property is in an object, otherwise, it returns false.
+          
+         <b> prop</b>: This parameter holds the string or symbol that represents a property name or array index.
+<b>object</b>: This parameter is an Object that is to be checked whether it contains the prop.
+          `,
+          code1: `prop in object
+          
+              // Illustration of in operator 
+    const array = ['geeks', 'for',
+        'geeks']
+ 
+    // Output of the indexed number 
+    console.log(0 in array);
+ 
+    // Output of the Value 
+    console.log('for' in array);
+ 
+    // output of the Array property 
+    console.log('length' in array);
+
+    Output : 
+    true
+false
+true
+          `
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "add new topic",
+      note: [
+        {
+          text1: ``,
+          code1: ``
         },
       ]
     },
@@ -4144,7 +4361,7 @@ console.log(areas);
                The value of the current array element.On the first call, it is 'array[0]' if you pas the 'initialValue' or 'array[1]' otherwise.
               
                  currentIndex:
-               The index of the currentValue in the array.On the first call, it’s '0' if you pass the 'initialValue' or '1' otherwise.
+               The index of the currentValue in the array.On the first call, it's '0' if you pass the 'initialValue' or '1' otherwise.
               
                'array':
                The array to loop through.
@@ -4152,9 +4369,9 @@ console.log(areas);
                <b>2) The initialValue argument</b>
                The 'initialValue' argument is optional.
                
-               If you specify the 'initialValue', the 'callbackFn' function will initialize the 'previousValue' to the 'initialValue' and 'currentValue' to the first array’s element on the first call.
+               If you specify the 'initialValue', the 'callbackFn' function will initialize the 'previousValue' to the 'initialValue' and 'currentValue' to the first array's element on the first call.
                
-               If you don’t specify the 'initialValue', the the 'callbackFn' function will initialize the 'previousValue' to the first array’s element(array[0]) in the array and the 'currentValue' to the second array’s element(array[1]).
+               If you don't specify the 'initialValue', the the 'callbackFn' function will initialize the 'previousValue' to the first array's element(array[0]) in the array and the 'currentValue' to the second array's element(array[1]).
                
                The following table illustrates the logic when the 'reduce()' method executes the 'callbackFn()' function for the first time according to the 'initialValue' argument:
 
@@ -4417,7 +4634,7 @@ console.log(areas);
         {
           text1: `Notice that in this example, we passed in the 'initialValue' argument to the 'reduce()' method.
 
-          If we didn’t do so, the 'reduce()' method would take the first element of the 'shoppingCart' array, which is an object, as an initial value and perform the calculation on this object.Hence, it would cause an incorrect result.
+          If we didn't do so, the 'reduce()' method would take the first element of the 'shoppingCart' array, which is an object, as an initial value and perform the calculation on this object.Hence, it would cause an incorrect result.
           
           
           JavaScript Array reduceRight() method: --
@@ -4692,7 +4909,7 @@ console.log(result);
 
   In other words, the 'every()' will stop calling the 'callback()' function and return 'false' once there is an array element that causes 'callback()' to return a falsy value.
 
-  Let’s take a look at some more examples of using the 'every()' method.
+  Let's take a look at some more examples of using the 'every()' method.
 
 More JavaScript Array every() method examples
 The following example tests whether all the array elements are the even numbers
@@ -4832,7 +5049,7 @@ console.log(lessThanFive);
            The 'some()' method accepts two arguments:
           
            1) The callback argument
-           The 'some()' function executes the 'callback' function once for each element in the array until it finds the one where the 'callback' function returns a 'true'.The 'some()' method immediately returns 'true' and doesn’t evaluate the remaining elements.
+           The 'some()' function executes the 'callback' function once for each element in the array until it finds the one where the 'callback' function returns a 'true'.The 'some()' method immediately returns 'true' and doesn't evaluate the remaining elements.
           
            If no element causes the 'callback()' to return 'true', the 'some()' method returns 'false'.
           
@@ -4848,7 +5065,7 @@ console.log(lessThanFive);
              The 'thisArg' argument is optional.If you pass the 'thisArg' into the method, you can use the 'thisArg' as the 'this' value inside the 'callback' function.
           
            JavaScript Array some() examples: --
-           Let’s take some more examples of using the 'some()' method.
+           Let's take some more examples of using the 'some()' method.
           
            1) Check if an element exists in the array:
            The following 'exists()' function uses the 'some()' method to check if a value exists in an array:`,
@@ -5145,7 +5362,7 @@ console.table(employees);
 
 // Sorting objects by the date property:--
 // ------- ------- -- --- ---- --------
-// Suppose, you wish to sort employees based on each employee’s hire date.
+// Suppose, you wish to sort employees based on each employee's hire date.
 
 // The hire date data is stored in the 'hireDate' property of the employee object. However, it is just a string that represents a valid date, not the 'Date' object. 
 
@@ -5305,7 +5522,7 @@ rivers.sort(function(a, b) {
           
            More JavaScript Array 'forEach()' method example: --
            ------------------------------------------------
-           Let’s take a look at an example of the 'forEach()' method that uses a 'contextObject'.
+           Let's take a look at an example of the 'forEach()' method that uses a 'contextObject'.
           
            The following illustrates 'Counter' constructor function:`,
           code1: `function Counter() {
@@ -5453,7 +5670,7 @@ rivers.sort(function(a, b) {
       title: "object methods",
       note: [
         {
-          text1: `An object is a collection of key/value pairs or properties. When the value is a function, the property becomes a method. Typically, you use methods to describe the object’s behaviors.
+          text1: `An object is a collection of key/value pairs or properties. When the value is a function, the property becomes a method. Typically, you use methods to describe the object's behaviors.
 
           In JavaScript, object methods are functions that are defined as properties of an object. These methods allow objects to perform actions or computations related to their properties and behavior. 
           
@@ -5579,7 +5796,7 @@ Technically speaking, a constructor function is a regular function with the foll
           > Assign the arguments <b>John</b> and <b>Doe</b> to the <b>firstName</b> and <b>lastName</b> properties of the object.
           > Return the <b>this</b> value.
 
-          It’s functionally equivalent to the following:`,
+          It's functionally equivalent to the following:`,
           code1: `function Person(firstName, lastName) {
             // this = {};
         
@@ -5643,15 +5860,15 @@ Technically, you can call a constructor function like a regular function without
 
 <span style="color:red"> let person = Person('John','Doe');</span>
 
-In this case, the <b>Person</b> just executes like a regular function. Therefore, the <b>this</b> inside the <b>Person</b> function doesn’t bind to the <b>person</b> variable but the global object.
+In this case, the <b>Person</b> just executes like a regular function. Therefore, the <b>this</b> inside the <b>Person</b> function doesn't bind to the <b>person</b> variable but the global object.
 
-If you attempt to access the <b>firstName</b> or <b>lastName</b> property, you’ll get an error:
+If you attempt to access the <b>firstName</b> or <b>lastName</b> property, you'll get an error:
 
 console.log(person.firstName);
 Error:
 
 TypeError: Cannot read property 'firstName' of undefined
-Similarly, you cannot access the <b>getFullName()</b> method since it’s bound to the global object.
+Similarly, you cannot access the <b>getFullName()</b> method since it's bound to the global object.
 
 person.getFullName();
 Error:
@@ -5681,7 +5898,7 @@ let person = Person("John", "Doe");
 // Output:
 // undefined
 
-// However, the following returns a reference to the 'Person' function because it’s called the 'new' keyword:
+// However, the following returns a reference to the 'Person' function because it's called the 'new' keyword:
 
 let person = new Person("John", "Doe");
 Output:
@@ -5698,7 +5915,7 @@ function Person(firstName, lastName) {
     this.lastName = lastName;
 }
 
-// Alternatively, you can make the syntax more flexible by creating a new 'Person' object if the users of the constructor function don’t use the 'new' keyword:
+// Alternatively, you can make the syntax more flexible by creating a new 'Person' object if the users of the constructor function don't use the 'new' keyword:
 
 function Person(firstName, lastName) {
     if (!new.target) {
@@ -6143,7 +6360,7 @@ console.log(person.firstName);
       {
         text1: `// The prototype chain can be found under '__proto__' , which is an object in each
         instance that points to the prototype it was created from.On the other hand, the
-        'prototype' property is found in every function created in JS.It’s the property of a
+        'prototype' property is found in every function created in JS.It's the property of a
         class constructor.
 
         // __proto__: 'Object' shows us how JavaScript assigns userPro1 and userPro2 to an
@@ -7393,7 +7610,7 @@ Object
             console.log("Static Method", Person.createStatic('male'))`
         },
         {
-          text1: `// The createStatic() method is considered a static method because it doesn’t depend on
+          text1: `// The createStatic() method is considered a static method because it doesn't depend on
             any instance of the 'Person' type for its property values.It can be called directly on
             the Person class itself, without creating an instance of the class.
 
@@ -8322,7 +8539,6 @@ The following shows the syntax of defining a private instance method:
 
 
           In this example, animal instanceof Animal returns true because animal is an instance of Animal. Similarly, dog instanceof Animal returns true because dog is an instance of Dog, which is a subclass of Animal. However, animal instanceof Dog returns false because animal is not an instance of Dog.
-
           `
         },
         {
@@ -8478,7 +8694,8 @@ console.log(p1 instanceof Person); // true
       title: "Promises",
       note: [
         {
-          text1: `<b>Promise</b> : An object that is used as a placeholder for the future result of an asynchronous operation
+          text1: `<a href="https://javascript.info/promise-basics" target="_blank">promise-basics</a>
+          <b>Promise</b> : An object that is used as a placeholder for the future result of an asynchronous operation
           (or)
           <b>Promise</b> : A container for an asynchronously delivered value.
           (or)
@@ -8486,9 +8703,12 @@ console.log(p1 instanceof Person); // true
 
           In JavaScript, a <b>Promise</b> is a special object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. Promises are a way to handle asynchronous operations more elegantly compared to traditional callback functions.
 
+          <b>Description</b>
+A Promise is a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers with an asynchronous action's eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future.
+
 <b>What is a Promise?</b>
 A Promise has three states:
-<b>Pending</b>: The initial state. The operation is ongoing, and the final value isn’t available yet.
+<b>Pending</b>: The initial state. The operation is ongoing, and the final value isn't available yet.
 <b>Fulfilled</b>: The operation completed successfully, and the promise has a resolved value.
 <b>Rejected</b>: The operation failed, and the promise has a reason for the failure.
 Creating a Promise
@@ -8497,8 +8717,27 @@ You create a promise using the Promise constructor, which takes a function with 
 A promise starts in a pending state. That means the process is not complete. If the operation is successful, the process ends in a fulfilled state. And, if an error occurs, the process ends in a rejected state.
 
 For example, when you request data from the server by using a promise, it will be in a pending state. When the data arrives successfully, it will be in a fulfilled state. If an error occurs, then it will be in a rejected state.
+
+
+
+a promise is an object that represents the initial evaluation and eventual result of an asynchronous operation in one of three states pending, fulfilled, and rejected. In any asynchronous operation, a promise will:
+
+=> exists first in a <u>pending</u> state while the operation is being evaluated or processed
+=> proceed to be <u>settled</u> in either a <u>fulfilled</u> state if the operation is completed successfully or a <u>rejected</u> state and consequently throws an error if the operation fails.
+
+The code block below shows a practical example of how to work with promises. First, we initiate a <u>new promise</u> using the <u>Promise constructor</u> and pass a callback function to the constructor containing the code we wish to run asynchronously. The first and second parameters of this callback automatically provide us with two functions; The first function (commonly named the <u>resolve</u> function) takes in an argument that would be the result of the promise if the asynchronous operation is completed (fulfilled). On the other hand, the second function (commonly named the <u>reject</u> function) takes in an argument that would be the error thrown by the promise when the asynchronous fails to complete successfully(rejected). When working with a promise, we would commonly chain to it two types of handler methods that hold code that will run only after the promise has been <b>settled</b>.
           `,
-          code1: ``,
+          code1: `       
+//--------------
+let checkEven = new Promise((resolve, reject) => {
+            let number = 3;
+            if (number % 2 === 0) resolve("The number is even!");
+            else reject("The number is odd!");
+        });
+
+        checkEven
+            .then((message) => console.log(message)) // On success
+            .catch((error) => console.error(error)); // On failure`,
           img : `../assets/images/javascript/Promise.webp`
         },
         {
@@ -8547,6 +8786,26 @@ For example, when you request data from the server by using a promise, it will b
           </tbody>
         </table>`,
           code1: ``
+        },
+        {
+          text1: `The function passed to <u>new Promise</u> is called the executor. When <u>new</u> Promise is created, the executor runs automatically. It contains the producing code which should eventually produce the result. In terms of the analogy above: the executor is the “singer”.
+
+Its arguments <u>resolve</u> and <u>reject</u> are callbacks provided by JavaScript itself. Our code is only inside the executor.
+
+When the executor obtains the result, be it soon or late, doesn't matter, it should call one of these callbacks:
+
+<u>resolve(value)</u> — if the job is finished successfully, with result <u>value</u>.
+<u>reject(error)</u> — if an error has occurred, error is the <u>error</u> object.
+<u>So to summarize</u>: the executor runs automatically and attempts to perform a job. When it is finished with the attempt, it calls <u>resolve</u> if it was successful or <u>reject</u> if there was an error.
+
+The <u>promise</u> object returned by the <u>new</u> Promise constructor has these internal properties:
+
+<u>state</u> — initially <u>"pending"</u>, then changes to either <u>"fulfilled"</u> when resolve is called or <u>"rejected"</u> when <u>reject</u> is called.
+<u>result</u> — initially <u>undefined</u>, then changes to <u>value</u> when <u>resolve(value)</u> is called or <u>error</u> when <u>reject(error)</u> is called.`,
+          code1: `let promise = new Promise(function(resolve, reject) {
+  // executor (the producing code, "singer")
+});
+`
         },        
         {
           text1: `Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a function. Imagine a function, createAudioFileAsync(), which asynchronously generates a sound file given a configuration record and two callback functions: one called if the audio file is successfully created, and the other called if an error occurs.`,
@@ -8567,12 +8826,245 @@ For example, when you request data from the server by using a promise, it will b
           createAudioFileAsync(audioSettings).then(successCallback, failureCallback);`
         },
         {
-          text1: ``,
-          code1: ``
+          text1: `The most important, fundamental one is <b>.then</b>.
+
+The first argument of <u>.then</u> is a function that runs when the promise is resolved and receives the result.
+The second argument of <u>.then</u> is a function that runs when the promise is rejected and receives the error.
+
+The <b>Promise.then()</b> method in JavaScript takes up to two parameters:
+
+    <u>onFulfilled (Required)</u>: A callback function that is executed when the promise is successfully resolved (i.e., when the promise is "fulfilled").
+    <u>onRejected (Optional)</u>: A callback function that is executed when the promise is rejected (i.e., when the promise is "rejected").
+
+    promise.then(onFulfilled, onRejected);
+
+    <b>onFulfilled</b>: This function is called with the value passed to <u>resolve()</u> when the promise is fulfilled.
+    <b>onRejected</b>: This function is called with the reason passed to <u>reject()</u> when the promise is rejected.
+
+    Both parameters are optional in the sense that you can call <u>then()</u> with just the <u>onFulfilled</u> handler, and the <u>onRejected</u> handler can be omitted. If no <u>onRejected</u> handler is provided, the rejection will be handled by any subsequent <u>catch()</u> block or the default rejection handler.
+`,
+          code1: `        //The syntax is:
+
+promise.then(
+  function(result) { /* handle a successful result */ },
+  function(error) { /* handle an error */ }
+);
+
+"use strict";
+
+        let promise = new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                if(false){
+                    resolve("Done!")
+                } else {
+                    reject("faild!")
+                }
+            }, 1000);
+        });
+
+        // resolve runs the first function in .then
+        promise.then(
+            result => console.log(result), // shows "done!" after 1 second
+            error => console.log(error) // doesn't run
+        );`
         },
         {
-          text1: ``,
-          code1: ``
+          text1: `<b>catch</b>
+If we're interested only in errors, then we can use <u>null</u> as the first argument: <u>.then(null, errorHandlingFunction)</u>. Or we can use <u>.catch(errorHandlingFunction)</u>, which is exactly the same:
+The call <b>.catch(f)</b> is a complete analog of <b>.then(null, f)</b>, it's just a shorthand.
+
+<b>Using catch() to handle rejections</b>
+If you do not provide an <b>onRejected</b> callback in <b>then()</b>, you can chain a <b>catch()</b> method to handle the rejection:
+`,
+          code1: `let promise = new Promise((resolve, reject) => {
+  setTimeout(() => reject(new Error("Whoops!")), 1000);
+});
+
+// .catch(f) is the same as promise.then(null, f)
+promise.catch(alert); // shows "Error: Whoops!" after 1 second
+
+//------------------
+
+        // ----------------callback function---------------------
+        function loadScript(src, callback) {
+            let script = document.createElement('script');
+            script.src = src;
+
+            // Debugging: Log the script element
+            // console.log(script);
+
+            // On load, execute the callback with the script element
+            script.onload = () => callback(null, script); // Passing 'null' for error since it's loaded successfully
+            // On error, execute the callback with an error message
+            script.onerror = () => callback(new Error(\`Script load error for \${src}\`));
+
+            document.head.append(script);
+        }
+
+        const callFuncion = (err, script) => {
+            try {
+                if (err) {
+                    // Log the error if the script loading failed
+                    console.log("Error:", err.message);
+                } else {
+                    // If script is loaded successfully, log the script and its type
+                    console.log("Script loaded successfully:", script);
+                    console.log("Type of script:", typeof script); // This will log 'object'
+                    window.open(script.src)
+                }
+            } catch (err) {
+                console.log("Caught error:", err);
+            }
+        }
+
+        // Calling loadScript with the URL of Lodash and the callback function
+        loadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js", callFuncion);
+
+
+        // ----------------promise---------------------
+
+        function loadScript(src) {
+            return new Promise(function (resolve, reject) {
+                let script = document.createElement('script');
+                script.src = src;
+
+                script.onload = () => resolve(script);
+                script.onerror = () => reject(new Error(\`Script load error for \${src}\`));
+
+                document.head.append(script);
+            });
+        }
+
+        let promise = loadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js");
+
+        promise.then(
+            script => {
+                console.log(\`\${script.src} is loaded!\`);
+                window.open(script.src);
+            },
+            error => console.log(\`Error: \${error.message}\`)
+        );
+
+        promise.then(script => console.log('Another handler...', script));
+
+
+
+        //--------------Ex : 2-----------------
+
+        &lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;style&gt;
+        .message-ball {
+            font-size: 20px;
+            line-height: 200px;
+            text-align: center;
+        }
+
+        .circle {
+            transition-property: width, height;
+            transition-duration: 2s;
+            position: fixed;
+            transform: translateX(-50%) translateY(-50%);
+            background-color: red;
+            border-radius: 50%;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;button onclick=&quot;go()&quot;&gt;Click me&lt;/button&gt;
+
+    &lt;script&gt;
+        function go() {
+            showCircle(150, 150, 100).then(div =&gt; {
+                div.classList.add(&#39;message-ball&#39;);
+                div.append(&quot;Hello, world!&quot;);
+            });
+        }
+
+        function showCircle(cx, cy, radius) {
+            let div = document.createElement(&#39;div&#39;);
+            div.style.width = 0;
+            div.style.height = 0;
+            div.style.left = cx + &#39;px&#39;;
+            div.style.top = cy + &#39;px&#39;;
+            div.className = &#39;circle&#39;;
+            document.body.append(div);
+
+            return new Promise(resolve =&gt; {
+                setTimeout(() =&gt; {
+                    div.style.width = radius * 2 + &#39;px&#39;;
+                    div.style.height = radius * 2 + &#39;px&#39;;
+
+                    div.addEventListener(&#39;transitionend&#39;, function handler() {
+                        div.removeEventListener(&#39;transitionend&#39;, handler);
+                        resolve(div);
+                    });
+                }, 0);
+            })
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+`
+        },
+        {
+          text1: `<b>Cleanup: finally</b>
+Just like there's a <u>finally</u> clause in a regular <u>try {...} catch {...}</u>, there's <u>finally</u> in promises.
+
+The call <u>.finally(f)</u> is similar to <u>.then(f, f)</u> in the sense that <u>f</u> runs always, when the promise is settled: be it resolve or reject.
+
+The idea of <u>finally</u> is to set up a handler for performing cleanup/finalizing after the previous operations are complete.
+
+E.g. stopping loading indicators, closing no longer needed connections, etc.
+
+Think of it as a party finisher. No matter was a party good or bad, how many friends were in it, we still need (or at least should) do a cleanup after it.
+
+
+Please note that <u>finally(f)</u> isn't exactly an alias of <u>then(f,f)</u> though.
+
+There are important differences:
+1) A <u>finally</u> handler has no arguments. In <u>finally</u> we don't know whether the promise is successful or not. That's all right, as our task is usually to perform “general” finalizing procedures.
+Please take a look at the example above: as you can see, the finally handler has no arguments, and the promise outcome is handled by the next handler.
+
+2) A <u>finally</u> handler “passes through” the result or error to the next suitable handler.
+For instance, here the result is passed through finally to then:`,
+          code1: `//The code may look like this:
+          // new Promise((resolve, reject) => {
+  /* do something that takes time, and then call resolve or maybe reject */
+})
+  // runs when the promise is settled, doesn't matter successfully or not
+  .finally(() => stop loading indicator)
+  // so the loading indicator is always stopped before we go on
+  .then(result => show result, err => show error)
+  
+  
+  new Promise((resolve, reject) => {
+  setTimeout(() => resolve("value"), 2000);
+})
+  .finally(() => alert("Promise ready")) // triggers first
+  .then(result => alert(result)); // <-- .then shows "value"`
+        },
+        {
+          text1: `As you can see, the <u>value</u> returned by the first promise is passed through <u>finally</u> to the next <u>then</u>.
+That's very convenient, because <u>finally</u> is not meant to process a promise result. As said, it's a place to do generic cleanup, no matter what the outcome was.
+And here's an example of an error, for us to see how it's passed through <u>finally</u> to <u>catch</u>:
+
+3) A <u>finally</u> handler also shouldn't return anything. If it does, the returned value is silently ignored.
+The only exception to this rule is when a <u>finally</u> handler throws an error. Then this error goes to the next handler, instead of any previous outcome.
+
+To summarize:
+A <u>finally</u> handler doesn't get the outcome of the previous handler (it has no arguments). This outcome is passed through instead, to the next suitable handler.
+If a <u>finally</u> handler returns something, it's ignored.
+When <u>finally</u> throws an error, then the execution goes to the nearest error handler.
+These features are helpful and make things work just the right way if we use finally how it's supposed to be used: for generic cleanup procedures.`,
+          code1: `new Promise((resolve, reject) => {
+  throw new Error("error");
+})
+  .finally(() => alert("Promise ready")) // triggers first
+  .catch(err => alert(err));  // <-- .catch shows the error`
         },
 
       ]
@@ -8582,7 +9074,252 @@ For example, when you request data from the server by using a promise, it will b
       title: "Promise Chaining",
       note: [
         {
-          text1: `Chaining: When you chain promises, you can perform a series of asynchronous operations in a specific order. Each .then() method returns a new promise, which can be used to perform the next asynchronous operation.`,
+          text1: `A Promise is an object representing the eventual completion or failure of an asynchronous operation.
+          Chaining: When you chain promises, you can perform a series of asynchronous operations in a specific order. Each .then() method returns a new promise, which can be used to perform the next asynchronous operation.
+          
+          A common need is to execute two or more asynchronous operations back to back, where each subsequent operation starts when the previous operation succeeds, with the result from the previous step. In the old days, doing several asynchronous operations in a row would lead to the classic callback hell:
+          
+          With promises, we accomplish this by creating a promise chain. The API design of promises makes this great, because callbacks are attached to the returned promise object, instead of being passed into a function.
+          
+          const promise = doSomething();
+const promise2 = promise.then(successCallback, failureCallback);
+
+          This second promise (promise2) represents the completion not just of doSomething(), but also of the successCallback or failureCallback you passed in — which can be other asynchronous functions returning a promise. When that's the case, any callbacks added to promise2 get queued behind the promise returned by either successCallback or failureCallback.
+
+          Promises are not just the mechanism to performif this occurs then do that sort of operation. That's the building block, but it turns out we can string multiple promises together to represent a sequence of operations. Understanding promise chaining is the building block to understanding javascript async/await.
+
+The key to making this work is built on the fact that:
+Every time you call then(), catch() on a promise, it creates and returns a new promise which can be chained further.
+
+<b>Function definition of then() and catch()</b>
+- <b>then(onFulfilled, onRejected)</b>: It takes two arguments as the callback functions. One for handling the fulfilled state (success handler) and the other for handling the rejected state(error handler) of the promise. Both the callback functions return a promise object.
+- <b>catch(onRejected)</b>: It takes one argument as the callback function i.e to handle the rejected state of the promise. The callback function onRejected also returns a promise object.
+
+<b>1. Chaining multiple synchronous tasks using .then()</b>
+Let's understand the synchronous task chaining with a simple example of a number game wherein each <b>synchronous</b> step is to be performed sequentially. The steps are :
+You select a random number <b>→ then</b> multiply the number by 2 <b>→ then</b> Add 2 to the multiplied number <b>→ then</b> the game is completed successfully
+
+Also, the <b>data can be passed down the chain using return statements</b>. In the Ex:1 using the statement <b>return(randomNumbar *2) at Step 2</b>, we pass the value to <b>Step3</b>, and 8 is printed.
+          `,
+          code1: `// callback hell
+          doSomething(function (result) {
+  doSomethingElse(result, function (newResult) {
+    doThirdThing(newResult, function (finalResult) {
+      console.log(\`Got the final result: \${finalResult}\`);
+    }, failureCallback);
+  }, failureCallback);
+}, failureCallback);
+
+// Here's the magic: the "then()" function returns a "new promise", different from the original:
+
+const promise = doSomething();
+const promise2 = promise.then(successCallback, failureCallback);
+
+
+//----------- Ex : 1 -------------
+        function numberGame() {
+           return new Promise ((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(3)
+                }, 2000)
+            }).then((randomNumber) => {
+                // console.log(randomNumber)
+                return randomNumber * 2
+            }).then((addNumber) => {
+                return addNumber + 2
+            }).then((num) => {
+                return \`The final value is \${num}\`
+            }).then(res => console.log(res))
+        }
+        numberGame()
+        // numberGame().then(res => console.log(res))
+
+
+
+//---------------- many .then to a single promise  --------------
+// A classic newbie error: technically we can also add many .then to a single promise. This is not chaining.
+
+// For example:
+
+let promise = new Promise(function(resolve, reject) {
+  setTimeout(() => resolve(1), 1000);
+});
+
+promise.then(function(result) {
+  alert(result); // 1
+  return result * 2;
+});
+
+promise.then(function(result) {
+  alert(result); // 1
+  return result * 2;
+});
+
+promise.then(function(result) {
+  alert(result); // 1
+  return result * 2;
+});
+`
+        },
+        {
+          text1: `<b>2. Chaining multiple asynchronous tasks using .then()</b>
+<b>Mainly promise chaining is used to chain multiple asynchronous task that has to be performed sequentially. Asynchronous task</b> can be chained in a similar way to <b>synchronous task</b>. The only difference is that <b>asynchronous tasks require promises</b>.
+Lets understand Asynchronous task chaining with an example. Imagine that your friends are coming over for dinner,and you are planning to serve pasta to them.
+Preparation for the party includes the following steps:
+You buy grocery from the store <b>→ then</b> prepare pasta <b>→ then</b> serve the pasta. Here each task is performed asynchronously.`,
+          code1: `// Step 1: Purchasing groceries
+        function serveDinner() {
+            return new Promise((resolve, reject) => {
+                console.log("Buying groceries...");
+                //Step : 1 promise1 - buy grocery
+                setTimeout(() => {
+                    groceryItems = ['pasta', 'arrabbita sauce', 'coke'];
+                    resolve(groceryItems)
+                }, 2000)
+            }).then((receivedGroceryItems) => {
+                // Step2 : grocery items received
+                console.log("received items...",receivedGroceryItems.join(", "));
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        if(receivedGroceryItems[0] === 'pasta' && receivedGroceryItems[1] === 'arrabbita sauce') {
+                            resolve(receivedGroceryItems[0])
+                        }
+                    }, 3000)
+                })
+            }).then((receivedPasta) => {
+                console.log("preparing pasta...");
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve(\`\${receivedPasta} is ready to serve\`)
+                    },2000)
+                })
+            })
+        }
+
+        serveDinner().then((item) => {
+            console.log(item)            
+        })
+            
+        //-------------------
+
+                // Step 1: Make an API call to fetch data
+        function fetchData() {
+            return new Promise((resolve, reject) => {
+                // Using the fetch API to make a GET request to a fake placeholder API
+                fetch('https://jsonplaceholder.typicode.com/users')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json(); // Parse the response as JSON
+                    })
+                    .then(data => resolve(data))  // Resolve with the fetched data
+                    .catch(error => reject(error));  // Reject if an error occurs
+            });
+        }
+
+        // Step 2: Process the response data (e.g., display user names)
+        function processUsers(users) {
+            return new Promise((resolve, reject) => {
+                if (users && users.length > 0) {
+                    // For example, extracting the names of the users
+                    const userNames = users.map(user => user.name);
+                    resolve(userNames);
+                } else {
+                    reject(new Error("No users found"));
+                }
+            });
+        }
+
+        // Step 3: Display the processed data or handle further actions
+        function displayUserNames(userNames) {
+            return new Promise((resolve, reject) => {
+                if (userNames.length > 0) {
+                    console.log("User Names: ");
+                    userNames.forEach(name => console.log(name));
+                    resolve("User names displayed successfully");
+                } else {
+                    reject(new Error("No user names to display"));
+                }
+            });
+        }
+
+        // Putting it all together in a promise chain
+        fetchData()
+            .then(users => processUsers(users))      // Step 2: Process the fetched users
+            .then(userNames => displayUserNames(userNames))  // Step 3: Display the user names
+            .then(message => console.log(message))   // Success message
+            .catch(error => console.error("Error: ", error));  // Error handling
+
+
+
+            //---------------------
+
+
+                    // Step 1: Make an API call to fetch data
+        function fetchData() {
+            return new Promise((resolve, reject) => {
+                // Using the fetch API to make a GET request to a fake placeholder API
+                fetch('https://jsonplaceholder.typicode.com/users')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json(); // Parse the response as JSON
+                    })
+                    .then(data => resolve(data))  // Resolve with the fetched data
+                    .catch(error => reject(error));  // Reject if an error occurs
+            });
+        }
+
+        function getUserById(users) {
+            return new Promise((resolve, reject) => {
+                const userById = users.find(e => e.id === 1)
+                if (userById) {
+                    resolve(userById)
+                } else {
+                    reject(new Error("users not found"));
+                }
+            })
+        }
+
+        function getAddress(user) {
+            return new Promise((resolve, reject) => {
+                if (user) {
+                    resolve(user.address)
+                } else {
+                    reject(new Error("user not found"));
+                }
+            })
+        }
+
+        function getGeo(address) {
+            return new Promise((resolve, reject) => {
+                if (address) {
+                    resolve(address.geo)
+                } else {
+                    reject(new Error("address not found"));
+                }
+            })
+        }
+
+        fetchData().then(users => getUserById(users))
+            .then(singleUser => getAddress(singleUser))
+            .then(address => getGeo(address))
+            .then(geo => console.log(geo))
+            .catch(err => console.log("geo not found"))
+        `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
           code1: ``
         },
       ]
@@ -8592,9 +9329,563 @@ For example, when you request data from the server by using a promise, it will b
       title: "Promise.all()",
       note: [
         {
+          text1: `<a href="https://dev.to/dperrymorrow/speed-up-your-code-with-promiseall-3d4i" target="_blank"> speed-up-your-code-with-promiseall </a>
+          <a href="https://blog.openreplay.com/promises-in-parallel/" target="_blank"> promises-in-parallel </a>
+          The Promise.all() static method takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises fulfill (including when an empty iterable is passed), with an array of the fulfillment values. It rejects when any of the input's promises rejects, with this first rejection reason.
+          
+          One of the most amazing things about working with Javascript is its concurrency. Meaning it can run your code in parallel instead of waiting for each Promise to finish before moving starting the next. Commonly referred to as "forking".
+          
+          <b>Promise.all() Method</b>
+👉 The <u>Promise.all()</u> method accepts an iterable Object, such as an Array of promises as an input and returns a single promise that resolves to a result array of the input promises.
+👉 When all input promises have been resolved or the iterable input does not contain a promise, the returned promise will be resolved.
+👉 It rejects immediately when an input promise rejects or non-promise throws an error and will reject with that <u>first rejection message / error message.</u>
+👉 It is often used when there are many asynchronous tasks involved that the overall code relies on to work successfully - all of the ones we want to do before we continue to execute the code.
+👉 This method aggregates the results of multiple promises.
+
+<b>Fulfillment of Promise.all()</b>
+🔹 When an <u>empty iterable</u> is passed, the promise returned by this method is executed synchronously. The resolved value will be an <u>empty array</u>.
+🔹 When a <u>non-empty iterable</u> is passed, and all of the promises fulfill or are not promises,the promise returned by this method will be executed asynchronously.
+
+<b>Rejection of Promise.all() : Fail-Fast Behavior</b>
+<b>Promise.all()</b> shows <u>fail-fast</u> behavior, that is, Promise.all() <u>asynchronously</u> rejects with the value of the promise that rejected, if any of the passed-in elements are rejected.
+          
+          JavaScript is an asynchronous language that, most of the time, relies on promises to handle asynchronous operations. Developers face situations where multiple asynchronous tasks need to be executed concurrently, and we need a way to wait until all of them are completed before proceeding. This is where the Promise.all in JavaScript comes into play. In this blog, let us explore what js Promise.all is, its syntax and usage examples, and address common questions such as its differences from Promise. Race, handling non-promise values, managing promise rejections, compatibility, and interplay with async/await.
+
+Promise.all in javaScript can work in the following way-
+=> All or Nothing: Promise.all() waits for all promises in the iterable to settle, meaning they either all resolve or at least one rejects.
+=> Single Promise Result: It returns a single promise that fulfills with an array of results when all promises in the iterable are fulfilled. The order of the results corresponds to the order of the promises in the iterable.
+=> First Rejection: If any promise in the iterable is rejected, the whole Promise.all() is rejected with the reason of the first rejected promise. Subsequent rejections are ignored.
+
+<b>Syntax</b>
+The syntax of js Promise.all is relatively straightforward:
+
+<u>Promise.all(iterable);</u> 
+
+Here, iterable is an array or any iterable object containing promises. The Promise.all method returns a single promise that resolves when all the promises in the iterable have been resolved or rejected with the reason of the first promise that was rejected.
+
+This method is useful for when you want to wait for more than one promise to complete.
+
+Given an <u>Iterable</u>(arrays are <u>Iterable</u>), or a promise of an <u>Iterable</u>, which produces promises (or a mix of promises and values), iterate over all the values in the <u>Iterable</u> into an array and return a promise that is fulfilled when all the items in the array are fulfilled. The promise's fulfillment value is an array with fulfillment values at respective positions to the original array. If any promise in the array rejects, the returned promise is rejected with the rejection reason.
+
+<b>Promise.all()</b> is a built-in helper that accepts an array of promises (or generally an iterable). The function returns a promise from where you can extract promises resolved values using a then-able syntax:
+
+<u>If all promises are resolved successfully</u>, then <u>allPromise</u> fulfills with an array containing fulfilled values of the promises. The order of promises in the array does matter — you'll get the fulfilled values in the same order.
+
+<b>But if at least one promise rejects</b>, then <b>allPromise</b> rejects right away (without waiting for the remaining pending promises to resolve) for the same reason.
+
+<b>Example: 1 - all promises fulfilled</b>
+To study how <u>Promise.all()</u> works, I'm going to use 2 helpers — <u>resolveTimeout(value, delay)</u> and <u>rejectTimeout(reason, delay)</u>
+<u>resolveTimeout(value, delay)</u> returns a promise that fulfills with <u>value</u> after passing delay time.
+<u>rejectTimeout(reason, delay)</u>, however, returns a promise that rejects with <u>reason</u> (usually an error) after passing <u>delay</u> time.
+
+Let's access, at the same time, the lists of vegetables and fruits available at the local grocery store. Accessing each list is an asynchronous operation:
+<u>const allPromise = Promise.all([...])</u> returns a new promise <u>allPromise</u>.
+<u>const lists = await allPromise</u> awaits 1 second until <u>allPromise</u> fulfills with an array containing the first and second promises fulfill values.
+
+Finally, <u>lists</u> contains the aggregated result: <u>[['potatoes', 'tomatoes'], ['oranges', 'apples']]</u>.
+Note that the order of the values in the aggregated result corresponds to the order of the promises in the array supplied to <u>Promise.all()</u>:
+
+<b> Example: 2 - one promise rejects</b>
+Now imagine the situation the grocery is out of fruits. Let's reject the fruits promise with an error <u>new Error('Out of fruits!')</u>:
+
+In this scenario <u>allPromise = Promise.all([...])</u> returns, as usual, a promise.
+After 1 second the second promise rejects with an error <u>new Error('Out of fruits!').</u> This makes <u>allPromise</u> reject right away with the same <u>new Error('Out of fruits!')</u>.
+
+Even if the vegetables' promise has been fulfilled, <u>Promise.all()</u> doesn't take it into account.
+
+Such behavior of <u>Promise.all([...])</u> is named fail-fast. If at least one promise in the promises array rejects, then the promise returned by <u>allPromise = Promise.all([...])</u> rejects too — for the same reason.
+`,
+          code1: `//syntax 
+          const allPromise = Promise.all([promise1, promise2]);
+
+allPromise.then(values => {
+  console.log(values); // [resolvedValue1, resolvedValue2]
+}).catch(error => {
+  console.log(error); // rejectReason of any first rejected promise
+});
+
+// --------- In the case of async/await syntax: -----------------
+
+const allPromise = Promise.all([promise1, promise2]);
+
+try {
+  const values = await allPromise;
+  console.log(values); // [resolvedValue1, resolvedValue2]
+} catch (error) {
+  console.log(error); // rejectReason of any first rejected promise
+}
+  
+//------------- Ex : 1 -----------
+        async function load() {
+            const allPromise = Promise.all([
+                resolveTimeout(["potatoes", "tomatoes"], 1000),
+                resolveTimeout(["oranges", "apples"], 1000)
+            ]);
+
+            // wait...
+            const lists = await allPromise;
+
+            // after 1 second
+            console.log(lists);
+            // [['potatoes', 'tomatoes'], ['oranges', 'apples']]
+        }
+
+        load();
+
+        function resolveTimeout(value, delay) {
+            return new Promise((resolve) => setTimeout(() => resolve(value), delay));
+        }
+
+        function rejectTimeout(reason, delay) {
+            return new Promise((r, reject) => setTimeout(() => reject(reason), delay));
+        }
+            
+  //--------------- Ex : 2 ------------
+
+          async function load() {
+            const allPromise = Promise.all([
+                resolveTimeout(["potatoes", "tomatoes"], 1000),
+                resolveTimeout(["oranges", "apples"], 1000),
+                rejectTimeout(new Error("Time out", 1000))
+            ]);
+
+            // wait...
+            const lists = await allPromise;
+
+            // after 1 second
+            console.log(lists);
+            // [['potatoes', 'tomatoes'], ['oranges', 'apples']]
+        }
+
+        load();
+
+        function resolveTimeout(value, delay) {
+            return new Promise((resolve) => setTimeout(() => resolve(value), delay));
+        }
+
+        function rejectTimeout(reason, delay) {
+            return new Promise((r, reject) => setTimeout(() => reject(reason), delay));
+        }
+
+
+        //-------------------- Ex : 3 -------------------
+// From the below example, it's clear that Promise.all waits till all the promises resolve.
+                // A simple promise that resolves after a given time
+        const timeOut = (t) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(\`Completed in \${t}\`)
+                }, t)
+            })
+        }
+
+        const durations = [1000, 2000, 3000]
+
+        const promises = []
+
+        durations.map((duration) => {
+            // In the below line, two things happen.
+            // 1. We are calling the async function (timeout()). So at this point the async function has started and enters the 'pending' state.
+            // 2. We are pushing the pending promise to an array.
+            promises.push(timeOut(duration))
+        })
+
+        console.log(promises) // [ Promise { "pending" }, Promise { "pending" }, Promise { "pending" } ]
+
+        // We are passing an array of pending promises to Promise.all
+        // Promise.all will wait till all the promises get resolves and then the same gets resolved.
+        Promise.all(promises)
+            .then(response => console.log(response)) // ["Completed in 1000", "Completed in 2000", "Completed in 3000"]
+
+
+
+        // ----------------- Ex : 4 ---------------------------------------------
+                // Simulate API calls using Promises (for demonstration purposes)
+        function fetchUserPosts(userId) {
+            return new Promise((resolve, reject) => {
+                fetch(\`https://jsonplaceholder.typicode.com/posts/\${userId}\`)
+                .then(res => res.json())
+                .then(posts => {
+                    // console.log(posts) 
+                    resolve({ userId : posts.userId, title: \`User \${posts.title}\`, age: 30 + posts.id });
+                })
+            });
+        }
+
+        function fetchUserProfile(userId) {
+            return new Promise((resolve, reject) => {
+                fetch(\`https://jsonplaceholder.typicode.com/users/\${userId}\`)
+                .then(res => res.json())
+                .then(users => {
+                    // console.log(users) 
+                    resolve({ userId : users.id, name: \`User \${users.name}\`, age: 30 + users.id })
+                })
+            });
+        }
+
+        // Function to fetch profiles and posts in parallel for multiple users
+        function fetchUserData(userIds) {
+            const profilePromises = userIds.map(userId => fetchUserProfile(userId));
+            const postPromises = userIds.map(userId => fetchUserPosts(userId));
+
+            // Use Promise.all() to wait for both profile and post data for all users
+            return Promise.all([...profilePromises, ...postPromises])
+                .then(results => {
+                    // console.log(results)
+                    // Split results into profiles and posts based on their order
+                    const profiles = results.slice(0, userIds.length);
+                    const posts = results.slice(userIds.length);
+
+                    // Combine profiles and posts into a structured format
+                    const userData = userIds.map((userId, index) => ({
+                        profile: profiles[index],
+                        posts: posts[index]
+                    }));
+
+                    return userData;
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                    throw error;
+                });
+        }
+
+        // Example Usage
+        const userIds = [1, 2, 3];  // Example user IDs to fetch data for
+        fetchUserData(userIds)
+            .then(userData => {
+                console.log("All user data fetched successfully:");
+                console.log(userData);
+            })
+            .catch(error => {
+                console.error("Error occurred:", error);
+            });
+
+        `
+        },
+        {
+          text1: `<b>Does JavaScript Promise.all() run in parallel or sequential?</b>
+          <a href="https://www.leohuynh.dev/blog/does-promise-all-run-in-parallel-or-sequential" target="_blank">does-promise-all-run-in-parallel-or-sequential</a>
+          
+          Let's say you have a list of async tasks (each return a Promise).
+let promise1 = async function () {
+  /* ... */
+}
+let promise2 = async function () {
+  /* ... */
+}
+let promise3 = async function () {
+  /* ... */
+}
+
+         What would you choose to run them?
+
+Awaiting each promise one by one:
+await promise1()
+await promise2()
+await promise3()
+// do other stuff
+
+Or run them all at once:
+
+await Promise.all([promise1(), promise2(), promise3()])
+// do other stuff
+          
+The first approach is running them sequentially, one after another. It means that the next promise will start only after the previous one is resolved.
+Like this:
+promise1().then(() => {
+  promise2().then(() => {
+    promise3().then(() => {
+      // do other stuff
+    })
+  })
+})
+          
+          
+          <b>Is Promise.all(iterable) executing all promises?</b>
+No, promises cannot "be executed", they do not consist of code that can be run. A promise is created when you start a task, and it represents the results only. It is your code that is executing everything in parallel, by starting all tasks at once to run concurrently. This happens even before (and would also happen without) passing the promises to Promise.all.
+
+Promise.all does only await multiple promises. It doesn't care in what order they get resolved by those tasks, or whether the computations are running in parallel.
+
+<b>is there a convenient way to run an iterable sequencially?</b>
+If you already have your promises, you can't do much but Promise.all([p1, p2, p3, …]) (which does not have a notion of sequence). But if you do have an iterable of asynchronous functions, you can indeed run them sequentially. Basically you need to get from
+
+[fn1, fn2, fn3, …]
+to
+fn1().then(fn2).then(fn3).then(…)
+
+and the solution to do that is using Array::reduce:
+iterable.reduce((p, fn) => p.then(fn), Promise.resolve())
+
+
+The second approach is well-known as running them in <b>parallel</b>, meaning that all promises will start at the same time. It's useful when you don't need to wait for the previous promise to be resolved before starting the next one.
+
+But does it really run in parallel (or all at once)? 
+
+The answer is no. JavaScript is single-threaded programming language, so it can't run multiple things at the exact same time (except for some circumstances such as web workers.) <b>Promise.all()</b> actually runs them concurrently, not in parallel!
+
+What's the difference?
+
+<b>Concurrent programming vs Parallel programming</b>
+<u>TL;DR: Concurrent programming is about dealing with a lot of things at once, while parallel programming is about doing a lot of things at once.</u>
+
+A dead-simple example for a 9-year-old kid:
+<b>Concurrency</b>: 2 lines of customers ordering food from a single cashier (lines take turns ordering).
+<b>Parallelism</b>: 2 lines of customers ordering food at the same time from 2 cashiers.
+As so, what <u>Promise.all()</u> does is, it adds the promises to an event loop queue and calls them all together. But it waits for each one to resolve before moving on. <u>Promise.all</u> will stop if the first promise rejects, unless you handle the error yourself (e.g. with <u>.catch()</u>).
+
+That's the major difference between concurrent and parallel, with concurrent execution, promises run one after another but don't have to wait for previous ones to end. They make progress at the same time. In contrast, parallel execution runs promises at the exact same time in separate processes. This allows them to progress completely separately at their own speed.
+`,
+          code1: ``
+        },
+        {
+          text1: `Asynchronous JavaScript was introduced to help implement non-blocking code execution. Async-await took it up a notch by making it easier to work with promises and avoid the infamous callback hell.
+          
+          However, one has to be a bit cautious while using <b>await</b> because it blocks code i.e when <b>await</b> is used, code execution stops until the promise that it is waiting for is settled (either resolved or rejected). This is different from the <b>.then</b> and <b>.catch</b> methods that were used before it, where code execution would not pause. Regular code execution would continue and <b>.then</b> or <b>.catch</b> would be called only when the promise had settled.
+
+When you have multiple independent <b>await</b> statements in your code block, all those statements become blocking statements, potentially breaking the async nature and the core advantage of using async-await in the first place.
+
+<b>Real-world example</b>
+Ex : 3
+I'm loading three images from a remote server using the fetch method. Since <b>fetch</b> is async and I like modern JavaScript, I take the async-await approach for all asynchronous operations. I then load these images onto the DOM. I also implement a fairly basic timer that works using <b>Date</b> to get a rough estimate of how much it takes to finish the entire operation.
+Make note of the time it takes to finish the operation. It took between 2 and 3 seconds for me.
+
+<b>So what's the problem here?</b>
+The three <b>await</b> statements block code execution at each step, making the images get fetched only one after the other. However, the three <b>fetchImage</b> calls can actually be made independently of one another since fetch was designed to be asynchronous. The only requirement for us is that all three promises should settle before <b>loadImages</b> is called so that valid values can be passed in as the arguments.
+
+So, by using multiple <b>await</b> statements one after the other, what was supposed to be an async load operation has now become a synchronous, time-consuming one.
+This can also be verified by inspecting the Network tab in the Dev Tools when running the code locally. Notice how the activities only happen sequentially.
+If the <b>loadImages</b> call is temporarily commented out and the <b>await</b> keyword is removed, you can observe the three fetch statements happening asynchronously.
+
+<b>Enter Promise.all()</b>
+Ex : 4
+By now, I hope it is established that having multiple independent <b>await</b> statements is not a good idea for performance. The solution to this problem is to use the <b>Promise.all()</b> method
+
+It takes an iterable of promises as input and returns a single promise. An array of promises is usually passed in as the iterable. The returned promise resolves when all the input promises get fulfilled. It rejects when any one of the input promises reject.
+
+Here's how we modify our existing code
+=> Omit the <b>await</b> keyword from the three <b>fetchImage()</b> calls so that <b>photo1, photo2</b>, and <b>photo3</b> become simple promises that will get a resolved value at a future time.
+=> Call the <b>Promise.all()</b> method and pass in the three promises as an array
+=> Handle the settled value of this promise.
+
+If <b>allPromises</b> gets fulfilled, the fulfilled value would be an array, with each element being the resolved value of the corresponding input promise. So in our case, the resolved value will be an array of image URLs.
+`,
+          code1: `// Ex : 1
+          // log every second -> callback hell version
+
+setTimeout(() => {
+  console.log('1 second');
+  setTimeout(() => {
+    console.log('2 seconds');
+    setTimeout(() => {
+      console.log('3 seconds');
+      setTimeout(() => {
+        console.log('4 seconds');
+        setTimeout(() => {
+          console.log('5 seconds');
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  }, 1000);
+}, 1000);
+
+/* 
+OUTPUT:
+1 second
+2 seconds
+3 seconds
+4 seconds
+5 seconds
+*/
+
+//----------------- log every second -> async-await version ---------
+// Ex : 2
+
+const wait = function(time) {
+  return new Promise(resolve => setTimeout(resolve, time * 1000))
+}
+
+async function clock() {
+  try {
+    await wait(1);
+    console.log('1 second');
+
+    await wait(1);
+    console.log('2 seconds');
+
+    await wait(1);
+    console.log('3 seconds');
+
+    await wait(1);
+    console.log('4 seconds');
+
+    await wait(1);
+    console.log('5 seconds');
+  } catch (err) {
+    console.log(err);
+  }
+}
+clock();
+
+/* 
+OUTPUT:
+1 second
+2 seconds
+3 seconds
+4 seconds
+5 seconds
+*/
+
+
+
+//-------------------- 
+//------------Ex : 3
+
+//css :
+        .img-container {
+            padding: 15px;
+        }
+        .img-container img {
+            margin:12px;
+            width: 200px; 
+            height:300px;
+        }
+
+// HTML :
+&lt;div class=&quot;img-container&quot;&gt;&lt;/div&gt;
+
+// Javascript :
+const imgContainer = document.querySelector('.img-container');
+
+// simple timer code
+let time = '';
+function resetTime() {
+  time = new Date();
+}
+function elapsedTime(type) {
+  const now = new Date();
+  console.log(type, (now - time) / 1000);
+}
+
+// fetch photo from server
+async function fetchImage(w = 200, h = 300) {
+  try {
+    const data = await fetch(\`https://picsum.photos/\${w}/\${h}/\`);
+    return data.url;
+  } catch (err) {
+    return new Error(err);
+  }
+}
+
+// load photos to DOM
+function loadImages(...sources) {
+  sources.forEach((source) => {
+    const img = document.createElement('img');
+    img.src = source;
+    imgContainer.append(img);
+  });
+}
+
+
+(async function () {
+  resetTime();
+  try {
+    const photo1 = await fetchImage(700, 800);
+    const photo2 = await fetchImage(50, 50);
+    const photo3 = await fetchImage(100, 200);
+    loadImages(photo1, photo2, photo3);
+  } catch (err) {
+    console.log(err);
+  }
+  elapsedTime('one-by-one');
+})();
+
+
+
+//-----------------------  Promise.all ---------------------
+// Ex : 4
+
+        const imgContainer = document.querySelector('.img-container');
+
+        // simple timer code
+        let time = '';
+        function resetTime() {
+            time = new Date();
+        }
+        function elapsedTime(type) {
+            const now = new Date();
+            console.log(type, (now - time) / 1000);
+        }
+
+        // fetch photo from server
+        async function fetchImage(w = 200, h = 300) {
+            try {
+                const data = await fetch(\`https://picsum.photos/\${w}/\${h}/\`);
+                return data.url;
+            } catch (err) {
+                return new Error(err);
+            }
+        }
+
+        // load photos to DOM
+        function loadImages(...sources) {
+            sources.forEach((source) => {
+                const img = document.createElement('img');
+                img.src = source;
+                imgContainer.append(img);
+            });
+        }
+
+
+        (async function () {
+            resetTime();
+            try {
+                const [photo1, photo2, photo3] = await Promise.all([fetchImage(700, 800), fetchImage(50, 50), fetchImage(100, 200)])
+                loadImages(photo1, photo2, photo3);
+                // console.log(photo1, photo2, photo3);
+            } catch (err) {
+                console.log(err);
+            }
+            elapsedTime('Promise.all');
+        })();
+`
+        },
+        {
+          text1: `Here's an example of how Promise.all works. The promises start in the order they're created, but they run in parallel.
+          <b>Key Notes</b>:
+    The logs related to <b>Done waiting</b> will appear in order of the promises finishing, not in the order they were initiated.
+    Even though the promises were initiated sequentially, they run in parallel because of <b>Promise.all()</b>.
+    The final log <b>All done!</b> will be printed once all promises are resolved.
+    
+    This example demonstrates how <b>Promise.all()</b> allows multiple asynchronous operations to run in parallel and waits for all of them to complete before proceeding.`,
+          code1: `        function promise(index) {
+            return new Promise((resolve) => {
+                const delay = Math.random() * 5000; // between 0 and 5 seconds
+                console.log(\`\${index}. Waiting \${delay}\`);
+                setTimeout(() => {
+                    console.log(\`\${index}. Done waiting \${delay}\`);
+                    resolve();
+                }, delay);
+            });
+        }
+
+        Promise.all([
+            promise(1),
+            promise(2),
+            promise(3),
+            promise(4),
+            promise(5)
+        ])
+            .then(() => console.log('All done!'));`
+        },
+        {
           text1: ``,
           code1: ``
-        }
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
       ]
     },
     {
@@ -8602,8 +9893,109 @@ For example, when you request data from the server by using a promise, it will b
       title: "Promise.race()",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `The <b>Promise.race()</b> static method takes an iterable of promises as input and returns a single Promise. This returned promise settles with the eventual state of the first promise that settles.
+          
+          The <b>Promise.race()</b> static method accepts a list of promises as an iterable object and returns a new promise that fulfills or rejects as soon as there is one promise that fulfills or rejects, with the value or reason from that promise.
+
+           <b>Promise.race() Method</b>
+👉 The <u>Promise.race()</u> method returns a Promise that is resolved or rejected, as soon as one of the promises in an iterable, such as an array, fulfills or rejects, with the value or reason from that Promise.
+👉 The promise returned will be forever pending, if the iterable passed is empty.
+👉 <u>Promise.race()</u> will resolve to the first value found in the iterable, if the iterable contains one or more non-promise value or an already settled promise.
+
+(Ex : 1) In the first case, pro2(100ms) is faster than pro1(200ms), so the output shows two. In the second case, pro3(300ms) is faster than pro4(400ms), so the promise rejects. So basically, <b>Promise.race() takes the first settled Promise</b>
+
+(Ex : 2) If we take this same example and pass all the promises inside Promise.race(), it will return <u>two</u> as output, as the pro2 is the fastest promise to be settled in this case.
+
+(Ex : 3) The following creates two promises: p1 resolves in 1 second and the p2 resolves in 2 seconds. Because the first promise resolves faster than the second one, the p1 wins the race. the <u>Promise.race()</u> resolves with the value from the first promise:
+
+          `,
+          code1: `// Let's see an example of Promise.race() with setTimeout 👇
+// Ex : 1
+const pro1 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("one"), 200);
+});
+
+const pro2 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("two"), 100);
+});
+
+Promise.race([pro1, pro2])
+  .then((response) => {
+    console.log(response); //output: two
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+const pro3 = new Promise((resolve, reject) => {
+  setTimeout(() => reject("rejected"), 300);
+});
+
+const pro4 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("four"), 400);
+});
+
+Promise.race([pro3, pro4])
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((err) => {
+    console.log(err);
+  }); //output: rejected
+  
+  
+  //---------------------- Ex : 2 ----------------
+
+  const pro1 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("one"), 200);
+});
+
+const pro2 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("two"), 100);
+});
+
+const pro3 = new Promise((resolve, reject) => {
+  setTimeout(() => reject("rejected"), 300);
+});
+
+const pro4 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("four"), 400);
+});
+
+Promise.race([pro1, pro2, pro3, pro4])
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+//output: two
+
+
+
+//--------------------------- Ex : 3 ---------------
+
+        const p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('The first promise has resolved');
+                resolve(10);
+            }, 1 * 1000);
+
+        });
+
+        const p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('The second promise has resolved');
+                resolve(20);
+            }, 2 * 1000);
+        });
+
+
+        Promise.race([p1, p2])
+            .then(value => console.log(\`Resolved: \${value}\`))
+            .catch(reason => console.log(\`Rejected: \${reason}\`));
+  `
         }
       ]
     },
@@ -8612,8 +10004,73 @@ For example, when you request data from the server by using a promise, it will b
       title: "Promise.any()",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `The Promise.any() static method takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when any of the input's promises fulfills, with this first fulfillment value. It rejects when all of the input's promises reject (including when an empty iterable is passed), with an AggregateError containing an array of rejection reasons.
+          
+          The <u>Promise.any()</u> method is one of the <u>promise concurrency</u> methods. This method is useful for returning the first promise that fulfills. It short-circuits after a promise fulfills, so it does not wait for the other promises to complete once it finds one.
+
+          ◼️<b> Promise.any() Method</b>
+👉 The Promise.any() takes an iterable Object, such as an Array of promises as an input. Once a promise is fulfilled, a single promise is returned and the promise is resolved using the value of the promise.
+👉 If no promises in the iterable fulfill (if all of the given promises are rejected), then the returned promise is rejected with an AggregateError (that groups together individual errors).
+
+Fulfillment of Promise.any()
+🔹 Unlike <u>Promise.all()</u>, this method is used to return the first promise that fulfills.
+🔹 It is <u>short-circuited</u> right after a promise is completed, so as soon as a promise is fulfilled, it will not wait for other promises to complete.
+🔹 When a <u>non-empty</u> iterable is passed, and any of the promises fulfill, or are non-promises, then the promise returned by this method is fulfilled asynchronously.
+
+For Example, the following code snippet will resolve the QuickyDone promise first as it is resolved after 100ms and the other one resolves after 500ms. It will not wait for any other promise to be fulfilled but immediately return the first promise that resolves. Ex : 1
+
+<b>Rejection of Promise.any()</b>
+🔹 Promise.any() rejects with an AggregateError if no promise fulfils.
+🔹 The <u>AggregateError</u> object represents an error when several errors need to be wrapped in a single error. It is thrown when multiple errors need to be reported by an operation. Ex : 2
+
+<b>Already rejected</b>, if the <u>iterable</u> passed is empty.
+<b>Asynchronously fulfilled</b>, when any of the promises in the given <u>iterable</u> fulfills. The fulfillment value is the fulfillment value of the first promise that was fulfilled.
+<b>Asynchronously rejected</b>, when all of the promises in the given <u>iterable</u> reject. The rejection reason is an <u>AggregateError</u> containing an array of rejection reasons in its <u>errors</u> property. The errors are in the order of the promises passed, regardless of completion order. If the <u>iterable</u> passed is non-empty but contains no pending promises, the returned promise is still asynchronously (instead of synchronously) rejected.
+
+ <b>Note</b> that, Promise.any() was supported in node.js 15.0.0. If your node.js version is older than that, the console might show a TypeError: Promise.any is not a function message, so you need to update it and try again.
+`,
+          code1: `// -------- Ex : 1 resolve----------
+          //         const SlowlyDone = new Promise((resolve, reject) => {
+            setTimeout(resolve, 500, "Done slowly");
+        }); //resolves after 500ms
+
+        const QuicklyDone = new Promise((resolve, reject) => {
+            setTimeout(resolve, 100, "Done quickly");
+        }); //resolves after 100ms
+
+        const Rejection = new Promise((resolve, reject) => {
+            setTimeout(reject, 100, "Rejected"); //always rejected
+        });
+
+        Promise.any([Rejection, SlowlyDone, QuicklyDone])
+            .then((value) => {
+                console.log(value);
+                //  QuicklyDone fulfils first
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        //expected output: Done quickly
+
+        
+        //--------------- Ex : 2 Rejected--------
+
+        const Rejection1 = new Promise((resolve, reject) => {
+            setTimeout(reject, 100, "Rejected1"); //always rejected
+        });
+
+        const Rejection2 = new Promise((resolve, reject) => {
+            setTimeout(reject, 100, "Rejected2"); //always rejected
+        });
+
+        Promise.any([Rejection1, Rejection2])
+            .catch((err) => {
+                console.log(err);
+            });
+
+        // expected output: "AggregateError: No Promise in Promise.any was resolved or AggregateError: All promises were rejected"
+        `
         }
       ]
     },
@@ -8622,8 +10079,100 @@ For example, when you request data from the server by using a promise, it will b
       title: "Promise.allSettled()",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `The <b>Promise.allSettled()</b> static method takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises settle (including when an empty iterable is passed), with an array of objects that describe the outcome of each promise.
+          
+          <b>Promise.allSettled()</b> waits for all promises you give it to settle, meaning either resolve or reject. It then returns an array of objects with the status and value or reason for each promise.
+
+This is useful when you have multiple asynchronous tasks that you want to ensure have completed, but don't necessarily care if some fail.
+This will run all three API calls, and the .then() callback will be called once they have all settled. The results array will have three objects: one for each promise, with either a status of <b>fulfilled</b> and the data, or <b>rejected</b> and the error.
+
+The <b>Promise.allSettled()</b> method in JavaScript is a promise combinator that waits for all promises passed to it to either resolve or reject. It returns a promise that resolves after all of the input promises have settled (each may resolve or reject). The returned promise is fulfilled with an array of objects that each describe the outcome of each promise.
+
+
+Promise.allSettled(iterable);
+<b>iterable</b>: An iterable (such as an array) of promises or values to settle.
+
+Returned Value
+-> A single promise that resolves after all the promises in the iterable have settled.
+-> The promise's value is an array of objects, each describing the outcome of each promise.
+
+Each object in the array has the following format:
+<b>status</b>: This will be either <u>fulfilled</u> or <u>rejected</u>.
+<b>value</b>: If the promise was fulfilled, this will be the fulfilled value.
+<b>reason</b>: If the promise was rejected, this will be the reason for the rejection.
+
+          `,
+          code1: `// Syntax : 
+          Promise.allSettled([apiCall1(), apiCall2(), apiCall3()]).then((results) => {});
+          
+                  const promise1 = Promise.resolve(42);
+        const promise2 = Promise.reject('An error occurred');
+        const promise3 = new Promise((resolve) => setTimeout(resolve, 100, 'foo'));
+
+        Promise.allSettled([promise1, promise2, promise3])
+            .then((results) => results.forEach((result) => console.log(result)));
+
+
+
+          //---------------
+                  function fetchUserPosts(userId) {
+            return new Promise((resolve, reject) => {
+                fetch(\`https://jsonplaceholder.typicode.com/posts/1\`)
+                    .then(res =>  {
+                        if(res.ok){
+                            resolve(res.json())
+                        } else {
+                            reject(new Error("Api not found 404"))
+                        }
+                })
+            });
+        }
+
+        function fetchUserProfile(userId) {
+            return new Promise((resolve, reject) => {
+                fetch(\`https://jsonplaceholder.typicode.com/users/2\`)
+                    .then(res => {
+                        if(res.ok){
+                            resolve(res.json())
+                        } else {
+                            reject(new Error("Api not found 404"))
+                        }
+                    })
+            });
+        }
+
+        function fetchUserProfile2(userId) {
+            return new Promise((resolve, reject) => {
+                fetch(\`https://jsonplaceholder.typicode.com/user/1\`)
+                    .then(res => {
+                        // console.log(res)
+                        if(res.ok){
+                            resolve(res.json())
+                        } else {
+                            reject(new Error("Api not found 404"))
+                        }
+                    })
+            });
+        }
+
+
+        async function time(label, fn) {
+            const start = new Date();
+            await fn();
+            console.log(
+                (new Date() - start) / 1000, \`seconds to load \${label}\`
+            );
+        }
+
+        time("parallel", async () => {
+            await Promise.all([fetchUserProfile(), fetchUserPosts()]);
+        });
+        const mainCall = Promise.allSettled([fetchUserProfile(), fetchUserPosts(), fetchUserProfile2()]);
+
+        mainCall.then(res => console.log(res))
+        .catch(err => console.log(err))
+
+          `
         }
       ]
     },
@@ -8642,9 +10191,228 @@ For example, when you request data from the server by using a promise, it will b
       title: "Promise Error Handling",
       note: [
         {
+          text1: `<b>Error handling with promises</b>
+          <a href="https://www.javascripttutorial.net/promise-error-handling/" target="_blank"> promise-error-handling </a>
+Asynchronous actions may sometimes fail: in case of an error the corresponding promise becomes rejected. For instance, <u>fetch</u> fails if the remote server is not available. We can use <u>.catch</u> to handle errors (rejections).
+
+Promise chaining is great at that aspect. When a promise rejects, the control jumps to the closest rejection handler down the chain. That's very convenient in practice.
+For instance, in the code below the URL is wrong (no such site) and <u>.catch</u> handles the error:`,
+          code1: `fetch('https://no-such-server.blabla') // rejects
+  .then(response => response.json())
+  .catch(err => alert(err)) // TypeError: failed to fetch (the text may vary)
+// Or, maybe, everything is all right with the site, but the response is not valid JSON:
+
+fetch('/') // fetch works fine now, the server responds with the HTML page
+  .then(response => response.json()) // rejects: the page is HTML, not a valid json
+  .catch(err => alert(err)) // SyntaxError: Unexpected token < in JSON at position 0
+// The easiest way to catch all errors is to append .catch to the end of chain:
+
+fetch('/article/promise-chaining/user.json')
+  .then(response => response.json())
+  .then(user => fetch(\`https://api.github.com/users/\${user.name}\`))
+  .then(response => response.json())
+  .then(githubUser => new Promise((resolve, reject) => {
+    let img = document.createElement('img');
+    img.src = githubUser.avatar_url;
+    img.className = "promise-avatar-example";
+    document.body.append(img);
+
+    setTimeout(() => {
+      img.remove();
+      resolve(githubUser);
+    }, 3000);
+  }))
+  .catch(error => alert(error.message));
+// Normally, ".catch" doesn't trigger at all, because there are no errors. But if any of the promises above rejects (a network problem or invalid json or whatever), then it would catch it.`
+        },
+        {
+          text1: `<b>Implicit try…catch</b>
+The code of a promise executor and promise handlers has an <u>invisible try..catch</u> around it. If an exception happens, it gets caught and treated as a rejection.`,
+          code1: `new Promise((resolve, reject) => {
+  throw new Error("Whoops!");
+}).catch(alert); // Error: Whoops!
+// …Works exactly the same as this:
+
+new Promise((resolve, reject) => {
+  reject(new Error("Whoops!"));
+}).catch(alert); // Error: Whoops!
+// The “invisible try..catch” around the executor automatically catches the error and treats it as a rejection.
+// This happens not only in the executor, but in its handlers as well. If we "throw" inside a ".then" handler, that means a rejected promise, so the control jumps to the nearest error handler.
+
+// Here's an example:
+new Promise((resolve, reject) => {
+  resolve("ok");
+}).then((result) => {
+  throw new Error("Whoops!"); // rejects the promise
+}).catch(alert); // Error: Whoops!
+// This happens for all errors, not just those caused by the "throw" statement. For example, a programming error:
+
+new Promise((resolve, reject) => {
+  resolve("ok");
+}).then((result) => {
+  blabla(); // no such function
+}).catch(alert); // ReferenceError: blabla is not defined
+// The final ".catch" not only catches explicit rejections, but also occasional errors in the handlers above.`
+        },
+        {
+          text1: `<b>Rethrowing</b>
+As we already noticed, <u>.catch</u> behaves like <u>try..catch</u>. We may have as many <u>.then</u> handlers as we want, and then use a single <u>.catch</u> at the end to handle errors in all of them.
+
+In a regular <u>try..catch</u> we can analyze the error and maybe rethrow it if can't handle. The same thing is possible for promises.
+
+If we <u>throw</u> inside <u>.catch</u>, then the control goes to the next closest error handler. And if we handle the error and finish normally, then it continues to the closest successful .then handler.
+
+In the example below the <u>.catch</u> successfully handles the error:
+`,
+          code1: `// the execution: catch -> then
+new Promise((resolve, reject) => {
+  throw new Error("Whoops!");
+}).catch(function(error) 
+  alert("The error is handled, continue normally");
+}).then(() => alert("Next successful handler runs"));
+// Here the <u>.catch</u> block finishes normally. So the next successful <u>.then</u> handler is called.
+// In the example below we see the other situation with <u>.catch</u>. The handler <u>(*)</u> catches the error and just can't handle it (e.g. it only knows how to handle <u>URIError</u>), so it throws it again:
+
+// the execution: catch -> catch -> then
+new Promise((resolve, reject) => {
+  throw new Error("Whoops!");
+}).catch(function(error) { // (*)
+
+  if (error instanceof URIError) {
+    // handle it
+  } else {
+    alert("Can't handle such error");
+    throw error; // throwing this or another error jumps to the next catch
+  }
+
+}).then(function() {
+  /* never runs here */
+}).catch(error => { // (**)
+  alert(\`The unknown error has occurred: \${error}\`);
+  // don't return anything => execution goes the normal way
+});
+// Then the execution jumps from the first ".catch (*)" to the next one "(**)" down the chain.
+// In the section below we'll see a practical example of rethrowing.
+`
+        },
+        {
+          text1: `<b>Fetch error handling example</b>
+Let's improve error handling for the user-loading example.
+
+The promise returned by fetch rejects when it's impossible to make a request. For instance, a remote server is not available, or the URL is malformed. But if the remote server responds with error 404, or even error 500, then it's considered a valid response.
+
+What if the server returns a non-JSON page with error 500 in the line (*)? What if there's no such user, and GitHub returns a page with error 404 at (**)?`,
+          code1: `fetch('no-such-user.json') // (*)
+  .then(response => response.json())
+  .then(user => fetch(\`https://api.github.com/users/\${user.name}\`)) // (**)
+  .then(response => response.json())
+  .catch(alert); // SyntaxError: Unexpected token < in JSON at position 0
+  // ...
+// As of now, the code tries to load the response as JSON no matter what and dies with a syntax error. You can see that by running the example above, as the file no-such-user.json doesn't exist.
+
+// That's not good, because the error just falls through the chain, without details: what failed and where.
+// So let's add one more step: we should check the response.status property that has HTTP status, and if it's not 200, then throw an error.
+
+class HttpError extends Error { // (1)
+  constructor(response) {
+    super(\`\${response.status} for \${response.url}\`);
+    this.name = 'HttpError';
+    this.response = response;
+  }
+}
+
+function loadJson(url) { // (2)
+  return fetch(url)
+    .then(response => {
+      if (response.status == 200) {
+        return response.json();
+      } else {
+        throw new HttpError(response);
+      }
+    })
+}
+
+loadJson('no-such-user.json') // (3)
+  .catch(alert); // HttpError: 404 for .../no-such-user.json
+`
+        },
+        {
+          text1: `=> We make a custom class for HTTP Errors to distinguish them from other types of errors. Besides, the new class has a constructor that accepts <u>response</u> object and saves it in the error. So error-handling code will be able to access the response.
+=> Then we put together the requesting and error-handling code into a function that fetches the <u>url</u> and treats any non-200 status as an error. That's convenient, because we often need such logic.
+=> Now <u>alert</u> shows a more helpful descriptive message.
+
+The great thing about having our own class for errors is that we can easily check for it in error-handling code using <u>instanceof</u>.
+
+For instance, we can make a request, and then if we get 404 - ask the user to modify the information.
+The code below loads a user with the given name from GitHub. If there's no such user, then it asks for the correct name:
+`,
+          code1: `function demoGithubUser() {
+  let name = prompt("Enter a name?", "iliakan");
+
+  return loadJson(\`https://api.github.com/users/\${name}\`)
+    .then(user => {
+      alert(\`Full name: \${user.name}.\`);
+      return user;
+    })
+    .catch(err => {
+      if (err instanceof HttpError && err.response.status == 404) {
+        alert("No such user, please reenter.");
+        return demoGithubUser();
+      } else {
+        throw err; // (*)
+      }
+    });
+}
+
+demoGithubUser();
+// Please note: ".catch" here catches all errors, but it “knows how to handle” only "HttpError 404". In that particular case it means that there's no such user, and ".catch" just retries in that case.
+
+// For other errors, it has no idea what could go wrong. Maybe a programming error or something. So it just rethrows it in the line "(*)".`
+        },
+        {
+          text1: `<b>Unhandled rejections</b>
+What happens when an error is not handled? For instance, after the rethrow <u>(*)</u> in the example above.
+Or we could just forget to append an error handler to the end of the chain, like here:
+
+In case of an error, the promise state becomes <u>rejected</u>, and the execution should jump to the closest rejection handler. But there is no such handler in the examples above. So the error gets <u>stuck</u>. There's no code to handle it.
+
+In practice, just like with a regular unhandled errors, it means that something has terribly gone wrong.
+What happens when a regular error occurs and is not caught by <u>try..catch?</u> The script dies. Similar thing happens with unhandled promise rejections.
+The JavaScript engine tracks such rejections and generates a global error in that case. You can see it in the console if you run the example above.
+In the browser we can catch such errors using the event <u>unhandledrejection</u>:
+
+The event is the part of the HTML standard.
+If an error occurs, and there's no <u>.catch</u>, the <u>unhandledrejection</u> handler triggers, and gets the <u>event</u> object with the information about the error, so we can do something.
+Usually such errors are unrecoverable, so our best way out is to inform the user about the problem and probably report the incident to the server.
+In non-browser environments like Node.js there are other similar ways to track unhandled errors.
+`,
+          code1: `new Promise(function() {
+  noSuchFunction(); // Error here (no such function)
+})
+  .then(() => {
+    // successful promise handlers, one or more
+  }); // without .catch at the end!
+  
+  
+  window.addEventListener('unhandledrejection', function(event) {
+  // the event object has two special properties:
+  alert(event.promise); // [object Promise] - the promise that generated the error
+  alert(event.reason); // Error: Whoops! - the unhandled error object
+});
+
+new Promise(function() {
+  throw new Error("Whoops!");
+}); // no catch to handle the error
+  `
+        },
+        {
           text1: ``,
           code1: ``
-        }
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
       ]
     },
     {
@@ -8654,7 +10422,172 @@ For example, when you request data from the server by using a promise, it will b
         {
           text1: `async and await are the keywords used to write the asynchronous code in a synchronous manner where the await keyword waits for the promise to be resolved or rejected and the async keyword is used to wrap all await keywords with a function.`,
           code1: ``
-        }
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: `<b>Async Await vs Fetch.Then()</b>
+          There is three key differences between async <b>await</b> and <b>then()</b>. They boil down to syntax, error handling, and general code organization.
+          
+          1) With <b>await</b>, we are able to write asynchronous code in a way that looks and feels synchronous. <b>await</b> is allowing us to pause code execution until our promise is resolved and then again while parsing the JSON we get back from that fulfillment. With <b>then()</b> we are promise chaining. We are saying after this, do this, and so on and so on. This is what is allowing us to asynchronously handle the request sent to the endpoint. This promise chaining is more explicit and allows us to handle that promise in multiple ways before returning it.
+
+          2) The next difference is how these two methods handle errors. With <b>await</b> we are able to create a <b>try</b> and <b>catch</b> code block.
+
+          This code block is acting as an <b>if-else</b> but one designed for acting with requests. What this is doing is in the <b>try</b> if the requests is successful, continue on and return the object; otherwise, throw this error to the console and tell me the error with the requests. With <b>catch()</b>, your errors are handled in your promise chain just as your <b>then()</b>s are.
+          `,
+          code1: `const apiCall = async () => {
+            try{
+               const apiCallPromise  = await 
+               fetch('https://api.example.com/data');
+            };
+            const apiCallObj = await apiCallPromise.json();
+            return apiCallObj;
+            catch(error){
+               console.error(error);
+            };
+         };
+         `
+                 },
+                 {
+                   text1: `This snippet functions exactly the same as done <b>with</b> the await example but the difference is that here, <b>catch()</b> is expecting a callback function.
+                   
+                   3) The third key difference between the <b>await</b> and <b>then()</b> comes down to code organization. I have touched on it already but using <b>await</b> allows you to write your code in a more linear and organized manner. You can perform subsequent operations on the fetched response immediately after the <b>await</b> statement, which can make the code flow more naturally. With <b>then()</b>, you need to chain multiple <b>then()</b> calls to handle the response and subsequent processing. This can sometimes lead to nested or cascading <b>then()</b> calls, which may make the code harder to read and maintain.
+                   `,
+                   code1: `const apiCall = () => {
+            fetch('https://api.example.com/data')
+            .then((resp) => resp.json)
+            .then((data) => {
+               return data;
+            });
+            .catch((error) => console.error('Error:', error));
+         };`
+        },
+        {
+          text1: `<b>async/await</b> and <b>.then()</b> are both ways to handle asynchronous operations in JavaScript, particularly when working with promises. They provide different approaches to managing asynchronous code, each with its own advantages and use cases.
+
+          <b>1) async/await</b>
+          <b>async/await</b> is a syntactic sugar introduced in ECMAScript 2017 (ES8) that makes working with asynchronous code more readable and easier to manage compared to traditional promise chaining.
+    
+          <u>How It Works</u>:
+    => <b>async Function</b>: Declaring a function with <b>async</b> makes it return a promise implicitly. Inside an <b>async</b> function, you can use <b>await</b> to pause execution until the promise is resolved or rejected.
+    => <b>await Expression</b>: The <b>await</b> keyword pauses the execution of the <b>async</b> function until the promise is resolved, then returns the result. If the promise is rejected, <b>await</b> throws the error, which you can catch with <b>try/catch.</b>
+    
+    <b>Advantages</b>:
+    <b>Readability</b>: The <b>async/await</b> syntax is more readable and closely resembles synchronous code.
+    <b>Error Handling</b>: Error handling with <b>try/catch</b> is straightforward and integrates well with synchronous code structures.
+    <b>Debugging</b>: Easier to debug due to its linear code flow.
+    `,
+          code1: `// Async function to fetch data
+async function fetchData() {
+  try {
+    const response = await fetch('https://api.example.com/data');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+  }
+}
+
+// Call the async function
+fetchData();
+`
+        },
+        {
+          text1: `<b>2) .then()</b>
+The .then() method is a way to handle promises and is part of the Promises API. It involves chaining methods to handle the resolved or rejected state of a promise.
+
+<u>How It Works</u>:
+    <b>then() Method</b>: The <b>.then()</b> method is used to specify what should happen when the promise resolves. You can chain multiple .then() calls for sequential asynchronous operations.
+    <b>catch() Method</b>: The <b>.catch()</b> method is used to handle any errors that occur during the promise chain.
+    
+    <u>Advantages</u>:
+    <b>Chainable: .then()</b> allows chaining multiple asynchronous operations, making it flexible for complex workflows.
+    <b>Compatibility</b>: Works with existing promise-based APIs and can be used in environments that do not support <u>async/await</u>.
+    `,
+          code1: `// Function to fetch data with .then()
+function fetchData() {
+  fetch('https://api.example.com/data')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+}
+
+// Call the function
+fetchData();
+`
+        },
+        {
+          text1: `<b>When to Use Which</b>:
+    <b>Use async/await</b>: When you want cleaner, more readable code that resembles synchronous code and simplifies error handling. It is particularly useful for handling asynchronous operations sequentially.
+    <b>Use .then()</b>: When working with existing code that uses promises, or when you need to chain multiple asynchronous operations. It's also useful when dealing with APIs or libraries that return promises.
+          
+          <b>Comparison:</b>              
+                <div class='table-res'>
+                    <table border=1 >
+                        <tbody>
+                            <tr>
+                              <th>Feature</th>
+                              <th>async/await</th>
+                              <th>.then()</th>
+                            </tr>
+
+                            <tr>
+                              <th>Syntax</th>
+                              <td>More concise and resembles synchronous code</td>
+                              <td>Can become complex with nested .then()</td>
+                            </tr>
+
+                            <tr>
+                              <th>Error Handling</th>
+                              <td>Use try/catch blocks for errors</td>
+                              <td>Use .catch() to handle errors</td>
+                            </tr>
+
+                            <tr>
+                              <th>Readability</th>
+                              <td>Easier to read and maintain</td>
+                              <td>Can be less readable with deep chaining</td>
+                            </tr>
+
+                            <tr>
+                              <th>Debugging</th>
+                              <td>Easier to debug due to linear flow</td>
+                              <td>Can be harder to trace with complex chains</td>
+                            </tr>
+
+                            <tr>
+                              <th>Browser Support</th>
+                              <td>Requires modern JavaScript environments</td>
+                              <td>Supported in all environments with promises</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                `,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
       ]
     },
     {
@@ -8667,12 +10600,1547 @@ For example, when you request data from the server by using a promise, it will b
            Instruction in synchronous code executes in a given sequence.
 
            <b>Asynchronous</b>:
-           Asynchronous code execution allows to execution next instructions immediately and doesn't block the flow because of previous instructions.`,
+           Asynchronous code execution allows to execution next instructions immediately and doesn't block the flow because of previous instructions.
+           `,
+          code1: ``,
+          img: `../assets/images/javascript/When-to-use-Async-vs-Sync-Programming.webp`
+        },
+        {
+          text1: `Synchronous programming is a way for computers to do things one step at a time, in the order they are given the instructions.
+
+Imagine you're cooking dinner and have a list of tasks, like <u> boiling water for pasta, frying chicken, and making a salad</u>.
+You would do these tasks one at a time and wait for each one to finish before moving to the next.
+Synchronous programming works similarly, where the computer will complete one task before moving on to the next. This makes it easy to understand and predict what the computer will do at any given time.
+
+          <span style="background:yellow; width:300px; padding:10px;" class="text-center d-flex flex-column">
+          <b>Synchronous programming</b> </br>
+          <span style="background:#8989ac; padding:10px; margin:3px;">boiling water for pasta</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">frying chicken</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">making a salad</span>
+          </span>
+
+
+// Define a function
+function f1() {
+    // Do something
+    // Do something again
+    // Again
+    // So on...
+}
+
+// Invoke the function
+f1();
+
+By default, every line in a function executes sequentially, one line at a time. The same is applicable even when you invoke multiple functions in your code. Again, line by line.
+
+So what happens when you define a function and then invoke it? The JavaScript engine maintains a <u>stack</u> data structure called <u>function execution stack</u>. The purpose of the stack is to track the current function in execution. It does the following:
+
+=> When the JavaScript engine invokes a function, it adds it to the stack, and the execution starts.
+=> If the currently executed function calls another function, the engine adds the second function to the stack and starts executing it.
+=> Once it finishes executing the second function, the engine takes it out from the stack.
+=> The control goes back to resume the execution of the first function from the point it left it last time.
+=> Once the execution of the first function is over, the engine takes it out of the stack.
+=> Continue the same way until there is nothing to put into the stack.
+
+//----------------- below IMG - 1 ---------------
+Let's look at an example of three functions that execute one by one:
+
+function f1() {
+  // some code
+}
+function f2() {
+  // some code
+}
+function f3() {
+  // some code
+}
+
+// Invoke the functions one by one
+f1();
+f2();
+f3();
+
+A step-by-step flow shows the execution order
+
+Did you see what happened there? First, <u>f1()</u> goes into the stack, executes, and pops out. Then <u>f2()</u> does the same, and finally <u>f3()</u>. After that, the stack is empty, with nothing else to execute.
+
+Ok, let's now work through a more complex example. Here is a function <u>f3()</u> that invokes another function <u>f2()</u> that in turn invokes another function <u>f1()</u>.
+
+`,
+          code1: ``,
+          img: `../assets/images/javascript/Synchronous-flow.gif`,
+          
+        },
+        {
+          text1: `//----------------- below IMG - 2 ---------------
+function f1() {
+  // Some code
+}
+function f2() {
+  f1();
+}
+function f3() {
+  f2();
+}
+f3();
+Let's see what's going on with the function execution stack:
+
+A step-by-step flow shows the execution order
+
+Notice that first <u>f3()</u> gets into the stack, invoking another function, <u>f2()</u>. So now <u>f2()</u> gets inside while <u>f3()</u> remains in the stack. The <u>f2()</u> function invokes <u>f1()</u>. So, time for <u>f1()</u> to go inside the stack with both <u>f2()</u> and <u>f3()</u> remaining inside.
+
+First, <u>f1()</u> finishes executing and comes out of the stack. Right after that <u>f2()</u> finishes, and finally <u>f3()</u>.
+
+The bottom line is that everything that happens inside the <u>function execution stack</u> is sequential. This is the <u>Synchronous</u> part of JavaScript. JavaScript's <u>main</u> thread makes sure that it takes care of everything in the stack before it starts looking into anything <u>elsewhere</u>.
+
+Great! Now that we understand how <u>synchronous</u> operations work in JavaScript, let's now flip the coin and see its <u>asynchronous</u> side. Are you ready?
+`,
+          code1: ``,
+          img: `../assets/images/javascript/Synchronous-second-flow.gif`
+        },
+        {
+          text1: `<u>Asynchronous</u> programming is a technique that enables your program to start a potentially long-running task and still be able to be responsive to other events while that task runs, rather than having to wait until that task has finished. Once that task has finished, your program is presented with the result.
+
+Many functions provided by browsers, especially the most interesting ones, can potentially take a long time, and therefore, are asynchronous. For example:
+
+=> Making HTTP requests using <u>fetch()</u>
+=> Accessing a user's camera or microphone using <u>getUserMedia()</u>
+=> Asking a user to select files using <u>showOpenFilePicker()</u>
+So even though you may not have to implement your own asynchronous functions very often, you are very likely to need to use them correctly.
+
+<b>Synchronous programming</b>
+Consider the following code:
+const name = "Miriam";
+const greeting = \`Hello, my name is \${name}!\`;
+console.log(greeting);
+// "Hello, my name is Miriam!"
+
+This code:
+1) Declares a string called <u>name</u>.
+2) Declares another string called <u>greeting</u>, which uses <u>name</u>.
+3) Outputs the greeting to the JavaScript console.
+We should note here that the browser effectively steps through the program one line at a time, in the order we wrote it. At each point, the browser waits for the line to finish its work before going on to the next line. It has to do this because each line depends on the work done in the preceding lines.
+
+That makes this a synchronous program. It would still be synchronous even if we called a separate function, like this:
+
+function makeGreeting(name) {
+  return \`Hello, my name is \${name}!\`;
+}
+const name = "Miriam";
+const greeting = makeGreeting(name);
+console.log(greeting);
+// "Hello, my name is Miriam!"
+
+Here, <b>makeGreeting()</b> is a synchronous function because the caller has to wait for the function to finish its work and return a value before the caller can continue.
+`,
+          code1: `//The program below uses a very inefficient algorithm
+          
+        function slowFunction() {
+            // Simulate a long-running synchronous operation
+            let counter = 0;
+            for (let i = 0; i < 1000000000; i++) {
+                counter++;
+            }
+
+            // Return the "asynchronous" result
+            return counter.toString();
+        }
+
+        console.log(slowFunction())
+        `
+        },
+        {
+          text1: `<b>Asynchronous</b> In traditional (synchronous) programming, each person would have to wait for the person before them to finish their task before starting their own. But with asynchronous programming, everyone can start and work on their tasks simultaneously without waiting for the others to finish.
+
+Similarly, in a computer program, asynchronous programming allows a program to work on multiple tasks simultaneously instead of completing one task before moving on to the next one. This can make the program get more things done in a shorter amount of time.
+
+Asynchronous programming is a way for a computer program to handle multiple tasks simultaneously rather than executing them one after the other.
+
+As we saw in the synchronous code example, all instructions in the program execute one after another, and every instruction waits for its previous instruction to get executed. Due to this nature of synchronous programming, sometimes important instructions get blocked due to some previous instructions, which causes a delay in the user interface. Asynchronous code execution allows to execution next instructions immediately and doesn't block the flow because of previous instructions.
+
+The word <u>asynchronous</u> means <b>not occurring at the same time</b>. What does it mean in the context of JavaScript?
+Typically, executing things in sequence works well. But you may sometimes need to fetch data from the server or execute a function with a delay, something you do not anticipate occurring <u>NOW</u>. So, you want the code to execute <u>asynchronously</u>.
+
+In these circumstances, you may not want the JavaScript engine to halt the execution of the other sequential code. So, the JavaScript engine needs to manage things a bit more efficiently in this case.
+
+We can classify most asynchronous JavaScript operations with two primary triggers:
+
+1) <b>Browser API/Web API</b> events or functions. These include methods like <u>setTimeout</u>, or event handlers like click, mouse over, scroll, and many more.
+2) <b>Promises</b>. A unique JavaScript object that allows us to perform asynchronous operations.
+ Don't worry if you are new to promises. You do not need to know more than this to follow this article. At the end of the article, I have provided some links so you can start learning promises in the most beginner-friendly way.
+
+
+ <b>How to Handle Browser APIs/Web APIs</b>
+Browser APIs like <u>setTimeout</u> and event handlers rely on <u>callback</u> functions. A callback function executes when an asynchronous operation completes. Here is an example of how a <u>setTimeout</u> function works:
+
+function printMe() {
+  console.log('print me');
+}
+setTimeout(printMe, 2000);
+
+The <u>setTimeout</u> function executes a function after a certain amount of time has elapsed. In the code above, the text <u>print me</u> logs into the console after a delay of 2 seconds.
+Now assume we have a few more lines of code right after the <u>setTimeout</u> function like this:
+
+function printMe() {
+  console.log('print me');
+}
+function test() {
+  console.log('test');
+}
+setTimeout(printMe, 2000);
+test();
+
+So, what do we expect to happen here? What do you think the output will be?
+Will the JavaScript engine wait for 2 seconds to go to the invocation of the <u>test()</u> function and output this:
+
+printMe
+test
+
+Or will it manage to keep the callback function of <u>setTimeout</u> aside and continue its other executions? So the output could be this, perhaps:
+
+test
+printMe
+
+If you guessed the latter, you're right. That's where the asynchronous mechanism kicks in.
+
+<b>How the JavaScript Callback Queue Works (aka Task Queue)</b>
+JavaScript maintains a queue of callback functions. It is called a callback queue or task queue. A queue data structure is <u>First-In-First-Out(FIFO)</u>. So, the callback function that first gets into the queue has the opportunity to go out first. But the question is:
+
+When does the JavaScript engine put it in the queue?
+When does the JavaScript engine take it out of the queue?
+Where does it go when it comes out of the queue?
+Most importantly, how do all these things relate to the asynchronous part of JavaScript?
+
+
+The below image shows the regular <u>call stack</u> we have seen already. There are two additional sections to track if a browser API (like setTimeout) kicks in and <u>queues</u> the callback function from that API.
+
+The JavaScript engine keeps executing the functions in the call stack. As it doesn't put the callback function straight into the stack, there is no question of any code waiting for/blocking execution in the stack.
+
+The engine creates a <u>loop</u> to look into the queue periodically to find what it needs to pull from there. It pulls a callback function from the queue to the call stack when the stack is empty. Now the callback function executes generally as any other function in the stack. The loop continues. This loop is famously known as the <u>Event Loop</u>.
+
+So, the moral of the story is:
+
+=> When a Browser API occurs, park the callback functions in a queue.
+=> Keep executing code as usual in the stack.
+=> The event loop checks if there is a callback function in the queue.
+=> If so, pull the callback function from the queue to the stack and execute.
+=> Continue the loop.
+`,
+          code1: ``
+        },
+        {
+          text1: `Alright, let's see how it works with the code below:
+
+function f1() {
+    console.log('f1');
+}
+
+function f2() {
+    console.log('f2');
+}
+
+function main() {
+    console.log('main');
+    setTimeout(f1, 0);
+    f2();
+}
+main();
+
+The code executes a <u>setTimeout</u> function with a callback function <u>f1()</u>. Note that we have given zero delays to it. This means that we expect the function <u>f1()</u> to execute immediately. Right after setTimeout, we execute another function, <u>f2()</u>.
+
+So, what do you think the output will be? Here it is:
+main
+f2
+f1
+
+But, you may think that <u>f1</u> should print before <u>f2</u> as we do not delay f1 to execute. But no, that's not the case. Remember the <u>event loop</u> mechanism we discussed above? Now, let's see it in a step-by-step flow for the above code.
+
+
+
+Event loop - see the step-by-step execution
+
+Here are steps written out:
+1) The <u>main()</u> function gets inside the call stack.
+2) It has a console log to print the word main. The <u>console.log('main')</u> executes and goes out of the stack.
+3) The setTimeout browser API takes place.
+4) The callback function puts it into the callback queue.
+5) In the stack, execution occurs as usual, so <u>f2()</u> gets into the stack. The console log of <u>f2()</u> executes. Both go out of the stack.
+6) The <u>main()</u> also pops out of the stack.
+7) The event loop recognizes that the call stack is empty, and there is a callback function in the queue.
+8) The callback function <u>f1()</u> then goes into the stack. Execution starts. The console log executes, and <u>f1()</u> also comes out of the stack.
+9) At this point, nothing else is in the stack and queue to execute further.
+
+I hope it's now clear to you how the <u>asynchronous</u> part of JavaScript works internally. But, that's not all. We have to look at <u>promises</u>.
+`,
+          code1: ``,
+          img: `../assets/images/javascript/Synchronous-event-loop-flow.gif`
+        },
+        {
+          text1: `JavaScript is single threaded and has a synchronous execution model. Single threaded means that one command is being executed at a time. Synchronous means one at a time i.e. one line of code is being executed at time in order the code appears. So in JavaScript one thing is happening at a time.
+          
+          <b>Execution Context</b>
+The JavaScript engine interacts with other engines in the browser. In the JavaScript execution stack there is global context at the bottom and then when we invoke functions the JavaScript engine creates new execution contexts for respective functions. When the called function exits its execution context is popped from the stack, and then next execution context is popped and so on...
+
+
+
+Maybe you think setTimeout like this -: <b>The setTimeout() method calls a function or evaluates an expression after a specified number of milliseconds</b>. it's true, but let's dive deeper.
+
+There aren't any methods like <u>setTimeout()</u> or <u>setInterval()</u> in JavaScript. They are not provided by the JavaScript engine itself but they are provided by browser as part of the window object. Let's break it down:
+
+If javascript doesn't provide <u>setInterval()</u> and <u>setTimeout()</u> but when we run our javascript code which also contains <b>setTImeout</b> it works perfectly fine. Yes, that's the real problem. Many people know how to use and they don't have any idea about what's going on under the hood. Before knowing about windows object, let's look at web APIs.
+
+<b>Web APIs</b>
+A browser can perform many tasks like getting user's location, turning on/off bluetooth, storage tasks, timer related tasks and many more. And we as a developers need these things. So, all these things can be accessed by JavaScript via Web APIs. That's it, now we have all these things inside one place and that place is window object.
+
+<b>Some web APIs</b>:
+=> localStorage
+=> setTimeout()
+=> console
+=> DOM APIs
+=> fetch()
+=> location
+=> alert()
+=> and others
+
+If <u>setTimeout()</u> is present inside window object then why we don't write like this:
+window.setTimeout(() => console.log('Timer finished'), 1000 );
+
+Instead we write without <u>window</u> object:
+setTimeout(() => console.log('Timer finished'), 1000 );
+
+<u>window</u> is a global object and <u>setTimeout()</u> is present inside global object(at global scope), so we can access <u>setTimeout()</u> without <u>window</u> object. Not only with <u>setTimeout()</u>, we don't need to write <u>window</u> object to access <u>alert, localstorage</u>, and other web APIs.
+
+Far by we've discussed that the browser provides web APIs, so we can use the things like <u>setTimeout()</u> but nodejs is not a browser. Then how is it possible to access <u>setTimeout()</u> in node. Well, we don't have <u>window</u> object available while working with node. But we can still access <u>setTimeout()</u>, let me tell you something at this point <u>setTimeout()</u> function in node works similar to <u>window.setTimeout()</u>, however they are not exactly same. Read more about this here.
+`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+
+      id: 1,
+      title: "imperative vs declarative javascript",
+      note: [
+        {
+          text1: `Declarative programming is a programming style that expresses the logic of a computation without describing its control flow. In JavaScript, a declarative example could be written as follows:
+          Imperative means you tell the compiler what you exactly want to happen, 
+          while in declarative paradigm you only specify what you want the result to be.
+
+<b>Declarative</b>:
+Declarative programming is an approach focused on expressing what the code should do, rather than how the operations should be performed. It emphasizes the results rather than the process. Code written with this approach is generally more readable and concise.
+
+          <b>Imperative</b>
+          Imperative programming, on the other hand, is an approach that explains step by step how operations should be performed. You explicitly specify all stages of the algorithm and control structures (such as loops and conditional statements).
+          `,
+          code1: `// declarative paradigm
+          const add = (x, y) => x + y;
+let result = add(2, 3);
+console.log(result); // 5
+//-----------
+Ex  : 1
+// Usually what you'd do is to define a for loop as below: imperative programming
+let n = [-9, 87, 72, 452, 32, -9]
+for(let i = 0; i < n.length; i++) {
+    console.log(n[i])
+}
+
+// declarative way:
+let n = [-9, 87, 72, 452, 32, -9]
+n.forEach(v => console.log(v))
+
+//--------
+Ex : 2 
+// Here is the imperative way:
+let n = [-9, 87, 72, 452, 32, -9]
+let z = []
+let doubleMinusOne = x => (x * 2) - 1
+for(let i = 0; i < n.length; i++) {
+    z[i] = doubleMinusOne(n[i])
+}
+
+// Now the 'z' variable holds an array of items doubled and subtracted by one from the 'n' array.
+// Here is how to do it declaratively:
+let n = [-9, 87, 72, 452, 32, -9]
+let z = n.map(v => (v * 2) - 1)
+
+//------------------
+// Ex : 3
+// imperative way:
+let n = [-9, 87, 72, 452, 32, -9]
+let z = []
+let lessThanFifty = v => v < 50
+for(let i = 0; i < n.length; i++) {
+    lessThanFifty(n[i]) && z.push(n[i])
+}
+
+// And the code below is the declarative counterpart:
+let n = [-9, 87, 72, 452, 32, -9]
+let z = n.filter(v => v < 50)
+
+`
+        },
+        {
+          text1: `<b>Advantages of Declarative Programming</b>
+        <b>Readability</b>: Code written with Declarative programming is generally more readable and understandable.
+        <b>Maintenance and Extensibility</b>: With the Declarative approach, maintaining and expanding the code becomes easier.
+        <b>Reduced Error Risk</b>: Focusing on what is being done rather than how it is done reduces the risk of making errors.
+
+        <b>Advantages of Imperative Programming</b>
+        <b>Control</b>: Imperative programming allows you to specify each step of the algorithm, providing more specific and detailed control.
+        <b>Optimization</b>: By determining step by step how operations are performed, it may be easier for you to make performance optimizations.
+        <b>Educational</b>: Imperative programming can be helpful, especially for beginners, in better understanding how an algorithm works.
+
+        In conclusion, when choosing between Declarative and Imperative programming approaches, you should consider your project's requirements, code readability, and maintenance processes. This way, you will adopt the most suitable approach for your project.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "proxy object",
+      note: [
+        {
+          text1: `A proxy may refer to a person who is authorized to act for another or it may designate the function or authority of serving in another's stead.
+
+So a proxy is nothing but a mediator that speaks or operates on behalf of the given party.
+
+Here is the syntax for declaring a proxy object:
+
+new Proxy(<object>, <handler>)
+The Proxy takes two parameters:
+
+<object>: The object that needs to be proxied.
+<handler>: An object that defines the list of methods that can be intercepted. These are also called traps.
+`,
           code1: ``
         }
       ]
     },
-   
+    {
+      id: 1,
+      title: "new FormData",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      section:'JavaScript Event',
+      title: "JavaScript Event",
+      note: [
+        {
+          text1: `<a href="https://www.guvi.in/blog/guide-for-events-in-javascript/" target="_blank">guide-for-events-in-javascript</a>
+          A JavaScript event is a specific action that occurs within a web page or application, such as clicking on an element, moving the mouse, pressing a key, or loading a page. Essentially, events are like signals that tell the browser to execute certain code or perform specific actions in response to user interactions or other occurrences.
+          
+          Here's a simplified breakdown of how events work in JavaScript:
+
+<b>Event Triggering:</b> Events can be triggered by user interactions (like clicking, hovering, typing) or by the browser itself (like when a page finishes loading).
+<b>Event Handling:</b> To respond to these events, developers write event handler functions. These functions contain the instructions or code that should run when the event occurs.
+<b>Event Binding:</b> Event handlers are then bound or attached to specific elements or objects on the webpage using JavaScript methods like addEventListener() or by directly assigning functions to event attributes in HTML.
+<b>Event Execution:</b> When the specified event occurs, the associated event handler function is executed, allowing the webpage to respond dynamically to user actions or other events.
+Understanding how events are triggered and handled in JavaScript is fundamental to building interactive and responsive web applications. It enables developers to create engaging user experiences by customizing how their websites respond to user inputs and other events.
+
+
+<b>How to Create an Event in JavaScript?</b>
+The following is a step-by-step guide to creating custom events:
+
+<b>Event Initialization</b>: Begin by initializing a new event object using the Event() constructor. This object represents the custom event you want to create.
+<b>Event Configuration</b>: Configure the event object by specifying its type. The event type is a descriptive string that identifies the custom event you're creating. You can also provide additional options, such as whether the event bubbles up through the DOM hierarchy or can be canceled.
+<b>Dispatching the Event</b>: Once the event object is configured, you can dispatch it to trigger the custom event. Dispatching an event involves specifying the target element or object where the event should originate from and calling the dispatchEvent() method on that target.
+
+
+<b>Events</b> are fired to notify code of <b>interesting changes</b> that may affect code execution. These can arise from user interactions such as using a mouse or resizing a window, changes in the state of the underlying environment (e.g. low battery or media events from the operating system), and other causes.
+
+Each event is represented by an object that is based on the <b>Event</b> interface, and may have additional custom fields and/or functions to provide information about what happened. The documentation for every event has a table (near the top) that includes a link to the associated event interface, and other relevant information.
+
+`,
+          code1: `/ Step 1: Event Initialization
+var customEvent = new Event("customEvent");
+
+// Step 2: Event Configuration
+// You can also pass additional options as the second argument, such as { bubbles: true, cancelable: true }
+customEvent.initEvent("customEventType", true, true);
+
+// Step 3: Dispatching the Event
+var targetElement = document.getElementById("targetElement");
+targetElement.dispatchEvent(customEvent);`,
+          img: `../assets/images/javascript/javascript-events.png`
+        },        
+        {
+          text1: `The browser can trigger many different types of events on the DOM(Document Object Model). The full list of all DOM event types are located here: MDN. For this blog, I'll go over some of the more frequently used DOM events, explain what the event does, and how each one is used.
+
+Here are some of the most common event types and event names:
+
+<b>Mouse Events</b>: click, dblclick, mousedown, mouseup, contextmenu, mouseout, mousewheel, mouseover
+<b>Touch Events</b>: touchstart, touchend, touchmove, touchcancel
+<b>Keyboard Events</b>: keydown, keyup, keypress
+<b>Form Events</b>: focus, blur, change, submit
+<b>Window Events</b>: resize, scroll, load, unload, hashchange
+Touch events are triggered on touch-enabled devices such as smartphones, tablets, and touch-screen laptops. Mouse events are triggered on the majority of all browsers and devices. The MouseEvent interface represents events that occur due to the user interacting with a pointing device.
+
+<b>The click event</b>: The onclick event occurs when the user clicks on an element.
+<b>The dblclick event</b>: ondblclick event occurs when the user double-clicks on an element.
+<b>Mousedown & Mouseup events</b>:A pointing device button is pressed/released on an element.
+<b>Mouseout event</b>: A pointing device is moved off the element that has the listener attached.
+
+<b>Keyboard events(keydown, keyup, keypress)</b>:
+<b>Keydown</b>: Any key is pressed.
+<b>keyup</b>: Any key is released.
+<b>keypress</b>: Any key (except shift, Fn, or capslock) is in the pressed position(fired continuously.)
+
+<b>Form Events(focus, blur, change, submit)</b>:
+<b>focus</b>: An element that has received focus.
+<b>blur</b>: An element that has lost focus.
+<b>change</b>: Event that is fired for input, select, and textarea elements when an alteration to the element's value is done by the user.
+<b>submit</b>: The submit button is pressed.
+
+<b>Window Events(resize, scroll, load, unload, hashchange)</b>:
+<b>resize</b>: This event fires when the document view(window) has been resized.
+<b>scroll</b>: Event fires when the document view or an element has been scrolled.
+<b>load/unload</b>: The load event is fired when the whole page has loaded, including all resources such as css and images. Unload is when the document or child resource is being unloaded.
+<b>hashchange</b>: This event is fired when the identifier of the URL has changed(the part of the URL that begins with a # symbol).
+
+<b>Some other common DOM events that are used are</b>:
+<b>error</b>: A resource has failed to load.
+<b>abort</b>: The loading fo a resource was aborted.
+<b>online</b>: The browser has gained access to the network.
+<b>animationstart</b>: This event fires when a CSS animatino has started.
+Event listeners are what make Javascript dynamic and fun. It allows the developer to be creative and experiment with their application to make it interesting and expressive. There are all kinds of keyword events that just about allow the user to do anything to interact with the browser. Knowing more event listener types will allow you(the developer) to become a Javascript wizard!`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: `The <b>DOMContentLoaded</b> event fires when the HTML document has been completely parsed, and all deferred scripts (<b>&lt;script defer src=&quot;…&quot;&gt;</b> and <b>&lt;script type=&quot;module&quot;&gt;</b>) have downloaded and executed. It doesn't wait for other things like images, subframes, and async scripts to finish loading.
+
+DOMContentLoaded does not wait for stylesheets to load, however deferred scripts do wait for stylesheets, and the DOMContentLoaded event is queued after deferred scripts. Also, scripts which aren't deferred or async (e.g. <b>&lt;script&gt;</b>) will wait for already-parsed stylesheets to load.
+
+A different event, load, should be used only to detect a fully-loaded page. It is a common mistake to use load where DOMContentLoaded would be more appropriate.
+
+
+<b>The Problem</b>
+You want to run some JavaScript code after a page has loaded. Should you use the <b>window load</b> event or the document <b>DOMContentLoaded</b> event to determine when to run the code?
+
+<b>The Solution</b>
+The window <b>load event</b> is fired when the entire web page has been loaded. This includes the page DOM and all dependent resources such as scripts, stylesheets, and images.
+
+The document <b>DOMContentLoaded</b> event is fired when the page DOM has been loaded and all deferred scripts have been loaded and executed.
+
+If your JavaScript code only needs to interact with the DOM, use the <b>DOMContentLoaded</b> event. This can be useful if you want to modify the DOM once it's loaded, set up event listeners, or fetch data from an API that will be displayed in the UI. For example, if you're using a UI library, such as <b>HighCharts</b>, adding the UI element after the <b>DOMContentLoaded</b> event improves performance as it does not wait for images or CSS to be loaded before adding the chart UI element to the page:
+`,
+          code1: `document.addEventListener('DOMContentLoaded', ()=> {
+    Highcharts.chart('container', {
+      // add config here
+    });
+});
+
+
+// If your JavaScript code depends on resources like stylesheets and images, then using the window load event is a better option. For example, if you want to start an animation only once all images have been loaded do the following:
+window.onload = function() {
+    // code to run animation.
+    HeaderTextAnimation();
+};
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Phases of JavaScript Event",
+      note: [
+        {
+          text1: `There are three different phases during the lifecycle of a JavaScript event.
+
+=> Capturing Phase
+=> Target Phase
+=> Bubbling Phase
+
+<b>Capturing Phase</b> is when the event goes down to the element. <b>The target phase</b> is when the event reaches the element and the <b>Bubbling phase</b> is when the event bubbles up from the element.
+
+
+
+<b>1. Event Capturing</b>
+Event capturing is the first phase in the event flow process where the event is captured or detected at the highest level of the DOM hierarchy and then propagates down to the target element. Event capturing allows developers to intercept events before they reach their target, enabling global event handling and delegation. Practical use cases include implementing event delegation, validating user input, and applying consistent event handling across multiple elements.
+
+In the event capturing phase, an event originates at the least particular element and progresses downhill to the most specific element. 
+
+During the capture process:
+=> The browser will execute if the element's outermost ancestor &lt;html&gt; has a click event handler registered for the capturing phase.
+=> Then it moves on to the next element inside &lt;html&gt; and repeats the process, continuing until it reaches the immediate parent of the element that was actually selected.
+
+<b>2. Event Targeting (Target Phase)</b>
+Event targeting, also known as the “at target” phase, occurs when the event reaches the target element that triggered it. During the targeting phase, event handlers attached directly to the target element are executed, allowing for specific actions or behaviors to be applied based on the event
+
+A target element is the most deeply nested element that generated the event. It can be accessed as “event.target”. The target element, or the element that triggered the event, receives the event.
+
+During the target phase:
+=> If the target property has an event handler for the click event registered on it, the browser will execute it.
+=> If bubbles are true, the event is propagated to the selected element's direct parent, then the next, until it reaches the &lt;html&gt; element. If bubbles are false, the event is not propagated to any of the target's ancestors. (Note: Don't worry about the keyword “bubble phase”, we will discuss it in detail in the next section.)
+
+<b>3. Event Bubbling</b>
+Event bubbling is the final phase in the event flow process where the event, having been processed at the target element, propagates back up through the DOM hierarchy to the root element. Unlike event capturing, which starts from the top of the DOM tree and moves downward, event bubbling starts at the target element and moves upward. Practical implications include simplifying event handling by allowing for more concise code, enabling event delegation, and facilitating the creation of interactive components.
+
+The bubble phase is the opposite of capturing. In the event bubbling model, an event starts at the most specific element and then flows upward to the least specific element (the document or even window).
+
+The exact opposite of the capturing phase occurs during the bubbling phase:
+=> The browser will execute if the direct parent of the element selected has a click event handler registered for the bubbling phase.
+=> Then it repeats the process for the next immediate ancestor element, then the next, and so on until it reaches the &lt;html&gt; element.
+
+A click on the inner &lt;p&gt; first runs onclick:
+
+On that &lt;p&gt;.
+Then on the outer &lt;div&gt;.
+Then on the outer &lt;form&gt;.
+And so on upwards till the document object.
+`,
+          code1: `//FORM > DIV > P
+           &lt;head&gt;
+    &lt;style&gt;
+        body * {
+            margin: 10px;
+            border: 1px solid blue;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;form&gt;FORM
+        &lt;div&gt;DIV
+            &lt;p&gt;P&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+
+    &lt;script&gt;
+        for (let elem of document.querySelectorAll(&#39;*&#39;)) {
+            elem.addEventListener(&quot;click&quot;, e =&gt; console.log(\`Capturing: \${elem.tagName}\`), true);
+            elem.addEventListener(&quot;click&quot;, e =&gt; console.log(\`Bubbling: \${elem.tagName}\`));
+        }
+    &lt;/script&gt;
+           `,
+          img: `../assets/images/javascript/Bubbling-and-capturing.svg`
+        },
+        {
+          text1: ``,
+          code1: ``,
+          img: `../assets/images/javascript/event-phases.png`
+        },
+        {
+          text1: `<b>event.target</b>
+A handler on a parent element can always get the details about where it actually happened.
+
+<u>The most deeply nested element that caused the event is called a target element, accessible as <b>event.target</b></u>.
+
+Note the differences from this (<u>=event.currentTarget</u>):
+
+<u>event.target</u> - is the “target” element that initiated the event, it doesn't change through the bubbling process.
+<u>this</u> - is the “current” element, the one that has a currently running handler on it.
+For instance, if we have a single handler <u>form.onclick</u>, then it can “catch” all clicks inside the form. No matter where the click happened, it bubbles up to &lt;form&gt; and runs the handler.
+
+In <u>form.onclick</u> handler:
+=> <u>this (=event.currentTarget)</u> is the &lt;form&gt; element, because the handler runs on it.
+=> <u>event.target</u> is the actual element inside the form that was clicked.
+`,
+          code1: ``
+        },        {
+          text1: `<b>Stopping bubbling</b>
+A bubbling event goes from the target element straight up. Normally it goes upwards till &lt;html&gt;, and then to document object, and some events even reach window, calling all handlers on the path.
+
+But any handler may decide that the event has been fully processed and stop the bubbling.
+The method for it is <b>event.stopPropagation()</b>.
+For instance, here body.onclick doesn't work if you click on &lt;button&gt;:
+
+<b>How to Stop Event Bubbling</b>
+Event Bubbling is a default behavior for events. But in some cases, you might want to prevent this.
+To prevent event bubbling, you use the <b>stopPropagation</b> method of the event object.
+
+<b>Event.stopPropagation()</b> is a method that prevents an event from propagating up the DOM tree.
+
+<b>How does Event.stopPropagation() work?</b>
+When an event occurs on an element, it will normally bubble up through its parent elements and trigger any event listeners attached to them. By calling Event.stopPropagation(), you can stop this propagation so that the event will only trigger the listener attached to the element where it occurred, and not any of its parent elements.
+
+<b>Why would you use it?</b>
+You might use Event.stopPropagation() if you want to prevent a parent element from handling an event that was triggered on a child element. For example, if you have a button inside a div, and clicking the button should not also trigger a click event on the div, you can call Event.stopPropagation() inside the button's click event listener.
+
+When handling events, an <b>event</b> object is passed to the handling function:
+The <b>event</b> object contains properties that have information about the event that was triggered and the element it was triggered on. This object also contains methods - one of which is <b>stopPropagation()</b>.
+The <u>stopPropagation</u> method of an event prevents the event from propagating to the parents and ancestors of the element the event was triggered on.
+
+The <b>stopPropagation()</b> method prevents propagation of the same event from being called.
+Propagation means bubbling up to parent elements or capturing down to child elements.
+
+Ex : 
+Because DIV 1 is inside Div 2, both DIVs get clicked when you click on DIV 1.
+Check the stop propagation checkbox, and try again.
+The stopPropagation() method allows you to prevent propagation of the current event.
+
+<h5>The stopPropagation() Method</h5>
+<p>Click DIV 1:</p>
+<div onclick="func2()">DIV 2
+  <div onclick="func1(event)">DIV 1</div>
+</div>
+
+Stop propagation:
+<input type="checkbox" id="check">
+
+`,
+          code1: `&lt;h1&gt;The stopPropagation() Method&lt;/h1&gt;
+
+&lt;p&gt;Click DIV 1:&lt;/p&gt;
+&lt;div onclick=&quot;func2()&quot;&gt;DIV 2
+  &lt;div onclick=&quot;func1(event)&quot;&gt;DIV 1&lt;/div&gt;
+&lt;/div&gt;
+
+Stop propagation:
+&lt;input type=&quot;checkbox&quot; id=&quot;check&quot;/&gt;
+
+
+function func1(event) {
+  alert("DIV 1");
+  if (document.getElementById("check").checked) {
+    event.stopPropagation();
+  }
+}
+
+function func2() {
+  alert("DIV 2");
+}
+
+//------------
+
+
+body.addEventListener('click', () => {
+  console.log("body was clicked")
+})
+
+div.addEventListener('click', () => {
+  console.log("div was clicked")
+})
+
+span.addEventListener('click', () => {
+  console.log("span was clicked")
+})
+
+button.addEventListener('click', (event) => {
+  event.stopPropagation()
+  console.log("button was clicked")
+})
+  
+
+
+//-------------
+
+// Let's say, for example, from our HTML code, that you want the div to open a modal when it is clicked. For the button, on the other hand, you want it to make an API request when it is clicked.
+
+// In this case, you may not want the modal to open when you click the button. You might want the modal to only open when you actually click it (and not when you click any of its children). This is where preventing event "propagation" comes in.
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Event Propagation Example&lt;/title&gt;
+    &lt;style&gt;
+        #modal {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;modal&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+            &lt;p&gt;This is a modal.&lt;/p&gt;
+            &lt;button id=&quot;modalButton&quot;&gt;Close Modal&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;outerDiv&quot; style=&quot;width: 300px; height: 300px; background-color: lightblue; text-align: center; padding: 20px;&quot;&gt;
+        &lt;p&gt;Click this div to open the modal.&lt;/p&gt;
+        &lt;button id=&quot;innerButton&quot;&gt;Click me for API Request&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        // Modal
+        const modal = document.getElementById(&#39;modal&#39;);
+        const outerDiv = document.getElementById(&#39;outerDiv&#39;);
+        const innerButton = document.getElementById(&#39;innerButton&#39;);
+
+        // Event listener to open the modal when the outer div is clicked
+        outerDiv.addEventListener(&#39;click&#39;, function() {
+            modal.style.display = &#39;flex&#39;;
+            console.log(&#39;Modal opened&#39;);
+        });
+
+        // Event listener to simulate an API request when the button is clicked
+        innerButton.addEventListener(&#39;click&#39;, function(event) {
+            // Stop the event from propagating to the outer div (bubbling phase)
+            event.stopPropagation();
+
+            // Simulate an API request
+            console.log(&#39;API request made&#39;);
+        });
+
+        // Close the modal when the close button inside the modal is clicked
+        document.getElementById(&#39;modalButton&#39;).addEventListener(&#39;click&#39;, function() {
+            modal.style.display = &#39;none&#39;;
+            console.log(&#39;Modal closed&#39;);
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+//------------------
+// React Example
+//-----------------
+import React from 'react';
+
+function MainEvent() {
+  function handleInnerElementClick(event) {
+    event.stopPropagation();
+    console.log('Inner element clicked');
+  }
+
+  function handleDocumentClick() {
+    console.log('Document clicked');
+  }
+
+  return (
+    &lt;div id=&quot;outer&quot; onClick={handleDocumentClick} style={{backgroundColor: &#39;#09ca91&#39;, padding: &#39;15px&#39;}}&gt;
+      &lt;div id=&quot;inner&quot; onClick={handleInnerElementClick} style={{backgroundColor: &#39;#ca459a&#39;, padding: &#39;15px&#39;}}&gt;
+        Inner Element
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default MainEvent;
+`
+        },
+        {
+          text1: `<b>stopImmediatePropagation</b>
+          <b>stopPropagation</b> will prevent any parent handlers from being executed 
+          <b>stopImmediatePropagation</b> will prevent any parent handlers and also any other handlers from executing
+          The stopImmediatePropagation() method prevents other listeners of the same event from being called.
+
+          <b>event.stopImmediatePropagation()</b>
+If an element has multiple event handlers on a single event, then even if one of them stops the bubbling, the other ones still execute.
+In other words, <u>event.stopPropagation()</u> stops the move upwards, but on the current element all other handlers will run.
+To stop the bubbling and prevent handlers on the current element from running, there's a method <u>event.stopImmediatePropagation()</u>. After it no other handlers execute.
+As you must have understood, to make our example work, we must stop the propagation once the event handler for the button executes. We have two utilities for this - <b>event.stopPropagation()</b> and <b>event.stopImmediatePropagation()</b>. Both of them block the propagation of the event once encountered. There is only one difference in their work.
+The <b>event.stopPropagation()</b> stops the event from going to the next element. All handlers associated with the current element for that particular event will still get executed. This does not happen in <b>event.stopImmediatePropagation()</b> where propagation stops immediately, and no event handlers execute even if they belong to the current element.
+          
+          If several listeners are attached to the same element for the same event type, they are called in the order in which they were added. If <b>stopImmediatePropagation()</b> is invoked during one such call, no remaining listeners will be called, either on that element or any other element.
+
+          <b>#Event.stopImmediatePropagation()</b>
+<b>Event.stopImmediatePropagation()</b> is a method that prevents an event from propagating up the DOM tree and prevents any further listeners on the current element from being called.
+
+<b>How does it work?</b>
+When an event occurs on an element, it will normally bubble up through its parent elements and trigger any event listeners attached to them. By calling <b>Event.stopImmediatePropagation()</b>, you can stop this propagation so that the event will only trigger the listener attached to the element where it occurred. Additionally, any other listeners on the same element will also be prevented from being called.
+
+<b>Why would you use it?</b>
+You might use <b>Event.stopImmediatePropagation()</b> if you want to prevent any other listeners on the same element from being called after a specific listener has been triggered. This can be useful if you have multiple listeners on the same element that might conflict with each other.
+
+
+In <b>2nd</b> example, we define a React component <u>MyComponent</u> that renders a button with an <u>id</u> of "example" and a second button that simulates a click on the first button. We use the <u>useRef</u> hook to create a ref to the button element, and we use the <u>useEffect</u> hook to attach three event listeners to the button element, similar to the original example. We also define a <u>handleClick</u> function that simulates a click on the button element when the second button is clicked.
+
+Note that we use the <u>useEffect</u> hook to attach and clean up the event listeners, similar to how we would use <u>addEventListener</u> and <u>removeEventListener</u> in JavaScript. Also, we use the <u>ref</u> attribute in React to create a reference to the button element, which we can use to attach the event listeners in the <u>useEffect</u> hook and to simulate a click in the <u>handleClick</u> function.
+          `,
+          code1: `
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Event Propagation Example&lt;/title&gt;
+    &lt;style&gt;
+        div {
+            display: inline-block;
+            padding: 10px;
+            background-color: #fff;
+            border: 2px solid #000;
+            margin: 10px;
+        }
+
+        button {
+            width: 100px;
+            color: #008;
+            padding: 5px;
+            background-color: #fff;
+            border: 2px solid #000;
+            border-radius: 30px;
+            margin: 5px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h2&gt;Click on the buttons&lt;/h2&gt;
+    &lt;div&gt;
+        outer div&lt;br /&gt;
+        &lt;div&gt;
+            middle div&lt;br /&gt;
+            &lt;div&gt;
+                inner div&lt;br /&gt;
+                &lt;button&gt;allow propagation&lt;/button&gt;&lt;br /&gt;
+                &lt;button id=&quot;stopPropagation&quot;&gt;stop propagation&lt;/button&gt;&lt;br /&gt;
+                &lt;button id=&quot;stopImmediatePropagation&quot;&gt;immediate stop propagation&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;pre&gt;&lt;/pre&gt;
+
+
+    &lt;script&gt;
+        const outElem = document.querySelector(&quot;pre&quot;);
+
+        /* Clear the output */
+        document.addEventListener(
+            &quot;click&quot;,
+            () =&gt; {
+                outElem.textContent = &quot;&quot;;
+            },
+            true,
+        );
+
+        /* Set event listeners for the buttons */
+        document.querySelectorAll(&quot;button&quot;).forEach((elem) =&gt; {
+            for (let i = 1; i &lt;= 3; i++) {
+                elem.addEventListener(&quot;click&quot;, (evt) =&gt; {
+                    /* Do any propagation stopping in first event handler */
+                    if (i === 1 &amp;&amp; elem.id) {
+                        console.log(elem.id)
+                        evt[elem.id]();
+                        outElem.textContent += \`Event handler for event 1 calling \${elem.id}()\n\`;
+                    }
+
+                    outElem.textContent += \`Click event \${i} processed on &quot;\${elem.textContent}&quot; button\n\`;
+                });
+            }
+        });
+
+        /* Set event listeners for the divs */
+        document
+            .querySelectorAll(&quot;div&quot;)
+            .forEach((elem) =&gt;
+                elem.addEventListener(
+                    &quot;click&quot;,
+                    (evt) =&gt;
+                        (outElem.textContent += \`Click event processed on &quot;\${elem.firstChild.data.trim()}&quot;\n\`),
+                ),
+            );
+
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+//-------------------Ex : 2--------------
+
+import React, { useEffect, useRef, useState } from 'react';
+
+function MyComponent() {
+    const elementRef = useRef(null);
+    const [isSetSIP, isSetSIPset] = useState(false)
+    useEffect(() => {
+        function listener1(event) {
+            console.log('Listener 1');
+            if(isSetSIP){
+                event.stopImmediatePropagation();
+            }
+        }
+
+        function listener2() {
+            console.log('Listener 2');
+        }
+
+        function listener3() {
+            console.log('Listener 3');
+        }
+
+        const element = elementRef.current;
+
+        element.addEventListener('click', listener1);
+        element.addEventListener('click', listener2);
+        element.addEventListener('click', listener3);
+
+        // Clean up event listeners when component unmounts
+        return () => {
+            element.removeEventListener('click', listener1);
+            element.removeEventListener('click', listener2);
+            element.removeEventListener('click', listener3);
+        };
+    }, [isSetSIP]);
+
+    function handleClick() {
+        const element = elementRef.current;
+        element.click();
+    }
+
+    return (
+        &lt;div&gt;
+            &lt;input type=&quot;checkbox&quot; onChange={() =&gt; isSetSIPset((p) =&gt; !p)} /&gt;
+            &lt;button id=&quot;example&quot; ref={elementRef}&gt;Example Button&lt;/button&gt;
+            &lt;button onClick={handleClick}&gt;Simulate Click&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+
+export default MyComponent;
+
+`
+        },
+        {
+          text1: `<b>preventDefault</b>
+          <b>stopPropagation</b> prevents further propagation of the current event in the capturing and bubbling phases.
+<b>preventDefault</b> prevents the default action the browser makes on that event.
+
+<b>#Event.preventDefault()</b>
+<u>Event.preventDefault()</u> is a method that prevents the default behavior of an element when an event is triggered.
+
+<b>How does it work?</b>
+When an event occurs on an element, it may have a default behavior associated with it. For example, clicking on a link will normally navigate to the URL specified in the href attribute of the link. By calling <u>Event.preventDefault()</u>, you can prevent this default behavior from occurring.
+
+<b>Why would you use it?</b>
+You might use <u>Event.preventDefault()</u> if you want to prevent the default behavior of an element when an event is triggered. This can be useful if you want to provide your own behavior for an element or if you want to prevent certain actions from occurring, such as submitting a form when a button is clicked.
+
+In below example, we define a React component <u>MyComponent</u> that renders a link with an <u>id</u> of "example-link". We define a <u>handleClick</u> function that prevents the default behavior of the link (i.e., navigating to a new page) and logs a message to the console. We attach the <u>handleClick</u> function to the <u>onClick</u> attribute of the link element, similar to how we would use <u>addEventListener</u> in JavaScript.
+
+Note that we use the <u>href</u> attribute to set the link URL to <u>#</u> in order to prevent the page from reloading when the link is clicked. We also use the <u>onClick</u> attribute in React to attach the event handler to the link element, rather than the <u>addEventListener</u> method in JavaScript.
+`,
+          code1: `import React from 'react';
+
+function MyComponent() {
+  function handleClick(event) {
+    event.preventDefault();
+    console.log('Link clicked');
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;a href=&quot;#&quot; id=&quot;example-link&quot; onClick={handleClick}&gt;
+        Example Link
+      &lt;/a&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default MyComponent;`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "window vs document Object",
+      note: [
+        {
+          text1: `<b>What is a JavaScript window?</b>
+The window is at a root/top level at the JavaScript object hierarchy. It  is a global/root object in JavaScript and it is the root object of the Document object model(DOM);
+
+<b>What is a JavaScript document?</b>
+A document is an object inside the window object and we use a document object for manipulation inside the document.
+
+The first thing that gets loaded into the browser is the window and the properties related to that window are stored in the window object. Properties related to window objects are length, innerWidth, innerHeight, caches, etc.
+
+<b>There was a document object too so what about it then?</b>
+So after the window gets loaded then there's a document (HTML, PHP, or another document) loaded inside that window, and the properties related to that document is stored in the document object. Properties related to document objects are title, URL, cookie, etc.
+`,
+          code1: `//Syntax:
+
+// window object:
+window.propertyname;
+
+// document object:
+document.propertyname
+// OR
+window.document.propertyname`
+        },
+        {
+          text1: `<b>Window Object</b>
+The Window object is a global object in client-side JavaScript, representing the browser window containing a DOM document and acting as the root of the document object model.
+
+The window object, supported by all browsers, represents the browser's window and automatically includes global JavaScript objects, functions, and variables as members.
+
+The Window object is responsible for managing global variables, functions, and objects, providing methods for browser interaction and managing properties related to frames, tabs, or windows, such as <u> alert(), confirm(), setTimeout(), and setInterval() </u>.
+
+Few properties and methods of window objects are,
+
+<b>Browser Object Model (BOM)</b>
+The Browser Object Model contains objects that represent the current browser window or tab. The topmost object in the BOM is the window object representing the window or tab or an iframe sometimes. Window object has properties like browser history, location and the device's screen etc. In case of multi tab browser, a window object represents a single tab, but some of its properties like innerHeight, innerWidth and methods like resizeTo() will affect the whole browser window.
+
+The <b>window object</b> in JavaScript provides access to the browser's history, location, and other properties and methods that allow us to interact with the browser window itself. It contains information about the browser window, like the size, the document the window contains, and the window's history.
+
+<b>Properties</b>
+<b>window.innerHeight</b> - the inner height of the browser window (in pixels)
+<b>window.innerWidth</b> - the inner width of the browser window (in pixels)
+
+<b>Methods</b>
+<b>window.open()</b> - open a new window
+<b>window.close()</b> - close the current window
+<b>window.moveTo()</b> - move the current window
+<b>window.resizeTo()</b> - resize the current window
+
+A <b>window object</b> is a global object in JavaScript, which is available in all contexts throughout your code. You can access it directly using the window keyword.
+
+Here are some examples of common tasks that involve the window object -
+Getting the current URL of the page: <u>var currentUrl = window.location.href;</u>
+Getting the width of the browser window: <u>var windowWidth = window.innerWidth;</u>
+Getting the height of the browser window: <u> var windowHeight = window.innerHeight;</u>
+Opening a new window: <u>window.open('http://www.example.com', '_blank');</u>
+Closing the current window: <u>window.close();</u>
+`,
+          code1: `&lt;/head&gt;
+&lt;body&gt;
+   &lt;h2&gt;JavaScript Window&lt;/h2&gt;
+   &lt;p id=&quot;innerHeight&quot;&gt;&lt;/p&gt;
+   &lt;p id=&quot;innerWidth&quot;&gt;&lt;/p&gt;
+   &lt;p id=&quot;currentUrl&quot;&gt;&lt;/p&gt;
+   &lt;script&gt;
+      const height = document.getElementById(&#39;innerHeight&#39;);
+      const width = document.getElementById(&#39;innerWidth&#39;);
+      const url = document.getElementById(&#39;currentUrl&#39;);
+      height.textContent = &quot;innerHeight - &quot; +
+      window.innerHeight;
+      width.textContent = &quot;innerWidth - &quot; +
+      window.innerWidth;
+      url.textContent = &quot;currentUrl - &quot; + window.location.href;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+// Output :
+// JavaScript Window
+// innerHeight - 607
+// innerWidth - 1366
+// currentUrl - file:///D:/forms-code/index.html
+`,
+          img: `../assets/images/javascript/window-object.webp`
+        },
+        {
+          text1: `<b>Document Object</b>
+The Document object is the HTML document that appears in the browser window and serves as an interface for interacting with the web page's content. The browser generates a Document Object Model of a web page upon loading it.
+
+The <u>W3C Document Object Model (DOM)</u> is a platform-neutral interface that enables dynamic access and updating of a document's content, structure, and style by programs and scripts.
+
+The DOM is a logical tree in a document, with methods allowing programmatic access to change its structure, style, or content.
+
+The DOM manipulation tool offers methods to access and manipulate the structure and content of a document, such as getElementById(), querySelector(), createElement(), and innerHTML. It represents the entire HTML document as a node tree, with the Document object as the root node. It allows dynamic updates and interactions with web page content.
+
+Few properties and methods of Document Object Model,
+
+<b>Properties</b>
+<u>element.innerHTML = new html content</u> //Change the inner HTML of an element
+<u>element.attribute = new value</u> //Change the attribute value of an HTML element
+
+<b>Methods</b>
+<u>document.createElement(element)</u> //Create an HTML element
+<u>document.removeChild(element)</u> //Remove an HTML element
+
+<b>Document Object Model</b>
+When a web page is loaded, the browser creates a Document Object Model of the page. The document object represents the whole html document as a tree of Objects(HTML, HEAD, BODY, and other HTML tags). It is the root element that represents the html document.
+
+These are the few methods and properties of <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" target="_blank">DOM</a>, to know more you can refer to MDN docs here.
+
+The <b>document object</b> represents the structure of the web page as a whole and provides access to the content of the page, as well as methods for manipulating that content. It contains information about the content of the page, like the URL, the title, the content, and the links.
+
+For example, we can use the document.getElementById() method to get a reference to an element on the page by its ID, or the document.createElement() method to create a new element. We can also use the window object to manipulate the browser window, such as with the window.open() method to open a new window, or the window.scrollTo() method to scroll to a specific position on the page.
+
+<b>JavaScript Document</b>
+In JavaScript, the <b>document object</b> represents the web page currently loaded in the web browser. It provides access to the content of the page, as well as methods for manipulating that content.
+
+The <b>document object</b> is a property of the window object and is also a global object in JavaScript, which means that it is available in all contexts throughout your code. You can access it directly using the document keyword.
+
+Below are some examples of common tasks that involve the document object -
+Getting the title of the document: <u> var docTitle = document.title; </u>
+Getting the last modified date of the document: <u> var modified = document.lastModified; </u>
+Getting the body element of the document: <u> var bodyEl = document.body; </u>
+Getting an element by its ID: <u> var el = document.getElementById('my-element'); </u>
+Creating a new element: <u> var newEl = document.createElement('div'); </u>
+`,
+          code1: `//Syntax
+//The syntax for a javascript document is as follows -
+
+document.propertyName
+//--------
+
+&lt;head&gt;
+   &lt;title&gt;Example- JavaScript Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h2&gt; JavaScript Document &lt;/h2&gt;
+   &lt;p id=&quot;title&quot;&gt;&lt;/p&gt;
+   &lt;p id=&quot;currentUrl&quot;&gt;&lt;/p&gt;
+   &lt;script&gt;
+      const p = document.getElementById(&#39;title&#39;);
+      const url = document.getElementById(&#39;currentUrl&#39;);
+      p.textContent = &quot;Doc Title - &quot; + document.title;
+      url.textContent = &quot;Doc CurrentUrl - &quot; + document.location.href;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+`,
+          img: `../assets/images/javascript/document-object.gif`
+        },
+        {
+          text1: `<b>Window Vs Document</b>
+<b>Window object</b> : It is the top most object and outermost element of the object hierarchy as shown in Figure 1.
+
+<b>Document object</b> : Each HTML document that gets loaded into a window becomes a document object. The document contains the contents of the page. Using document object, JavaScript can modify, add and delete the HTML elements, attributes CSS styles in the page
+
+The window object represents a window/tab containing a DOM document where as document object is property of window object that points to the DOM document loaded in that window.
+
+You can access a document object either using window.document property or using document object directly as window is global object. In the below example, title is the property of document object.
+
+The other major difference is that both window object and document object have properties and methods. Few method names are same in both objects but with different behavior. In the below example window.open() opens a new tab or window and document.open() creates a blank document within the window.
+
+<b>Screen</b>
+Screen is the window property that holds information of browser screen. It refers to screen object associated with that window object. Used to display screen width, height, colorDepth, pixelDepth etc
+
+Similar to document screen can be accessed either by window.screen or screen object directly. Screen object doesn't have any methods as in window and document objects.
+
+
+<div class='table-res'>
+          <table class="table table-bordered">
+<tbody><tr>
+<th>JavaScript's window</th>
+<th>JavaScript's document</th>
+</tr>
+<tr>
+<td>It represents the current web browser window.</td>
+<td>It represents the web page that is currently loaded in the window.</td>
+</tr>
+<tr>
+<td>Its properties include location, history, innerWidth, innerHeight, etc.</td>
+<td>Its properties include title, lastModified, body, head, etc.</td>
+</tr>
+<tr>
+<td>JavaScript windows methods are: open(), close(), scrollTo(), alert(), etc.</td>
+<td>JavaScript windows methods are: getElementById(), createElement(), querySelector(), querySelectorAll(), etc.</td>
+</tr>
+<tr>
+<td>It is available globally.</td>
+<td>It is available globally.</td>
+</tr>
+<tr>
+<td>It is an object of a window.</td>
+<td>It is an object of the browser.</td>
+</tr>
+</tbody></table>
+</div>
+`,
+          code1: `
+          //Screen
+          window.screen.height
+          
+          screen.height
+          `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Custom event",
+      note: [
+        {
+          text1: `<b>Creating a Custom Event</b>:
+          There are two ways to create custom events.
+
+=> The first way is using an <b>Event</b> constructor.
+=> The second way is using the <b>CustomEvent</b> constructor which we prefer.
+
+To create a custom event we use the Event constructor or CustomEvent interface. The Event constructor creates an <b>Event</b> and <b>CustomEvent</b> creates an Event with more functionality.
+
+The below steps are followed to create one using a new <b>Event</b>.
+
+=> We create an event using the Event constructor.
+=> We listen to this event using the <b>addEventListener()</b> method.
+=> We trigger or dispatch the event using <b>element.dispatchEvent(eventName)</b> method.
+=> A custom Event named <b>start</b> has now been created.
+
+<b>bubbles</b>
+The <b>bubbles</b> property specifies whether the event should be propagated upward to the parent element. Setting this to <b>true</b> means that if the event gets dispatched in a child element, the parent element can listen on the event and perform an action based on that. This is the behavior of most native DOM events, but for custom events, it is set to <b>false</b> by default.
+
+If you only want the event to be dispatched at a particular element, you can stop the propagation of the event via <b>event.stopPropagation()</b>. This should be in the callback that listens on the event. More on this later.
+
+<b>cancelable</b>
+As the name implies, <b>cancelable</b> specifies whether the event should be cancelable.
+
+Native DOM events are cancelable by default, so you can call <b>event.preventDefault()</b> on them, which will prevent the default action of the event. If the custom event has <b>cancelable</b> set to <b>false</b>, calling <b>event.preventDefault()</b> will not perform any action.
+
+<b>composed</b>
+The <b>composed</b> property specifies whether an event should bubble across from the shadow DOM (created when using web components) to the real DOM. If <b>bubbles</b> is set to <b>false</b>, the value of this property won't matter because you're explicitly telling the event not to bubble upward. However, if you want to dispatch a custom event in a web component and listen on it on a parent element in the real DOM, then the composed property needs to be set to <b>true</b>.
+
+A drawback of using this method is that you can't send data across to the listener. However, in most applications, we would want to be able to send data across from where the event is being dispatched to the listener. To do this, we can use the <b>CustomEvent</b> controller
+
+You can't also send data using native DOM events. Data can only be gotten from the event's target.
+`,
+          code1: `
+          // we created an event, "myevent", by passing the event name to the "Event" constructor. Event names are case-insensitive, so "myevent" is the same as "myEvent" and "MyEvent", 
+          const myEvent = new Event('myevent', {
+  bubbles: true,
+  cancelable: true,
+  composed: false
+})
+
+//------------
+          // To assign event
+const startEvent = new Event("start");
+// To trigger the event Listener
+document.addEventListener("start", () => {
+    console.log("The start event was triggered")
+});
+// To trigger the Event
+document.dispatchEvent(startEvent);
+          
+`
+        },        
+        {
+          text1: `<b>Creating a custom event using CustomEvent</b>:
+Creating custom events using the CustomEvent interface has an advantage as it can send custom data. The below steps are followed in order to create a new CustomEvent.
+
+=> We create a custom event using the CustomEvent constructor.
+=> This takes two arguments, the first is the name of the event and the second is an object that contains the data. The property name inside the object name should be named <b>detail</b> otherwise it won't work.
+=> We create a listener for this event.
+=> We trigger or dispatch the event.
+=> A custom event that contains data has been created.
+`,
+          code1: `
+          // To assign event
+const event = new CustomEvent("start", {
+      detail: {
+        platform : "GeeksforGeeks"
+      }
+});
+
+// To trigger the event Listener
+document.addEventListener('start', (e)=>{
+      console.log(
+        \`start event triggered on platform :
+        \${e.detail.platform}\`
+        );
+});
+// To trigger the Event
+document.dispatchEvent(event);
+          
+
+//-------------
+          
+          window.addEventListener("xyz", event => console.log(event.detail));
+
+event = new CustomEvent("xyz", {
+  detail: {
+    action: "didInitialize",
+    payload: 3
+  }
+});
+
+window.dispatchEvent(event);`
+        },
+        {
+          text1: `<b>dispatchEvent()</b>
+          The dispatchEvent() method is a JavaScript function used to trigger (or "dispatch") an event on a specified target (such as a DOM element, document, window, or custom object). It allows developers to programmatically fire an event, simulating user interactions or other events that might need to be triggered under specific conditions.
+          
+          The <b>dispatchEvent</b> method allows you to simulate an event on an element. Why do you need it: you can simulate a user clicking on a button, trying to submit a form, and so on. In this case, the event will not differ from the real one except for the <b>event.isTrusted</b> property. You can even create events with non-standard (your own) names and then call them at the right time. The method is applied to the element on which the event is to be fired. As a parameter, the method receives an event (object) created using the new Event constructor.
+          `,
+          code1: `element.dispatchEvent(event);
+          
+          const event = new CustomEvent('NOTIFICATION_ADD', { 
+  detail: {
+    title: 'Error!',
+    message: 'There was a problem creating your account.'
+  }
+});
+
+function handleButtonClick(){
+	window.dispatchEvent(event);
+}
+
+function handleAddNotification(e) {
+  alert(e.detail.title + ' ' + e.detail.message);
+}
+
+window.addEventListener('NOTIFICATION_ADD', handleAddNotification);
+
+&lt;button onclick=&quot;handleButtonClick()&quot;&gt;
+  Create my account
+&lt;/button&gt;
+`
+        },
+        {
+          text1: `To generate an event programmatically, you follow these steps:
+
+First, create a new <u>Event</u> object using <u>Event</u> constructor.
+Then, trigger the event using <u>element.dispatchEvent()</u> method.
+Event constructor
+To create a new event, you use the <u>Event</u> constructor like this:
+
+let event = new Event(type, [,options]);
+
+The <u>Event</u> constructor accepts two parameters:
+
+<b>type</b>
+is a string that specifies the event type such as 'click'.
+
+<b>options</b>
+is an object with two optional properties:
+
+=> <u>bubbles</u>: is a boolean value that determines if the event bubbles or not. If it is <u>true</u> then the event is bubbled and vice versa.
+=> <u>cancelable</u>: is also a boolean value that specifies whether the event is cancelable when it is <u>true</u>.
+
+By default, the <u>options</u> object is:
+{ bubbles: false, cancelable: false}
+
+For example, the following creates a new <u>click</u> event with the default <u>options</u> object:
+
+let clickEvent = new Event('click');
+
+After creating an event, you can fire it on a target element using the <u>dispatchEvent()</u> method like this:
+
+element.dispatchEvent(event);
+
+
+
+
+In Below example, the event handler is executed as if the <u>click</u> event were generated by user actions.
+
+If the event comes from the user actions, the <u>event.isTrusted</u> property is set to <u>true</u>. In case the event is generated by code, the <u>event.isTrusted</u> is <u>false</u>. Therefore, you can examine the value of <u>event.isTrusted</u> property to check the “authenticity” of the event.
+
+The <u>Event</u> is the base type of <u>UIEvent</u> which is the base type of other specific event types such as <u>MouseEvent, TouchEvent, FocusEvent</u>, and <u>KeyboardEvent</u>.
+
+It's a good practice to use the specialized event constructor like MouseEvent instead of using the generic <u>Event</u> type because these constructors provide more information specific to the events.
+
+For example, the <u>MouseEvent</u> event has many other properties such as <u>clientX</u> and <u>clientY</u> that specify the horizontal and vertical coordinates at which the event occurred relative to the viewport:
+
+let clickEvent = new MouseEvent("click", {
+    bubbles: true,
+    cancelable: true,
+    clientX: 150,
+    clientY: 150
+});
+
+The dispatchEvent() method of the EventTarget sends an Event to the object, (synchronously) invoking the affected event listeners in the appropriate order. The normal event processing rules (including the capturing and optional bubbling phase) also apply to events dispatched manually with dispatchEvent().
+`,
+          code1: `//HTML:
+&lt;button class=&quot;btn&quot;&gt;Test&lt;/button&gt;
+
+// JavaScript:
+let btn = document.querySelector('.btn');
+
+ btn.addEventListener('click', function () {
+        alert('Mouse Clicked');
+ });
+
+let clickEvent = new Event('click');
+btn.dispatchEvent(clickEvent);`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "parallel or concurrently or sequentially",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "import and export modules",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Browsers",
+      note: [
+        {
+          text1: `Browsers can only access some response headers by default when it comes to CORS request, the default response headers are the ones listed below:
+
+-> Cache-Control
+-> Content-Language
+-> Content-Type
+-> Expires
+-> Last-Modified
+-> Pragma
+`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "CORS request",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
 
   ]
+}
+
+
+function func1(event) {
+  alert("DIV 1");
+  if (document.getElementById("check").checked) {
+    event.stopPropagation();
+  }
+}
+
+function func2() {
+  alert("DIV 2");
 }

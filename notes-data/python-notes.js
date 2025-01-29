@@ -565,8 +565,75 @@ else:
             title: "Listes in Python",
             note: [
                 {
-                    text1: `Listes`,
-                    code1: ``
+                    text1: `In Python, the sequence of various data types is stored in a list. A list is a collection of different kinds of values or items. Since Python lists are mutable, we can change their elements after forming. The comma (,) and the square brackets [enclose the List's items] serve as separators.
+                    
+                    In Python, a list is a built-in data structure that allows you to store an ordered collection of items. Lists are versatile and can hold a mix of different data types, including numbers, strings, and even other lists. Here are some key features and operations related to lists in Python:
+
+                    <b>Key Features</b>
+    <b>Ordered</b>: The items in a list maintain their order. The first item has an index of 0, the second an index of 1, and so on.
+    <b>Mutable</b>: Lists are mutable, meaning you can change, add, or remove items after the list has been created.
+    <b>Dynamic</b>: You can change the size of a list dynamically as you add or remove elements.
+    <b>Heterogeneous</b>: Lists can contain items of different data types (e.g., integers, strings, objects).
+
+                    `,
+                    code1: `//Creating a List
+// You can create a list by enclosing elements in square brackets ([]):
+
+# Creating a list
+my_list = [1, 2, 3, 'four', 5.0]
+
+// 1) Common List Operations
+//     "Accessing Elements": You can access elements by their index:
+print(my_list[0])  # Output: 1
+print(my_list[3])  # Output: 'four'
+
+// 2) "Slicing": You can get a subset of the list using slicing:
+print(my_list[1:4])  # Output: [2, 3, 'four']
+
+// 3) Adding Elements:
+//     "append()": Adds an item to the end of the list.
+my_list.append('new item')
+
+// "insert()": Inserts an item at a specified index.
+    my_list.insert(1, 'inserted item')  # Inserts at index 1
+
+// 4) Removing Elements:
+    // "remove()": Removes the first occurrence of a specified item.
+my_list.remove(2)
+
+// "pop()": Removes an item at a specified index and returns it. If no index is specified, it removes and returns the last item.
+    last_item = my_list.pop()  # Removes the last item
+
+// 5) "Finding Length": You can get the number of items in a list using len():
+length = len(my_list)
+
+// 6) "Looping Through a List": You can use a for loop to iterate through the items:
+for item in my_list:
+    print(item)
+
+// 7) "List Comprehensions": A concise way to create lists based on existing lists:
+squares = [x**2 for x in range(10)]  # Generates a list of squares
+
+//===============
+// # Creating a list
+fruits = ['apple', 'banana', 'cherry']
+
+// # Accessing elements
+print(fruits[1])  # Output: banana
+
+// # Adding elements
+fruits.append('orange')
+print(fruits)  # Output: ['apple', 'banana', 'cherry', 'orange']
+
+// # Removing elements
+fruits.remove('banana')
+print(fruits)  # Output: ['apple', 'cherry', 'orange']
+
+// # Looping through the list
+for fruit in fruits:
+    print(fruit)
+
+`
                 },
                 {
                     text1: `
@@ -604,13 +671,419 @@ else:
                     code1: ``
                 },                
                 {
-                    text1: `Listes`,
-                    code1: ``
+                    text1: `The list data type has some more methods. Here are all of the methods of list objects:
+
+list.<b>append</b>(x)
+    Add an item to the end of the list. Equivalent to a[len(a):] = [x].
+
+list.<b>extend</b>(iterable)
+    Extend the list by appending all the items from the iterable. Equivalent to a[len(a):] = iterable.
+    We can add list items using the extend() method by passing another iterable containing the elements we want to add, like my_list.extend(iterable), which appends each element from the iterable to the end of my_list.
+
+list.<b>insert</b>(i, x)
+    Insert an item at a given position. The first argument is the index of the element before which to insert, so a.insert(0, x) inserts at the front of the list, and a.insert(len(a), x) is equivalent to a.append(x).
+
+list.<b>remove</b>(x)
+    Remove the first item from the list whose value is equal to x. It raises a ValueError if there is no such item.
+
+list.<b>pop</b>([i])
+    Remove the item at the given position in the list, and return it. If no index is specified, a.pop() removes and returns the last item in the list. It raises an IndexError if the list is empty or the index is outside the list range.
+
+list.<b>clear</b>()
+    Remove all items from the list. Equivalent to del a[:].
+
+list.<b>index</b>(x[, start[, end]])
+    Return zero-based index in the list of the first item whose value is equal to x. Raises a ValueError if there is no such item.
+
+    The optional arguments start and end are interpreted as in the slice notation and are used to limit the search to a particular subsequence of the list. The returned index is computed relative to the beginning of the full sequence rather than the start argument.
+
+list.<b>count</b>(x)
+    Return the number of times x appears in the list.
+
+list.<b>sort</b>(*, key=None, reverse=False)
+    Sort the items of the list in place (the arguments can be used for sort customization, see sorted() for their explanation).
+
+list.<b>reverse</b>()
+    Reverse the elements of the list in place.
+
+list.<b>copy</b>()
+    Return a shallow copy of the list. Equivalent to a[:].
+`,
+                    code1: `//An example that uses most of the list methods:
+>>>
+
+fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+fruits.count('apple')
+// 2
+
+fruits.count('tangerine')
+// 0
+
+fruits.index('banana')
+// 3
+
+fruits.index('banana', 4) // # Find next banana starting at position 4
+// 6
+
+fruits.reverse()
+fruits
+// ['banana', 'apple', 'kiwi', 'banana', 'pear', 'apple', 'orange']
+
+fruits.append('grape')
+fruits
+// ['banana', 'apple', 'kiwi', 'banana', 'pear', 'apple', 'orange', 'grape']
+
+fruits.sort()
+fruits
+// ['apple', 'apple', 'banana', 'banana', 'grape', 'kiwi', 'orange', 'pear']
+
+fruits.pop()
+//'pear'
+
+//----------
+// extend()
+// # Original list
+list1 = [1, 2, 3]
+// # Another list to extend with
+another_list = [4, 5, 6]
+
+list1.extend(another_list)
+print("Extended list:", list1)
+//Output:
+// Extended list: [1, 2, 3, 4, 5, 6]
+`
                 },                
                 {
-                    text1: `Listes`,
-                    code1: ``
+                    text1: `<b>Using Lists as Stacks</b>
+                    The list methods make it very easy to use a list as a stack, where the last element added is the first element retrieved (“last-in, first-out”). To add an item to the top of the stack, use append(). To retrieve an item from the top of the stack, use pop() without an explicit index. For example:`,
+                    code1: `stack = [3, 4, 5]
+stack.append(6)
+stack.append(7)
+stack
+// [3, 4, 5, 6, 7]
+stack.pop()
+// 7
+stack
+// [3, 4, 5, 6]
+stack.pop()
+// 6
+stack.pop()
+// 5
+stack
+//[3, 4]`
                 },
+            ]
+        },
+        {
+            id: 1,
+            title: "Change List Items",
+            note: [
+                {
+                    text1: `<b>Change List Items</b>
+List is a mutable data type in Python. It means, the contents of list can be modified in place, after the object is stored in the memory. You can assign a new value at a given index position in the list
+
+<b>Change Consecutive List Items</b>
+You can replace more consecutive items in a list with another sublist.
+
+<b>Change a Range of List Items(Changing Multiple Items)</b>
+If the source sublist has more items than the slice to be replaced, the extra items in the source will be inserted. Take a look at the following code
+You can also change multiple items using slicing:
+`,
+                    code1: `// Syntex:
+                    list1[i] = newvalue
+                    //------------
+// Change List Items
+colors = ['Red', 'Black', 'Green']
+print('Original List:', colors)
+
+// # changing the third item to 'Blue'
+colors[2] = 'Blue'
+
+print('Updated List:', colors)
+
+//------------
+// In the following code, we change the value at index 2 of the given list.
+list3 = [1, 2, 3, 4, 5]
+print ("Original list ", list3)
+list3[2] = 10
+print ("List after changing value at index 2: ", list3)
+// output −
+// Original list [1, 2, 3, 4, 5]
+// List after changing value at index 2: [1, 2, 10, 4, 5]
+
+// In the following code, items at index 1 and 2 are replaced by items in another sublist.
+list1 = ["a", "b", "c", "d"]
+print ("Original list: ", list1)
+list2 = ['Y', 'Z']
+list1[1:3] = list2
+print ("List after changing with sublist: ", list1)
+
+//  output -
+// Original list: ['a', 'b', 'c', 'd']
+// List after changing with sublist: ['a', 'Y', 'Z', 'd']
+
+// Change a Range of List Items(Changing Multiple Items)
+// # Example 1 list
+my_list = [10, 20, 30, 40]
+// # Change the items at index 1 and 2
+my_list[1:3] = [25, 35]
+print(my_list)  # Output: [10, 25, 35, 40]
+// Output: [10, 25, 35, 40]
+//-------------
+// # Example 2 list
+list1 = ["a", "b", "c", "d"]
+print ("Original list: ", list1)
+list2 = ['X','Y', 'Z']
+list1[1:3] = list2
+print ("List after changing with sublist: ", list1)
+// output -
+// Original list: ['a', 'b', 'c', 'd']
+// List after changing with sublist: ['a', 'X', 'Y', 'Z', 'd']
+//------------
+// # Example 3 list
+// If the sublist with which a slice of original list is to be replaced, has lesser items, the items with match will be replaced and rest of the items in original list will be removed.
+
+// In the following code, we try to replace "b" and "c" with "Z" (one less item than items to be replaced). It results in Z replacing b and c removed.
+list1 = ["a", "b", "c", "d"]
+print ("Original list: ", list1)
+list2 = ['Z']
+list1[1:3] = list2
+print ("List after changing with sublist: ", list1)
+
+// output -
+// Original list: ['a', 'b', 'c', 'd']
+// List after changing with sublist: ['a', 'Z', 'd']
+
+//------------
+// Changing Items with a Loop
+# Example 4 list
+my_list = [10, 20, 30, 40]
+
+# Change items that are greater than 25
+for i in range(len(my_list)):
+    if my_list[i] > 25:
+        my_list[i] = my_list[i] * 2
+
+print(my_list)  # Output: [10, 20, 60, 80]
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Remove List Items",
+            note: [
+                {
+                    text1: `<b>Remove List Item Using remove() Method</b>
+                    We can remove list items using the remove() method by specifying the value we want to remove within the parentheses, like <b>my_list.remove(value)</b>, which deletes the first occurrence of value from my_list.
+                    This method removes the first occurrence of a specified value.
+
+                    <b>Remove List Item Using pop() Method</b>
+                    We can remove list items using the pop() method by calling it without any arguments my_list.pop(), which removes and returns the last item from my_list, or by providing the index of the item we want to remove my_list.pop(index), which removes and returns the item at that index.
+                    This method removes an item at a specified index and returns it. If no index is specified, it removes and returns the last item
+
+                    <b>Remove List Item Using clear() Method</b>
+                    We can remove all list items using the clear() method by calling it on the list object like my_list.clear(), which empties my_list, leaving it with no elements.
+                    This method removes all items from the list.
+
+                    <b>Remove List Item Using del Keyword</b>
+                    We can remove list items using the del keyword by specifying the index or slice of the items we want to delete, like <b>del my_list[index]</b> to delete a single item or del <b>my_list[start:stop]</b> to delete a range of items.
+                    The <b>del</b> statement can be used to remove an item at a specific index or to delete the entire list.
+
+                    <b>Using List Comprehension</b>
+                    we are deleting a series of consecutive items from a list with the slicing
+                    `,
+                    code1: `//Using remove() Method
+                    list1 = ["Rohan", "Physics", 21, 69.75]
+print ("Original list: ", list1)
+
+list1.remove("Physics")
+print ("List after removing: ", list1)
+// output -
+// Original list: ['Rohan', 'Physics', 21, 69.75]
+// List after removing: ['Rohan', 21, 69.75]
+
+//-------------
+// Remove List Item Using pop() Method
+list2 = [25.50, True, -55, 45]
+print ("Original list: ", list2)
+list2.pop(2)
+print ("List after popping: ", list2)
+//Output:
+// Original list:  [25.5, True, -55, 45]
+// List after popping:  [25.5, True, 45]
+
+//-------------
+// Remove List Item Using clear() Method
+my_list = [1, 2, 3, 4, 5]
+
+# Clearing the list
+my_list.clear()
+print("Cleared list:", my_list)
+// Output : Cleared list: []
+
+//------------
+// Remove List Item Using del Keyword
+list1 = ["a", "b", "c", "d"]
+print ("Original list: ", list1)
+del list1[2]
+print ("List after deleting: ", list1)
+//Output : 
+// Original list: ['a', 'b', 'c', 'd']
+// List after deleting: ['a', 'b', 'd']
+
+//-----------
+// Using List Comprehension
+// # Example list
+my_list = [10, 20, 30, 20, 40]
+// # Remove all occurrences of 20
+my_list = [x for x in my_list if x != 20]
+print(my_list)  # Output: [10, 30, 40]
+//Output : [10, 30, 40]
+//----------
+list2 = [25.50, True, -55, 15]
+print ("List before deleting: ", list2)
+del list2[0:2]
+print ("List after deleting: ", list2)
+//Output:
+// List before deleting:  [25.5, True, -55, 15]
+// List after deleting:  [-55, 15]
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Loop Lists",
+            note: [
+                {
+                    text1: `Loop Through List Items with For Loop
+                    A for loop in Python is used to iterate over a sequence (like a list, tuple, dictionary, string, or range) or any other iterable object. It allows you to execute a block of code repeatedly for each item in the sequence.`,
+                    code1: `for item in list:
+//    # Code block to execute
+
+//----------
+   //we are using a for loop to iterate through each element in the list "lst"
+   lst = [25, 12, 10, -21, 10, 100]
+for num in lst:
+   print (num, end = ' ')
+   //Output:
+//    25 12 10 -21 10 100
+
+//------------------
+// Loop Through List Items with While Loop
+my_list = [1, 2, 3, 4, 5]
+index = 0
+
+while index < len(my_list):
+   print(my_list[index])
+   index += 1
+   `
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "List Comprehension",
+            note: [
+                {
+                    text1: `List comprehension offers a concise way to create a new list based on the values of an existing list.
+Suppose we have a list of numbers and we desire to create a new list containing the double value of each element in the list.
+
+Syntax: newList = [ expression(element) <b>for</b> element <b>in</b> oldList <b>if</b> condition ] 
+
+<b>Parameter</b>:
+<b>expression</b>: Represents the operation you want to execute on every item within the iterable.
+<b>element</b>: The term “variable” refers to each value taken from the iterable.
+<b>iterable</b>: specify the sequence of elements you want to iterate through.(e.g., a list, tuple, or string).
+<b>condition</b>: (Optional) A filter helps decide whether or not an element should be added to the new list.
+
+<b>Return</b>:The return value of a list comprehension is a new list containing the modified elements that satisfy the given criteria.
+Python List comprehension provides a much more short syntax for creating a new list based on the values of an existing list.
+
+<b>for Loop vs. List Comprehension</b>
+List comprehension makes the code cleaner and more concise than <b>for</b> loop.
+Let's write a program to print the square of each list element using both for loop and <b>list</b> comprehension.
+
+<b>Conditionals in List Comprehension</b>
+List comprehensions can utilize conditional statements like <b>if…else</b> to filter existing lists.
+Let's see an example of an <b>if</b> statement with list comprehension.
+`,
+                    code1: `//Syntax:
+                    [expression for item in list if condition == True]
+                    // for every "item" in "list", execute the "expression" "if" the "condition" is "True".
+                    // The "if" statement in list comprehension is optional.
+
+                    numbers = [1, 2, 3, 4]
+// # list comprehension to create new list
+doubled_numbers = [num * 2 for num in numbers]
+
+print(doubled_numbers)
+// Output:
+[2, 4, 6, 8]
+
+//-----------
+// Here is an example of using list comprehension to find the square of the number in
+numbers = [1, 2, 3, 4, 5] 
+squared = [x ** 2 for x in numbers] 
+print(squared)
+
+// Output:
+[1, 4, 9, 16, 25]
+
+//---------
+// ********** for Loop vs. List Comprehension *********
+numbers = [1, 2, 3, 4, 5]
+square_numbers = []
+// # for loop to square each elements
+for num in numbers:
+    square_numbers.append(num * num)
+print(square_numbers)
+// # Output: [1, 4, 9, 16, 25]
+
+//List Comprehension
+numbers = [1, 2, 3, 4, 5]
+// # create a new list using list comprehension
+square_numbers = [num * num for num in numbers]
+print(square_numbers)
+// # Output: [1, 4, 9, 16, 25]
+
+
+//-------------
+// *********** Conditionals in List Comprehension **********
+// # filtering even numbers from a list
+even_numbers = [num for num in range(1, 10) if num % 2 == 0 ]
+print(even_numbers)
+
+// # Output: [2, 4, 6, 8]
+
+// Here, list comprehension checks if the number from "range(1, 10)" is even or odd. If even, it appends the number in the list.
+// Note: The "range()" function generates a sequence of numbers. To learn more, visit Python range().
+
+//------------------
+// *********** List Comprehension with String **********
+// We can also use list comprehension with iterables other than lists.
+
+word = "Python"
+vowels = "aeiou"
+// # find vowel in the string "Python"
+result = [char for char in word if char in vowels]
+print(result)
+
+// # Output: ['o']
+`,
+                    img: `../assets/images/python/list-comprehension.png`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "What is Python?",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
             ]
         },
         {

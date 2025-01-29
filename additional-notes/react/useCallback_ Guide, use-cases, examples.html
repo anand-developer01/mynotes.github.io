@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en" data-color-scheme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>useCallback: Guide, use-cases, examples</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <link rel="manifest" href="https://deadsimplechat.com/blog/assets/manifest.webmanifest?v=63f27459c3">
+    <meta name="theme-color" content="#44b880">
+    <link rel="apple-touch-icon" href="https://deadsimplechat.com/blog/assets/icon-192x192.png?v=63f27459c3">
+
+    <link rel="preload" href="./useCallback_ Guide, use-cases, examples_files/app.min.js.download" as="script">
+    <link rel="preload" href="./useCallback_ Guide, use-cases, examples_files/app.min.css" as="style">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./useCallback_ Guide, use-cases, examples_files/css2" rel="stylesheet">
+
+        <link rel="stylesheet" href="./useCallback_ Guide, use-cases, examples_files/css2(1)" as="font" onload="this.onload=null;">
+        <link rel="stylesheet" href="./useCallback_ Guide, use-cases, examples_files/css2(2)" as="font" onload="this.onload=null;">
+        
+        <noscript>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&display=swap">
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+        </noscript>  
+
+
+
+
+
+    <script type="text/javascript" async="" src="./useCallback_ Guide, use-cases, examples_files/js"></script><script type="text/javascript" async="" src="./useCallback_ Guide, use-cases, examples_files/array.js.download"></script><script>
+  // ===============
+  // Basic Config
+  // ===============
+  let config = {
+    ghost_url: ``,  
+    ghost_key: ``,
+    ghost_version: 'v5.0',
+    enable_search_in_content: !!``,
+    color_scheme_default: `System`,
+    enable_progress_bar: !!`true`,
+    enable_image_lightbox: !!`true`,
+    enable_scroll_top: !!`true`,
+    open_links_in_new_tab: !!``,
+    enable_hyphens: false, /* Enable hyphens */
+    enable_pwa: false, /* Enable PWA - Progressive Web App */
+    disqus_shortname: 'biron-demo', /* Replace 'biron-demo' with your disqus account shortname */
+  }
+
+  // =========================
+  // Dark/Light Theme Handling
+  // =========================
+  let preferredTheme; 
+  if (config.color_scheme_default.toLowerCase() === 'system') {
+    const preferredColorScheme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    preferredTheme = localStorage.getItem('USER_COLOR_SCHEME') || preferredColorScheme;
+  } else {
+    preferredTheme = localStorage.getItem('USER_COLOR_SCHEME') || config.color_scheme_default.toLowerCase();
+  }
+  document.documentElement.setAttribute("data-color-scheme", preferredTheme);
+
+  // =========================
+  // Set Hyphens property
+  // =========================
+  const root = document.documentElement;
+  if (config.enable_hyphens) {
+    root.style.setProperty('--global-hyphens', 'auto')
+  }
+  
+  // ===============================
+  // Global values used in the theme
+  // ===============================
+  const global = {
+    pagination_current_page: parseInt(``),
+    pagination_next_page: parseInt(``),
+    pagination_next_page_link: '',
+    pagination_max_pages: parseInt(''), 
+    pagination_posts_per_page: parseInt('10'),
+  }
+</script>
+
+<style> 
+body { 
+   --color-secondary: #f9d400;  
+} 
+</style>
+
+    <link rel="stylesheet" type="text/css" href="./useCallback_ Guide, use-cases, examples_files/app.min.css">
+
+    <script async="" defer="" src="./useCallback_ Guide, use-cases, examples_files/app.min.js.download"></script>
+
+    <!--cssential--><style></style><!--/cssential-->
+
+    <link rel="canonical" href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Dead Simple Chat Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="useCallback: Guide, use-cases, examples">
+    <meta property="og:description" content="This is an easy to read guide, where we will cover  What is React useCallback?When to use React useCallback? (use-cases)Real world examples of useCallbackTroubleShooting Tipsusecallback memeWhat is React useCallbackuseCallback is a React Hook. (Hooks are JS functions that let&#39;s you add additional pre-built functionality to your component) useCallback">
+    <meta property="og:url" content="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/">
+    <meta property="og:image" content="https://deadsimplechat.com/blog/content/images/2023/08/react-usecallback.png">
+    <meta property="article:published_time" content="2023-08-14T20:09:22.000Z">
+    <meta property="article:modified_time" content="2024-07-10T16:00:22.000Z">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="useCallback: Guide, use-cases, examples">
+    <meta name="twitter:description" content="This is an easy to read guide, where we will cover  What is React useCallback?When to use React useCallback? (use-cases)Real world examples of useCallbackTroubleShooting Tipsusecallback memeWhat is React useCallbackuseCallback is a React Hook. (Hooks are JS functions that let&#39;s you add additional pre-built functionality to your component) useCallback">
+    <meta name="twitter:url" content="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/">
+    <meta name="twitter:image" content="https://deadsimplechat.com/blog/content/images/2023/08/react-usecallback.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Dead Simple Chat Team">
+    <meta property="og:image:width" content="976">
+    <meta property="og:image:height" content="499">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Dead Simple Chat Blog",
+        "url": "https://deadsimplechat.com/blog/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://deadsimplechat.com/blog/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Dead Simple Chat Team",
+        "url": "https://deadsimplechat.com/blog/author/deadsimplechat-team/",
+        "sameAs": []
+    },
+    "headline": "useCallback: Guide, use-cases, examples",
+    "url": "https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/",
+    "datePublished": "2023-08-14T20:09:22.000Z",
+    "dateModified": "2024-07-10T16:00:22.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://deadsimplechat.com/blog/content/images/2023/08/react-usecallback.png",
+        "width": 976,
+        "height": 499
+    },
+    "description": "This is an easy to read guide, where we will cover \n\n * What is React useCallback?\n * When to use React useCallback? (use-cases)\n * Real world examples of useCallback\n * TroubleShooting Tips\n\nusecallback memeWhat is React useCallback\nuseCallback is a React Hook. (Hooks are JS functions that let&#x27;s you add\nadditional pre-built functionality to your component)\n\nuseCallback is a hook that lets you cache a function definition between renders.\n\nuseCallback does not call the function and cache the retu",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://deadsimplechat.com/blog/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.48">
+    <link rel="alternate" type="application/rss+xml" title="Dead Simple Chat Blog" href="https://deadsimplechat.com/blog/rss/">
+    <script defer="" src="./useCallback_ Guide, use-cases, examples_files/portal.min.js.download" data-ghost="https://deadsimplechat.com/blog/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style>
+    <script defer="" src="./useCallback_ Guide, use-cases, examples_files/cards.min.js.download"></script>
+    <link rel="stylesheet" type="text/css" href="./useCallback_ Guide, use-cases, examples_files/cards.min.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./useCallback_ Guide, use-cases, examples_files/js(1)"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V48WSXM8JQ');
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="./useCallback_ Guide, use-cases, examples_files/js(2)"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T4H4YR734G');
+</script>
+
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_Lbu2hFMOXtYsqKfhXNrjT2hmGFFk1FUWgnVhKTroQt',{api_host:'https://stats.deadsimplechat.com'})
+</script>
+<style>:root {--ghost-accent-color: #44b880;}</style><style class="fslightbox-styles">.fslightbox-absoluted{position:absolute;top:0;left:0}.fslightbox-fade-in{animation:fslightbox-fade-in .3s cubic-bezier(0,0,.7,1)}.fslightbox-fade-out{animation:fslightbox-fade-out .3s ease}.fslightbox-fade-in-strong{animation:fslightbox-fade-in-strong .3s cubic-bezier(0,0,.7,1)}.fslightbox-fade-out-strong{animation:fslightbox-fade-out-strong .3s ease}@keyframes fslightbox-fade-in{from{opacity:.65}to{opacity:1}}@keyframes fslightbox-fade-out{from{opacity:.35}to{opacity:0}}@keyframes fslightbox-fade-in-strong{from{opacity:.3}to{opacity:1}}@keyframes fslightbox-fade-out-strong{from{opacity:1}to{opacity:0}}.fslightbox-cursor-grabbing{cursor:grabbing}.fslightbox-full-dimension{width:100%;height:100%}.fslightbox-open{overflow:hidden;height:100%}.fslightbox-flex-centered{display:flex;justify-content:center;align-items:center}.fslightbox-opacity-0{opacity:0!important}.fslightbox-opacity-1{opacity:1!important}.fslightbox-scrollbarfix{padding-right:17px}.fslightbox-transform-transition{transition:transform .3s}.fslightbox-container{font-family:Arial,sans-serif;position:fixed;top:0;left:0;background:linear-gradient(rgba(30,30,30,.9),#000 1810%);touch-action:pinch-zoom;z-index:1000000000;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}.fslightbox-container *{box-sizing:border-box}.fslightbox-svg-path{transition:fill .15s ease;fill:#ddd}.fslightbox-nav{height:45px;width:100%;position:absolute;top:0;left:0}.fslightbox-slide-number-container{display:flex;justify-content:center;align-items:center;position:relative;height:100%;font-size:15px;color:#d7d7d7;z-index:0;max-width:55px;text-align:left}.fslightbox-slide-number-container .fslightbox-flex-centered{height:100%}.fslightbox-slash{display:block;margin:0 5px;width:1px;height:12px;transform:rotate(15deg);background:#fff}.fslightbox-toolbar{position:absolute;z-index:3;right:0;top:0;height:100%;display:flex;background:rgba(35,35,35,.65)}.fslightbox-toolbar-button{height:100%;width:45px;cursor:pointer}.fslightbox-toolbar-button:hover .fslightbox-svg-path{fill:#fff}.fslightbox-slide-btn-container{display:flex;align-items:center;padding:12px 12px 12px 6px;position:absolute;top:50%;cursor:pointer;z-index:3;transform:translateY(-50%)}@media (min-width:476px){.fslightbox-slide-btn-container{padding:22px 22px 22px 6px}}@media (min-width:768px){.fslightbox-slide-btn-container{padding:30px 30px 30px 6px}}.fslightbox-slide-btn-container:hover .fslightbox-svg-path{fill:#f1f1f1}.fslightbox-slide-btn{padding:9px;font-size:26px;background:rgba(35,35,35,.65)}@media (min-width:768px){.fslightbox-slide-btn{padding:10px}}@media (min-width:1600px){.fslightbox-slide-btn{padding:11px}}.fslightbox-slide-btn-container-previous{left:0}@media (max-width:475.99px){.fslightbox-slide-btn-container-previous{padding-left:3px}}.fslightbox-slide-btn-container-next{right:0;padding-left:12px;padding-right:3px}@media (min-width:476px){.fslightbox-slide-btn-container-next{padding-left:22px}}@media (min-width:768px){.fslightbox-slide-btn-container-next{padding-left:30px}}@media (min-width:476px){.fslightbox-slide-btn-container-next{padding-right:6px}}.fslightbox-down-event-detector{position:absolute;z-index:1}.fslightbox-slide-swiping-hoverer{z-index:4}.fslightbox-invalid-file-wrapper{font-size:22px;color:#eaebeb;margin:auto}.fslightbox-video{object-fit:cover}.fslightbox-youtube-iframe{border:0}.fslightbox-loader{display:block;margin:auto;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:67px;height:67px}.fslightbox-loader div{box-sizing:border-box;display:block;position:absolute;width:54px;height:54px;margin:6px;border:5px solid;border-color:#999 transparent transparent transparent;border-radius:50%;animation:fslightbox-loader 1.2s cubic-bezier(.5,0,.5,1) infinite}.fslightbox-loader div:nth-child(1){animation-delay:-.45s}.fslightbox-loader div:nth-child(2){animation-delay:-.3s}.fslightbox-loader div:nth-child(3){animation-delay:-.15s}@keyframes fslightbox-loader{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.fslightbox-source{position:relative;z-index:2;opacity:0}</style><style>
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ== */</style><style>
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ== */</style><style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+  
+  <body class="post-template">
+    <div class="search" id="search">
+  <div class="search__header">
+    <form action="https://deadsimplechat.com/" method="get" class="search__form" id="search-form">
+      <input type="text" id="ghost-search-field" class="search__input" title="Search" placeholder="Search" autocomplete="off" required="">
+      <div class="search__icon">
+        <i class="icon icon-search icon--lg">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#search"></use>
+  </svg>
+</i>      </div>
+    </form>
+    <a tabindex="0" class="search--close" id="search-close">
+      <i class="icon icon-x icon--lg">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#x"></use>
+  </svg>
+</i>    </a>
+  </div>
+  <div class="search-helper">
+  </div>
+  <div class="search-content">
+    <div class="search-result" id="ghost-search-results"></div>
+  </div>
+</div>
+
+    <div class="menu" id="menu">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 is-flex end-xs">
+        <a tabindex="0" class="menu--close" id="menu-close">
+          <i class="icon icon-x icon--lg">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#x"></use>
+  </svg>
+</i>        </a>
+      </div>
+      <div class="col-xs-12">
+        <div class="menu__main">
+          <ul class="nav">
+    <li class="nav-chat-for-live-events"><a href="https://deadsimplechat.com/chat-for-live-events">Chat for Live Events</a></li>
+    <li class="nav-live-streaming-chat"><a href="https://deadsimplechat.com/live-streaming-chat">Live Streaming Chat</a></li>
+    <li class="nav-pricing"><a href="https://deadsimplechat.com/pricing">Pricing</a></li>
+    <li class="nav-developer"><a href="https://deadsimplechat.com/developer/">Developer</a></li>
+</ul>
+
+        </div>
+        <div class="menu__secondary">
+          <ul class="nav">
+    <li class="nav-features"><a href="https://deadsimplechat.com/features">Features</a></li>
+    <li class="nav-chat-for-live-events"><a href="https://deadsimplechat.com/chatforliveevents">Chat for Live Events</a></li>
+    <li class="nav-login"><a href="https://deadsimplechat.com/login">login</a></li>
+    <li class="nav-pricing"><a href="https://deadsimplechat.com/pricing">Pricing</a></li>
+    <li class="nav-support-documentation"><a href="https://support.deadsimplechat.com/">Support Documentation</a></li>
+    <li class="nav-request-e-u-data-residency"><a href="https://support.deadsimplechat.com/">Request E.U data residency</a></li>
+    <li class="nav-developer-documentation"><a href="https://developer.deadsimplechat.com/">Developer Documentation</a></li>
+    <li class="nav-metered-video-apis"><a href="https://www.metered.ca/">Metered Video APIs</a></li>
+    <li class="nav-faq"><a href="https://deadsimplechat.com/faq">FAQ</a></li>
+    <li class="nav-gdpr"><a href="https://deadsimplechat.com/gdpr">GDPR</a></li>
+    <li class="nav-security"><a href="https://deadsimplechat.com/privacy">Security</a></li>
+    <li class="nav-terms"><a href="https://deadsimplechat.com/terms">Terms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <header class="header is-scrolled" style="margin-bottom: 100px;">
+  <div id="progress" style="--scroll: 91%;"></div>
+  <div class="header__top" style="height: 80px;">
+    <div class="container-fluid wrapper">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 middle-xs is-flex">
+          <div class="header__brand flex-cc">
+            <a href="https://www.deadsimplechat.com/">
+                <h3 class="header__title">
+                Dead Simple Chat
+
+                </h3>
+              </a><a href="https://deadsimplechat.com/blog">
+                <small style="font-size: 24px" class="header__subtitle">&nbsp;| Blog</small>
+              </a>
+            
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-8 center-xs hidden-sm">
+      <nav class="header__nav">
+        <ul style="font-size: 16px; margin-top: 2px; margin-bottom: 2px;">
+          <li>
+              <a href="https://deadsimplechat.com/developer/">
+                Developer
+              </a>          
+            </li>
+          <li>
+            <a href="https://deadsimplechat.com/features">Features</a>
+          </li>
+          <li>
+            <a href="https://deadsimplechat.com/pricing">Pricing</a>
+          </li>
+          <li>
+            <a href="https://deadsimplechat.com/live-streaming-chat">Live Streaming chat</a>
+          </li>
+          <li>
+            <a href="https://deadsimplechat.com/getstarted">Sign Up for Free</a>
+          </li>
+        </ul>
+      </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="header__bottom">
+    <div class="container-fluid wrapper">
+
+    </div>
+  </div>
+</header>
+    <main class="main">
+      
+<div class="container-fluid wrapper">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="post-hero">
+    <figure class="post-hero__image">
+      <img class="lazyload entered loaded" data-srcset="/blog/content/images/size/w300/2023/08/react-usecallback.png 300w,
+                /blog/content/images/size/w600/2023/08/react-usecallback.png 600w,
+                /blog/content/images/size/w1000/2023/08/react-usecallback.png 1000w,
+                /blog/content/images/size/w2000/2023/08/react-usecallback.png 2000w" data-sizes="(max-width: 800px) 50vw,
+                (max-width: 1170px) 60vw,
+                1400px" data-src="/blog/content/images/size/w2000/2023/08/react-usecallback.png" src="./useCallback_ Guide, use-cases, examples_files/react-usecallback.png" alt="useCallback: Guide, use-cases, examples" data-ll-status="loaded" sizes="(max-width: 800px) 50vw,
+                (max-width: 1170px) 60vw,
+                1400px" srcset="/blog/content/images/size/w300/2023/08/react-usecallback.png 300w,
+                /blog/content/images/size/w600/2023/08/react-usecallback.png 600w,
+                /blog/content/images/size/w1000/2023/08/react-usecallback.png 1000w,
+                /blog/content/images/size/w2000/2023/08/react-usecallback.png 2000w">
+        <figcaption>DeadSimpleChat React useCallback, guide, use-cases and examples</figcaption>
+    </figure>
+  <div class="post-hero__content">
+    <div class="post-hero__header">
+    </div>
+
+    <h1 class="post-hero__title">useCallback: Guide, use-cases, examples</h1>
+
+    <div class="post-hero__details">
+      <div class="post-hero__authors is-flex ">
+          <div class="post-hero__author">
+              <a href="https://deadsimplechat.com/blog/author/deadsimplechat-team/" class="post-hero__author-icon" aria-label="Dead Simple Chat Team">
+                <i class="icon icon-user">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#user"></use>
+  </svg>
+</i>              </a>
+          </div>
+      </div>
+
+      <div class="post-hero__info">
+        <div class="post-hero__author-names">
+          <a href="https://deadsimplechat.com/blog/author/deadsimplechat-team/">Dead Simple Chat Team</a>
+        </div>
+
+        <time datetime="2023-08-14" class="post-hero__date">
+          Aug 14, 2023
+        </time>
+      </div>
+    </div>
+  </div>
+</div>    </div>
+    <div class="col-xs-12 col-xl-3 toc-wrapper">
+      <div class="post-toc">
+        <div class="post-toc__head js-toc-toggle">
+          <h4>Table of Contents</h4>
+          <div class="post-toc__icon js-toc-icon"><i class="icon icon-chevron-right">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#chevron-right"></use>
+  </svg>
+</i></div>
+        </div>
+        <div class="post-toc__content js-toc"><ol class="toc-list "><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#what-is-react-usecallback" class="toc-link node-name--H2 ">What is React useCallback</a></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#usecallback-reference" class="toc-link node-name--H2 ">useCallBack Reference</a></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#examples-and-use-cases" class="toc-link node-name--H2 ">Examples and Use-cases</a><ol class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#use-case-skipping-rerendering-of-components-for-performance-optimization" class="toc-link node-name--H3 ">Use-Case : Skipping Re- rendering of components for performance optimization</a></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#1-un-unessessory-re-renders" class="toc-link node-name--H3 ">1. &nbsp;un-unessessory re-renders</a></li></ol></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#caching-the-values-or-function" class="toc-link node-name--H2 ">Caching the Values or Function</a><ol class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#example-1-the-comment-section" class="toc-link node-name--H3 ">Example 1 : The Comment section</a></li></ol></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#when-to-use-usecallback-vs-usememo" class="toc-link node-name--H2 ">When to use useCallback vs useMemo?</a></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#difference-of-usememo-with-usecallback" class="toc-link node-name--H2 ">Difference of useMemo with useCallback</a></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#when-to-use-usecallback" class="toc-link node-name--H2 ">When to use useCallback</a><ol class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#here-are-a-few-cases-where-usecallback-is-a-good-idea" class="toc-link node-name--H3 ">Here are a few cases where useCallback is a good idea'</a></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#making-memorization-and-caching-unnecessary-by-following-a-few-principles" class="toc-link node-name--H3 ">Making Memorization and caching unnecessary by following a few principles:</a></li></ol></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#the-difference-between-usecallback-and-declaring-a-function-directly" class="toc-link node-name--H2 ">The difference between useCallback and declaring a function directly</a></li><li class="toc-list-item is-active-li"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#updating-state-from-a-memoized-callback" class="toc-link node-name--H2  is-active-link">Updating state from a memoized callback</a></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#preventing-an-effect-from-firing-too-often" class="toc-link node-name--H2 ">Preventing an Effect from firing too often</a></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#optimizing-a-custom-hook" class="toc-link node-name--H2 ">Optimizing a custom Hook</a></li><li class="toc-list-item"><a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/#conclusion" class="toc-link node-name--H2 ">Conclusion</a></li></ol></div>
+        
+      </div>
+    
+
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      <article class="post post-access-public has-toc">
+          <div class="social-share">
+  <a class="social-share__item js-share" tabindex="0" data-type="twitter" data-title="useCallback%3A%20Guide%2C%20use-cases%2C%20examples" data-url="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/" title="Share on Twitter" aria-label="Share on Twitter">
+    <i class="icon icon-twitter icon--sm">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#twitter"></use>
+  </svg>
+</i>  </a>
+  <a class="social-share__item js-share" tabindex="0" data-type="facebook" data-title="useCallback%3A%20Guide%2C%20use-cases%2C%20examples" data-url="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/" title="Share on Facebook" aria-label="Share on Facebook">
+    <i class="icon icon-facebook icon--sm">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#facebook"></use>
+  </svg>
+</i>  </a>
+  <a class="social-share__item js-share" tabindex="0" data-type="linkedin" data-title="useCallback%3A%20Guide%2C%20use-cases%2C%20examples" data-url="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/" title="Share on Linkedin" aria-label="Share on Linkedin">
+    <i class="icon icon-linkedin icon--sm">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#linkedin"></use>
+  </svg>
+</i>  </a>
+  <a href="mailto:?subject=useCallback%3A%20Guide%2C%20use-cases%2C%20examples&amp;body=https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/" class="social-share__item js-share" tabindex="0" data-type="email" data-title="useCallback%3A%20Guide%2C%20use-cases%2C%20examples" data-url="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/" title="Share by email" aria-label="Share by email">
+    <i class="icon icon-mail icon--sm">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#mail"></use>
+  </svg>
+</i>  </a>
+  <a class="copy-link js-share js-copy-link" tabindex="0" data-type="copy" data-title="useCallback%3A%20Guide%2C%20use-cases%2C%20examples" data-url="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/" title="Copy to clipboard" data-label="Copied!" aria-label="Copy to clipboard">
+    <i class="icon icon-copy icon--sm">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#copy"></use>
+  </svg>
+</i>  </a>
+</div>
+        <div class="post__content js-toc-content">
+            <p>This is an easy to read guide, where we will cover </p><ul><li>What is React <code>useCallback</code>?</li><li>When to use React <code>useCallback</code>? (use-cases)</li><li>Real world examples of <code>useCallback</code></li><li>TroubleShooting Tips</li></ul><figure class="kg-card kg-image-card kg-card-hascaption"><a data-no-swup="" data-fslightbox="" href="./useCallback_ Guide, use-cases, examples_files/image-19.png" aria-label="Click for Lightbox"><img src="./useCallback_ Guide, use-cases, examples_files/image-19.png" class="kg-image" alt="" loading="lazy" width="559" height="447"></a><figcaption>usecallback meme</figcaption></figure><h2 id="what-is-react-usecallback">What is React useCallback</h2><p>useCallback is a React Hook. (Hooks are JS functions that let's you add additional pre-built functionality to your component)</p><p><code>useCallback</code> is a hook that lets you cache a function definition between renders.</p><p><code>useCallback</code> does not call the function and cache the return value. It caches the function definition itself.</p><figure class="kg-card kg-image-card kg-card-hascaption"><a data-no-swup="" data-fslightbox="" href="./useCallback_ Guide, use-cases, examples_files/image-20.png" aria-label="Click for Lightbox"><img src="./useCallback_ Guide, use-cases, examples_files/image-20.png" class="kg-image" alt="" loading="lazy" width="500" height="688"></a><figcaption>meme</figcaption></figure><h2 id="usecallback-reference">useCallBack Reference</h2><p><code>useCallback(function, [dependencies]);</code></p><p>As <code>useCallback</code> is a react Hook you need to call it at the top level of your component</p><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> useCallback <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">ReactCommentsSection</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> postId<span class="token punctuation">,</span> username <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> handleCommentSubmission <span class="token operator">=</span> <span class="token function">useCallback</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">Text</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/post/'</span> <span class="token operator">+</span> postId <span class="token operator">+</span> <span class="token string">'/comment'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      username<span class="token punctuation">,</span>
+      <span class="token literal-property property">comment</span><span class="token operator">:</span> commentText<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>postId<span class="token punctuation">,</span> username<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Parameters</p><h4 id="fn-function-to-memorize">fn : (function to memorize)</h4><p>This is the function that you want to cache. </p><p>This function can take any arguments and can return any data</p><p>The React will return this function definition (but not call it) during the first render.</p><p>On the next renders:</p><ul><li>If the <code>dependencies</code> are not changed then the react will give you the same cached function</li><li>Else if, dependencies have changed the react will give you the current function that you have passed it. That is if the dependencies have changed.</li></ul><h4 id="dependencies">Dependencies </h4><p>An array of reactive values that the function depends on or are referenced by the &nbsp;<code>fn</code></p><p>Reactive values are props, state and all the variables/ functions that are inside your component</p><p>The react will do a shallow check to with the <code>Object.is</code> method to check if the dependencies have changed</p><p>You can use code linter to verify if all the dependencies are listed in the dependencies array</p><p>The list of depencies should remain constant and will be written in line in an array like <code>[dep1, dep2, dep3]</code></p><h4 id="what-does-usecallback-return">What does useCallback Return</h4><ul><li><strong>initial Render</strong> : On initial render the <code>useCallback</code> hook returns the function that you have passed it</li><li><strong>Subsequent Renders</strong> : </li><li>If the dependencies have not changed, it will return the cacheed function</li><li>If the dependencies have changed, it will return the new function, that is the function you have passed during this render</li></ul><h4 id="caveat">Caveat</h4><p>Always declare <code>useCallback</code> at the top of your component because it is a hook</p><p><code>useCallback</code> should never be used inside loops or conditionals. If you need to use it inside loops or conditions, extract the code into a new component</p><h4 id="cache-management">Cache Management</h4><ul><li>React will not throw away a cached function unless there is a very good reason to do that</li><li>like: during development react will through a cached function, if you edit the component</li><li> If a component suspends the during initial mounting phase then the react will discard the cached</li></ul><figure class="kg-card kg-image-card"><a data-no-swup="" data-fslightbox="" href="./useCallback_ Guide, use-cases, examples_files/image-21.png" aria-label="Click for Lightbox"><img src="./useCallback_ Guide, use-cases, examples_files/image-21.png" class="kg-image" alt="" loading="lazy" width="556" height="500"></a></figure><h2 id="examples-and-use-cases">Examples and Use-cases</h2><h3 id="use-case-skipping-rerendering-of-components-for-performance-optimization">Use-Case : Skipping Re- rendering of components for performance optimization</h3><h3 id="1-un-unessessory-re-renders">1. &nbsp;un-unessessory re-renders</h3><p>When developing large scale application or applications with complex logic, it becomes necessary to optimize performance. </p><p>Because of resource limitations the logic or the scale of component and prop drilling can cause the UI to not perform optimally</p><h2 id="caching-the-values-or-function">Caching the Values or Function</h2><p>One of the methods of optimizing performance is caching the values that require a lot of computation and that don't change much from one re render to another</p><p>you can use the <code>useMemo</code> for caching the values, but what about functions.</p><p>As <code>{}</code> notation creates a new Object, the function notation like <code>function () {}</code> or <code>() =&gt; {}</code> creates a new function</p><p>Normally this isn't an issue but creating new function on every re render defeats the purpose of caching</p><p>So, we need to cache the functions that we are passing down as props here <code>useCallback</code> comes in handy</p><h3 id="example-1-the-comment-section">Example 1 : The Comment section</h3><p>Consider a comment section on a website. Here we have <code>CommentSection</code> Component</p><figure class="kg-card kg-code-card"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> useCallback <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">CommentSection</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> userName<span class="token punctuation">,</span> userToken<span class="token punctuation">,</span> postId<span class="token punctuation">,</span> <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> handleCommentSubmission <span class="token operator">=</span> <span class="token function">useCallback</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">textOfTheComment</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/post/'</span> <span class="token operator">+</span> postId <span class="token operator">+</span> <span class="token string">'/comment'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      username<span class="token punctuation">,</span>
+      <span class="token literal-property property">comment</span><span class="token operator">:</span> textOfTheComment<span class="token punctuation">,</span>
+      <span class="token literal-property property">token</span><span class="token operator">:</span> userToken<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>postId<span class="token punctuation">,</span> userName<span class="token punctuation">,</span> userToken<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre><figcaption>Comment section</figcaption></figure><p>Here we have a <code>CommentSection</code> Component. Our component takes three props : 1. <code>userName</code>, <code>userToken</code>, and <code>postId</code></p><p>Then we have the <code>handleCommentSection</code> function that has the <code>useCallback</code> hook to which checks if any of the dependencies in the dependencies array has changed</p><p>the dependencies are : <code>[postId, userName, userToken]</code></p><p>If the dependencies have not changed then the <code>useCallback</code> returns the cached function otherwise the <code>useCallback</code> returns the new function</p><h4 id="preventing-unnecessary-re-rendering-of-child-components">Preventing unnecessary re-rendering of child components</h4><h2 id="when-to-use-usecallback-vs-usememo">When to use useCallback vs useMemo?</h2><p>Both useCallback and useMemo are used to cache something to optimize performance</p><p>useMemo is used to cache values and useCallback is used to cache function definitions</p><p>So, as to prevent unnecessary re-renders</p><figure class="kg-card kg-image-card kg-card-hascaption"><a data-no-swup="" data-fslightbox="" href="./useCallback_ Guide, use-cases, examples_files/image-23.png" aria-label="Click for Lightbox"><img src="./useCallback_ Guide, use-cases, examples_files/image-23.png" class="kg-image" alt="" loading="lazy" width="500" height="1406"></a><figcaption>usememo vs usecallback</figcaption></figure><h2 id="difference-of-usememo-with-usecallback">Difference of useMemo with useCallback</h2><p>The <code>useMemo</code> hook takes a function and a dependency array as arguments</p><p>The <code>useMemo</code> calls the function and caches its returned <strong>value</strong>, the function is then only called when any of the dependencies change</p><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">const</span> ComponentCompute <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">calculateReq</span><span class="token punctuation">(</span>product<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>product<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>here the returned value of <code>calculateReq</code> will be cached and this will only be re-calculated when the <code>product</code> changes</p><p><code>useCallback</code> also takes a function and a dependency array, but instead of caching the return value of the function it caches the <strong>function declaration</strong> itself</p><p><strong>useMemo</strong></p><pre><code>  const requirements = useMemo(() =&gt; { // Calls your function and caches its result    return computeRequirements(product);  }, [product]);</code></pre><p><strong>useCallback</strong></p><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> useCallback <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">CommentSection</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> userName<span class="token punctuation">,</span> userToken<span class="token punctuation">,</span> postId<span class="token punctuation">,</span> <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> handleCommentSubmission <span class="token operator">=</span> <span class="token function">useCallback</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">textOfTheComment</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/post/'</span> <span class="token operator">+</span> postId <span class="token operator">+</span> <span class="token string">'/comment'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      username<span class="token punctuation">,</span>
+      <span class="token literal-property property">comment</span><span class="token operator">:</span> textOfTheComment<span class="token punctuation">,</span>
+      <span class="token literal-property property">token</span><span class="token operator">:</span> userToken<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>postId<span class="token punctuation">,</span> userName<span class="token punctuation">,</span> userToken<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>When the <code>handleCommentSubmission</code> function gets called, useMemo calls the cached version and that remains the same across renders except when one of the dependencies change</p><p>If you are familiar with useMemo then you can think of useCallback as a wrapper around useMemo with built in functionality</p><p>you can use useMemo instead of useCallback by adding a callback function like so</p><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">useCallback</span><span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> dependencies</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> fn<span class="token punctuation">,</span> dependencies<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p></p><h2 id="when-to-use-usecallback">When to use useCallback</h2><p>It depends on what type of app or website you have. If you have an app that is more like a website, that is you are changing Big parts or your UI at once then memorization of caching is not that useful</p><p>And if you only need to change small parts of your overall UI like in a drawing application or some other app</p><p>Where you load a whole lot of UI at once and then need to make small changes to the UI then caching would be a good strategy</p><h3 id="here-are-a-few-cases-where-usecallback-is-a-good-idea">Here are a few cases where useCallback is a good idea'</h3><ol><li>If you are using <code>useMemo</code> in a component and you want to pass a function to that component &nbsp;as prop. </li><li>If you are using the function inside other React Hooks. For example another function wrapped in useCallback depends on itor you depend on this function from <code>useEffect</code></li></ol><p><strong>Note: </strong>The <code>useCallback</code> does not prevent from creating a function. the function is always created and that is all good, React just ignores the created function and provides you with the cached version instead</p><h3 id="making-memorization-and-caching-unnecessary-by-following-a-few-principles">Making Memorization and caching unnecessary by following a few principles:</h3><ol><li><strong>Wrap a component visually</strong></li></ol><p>When a component is visually wrapping other components like a big web page component containing smaller UI components like buttons etc</p><p>Let it accept JSX as its children. like so,</p><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>img <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>button <span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span></code></pre><p>Then if the wrapper component updates react know not to update the child components.</p><p>2. <strong>Local State</strong></p><p>Always prefer local state and do not lift the state. Only lift the state when necessarily required.</p><p>So this importantly with short lived data like when a user is hovering over a &nbsp;button or there is a small form</p><p>3. <strong>Keeping the rendering logic pure</strong></p><p>The component should always be pure. Meaning for a given input props the output should always remain the same</p><p>or re-rendering the component should never give different outputs</p><p>Fix the bug instead of caching the component</p><p>4. <strong>Avoid unnecessary effects that update state</strong></p><p>Effects are updates that the application asks react to perform after the UI update is over. However if there are lots of updates then it makes the app run in circles and causes performance issues</p><p>hence, only use updates when necessary</p><p>5. <strong>Removing unnecessary dependencies from your effects</strong></p><p>instead of caching the values and the function declaration, you can try to reduce the dependencies like move out some object or function </p><p>IF the interaction is still laggy use the React dev tools profiler to find out which components can benefit from memorization</p><h2 id="the-difference-between-usecallback-and-declaring-a-function-directly">The difference between useCallback and declaring a function directly</h2><ol><li>Declaring a function directly</li></ol><p>Directly declaring a function inside a component, creates a new instance of the function every time the component re renders. This is because as <code>{}</code> creates a new Object a new functional declaration like <code>function (){}</code> or <code>()=&gt;{}</code> creates a new function</p><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">SomeComponent</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Somebody clicked the button'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>handleClick<span class="token punctuation">}</span><span class="token operator">&gt;</span>Click the button		<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Here everytime the SomeComponent is rendered on screeen a new <code>handleClick</code> button is created.</p><p>2. <strong>useCallback</strong></p><p>the <code>useCallback</code> hook memorizes the function defination itself. Now, when the <code>SomeComponent</code> is rendered on the screen the useCallback gives you the cached version of the <code>handleClick</code> method</p><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> useCallback <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">SomeComponent</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> handleClick <span class="token operator">=</span> <span class="token function">useCallback</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'user clicked button'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// function get recreated when dependencies change, here the array is empty meaning the function will never be recreated</span>
+
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>handleClick<span class="token punctuation">}</span><span class="token operator">&gt;</span>Click the Button<span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Using the useCallback the handleClick method is only created once and cached by the react and the cached copy will always be used thus improving performance</p><p>This article is brought to you by DeadSimpleChat, <a href="https://deadsimplechat.com/">Chat API</a> and SDK for your website and apps.</p><h4 id="main-difference">Main Difference</h4><ul><li>Directly creating a function will create a new instance of the function every time the component re renders</li><li>useCallback will cache the function and reuse the function definition thus giving the cached copy every time </li></ul><h2 id="updating-state-from-a-memoized-callback">Updating state from a memoized callback</h2><p>In React you can update the state of a component using the setState function.</p><p>There are two options when you need to update the state based on the previous state</p><ol><li>Reading the current state from inside the callback</li><li>using an updater function</li></ol><h4 id="reading-the-current-state-from-inside-the-callback">Reading the current state from inside the callback</h4><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">const</span> handleTodo <span class="token operator">=</span> <span class="token function">useCallback</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">todoText</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> newTodo <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> nextId<span class="token operator">++</span><span class="token punctuation">,</span> todoText <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token function">setTodos</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">...</span>todos<span class="token punctuation">,</span> newTodo<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>todos<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Here</p><ul><li>We are memorizing or caching the handleTodo function with <code>useCallback</code></li><li>the <code>todos</code> state variable is specified as a dependency because we are reading the state directly</li><li>Here every time the todos change a new version of handleTodo will be created</li></ul><h4 id="using-an-updater-function-without-direct-dependency-on-state">using an updater function without direct dependency on state</h4><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token keyword">const</span> handleAddTodo <span class="token operator">=</span> <span class="token function">useCallback</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">text</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> newTodo <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> nextId<span class="token operator">++</span><span class="token punctuation">,</span> text <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token function">setTodos</span><span class="token punctuation">(</span><span class="token parameter">todos</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span><span class="token operator">...</span>todos<span class="token punctuation">,</span> newTodo<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><ul><li>Here instead of reading the <code>todos</code> inside of reading the todos directly and hence creating the nessissity of adding it as a dependency in the the dependencies array of useCallback</li><li>we are providing an updater function. &nbsp;This updater <code>func</code> takes the previous todos as an argument and calculates the new todos state</li><li>Thus the benefit here is that the handleTodo now no longer needs to update whenever todos changes thus using the cached version more and improving the performance</li></ul><h2 id="preventing-an-effect-from-firing-too-often">Preventing an Effect from firing too often</h2><p>Many times you have use the useEffect hook and you need to call a function inside the hook</p><p>This creates a problem, every value must be declared in the dependency array.</p><p>To optimize the <code>useEffect</code> and component rendering for performance purposes you can wrap the function that you are calling from useEffect into <code>useCallback</code>.</p><h2 id="optimizing-a-custom-hook">Optimizing a custom Hook</h2><p>Hooks are functions designed to encapsulate reusable functionality. This is why you can also create custom hooks of your own, this promotes code reusability and maintainability</p><ol><li><strong>Need for optimization in custom Hooks</strong></li></ol><p>There is a need for optimization in custom hooks that return functions.</p><p>This is because these hooks can become problematic for components that have the returned function as a dependency. </p><p>The re creation of these functions at every render of the component could cause performance issues</p><p>2. <strong><code>useCallback</code> for stable functions</strong></p><p> &nbsp;You can use the <code>useCallback</code> hook to cache these functions thus optimizing performance. </p><p>You might be interested in some of our other articles</p><ul><li><a href="https://deadsimplechat.com/blog/react-usememo-vs-usecallback/">React useMemo Vs useCallback</a></li><li><a href="https://deadsimplechat.com/blog/react-hooks-cheat-sheet/">React Hooks: Cheat Sheet, with examples</a></li><li><a href="https://deadsimplechat.com/blog/react-usedeferredvalue/">React useDeferredValue</a></li><li><a href="https://deadsimplechat.com/blog/uselayouteffect-vs-useeffect-with-examples/">useLayoutEffect vs useEffect with examples</a></li></ul><h2 id="conclusion">Conclusion</h2><p>In this article we learned about the <code>useCallback</code> react hook with use-cases and examples</p><p>I hope you liked the article. Thank you for reading.</p>
+        </div>
+
+      </article>
+    </div>
+  </div>
+</div>
+
+
+    </main>
+
+      <footer class="footer">
+  <div class="container-fluid wrapper">
+    <div class="footer__top">
+      <div class="row">
+        <div class="col-xs-12 col-md-2">
+          <h5 class="m-b-sm">Connect Now</h5>
+          <ul class="nav">
+            <li class="nav-item">
+              <a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/">
+                
+              </a>
+            </li>
+            <li>
+              <a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/">
+              
+              </a>
+
+            </li>
+            <li>
+              <a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/">
+              Next Path Software Consulting Inc. 
+              Ontario Canada.
+              </a>
+
+            </li>
+          </ul>
+        </div>
+        
+          <div class="col-xs-12 col-md-2">
+            <h5 class="m-b-sm">Solutions</h5>
+            <ul class="nav">
+              <li><a href="https://deadsimplechat.com/features">Features</a></li>
+              <li><a href="https://deadsimplechat.com/live-streaming-chat">Live Streaming Chat</a></li>
+              <li><a href="https://deadsimplechat.com/chatforliveevents">Chat for Live Events</a></li>
+              <li><a href="https://deadsimplechat.com/login">Login</a></li>
+
+            </ul>
+          </div>
+        
+          <div class="col-xs-12 col-md-2">
+            <h5 class="m-b-sm">Support</h5>
+            <ul class="nav">
+              <li><a href="https://deadsimplechat.com/pricing">Pricing</a></li>
+              <li><a href="https://developer.deadsimplechat.com/">Developer</a></li>
+              <li><a href="https://support.deadsimplechat.com/">Support</a></li>
+              <li><a href="https://calendly.com/deadsimplechat/15min">Book a Demo</a></li>
+            </ul>
+          </div>
+
+
+
+        <div class="col-xs-12 col-md-2">
+          <h5 class="m-b-sm">Developers</h5>
+          <ul class="nav">
+            <li><a href="https://developer.deadsimplechat.com/">Developer Documentation</a></li>
+
+          </ul>
+        </div>
+
+
+        <div class="col-xs-12 col-md-2">
+          <h5 class="m-b-sm">Legal</h5>
+          <ul class="nav">
+            <li><a href="https://deadsimplechat.com/gdpr">GDPR</a></li>
+            <li><a href="https://deadsimplechat.com/security">Security</a></li>
+            <li><a href="https://deadsimplechat.com/privacy">Privacy</a></li>
+            <li><a href="https://deadsimplechat.com/terms">Terms</a></li>
+
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div>© 2024&nbsp;Next Path Software Consulting Inc.</div>
+    </div>
+  </div>
+</footer>
+      <div class="scroll-to-top is-active"><i class="icon icon-arrow-up">
+  <svg class="icon__svg">
+    <use xlink:href="/blog/assets/icons/feather-sprite.svg?v=63f27459c3#arrow-up"></use>
+  </svg>
+</i></div>
+
+    <svg class="wave-gradient" version="1.1">
+  <defs>
+    <lineargradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="var(--color-primary)"></stop>
+      <stop offset="100%" stop-color="var(--color-secondary)"></stop>
+    </lineargradient>
+  </defs>
+</svg>
+    <script type="text/javascript" src="./useCallback_ Guide, use-cases, examples_files/recorder.js.download"></script><script>
+      if (config.enable_pwa && 'serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+    </script>
+
+    
+  
+
+<iframe allow="join-ad-interest-group" data-tagging-id="G-T4H4YR734G" data-load-time="1726663421277" height="0" width="0" src="./useCallback_ Guide, use-cases, examples_files/rul.html" style="display: none; visibility: hidden;"></iframe><div id="ghost-portal-root"></div></body></html>

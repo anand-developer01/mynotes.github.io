@@ -206,21 +206,24 @@ const SubjectList = {
             content:[
                 {
                     id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel:'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                }
-            ],
-        },
-        {
-            id: 7,
-            topic: 'Can',
-            
-            content:[
+                    eng: "I can speak English.",
+                    tel:'నేను ఇంగ్లీష్ మాట్లాడగలను.'
+                },
                 {
                     id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel:'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                }
+                    eng: "Can you help me?",
+                    tel:'మీరు నాకు సహాయం చేయగలరా? '
+                },
+                {
+                    id: 1,
+                    eng: "She can dance very well.",
+                    tel:'ఆమె చాలా బాగా నర్తించగలదు.'
+                },
+                {
+                    id: 1,
+                    eng: "Can we go to the park?",
+                    tel:'మనం పార్క్ కు వెళ్లవచ్చా?'
+                },
             ],
         },
         {
@@ -230,9 +233,24 @@ const SubjectList = {
             content:[
                 {
                     id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel:'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                }
+                    eng: "I cannot speak French.",
+                    tel:'నేను ఫ్రెంచ్ మాట్లాడలేను.'
+                },
+                {
+                    id: 1,
+                    eng: "She cannot come to the party.",
+                    tel:'ఆమె పార్టీకి రాలేరు.'
+                },
+                {
+                    id: 1,
+                    eng: "We cannot find the keys.",
+                    tel:'మనకు చావులను కనుగొనలేము.'
+                },
+                {
+                    id: 1,
+                    eng: "They cannot play cricket today.",
+                    tel:'వారు ఈ రోజు క్రికెట్ ఆడలేరు.'
+                },
             ],
         },
         {
@@ -242,9 +260,34 @@ const SubjectList = {
             content:[
                 {
                     id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel:'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                }
+                    eng: "I could swim when I was a child.",
+                    tel:'నేను చిన్నప్పుడే ఈదగలిగేవాడిని'
+                },
+                {
+                    id: 1,
+                    eng: "She could play the piano very well.",
+                    tel:'ఆమె పియానో చాలా బాగా వాయించగలిగింది.'
+                },
+                {
+                    id: 1,
+                    eng: "We could go to the beach tomorrow.",
+                    tel:'మనం రేపు బీచ్ కి వెళ్ళవచ్చు.'
+                },
+                {
+                    id: 1,
+                    eng: "Could you help me with this problem?",
+                    tel:'మీరు ఈ సమస్యతో నాకు సహాయం చేయగలరా? '
+                },
+                {
+                    id: 1,
+                    eng: "I could understand the instructions clearly.",
+                    tel:'నేను ఆ సూచనలను స్పష్టంగా అర్థం చేసుకోగలిగాను.'
+                },
+                {
+                    id: 1,
+                    eng: "Could you help me with this problem?",
+                    tel:'మీరు ఈ సమస్యతో నాకు సహాయం చేయగలరా? '
+                },
             ],
         },
         {
@@ -254,9 +297,29 @@ const SubjectList = {
             content:[
                 {
                     id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel:'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                }
+                    eng: "I could not finish my homework.",
+                    tel:'నేను నా హోంవర్క్ ముగించలేకపోయాను.'
+                },
+                {
+                    id: 1,
+                    eng: "She could not attend the meeting.",
+                    tel:'ఆమె సమావేశానికి హాజరుకావలెను.'
+                },
+                {
+                    id: 1,
+                    eng: "We could not find a solution.",
+                    tel:'మనం పరిష్కారం కనుగొనలేకపోయాము.'
+                },
+                {
+                    id: 1,
+                    eng: "He could not understand the question.",
+                    tel:'అతను ప్రశ్నను అర్థం చేసుకోలేకపోయాడు.'
+                },
+                {
+                    id: 1,
+                    eng: "They could not complete the project on time.",
+                    tel:'వారు ప్రాజెక్ట్ సమయానికి పూర్తి చేయలేకపోయారు.'
+                },
             ],
         },
         {
@@ -278,9 +341,24 @@ const SubjectList = {
             content:[
                 {
                     id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel:'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                }
+                    eng: "I don't want to go to the party.",
+                    tel:'నాకు పార్టీకి వెళ్లాలనిపించదు.'
+                },
+                {
+                    id: 1,
+                    eng: "She doesn't want to eat vegetables.",
+                    tel:'ఆమె కూరగాయలు తినాలనిపించదు.'
+                },
+                {
+                    id: 1,
+                    eng: "We don't want to be late for the meeting.",
+                    tel:'మేము సమావేశానికి ఆలస్యం కావాలనిపించదు. '
+                },
+                {
+                    id: 1,
+                    eng: "He doesn't want to speak in front of the audience.",
+                    tel:'అతను ప్రేక్షకుల ముందు మాట్లాడాలనిపించడు.'
+                },
             ],
         },
         {
@@ -290,9 +368,24 @@ const SubjectList = {
             content:[
                 {
                     id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel:'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                }
+                    eng: "I wanted to go to the movies.",
+                    tel:'నాకు సినిమా చూసేందుకు వెళ్లాలనుకుంది.'
+                },
+                {
+                    id: 1,
+                    eng: "She wanted to become a doctor.",
+                    tel:'ఆమె డాక్టర్ కావాలని అనుకుంది.'
+                },
+                {
+                    id: 1,
+                    eng: "We wanted to visit our grandparents.",
+                    tel:'మేము మా అజ్‍జగారిని సందర్శించాలనుకున్నాము.'
+                },
+                {
+                    id: 1,
+                    eng: "He wanted to talk to you.",
+                    tel:'అతను నిన్ను మాట్లాడాలనుకున్నాడు.'
+                },
             ],
         },
         {
@@ -302,9 +395,24 @@ const SubjectList = {
             content:[
                 {
                     id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel:'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                }
+                    eng: "I didn't want to go to the party.",
+                    tel:'నేను పార్టీకి వెళ్లాలని అనుకోలేదు.'
+                },
+                {
+                    id: 1,
+                    eng: "She didn't want to eat vegetables.",
+                    tel:'ఆమె కూరగాయలు తినడానికి ఇష్టపడలేదు.'
+                },
+                {
+                    id: 1,
+                    eng: "We didn't want to be late for the meeting.",
+                    tel:'మేము సమావేశానికి ఆలస్యం చేయకూడదనుకున్నాము.'
+                },
+                {
+                    id: 1,
+                    eng: "He didn't want to speak in front of the audience.",
+                    tel:'అతను ప్రేక్షకుల ముందు మాట్లాడటానికి ఇష్టపడలేదు.'
+                },
             ],
         },
         {
@@ -314,9 +422,29 @@ const SubjectList = {
             content:[
                 {
                     id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel:'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                }
+                    eng: "I had to finish my homework.",
+                    tel:'నేను నా హోంవర్క్ పూర్తి చేయాల్సి వచ్చింది.'
+                },
+                {
+                    id: 1,
+                    eng: "She had to leave early.",
+                    tel:'ఆమె త్వరగా బయలుదేరవలసి వచ్చింది.'
+                },
+                {
+                    id: 1,
+                    eng: "We had to cancel the meeting.",
+                    tel:'మేము సమావేశాన్ని రద్దు చేయవలసి వచ్చింది.'
+                },
+                {
+                    id: 1,
+                    eng: "He had to take the test again.",
+                    tel:'మళ్లీ పరీక్ష రాయాల్సి వచ్చింది.'
+                },
+                {
+                    id: 1,
+                    eng: "They had to move to a new city.",
+                    tel:'వారికి కొత్త నగరానికి మళ్లీ వెళ్లాల్సి వచ్చింది.'
+                },
             ],
         },
         {

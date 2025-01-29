@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/boxicons.min.css">
+
+    <style>
+        :root {
+            --theme-color: #6913e3;
+            --left-nav-width: 200px;
+            --left-nav-min-width: 50px;
+            --header-height: 50px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            box-shadow: 0px 0px 10px grey;
+            height: var(--header-height);
+        }
+
+        .main-component {
+            background-color: rgb(232, 232, 232);
+            width: calc(100% - var(--left-nav-min-width));
+            margin-left: var(--left-nav-min-width);
+
+            transition: 0.5s;
+        }
+
+        /* .nav_list {
+            display: flex;
+            flex-direction: column;
+        } */
+
+        .left-nav {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            background-color: var(--theme-color);
+            width: calc((var(--left-nav-width) + 50px) - var(--left-nav-width));
+            padding: .5rem 1rem 0 0;
+            transition: .5s;
+            z-index: var(--z-fixed);
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav_link {
+            display: flex;
+            justify-content: flex-start;
+            column-gap: 1rem;
+            transition: 0.5s;
+
+            color: #fff;
+            padding: 1rem 0 1rem 1rem;
+        }
+
+        .header_toggle {
+            transition: .5s;
+            align-self: flex-end;
+        }
+
+        .nav {
+            overflow: hidden;
+        }
+
+
+        .left-nav-toggle-none {
+            display: none;
+        }
+
+        .main-component-left-nav-none {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        @media screen and (min-width:768px) {
+            .left-nav {
+                width: var(--left-nav-width);
+            }
+
+            .min-left-nav {
+                width: calc((var(--left-nav-width) + 50px) - var(--left-nav-width));
+            }
+
+            .main-component {
+                width: calc(100% - var(--left-nav-width));
+                margin-left: var(--left-nav-width);
+            }
+
+            .main-component-with-left-nav {
+                width: calc(100% - var(--left-nav-min-width));
+                margin-left: var(--left-nav-min-width);
+            }
+
+            .main-component-left-nav-none {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <header class="header">
+            <div id="toggle-side-nav-id"> <img src="../assets/img/menu.png" alt="" width="20" height="20">
+            </div>
+            <div> <img src="../assets/img/profile.png" alt="" width="20" height="20"> </div>
+        </header>
+        <div class="container-fluid">
+            <div class="left-nav" id="min-left-nav-id">
+                <div class="header_toggle" id="header-toggle">
+                    <p id="arrow-icon" style="font-size: 22px;" class="arrow-icon">&#10097;&#10097;</p>
+                </div>
+
+                <nav class="nav">
+                    <div class="nav_list">
+                        <a href="#" class="nav_link active">
+                            <span class=''>&#9860;</span>
+                            <span class="nav_name">Dashboard</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <span class=''>&#9860;</span>
+                            <span class="nav_name">Users</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <span class=''>&#9860;</span>
+                            <span class="nav_name">Messages</span> </a>
+                        <a href="#" class="nav_link">
+                            <span class=''>&#9860;</span>
+                            <span class="nav_name">Bookmark</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <span class=''>&#9860;</span>
+                            <span class="nav_name">Files</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <span class=''>&#9860;</span>
+                            <span class="nav_name">Stats</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <span class=''>&#9860;</span>
+                            <span class="nav_name">SignOut</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <div class="main-component height-100 mt-2" id="main-component-id">
+                <div>
+                    <div class="row m-0">
+                        main Component
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+            function sideNavListener(toggleId, minLeftId, mainComponentId, toggleSideNavId) {
+                const toggleNav = document.getElementById(toggleId),
+                    minLeftNav = document.getElementById(minLeftId),
+                    mainComponentNav = document.getElementById(mainComponentId),
+                    toggleSideNav = document.getElementById(toggleSideNavId)
+
+                if (toggleNav && minLeftNav) {
+                    toggleNav.addEventListener('click', () => {
+                        minLeftNav.classList.toggle('min-left-nav')
+                        mainComponentNav.classList.toggle('main-component-with-left-nav')
+                    })
+
+                    toggleSideNav.addEventListener('click', () => {
+                        minLeftNav.classList.toggle('left-nav-toggle-none')
+                        mainComponentNav.classList.toggle('main-component-left-nav-none')
+                    })
+                }
+            }
+
+            sideNavListener('header-toggle', 'min-left-nav-id', 'main-component-id', 'toggle-side-nav-id')
+        })
+    </script>
+</body>
+
+</html>

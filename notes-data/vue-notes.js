@@ -1,9 +1,8 @@
+const isHighlighted = 'vue-notes'
 const Links1 = 'vue-notes'
 const Links2 = 'vue3'
 const Links3 = 'vue-x'
 const Links4 = 'vuejs-projects'
-
-const isHighlighted = 'vue-notes'
 
 const vueData = {
   vueNote: [
@@ -280,26 +279,23 @@ new Vue({
       },
       {
         text1: `Notice how the <b>v-for</b> value matches the function signature of the <b>forEach</b> callback. In fact, you can use destructuring on the <b>v-for</b> item alias similar to destructuring function arguments:`,
-        code1: `<li v-for="{ message } in items">
+        code1: `&lt;li v-for=&quot;{ message } in items&quot;&gt;
   {{ message }}
-</li>
-
-<!-- with index alias -->
-<li v-for="({ message }, index) in items">
+&lt;/li&gt;
+&lt;!-- with index alias --&gt;
+&lt;li v-for=&quot;({ message }, index) in items&quot;&gt;
   {{ message }} {{ index }}
-</li>
+&lt;/li&gt;
 
 // For nested 'v-for', scoping also works similar to nested functions. Each 'v-for' scope has access to parent scopes:
-
-
-<li v-for="item in items">
-  <span v-for="childItem in item.children">
+&lt;li v-for=&quot;item in items&quot;&gt;
+  &lt;span v-for=&quot;childItem in item.children&quot;&gt;
     {{ item.message }} {{ childItem }}
-  </span>
-</li>
-You can also use 'of' as the delimiter instead of 'in', so that it is closer to JavaScript's syntax for iterators:
+  &lt;/span&gt;
+&lt;/li&gt;
 
-<div v-for="item of items"></div>`
+// You can also use 'of' as the delimiter instead of 'in', so that it is closer to JavaScript's syntax for iterators:
+&lt;div v-for=&quot;item of items&quot;&gt;&lt;/div&gt;`
       },
       {
         text1: `<b>v-for with an Object</b>
@@ -307,16 +303,15 @@ You can also use 'of' as the delimiter instead of 'in', so that it is closer to 
                 `,
         code1: `
                 // Vue 3:
-                <template>
-                    <div>
-                      <h1>{{ myObject.title }}</h1>
-                      <p>Author: {{ myObject.author }}</p>
-                      <p>Published At: {{ myObject.publishedAt }}</p>
-                    </div>
+                &lt;template&gt;
+                    &lt;div&gt;
+                      &lt;h1&gt;{{ myObject.title }}&lt;/h1&gt;
+                      &lt;p&gt;Author: {{ myObject.author }}&lt;/p&gt;
+                      &lt;p&gt;Published At: {{ myObject.publishedAt }}&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/template&gt;
 
-                </template>
-
-                  <script>
+                  &lt;script&gt;
                   import { reactive } from 'vue'; // Import reactive directly from 'vue'
 
                   export default {
@@ -326,29 +321,26 @@ You can also use 'of' as the delimiter instead of 'in', so that it is closer to 
                         author: 'Jane Doe',
                         publishedAt: '2016-04-10'
                       });
-
                       console.log(myObject); // This will log the reactive object to the console
-
                       return {
                         myObject
                       };
                     }
                   };
-                  </script>
+                  &lt;/script&gt;
 
-                  vue :2 
 
-                  <template>
-                    <div id="app">
-                      <h2>Fruits List:</h2>
-                      <li v-for="(value, key, index) in myObject">
+                  // vue :2 
+                  &lt;template&gt;
+                    &lt;div id=&quot;app&quot;&gt;
+                      &lt;h2&gt;Fruits List:&lt;/h2&gt;
+                      &lt;li v-for=&quot;(value, key, index) in myObject&quot;&gt;
                         {{ index }}. - {{ key }}: - {{ value }}
-                      </li>
+                      &lt;/li&gt;
+                    &lt;/div&gt;
+                  &lt;/template&gt;
 
-                    </div>
-                  </template>
-
-                  <script>
+                  &lt;script&gt;
                   export default {
                     data() {
                       return {
@@ -360,34 +352,30 @@ You can also use 'of' as the delimiter instead of 'in', so that it is closer to 
                       }
                     }
                   };
-                  </script>
-
+                  &lt;/script&gt;
                 `
       },
       {
         text1: `<b>v-for with a Range</b>
                 <b>v-for</b> can also take an integer. In this case it will repeat the template that many times, based on a range of <b>1...n</b>.
                 `,
-        code1: `
-                <span v-for="n in 10">{{ n }}</span>
+        code1: ` &lt;span v-for=&quot;n in 10&quot;&gt;{{ n }}&lt;/span&gt;
                 Note here 'n' starts with an initial value of '1' instead of '0'.
                 `
       },
       {
         text1: `<b>v-for on <template></b>
                 Similar to template <b>v-if</b>, you can also use a <b><template></b> tag with <b>v-for</b> to render a block of multiple elements. For example:`,
-        code1: `
-                <ul>
-                  <template v-for="item in items">
-                    <li>{{ item.msg }}</li>
-                    <li class="divider" role="presentation"></li>
-                  </template>
-                </ul>
+        code1: `&lt;ul&gt;
+                  &lt;template v-for=&quot;item in items&quot;&gt;
+                    &lt;li&gt;{{ item.msg }}&lt;/li&gt;
+                    &lt;li class=&quot;divider&quot; role=&quot;presentation&quot;&gt;&lt;/li&gt;
+                  &lt;/template&gt;
+                &lt;/ul&gt;
                 `
       },
       {
         text1: `v-for with v-if
-
                 <b><i>Note:</i></b>
                 <b>Avoid 'v-if' with 'v-for'​</b>
                 Never use <b>v-if</b> on the same element as <b>v-for</b>.
@@ -526,16 +514,14 @@ items.value = items.value.filter((item) => item.message.match(/Foo/))`
       note: [
         {
           text1: `The directive <b>v-if</b> is used to conditionally render a block. The block will only be rendered if the directive's expression returns a truthy value.
-
-<span style="color:red"><h1 v-if="awesome">Vue is awesome!</h1></span> 
+&lt;span style=&quot;color:red&quot;&gt;&lt;h1 v-if=&quot;awesome&quot;&gt;Vue is awesome!&lt;/h1&gt;&lt;/span&gt; 
 
 <b>v-else​</b>
 You can use the <b>v-else</b> directive to indicate an "else block" for <b>v-if</b>:
 `,
-          code1: `<button @click="awesome = !awesome">Toggle</button>
-
-<h1 v-if="awesome">Vue is awesome!</h1>
-<h1 v-else>Oh no 😢</h1>`
+          code1: `&lt;button @click=&quot;awesome = !awesome&quot;&gt;Toggle&lt;/button&gt;
+&lt;h1 v-if=&quot;awesome&quot;&gt;Vue is awesome!&lt;/h1&gt;
+&lt;h1 v-else&gt;Oh no 😢&lt;/h1&gt;`
         },
         {
           text1: `A <b>v-else</b> element must immediately follow a <b>v-if</b> or a <b>v-else-if</b> element - otherwise it will not be recognized.
@@ -545,18 +531,18 @@ The <b>v-else-if</b>, as the name suggests, serves as an "else if block" for <b>
 
 Similar to <b>v-else</b>, a <b>v-else-if</b> element must immediately follow a <b>v-if</b> or a <b>v-else-if</b> element.
 `,
-          code1: `<div v-if="type === 'A'">
+          code1: `&lt;div v-if=&quot;type === &#39;A&#39;&quot;&gt;
   A
-</div>
-<div v-else-if="type === 'B'">
+&lt;/div&gt;
+&lt;div v-else-if=&quot;type === &#39;B&#39;&quot;&gt;
   B
-</div>
-<div v-else-if="type === 'C'">
+&lt;/div&gt;
+&lt;div v-else-if=&quot;type === &#39;C&#39;&quot;&gt;
   C
-</div>
-<div v-else>
+&lt;/div&gt;
+&lt;div v-else&gt;
   Not A/B/C
-</div>`
+&lt;/div&gt;`
         },
         {
           text1: `<b>v-if on <template></b>
@@ -564,15 +550,14 @@ Because <b>v-if</b> is a directive, it has to be attached to a single element. B
 
                     <b>v-else</b> and <b>v-else-if</b> can also be used on <b><template></b>.
                     `,
-          code1: `<template v-if="ok">
-  <h1>Title</h1>
-  <p>Paragraph 1</p>
-  <p>Paragraph 2</p>
-</template>`
+          code1: `&lt;template v-if=&quot;ok&quot;&gt;
+  &lt;h1&gt;Title&lt;/h1&gt;
+  &lt;p&gt;Paragraph 1&lt;/p&gt;
+  &lt;p&gt;Paragraph 2&lt;/p&gt;
+&lt;/template&gt;`
         },
         {
           text1: `<b>v-show</b>
-
                     Another option for conditionally displaying an element is the <b>v-show</b> directive. The usage is largely the same:
 
 <span style="color:red"><h1 v-show="ok">Hello!</h1> </span>
@@ -581,7 +566,6 @@ Because <b>v-if</b> is a directive, it has to be attached to a single element. B
                     <b>v-show</b> doesn't support the <b><template></b> element, nor does it work with <b>v-else</b>.
 
 <b>v-show VS v-show </b>
-
                     <b>v-show</b>: expensive initial load, cheap toggling,
                     <b>v-if</b>: cheap initial load, expensive toggling.
 
@@ -629,8 +613,8 @@ Inline handlers are typically used in simple cases, for example:
   }
 }
 
-<button @click="count++">Add 1</button>
-<p>Count is: {{ count }}</p>
+&lt;button @click=&quot;count++&quot;&gt;Add 1&lt;/button&gt;
+&lt;p&gt;Count is: {{ count }}&lt;/p&gt;
 `
         },
         {
@@ -653,8 +637,8 @@ methods: {
 }
 
 
-<!-- 'greet' is the name of the method defined above -->
-<button @click="greet">Greet</button>
+&lt;!-- &#39;greet&#39; is the name of the method defined above --&gt;
+&lt;button @click=&quot;greet&quot;&gt;Greet&lt;/button&gt;
 `
         },
         {
@@ -663,22 +647,22 @@ methods: {
           <b>Method vs. Inline Detection</b>
           The template compiler detects method handlers by checking whether the <b>v-on</b> value string is a valid JavaScript identifier or property access path. For example, <b>foo, foo.bar and foo['bar']</b> are treated as method handlers, while <b>foo()</b> and <b>count++</b> are treated as inline handlers.
           `,
-          code1: `<template>
-  <div>
-    <!-- Method handler examples -->
-    <button @click="handleClick">Method Handler 1</button>
-    <!-- Method Handler 2 -->
-    <button @click="logUserName(user.fullName)">Method Handler 2</button>
-    <!-- Method Handler 3 -->
-    <button @click="logUserName(user['fullName'])">Method Handler 3</button>
+          code1: `&lt;template&gt;
+  &lt;div&gt;
+    &lt;!-- Method handler examples --&gt;
+    &lt;button @click=&quot;handleClick&quot;&gt;Method Handler 1&lt;/button&gt;
+    &lt;!-- Method Handler 2 --&gt;
+    &lt;button @click=&quot;logUserName(user.fullName)&quot;&gt;Method Handler 2&lt;/button&gt;
+    &lt;!-- Method Handler 3 --&gt;
+    &lt;button @click=&quot;logUserName(user[&#39;fullName&#39;])&quot;&gt;Method Handler 3&lt;/button&gt;
 
-    <!-- Inline handler examples -->
-    <button @click="sayHello">Inline Handler 1</button>
-    <button @click="count++">Inline Handler 2</button>
-  </div>
-</template>
+    &lt;!-- Inline handler examples --&gt;
+    &lt;button @click=&quot;sayHello&quot;&gt;Inline Handler 1&lt;/button&gt;
+    &lt;button @click=&quot;count++&quot;&gt;Inline Handler 2&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 
-<script>
+&lt;script&gt;
 export default {
   data() {
     return {
@@ -700,11 +684,11 @@ export default {
     }
   }
 };
-</script>
+&lt;/script&gt;
 `
         },
         {
-          text1: `Calling Methods in Inline Handlers​
+          text1: `Calling Methods in Inline Handlers
 Instead of binding directly to a method name, we can also call methods in an inline handler. This allows us to pass the method custom arguments instead of the native event:`,
           code1: `methods: {
   say(message) {
@@ -712,21 +696,21 @@ Instead of binding directly to a method name, we can also call methods in an inl
   }
 }
 template
-<button @click="say('hello')">Say hello</button>
-<button @click="say('bye')">Say bye</button>`
+&lt;button @click=&quot;say(&#39;hello&#39;)&quot;&gt;Say hello&lt;/button&gt;
+&lt;button @click=&quot;say(&#39;bye&#39;)&quot;&gt;Say bye&lt;/button&gt;`
         },
         {
           text1: `<b>Accessing Event Argument in Inline Handlers​</b>
 Sometimes we also need to access the original DOM event in an inline handler. You can pass it into a method using the special <b>$event</b>, variable, or use an inline arrow function:`,
-          code1: `<!-- using $event special variable -->
-<button @click="warn('Form cannot be submitted yet.', $event)">
+          code1: `&lt;!-- using $event special variable --&gt;
+&lt;button @click=&quot;warn(&#39;Form cannot be submitted yet.&#39;, $event)&quot;&gt;
   Submit
-</button>
+&lt;/button&gt;
 
-<!-- using inline arrow function -->
-<button @click="(event) => warn('Form cannot be submitted yet.', event)">
+&lt;!-- using inline arrow function --&gt;
+&lt;button @click=&quot;(event) =&gt; warn(&#39;Form cannot be submitted yet.&#39;, event)&quot;&gt;
   Submit
-</button>
+&lt;/button&gt;
 
 methods: {
   warn(message, event) {
@@ -773,35 +757,35 @@ Event modifiers are pre-set modifications that you can chain to your event liste
 
 
 `,
-          code1: `<!-- the click event's propagation will be stopped -->
-<a @click.stop="doThis"></a>
+          code1: `&lt;!-- the click event's propagation will be stopped --&gt;
+&lt;a @click.stop=&quot;doThis&quot;&gt;&lt;/a&gt;
 
-<!-- the submit event will no longer reload the page -->
-<form @submit.prevent="onSubmit"></form>
+&lt;!-- the submit event will no longer reload the page --&gt;
+&lt;form @submit.prevent=&quot;onSubmit&quot;&gt;&lt;/form&gt;
 
-<!-- modifiers can be chained -->
-<a @click.stop.prevent="doThat"></a>
+&lt;!-- modifiers can be chained --&gt;
+&lt;a @click.stop.prevent=&quot;doThat&quot;&gt;&lt;/a&gt;
 
-<!-- just the modifier -->
-<form @submit.prevent></form>
+&lt;!-- just the modifier --&gt;
+&lt;form @submit.prevent&gt;&lt;/form&gt;
 
-<!-- only trigger handler if event.target is the element itself -->
-<!-- i.e. not from a child element -->
-<div @click.self="doThat">...</div>
+&lt;!-- only trigger handler if event.target is the element itself --&gt;
+&lt;!-- i.e. not from a child element --&gt;
+&lt;div @click.self=&quot;doThat&quot;&gt;...&lt;/div&gt;
 
 
-<!-- use capture mode when adding the event listener     -->
-<!-- i.e. an event targeting an inner element is handled -->
-<!-- here before being handled by that element           -->
-<div @click.capture="doThis">...</div>
+&lt;!-- use capture mode when adding the event listener     --&gt;
+&lt;!-- i.e. an event targeting an inner element is handled --&gt;
+&lt;!-- here before being handled by that element           --&gt;
+&lt;div @click.capture=&quot;doThis&quot;&gt;...&lt;/div&gt;
 
-<!-- the click event will be triggered at most once -->
-<a @click.once="doThis"></a>
+&lt;!-- the click event will be triggered at most once --&gt;
+&lt;a @click.once=&quot;doThis&quot;&gt;&lt;/a&gt;
 
-<!-- the scroll event's default behavior (scrolling) will happen -->
-<!-- immediately, instead of waiting for 'onScroll' to complete  -->
-<!-- in case it contains 'event.preventDefault()'                -->
-<div @scroll.passive="onScroll">...</div>
+&lt;!-- the scroll event&#39;s default behavior (scrolling) will happen --&gt;
+&lt;!-- immediately, instead of waiting for &#39;onScroll&#39; to complete  --&gt;
+&lt;!-- in case it contains &#39;event.preventDefault()&#39;                --&gt;
+&lt;div @scroll.passive=&quot;onScroll&quot;&gt;...&lt;/div&gt;
 `
         },
         {
@@ -825,9 +809,9 @@ $("#foo").click(function () {
 })
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<div id="foo">
-  <button id="but">button</button>
-</div>
+&lt;div id=&quot;foo&quot;&gt;
+  &lt;button id=&quot;but&quot;&gt;button&lt;/button&gt;
+&lt;/div&gt;
 `
         },
         {
@@ -851,11 +835,10 @@ $("#foo").click(function () {
   alert("parent click event fired!")
 })
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<div id="foo">
-  <button id="but">button</button>
-</div>
-
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;div id=&quot;foo&quot;&gt;
+  &lt;button id=&quot;but&quot;&gt;button&lt;/button&gt;
+&lt;/div&gt;
 
 //In summary, 'event.preventDefault()' prevents the default behavior of an element from happening, while 'event.stopPropagation()' prevents an event from bubbling up the event chain.
 `
@@ -864,12 +847,11 @@ $("#foo").click(function () {
           text1: `<b>Key Modifiers​</b>
 When listening for keyboard events, we often need to check for specific keys. Vue allows adding key modifiers for <b>v-on</b> or <b>@</b> when listening for key events:`,
           code1: `<!-- only call 'submit' when the 'key' is 'Enter' -->
-<input @keyup.enter="submit" />
+&lt;input @keyup.enter=&quot;submit&quot; /&gt;
 // You can directly use any valid key names exposed via 'KeyboardEvent.key' as modifiers by converting them to kebab-case.
 
 template
-<input @keyup.page-down="onPageDown" />
-
+&lt;input @keyup.page-down=&quot;onPageDown&quot; /&gt;
 // In the above example, the handler will only be called if '$event.key' is equal to 'PageDown'.
 `
         },
@@ -893,23 +875,23 @@ You can use the following modifiers to trigger mouse or keyboard event listeners
 .alt
 .shift
 .meta`,
-          code1: `<!-- Alt + Enter -->
-<input @keyup.alt.enter="clear" />
+          code1: `// &lt;!-- Alt + Enter --&gt;
+&lt;input @keyup.alt.enter=&quot;clear&quot; /&gt;
 
-<!-- Ctrl + Click -->
-<div @click.ctrl="doSomething">Do something</div>`
+// &lt;!-- Ctrl + Click --&gt;
+&lt;div @click.ctrl=&quot;doSomething&quot;&gt;Do something&lt;/div&gt;`
         },
         {
           text1: `.exact Modifier​
 The .exact modifier allows control of the exact combination of system modifiers needed to trigger an event.`,
-          code1: `<!-- this will fire even if Alt or Shift is also pressed -->
-<button @click.ctrl="onClick">A</button>
+          code1: `// &lt;!-- this will fire even if Alt or Shift is also pressed --&gt;
+&lt;button @click.ctrl=&quot;onClick&quot;&gt;A&lt;/button&gt;
 
-<!-- this will only fire when Ctrl and no other keys are pressed -->
-<button @click.ctrl.exact="onCtrlClick">A</button>
+// &lt;!-- this will only fire when Ctrl and no other keys are pressed --&gt;
+&lt;button @click.ctrl.exact=&quot;onCtrlClick&quot;&gt;A&lt;/button&gt;
 
-<!-- this will only fire when no system modifiers are pressed -->
-<button @click.exact="onClick">A</button>`
+// &lt;!-- this will only fire when no system modifiers are pressed --&gt;
+&lt;button @click.exact=&quot;onClick&quot;&gt;A&lt;/button&gt;`
         }
       ]
     },
@@ -919,27 +901,26 @@ The .exact modifier allows control of the exact combination of system modifiers 
       note: [
         {
           text1: `When dealing with forms on the frontend, we often need to sync the state of form input elements with corresponding state in JavaScript. It can be cumbersome to manually wire up value bindings and change event listeners:`,
-          code1: `<template>
-  <div>
-    <input :value="text" @input="event => text = event.target.value">
+          code1: `&lt;template&gt;
+  &lt;div&gt;
+    &lt;input :value=&quot;text&quot; @input=&quot;event =&gt; text = event.target.value&quot;&gt;
     {{ text }}
-  </div>
-</template>
+  &lt;/div&gt;
+&lt;/template&gt;
 
-<script>
+&lt;script&gt;
 export default {
   data() {
     return {
-      text:''
+      text:&#39;&#39;
     };
   }
 };
-</script>
+&lt;/script&gt;
 
 // The 'v-model' directive helps us simplify the above to:
 
-<input v-model="text">
-
+&lt;input v-model=&quot;text&quot;&gt;
 `
         },
         {
@@ -952,37 +933,36 @@ export default {
 Note: <b>v-model will ignore the initial <b>value</b>, <b>checked</b> or <b>selected</b> attributes found on any form elements. It will always treat the current bound JavaScript state as the source of truth. You should declare the initial value on the JavaScript side, using reactivity APIs.
 `,
           code1: `Note that interpolation inside '<textarea>' won't work. Use 'v-model' instead.
-<!-- bad -->
-<textarea>{{ text }}</textarea>
+&lt;!-- bad --&gt;
+&lt;textarea&gt;{{ text }}&lt;/textarea&gt;
 
-<!-- good -->
-<textarea v-model="text"></textarea>
+&lt;!-- good --&gt;
+&lt;textarea v-model=&quot;text&quot;&gt;&lt;/textarea&gt;
 
 // Single checkbox, boolean value:
 
-<input type="checkbox" id="checkbox" v-model="checked" />
-<label for="checkbox">{{ checked }}</label>
+&lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; v-model=&quot;checked&quot; /&gt;
+&lt;label for=&quot;checkbox&quot;&gt;{{ checked }}&lt;/label&gt;
 
 //-------------
 
 // We can also bind multiple checkboxes to the same array or Set value:
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;div&gt;Checked names: {{ checkedNames }}&lt;/div&gt;
 
-<template>
-  <div>
-    <div>Checked names: {{ checkedNames }}</div>
+    &lt;input type=&quot;checkbox&quot; id=&quot;jack&quot; value=&quot;Jack&quot; v-model=&quot;checkedNames&quot; /&gt;
+    &lt;label for=&quot;jack&quot;&gt;Jack&lt;/label&gt;
 
-    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
-    <label for="jack">Jack</label>
+    &lt;input type=&quot;checkbox&quot; id=&quot;john&quot; value=&quot;John&quot; v-model=&quot;checkedNames&quot; /&gt;
+    &lt;label for=&quot;john&quot;&gt;John&lt;/label&gt;
 
-    <input type="checkbox" id="john" value="John" v-model="checkedNames" />
-    <label for="john">John</label>
+    &lt;input type=&quot;checkbox&quot; id=&quot;mike&quot; value=&quot;Mike&quot; v-model=&quot;checkedNames&quot; /&gt;
+    &lt;label for=&quot;mike&quot;&gt;Mike&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 
-    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
-    <label for="mike">Mike</label>
-  </div>
-</template>
-
-<script>
+&lt;script&gt;
 export default {
   // setup() {
   //   const checkedNames = ref([]) composition api vue 3
@@ -993,7 +973,7 @@ export default {
     };
   }
 };
-</script>
+&lt;/script&gt;
 
 In this case, the 'checkedNames' array will always contain the values from the currently checked boxes.
 
