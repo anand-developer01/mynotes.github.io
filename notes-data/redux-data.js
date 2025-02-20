@@ -344,10 +344,10 @@ Selectors that return the entire state are almost certainly a mistake, as they w
 
 The warning you're seeing indicates that your selector is returning the entire state object instead of a specific part of the state. This can lead to unnecessary re-renders because any change in the state will trigger a re-render of the components that use that selector.
 `,
-                    code1: `
-                    To fix this, ensure that your selector is returning only the necessary slice of state. In your case, if you'''re trying to access the "coin" value from the "counter" slice, your selector should be defined like this:
-
-                    //selector : specific part of the state
+          code1: `
+//To fix this, ensure that your selector is returning only the necessary slice of state. In your case, 
+// if you'''re trying to access the "coin" value from the "counter" slice, your selector should be defined like this:
+//selector : specific part of the state
 import { useSelector } from 'react-redux';
 const MyComponent = () => {
     const coin = useSelector((state) => state.counter.coin); // Correctly access the specific value

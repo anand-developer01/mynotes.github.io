@@ -4,30 +4,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./assets/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/boxicons.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/common-css.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/agate.min.css">
+    <link rel="stylesheet" href="../header/header.css">
+    <link rel="stylesheet" href="../css/sub-header.css">
 
     <style>
         :root {
             --theme-color: #6913e3;
-            --left-nav-width: 200px;
+            --left-nav-width: 260px;
             --left-nav-min-width: 50px;
             --header-height: 50px;
         }
 
-        .header {
+        /* .header {
             display: flex;
             justify-content: space-between;
             padding: 10px;
             box-shadow: 0px 0px 10px grey;
             height: var(--header-height);
-        }
+        } */
 
         .main-component {
             background-color: rgb(232, 232, 232);
             width: calc(100% - var(--left-nav-min-width));
             margin-left: var(--left-nav-min-width);
-
             transition: 0.5s;
         }
 
@@ -38,11 +41,12 @@
 
         .left-nav {
             position: fixed;
-            top: var(--header-height);
+            /* top: var(--header-height); */
+            top: calc(var(--header-height) + 65px);
             left: 0;
             background-color: var(--theme-color);
             width: calc((var(--left-nav-width) + 50px) - var(--left-nav-width));
-            padding: .5rem 1rem 0 0;
+            /* padding: .5rem 1rem 0 0; */
             transition: .5s;
             z-index: var(--z-fixed);
 
@@ -65,8 +69,9 @@
             align-self: flex-end;
         }
 
-        .nav {
-            overflow: hidden;
+        .left-nav-box {
+            overflow-y: scroll;
+            height: 1000px;
         }
 
 
@@ -109,61 +114,50 @@
 <body>
 
     <div>
-        <header class="header">
-            <div id="toggle-side-nav-id"> <img src="../assets/img/menu.png" alt="" width="20" height="20">
-            </div>
-            <div> <img src="../assets/img/profile.png" alt="" width="20" height="20"> </div>
-        </header>
+
+        <nav class="nav" id="header"></nav>
+        <ul id="subHeader" class="inside-nav-bar"></ul>
         <div class="container-fluid">
             <div class="left-nav" id="min-left-nav-id">
                 <div class="header_toggle" id="header-toggle">
                     <p id="arrow-icon" style="font-size: 22px;" class="arrow-icon">&#10097;&#10097;</p>
                 </div>
 
-                <nav class="nav">
+                <nav class="left-nav-box">
                     <div class="nav_list">
-                        <a href="#" class="nav_link active">
-                            <span class=''>&#9860;</span>
-                            <span class="nav_name">Dashboard</span>
-                        </a>
-                        <a href="#" class="nav_link">
-                            <span class=''>&#9860;</span>
-                            <span class="nav_name">Users</span>
-                        </a>
-                        <a href="#" class="nav_link">
-                            <span class=''>&#9860;</span>
-                            <span class="nav_name">Messages</span> </a>
-                        <a href="#" class="nav_link">
-                            <span class=''>&#9860;</span>
-                            <span class="nav_name">Bookmark</span>
-                        </a>
-                        <a href="#" class="nav_link">
-                            <span class=''>&#9860;</span>
-                            <span class="nav_name">Files</span>
-                        </a>
-                        <a href="#" class="nav_link">
-                            <span class=''>&#9860;</span>
-                            <span class="nav_name">Stats</span>
-                        </a>
-                        <a href="#" class="nav_link">
-                            <span class=''>&#9860;</span>
-                            <span class="nav_name">SignOut</span>
-                        </a>
+                        <div id="myLinks"></div>
                     </div>
                 </nav>
             </div>
             <div class="main-component height-100 mt-2" id="main-component-id">
                 <div>
                     <div class="row m-0">
-                        main Component
+                        <div id="cards"></div>
                     </div>
                 </div>
+            </div>
+            <div>
+                <a href="#top" class='top-of-site-link' data-visible="true">
+                    <p style="font-size: 39px; margin: -9px auto; padding-left: 10px;">&#8593;</p>
+                </a>
             </div>
         </div>
     </div>
 
-    <script src="./assets/jquery.min.js"></script>
-    <script src="./assets/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="./main.js"></script>
+    <script src="../notes-data/javascript-notes.js"></script>
+    <script src="../header/header.js"></script>
+    <script src="./subHeader.js"></script>
+    <script>
+        mainDom(javascriptData.javascriptNote)
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>hljs.highlightElement();</script>
     <script>
         document.addEventListener("DOMContentLoaded", function (event) {
 

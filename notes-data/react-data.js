@@ -586,7 +586,15 @@ export default UncontrolledForm;
                   Code reuse, logic and bootstrap abstraction.
                   Render hijacking.
                   State abstraction and manipulation.
-                  Props manipulation.`,
+                  Props manipulation.
+                  
+                  Key Points About HOCs in React:
+HOCs are functions that take a component and return a new component with additional props or behavior. They were commonly used to add cross-cutting concerns like:
+=> Authentication checks
+=> Data fetching
+=> Event listeners
+=> State management
+`,
           code1: `//class Component HOC
           // HOC.js
           // HOC.js
@@ -830,9 +838,11 @@ class HoverCounter extends Component{
 }
 export default withCounter(HoverCounter)
 
-//================
+
+
+//===============================
 //Functional HOC
-//================
+//================================
 //FuncrionalHoc.js
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios'
@@ -1039,6 +1049,16 @@ const App = () => {
 export default App;
 `
         },
+      ],
+    },
+    {
+      id: 52,
+      title: "Do We Really Need HOCs in React Functional Components?",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
       ],
     },
     {
@@ -2582,7 +2602,18 @@ export default function App() {
 
                     <b>5)Component Lifecycle Methods</b>:
                     =>During the reconciliation process, React invokes specific lifecycle methods on the components, allowing them to perform actions at different stages of the update cycle.
-                    =>For example, the componentDidUpdate lifecycle method is called after the component has been updated in the DOM.`,
+                    =>For example, the componentDidUpdate lifecycle method is called after the component has been updated in the DOM.
+                    
+                    
+                    
+                    The virtual DOM is an in-memory representation of the real DOM elements. Instead of interacting directly with the real DOM, which can be slow and costly in terms of performance, React creates a virtual representation of the UI components. This virtual representation is a lightweight JavaScript object that mirrors the structure of the real DOM.
+
+Here's a step-by-step process of how the virtual DOM works:
+<b>Step 1 </b>– Initial Rendering: when the app starts, the entire UI is represented as a Virtual DOM. React elements are created and rendered into the virtual structure.
+<b>Step 2 </b>– State and Props Changes: as the states and props change in the app, React re-renders the affected components in the virtual DOM. These changes do not immediately impact the real DOM.
+<b>Step 3 </b>– Comparison Using Diff Algorithm: React then uses a diffing algorithm to compare the current version of the Virtual DOM with the previous version. This process identifies the differences (or "diffs") between the two versions.
+<b>Step 4 </b>– Reconciliation Process: based on the differences identified, React determines the most efficient way to update the real DOM. Only the parts of the real DOM that need to be updated are changed, rather than re-rendering the entire UI. This selective updating is quick and performant.
+<b>Step 5 </b>– Update to the Real DOM: finally, React applies the necessary changes to the real DOM. This might involve adding, removing, or updating elements based on the differences detected in step 3.`,
           code1: ``
         }
       ],
@@ -4411,9 +4442,10 @@ export default ParentComponent;
       title: "useContext",
       note: [
         {
-          text1: `<b>1. Introduction to React and useContext</b>:
-
-                    <b>2. What is Context in React?</b>
+          text1: `<b>Introduction to React and useContext</b>:
+<a href="https://react.dev/reference/react/createContext" target="_blank">createContext</a>
+<a href="https://react.dev/learn/passing-data-deeply-with-context" target="_blank">passing-data-deeply-with-context</a>
+                    <b>What is Context in React?</b>
                     Instead of passing the props down through each component, React Context allows you to broadcast data to the components below.
                 Accesses the value of a React context within a functional component.
                 
@@ -4421,28 +4453,55 @@ export default ParentComponent;
 
                  <b>context</b> refers to a mechanism that allows data to be shared across multiple components without explicitly passing it through props. 
 
-                 <b>3. Why useContext is Important</b>
+                 <b>Why useContext is Important</b>
 <u>Sharing Data Across Components</u>
 One of the main benefits of using context is the ability to share data across multiple components. This is especially useful when dealing with data that needs to be accessed by several components at different levels of the component tree.
 
 <u>Avoiding Prop Drilling</u>
 Prop drilling is the process of passing data from one component to another through props. This can become cumbersome and difficult to manage when data needs to be passed through multiple levels of components. Context eliminates the need for prop drilling by providing a centralized way to share data.
 
-<b>4. Creating a Context in React</b>
-To create a context in React, we use the <b>React.createContext</b> method. This method returns a context object that can be used to provide and consume values within the component tree.
+<b>1. Creating a Context in React</b>
+To create a context in React, we use the <b>React.createContext</b> method. This method returns a context object that can be used to <u>provide and consume</u> values within the component tree.
+<b>createContext</b> is a function provided by React to create a context. A context allows you to share values (such as state, functions, etc.) across the component tree without passing props explicitly at each level.
+When you call <b>createContext()</b>, it returns a context object that contains two important components:
 
-<b>5. Using the useContext Hook</b>
+-> Provider
+-> Consumer (usually replaced with useContext hook)
+<span style="color:#aa1099">
+This is done using <b>React.createContext()</b>. It returns a Context object.
+import React, { createContext } from 'react';
+export const AuthContext = createContext(); // Create the context </span>
+
+<b>2. Provide a Context Value</b>: The <b>Context.Provider</b> component allows you to define the context value that child components can consume.
+<span style="color:#aa1099">     &lt;AuthContext.Provider value={{ user, login, logout }}&gt;
+      {children}
+    &lt;/AuthContext.Provider&gt; 
+    </span>
+<b>3. Using the useContext Hook (Consume the Context)</b>: This can be done using the <b>Context.Consumer</b> component or the <b>useContext</b> hook in functional components.
 <u>Accessing Context Values</u>
 The <u>useContext</u> hook allows us to access the value of a context within a functional component. By passing the context object to the useContext hook, we can retrieve the current value of the context.
 <u>Updating Context Values</u>
 To update the value of a context, we use the context provider. The provider allows us to define the value that should be made available to all components that consume the context. 
 
+-> When consumed by the <b>useContext</b> hook, it establishes a store for the required values. This enables the centralized management of these values within our application.
+-> The <b>Provider</b> property of <b>AuthContext</b> allows any component to access the store. This is crucial for enabling components to retrieve or update stored values. The specific values that are made available to the components are determined by the <b>value</b> property of the <b>Provider</b> component.
+<span style="color:#aa1099"> 
+import React, { useContext } from 'react';
+import { AuthContext } from 'AuthContext';
+const { userData, loginAction } = useContext(AuthContext);
+OR
+const AuthContext = React.createContext();
+export const useAuth = () => useContext(AuthContext);
+--- using useAuth custom hook ----
+import { useAuth } from '../AuthContext'; 
+  const { user, logout } = useAuth();
+</span>
 <b>=> Parameters </b>
 <b>SomeContext</b>: The context that you've previously created with <b>createContext</b>. The context itself does not hold the information, it only represents the kind of information you can provide or read from components.
 <b>=> Returns </b>
 <b>useContext</b> returns the context value for the calling component. It is determined as the value passed to the closest <b>SomeContext.Provider</b> above the calling component in the tree. If there is no such provider, then the returned value will be the <b>defaultValue</b> you have passed to <b>createContext</b> for that context. The returned value is always up-to-date. React automatically re-renders components that read some context if it changes.
 
-<b>=> Caveats </b>
+<b>=> warning </b>
 <b>useContext()</b> call in a component is not affected by providers returned from the same component. The corresponding <b> <Context.Provider>  </b>needs to be above the component doing the <b>useContext()</b> call.
 React automatically re-renders all the children that use a particular context starting from the provider that receives a different <b>value</b>. The previous and the next values are compared with the <b>Object.is</b> comparison. Skipping re-renders with <b>memo</b> does not prevent the children receiving fresh context values.
 If your build system produces duplicates modules in the output (which can happen with symlinks), this can break context. Passing something via context only works if <b>SomeContext</b> that you use to provide context and <b>SomeContext</b> that you use to read it are exactly the same object, as determined by a <b>===</b> comparison.
@@ -4470,112 +4529,112 @@ The <b>ThemeSwitcher</b> component is wrapped inside the <b>ThemeProvider</b> co
           code1: `//ThemeProvider.js
                     import React, { createContext, useContext, useState } from 'react';
 
-export const ThemeContext = createContext({
-    theme: 'light',
-    toggleTheme : () => {},
-})
+              export const ThemeContext = createContext({
+                  theme: 'light',
+                  toggleTheme : () => {},
+              })
 
-export const ThemeProvider = ({children}) => {
-    const [theme, setTheme] = useState('dark')
-    const toggleTheme = () => {
-        setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
-    }
+              export const ThemeProvider = ({children}) => {
+                  const [theme, setTheme] = useState('dark')
+                  const toggleTheme = () => {
+                      setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
+                  }
 
-    return (
-        &lt;ThemeContext.Provider value={{theme, toggleTheme}}&gt;{children}&lt;/ThemeContext.Provider&gt;
-    )
-}
-
-
-// ThemeSwitcher.js
-import { useContext } from "react";
-import { ThemeContext } from "./ThemeProvider";
-import './Theme.css'
-const ThemeSwitcher = () => {
-    const { theme, toggleTheme } = useContext(ThemeContext)
-    return (
-        &lt;div &gt;
-            &lt;p className=&#39;themeTitleText&#39;&gt;Current theme: {theme}&lt;/p&gt;
-            &lt;button onClick={toggleTheme} className={theme + &#39;ButtonTheme&#39;} &gt;Toggle Theme&lt;/button&gt;
-        &lt;/div&gt;
-    )
-}
-export default ThemeSwitcher
+                  return (
+                      &lt;ThemeContext.Provider value={{theme, toggleTheme}}&gt;{children}&lt;/ThemeContext.Provider&gt;
+                  )
+              }
 
 
-// App.js
-import Mainroute from './Mainroute'
+              // ThemeSwitcher.js
+              import { useContext } from "react";
+              import { ThemeContext } from "./ThemeProvider";
+              import './Theme.css'
+              const ThemeSwitcher = () => {
+                  const { theme, toggleTheme } = useContext(ThemeContext)
+                  return (
+                      &lt;div &gt;
+                          &lt;p className=&#39;themeTitleText&#39;&gt;Current theme: {theme}&lt;/p&gt;
+                          &lt;button onClick={toggleTheme} className={theme + &#39;ButtonTheme&#39;} &gt;Toggle Theme&lt;/button&gt;
+                      &lt;/div&gt;
+                  )
+              }
+              export default ThemeSwitcher
 
-import { ThemeProvider } from './components/UseContext/theme-switch/ThemeProvider';
-function App() {
-    return (
-      &lt;div&gt;
-        &lt;ThemeProvider&gt; 
-          &lt;Mainroute/&gt;
-        &lt;/ThemeProvider&gt;
-      &lt;/div&gt;
-    );
-  }
-export default App;
+
+              // App.js
+              import Mainroute from './Mainroute'
+
+              import { ThemeProvider } from './components/UseContext/theme-switch/ThemeProvider';
+              function App() {
+                  return (
+                    &lt;div&gt;
+                      &lt;ThemeProvider&gt; 
+                        &lt;Mainroute/&gt;
+                      &lt;/ThemeProvider&gt;
+                    &lt;/div&gt;
+                  );
+                }
+              export default App;
 
 
-//Mainroute.js
-function App() {
-    const {theme} = useContext(ThemeContext)
-    return (
-        &lt;div className={theme + &#39;Theme&#39;}&gt;
-            ...
-        &lt;/div&gt;
-    );
-}
+              //Mainroute.js
+              function App() {
+                  const {theme} = useContext(ThemeContext)
+                  return (
+                      &lt;div className={theme + &#39;Theme&#39;}&gt;
+                          ...
+                      &lt;/div&gt;
+                  );
+              }
 
-// Theme.css
-.lightTheme {
-    background-color: #fff;
-    color: #000;
-}
-.darkTheme {
-    background-color: #000;
-    color: #fff;
-}
-.darkButtonTheme {
-    background-color: #000;
-    color: #fff;
-    border-radius: 5px;
-    border: 1px solid #fff;  
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-   
-}
-.darkButtonTheme:hover {
-    background-color: #ddd; /* Change the background color on hover */
-    color: #000;
-    cursor: pointer; /* Change the cursor to a pointer on hover */
-}
-.lightButtonTheme {
-    background-color: #fff;
-    color: #000;
-    border-radius: 5px;
-    border: 1px solid #000;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-}
-.lightButtonTheme:hover {
-    background-color: #ddd; /* Change the background color on hover */
-    cursor: pointer; /* Change the cursor to a pointer on hover */
-}
-.themeTitleText {
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    font-size: 20px;
-}
-                    
-// TypeScript
-// https://dev.to/nas5w/toggling-light-dark-theme-in-react-with-usecontext-39hn
+              // Theme.css
+              .lightTheme {
+                  background-color: #fff;
+                  color: #000;
+              }
+              .darkTheme {
+                  background-color: #000;
+                  color: #fff;
+              }
+              .darkButtonTheme {
+                  background-color: #000;
+                  color: #fff;
+                  border-radius: 5px;
+                  border: 1px solid #fff;  
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                
+              }
+              .darkButtonTheme:hover {
+                  background-color: #ddd; /* Change the background color on hover */
+                  color: #000;
+                  cursor: pointer; /* Change the cursor to a pointer on hover */
+              }
+              .lightButtonTheme {
+                  background-color: #fff;
+                  color: #000;
+                  border-radius: 5px;
+                  border: 1px solid #000;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  align-content: center;
+              }
+              .lightButtonTheme:hover {
+                  background-color: #ddd; /* Change the background color on hover */
+                  cursor: pointer; /* Change the cursor to a pointer on hover */
+              }
+              .themeTitleText {
+                  text-align: center;
+                  margin-top: 50px;
+                  margin-bottom: 50px;
+                  font-size: 20px;
+              }
+                                  
+              // TypeScript
+              // https://dev.to/nas5w/toggling-light-dark-theme-in-react-with-usecontext-39hn
 `
         },
         {
@@ -6599,43 +6658,43 @@ The useHistory() hook is now deprecated. If you are using React Router 6, the pr
 `,
           code1: `//imperative navigate
                   import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+              import { useNavigate } from 'react-router-dom';
 
-const DataComponent = () => {
-  const navigate = useNavigate()
-  const NavigateHandler = useCallback(() => {
-      navigate("/UseMemoMain")
-  },[])
+              const DataComponent = () => {
+                const navigate = useNavigate()
+                const NavigateHandler = useCallback(() => {
+                    navigate("/UseMemoMain")
+                },[])
 
-  return (
-    &lt;&gt;
-      &lt;button onClick={NavigateHandler}&gt; Main Menu &lt;/button&gt;
-    &lt;/&gt;
-  )
-};
+                return (
+                  &lt;&gt;
+                    &lt;button onClick={NavigateHandler}&gt; Main Menu &lt;/button&gt;
+                  &lt;/&gt;
+                )
+              };
 
-export default DataComponent;
+              export default DataComponent;
 
-//---------
-// declarative approach
-//---------
-import React, {  } from 'react';
-import { Navigate } from 'react-router-dom';
-const DataComponent = () => {
-  const [toDashboard, setToDashboard] = React.useState(false);
-  const NavigateHandler = () => {
-    setToDashboard(true)
-  }
-  if(toDashboard){
-    return &lt;Navigate to=&quot;/UseMemoMain&quot; /&gt;;
-  }
-  return (
-    &lt;&gt;
-      &lt;button onClick={NavigateHandler}&gt; Main Menu { toDashboard } &lt;/button&gt;
-    &lt;/&gt;
-  )
-};
-export default DataComponent;
+              //---------
+              // declarative approach
+              //---------
+              import React, {  } from 'react';
+              import { Navigate } from 'react-router-dom';
+              const DataComponent = () => {
+                const [toDashboard, setToDashboard] = React.useState(false);
+                const NavigateHandler = () => {
+                  setToDashboard(true)
+                }
+                if(toDashboard){
+                  return &lt;Navigate to=&quot;/UseMemoMain&quot; /&gt;;
+                }
+                return (
+                  &lt;&gt;
+                    &lt;button onClick={NavigateHandler}&gt; Main Menu { toDashboard } &lt;/button&gt;
+                  &lt;/&gt;
+                )
+              };
+              export default DataComponent;
 `
         },
         {

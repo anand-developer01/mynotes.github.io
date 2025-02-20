@@ -79,7 +79,7 @@ This method takes an optional parameter called 'index', which is explained below
    `
                 }
             ]
-        },        
+        },
         {
             id: 1,
             title: "charCodeAt()",
@@ -89,7 +89,7 @@ This method takes an optional parameter called 'index', which is explained below
                     code1: ``
                 }
             ]
-        },        
+        },
         {
             id: 1,
             title: "concat()",
@@ -127,7 +127,7 @@ const result = arr1.concat(arr2);  // result: [1, 2, 3, 4, 5]
 `
                 }
             ]
-        },        
+        },
         {
             id: 1,
             title: "indexOf()",
@@ -177,7 +177,7 @@ console.log(sentence.indexOf('the', 10));  // Output: 31 (searches starting from
 `
                 }
             ]
-        },        
+        },
         {
             id: 1,
             title: "lastIndexOf()",
@@ -258,7 +258,6 @@ console.log(str.length);  // Output: 13`
                     The <b>match()</b> method returns the result of matching a string against a regular expression.
                     In JavaScript, the <b>match()</b> method is used to search a string for a match against a regular expression and returns an array of matches or null if no match is found.
                     
-                    
                    <b> match() Parameters</b>
 The <u>match()</u> method takes in:
 <u>regexp</u> - A regular expression object (Argument is implicitly converted to <u>RegExp</u> if it is a non-<u>RegExp</u> object)
@@ -268,8 +267,8 @@ The <u>match()</u> method takes in:
 Returns an Array containing the matches, one item for each match.
 Returns <u>null</u> if no match is found.
 `,
-                    code1: `string.match(regexp)
-
+                    code1: `// Syntax : 
+                    // string.match(regexp)
 
                     //------------------
 const message = "JavaScript is a fun programming language.";
@@ -311,19 +310,30 @@ Output: [
 
 
     <b>Note</b>: Only the first instance will be replaced. If you want to replace all instances, you will have to use the replaceAll() method.
-    
-`,
-                    code1: `// Syntax
+    // Syntax
 string.replace(searchValue, newValue);
 
-    "searchValue": The substring or regular expression pattern to search for within the string.
-        If it's a string, it will only replace the "first occurrence".
-        If it's a regular expression (with the global flag g), it will replace all matches.
-    "newValue": The substring to replace the matched value with. It can also be a function that returns the replacement string based on the match.
+    <b>searchValue</b>: The substring or regular expression pattern to search for within the string.
+        If it's a string, it will only replace the <b>first occurrence</b>.
+        If it's a regular expression (with the <b>global flag g</b>), it will replace all matches.
+    <b>newValue</b>: The substring to replace the matched value with. It can also be a function that returns the replacement string based on the match.
     
-    
-    //------------------
-    // Example 2: Using replace() with a Regular Expression
+
+   <b> The syntax of replace() is</b>:
+
+str.replace(pattern, replacement)
+Here, str is a string.
+
+<b>replace() Parameter</b>
+The replace() method takes in:
+
+pattern - either a string or a regex that is to be replaced
+replacement - the pattern is replaced with this replacement (can be either a string or a function)
+<b>relace() Return Value</b>
+The replace() method returns a new string with the specified pattern replaced.
+`,
+                    code1: `//------------------
+    // Example 1: Using replace() with a Regular Expression
 // If you use a regular expression, you can match patterns and even use flags like g (global) to replace all occurrences.
 // Without the global flag:
 let str = "Hello, world! Welcome to the world!";
@@ -332,9 +342,7 @@ console.log(result); // Outputs: "Hello, JavaScript! Welcome to the world!"
 
 // Only the first occurrence of "world" is replaced because the regular expression does not have the g (global) flag.
 
-//------------------------
-
-
+//--------------Example 2:----------
 // *** With the global flag (g) ***:
 let str = "Hello, world! Welcome to the world!";
 let result = str.replace(/world/g, "JavaScript");
@@ -344,13 +352,19 @@ console.log(result); // Outputs: "Hello, JavaScript! Welcome to the JavaScript!"
 //------------------
 // Example 3: Using a Function as the newValue
 // You can also pass a function as the newValue parameter. This function is called for each match and can return a custom replacement string.
-
 let str = "I have 1 apple and 2 bananas.";
 let result = str.replace(/\d+/g, function(match) {
     return parseInt(match) * 2;  // Doubles the number
 });
 console.log(result); // Outputs: "I have 2 apple and 4 bananas."
 
+//----------------
+    Example : 3.1
+    const cities = "Seattle, NV - No : 2, AZ - No : 4";
+    const newRes = cities.replace(/NV/, "New York").replace(/AZ/,"Arizona").replace(/\d+/g, function(match){
+        return parseInt(match) * 2;
+    });
+    console.log(newRes) // Output : Seattle, New York - No : 4, Arizona - No : 8
 
 
 //-------------------
@@ -424,9 +438,8 @@ let check = languages.includes("Java");
 console.log(check); 
 // Output: true
 
-//----------------
+//-----------------------
 // Example 1: Using includes() method
-
 let languages = ["JavaScript", "Java", "C", "C++"];
 // checking whether the array contains 'C'
 let check1 = languages.includes("C");
@@ -435,29 +448,25 @@ console.log(check1); // true
 // checking whether the array contains 'Ruby'
 let check2 = languages.includes("Ruby");
 console.log(check2); // false
-
 // Output :
 // true
 // false
 
-//-------------
+//--------------------
 // 2: includes() for Case-Sensitive Search
 // The "includes()" method is case sensitive. For example:
 let languages = ["JavaScript", "Java", "C", "Python"];
-
 // checking whether the array contains 'Python'
 let check1 = languages.includes("Python");
 console.log(check1); // true
-
 // checking whether the array contains 'python'
 let check2 = languages.includes("python");
 console.log(check2); // false
-
 // Output:
 // true
 // false
 
-//---------------
+//----------------------
 // Example 3: includes() with two Parameters
 let languages = ["JavaScript", "Java", "C", "Python"];
 
@@ -476,18 +485,45 @@ console.log(check2); // true
 // "languages.includes("Java", 2)" returns "false" since the method doesn't find "'Java'" from second index of the array.
 // In "languages.includes("Java", -3)", the method starts searching "'Java'" from the "third last" element because of the negative argument
 
-//--------
+//----------------------
 let arr = [1, 2, 3, 4, 5];
 console.log(arr.includes(3, 3));  // Output: false (starts searching from index 3)
 console.log(arr.includes(4, 3));  // Output: true (starts searching from index 3)
 
-//---------
+//-----------------------
 // Checking for Substring in a String with a Start Position
 let str = "The quick brown fox";
 console.log(str.includes("quick", 5));  // Output: false (search starts after "The ")
 console.log(str.includes("brown", 5));  // Output: true (search starts after "The ")
-
  "-3".
+
+ //---------- Filter seatch using includes ----------
+ const userList = [
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "American first finance",
+  },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "American cities",
+  },
+  {
+    "userId": 1,
+    "id": 3,
+    "title": "Indian cities",
+  },
+  {
+    "userId": 1,
+    "id": 4,
+    "title": "us books",
+  },
+  ]
+  const searchRes = userList.filter(e => {
+    return e.title.toLowerCase().includes("american".toLowerCase())
+  })
+  console.log(searchRes)
 `
                 }
             ]
@@ -497,35 +533,125 @@ console.log(str.includes("brown", 5));  // Output: true (search starts after "Th
             title: "search()",
             note: [
                 {
-                    text1: `Executes the search for a match between a regular expression and a specified string.`,
-                    code1: ``
+                    text1: `Executes the search for a match between a regular expression and a specified string.
+                    The <b>search()</b> method searches for a match between a given <u>string</u> and a <u>regular expression</u>.
+                    In JavaScript, the <b>search()</b> method is specifically used for <b>strings</b> and <b>regular expressions</b>. It does <b>not work directly on arrays</b>. However, you can use it in a string context to search for a match, and if you want to search in an array, you would need to iterate through the array (or use array methods) and apply the <b>search()</b> method on each element.
+
+                    <b>search() Syntax </b>
+The syntax of the <u>search()</u> method is:
+str.search(regexp)
+Here, <u>str</u> is a string.
+
+<b>search() Parameters </b>
+The <u>search()</u> method takes a single parameter:
+=> <u>regExp</u> - A regular expression object (Argument is implicitly converted to <u>regExp</u> if it is a non-<u>regExp</u> object)
+
+<b>search() Return Value </b>
+=> Returns the index of the first match between the regular expression and the given string
+=> Returns <u>-1</u> if no match was found.
+
+
+<b>search() with an Array</b>:
+If you want to search through an array, you cannot directly use <u>search()</u> because it's a method for strings. But you can use methods like <u>find(), indexOf()</u>, or <u>some()</u> in combination with <u>search()</u> to search for a string inside each array element.
+
+<b>Example 1: Using <u>search()</u> on Each Element of an Array</b>
+You can use <u>Array.prototype.map()</u> to apply <u>search()</u> on each element of the array.
+                    `,
+                    code1: `// Ex : 1
+                    let sentence= "I love JavaScript.";
+// pattern that searches the first occurence of an uppercase character
+let regExp = /[A-Z]/;
+
+// searching for a match between regExp and given string 
+let indexReg = sentence.search(regExp);
+console.log(indexReg);
+// Output: 0
+
+
+//-----------------
+Example 1.1: Using search() on a String
+let str = "Hello, world!";
+let result = str.search("world");
+console.log(result);  // Output: 7 (index of "world")
+
+
+//----------------
+// Example 2: Using search() Method
+// defining string
+let string1 = "JavaScript JavaScript1";
+
+// pattern having 'JavaScript' followed by a digit
+let regExp = /(JavaScript)\d/;
+
+// searching for a match between regExp and given string
+let index = string1.search(regExp);
+console.log(index);
+// Output
+// 11
+
+//------------
+// Example 3: Passing non-regExp in search()
+let string1 = "I love to code in JavaScript.";
+// searching word "JavaScript" in the given string
+let index = string1.search("code");
+console.log(index);
+// Output
+// 10
+
+//---------------
+// Example 4
+let arr = ["apple", "banana", "cherry"];
+let searchTerm = "ban";
+let result = arr.map(item => item.search(searchTerm));
+console.log(result);  // Output: [-1, 0, -1] (index 0 means "banana" contains "ban")
+
+//---------------
+//Example 5: Using find() to Search for a String in an Array
+// If you want to find the first element in the array that matches a search term, you can use find().
+
+let arr = ["apple", "banana", "cherry"];
+let searchTerm = "ban";
+let found = arr.find(item => item.search(searchTerm) !== -1);
+console.log(found);  // Output: "banana"
+
+
+//---------------
+// Example 3: Using some() to Check if Any Array Element Contains the Search Term
+// You can also use some() to check if any element in the array contains the search term.
+let arr = ["apple", "banana", "cherry"];
+let searchTerm = "ban";
+let hasMatch = arr.some(item => item.search(searchTerm) !== -1);
+console.log(hasMatch);  // Output: true (since "banana" contains "ban")
+
+
+//----------------
+
+`
                 }
             ]
         },
-          {
+        {
             id: 1,
-            title: "concat() - merge two arrays into an array",
+            title: "concat()",
             note: [
-              {
-                text1: `To merge two or more arrays, you use the <b>concat()</b> method of an Array object.The <b>concat()</b> method returns a new array and doesn't change the original arrays.For example:`,
-                code1: `let odds = [1, 3, 5];
+                {
+                    text1: `To merge two or more arrays, you use the <b>concat()</b> method of an Array object.The <b>concat()</b> method returns a new array and doesn't change the original arrays.For example:`,
+                    code1: `let odds = [1, 3, 5];
                 let evens = [2, 4, 6];
                 // merge odds and evens array
                 let combined = odds.concat(evens);
                 
                 console.log('Result:', combined);
                 console.log('Odds:', odds);
-                
-                
                 // Output:
                 // Result: [ 1, 3, 5, 2, 4, 6 ]
                 // Odds: [ 1, 3, 5 ]`
-              },
-              {
-                text1: `In this example, we have two arrays: <b>odds</b> and <b>evens</b>.We call the <b>concat()</b> method of the <b>odds</b> array method to merge elements of the two arrays.The elements of the second array are appended to the elements of the first array.
+                },
+                {
+                    text1: `In this example, we have two arrays: <b>odds</b> and <b>evens</b>.We call the <b>concat()</b> method of the <b>odds</b> array method to merge elements of the two arrays.The elements of the second array are appended to the elements of the first array.
       
                 Similarly, you can call the <b>concat()</b> method on an empty array denoted by(<b>[]</b>):`,
-                code1: `let odds = [1, 3, 5];
+                    code1: `let odds = [1, 3, 5];
                 let evens = [2, 4, 6];
                 // merge odds and evens array
                 let combined = [].concat(odds, evens);
@@ -584,9 +710,9 @@ console.log(str.includes("brown", 5));  // Output: true (search starts after "Th
       // Output:
       // [ 1, 3, 5, 2, 4, 6 ]
                 `
-              },
+                },
             ]
-          },
+        },
         {
             id: 1,
             title: "split()",
@@ -694,8 +820,6 @@ substring() Return Value
 Returns a new string containing the specified part of the given string.
 Note: substring() does not change the original string.
 
-
-
                     The substring() method returns a specified part of the string between start and end indexes.
                     The <b>substr()</b> method in JavaScript is used to extract a portion of a string, starting from a specified index, and optionally, for a specified length. It’s important to note that substr() has been deprecated in favor of the slice() and substring() methods, but it still works in most browsers.
 
@@ -791,21 +915,31 @@ console.log(result);  // Output: "istanbul" (with the dotless 'i')
             title: "toString()",
             note: [
                 {
-                    text1: `Returns a string representing the specified object.
+                    text1: `Description
+The toString() method returns a string as a string.
+The toString() method does not change the original string.
+The toString() method can be used to convert a string object into a string.
+
                     
+                    <b>Returns a string representing the specified object</b>.
                     The toString() method in JavaScript returns the string format of an object. This section will help you understand what happened under the hood in the last section.
-                    
                     The toString() method in JavaScript is a built-in method that returns a string representation of an object. It is commonly used to convert values like numbers, arrays, and objects to strings.
 
 This method is automatically called when a value is used in a string context (such as concatenation).`,
-                    code1: `object.toString();
+                    code1: `let text = "Hello World!";
+let result = text.toString();
 
+//--------------
+const num = 2324123
+console.log(num.toString())
 
+//-------------
+                    
+                    object.toString();
 const student = {
   name: "John",
   school: "freeCodeCamp",
 };
-
 console.log(student.toString());
 // [object Object]
 `
@@ -827,8 +961,43 @@ console.log(student.toString());
             title: "valueOf()",
             note: [
                 {
-                    text1: `Returns the primitive value of the specified object.`,
-                    code1: ``
+                    text1: `Returns the primitive value of the specified object.
+                    The Object.valueOf() method returns the primitive value of the specified object.
+                    
+                    The valueOf() method returns the primitive value of an object.
+If the object has no primitive value, valueOf() returns the object itself.
+The valueOf() method does not change the original object.
+
+<b>valueOf() Syntax</b>
+The syntax of the <u>valueOf()</u> method is:
+obj.valueOf()
+Here, <u>obj</u> is an object whose primitive value we want to find.
+
+<b>valueOf() Parameters</b>
+The valueOf() method does not take any parameters.
+
+<b>valueOf() Return Value</b>
+The valueOf() method returns the primitive value of the specified object.
+
+<b>Notes</b>:
+For objects of type Object, there is no primitive value, so the valueOf() method simply returns the object itself.
+For objects of type <u>Number, Boolean, or String</u>, however, valueOf() returns the primitive value represented by the corresponding object.
+                    `,
+                    code1: `const fruits = ["Banana", "Orange", "Apple", "Mango"];
+const myArray = fruits.valueOf();
+console.log(myArray) // ['Banana', 'Orange', 'Apple', 'Mango']
+//fruits.valueOf() returns the same as fruits:
+//valueOf() returns the object itself
+
+//---------------
+
+        // create a new Number object with value of 12
+        let num = new Number(12);
+        console.log(num);
+        // Output: [Number: 12]
+        console.log(num.valueOf());
+        // Output: 12
+`
                 }
             ]
         },
@@ -867,12 +1036,62 @@ console.log(student.toString());
             id: 1,
             title: "join()",
             note: [
-                {
-                    text1: `Joins all elements of an array into a string.`,
-                    code1: ``
-                }
+              {
+                text1: `Joins all elements of an array into a string.
+                concatenate all elements of an array into a string separated by a separator.types
+                 The <b>join()</b> method allows you to concatenate all elements of an array and returns a new string:
+                <span style="color:red"> Array.prototype.join([separator]) </span>
+                
+                The <b>join()</b> method accepts a optional argument <b>separator</b> which is a string that separates each pair of adjacent elements of the array in the result string.
+                  The <b>separator</b> defaults to a comma if you don't pass it to the <b>join()</b> method.
+                In case the array has one element, the <b>join()</b> method returns that element as a string without using the <b>separator</b>.
+                And if the array is empty, the <b>join()</b> method returns an empty string.
+                When the elements of the array aren't strings, the <b>join()</b> method converts them to strings before joining.
+                
+                Note that the <b>join()</b> method converts <b>undefined, null</b>, and empty array[] to an empty string.
+                `,
+                code1: `Ex: 
+                const cssClasses = ['btn', 'btn-primary', 'btn-active'];
+                const btnClass = cssClasses.join(' ');
+                
+                console.log(btnClass);
+                
+                // Output:
+                // btn btn - primary btn - active
+                
+                // In this example, we have an array that holds a list of CSS classes.And we use the 'join()' method joins all elements of the 'cssClasses' array and return a string of the CSS classes separated by a space.
+                `
+              },
+              {
+                text1: `<b>2) Using the JavaScript Array 'join()' method to replace all occurrences of a string</b>
+                
+                This example uses the JavaScript Array 'join()' method to replace all occurrences of the space ' ' by the hyphen(-):`,
+                code1: `const title = 'JavaScript array join example';
+                const url = title.split(' ')
+                  .join('-')
+                  .toLowerCase();
+                
+                console.log(url);
+                
+                // Output:
+                // javascript - array - join - example
+                
+                // > First, split the title string by the space into an array by using the 'split()' string method.
+                // > Second, concatenate all elements in the result array into a string by using the 'join()' method.
+                // > Third, convert the result string to lower case by using the 'toLowerCase()' method.`
+              },
+              {
+                text1: `=> Summary
+                Use the JavaScript Array 'join()' method to concatenate all elements of an array into a string separated by a separator.`,
+                code1: ``
+              },
+              {
+                text1: ``,
+                code1: ``
+              },
+      
             ]
-        },
+          },
         {
             id: 1,
             title: "map()",
@@ -887,32 +1106,615 @@ console.log(student.toString());
             id: 1,
             title: "pop()",
             note: [
-                {
-                    text1: `Removes the last element from an array and returns that element.`,
-                    code1: ``
-                }
+              {
+                text1: `The pop() method removes the last element from an array and returns that element.`,
+                code1: `let cities = ["Madrid", "New York", "Kathmandu", "Paris"];
+      
+                // remove the last element
+                let removedCity = cities.pop();
+                
+                console.log(cities)         // ["Madrid", "New York", "Kathmandu"]
+                console.log(removedCity);   // Paris
+                
+                // pop() Return Value
+                // Removes the last element from array and returns that value.
+                // Returns undefined if the array is empty.
+                // Notes: This method changes the original array and its length.`
+              },
             ]
-        },
+          },
         {
             id: 1,
             title: "push()",
             note: [
-                {
-                    text1: `Adds one or more elements to the end of an array and returns the new length of the array.`,
-                    code1: ``
-                }
+              {
+                text1: `The push() method adds zero or more elements to the end of the array.`,
+                code1: `let city = ["New York", "Madrid", "Kathmandu"];
+      
+                // add "London" to the array
+                city.push("London");
+                console.log(city);
+                // Output: [ 'New York', 'Madrid', 'Kathmandu', 'London' ]
+                
+                // The syntax of the push() method is:
+                arr.push(element1, element2, ..., elementN)
+      
+                // push() Parameters
+                // The push() method takes in an arbitrary number of elements to add to the array.`
+              },
             ]
-        },
-        {
+          },
+          {
             id: 1,
             title: "reduce()",
             note: [
-                {
-                    text1: `Apply a function simultaneously against two values of the array (from left-to-right) as to reduce it to a single value.`,
-                    code1: ``
+              {
+                text1: `The reduce() method executes a reducer function on each element of the array and returns a single output value.
+      
+                The array reduce in JavaScript is a predefined method used to reduce an array to a single value by passing a callback function on each element of the array.It accepts a function executed on all the items of the specified array in the left - to - right sequence.The returned single value is stored in the accumulator.Thus, array reduce JavaScript is a non - mutating method.This means that instead of changing the actual value variable, it will hold the computed value in the accumulator without changing the original value variable.
+                
+                  reduce() Parameters: -
+                  The <b>reduce()</b> method takes in:
+                
+                 1) => callback - The callback function to execute on each array element(except the first element if no <b>initialValue</b> is provided). It takes in
+                
+                  > <b>accumulator</b> - It accumulates the callback's return values.
+                  > <b>currentValue</b> - The current element being passed from the array.
+                
+                2) => <b>initialValue</b>(optional) - A value that will be passed to <b>callback()</b> on first call.If not provided, the first element acts as the <b>accumulator</b> on the first call and <b>callback()</b> won't execute on it.
+                
+                <b>Note: </b> Calling reduce() on an empty array without initialValue will throw TypeError.
+                
+                <b>reduce() Return Value:- </b>
+                  Returns the single value resulting after reducing the array.
+      
+                Notes:
+                > <b>reduce()</b> executes the given function for each value from left to right.
+                > <b>reduce()</b> does not change the original array.
+                > It is almost always safer to provide <b>initialValue</b>.
+      
+                <b>Accumulator:</b> This contains the value calculated from the previous iteration. On the first iteration, if an <b>initialValue</b> will be provided, the accumulator will be set to the value of <b>initialValue</b>.
+                <b>CurrentValue:</b> The current value of the element is processed in the array.
+                <b>CurrentIndex:</b> The index of the current element is processed in the array.
+                <b>Array:</b> The original array on which the <b>reduce()</b> method was called.
+      
+                When to Use the reduce() Method:--
+                As shown above, the reduce() method is recommended when you need to have a single value returned from iterating over your array.
+                
+                This includes:
+                
+                > Summarizing your values into a single value
+                > Grouping similar items together
+                > Removing duplicates from an array
+                
+                The single value returned by the method can also be an array of objects, therefore containing multiple values.
+                
+                Suppose that you have an array of numbers, like this:
+                let numbers = [1, 2, 3];
+      
+                // and you want to calculate the total of elements of the array. Typically, you use a 'for' loop to iterate over the elements and add them up as shown in the following example:
+                
+                let numbers = [1, 2, 3];
+                let sum = 0;
+                for (let i = 0; i < numbers.length; i++) {
+                  sum += numbers[i];
                 }
+                console.log(sum);
+                
+                // Output:
+                // 6
+                `,
+                code1: ``
+              },
+              {
+                text1: ` The script is simple and straightforward:--
+      
+                > First, declare an array of three numbers 1, 2 and 3.
+                  > Second, declare the sum variable and set its value to zero.
+                > Third, in the for loop, add up the elements of the numbers array to the sum variable.After the loop, the value of the sum variable is 6.
+                
+                What we have done was to 'reduce' an array into a value.
+                
+                The 'Array.prototype' allows you to reduce an array to a single value using the 'reduce()' method like this:
+                `,
+                code1: `let numbers = [1, 2, 3];
+                let sum = numbers.reduce(function(previousValue, currentValue) {
+                  return previousValue + currentValue;
+                });
+                console.log(sum);`
+              },
+              {
+                text1: `JavaScript Array reduce() method in detail: --
+                  The following illustrates the syntax of the 'reduce()' method:
+                
+                array.reduce(callbackFn[, initialValue])
+                
+                The 'reduce()' method takes two arguments:
+                
+                > A callback function 'callbackFn'.The function is often referred to as a reducer.
+                > An optional initial value.
+                  The 'reduce()' method calls the 'callbackFn()' function for every element in the array.
+                
+                    The 'reducer()' function returns a value that results from executing the 'callbackFn' to completion over the entire array.
+                    1) The callbackFn() function argument
+      
+                     The 'callbackFn' function has the following syntax:
+                    
+                     function callbackFn(previousValue, currentValue, currentIndex, array) { /**/ }
+                    
+                    
+                     The 'callbackFn' function takes four arguments:
+                    
+                     'previousValue':
+                     The value returned from the previous call of the 'callbackFn' function. On the first call, the 'initialValue' is the 'previousValue' if you pass the 'initialValue'.Otherwise, its value is the 'array[0]'.
+                    
+                       currentValue:
+                     The value of the current array element.On the first call, it is 'array[0]' if you pas the 'initialValue' or 'array[1]' otherwise.
+                    
+                       currentIndex:
+                     The index of the currentValue in the array.On the first call, it's '0' if you pass the 'initialValue' or '1' otherwise.
+                    
+                     'array':
+                     The array to loop through.
+      
+                     <b>2) The initialValue argument</b>
+                     The 'initialValue' argument is optional.
+                     
+                     If you specify the 'initialValue', the 'callbackFn' function will initialize the 'previousValue' to the 'initialValue' and 'currentValue' to the first array's element on the first call.
+                     
+                     If you don't specify the 'initialValue', the the 'callbackFn' function will initialize the 'previousValue' to the first array's element(array[0]) in the array and the 'currentValue' to the second array's element(array[1]).
+                     
+                     The following table illustrates the logic when the 'reduce()' method executes the 'callbackFn()' function for the first time according to the 'initialValue' argument:
+      
+                     <div class='table-res'>
+                          <table border=1 >
+                              <tbody>
+                                  <tr>
+                                    <th>initialValue</th>
+                                    <th>previousValue</th>
+                                    <th>currentValue</th>
+                                  </tr>
+      
+                                  <tr>
+                                    <td>passed</td>
+                                    <td>initialValue</td>
+                                    <td>array[0]</td>
+                                  </tr>
+      
+                                  <tr>
+                                    <td>not passed</td>
+                                    <td>array[0]</td>
+                                    <td>array[1]</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                    `,
+                code1: `// The following example shows the progress of the reduce() function with an 'initialValue' as 100:
+      
+                let numbers = [1, 2, 3];
+                
+                function getOrdinalSuffix(i) {
+                  let j = i % 10, k = i % 100;
+                  if (j == 1 && k != 11) return i + 'st';
+                  if (j == 2 && k != 12) return i + 'nd';
+                  if (j == 3 && k != 13) return i + 'rd';
+                  return i + 'th';
+                }
+                
+                let call = 1;
+                let sum = numbers.reduce(function(previousValue, currentValue, currentIndex, array) {
+                  let result = previousValue + currentValue;
+                
+                  // show the 1st call, 2nd call, etc.
+                  console.log('\${getOrdinalSuffix(call)} call');
+                  call++;
+                
+                  // show the immediate values
+                  console.table({ previousValue, currentValue, currentIndex, result });
+                
+                  return result;
+                }, 100);
+                
+                console.log('Result: \${sum}');
+                `
+              },
+              {
+                text1: `Output:
+                1st call
+      
+                <div class='table-res'>
+                  <table border=1 >
+                      <tbody>
+                          <tr>
+                            <th> (index)  </th>
+                            <th> Values </th>
+                          </tr>
+      
+                          <tr>
+                            <td>previousValue</td>
+                            <td>100</td>
+                          </tr>
+      
+                          <tr>
+                            <td>currentValue</td>
+                            <td>1</td>
+                          </tr>
+      
+                          <tr>
+                            <td>currentIndex</td>
+                            <td> 0 </td>
+                          </tr>
+      
+                          <tr>
+                            <td>result</td>
+                            <td> 101 </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+      
+              2nd call
+      
+                <div class='table-res'>
+                  <table border=1 >
+                      <tbody>
+                          <tr>
+                            <th> (index)  </th>
+                            <th> Values </th>
+                          </tr>
+      
+                          <tr>
+                            <td>previousValue</td>
+                            <td>101</td>
+                          </tr>
+      
+                          <tr>
+                            <td>currentValue</td>
+                            <td>2</td>
+                          </tr>
+      
+                          <tr>
+                            <td>currentIndex</td>
+                            <td> 1 </td>
+                          </tr>
+      
+                          <tr>
+                            <td>result</td>
+                            <td> 103 </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+      
+              3rd call
+      
+                <div class='table-res'>
+                <table border=1 >
+                    <tbody>
+                        <tr>
+                          <th> (index)  </th>
+                          <th> Values </th>
+                        </tr>
+      
+                        <tr>
+                          <td>previousValue</td>
+                          <td>103</td>
+                        </tr>
+      
+                        <tr>
+                          <td>currentValue</td>
+                          <td> 3 </td>
+                        </tr>
+      
+                        <tr>
+                          <td>currentIndex</td>
+                          <td> 2 </td>
+                        </tr>
+      
+                        <tr>
+                          <td>result</td>
+                          <td> 106 </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+      
+              Result: 106
+                `,
+                code1: ``
+              },
+              {
+                text1: ` And the following illustrates the 'reduce()' method without the 'initialValue' argument:
+              1st call
+      
+                <div class='table-res'>
+                <table border=1 >
+                    <tbody>
+                        <tr>
+                          <th> (index) </th>
+                          <th> Values </th>
+                        </tr>
+      
+                        <tr>
+                          <td>previousValue</td>
+                          <td>1</td>
+                        </tr>
+      
+                        <tr>
+                          <td>currentValue</td>
+                          <td> 2 </td>
+                        </tr>
+      
+                        <tr>
+                          <td>currentIndex</td>
+                          <td> 1 </td>
+                        </tr>
+      
+                        <tr>
+                          <td>result</td>
+                          <td> 3 </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+              2nd call
+      
+                <div class='table-res'>
+                <table border=1 >
+                    <tbody>
+                        <tr>
+                          <th> (index) </th>
+                          <th> Values </th>
+                        </tr>
+      
+                        <tr>
+                          <td>previousValue</td>
+                          <td> 3 </td>
+                        </tr>
+      
+                        <tr>
+                          <td>currentValue</td>
+                          <td> 3 </td>
+                        </tr>
+      
+                        <tr>
+                          <td>currentIndex</td>
+                          <td> 2 </td>
+                        </tr>
+      
+                        <tr>
+                          <td>result</td>
+                          <td> 6 </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+      
+                // Result: 6
+                // More JavaScript Array reduce() examples: --
+                // Suppose that you have the following 'shoppingCart' array of product objects:`,
+                code1: `let shoppingCart = [
+                  {
+                    product: 'phone',
+                    qty: 1,
+                    price: 500,
+                  },
+                  {
+                    product: 'Screen Protector',
+                    qty: 1,
+                    price: 10,
+                  },
+                  {
+                    product: 'Memory Card',
+                    qty: 2,
+                    price: 20,
+                  },
+                ];
+                
+                // To calculate the total amount of the products in the shopping cart, you can use the 'reduce()' method, like this:
+                
+                let total = shoppingCart.reduce(function(previousValue, currentValue) {
+                  return previousValue + currentValue.qty * currentValue.price;
+                }, 0);
+                
+                // Output:
+                // 550
+                `
+              },
+              {
+                text1: `Notice that in this example, we passed in the 'initialValue' argument to the 'reduce()' method.
+      
+                If we didn't do so, the 'reduce()' method would take the first element of the 'shoppingCart' array, which is an object, as an initial value and perform the calculation on this object.Hence, it would cause an incorrect result.
+                
+                
+                JavaScript Array reduceRight() method: --
+                  The 'reduceRight()' method works in the same way as the 'reduce()' method, but in the opposite direction.
+                
+                    The 'reduce()' method starts at the first element and travels toward the last, whereas the 'reduceRight()' method starts at the last element and travels backward the first.
+                
+                See the following example:`,
+                code1: `let numbers = [1, 2, 3];
+      
+                let sum = numbers.reduceRight(function(previousValue, currentValue) {
+                  console.log({ previousValue, currentValue });
+                  return previousValue + currentValue;
+                });
+                
+                console.log('Result: \${sum}');
+                
+                // Output
+                
+                // { previousValue: 3, currentValue: 2 }
+                // { previousValue: 5, currentValue: 1 }
+                // Result:6
+                
+                // reduceRight() methods to reduce an array into a value.
+      
+      // Map
+      function double(x){
+          return x * 2
+      }
+      const ar = [2,4,7,9];
+      const dValues = ar.map(double)
+      console.log(dValues)
+      
+      
+      function total(arr) {
+         return arr.reduce(function(tot, acc, i, arrr){
+          console.log("tot ",tot)
+          console.log("acc ",acc)
+          return tot + acc
+         }, 0)
+      }
+      
+      console.log(total([1,2,3])); // 6
+      
+      const userDetails = [
+          {
+              fullName: "American First Finance",
+              area: 'yes',
+          },
+          {
+              fullName: "World Health",
+              area: 'yes',
+          }
+      ]
+      
+      //-----------------
+      // returning new array
+      const newARR = userDetails.map(acc => {
+          const shortOb =  {...acc, shordName : acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('') }
+          return shortOb
+      })
+      console.log(newARR) //
+      output
+      [
+          { fullName: 'American First Finance', area: 'yes' },
+          { fullName: 'World Health', area: 'yes'}
+      ]
+      
+      //------------------------
+      // mutated original array
+      userDetails.forEach(acc => {
+          acc.shortName = acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('')
+      })
+      console.log(userDetails)
+      output
+      [
+          { fullName: 'American First Finance', area: 'yes', shordName: 'aff' },
+          { fullName: 'World Health', area: 'yes', shordName: 'wh' }
+      ]
+      
+      // ========================================
+      
+      
+      
+      // Example 1:
+      const bankMovementsInDollars = [130, -50, 2000, -500, 1200, 2000, -400, -200, 500]
+      const rupees = 83.64
+      const credis = bankMovementsInDollars.filter(mov => mov > 0)
+                                          .map(doll => doll * rupees)
+                                          .reduce((acc, mov) => acc + mov, 0)
+      console.log("total credits in rupees ",credis)
+      
+      // ---------
+      // Example 2:   
+      // For example, here is the code for getting the total number of occurrences for each fruit in an array of fruits:
+      const fruits = ['Banana', 'Orange', 'Apple', 'Orange', 'Pear', 'Banana', 'Pear', 'Banana']
+      
+      const occursFruits = fruits.reduce((acc, currFruit) => {
+          return { ...acc, [currFruit]: (acc[currFruit] || 0) + 1 }
+          // return 1
+      }, {})
+      console.log(occursFruits)
+      
+      // Note that at each step of the iteration, the accumulator will be a hash map (i.e. a JavaScript object) with a key for each fruit in the array so far, and the values will be the number of times each fruit has occurred. This is the expression where we update the accumulator:
+      
+      // {...acc, [currFruit]: (acc[currFruit] || 0) + 1 }
+      // Let's break this down a little. First, using the spread operator, ...acc copies over all the existing values from the accumulator.
+      
+      // Then, [currFruit]: sets the value for the current fruit in the array. For example, on the very first iteration over the fruits collection, this will create the Banana property. acc[currFruit] || 0 retrieves the value for that fruit from the previous version of the accumulator. If the fruit doesn't exist in the accumulator, it will start with a value of zero. 
+      
+      // Finally, we add 1 to the value of that fruit and return the new accumulator.
+      
+      // -----------
+      // Example 3:
+      // For example, suppose we want to get just the names of each student from an array of objects. We can reduce the array from an array of objects to an array of string values, like so:
+      
+      const students = [
+          { name: "Kingsley", score: 70 },
+          { name: "Jack", score: 80 },
+          { name: "Joe", score: 63 },
+          { name: "Beth", score: 75 },
+          { name: "Kareem", score: 59 },
+          { name: "Sarah", score: 93 }
+      ]
+      
+      const stuNames = students.map((stu) => {
+          return stu.name
+      })
+      console.log(stuNames)
+      
+      const stuNamesReduce = students.reduce((acc, stu) => {
+          return [...acc, stu.name]
+      },[])
+      console.log(stuNamesReduce)
+      
+      // ----------
+      // Example 4:
+      // total marks
+      const studentsArray = [
+          { name: "Kingsley", sub1: 45, sub2: 45, sub3: 45 },
+          { name: "Jack", sub1: 41, sub2: 44, sub3: 85 },
+          { name: "Joe", sub1: 57, sub2: 49, sub3: 45 },
+          { name: "Beth", sub1: 45, sub2: 85, sub3: 65 },
+          { name: "Kareem", sub1: 15, sub2: 65, sub3: 95 },
+          { name: "Sarah", sub1: 35, sub2: 65, sub3: 5 }
+      ]
+      
+      const sutMarks = studentsArray.reduce((acc, currStu) => {
+          // return { ...acc, [currStu.name]: currStu.sub1 + currStu.sub2 + currStu.sub3 }
+          return [...acc, {...currStu, total: currStu.sub1 + currStu.sub2 + currStu.sub3 }]
+      }, [])
+      
+      console.log(sutMarks)
+      console.log(studentsArray)
+      
+      const students = [
+          { name: "Kingsley", score: 70 },
+          { name: "Jack", score: 80 },
+          { name: "Joe", score: 63 },
+          { name: "Beth", score: 75 },
+          { name: "Kareem", score: 59 },
+          { name: "Sarah", score: 93 }
+      ]
+      
+      const max = students.reduce((acc, currStu) => {
+          console.log(acc, currStu.score)
+          return acc ?? currStu.score > acc ? currStu.score : acc
+      }, null)
+      
+      // console.log(max)
+      
+      // ---------
+      // Example 5:
+      let ArrayList = ["Gun", "Hat", "Hate", "Apple", "Animals", "Ball", "Bat", "Cat", "Candy", "Dog", "Dare", "Exam", "Earth", "Air"];
+      const chOb = ArrayList.reduce((acc, let) => {
+          return { ...acc, [let[0]]: acc[let[0]] ? acc[let[0]].concat([let]) : [let] }
+      }, {})
+      
+      // console.log(chOb)
+      
+      // // {"A":["Animals","Apple"],"B":["Ball","Bat"],"C":["Candy","Cat"],"D":["Dare","Dog"],"E":["Earth","Exam"],"G":["Gang","Gun"],"H":["Hat","Hate"]}
+                `
+              },
+              {
+                text1: ``,
+                code1: ``
+              },
             ]
-        },
+          },
         {
             id: 1,
             title: "reduceRight()",
@@ -925,30 +1727,141 @@ console.log(student.toString());
         },
         {
             id: 1,
+            section: `Reversing elements`,
             title: "reverse()",
             note: [
-                {
-                    text1: `Reverses the order of the elements of an array -- the first becomes the last, and the last becomes the first.`,
-                    code1: ``
+              {
+                text1: `The reverse() method of TypedArray instances reverses a typed array in place and returns the reference to the same typed array, the first typed array element now becoming the last, and the last typed array element becoming the first.In other words, elements order in the typed array will be turned towards the direction opposite to that previously stated.This method has the same algorithm as Array.prototype.reverse().
+      
+                Using a for loop (or any other type of loop), we can loop through an array from the last time to the first item, and push those values to a new array which becomes the reversed version. Here's how:`,
+                code1: `const array = [1, 2, 3, 4]
+      
+                const reversedArray = []
+                
+                for (let i = array.length - 1; i >= 0; i--) {
+                  const valueAtIndex = array[i]
+                  reversedArray.push(valueAtIndex)
                 }
+                
+                console.log(reversedArray)
+                // [4, 3, 2, 1]
+                
+                //By using a 'for' loop, we start looping from the index of the last 'value (array.length - 1)' to the index of the first 'value (0)'.Then we push the values accordingly to 'reversedArray'.
+      
+                const array = [1, 2, 3, 4]
+                
+                array.reverse()
+                
+                console.log(array)
+                // [ 4, 3, 2, 1 ]
+                `
+              },
+              {
+                text1: `<a href="https://www.freecodecamp.org/news/how-to-reverse-a-string-in-javascript-in-3-different-ways-75e4763c68cb/" target="_blank">Three Ways to Reverse a String in JavaScript</a>`,
+                code1: ``
+              }
             ]
-        },
-        {
+          },
+          {
             id: 1,
-            title: "shift()",
+            title: "toReversed()",
             note: [
-                {
-                    text1: `Removes the first element from an array and returns that element.`,
-                    code1: ``
-                }
+              {
+                text1: ` The <b>toReversed()</b> method reverses the order of elements in an array and returns a new array with the elements in reversed order.
+      
+                 Unlike the <b>reversed()</b> method that reverses the elements of the array in place, the <b>toReversed()</b> method does not modify the original array.Instead, it creates a new array with the elements of the original array in the reversed order.
+                
+                Here's the basic syntax of the <b>toReversed()</b> method:
+                
+                   <span style="color:red">Array.prototype.toReversed()</span>
+                
+                 The <b>toReversed()</b> method takes no parameters and returns a new array containing the elements in reversed order.
+                
+                 When you call the <b>toReversed()</b> method on a sparse array, it treats empty slots as if they have the value <b>undefined</b>.
+                
+                 This method is generic, meaning that you can call it on a non - array object that has a length property and integer - keyed properties.
+                
+                JavaScript Array toReversed() method examples
+                Let's explore some examples of using the JavaScript array toReverse() method.
+                
+                <b> 1) Using JavaScript Array toReversed() method on string arrays </b>
+                The following example uses the toReverse() method to reverse an array of strings:`,
+                code1: `const colors = ['red', 'green', 'blue'];
+                const reversedColors = colors.toReversed();
+                
+                console.log(colors);
+                console.log(reversedColors);
+                
+                // Output:
+                // ['red', 'green', 'blue']
+                // ['blue', 'green', 'red']
+                `
+              },
+              {
+                text1: `<b>3) Using JavaScript Array toReversed() method on arrays of objects</b>
+                The following example uses the toReversed() method to reverse the order of objects in an array:`,
+                code1: `const contacts = [{ name: 'John' }, { name: 'Alice' }, { name: 'Bob' }];
+                const reversedContacts = contacts.toReversed();
+                
+                console.log(contacts);
+                console.log(reversedContacts);
+                
+                // Output:
+                // [{ name: 'John' }, { name: 'Alice' }, { name: 'Bob' }]
+                // [{ name: 'Bob' }, { name: 'Alice' }, { name: 'John' }]
+                `
+              },
+              {
+                text1: `<b>4) Calling toReversed() method on sparse arrays</b>
+                When you call the toReversed() method on a sparse array, the result array remains sparse.The toReversed() method copies empty slots over their respective indices as empty slots:`,
+                code1: `const scores = [1, , 7, 5];
+                const reversedScores = scores.toReversed();
+                
+                console.log(scores);
+                console.log(reversedScores);
+                
+                // Output:
+                // [1, , 7, 5]
+                // [5, 7, undefined, 1]
+                `
+              },
+              {
+                text1: `<b>5) Calling toReversed() method on non - array objects</b>
+                The following example illustrates how to call the toReversed() method on an object that has the length property and integer - keyed properties:`,
+                code1: `const arrayLike = {
+                  length: 3,
+                  unrelated: "bar",
+                  2: 2,
+                  3: 3, // ignored because the length is 3
+                };
+                
+                const result = Array.prototype.reverse.call(arrayLike);
+                
+                console.log(result);
+                
+                // Output:
+                // { 0: 2, 3: 3, length: 3, unrelated: 'bar' }
+                `
+              },
+              {
+                text1: `In this example, the toReversed() method does the following:
+      
+                First, access the length property of the object.
+                  Second, iterate through each property with an integer key ranging from 0 to length / 2.
+                Third, swap the values at corresponding indices on both ends of the array.Additionally, remove any destination property without a corresponding source property.
+                  Finally, return a new object with the order of the elements(or properties) in the reversed order.
+                <b>Summary</b>
+                Use the JavaScript array toReversed() method to reverse the order of elements within an array and return a new reversed array.`,
+                code1: ``
+              },
             ]
-        },
+          },
         {
             id: 1,
             title: "splice() - (adds, removes or replaces elements)",
             note: [
-              {
-                text1: `<b>The splice() method modifies an array(adds, removes or replaces elements).</b>
+                {
+                    text1: `<b>The splice() method modifies an array(adds, removes or replaces elements).</b>
                 splice() method that allows you to insert new elements into the middle of an array. Also, you can use this method to delete and replace existing elements as well.
 
                 <b>Deleting elements using JavaScript Array's splice() method</b>
@@ -961,7 +1874,7 @@ console.log(student.toString());
                 Let's take a look at the following example.
                 Suppose, you have an array <b>scores</b> that contains five numbers from 1 to 5.
              `,
-                code1: `let scores = [1, 2, 3, 4, 5];
+                    code1: `let scores = [1, 2, 3, 4, 5];
                 // The following statement deletes three elements of the 'scores' array starting from the first element.
                 let deletedScores = scores.splice(0, 3);
                 // The scores array now contains two elements.
@@ -974,9 +1887,9 @@ console.log(student.toString());
                 // The following figure illustrates the scores.splice(0,3) method call above.
                 // 0: The position of the first item to delete
                 // 3: The number of elements to delete`
-              },
-              {
-                text1: `<b>Inserting elements using the JavaScript Array splice() method</b>
+                },
+                {
+                    text1: `<b>Inserting elements using the JavaScript Array splice() method</b>
       
                 You can insert one or more elements into an array by passing three or more arguments to the splice() method with the second argument is zero.
       
@@ -990,12 +1903,10 @@ console.log(student.toString());
                 Note that the splice() method changes the original array. Also, the splice() method does not remove any elements, therefore, it returns an empty array. For example:
       
                 `,
-                code1: `// Assuming that you have an array named colors with three strings:
-      
+                    code1: `// Assuming that you have an array named colors with three strings:
                 let colors = ['red', 'green', 'blue'];
                 
                 // The following statement inserts one element after the second element.
-                
                 colors.splice(2, 0, 'purple');
                 // The colors array now has four elements with the new element inserted in the second position.
                 
@@ -1012,19 +1923,17 @@ console.log(student.toString());
                 console.log(colors); 
                 ["red", "yellow", "pink", "green", "purple", "blue"]
                 `
-              },
-              {
-                text1: `<b>Replacing elements using the JavaScript Array splice() method</b>
-
+                },
+                {
+                    text1: `<b>Replacing elements using the JavaScript Array splice() method</b>
                 The splice() method allows you to insert new elements into an array while deleting existing elements simultaneously.
-                
                 To do this, you pass at least three arguments with the second one that specifies the number of items to delete and the third one that indicates the elements to insert.
                 
                 <b>Note</b> that the number of elements to delete needs not be the same as the number of elements to insert.
                 
                 Suppose you have an array of programming languages with four elements as follows:
                 `,
-                code1: `let languages = ['C', 'C++', 'Java', 'JavaScript'];
+                    code1: `let languages = ['C', 'C++', 'Java', 'JavaScript'];
                 // The following statement replaces the second element with a new one.
                 
                 languages.splice(1, 1, 'Python');
@@ -1058,23 +1967,23 @@ console.log(student.toString());
                 const days = months.splice(2, 2, 'March', 'April');
                 console.log(months) //  ['Jan', 'Feb', 'March', 'April']
                 console.log(days) // ['Monday', 'Tuesday']`
-              },
-              {
-                text1: `<a href="https://www.freecodecamp.org/news/how-to-slice-and-splice-arrays-in-javascript-72bbca45006/" target="_blank">slice and splice</a>`,
-                code1: ``
-              },
-              {
-                text1: ``,
-                code1: ``
-              },
+                },
+                {
+                    text1: `<a href="https://www.freecodecamp.org/news/how-to-slice-and-splice-arrays-in-javascript-72bbca45006/" target="_blank">slice and splice</a>`,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
             ]
         },
         {
             id: 1,
             title: "slice() - copy elements of an array.",
             note: [
-              {
-                text1: `The <b>slice()</b> method can be used to create a copy of an array or return a portion of an array. It is important to note that the <b>slice()</b> method does not alter the original array but instead creates a shallow copy.
+                {
+                    text1: `The <b>slice()</b> method can be used to create a copy of an array or return a portion of an array. It is important to note that the <b>slice()</b> method does not alter the original array but instead creates a shallow copy.
 
                 The slice() method accepts two optional parameters as follows:
                <span style="color:red"> slice(optional start parameter, optional end parameter) </span>
@@ -1087,14 +1996,12 @@ console.log(student.toString());
 
                 It works on <b>Array</b> and <b>String</b> both
                 `,
-                code1: `//-------------- Ex : 1 ----------
+                    code1: `//-------------- Ex : 1 ----------
                 // //slice() JavaScript method without the start and end parameters
 //In this first example, I have created a list of cities from around the world.
 const cities = ["Tokyo","Cairo","Los Angeles","Paris","Seattle"];
 console.log(cities.slice()) // (5) ['Tokyo', 'Cairo', 'Los Angeles', 'Paris', 'Seattle']
 // I can use the slice() method to create a shallow copy of that array.
-
-
 
 
 //---------------- Ex : -------------
@@ -1104,14 +2011,14 @@ var numbers = [1, 2, 3, 4, 5];
                 var newNumbers = numbers.slice();
                 // In this example, the 'newNumbers' array contains all the elements of the 'numbers' array.             
                `
-              },
-              {
-                text1: `<b>slice() JavaScript method using the start parameter</b>
+                },
+                {
+                    text1: `<b>slice() JavaScript method using the start parameter</b>
                 You can use the optional start parameter to set a starting position for selecting elements from the array. It is important to remember that arrays are zero based indexed.
                 
                 You can also use negative indexes which will start extracting elements from the end of the array.
                 `,
-                code1: `//In this example, we will set the start position at index 2 which will select the last three cities in the array and return them in a new array.
+                    code1: `//In this example, we will set the start position at index 2 which will select the last three cities in the array and return them in a new array.
                  const cities = ["Tokyo","Cairo","Los Angeles","Paris","Seattle"];
 console.log(cities.slice(2))
 
@@ -1132,7 +2039,7 @@ const newCityArr = cities.slice(-2);
 // If the start parameter is greater than the last index of the array, then an empty array will be returned.
 const newCityArr = cities.slice(5);
 `
-              },
+                },
                 {
                     text1: `The slice() method in JavaScript is used to extract a shallow copy of a portion of an array or a string without modifying the original array or string. It returns a new array or string that contains the selected elements or characters from the original one.
                     array.slice([begin[, end]]);
@@ -1200,14 +2107,14 @@ console.log(newArr);  // Output: [30, 40]
                     var classification = toArray('A', 'B', 'C');
                     console.log(classification); // ["A", "B", "C"]`
                 },
-              {
-                text1: `In this example, the <b>arguments</b> of the toArray() function is an array-like object. Inside the toArray() function, we called the slice() method to convert the arguments object into an array.
+                {
+                    text1: `In this example, the <b>arguments</b> of the toArray() function is an array-like object. Inside the toArray() function, we called the slice() method to convert the arguments object into an array.
       
                 Every argument we pass to the toArray() function will be the elements of the new array.
                 
                 Another typical example that you often see is converting a <b>NodeList</b> into an array as follows:
                 `,
-                code1: `var p = document.querySelectorAll('p');
+                    code1: `var p = document.querySelectorAll('p');
                 var list = Array.prototype.slice.call(p);
                 
                 // In this example, first, we used the 'document.querySelectorAll()' to get all 'p' nodes of the HTML document.The result of this method is a 'NodeList' object, which is an array - like object.Then, we called the 'slice()' method to convert the 'NodeList' object into an array.
@@ -1216,9 +2123,9 @@ console.log(newArr);  // Output: [30, 40]
                 var list = [].slice.call(document.querySelectorAll('p'));
                 
                 // In this example, we instantiated an empty array '[]' and indirectly accessed the 'slice()' method of the 'Array.prototype' method through the empty array.The effect is the same as the one that uses the 'Array.prototype' directly.`
-              },
-              {
-                text1: `slice() vs splice()
+                },
+                {
+                    text1: `slice() vs splice()
                 slice returns a piece of the array but it doesn’t affect the original array. splice changes the original array by removing, replacing, or adding values and returns the affected values.
                 
                 <div class='table-res'> 
@@ -1254,16 +2161,17 @@ console.log(newArr);  // Output: [30, 40]
                     </tbody>
                 </table>
                 </div>`,
-                code1: ``
-            }
+                    code1: ``
+                }
             ]
-          },
+        },
         {
             id: 1,
             title: "some()",
             note: [
                 {
-                    text1: `Returns true if at least one element in this array satisfies the provided testing function.
+                    text1: `<a href="https://www.freecodecamp.org/news/javascript-array-some-tutorial-how-to-iterate-through-elements-in-an-array/" target="_blank">some()</a>
+                     Returns true if at least one element in this array satisfies the provided testing function.
                     The some() method tests whether any of the array elements pass the given test function.
                     
                    <b> some() Syntax</b>
@@ -1315,8 +2223,176 @@ let numbers = [1, 3, 2, 5, 4];
 // checks whether the numbers array contain at least one even number
 console.log(numbers.some(isEven));
 
-// Output: true `
-                }
+// Output: true 
+
+
+//-----------------
+let people = [{
+    name: "Anna",
+    sex: "Female"
+  },
+
+  {
+    name: "Ben",
+    sex: "Male"
+  },
+
+  {
+    name: "Cara",
+    sex: "Female"
+  },
+
+  {
+    name: "Danny",
+    sex: "Female"
+  }
+
+]
+
+function isThereMale(person) {
+    return person.sex === "Male"
+}
+console.log(people.some(person => isThereMale(person))) // true
+
+`
+                },
+                {
+                    text1: ` The some() method of Array instances tests whether at least one element in the array passes the test implemented by the provided function. It returns true if, in the array, it finds an element for which the provided function returns true; otherwise it returns false. It doesn't modify the array.
+          
+                     The some() method is an Array.propotype (built-in) method which takes in a callback function and will test that function  on each iteration against the current item.
+                    
+                     The method takes in three parameters:
+                    
+                     > currentItem: This is the element inside of the array which is currently being iterated over
+                     > index: This is the index position of the currentItem inside of the array
+                     > array: This represents the array collection to which the some() method is bound
+                    
+                     Sometimes, you want to check if an array has at least one element that meets a specified condition.
+                    
+                     For example, to check if the following array has at least one element less than 5:`,
+                    code1: `let marks = [4, 5, 7, 9, 10, 3];
+          
+                     …you typically use a 'for' loop, like this:
+                    
+                    let marks = [4, 5, 7, 9, 10, 3];
+                    
+                    let lessThanFive = false;
+                    
+                    for (let index = 0; index < marks.length; index++) {
+                      if (marks[index] < 5) {
+                        lessThanFive = true;
+                        break;
+                      }
+                    }
+                    
+                    console.log(lessThanFive);
+                    
+                    //  Output:
+                    //  true
+          
+                    //  > First, declare a flag variable 'lessThanFive' and set its value to 'false'.
+                    //  > Second, iterate over the elements.If an element is less than 5, set the flag to 'true' and immediately exit the loop using the 'break' statement.
+                    //  The code works as expected.However, it is quite verbose.
+                     
+                     //---------------------------
+                     let marks = [4, 5, 7, 9, 10, 3];
+          
+          lessThanFive = marks.some(function(e) {
+            return e < 5;
+          });
+          
+          console.log(lessThanFive);
+          
+          // Output
+          // true
+          
+          // The condition is implemented via a callback function passed into the 'some()' method.
+          // Now, the code is shorter.To make it more expressive, you can use the arrow function syntax in ES6:
+          
+          let marks = [4, 5, 7, 9, 10, 3];
+          let lessThanFive = marks.some(e => e < 5);
+          console.log(lessThanFive);
+                     `
+                  },
+                  {
+                    text1: ` JavaScript Array 'some()' syntax: --
+                    
+                     arrayObject.some(callback[, thisArg]);
+                    
+                     The 'some()' method accepts two arguments:
+                    
+                     1) The callback argument
+                     The 'some()' function executes the 'callback' function once for each element in the array until it finds the one where the 'callback' function returns a 'true'.The 'some()' method immediately returns 'true' and doesn't evaluate the remaining elements.
+                    
+                     If no element causes the 'callback()' to return 'true', the 'some()' method returns 'false'.
+                    
+                       The 'callback' function takes three arguments:
+                    
+                     function callback(currentElement [[, currentIndex], array]) {  ...}
+                    
+                     > The 'currentElement' is the current element being processed in the array.
+                     > The 'currentIndex' is the index of the current element being processed in the array.
+                     > The 'array' is array that 'some()' was called upon.
+                    
+                     2) The thisArg argument: --
+                       The 'thisArg' argument is optional.If you pass the 'thisArg' into the method, you can use the 'thisArg' as the 'this' value inside the 'callback' function.
+                    
+                     JavaScript Array some() examples: --
+                     Let's take some more examples of using the 'some()' method.
+                    
+                     1) Check if an element exists in the array:
+                     The following 'exists()' function uses the 'some()' method to check if a value exists in an array:`,
+                    code1: `function exists(value, array) {
+                      return array.some(e => e === value);
+                    }
+                    
+                    let marks = [4, 5, 7, 9, 10, 2];
+                    
+                    console.log(exists(4, marks));
+                    console.log(exists(11, marks));
+                    
+                    // Output:
+                    // true
+                    // false`
+                  },
+                  {
+                    text1: `2) Check if an array has one element that is in a range: --
+                    The following example shows how to check if any number in the 'marks' array is in the range of(8, 10):`,
+                    code1: `let marks = [4, 5, 7, 9, 10, 2];
+                    const range = {
+                      min: 8,
+                      max: 10
+                    };
+                    
+                    let result = marks.some(function(e) {
+                      return e >= this.min && e <= this.max;
+                    }, range);
+                    
+                    console.log(result);
+                    
+                    // Output:
+                    // true
+                    
+                    // > First, define a range object with min and max properties.
+          // > Second, call the 'some()' method on the marks array object and pass the callback and range object.Because we pass the range object as the second argument('thisArg'), we can reference it inside the callback via the 'this' value.
+                    `
+                  },
+                  {
+                    text1: `<b>Notice</b> that if you use the arrow function in this example, the 'this' value inside the callback function doest not bind to the range 'object' but the 'global' object.
+                    Caution: Empty arrays
+          If you call the some() method on an empty array, the result is always false regardless of any condition. 
+          For example:
+                    `,
+                    code1: `let result = [].some(e => e > 0);
+                    console.log(result);
+                    
+                    result = [].some(e => e <= 0);
+                    console.log(result);
+                    
+                    //   Output:
+                    //   false
+                    //   false`
+                  }
             ]
         },
         {
@@ -1324,9 +2400,330 @@ console.log(numbers.some(isEven));
             title: "every()",
             note: [
                 {
-                    text1: `Returns true if every element in this array satisfies the provided testing function.`,
-                    code1: ``
-                }
+                    text1: `Returns true if every element in this array satisfies the provided testing function.
+                    
+                    <b>every</b> loops over the array elements left to right.
+=> For each iteration, it calls the given function with the current array element as its 1st argument.
+=> The loop continues until the function returns a <b>falsy value</b>. And in that case <u>every</u> returns <u>false</u> - otherwise it returns <u>true</u>.
+
+The every() method checks if all the array elements pass the given test function.
+
+<b>every() Syntax </b>
+The syntax of the <u>every()</u> method is:
+arr.every(callback(currentValue), thisArg)
+Here, <u>arr</u> is an array.
+
+<b> every() Parameters </b>
+The every() method takes in:
+=> callback() - the function to test for each array element. It takes in:
+=> currentValue - the current element being passed from the array.
+=> thisArg (optional) - value to use as this when executing callback(). By default, it is undefined.
+
+<b>every() Return Value </b>
+The every() method returns:
+<b>true</b> - if all the array elements pass the given test function (callback returns a truthy value).
+<b>false</b> - if any array element fails the given test function.
+Notes:
+
+<u>every()</u> does not change the original array.
+<u>every()</u> does not execute the <u>callback()</u> function for an empty array. In case we do pass an empty array, it always returns true.
+
+In JavaScript, the <u>every()</u> method is an <b>array method</b> that checks whether <b>all elements</b> in an array pass a <b>test implemented by a provided function</b>. It returns a <b>boolean value: true</b> if all elements satisfy the condition, and <u>false</u> if <b>at least one element</b> does not.
+
+array.<span style="color:blue">every</span>(<span style="color:red">callback</span>(element, index, array), thisArg);
+
+    <b>callback</b>: A function that is executed on each element in the array.
+    <b>element</b>: The current element being processed in the array.
+    <b>index (optional)</b>: The index of the current element being processed.
+    <b>array (optional)</b>: The array that every() was called on.
+<b>thisArg (optional)</b>: A value to use as this when executing the callback function.
+
+<b>Return Value</b>:
+    <u>true</u> if <b>all</b> elements pass the test (i.e., the callback function returns <b>true</b> for every element).
+    <u>false</u> if <b>any</b> element does <b>not</b> pass the test (i.e., the callback function returns <b>false</b> for at least one element).
+`,
+                    code1: `// Ex : 1
+                    // function that checks whether
+// the age is 18 or above
+function checkAdult(age) {
+    return age >= 18;
+}
+const ageArray = [34, 23, 20, 26, 12];
+//checks if all the array elements
+// pass the checkAdult() function
+let check = ageArray.every(checkAdult);
+// Output: false
+
+
+//-----------------
+// Example 2: At Least One Element Fails the Test
+// Check if all numbers in an array are even:
+
+let arr = [2, 4, 6, 8, 10];
+let result = arr.every(num => num % 2 === 0);
+console.log(result);  // Output: true
+// All elements in arr are even, so the method returns "true".
+
+//--------------
+//Ex : 2.1
+// Example where the test fails:
+let arr = [2, 4, 5, 8, 10];
+let result = arr.every(num => num % 2 === 0);
+console.log(result);  // Output: false
+// Since 5 is not even, the every() method returns false.
+
+
+//---------------
+// Example 3: JavaScript every() With Arrow Function
+let numbers = [ 1 , 2 , 3 , 4 , 5];
+// use arrow function with every()
+let result = numbers.every(element => element < 6);
+console.log(result); 
+// Output: true
+
+// In the above example, we have created the "numbers" array. Then, we call the "every()" method on that array.
+// Notice the arrow function "element=> element < 6" inside the "every()" method. This function checks whether a given array element is less than 6 or not.
+// Since, all the elements in the "numbers" array are less than 6, we get "true" as an output.
+
+//-----------------------
+// Example 4: Checking if All Strings in an Array Have a Minimum Length
+let words = ["apple", "banana", "cherry"];
+let result = words.every(word => word.length > 4);
+console.log(result);  // Output: true
+// All the "words" in the words array have more than 4 characters, so the method returns true.
+
+
+//---------------------
+// Example 5: Using "thisArg" to Specify "this" Value
+// The "thisArg" parameter allows you to pass an external object to be used as this inside the "callback" function.
+
+function checkLength(minLength) {
+  return function(word) {
+    return word.length >= minLength;
+  };
+}
+
+let minLength = 5;
+let words = ["apple", "banana", "kiwi", "cherry"];
+let result = words.every(checkLength(minLength));
+console.log(result);  // Output: false
+// Explanation:
+// The function "checkLength(minLength)" returns a function that checks if the length of each word is greater than or equal to "minLength". In this case, the result is "false" because "kiwi" has fewer than 5 characters.
+
+
+//---------------------
+// Example 6: "every()" with an Array of Objects
+// Check if all objects in an array meet a specific condition:
+
+let products = [
+  { name: "apple", price: 1 },
+  { name: "banana", price: 2 },
+  { name: "cherry", price: 3 }
+];
+let result = products.every(product => product.price > 0);
+console.log(result);  // Output: true
+// Explanation:
+// Since all the "price" values are greater than "0", the "every()" method returns "true".
+
+
+//---------------------
+// Example: Using thisArg in every()
+// Let's say we have an object with a property minAge, and we want to check if all people in an array of objects have an age greater than or equal to minAge.
+
+const personChecker = {
+  minAge: 18,
+  checkAge: function(person) {
+    return person.age >= this.minAge;  // Use \`this\` to refer to \`minAge\`
+  }
+};
+const people = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 20 },
+  { name: 'Charlie', age: 17 }
+];
+
+// Use \`thisArg\` to pass \`personChecker\` as the value of \`this\`
+const result = people.every(person => personChecker.checkAge.call(personChecker, person));
+console.log(result);  // Output: false (because Charlie is under 18)
+
+// Explanation:
+//     => The \`personChecker\` object has a \`minAge\` property and a \`checkAge\` method, which checks if a person's age is greater than or equal to \`minAge\`.
+//     => We use \`every()\` to check if all elements in the \`people\` array satisfy the condition that their \`age\` is greater than or equal to \`minAge\`.
+//     => The \`call()\` method is used to bind the \`thisArg\` (the \`personChecker\` object) to the \`checkAge\` method.
+
+
+//-------------------------
+// thisArg Example with every():
+// Alternatively, we can use thisArg directly in the every() method to specify the context (value of this) inside the callback:
+const personChecker = {
+  minAge: 18,
+};
+const people = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 20 },
+  { name: 'Charlie', age: 17 }
+];
+
+// Using \`thisArg\` directly
+const result = people.every(function(person) {
+  return person.age >= this.minAge;  // 'this' refers to personChecker
+}, personChecker);  // Set \`thisArg\` to \`personChecker\`
+console.log(result);  // Output: false (because Charlie is under 18)
+
+// "Explanation of thisArg:"
+//     In this version, we don't need to use "call()". Instead, we pass "personChecker" as the second argument to "every()".
+//     Now, inside the callback function, "this" refers to the "personChecker" object (thanks to the "thisArg" passed to "every()").
+ `
+                },
+                {
+                    text1: `Checking array elements using the for loop:--
+                    Sometimes, you need to test whether every element of an array satisfies a specified condition.
+                    
+                    Typically, you use a  'for' loop to iterate all elements and check each individual element against the condition. Suppose that you have an array 'numbers' with three elements:
+                    
+                    let numbers = [1, 3, 5];
+                    The following code checks if every element in the 'numbers' array is greater than zero:`,
+                    code1: `let numbers = [1, 3, 5];
+                    let result = true;
+                    for (let i = 0; i < numbers.length; i++) {
+                      if (numbers[i] <= 0) {
+                        result = false;
+                        break;
+                      }
+                    }
+                    console.log(result);
+                    // Output:
+                    // true
+                    // How it works:`
+                  },
+                  {
+                    text1: `> First, initialize the  'result' variable to 'true'.
+                    > Second, iterate over the elements of the 'numbers' array and check whether each element is less than or equal zero.If it is the case, set the 'result' variable to 'false' and terminate the loop immediately using the 'break' statement.In case no element is less than or equal zero, the value of the 'result' variable remains  'true'.
+                    
+                    This code is simple and straight forward.However, it is quite verbose.
+                    
+                      JavaScript 'Array' type provides the 'every()' method that allows you to check if every element of an array pass a test in a shorter and cleaner way.
+                    
+                    
+                    Introduction to JavaScript Array every() method: --
+                    
+                      Starting from ES5, JavaScript Array type provides a method 'every()' that tests every element in an array.
+                    
+                    The following example uses the 'every()' to check if every element of the numbers array is greater than zero:`,
+                    code1: `let numbers = [1, 3, 5];
+                    let result = numbers.every(function(e) {
+                      return e > 0;
+                    });
+                    
+                    console.log(result);
+                    
+                    // Output:
+                    // true
+                    
+                    // By using the ES6 arrow functions, the code can be even shorter:
+          
+          let numbers = [1, 3, 5];
+          let result = numbers.every(e => e > 0);
+          console.log(result);
+                    `
+                  },
+                  {
+                    text1: `  The following illustrates the syntax of the 'every()' method.
+          
+                        arrayObject.every(callback[, thisArg])
+                    
+                    The 'every()' method accepts two named arguments: 'callback' and 'thisArg'.
+                    
+                    1) The callback argument
+                    The 'callback' is a function that tests each element of the array.The 'callback()' function has the following form:
+                    
+                    function callback(currentElement, index, array) {
+                      //...
+                    }
+                    
+                    The 'callback()' function takes three arguments:
+                    
+                    First, the 'currentElement' is the current element that is being processed.
+                      Second, the 'index' is the index  of the 'currentElement'.
+                        Third, the 'array' is the array that the 'every()' method was called upon.
+                          The 'currentElement' argument is required whereas the 'index' and 'array' arguments are optional.
+                            2) The thisArg argument
+            The 'thisArg' argument of the 'every()' method is optional.If you pass the 'thisArg' argument into the method, the this value inside the callback function will reference the 'thisArg' argument.
+          
+            The 'every()' method returns 'true' if the 'callback' function returns a truthy value for every array element; otherwise, it returns 'false'.
+          
+            Note that the 'every()' method executes the 'callback()' function on every element in the array until it finds the one that causes the 'callback()' return a falsy value.
+          
+            In other words, the 'every()' will stop calling the 'callback()' function and return 'false' once there is an array element that causes 'callback()' to return a falsy value.
+          
+            Let's take a look at some more examples of using the 'every()' method.
+          
+          More JavaScript Array every() method examples
+          The following example tests whether all the array elements are the even numbers
+                    `,
+                    code1: `let numbers = [1, 3, 5];
+                    let isEven = numbers.every(function(e) {
+                      return e % 2 == 0;
+                    });
+                    
+                    console.log(isEven);
+                    
+                    // Output:
+                    // false
+                    
+                    // In contrast, the following example tests if all the array elements are the odd numbers.
+          
+          let numbers = [1, 3, 5];
+          let isOdd = numbers.every(function(e) {
+            return Math.abs(e % 2) == 1;
+          });
+          
+          console.log(isOdd);
+          
+          // Output:
+          // true
+          
+          // Suppose that you have an object with two properties: 'min' and 'max':
+          
+          let range = {
+            min: 0,
+            mas: 10
+          };
+          
+          // The following example tests whether all elements in the 'numbers' array is in the range specified by the 'min' and 'max' of the 'range' object.
+          
+          
+          let numbers = [1, 3, 5];
+          
+          let range = {
+            min: 0,
+            max: 10
+          };
+          
+          let isInRange = numbers.every(function(e) {
+            return e >= this.min && e <= this.max;
+          }, range);
+          
+          // Output:
+          // true
+          
+                    `
+                  },
+                  {
+                    text1: `In this example, we pass the 'range' object to the 'every()' method as the second argument.And inside the 'callback()' function, we reference the 'range' object using the this keyword.
+          
+                      Caution: Empty arrays: --
+                        If you call the 'every()' method on an empty array, the method will always return true for any condition.For example:`,
+                    code1: `let gtZero = [].every(e => e > 0); // any condition
+                    let ltZero = [].every(e => e < 0); // any condition
+                    
+                    console.log('gtZero:', gtZero);
+                    console.log('ltZero:', ltZero);
+                    
+                    // Output:
+                    // gtZero: true
+                    // ltZero: true`
+                  },
             ]
         },
         {
@@ -1344,8 +2741,568 @@ console.log(numbers.some(isEven));
             title: "sort()",
             note: [
                 {
-                    text1: `Sorts the elements of an array.`,
+                    text1: `Sorts the elements of an array.
+                    The sort() method sorts the items of an array in a specific order (ascending or descending).
+                    works on arrays,
+                    <b>Array sort() Method Works</b>
+The sort() method can be used to sort elements of an array in ascending order based on Unicode character code values by default.
+
+                   <b> How To Sort Numbers Accurately in JavaScript </b>
+The sort() method of JavaScript compares the elements of the array by converting them into strings and then comparing their Unicode code points.
+
+It is also important for you to know that when you apply the sort() method to an array, it will change the position of the elements in the original array. This means you do not need to assign a new variable to the sorted array:
+The sort() method compares the elements of the array by converting them into strings and then comparing their Unicode code points. This means that in some situations, the sorting could go wrong in reality:
+The sort() method sorts arrays in <b>lexicographical</b> order by default.
+
+let numArray = [3, 10, 4, 21, 5, 9, 2, 6, 5, 3, 5].sort();
+console.log(numArray); // Output: [10,2,21,3,3,4,5,5,5,6,9]
+
+This can lead to unexpected results when sorting arrays of numbers, as seen in the example where 10, 5, and 80 are sorted as 10, 5, 80 instead of 5, 10, 80.
+let <span style="color:blue">numArr</span> = [10, 5, 80].<span style="color:#9d0797;">sort</span>();
+console.log(<span style="color:blue">numArr</span>); // Output: [10, 5, 80]
+
+To solve this shortcoming, you can provide a <b>comparison function</b> that defines the desired sorting order.
+For sorting an array of numbers, the comparison function should subtract the second number from the first number.
+This will result in a negative number if the first number is smaller than the second number, a positive number if the first number is larger than the second number, and 0 if the two numbers are equal.
+
+-> The function <u>(a, b) => a - b</u> compares two elements a and b:
+->     <u>If a - b < 0</u>, a is considered <b>smaller</b> than <b>b</b>, and the order is kept as is.
+->     <u>If a - b > 0</u>, a is considered <b>larger</b> than <b>b</b>, and their order is swapped.
+->     <u>If a - b === 0</u>, the order remains unchanged.
+-> This comparison function effectively sorts the numbers <b>in ascending numerical order</b>.
+
+<b>Explanation</b>:
+In lexicographical order, the sorting compares characters from <b>left to right</b>:
+    // Compare the first characters.
+    // If they are the same, move to the next character and compare again.
+    // Continue this process until a difference is found or the end of one of the strings is reached.
+                    `,
+                    code1: `// sorts based on Unicode character code values, let's see some examples.
+let numArray = [3, 4, 1, 7, 2];
+let sortedArr = numArray.sort();
+console.log(sortedArr); // Output: [1,2,3,4,7]
+
+        const arNum = [3, 5, 8, 12, 11, 10, 4, 2]
+        console.log(arNum.sort((a, b) => a - b)) // ascending
+        console.log(arNum.sort((a, b) => b - a)) // descending 
+`
+                },
+                {
+                    text1: `(Ex : 1) By providing a comparison function that defines the correct sorting order, we can ensure that the array is sorted accurately.
+                    
+                    <b>How To Sort Strings Accurately</b>
+The sort() method can also be used to sort an array of strings, but the sorting order may not be accurate in all cases.
+
+For example (Ex : 2), the strings "a", "A", and "b" would be sorted as "A", "a", "b" instead of "a", "A", "b", because the uppercase "A" has a lower Unicode code point than the lowercase "a".
+
+To solve this shortcoming, you can provide a comparison function that defines the desired sorting order.
+For sorting an array of strings in a case-insensitive alphabetical order, the comparison function should convert both strings to lowercase using the <b>toLowerCase()</b> method and then compare them using the <b><</b> and <b>></b> operators.
+                    `,
+                    code1: `//------------ Ex : 1 ----------
+ let stringsArr = ["a", "A", "b", "C", "D", "e"].sort();
+ console.log(stringsArr); // Output: ['A', 'C', 'D', 'a', 'b', 'e']
+
+
+//------------ Ex : 2 ----------
+ let stringsArr2 = ["a", "A", "b", "C", "D", "e"];
+ stringsArr2.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
+console.log(stringsArr2); // Output: ['a', 'A', 'b', 'C', 'D', 'e']
+
+
+//----------- Ex : 3 -----------
+//  Sorting Strings in Reverse Order
+// If you want to sort strings in reverse order, simply use the reverse() method after sorting.
+let words = ['banana', 'apple', 'cherry', 'kiwi', 'grape'];
+words.sort().reverse();  // First sort, then reverse
+console.log(words);  // Output: ['kiwi', 'grape', 'banana', 'cherry', 'apple']
+
+`
+                },
+                {
+                    text1: `<b>Explanation of Lexicographical Sorting:</b>
+    <b>Lexicographical Order</b>: In lexicographical order, strings are compared character by character based on their Unicode values (character encoding values).
+    For example:
+        The first letter of "apple" is "a", which comes before "b", so "apple" comes before "banana".
+        "banana" comes before "cherry", because "b" comes before "c".
+
+<b>Lexicographical Sorting Based on Unicode Values</b>:
+JavaScript compares characters using their Unicode values. For example:
+    The character "a" has a Unicode value of <b>97</b>.
+    The character "b" has a Unicode value of <b>98</b>.
+    "apple" will come before "banana" because "a" (97) is less than "b" (98).`,
+                    code1: `let words = ['banana', 'apple', 'grape', 'kiwi', 'cherry'];
+words.sort();
+console.log(words);  // Output: [ 'apple', 'banana', 'cherry', 'grape', 'kiwi' ]
+`
+                },
+                {
+                    // text1: `<b>Lexicographical (లెక్సికోగ్రాఫికల్)</b> comparison is based on the Unicode value of each character in the strings.
+                    text1: `<b>Lexicographical</b> comparison is based on the Unicode value of each character in the strings.
+
+The program should return a positive value if the first string comes after the second string, a negative value if the first string comes before the second string, and zero if the strings are equal. 
+
+In mathematics, the <b>lexicographic or lexicographical</b> order is a generalization of the alphabetical order of the dictionaries to sequences of ordered symbols or, more generally,
+                    `,
+                    code1: `let numbers = [10, 2, 5, 1, 9];
+numbers.sort();  // Sorts the array in lexicographical (string) order
+console.log(numbers);  // Output: [1, 10, 2, 5, 9]
+`
+                },
+                {
+                    text1: `<b>console.log('iPhone' > 'fasttrack')</b> returns <b>true</b> because JavaScript compares strings <b>lexicographically</b>, which means it compares the characters of the strings one by one based on their Unicode values.
+                    
+                               <b>Lexicographical comparison</b>:
+                JavaScript compares strings character by character using the Unicode (or ASCII) value of each character.
+           <b>Comparison of 'iPhone' and 'fasttrack'</b>:
+                The comparison starts with the first characters in both strings:
+                <code>'i'</code> has a Unicode value of 105.
+                <code>'f'</code> has a Unicode value of 102.
+        
+           Since <code>105</code> (for <code>'i'</code>) is <b>greater than</b> <code>102</code> (for <code>'f'</code>), the comparison  returns <code>true</code> right away without checking the remaining characters. This is because string comparison in JavaScript stops at the first character that differs.
+           
+               The Unicode values of characters are ordered in a way that uppercase letters (like <code>'I'</code>, <code>'F'</code>) come before lowercase letters (like <code>'i'</code>, <code>'f'</code>). In fact, lowercase letters generally have a higher Unicode value than uppercase letters, so <code>'i'</code> comes after <code>'F'</code>. However, you are comparing an uppercase <code>'I'</code> with a lowercase <code>'f'</code>.
+        `,
+                    code1: `console.log('i' > 'f'); // true because Unicode of 'i' (105) > 'f' (102)
+console.log('I' < 'f'); // true because Unicode of 'I' (73) < 'f' (102)
+
+
+// If you want a case-insensitive comparison or a different kind of sorting, you could convert both strings to lowercase or uppercase first:
+console.log('iPhone'.toLowerCase() > 'fasttrack'.toLowerCase()); // false
+
+`
+                },
+                {
+                    text1: `To find the Unicode value of a character in JavaScript, you can use the <b>charCodeAt()</b> method. This method returns the Unicode value (or ASCII value for characters in the ASCII range) of the character at a specific index in a string.
+                    
+                    let character = 'A';
+let unicodeValue = character.charCodeAt(0); // Get Unicode value of 'A'
+console.log(unicodeValue);  // Output: 65
+
+charCodeAt(0) returns the Unicode value of the character at index 0 in the string. In this case, the character 'A' has a Unicode value of 65`,
+                    code1: `string.charCodeAt(index)
+    // "index": The index of the character in the string whose Unicode value you want to retrieve. The index is zero-based.
+    
+    let character = 'A';
+let unicodeValue = character.charCodeAt(0); // Get Unicode value of 'A'
+console.log(unicodeValue);  // Output: 65
+
+
+
+//---------------------
+let str = "Hello";
+for (let i = 0; i < str.length; i++) {
+    console.log(\`Character: \${str[i]}, Unicode: \${str.charCodeAt(i)}\`);
+}
+// Output :     
+// Character: H, Unicode: 72
+// Character: e, Unicode: 101
+// Character: l, Unicode: 108
+// Character: l, Unicode: 108
+// Character: o, Unicode: 111
+`
+                },
+                {
+                    text1: ``,
+                    code1: `function compareBy(propertyName) {
+  return function (a, b) {
+    let x = a[propertyName],
+      y = b[propertyName];
+
+    if (x > y) {
+      return 1;
+    } else if (x < y) {
+      return -1;
+    } else {
+      return 0;
+    }
+  };
+}
+let products = [
+  { name: 'iPhone', price: 900 },
+  { name: 'Samsung Galaxy', price: 850 },
+  { name: 'Sony Xperia', price: 700 },
+];
+
+// sort products by name
+console.log('Products sorted by name:');
+products.sort(compareBy('name'));
+console.table(products);
+
+// sort products by price
+console.log('Products sorted by price:');
+products.sort(compareBy('price'));
+console.table(products);`
+                },
+                {
+                    text1: `The sort() function allows you to sort an array object by either the default sorting order, or by a custom sorting function.
+          
+                    By default, it sorts the elements in the array in ascending order based on their string Unicode values. The function takes the inputs, converts them to strings, and then sorts them using Unicode values.
+          
+                    The 'sort()' method allows you to sort elements of an array in place.Besides returning the sorted array, the 'sort()' method changes the positions of the elements in the original array.
+                    
+                    By default, the 'sort()' method sorts the array elements in ascending order with the smallest value first and largest value last.
+                    
+                    The 'sort()' method casts elements to strings and compares the strings to determine the orders.
+                    
+                    Consider the following example:`,
+                    code1: `let numbers = [0, 1, 2, 3, 10, 20, 30];
+                    numbers.sort();
+                    console.log(numbers);
+                    
+                    // The output is:
+                    // [0, 1, 10, 2, 20, 3, 30]`
+                  },
+                  {
+                    text1: `In this example, the 'sort()' method places 10 before 2 because the string “10” comes before “2” when doing a string comparison.
+          
+                    To fix this, you need to pass a compare function to the 'sort()' method.The 'sort()' method will use the compare function to determine the orders of elements.
+                    
+                    The following illustrates the syntax of the 'sort()' method:
+                    
+                    array.sort(comparefunction)
+                    
+                    The 'sort()' method accepts an optional argument which is a function that compares two elements of the array.
+                    
+                    If you omit the compare function, the 'sort()' method sorts the elements with the sort order based on the Unicode code point values of elements as mentioned earlier.
+                    
+                    The compare function of the 'sort()' method accepts two arguments and returns a value that determines the sort order.The following illustrates the syntax of the compare function:
+                    
+                      function compare(a, b) {
+                      // ...
+                    }
+                    
+                    The 'compare()' function accepts two arguments 'a' and 'b'.The 'sort()' method will sort elements based on the return value of the 'compare()' function with the following rules:
+                    
+                    1). If 'compare(a, b)' is less than zero, the 'sort()' method sorts 'a' to a lower index than 'b'.In other words, a will come first.
+                    2). If 'compare(a, b)' is greater than zero, the 'sort()' method sort 'b' to a lower index than 'a', i.e., b will come first.
+                    3). If 'compare(a, b)' returns zero, the 'sort()' method considers a equals b and leaves their positions unchanged.
+                    To fix the issue of sorting the number, you can use the following syntax:
+                    `,
+                    code1: `let numbers = [0, 1, 2, 3, 10, 20, 30];
+                    numbers.sort(function(a, b) {
+                      if (a > b) return 1;
+                      if (a < b) return -1;
+                      return 0;
+                    });
+                    
+                    console.log(numbers);
+                    
+                    // Output:
+                    // [0, 1, 2, 3, 10, 20, 30]
+                    
+                    // Or you can define the comparison function using the arrow function syntax:
+                    
+                    let numbers = [0, 1, 2, 3, 10, 20, 30];
+                    numbers.sort((a, b) => {
+                      if (a > b) return 1;
+                      if (a < b) return -1;
+                      return 0;
+                    });
+                    
+                    console.log(numbers);
+                    
+                    // And the following is the simplest since the elements of the array are numbers:
+                    
+                    let numbers = [0, 1, 2, 3, 10, 20, 30];
+                    numbers.sort((a, b) => a - b);
+                    
+                    console.log(numbers);
+                    
+                    // Sorting an array of strings: --
+                    // ----------------------------
+                    // Suppose you have an array of string named 'animals' as follows:
+                    
+                    let animals = [
+                      'cat', 'dog', 'elephant', 'bee', 'ant'
+                    ];
+                    
+                    // To sort the elements of the 'animals' array in ascending order alphabetically, you use the 'sort()' method without passing the compare function as shown in the following example:
+                    
+                    let animals = [
+                      'cat', 'dog', 'elephant', 'bee', 'ant'
+                    ];
+                    animals.sort();
+                    
+                    console.log(animals);
+                    
+                    // Output:
+                    // ['ant', 'bee', 'cat', 'dog', 'elephant']
+                    
+                    
+                    // To sort the 'animals' array in descending order, you need to change the logic of the compare function and pass it to the 'sort()' method as the following example.
+                    
+                    let animals = [
+                      'cat', 'dog', 'elephant', 'bee', 'ant'
+                    ];
+                    
+                    animals.sort((a, b) => {
+                      if (a > b)
+                        return -1;
+                      if (a < b)
+                        return 1;
+                      return 0;
+                    });
+                    
+                    console.log(animals);
+                    
+                    Output:
+                    ['elephant', 'dog', 'cat', 'bee', 'ant']
+                    
+                    // Suppose you have an array that contains elements in both uppercase and lowercase as follows:
+                    
+                    // sorting array with mixed cases
+                    let mixedCaseAnimals = [
+                      'Cat', 'dog', 'Elephant', 'bee', 'ant'
+                    ];
+                    
+                    // To sort this array alphabetically, you need to use a custom compare function to convert all elements to the same case e.g., uppercase for comparison and pass that function to the 'sort()' method.
+                    
+                    let mixedCaseAnimals = [
+                      'Cat', 'dog', 'Elephant', 'bee', 'ant'
+                    ];
+                    
+                    mixedCaseAnimals.sort(function(a, b) {
+                      let x = a.toUpperCase(),
+                        y = b.toUpperCase();
+                      return x == y ? 0 : x > y ? 1 : -1;
+                    
+                    });
+                    
+                    // Output:
+                    // ['ant', 'bee', 'Cat', 'dog', 'Elephant']`
+                  },
+                  {
+                    text1: `Sorting an array of strings with non-ASCII characters:--
+                    
+                    The 'sort()' method is working fine with the strings with ASCII characters.However, for the strings with non - ASCII characters e.g., é, è, etc., the 'sort()' method will not work correctly.For example:`,
+                    code1: `let animaux = ['zèbre', 'abeille', 'écureuil', 'chat'];
+                    animaux.sort();
+                    console.log(animaux);
+          
+                    // As you see, the 'écureuil' string should come before the 'zèbre' string.
+                    
+                    // To resolve this, you use the 'localeCompare()' method of the 'String' object to compare strings in a specific locale, like this:
+                    
+                    animaux.sort(function(a, b) {
+                      return a.localeCompare(b);
+                    });
+                    console.log(animaux);
+                    
+                    // Output:
+                    // ['abeille', 'chat', 'écureuil', 'zèbre']
+                    
+                    // The elements of the 'animaux' array now are in the correct order.
+                    
+          // Sorting an array of numbers: --
+          // ------- -- ----- -- --------
+          //   Suppose you have an array of numbers named 'scores' as in the following example.
+          
+          let scores = [
+            9, 80, 10, 20, 5, 70
+          ];
+          
+          // To sort an array of numbers numerically, you need to pass into a custom comparison function that compares two numbers.
+          
+          // The following example sorts the 'scores' array numerically in ascending order.
+          
+          let scores = [
+            9, 80, 10, 20, 5, 70
+          ];
+          // sort numbers in ascending order
+          scores.sort((a, b) => a - b);
+          
+          console.log(scores);
+          
+          // Output:
+          // [5, 9, 10, 20, 70, 80]
+          
+          
+          // To sort an array of numbers numerically in descending order, you just need to reverse the logic in the compare function as shown in the following example:
+          
+          let scores = [
+            9, 80, 10, 20, 5, 70
+          ];
+          // descending order
+          scores.sort((a, b) => b - a);
+          console.log(scores);
+          
+          // Output:
+          // [80, 70, 20, 10, 9, 5]
+          
+          
+          // Sorting an array of objects by a specified property: --
+          // ------- -- ----- -- ------- -- - --------- --------
+          //   The following is an array of 'employee' objects, where each object contains three properties: 'name', 'salary' and 'hireDate'.
+          
+          let employees = [
+            { name: 'John', salary: 90000, hireDate: "July 1, 2010" },
+            { name: 'David', salary: 75000, hireDate: "August 15, 2009" },
+            { name: 'Ana', salary: 80000, hireDate: "December 12, 2011" }
+          ];
+          
+          // Sorting objects by a numeric property
+          // The following example shows how to sort the employees by 'salary' in ascending order.
+          
+          // sort by salary
+          employees.sort(function(x, y) {
+            return x.salary - y.salary;
+          });
+          
+          console.table(employees);
+          
+          Output: <table>
+          
+          
+          // This example is similar to the example of sorting an array of numbers in ascending order.The difference is that it compares the 'salary' property of two objects instead.
+          
+          // Sorting objects by a string property:
+          // ------- ------- -- - ------ --------
+          // To sort the 'employees' array by 'name' property case-insensitively, you pass the compare function that compares two strings case-insensitively as follows:
+          
+          employees.sort(function(x, y) {
+            let a = x.name.toUpperCase(),
+              b = y.name.toUpperCase();
+            return a == b ? 0 : a > b ? 1 : -1;
+          });
+          
+          console.table(employees);
+          
+          // Sorting objects by the date property:--
+          // ------- ------- -- --- ---- --------
+          // Suppose, you wish to sort employees based on each employee's hire date.
+          
+          // The hire date data is stored in the 'hireDate' property of the employee object. However, it is just a string that represents a valid date, not the 'Date' object. 
+          
+          // Therefore, to sort employees by hire date, you first have to create a valid 'Date' object from the date string, and then compare two dates, which is the same as comparing two numbers.
+          
+          // Here is the solution:
+          
+          employees.sort(function(x, y) {
+            let a = new Date(x.hireDate),
+              b = new Date(y.hireDate);
+            return a - b;
+          });
+          
+          console.table(employees);
+          
+          // Optimizing JavaScript Array sort() method:--
+          // ---------- ---------- ----- ------ ------
+          // In fact, the 'sort()' method calls the compare function multiple times for each element in the array.
+          
+          // See the following example:
+          
+          let rivers = ['Nile', 'Amazon', 'Congo', 'Mississippi', 'Rio-Grande'];
+          
+          rivers.sort(function(a, b) {
+            console.log(a, b);
+            return a.length - b.length;
+          });
+          
+          // Output:
+          // Amazon Nile
+          // Congo Amazon
+          // Congo Amazon
+          // Congo Nile
+          // Mississippi Congo
+          // Mississippi Amazon
+          // Rio - Grande Amazon
+          // Rio - Grande Mississippi
+                    `
+                  },
+                  {
+                    text1: `> First, declare an array 'rivers' that consists of the famous river names.
+                    > Second, sort the 'rivers' array by the length of its element using the 'sort()' method.We output the elements of the 'rivers' array to the web console whenever the 'sort()' method invokes the comparison function .
+                    
+                    As shown in the output above, each element has been evaluated multiple times e.g., Amazon 4 times, Congo 2 times, etc.
+                    
+                    If the number of array elements is increasing, it will potentially decrease the performance.
+                    
+                    You cannot reduce the number of times that comparison function is executed. However, you can reduce the work that the comparison has to do. This technique is called Schwartzian Transform.
+                    
+                    To implement this, you follow these steps:
+                    
+                    1) First, extract the actual values into a temporary array using the map() method.
+                    2) Second, sort the temporary array with the elements that are already evaluated(or transformed).
+                    3) Third, walk the temporary array to get an array with the right order.
+                    `,
+                    code1: `// Here is the solution:
+          
+                    // temporary array holds objects with position
+                    // and length of element
+                    var lengths = rivers.map(function(e, i) {
+                      return { index: i, value: e.length };
+                    });
+                    
+                    // sorting the lengths array containing the lengths of
+                    // river names
+                    lengths.sort(function(a, b) {
+                      return +(a.value > b.value) || +(a.value === b.value) - 1;
+                    });
+                    
+                    // copy element back to the array
+                    var sortedRivers = lengths.map(function(e) {
+                      return rivers[e.index];
+                    });
+                    
+                    console.log(sortedRivers);
+                    
+                    // Output:
+                    // [ 'Nile', 'Congo', 'Amazon', 'Rio-Grande', 'Mississippi' ]
+                    
+                    // In this tutorial, you have learned how to use the JavaScript Array 'sort()' method to sort arrays of strings, numbers, dates, and objects.`
+                  },
+                  {
+                    text1: ``,
                     code1: ``
+                  },
+            ]
+        },
+        {
+            id: 1,
+            title: "shift()",
+            note: [
+                {
+                    text1: `Removes the first element from an array and returns that element.
+                    
+                    The shift() method in JavaScript is used to remove the first element of an array, reducing the array’s length by one. This method is particularly useful for scenarios where elements need to be processed in the order they were added, such as in <b>queue-like structures</b>.
+Javascript Shift is an inbuilt Array method that removes the first element from an array and returns the removed element.
+
+<b>shift() Syntax</b>
+The syntax of the <b>shift()</b> method is:
+arr.shift()
+Here, <b>arr</b> is an array.
+
+<b>shift() Parameters</b>
+The shift() method does not accept any arguments.
+
+<b>shift() Return Value</b>
+-> Removes the first element from array and returns that value.
+-> Returns undefined if the array is empty.
+After removing the element at the 0th index, it shifts other values to consecutive indexes down.
+This function returns the removed first element of the array. If the array is empty then this function returns undefined.
+
+<b>Notes</b>:
+-> This method changes the original array and its length.
+-> To remove the last element of an array, use the JavaScript Array pop() method.
+
+<b>Eg</b>: In arr = [ “a”,”b”,”c”] after Shift is used the element “a” is removed and the subsequent elements are moved up 1 index, i.e “b” whose index was 1 initially is moved to 
+
+ Javascript Shift() function reduces the size of the array by 1. And on the contrary
+                    `,
+                    code1: `var languages = ["JavaScript", "Python", "Java", "C++", "Lua"];
+var shifted = languages.shift();
+console.log(languages); // [ 'Python', 'Java', 'C++', 'Lua' ]
+console.log(shifted); // JavaScript
+
+//------------------
+// shift returns any type of object
+var numbers = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [-5, -4, -3],
+];
+console.log(numbers.shift()); // [ 1, 2, 3 ]
+console.log(numbers); // [ [ 4, 5, 6 ], [ -5, -4, -3 ] ]`
                 }
             ]
         },
@@ -1354,8 +3311,544 @@ console.log(numbers.some(isEven));
             title: "unshift()",
             note: [
                 {
-                    text1: `Adds one or more elements to the front of an array and returns the new length of the array.`,
+                    text1: `Adds one or more elements to the front of an array and returns the new length of the array.
+                    The unshift() method adds one or more elements to the beginning of an array and returns the new length of the array.
+
+                    <b>Notes</b>:
+This method changes the original array and its length.
+To add elements to the end of an array, use the JavaScript Array push() method.
+                    `,
+                    code1: `let languages = ["Java", "Python", "C"];
+// add "JavaScript" at the beginning of the array
+languages.unshift("JavaScript");
+console.log(languages);
+// Output: [ 'JavaScript', 'Java', 'Python', 'C' ]`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "regex.test()",
+            note: [
+                {
+                    text1: `The <b>regex.test()</b> method is used to test for a match in a string. The method returns <b>true</b> if it finds a match; otherwise, it returns <b>false</b>.`,
+                    code1: `//Syntax :  RegExpObject.test(string)
+                    
+                    
+                    `
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "toFixed()",
+            note: [
+                {
+                    text1: `<b>Number toFixed() Parameters</b>
+                    The <u>toFixed()</u> method converts a number to a string.
+The <u>toFixed()</u> method rounds the string to a specified number of decimals.
+
+The <u>toFixed()</u> method takes in:
+<u>digits</u> (Optional) - Value between <b>0</b> and <b>20</b> representing the number of digits to appear after the decimal point. By default, it is <b>0</b>.
+
+<b>Return value from Number toFixed()</b>
+Returns a <u>String</u> representing the given number using fixed-point notation.
+<b>Note</b>: The <u>toFixed()</u> method throws a <u>RangeError</u> if <u>digits</u> is not in between <b>1</b> and <b>100</u>.
+`,
+                    code1: `let num = 57.77583;
+
+        console.log(num.toFixed()); // 58-> rounded off, no fractional part
+        console.log(num.toFixed(1)); // 57.8
+        console.log(num.toFixed(7)); // 57.7758300 -> Added zeros
+        console.log(num.toFixed(2)); // 57.78
+
+        console.log((5.68e20).toFixed(2)); // 568000000000000000000.00
+        console.log((1.23e-10).toFixed(2)); // 0.00
+        console.log((-2.34).toFixed(1)); // -2.3
+                    
+                    
+                    `
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Date Functions",
+            note: [
+                {
+                    text1: `<div class='table-res'>     <table>
+        <thead>
+            <tr>
+                <th><strong>Function</strong></th>
+                <th><strong>Description</strong></th>
+                <th><strong>Example</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>Date.now()</code></td>
+                <td>Returns the current timestamp (milliseconds since Jan 1, 1970).</td>
+                <td><code>Date.now()</code> ➔ <code>1617174305292</code></td>
+            </tr>
+            <tr>
+                <td><code>new Date()</code></td>
+                <td>Creates a new Date object with the current date and time.</td>
+                <td><code>new Date()</code> ➔
+                    <code>Wed Mar 31 2021 11:58:25 GMT+0000 (Coordinated Universal Time)</code></td>
+            </tr>
+            <tr>
+                <td><code>Date.getFullYear()</code></td>
+                <td>Returns the year (4 digits) of a Date object.</td>
+                <td><code>new Date().getFullYear()</code> ➔ <code>2021</code></td>
+            </tr>
+            <tr>
+                <td><code>Date.getMonth()</code></td>
+                <td>Returns the month (0-11) of a Date object.</td>
+                <td><code>new Date().getMonth()</code> ➔ <code>2</code> (March)</td>
+            </tr>
+            <tr>
+                <td><code>Date.getDate()</code></td>
+                <td>Returns the day of the month (1-31) of a Date object.</td>
+                <td><code>new Date().getDate()</code> ➔ <code>31</code></td>
+            </tr>
+            <tr>
+                <td><code>Date.getDay()</code></td>
+                <td>Returns the day of the week (0-6) of a Date object.</td>
+                <td><code>new Date().getDay()</code> ➔ <code>3</code> (Wednesday)</td>
+            </tr>
+            <tr>
+                <td><code>Date.getHours()</code></td>
+                <td>Returns the hour (0-23) of a Date object.</td>
+                <td><code>new Date().getHours()</code> ➔ <code>12</code></td>
+            </tr>
+            <tr>
+                <td><code>Date.getMinutes()</code></td>
+                <td>Returns the minutes (0-59) of a Date object.</td>
+                <td><code>new Date().getMinutes()</code> ➔ <code>25</code></td>
+            </tr>
+        </tbody>
+    </table> </div>`,
                     code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "JSON Functions",
+            note: [
+                {
+                    text1: `<div class='table-res'> </div>`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Event Handling Functions",
+            note: [
+                {
+                    text1: `<div class='table-res'> </div>`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "JavaScript Math Methods",
+            note: [
+                {
+                    text1: `<div class='table-res'> 
+                    <table class="ws-table-all notranslate">
+  <tbody><tr>
+    <th style="width:20%">Method</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_abs.asp">abs(x)</a></td>
+    <td>Returns the absolute value of x</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_acos.asp">acos(x)</a></td>
+    <td>Returns the arccosine of x, in radians</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_acosh.asp">acosh(x)</a></td>
+    <td>Returns the hyperbolic arccosine of x</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_asin.asp">asin(x)</a></td>
+    <td>Returns the arcsine of x, in radians</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_asinh.asp">asinh(x)</a></td>
+    <td>Returns the hyperbolic arcsine of x</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_atan.asp">atan(x)</a></td>
+    <td>Returns the arctangent of x as a numeric value between -PI/2 and PI/2 radians</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_atan2.asp">atan2(y, x)</a></td>
+    <td>Returns the arctangent of the quotient of its arguments</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_atanh.asp">atanh(x)</a></td>
+    <td>Returns the hyperbolic arctangent of x</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_cbrt.asp">cbrt(x)</a></td>
+    <td>Returns the cubic root of x</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_ceil.asp">ceil(x)</a></td>
+    <td>Returns x, rounded upwards to the nearest integer</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_cos.asp">cos(x)</a></td>
+    <td>Returns the cosine of x (x is in radians)</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_cosh.asp">cosh(x)</a></td>
+    <td>Returns the hyperbolic cosine of x</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_exp.asp">exp(x)</a></td>
+    <td>Returns the value of E<sup>x</sup></td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_floor.asp">floor(x)</a></td>
+    <td>Returns x, rounded downwards to the nearest integer</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_log.asp">log(x)</a></td>
+    <td>Returns the natural logarithm (base E) of x</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_max.asp">max(x, y, z, ..., n)</a></td>
+    <td>Returns the number with the highest value</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_min.asp">min(x, y, z, ..., n)</a></td>
+    <td>Returns the number with the lowest value</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_pow.asp">pow(x, y)</a></td>
+    <td>Returns the value of x to the power of y</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_random.asp">random()</a></td>
+    <td>Returns a random number between 0 and 1</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_round.asp">round(x)</a></td>
+    <td>Rounds x to the nearest integer</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_sign.asp">sign(x)</a></td>
+    <td>Returns if x is negative, null or positive (-1, 0, 1)</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_sin.asp">sin(x)</a></td>
+    <td>Returns the sine of x (x is in radians)</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_sinh.asp">sinh(x)</a></td>
+    <td>Returns the hyperbolic sine of x</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_sqrt.asp">sqrt(x)</a></td>
+    <td>Returns the square root of x</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_tan.asp">tan(x)</a></td>
+    <td>Returns the tangent of an angle</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_tanh.asp">tanh(x)</a></td>
+    <td>Returns the hyperbolic tangent of a number</td>
+  </tr>
+  <tr>
+    <td><a href="/jsref/jsref_trunc.asp">trunc(x)</a></td>
+    <td>Returns the integer part of a number (x)</td>
+  </tr>
+  </tbody></table>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class='table-res'>
+                        <table>
+        <thead>
+            <tr>
+                <th><strong>Function</strong></th>
+                <th><strong>Description</strong></th>
+                <th><strong>Example</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>Math.abs(x)</code></td>
+                <td>Returns the absolute value of <code>x</code>.</td>
+                <td><code>Math.abs(-5)</code> ➔ <code>5</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.ceil(x)</code></td>
+                <td>Returns the smallest integer greater than or equal to <code>x</code> (rounds up).</td>
+                <td><code>Math.ceil(4.2)</code> ➔ <code>5</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.floor(x)</code></td>
+                <td>Returns the largest integer less than or equal to <code>x</code> (rounds down).</td>
+                <td><code>Math.floor(4.7)</code> ➔ <code>4</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.round(x)</code></td>
+                <td>Returns the value of <code>x</code> rounded to the nearest integer.</td>
+                <td><code>Math.round(4.5)</code> ➔ <code>5</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.trunc(x)</code></td>
+                <td>Returns the integer part of <code>x</code> by removing the decimal part.</td>
+                <td><code>Math.trunc(4.9)</code> ➔ <code>4</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.sign(x)</code></td>
+                <td>Returns 1 if <code>x</code> is positive, -1 if <code>x</code> is negative, or 0 if <code>x</code> is
+                    0.</td>
+                <td><code>Math.sign(-10)</code> ➔ <code>-1</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.pow(base, exponent)</code></td>
+                <td>Returns <code>base</code> raised to the power of <code>exponent</code>.</td>
+                <td><code>Math.pow(2, 3)</code> ➔ <code>8</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.sqrt(x)</code></td>
+                <td>Returns the square root of <code>x</code>.</td>
+                <td><code>Math.sqrt(16)</code> ➔ <code>4</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.cbrt(x)</code></td>
+                <td>Returns the cube root of <code>x</code>.</td>
+                <td><code>Math.cbrt(27)</code> ➔ <code>3</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.exp(x)</code></td>
+                <td>Returns <code>e</code> raised to the power of <code>x</code> (Euler's number).</td>
+                <td><code>Math.exp(1)</code> ➔ <code>2.718</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.log(x)</code></td>
+                <td>Returns the natural logarithm (base <code>e</code>) of <code>x</code>.</td>
+                <td><code>Math.log(10)</code> ➔ <code>2.302</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.log10(x)</code></td>
+                <td>Returns the base-10 logarithm of <code>x</code>.</td>
+                <td><code>Math.log10(100)</code> ➔ <code>2</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.log2(x)</code></td>
+                <td>Returns the base-2 logarithm of <code>x</code>.</td>
+                <td><code>Math.log2(8)</code> ➔ <code>3</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.random()</code></td>
+                <td>Returns a pseudo-random number between 0 (inclusive) and 1 (exclusive).</td>
+                <td><code>Math.random()</code> ➔ <code>0.642</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.PI</code></td>
+                <td>Returns the value of Pi (π), approximately 3.14159.</td>
+                <td><code>Math.PI</code> ➔ <code>3.14159</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.E</code></td>
+                <td>Returns Euler's number (approximately 2.718).</td>
+                <td><code>Math.E</code> ➔ <code>2.718</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.SQRT2</code></td>
+                <td>Returns the square root of 2 (approximately 1.414).</td>
+                <td><code>Math.SQRT2</code> ➔ <code>1.414</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.SQRT1_2</code></td>
+                <td>Returns the square root of 1/2 (approximately 0.707).</td>
+                <td><code>Math.SQRT1_2</code> ➔ <code>0.707</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.LN2</code></td>
+                <td>Returns the natural logarithm of 2 (approximately 0.693).</td>
+                <td><code>Math.LN2</code> ➔ <code>0.693</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.LN10</code></td>
+                <td>Returns the natural logarithm of 10 (approximately 2.302).</td>
+                <td><code>Math.LN10</code> ➔ <code>2.302</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.LOG2E</code></td>
+                <td>Returns the base-2 logarithm of <code>e</code> (approximately 1.442).</td>
+                <td><code>Math.LOG2E</code> ➔ <code>1.442</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.LOG10E</code></td>
+                <td>Returns the base-10 logarithm of <code>e</code> (approximately 0.434).</td>
+                <td><code>Math.LOG10E</code> ➔ <code>0.434</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.sin(x)</code></td>
+                <td>Returns the sine of <code>x</code> (in radians).</td>
+                <td><code>Math.sin(Math.PI / 2)</code> ➔ <code>1</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.cos(x)</code></td>
+                <td>Returns the cosine of <code>x</code> (in radians).</td>
+                <td><code>Math.cos(0)</code> ➔ <code>1</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.tan(x)</code></td>
+                <td>Returns the tangent of <code>x</code> (in radians).</td>
+                <td><code>Math.tan(Math.PI / 4)</code> ➔ <code>1</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.asin(x)</code></td>
+                <td>Returns the arcsine (inverse sine) of <code>x</code> in radians.</td>
+                <td><code>Math.asin(1)</code> ➔ <code>1.5708</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.acos(x)</code></td>
+                <td>Returns the arccosine (inverse cosine) of <code>x</code> in radians.</td>
+                <td><code>Math.acos(1)</code> ➔ <code>0</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.atan(x)</code></td>
+                <td>Returns the arctangent (inverse tangent) of <code>x</code> in radians.</td>
+                <td><code>Math.atan(1)</code> ➔ <code>0.7854</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.atan2(y, x)</code></td>
+                <td>Returns the arctangent of <code>y/x</code> considering the signs of <code>y</code> and
+                    <code>x</code>.</td>
+                <td><code>Math.atan2(1, 1)</code> ➔ <code>0.7854</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.min(...values)</code></td>
+                <td>Returns the smallest of the zero or more numbers provided.</td>
+                <td><code>Math.min(1, 5, 3, -2)</code> ➔ <code>-2</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.max(...values)</code></td>
+                <td>Returns the largest of the zero or more numbers provided.</td>
+                <td><code>Math.max(1, 5, 3, -2)</code> ➔ <code>5</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.acosh(x)</code></td>
+                <td>Returns the inverse hyperbolic cosine of <code>x</code>.</td>
+                <td><code>Math.acosh(1)</code> ➔ <code>0</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.asinh(x)</code></td>
+                <td>Returns the inverse hyperbolic sine of <code>x</code>.</td>
+                <td><code>Math.asinh(1)</code> ➔ <code>0.88137</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.atanh(x)</code></td>
+                <td>Returns the inverse hyperbolic tangent of <code>x</code>.</td>
+                <td><code>Math.atanh(0.5)</code> ➔ <code>0.54931</code></td>
+            </tr>
+        </tbody>
+    </table>
+     </div>
+     
+     
+     <b>regularly used Math Functions</b>
+     <div class='table-res'> 
+         <table>
+        <thead>
+            <tr>
+                <th><strong>Function</strong></th>
+                <th><strong>Description</strong></th>
+                <th><strong>Example</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>Math.abs(x)</code></td>
+                <td>Returns the absolute value of <code>x</code>.</td>
+                <td><code>Math.abs(-5)</code> ➔ <code>5</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.ceil(x)</code></td>
+                <td>Returns the smallest integer greater than or equal to <code>x</code> (rounds up).</td>
+                <td><code>Math.ceil(4.2)</code> ➔ <code>5</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.floor(x)</code></td>
+                <td>Returns the largest integer less than or equal to <code>x</code> (rounds down).</td>
+                <td><code>Math.floor(4.7)</code> ➔ <code>4</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.random()</code></td>
+                <td>Returns a pseudo-random number between 0 (inclusive) and 1 (exclusive).</td>
+                <td><code>Math.random()</code> ➔ <code>0.342</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.max(...numbers)</code></td>
+                <td>Returns the largest number from a set of numbers.</td>
+                <td><code>Math.max(1, 2, 3)</code> ➔ <code>3</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.min(...numbers)</code></td>
+                <td>Returns the smallest number from a set of numbers.</td>
+                <td><code>Math.min(1, 2, 3)</code> ➔ <code>1</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.pow(base, exponent)</code></td>
+                <td>Returns <code>base</code> raised to the power of <code>exponent</code>.</td>
+                <td><code>Math.pow(2, 3)</code> ➔ <code>8</code></td>
+            </tr>
+            <tr>
+                <td><code>Math.sqrt(x)</code></td>
+                <td>Returns the square root of <code>x</code>.</td>
+                <td><code>Math.sqrt(16)</code> ➔ <code>4</code></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>`,
+                    code1: ``
+                }
+            ]
+        },
+
+
+
+        {
+            id: 1,
+            title: "typeof",
+            note: [
+                {
+                    text1: `The typeof operator returns a string indicating the type of the operand`,
+                    code1: `typeof 50; //   "number"
+typeof "text"; //   "string"
+typeof true; //   "boolean"
+typeof undefined; //   "undefined"
+typeof function () {}; //   "function"
+typeof 10n; //   "bigint"
+typeof Symbol(); //   "symbol"
+typeof [1, 2]; //   "object"
+typeof {}; //   "object"
+ 
+typeof NaN; //   "number"        (NaN is Not a Number)
+typeof undeclaredVar; //   "undefined"     (undeclaredVariable is never declared)
+typeof Infinity; //   "number"        (Infinity, -Infinity, -0 are all valid numbers in JavaScript)
+typeof null; //   "object"        (This stands since the beginning of JavaScript)
+typeof /regex/; //   "object"        (regular expressions start and end with '/' in literal form)`
                 }
             ]
         },

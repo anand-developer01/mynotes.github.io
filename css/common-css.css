@@ -6,11 +6,12 @@
  }
 
  .notes-text {
-     background-color: antiquewhite;
+     background-color: #fbfbfb;
      text-align: left;
      white-space: pre-line;
      padding: 2px 17px;
      width: 100%;
+     box-shadow: 1px 1px 6px 0px;
      /* word-wrap: break-word;
     display: inline-block; */
  }
@@ -37,6 +38,10 @@
 
  .left-menu-list {
      padding: 7px;
+ }
+
+ .left-menu-list a {
+     color : #000;
  }
 
 
@@ -68,8 +73,11 @@
 
  .li-main-box {
      padding: 10px;
-     background-color: #d4f19d;
+     /* background-color: #d4f19d; */
+     /* background-color: #fff; */
      margin-bottom: 30px;
+     border: .5px solid #000;
+     border-radius: 10px;
  }
 
  .code-prre {

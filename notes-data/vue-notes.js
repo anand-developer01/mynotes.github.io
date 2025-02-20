@@ -2,7 +2,7 @@ const isHighlighted = 'vue-notes'
 const Links1 = 'vue-notes'
 const Links2 = 'vue3'
 const Links3 = 'vue-x'
-const Links4 = 'vuejs-projects'
+const Links4 = 'vue3-projects'
 
 const vueData = {
   vueNote: [
@@ -104,6 +104,11 @@ A framework is a more comprehensive and structured collection of pre-written cod
 
                     Declarative Rendering
                     What you see in the editor is a Vue Single-File Component (SFC). An SFC is a reusable self-contained block of code that encapsulates HTML, CSS and JavaScript that belong together, written inside a .vue file.
+                    
+                    This file typically contains three distinct sections:
+    <b>Template</b>: The structure of the component (HTML-like markup).
+    <b>Script</b>: The JavaScript logic (methods, data, lifecycle hooks, etc.).
+    <b>Style</b>: The CSS (or other styling languages like SCSS, LESS) scoped to that component.
 
                     The core feature of Vue is declarative rendering: using a template syntax that extends HTML, we can describe how the HTML should look based on JavaScript state. When the state changes, the HTML updates automatically.
 
@@ -167,39 +172,35 @@ We can use the v-bind directive to do in-line styling and modify classes dynamic
         },
         {
           text1: `We can use <b>v-bind</b> to change the class attribute.
-
 The value of <b>v-bind:class</b> can be a variable:
 
 Example
 The class name is taken from the <b>className</b> Vue data property:
-
 `,
-          code1: `
-<div v-bind:class="className">
+          code1: `&lt;div v-bind:class=&quot;className&quot;&gt;
   The class is set with Vue
-</div>
-
-                    // The class attribute is assigned or not depending on if the class 'myClass' is set to 'true' or 'false':
-
-<div v-bind:class="{ myClass: true }">
+&lt;/div&gt;
+// The class attribute is assigned or not depending on if the class &#39;myClass&#39; is set to &#39;true&#39; or &#39;false&#39;:
+&lt;div v-bind:class=&quot;{ myClass: true }&quot;&gt;
   The class is set conditionally to change the background color
-</div>`
+&lt;/div&gt;`
         },
         {
           text1: `The shorthand for <b>v-bind:</b> is simply <b>:</b>.
 Example
-Here we just write ':' instead of 'v-bind:':`,
-          code1: `<div :class="{ impClass: isImportant }">
+Here we just write ':' instead of 'v-bind:':
+
+&lt;div :class=&quot;{ impClass: isImportant }&quot;&gt;
   The class is set conditionally to change the background color
-</div>
+&lt;/div&gt;
 
 <b>v-model</b> :
 v-model creates a link between the input element value attribute and a data value in the Vue instance. When you change the input, the data updates and when the data changes, the input updates as well (two-way binding).
 
-The v-model directive is used for two-way data binding. It binds an input element's value to a variable, allowing changes in the input to update the variable, and vice versa.
+The v-model directive is used for two-way data binding. It binds an input element's value to a variable, allowing changes in the input to update the variable, and vice versa.`,
 
-<input v-model="username" type="text">
-<p>Hello, {{ username }}!</p>
+          code1: `&lt;input v-model=&quot;username&quot; type=&quot;text&quot;&gt;
+&lt;p&gt;Hello, {{ username }}!&lt;/p&gt;
 
 new Vue({
     el: '#app',
@@ -207,7 +208,6 @@ new Vue({
         username: ''
     }
 });
-
 `
         },
         {
@@ -224,16 +224,16 @@ new Vue({
 
                 Inside the <b>v-for</b> scope, template expressions have access to all parent scope properties. In addition, <b>v-for</b> also supports an optional second alias for the index of the current item:
                 `,
-        code1: `<template>
-                <div id="app">
-                <h2>Fruits List:</h2>
-                <ul>
-                <li v-for="fruit in fruits" :key="fruit.id">{{ fruit.name }}</li>
-                </ul>
-                </div>
-                </template>
+        code1: `&lt;template&gt;
+                &lt;div id=&quot;app&quot;&gt;
+                &lt;h2&gt;Fruits List:&lt;/h2&gt;
+                &lt;ul&gt;
+                &lt;li v-for=&quot;fruit in fruits&quot; :key=&quot;fruit.id&quot;&gt;{{ fruit.name }}&lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;/div&gt;
+                &lt;/template&gt;
 
-                <script>
+                &lt;script&gt;
                 export default {
                 data() {
                 return {
@@ -247,20 +247,22 @@ new Vue({
                 }
                 }
                 };
-                </script>
+                &lt;/script&gt;
 
 
+
+                //---------------
                 const parentMessage = ref('Parent') // Parent scope properties
                 const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
-                template
-                <li v-for="(item, index) in items">
+                
+                // template
+                &lt;li v-for=&quot;(item, index) in items&quot;&gt;
                   {{ parentMessage }} - {{ index }} - {{ item.message }}
-                </li>
+                &lt;/li&gt;
 
                 // Output:
                 Parent - 0 - Foo
                 Parent - 1 - Bar
-
 
                 // The variable scoping of 'v-for' is similar to the following JavaScript:
 
@@ -282,7 +284,7 @@ new Vue({
         code1: `&lt;li v-for=&quot;{ message } in items&quot;&gt;
   {{ message }}
 &lt;/li&gt;
-&lt;!-- with index alias --&gt;
+// &lt;!-- with index alias --&gt;
 &lt;li v-for=&quot;({ message }, index) in items&quot;&gt;
   {{ message }} {{ index }}
 &lt;/li&gt;
@@ -599,11 +601,8 @@ Because <b>v-if</b> is a directive, it has to be attached to a single element. B
           text1: `We can use the <b>v-on</b> directive, which we typically shorten to the <b>@</b> symbol, to listen to DOM events and run some JavaScript when they're triggered. The usage would be <b>v-on:click="handler"</b> or with the shortcut, <b>@click="handler"</b>.
 
 The handler value can be one of the following:
-
 1) <b>Inline handlers</b>: Inline JavaScript to be executed when the event is triggered (similar to the native <b>onclick</b> attribute).
-
 2) <b>Method handlers</b>: A property name or path that points to a method defined on the component.
-
 <b> Inline Handlers </b>
 Inline handlers are typically used in simple cases, for example:
 `,
@@ -636,8 +635,7 @@ methods: {
   }
 }
 
-
-&lt;!-- &#39;greet&#39; is the name of the method defined above --&gt;
+// &lt;!-- &#39;greet&#39; is the name of the method defined above --&gt;
 &lt;button @click=&quot;greet&quot;&gt;Greet&lt;/button&gt;
 `
         },
@@ -695,19 +693,19 @@ Instead of binding directly to a method name, we can also call methods in an inl
     alert(message)
   }
 }
-template
+// template
 &lt;button @click=&quot;say(&#39;hello&#39;)&quot;&gt;Say hello&lt;/button&gt;
 &lt;button @click=&quot;say(&#39;bye&#39;)&quot;&gt;Say bye&lt;/button&gt;`
         },
         {
           text1: `<b>Accessing Event Argument in Inline Handlers​</b>
 Sometimes we also need to access the original DOM event in an inline handler. You can pass it into a method using the special <b>$event</b>, variable, or use an inline arrow function:`,
-          code1: `&lt;!-- using $event special variable --&gt;
+          code1: `//&lt;!-- using $event special variable --&gt;
 &lt;button @click=&quot;warn(&#39;Form cannot be submitted yet.&#39;, $event)&quot;&gt;
   Submit
 &lt;/button&gt;
 
-&lt;!-- using inline arrow function --&gt;
+// &lt;!-- using inline arrow function --&gt;
 &lt;button @click=&quot;(event) =&gt; warn(&#39;Form cannot be submitted yet.&#39;, event)&quot;&gt;
   Submit
 &lt;/button&gt;
@@ -729,9 +727,7 @@ methods: {
 
           To address this problem, Vue provides event modifiers for <b>v-on</b>. Recall that modifiers are directive postfixes denoted by a dot.
 
-
           DOM event handlers can have modifiers that alter their behaviour. 
-
           <b>.stop</b>: the click event's propagation will be stopped
           <b>.prevent</b>: just the modifier
           <b>.self</b>: not from a child element
@@ -755,7 +751,53 @@ Event modifiers are pre-set modifications that you can chain to your event liste
 <b>trusted</b> — only trigger handler if <b>event.isTrusted</b> is <b>true</b>, meaning the event was triggered by a user action rather than because some JavaScript called element.dispatchEvent(...)
 
 
-
+<div class='table-res'>     <table>
+        <thead>
+            <tr>
+                <th>Modifier</th>
+                <th>Description</th>
+                <th>Example Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>.stop</code></td>
+                <td>Stops the event from propagating (bubbling).</td>
+                <td><code>@click.stop="handleClick"</code></td>
+            </tr>
+            <tr>
+                <td><code>.prevent</code></td>
+                <td>Prevents the default behavior of the event.</td>
+                <td><code>@submit.prevent="handleSubmit"</code></td>
+            </tr>
+            <tr>
+                <td><code>.self</code></td>
+                <td>Only triggers the event if it's fired on the element itself.</td>
+                <td><code>@click.self="handleClick"</code></td>
+            </tr>
+            <tr>
+                <td><code>.capture</code></td>
+                <td>Uses capture mode for event listening.</td>
+                <td><code>@click.capture="handleClick"</code></td>
+            </tr>
+            <tr>
+                <td><code>.once</code></td>
+                <td>Triggers the event handler at most once.</td>
+                <td><code>@click.once="handleClick"</code></td>
+            </tr>
+            <tr>
+                <td><code>.passive</code></td>
+                <td>The event listener won't call <code>preventDefault()</code>.</td>
+                <td><code>@scroll.passive="handleScroll"</code></td>
+            </tr>
+            <tr>
+                <td><code>.stopPropagation</code></td>
+                <td>Stops event propagation manually.</td>
+                <td><code>@click.stop="handleClick"</code></td>
+            </tr>
+        </tbody>
+    </table> 
+    </div>
 `,
           code1: `&lt;!-- the click event's propagation will be stopped --&gt;
 &lt;a @click.stop=&quot;doThis&quot;&gt;&lt;/a&gt;
@@ -787,6 +829,187 @@ Event modifiers are pre-set modifications that you can chain to your event liste
 &lt;!-- in case it contains &#39;event.preventDefault()&#39;                --&gt;
 &lt;div @scroll.passive=&quot;onScroll&quot;&gt;...&lt;/div&gt;
 `
+        },
+        {
+          text1: `<b>1. .stop (Stop Event Propagation)</b>
+
+<b>Purpose</b>: This modifier stops the event from propagating (bubbling) up to the parent elements in the DOM. When <b>.stop</b> is used, it prevents any parent elements from receiving the event.
+
+<b>Explanation</b>:
+    => If you click the button, the <b>childClick</b> method will run.
+    => The parent div (parentClick) will not run because <b>.stop</b> prevents the click event from propagating to the parent.
+    `,
+          code1: `&lt;template&gt;
+    &lt;div @click=&quot;parentClick&quot;&gt;
+      Parent Div
+      &lt;button @click.stop=&quot;childClick&quot;&gt;Click Me (Stop Propagation)&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+  
+  &lt;script&gt;
+  export default {
+    methods: {
+      parentClick() {
+        console.log("Parent Clicked");
+      },
+      childClick() {
+        console.log("Button Clicked (Event propagation stopped)");
+      }
+    }
+  };
+  &lt;/script&gt;
+  `
+        },
+        {
+          text1: `<b>2. .prevent (Prevent Default Action)</b>
+<b>Purpose</b>: This modifier prevents the default action that the browser would normally perform for the event. For example, when submitting a form, <b>.prevent</b> stops the form from actually submitting and reloading the page.
+it works like <b>event.preventDefault()</b>
+
+<b>Explanation</b>:
+    => When you click the <b>submit</b> button, the form <b>won't reload</b> the page because <b>.prevent</b> stops the default form submission behavior.
+    => The <b>handleSubmit</b> method will run and log the message.
+    `,
+          code1: `&lt;template&gt;
+    &lt;form @submit.prevent=&quot;handleSubmit&quot;&gt;
+      &lt;button type=&quot;submit&quot;&gt;Submit (Prevent Default)&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/template&gt;
+  
+  &lt;script&gt;
+  export default {
+    methods: {
+      handleSubmit() {
+        console.log(&quot;Form submission prevented (no reload)&quot;);
+      }
+    }
+  };
+  &lt;/script&gt;
+  `
+        },
+        {
+          text1: `<b>3. .self (Trigger Event Only on the Element Itself)</b>
+<b>Purpose</b>: This modifier ensures that the event handler is only triggered if the event happens on the element itself, not on its child elements.
+
+<b>Explanation</b>:
+    => When you click the <b>button</b>, the <b>handleClick</b> method will be triggered.
+    => However, if you click on the <b>child button</b> inside the <b>div</b>, the <b>handleClick</b> method will not be triggered because <b>.self</b> ensures the event is only triggered by the button itself, not by any child element inside it.
+    `,
+          code1: `&lt;template&gt;
+    &lt;div&gt;
+        &lt;button @click.self=&quot;handleClick&quot;&gt;Click Me (Self Modifier)&lt;/button&gt;
+        &lt;div&gt;
+            &lt;button&gt;Child Button&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    methods: {
+        handleClick() {
+            console.log(&quot;Button clicked directly&quot;); // Output : Button clicked directly
+        }
+    }
+};
+&lt;/script&gt;`
+        },
+        {
+          text1: `<b>4. .capture (Capture Phase)</b>
+<b>Purpose</b>: The <b>.capture</b> modifier listens for the event during the capturing phase instead of the bubbling phase. The event is captured before it reaches the target element.
+
+<b>Explanation</b>:
+    Normally, events are handled in the <b>bubbling phase</b>, meaning they start from the target element and propagate upward to the root.
+    By adding <b>.capture</b>, the event is handled during the <b>capturing phase</b>, which starts from the root and works its way down to the target element.
+    The <b>handleCapture</b> method will be triggered during the capturing phase.
+
+    <b>Event Phases: Capturing vs. Bubbling</b>
+In JavaScript, events go through two phases:
+    => <b>Capturing Phase</b>: The event starts at the root of the DOM and travels down to the target element (from top to bottom).
+    => <b>Bubbling Phase</b>: The event starts from the target element and bubbles up to the root (from bottom to top).
+    `,
+          code1: `&lt;template&gt;
+    &lt;div @click=&quot;handleDivClick&quot;&gt;
+      Parent Div
+      &lt;div @click.capture=&quot;handleCapture&quot;&gt;
+        Click Me (Capture Modifier)
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+  
+  &lt;script&gt;
+  export default {
+    methods: {
+      handleDivClick() {
+        console.log(&quot;Parent Div Clicked&quot;);
+      },
+      handleCapture() {
+        console.log(&quot;Event captured during the capturing phase&quot;);
+      }
+    }
+  };
+  &lt;/script&gt;
+  `
+        },
+        {
+          text1: `<b>5. .once (Trigger Only Once)</b>
+<b>Purpose</b>: This modifier ensures the event is triggered at most once. After it runs once, the event listener is automatically removed.
+
+<b>Explanation</b>:
+    When you click the <b>button</b>, the <b>handleOnceClick</b> method will be triggered.
+    After the first click, the event listener will automatically be removed, so subsequent clicks won't trigger the method anymore.
+    `,
+          code1: `&lt;template&gt;
+    &lt;button @click.once=&quot;handleOnceClick&quot;&gt;Click Me (Once Modifier)&lt;/button&gt;
+  &lt;/template&gt;
+  
+  &lt;script&gt;
+  export default {
+    data() {
+      return {
+        clickCount: 0
+      };
+    },
+    methods: {
+      handleOnceClick() {
+        this.clickCount++;
+        console.log(\`Button clicked \${this.clickCount} time(s) - Only once\`);
+      }
+    }
+  };
+  &lt;/script&gt;
+  `
+        },
+        {
+          text1: `<b>6. .passive (Optimizing Performance for Scroll Events)</b>
+Purpose: The <b>.passive</b> modifier tells the browser that the event handler will <b>not call preventDefault()</b>, allowing for better performance, especially on scroll and touch events.
+
+<b>Explanation</b>:
+    When you scroll inside the <b>div</b>, the <b>handleScroll</b> method will be triggered.
+    The <b>.passive</b> modifier optimizes performance by telling the browser that the event handler will not block the scroll behavior using <b>preventDefault()</b>.`,
+          code1: `&lt;template&gt;
+    &lt;div @scroll.passive=&quot;handleScroll&quot; style=&quot;overflow: auto; height: 100px; border: 1px solid;&quot;&gt;
+      &lt;div style=&quot;height: 300px;&quot;&gt;Scroll here to trigger the passive event&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+  
+  &lt;script&gt;
+  export default {
+    methods: {
+      handleScroll() {
+        console.log(&quot;Scroll event triggered (passive handler)&quot;);
+      }
+    }
+  };
+  &lt;/script&gt;
+  `
+        },
+        {
+          text1: `In <b>React</b>, we don't have built-in event modifiers like in Vue.js. However, we can implement similar behaviors using <b>event handlers, native JavaScript methods</b>, and <b>React's synthetic event system</b>. Let's break down each of the Vue event modifiers and how we can achieve the same results in React.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
         },
         {
           text1: `The <b>event.preventDefault()</b> method prevents the default behavior of an element from happening. For example, if you have a form with a submit button, and you want to prevent the form from being submitted when the button is clicked, you can use <b>preventDefault()</b> to cancel the default submission behavior.
@@ -919,28 +1142,26 @@ export default {
 &lt;/script&gt;
 
 // The 'v-model' directive helps us simplify the above to:
-
 &lt;input v-model=&quot;text&quot;&gt;
 `
         },
         {
-          text1: `In addition, <b>v-model</b> can be used on inputs of different types, <b><textarea></b>, and <b><select></b> elements. It automatically expands to different DOM property and event pairs based on the element it is used on:
+          text1: `In addition, <b>v-model</b> can be used on inputs of different types, <b>&lt;textarea&gt;</b>, and <b>&lt;select&gt;</b> elements. It automatically expands to different DOM property and event pairs based on the element it is used on:
 
-<b><input></b> with text types and <b><textarea></b> elements use <b>value</b> property and <b>input</b> event;
-<b><input type="checkbox"></b> and <b><input type="radio"></b> use <b>checked</b> property and <b>change</b> event;
-<b><select></b> uses <b>value</b> as a prop and <b>change</b> as an event.
+<b>&lt;input&gt;</b> with text types and <b>&lt;textarea&gt;</b> elements use <b>value</b> property and <b>input</b> event;
+<b>&lt;input type=&quot;checkbox&quot;&gt;</b> and <b>&lt;input type=&quot;radio&quot;&gt;</b> use <b>checked</b> property and <b>change</b> event;
+<b>&lt;select&gt;</b> uses <b>value</b> as a prop and <b>change</b> as an event.
 
-Note: <b>v-model will ignore the initial <b>value</b>, <b>checked</b> or <b>selected</b> attributes found on any form elements. It will always treat the current bound JavaScript state as the source of truth. You should declare the initial value on the JavaScript side, using reactivity APIs.
+Note: <b>v-model</b> will ignore the initial <b>value</b>, <b>checked</b> or <b>selected</b> attributes found on any form elements. It will always treat the current bound JavaScript state as the source of truth. You should declare the initial value on the JavaScript side, using reactivity APIs.
 `,
-          code1: `Note that interpolation inside '<textarea>' won't work. Use 'v-model' instead.
-&lt;!-- bad --&gt;
+          code1: `//Note that interpolation inside '&lt;textarea&gt;' won't work. Use 'v-model' instead.
+// &lt;!-- bad --&gt;
 &lt;textarea&gt;{{ text }}&lt;/textarea&gt;
 
-&lt;!-- good --&gt;
+// &lt;!-- good --&gt;
 &lt;textarea v-model=&quot;text&quot;&gt;&lt;/textarea&gt;
 
 // Single checkbox, boolean value:
-
 &lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; v-model=&quot;checked&quot; /&gt;
 &lt;label for=&quot;checkbox&quot;&gt;{{ checked }}&lt;/label&gt;
 
@@ -950,13 +1171,10 @@ Note: <b>v-model will ignore the initial <b>value</b>, <b>checked</b> or <b>sele
 &lt;template&gt;
   &lt;div&gt;
     &lt;div&gt;Checked names: {{ checkedNames }}&lt;/div&gt;
-
     &lt;input type=&quot;checkbox&quot; id=&quot;jack&quot; value=&quot;Jack&quot; v-model=&quot;checkedNames&quot; /&gt;
     &lt;label for=&quot;jack&quot;&gt;Jack&lt;/label&gt;
-
     &lt;input type=&quot;checkbox&quot; id=&quot;john&quot; value=&quot;John&quot; v-model=&quot;checkedNames&quot; /&gt;
     &lt;label for=&quot;john&quot;&gt;John&lt;/label&gt;
-
     &lt;input type=&quot;checkbox&quot; id=&quot;mike&quot; value=&quot;Mike&quot; v-model=&quot;checkedNames&quot; /&gt;
     &lt;label for=&quot;mike&quot;&gt;Mike&lt;/label&gt;
   &lt;/div&gt;
@@ -970,53 +1188,51 @@ export default {
   data() {
     return {
       text: '',
+      checkedNames: false
     };
   }
 };
 &lt;/script&gt;
-
-In this case, the 'checkedNames' array will always contain the values from the currently checked boxes.
+// In this case, the 'checkedNames' array will always contain the values from the currently checked boxes.
 
 
 //--------------------
 
-Radio​
-<div>Picked: {{ picked }}</div>
+&lt;template&gt;
+    &lt;div&gt;
+        // Radio
+        &lt;div&gt;Picked: {{ picked }}&lt;/div&gt;
+        &lt;input type=&quot;radio&quot; id=&quot;one&quot; value=&quot;One&quot; v-model=&quot;picked&quot; /&gt;
+        &lt;label for=&quot;one&quot;&gt;One&lt;/label&gt;
+        &lt;input type=&quot;radio&quot; id=&quot;two&quot; value=&quot;Two&quot; v-model=&quot;picked&quot; /&gt;
+        &lt;label for=&quot;two&quot;&gt;Two&lt;/label&gt;
+        
+        &lt;/br&gt;
+        // Single select:
+        &lt;div&gt;Selected: {{ selected }}&lt;/div&gt;
+        &lt;select v-model=&quot;selected&quot;&gt;
+            &lt;option disabled value=&quot;&quot;&gt;Please select one&lt;/option&gt;
+            &lt;option&gt;A&lt;/option&gt;
+            &lt;option&gt;B&lt;/option&gt;
+            &lt;option&gt;C&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
 
-<input type="radio" id="one" value="One" v-model="picked" />
-<label for="one">One</label>
-
-<input type="radio" id="two" value="Two" v-model="picked" />
-<label for="two">Two</label>
-
-//----------------------------
-
-Single select:
-
-<div>Selected: {{ selected }}</div>
-
-<select v-model="selected">
-  <option disabled value="">Please select one</option>
-  <option>A</option>
-  <option>B</option>
-  <option>C</option>
-</select>
-
-<script>
+&lt;script&gt;
 export default {
-  data() {
-    return {
-      selected: []
-    };
-  }
+    data() {
+        return {
+            selected: [],
+            picked : &#39;&#39;
+        };
+    }
 };
-</script>
+&lt;/script&gt;
+
 
 //---------------------
-
-Select options can be dynamically rendered with v-for:
-
-js
+// Select options can be dynamically rendered with v-for:
 export default {
   data() {
     return {
@@ -1029,16 +1245,13 @@ export default {
     }
   }
 }
-template
-<select v-model="selected">
-  <option v-for="option in options" :value="option.value">
+// template
+&lt;select v-model=&quot;selected&quot;&gt;
+  &lt;option v-for=&quot;option in options&quot; :value=&quot;option.value&quot;&gt;
     {{ option.text }}
-  </option>
-</select>
-
-<div>Selected: {{ selected }}</div>
-
-
+  &lt;/option&gt;
+&lt;/select&gt;
+&lt;div&gt;Selected: {{ selected }}&lt;/div&gt;
 `
         },
         {
@@ -1102,40 +1315,35 @@ But sometimes we may want to bind the value to a dynamic property on the current
           text1: `<b>.lazy​</b>
 By default, <b>v-model</b> syncs the input with the data after each <b>input</b> event (with the exception of IME composition as stated above). You can add the <b>lazy</b> modifier to instead sync after <b>change</b> events:
 
-<!-- synced after "change" instead of "input" -->
-<span style="color:red"> <input v-model.lazy="msg" /> </span>
+&lt;!-- synced after &quot;change&quot; instead of &quot;input&quot; --&gt;
+&lt;span style=&quot;color:red&quot;&gt; &lt;input v-model.lazy=&quot;msg&quot; /&gt; &lt;/span&gt;
 
 <b>.number​</b>
 If you want user input to be automatically typecast as a number, you can add the <b>number</b> modifier to your <b>v-model</b> managed inputs:
-
-<span style="color:red"><input v-model.number="age" /></span>
+<span style="color:red">&lt;input v-model.number=&quot;age&quot; /&gt;</span>
 
 If the value cannot be parsed with <b>parseFloat()</b>, then the original value is used instead.
-
 The number modifier is applied automatically if the input has type="number".
 
-<b>.trim</b>​
+<b>.trim</b>
 If you want whitespace from user input to be trimmed automatically, you can add the <b>trim</b> modifier to your <b>v-model</b>-managed inputs:
-
-<span style="color:red">
-<input v-model.trim="msg" /> </span>`,
+<span style="color:red">&lt;input v-model.trim=&quot;msg&quot; /&gt; </span>`,
           code1: ``
         },
         {
           text1: ``,
           code1: `
           // main.vue
+          &lt;template&gt;
+            &lt;div&gt;
+              &lt;h2&gt;Using CustomInput Component with v-model&lt;/h2&gt;
+              &lt;InputComponent v-model=&quot;message&quot; /&gt;
+              &lt;p&gt;Message from parent component: {{ message }}&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/template&gt;
 
-          <template>
-            <div>
-              <h2>Using CustomInput Component with v-model</h2>
-              <InputComponent v-model="message" />
-              <p>Message from parent component: {{ message }}</p>
-            </div>
-          </template>
-
-          <script>
-          import InputComponent from './InputComponent.vue';
+          &lt;script&gt;
+          import InputComponent from &#39;./InputComponent.vue&#39;;
 
           export default {
             components: {
@@ -1143,42 +1351,41 @@ If you want whitespace from user input to be trimmed automatically, you can add 
             },
             data() {
               return {
-                message: '', // This is the initial value
+                message: &#39;&#39;, // This is the initial value
               };
             },
           };
-          </script>
+          &lt;/script&gt;
 
-//---------------
+//---
 // InputComponent.vue
-<template>
-  <input
-    :value="value"
-    @input="$emit('input', $event.target.value)"
-    placeholder="Enter text..."
-  />
-</template>
-
-<script>
+&lt;template&gt;
+  &lt;input
+    :value=&quot;value&quot;
+    @input=&quot;$emit(&#39;input&#39;, $event.target.value)&quot;
+    placeholder=&quot;Enter text...&quot;
+  /&gt;
+&lt;/template&gt;
+&lt;script&gt;
 export default {
-  props: ['value'],
+  props: [&#39;value&#39;],
 };
-</script>
+&lt;/script&gt;
 
-// Example 2
+
+// ---------Example 2 ----------------
 // Parent.vue
-
-<template>
-  <section id="main" class="main-alt">
-    <div v-for="u in userDetails">
-      <InputComponent :user="u" />
+&lt;template&gt;
+  &lt;section id=&quot;main&quot; class=&quot;main-alt&quot;&gt;
+    &lt;div v-for=&quot;u in userDetails&quot;&gt;
+      &lt;InputComponent :user=&quot;u&quot; /&gt;
       Value : {{ u.value }}
-    </div>
-  </section>
-</template>
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/template&gt;
 
-<script>
-import InputComponent from './InputComponent.vue';
+&lt;script&gt;
+import InputComponent from &#39;./InputComponent.vue&#39;;
 
 export default {
   components: {
@@ -1189,38 +1396,38 @@ export default {
       userDetails: [
         {
           id: 1,
-          name: 'ram',
-          area: 'wgl',
-          value: ''
+          name: &#39;ram&#39;,
+          area: &#39;wgl&#39;,
+          value: &#39;&#39;
         },
         {
           id: 2,
-          name: 'venkat',
-          area: 'wgl',
-          value: ''
+          name: &#39;venkat&#39;,
+          area: &#39;wgl&#39;,
+          value: &#39;&#39;
         },
         {
           id: 3,
-          name: 'kumar',
-          area: 'wgl',
-          value: ''
+          name: &#39;kumar&#39;,
+          area: &#39;wgl&#39;,
+          value: &#39;&#39;
         },
       ], // This is the initial value
     };
   },
 };
-</script>
+&lt;/script&gt;
 
+//---------------------
 //InputComponent.vue
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;input type=&quot;text&quot; v-model=&quot;user.value&quot; /&gt;
+    &lt;!-- {{ user }} --&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 
-<template>
-  <div>
-    <input type="text" v-model="user.value" />
-    <!-- {{ user }} -->
-  </div>
-</template>
-
-<script>
+&lt;script&gt;
 export default {
   props: {
     user: {
@@ -1237,10 +1444,9 @@ export default {
     }
   },
 }
-</script>
+&lt;/script&gt;
 
-Example: 3
-
+// Example: 3
           `
         },
       ]
@@ -1250,20 +1456,15 @@ Example: 3
       title: "Computed properties",
       note: [
         {
-          text1: `Definition: Computed properties are like methods but are cached based on their reactive dependencies. Vue.js watches these dependencies and only re-evaluates the computed property when one of its dependencies has changed.
-
-
+          text1: `<b>Definition</b>: Computed properties are like methods but are cached based on their reactive dependencies. Vue.js watches these dependencies and only re-evaluates the computed property when one of its dependencies has changed.
 
           <b>Computed properties</b> are like data properties, except they depend on other properties.
-
           <b>Computed properties</b> are written like methods, but they do not accept any input arguments.
-
           <b>Computed properties</b> are updated automatically when a dependency changes, while methods are called on when something happens, like with event handling for example.
-
           <b>Computed properties</b> are used when outputting something that depends on something else.
 
-
-          <b>computed properties</b> are cached based on their reactive dependencies.</b> A computed property will only re-evaluate when some of its reactive dependencies have changed. This means as long as message has not changed, multiple access to the reversedMessage computed property will immediately return the previously computed result without having to run the function again.
+          <b>computed properties</b> are cached based on their reactive dependencies.</b> A computed property will only re-evaluate when some of its reactive dependencies have changed. 
+          This means as long as message has not changed, multiple access to the reversedMessage computed property will immediately return the previously computed result without having to run the function again.
           `,
           code1: `
 &lt;template&gt; 
@@ -1456,7 +1657,8 @@ export default {
 `
         },
         {
-          text1: `The difference between a computed property and a method is that <b>computed properties are cached</b> and change only when their dependencies change. A <b>method will evaluate every time it's called</b>.
+          text1: `<b>computed property vs method</b>
+          The difference between a computed property and a method is that <b>computed properties are cached</b> and change only when their dependencies change. A <b>method will evaluate every time it's called</b>.
 
           The difference between a <b>computed property and a method is that computed properties are cached</b>, these properties only change when their dependency change. A method will be evaluated every time it is being called.
 
@@ -1467,22 +1669,19 @@ export default {
         {
           text1: `<b>Writable Computed</b>
 By default, Computed properties are getter-only, but it's possible a declare a setter and make Computed a “Writable Computed”.`,
-          code1: `
-          <script setup>
-          import { ref, computed } from 'vue'
-
-          const name = ref('Harry')
-          const surname = ref('Potter')
-
+          code1: `&lt;script setup&gt;
+          import { ref, computed } from &#39;vue&#39;
+          const name = ref(&#39;Harry&#39;)
+          const surname = ref(&#39;Potter&#39;)
           const fullName = computed({
              get() {
-               return name.value + ' ' + surname.value
+               return name.value + &#39; &#39; + surname.value
              },
              set(newValue) {
                [name.value, surname.value] = newValue.toUpperCase()
              }
           })
-          </script>
+          &lt;/script&gt;
           `
         },
         {
@@ -1602,7 +1801,7 @@ Common examples are:
         {
           text1: `Watch Example: Call API when parent input prop changed
 
-        <span style="color:orange">Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: <b>searchQuery</b></span>
+        <span style="color:green">Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: <b>searchQuery</b></span>
 
         to avoid above error created <b>localSearchQuery</b> data property and updating <b>searchQuery</b> using <b>$emit</b>
 
@@ -1758,7 +1957,7 @@ Vue.directive('initvalue', {
           code1: ``
         },
         {
-          text1: `what is difference between watch and computed
+          text1: `<b>what is difference between watch and computed</b>
 
 -> Computed properties are more declarative than watcher properties.
 -> Computed properties should be pure in the way that they should return a value, be synchronous, and have no side effects.

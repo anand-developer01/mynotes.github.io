@@ -98,7 +98,7 @@ const isHighlighted = 'vue3'
 const Links1 = 'vue-notes'
 const Links2 = 'vue3'
 const Links3 = 'vue-x'
-const Links4 = 'vuejs-projects'
+const Links4 = 'vue3-projects'
 
 const vue3Data = {
   vue3Note: [
@@ -317,10 +317,96 @@ Now let's take a look at <b>renderless components</b>. A renderless component is
       title: "composable function:",
       note: [
         {
-          text1: `If we were to implement the mouse tracking functionality using the Composition API directly inside a component, it would look like this:
+          text1: `<b>Composability</b> is a system design principle that deals with the inter-relationships of components.
+
+          In Vue 3, a <b>composable function</b> is a custom function that encapsulates reusable logic and is typically used inside the <b>setup()</b> function. Composables allow you to organize code in a way that is easy to reuse across components without creating a rigid component hierarchy or using mixins. They are a part of the Composition API, which was introduced in Vue 3.
+          
+          a <b>Composable</b> is a function that leverages the power of the <b>Composition API</b>, enabling you to structure your code into reusable units.
+
+          a <b>composable function</b> is a reusable function that encapsulates logic using Vue3's Composition API. It is typically used to reuse stateful login. across multiple components without using mixins
+          Composables in Vue 3 are functions or objects that encapsulate a specific piece of functionality or logic. They are designed to be self-contained units that can be easily shared, reused, and composed together to build complex functionality in a declarative manner.
+
+          When building frontend applications, we often need to reuse logic for common tasks. For example, we may need to format dates in many places, so we extract a reusable function for that. 
+
+          <b>Reusability</b>: Composables allow you to encapsulate and package specific logic, making it highly reusable across different components. This promotes code reuse and reduces duplication, leading to a more maintainable codebase.
+<b>Modularity</b>: By breaking down your code into smaller composables, you can achieve better modularity and separation of concerns. Each composable focuses on a specific task, making your codebase more organized and easier to understand.
+<b>Testability</b>: Composables can be easily tested in isolation since they encapsulate specific logic. This facilitates unit testing and improves the overall testability of your Vue applications.
+<b>Composition</b>: Composables are designed to be composable themselves. You can easily combine multiple composables together to create more complex functionality, providing a flexible way to build and extend features in your applications.
+
+          If we were to implement the mouse tracking functionality using the Composition API directly inside a component, it would look like this:
 
           `,
-          code1: `&lt;script setup&gt;
+          code1: `//--------- AppComposable.vue -------
+          &lt;template&gt;
+    &lt;div&gt;
+        &lt;p&gt;{{ count }}&lt;/p&gt;
+        &lt;button @click=&quot;increment&quot;&gt;Increment &lt;/button&gt;
+        &lt;button @click=&quot;decrement&quot;&gt;Decrement &lt;/button&gt;
+
+        &lt;br /&gt;
+
+        &lt;p&gt;{{ timer }}&lt;/p&gt;
+        &lt;button @click=&quot;start&quot;&gt;start &lt;/button&gt;
+        &lt;button @click=&quot;stop&quot;&gt;stop &lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script lang=&quot;ts&quot;&gt;
+import { defineComponent } from &#39;vue&#39;;
+import { useCounter } from &#39;./useCounter&#39;;
+import { useTimer } from &#39;@/components/composable/useTimer&#39;
+
+export default defineComponent({
+    setup() {
+        const { count, increment, decrement } = useCounter()
+        const { timer, start, stop } = useTimer()
+        return { count, increment, decrement, timer, start, stop }
+    }
+})
+&lt;/script&gt;
+
+
+//-------- useCounter.js -----
+import { ref } from "vue";
+export function useCounter() {
+    const count = ref(0)
+    const increment = () => {
+        count.value++
+    }
+    const decrement = () => {
+        count.value--
+    }
+    return { count, increment, decrement }
+}
+
+
+//------- useTimer.ts ---------
+import { ref } from "vue";
+
+export function useTimer() {
+    const timer = ref(0)
+    let timerId: ReturnType<typeof setInterval> | null = null;
+    // let timerId = null // without typescript 
+    const start = () => {
+        if (timerId === null) {
+            timerId = setInterval(() => {
+                timer.value++
+            }, 1000)
+        }
+    }
+    const stop = () => {
+        if (timerId !== null) {
+            clearInterval(timerId)
+            timerId = null
+        }
+
+    }
+    return { timer, start, stop }
+}
+
+          
+          //-----------------------
+          &lt;script setup&gt;
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const x = ref(0)
@@ -838,6 +924,78 @@ export default {
           text1: ``,
           code1: ``
         },
+      ]
+    },
+    {
+      id: 1,
+      title: "Vue 3: Composition API + Vue Router",
+      note: [
+        {
+          text1: `<b>Key Concepts for Vue 2 with Vue Router</b>:
+    <b>Vue.use(Router)</b>: This is used to install the Vue Router plugin globally.
+
+    <b>Vue</b>: This is the Vue constructor function.
+<b>use()</b>: The use() method is a built-in Vue method for installing plugins into Vue. This method modifies the Vue instance by adding new features or global configurations.
+<b>Router</b>: This is the Vue Router instance you created by importing <b>vue-router</b>. When you pass <b>Router</b> to <b>Vue.use()</b>, Vue Router's features (such as routing, navigation, etc.) are installed and globally available in your app.
+
+// 4. Define some routes
+const routes = [
+  {
+    path: '/',
+    component: Home,
+  },
+  {
+    path: '/about',
+    component: About,
+  },
+];
+
+// 5. Create a Router instance
+const router = new Router({
+  routes,  // Define the routing table
+});
+
+    <b>&lt;router-link&gt;</b>: A component used to create navigation links. It works like an anchor tag but without refreshing the page.
+    <b>&lt;router-view&gt;</b>: A placeholder where the routed component will be displayed.`,
+          code1: `<b>Install the Vue 3 Router from the Command Line</b>
+$ npm i vue-router@next
+
+//--------  router/index.js  -----
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../components/Home.vue';
+import About from '../components/About.vue';
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About
+  }
+];
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+});
+export default router;
+
+
+
+//--------- main.js (Vue 3) ---------
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router'; // Import the router
+
+createApp(App)
+  .use(router) // Use the router in the app
+  .mount('#app');
+`
+        }
       ]
     },
     {

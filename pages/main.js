@@ -1,3 +1,16 @@
+// function alignCode(){
+//     console.log(document.getElementById('aligncode').checked)
+//     console.log(document.getElementById('just-code-align'))
+//     var justCodeAlignEle = document.getElementById('just-code-align')
+//     var isChecked = document.getElementById('aligncode').checked
+//     if(isChecked){
+//         justCodeAlignEle.classList.add("align-code")
+//         console.log("added")
+//     } else {
+//         justCodeAlignEle.classList.remove("align-code");
+//         console.log("removed")
+//     }
+// }
 const logoTitle = ''
 function mainDom(data) {
 

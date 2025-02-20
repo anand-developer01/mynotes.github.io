@@ -13,13 +13,9 @@ const javascriptData = {
       note: [
         {
           text1: `JavaScript is a single-threaded programming language. This means that JavaScript can do only one thing at a single point in time.
-
           The JavaScript engine executes a script from the top of the file and works its way down. It creates the execution contexts, and pushes, and pops functions onto and off the call stack in the execution phase.
-          
           If a function takes a long time to execute, you cannot interact with the web browser during the function's execution because the page hangs.
-          
           A function that takes a long time to complete is called a blocking function. Technically, a blocking function blocks all the interactions on the webpage, such as mouse clicks.
-          
           An example of a blocking function is a function that calls an API from a remote server.
           
           The following example uses a big loop to simulate a blocking function:`,
@@ -34,7 +30,56 @@ const javascriptData = {
         
         console.log('Start script...');
         task('Call an API');
-        console.log('Done!');`
+        console.log('Done!');`,
+        },
+        {
+          text1: ``,
+          code1: ``,
+          img: `../assets/images/javascript/EventLoop2.gif`
+        },
+        {
+          text1: `<b>Event Loop</b>:
+The event loop is like a diligent coordinator, making sure everything runs smoothly. <u>It watches over the <b>call stack</b> and <b>task queues</b></u>. If the call stack is empty, it checks the task queues and moves tasks to the call stack for execution. This helps keep your applications responsive and free from freezing.
+When you have a setTimeOut and a Delay, It's not the dalay until it gets moved onto the call stack. no it's the delay until it gets moved to the task queue 
+
+<b>Event Loop</b>: — The event loop continuously monitors the call stack and the event queue. When the call stack is empty (i.e., no code is executing), the event loop takes the first event from the event queue and pushes its corresponding callback function onto the call stack. This process is known as “popping an event off the queue.”
+
+<b>Event Loop</b>
+The Event Loop is like a manager who keeps an eye on the call stack and the Callback Queue. Here's how it works:
+1) The Event Loop looks at the call stack to see if it's empty.
+2) If the stack is empty, it takes the first task from the Callback Queue and puts it on the stack.
+3) The task runs and is then removed from the stack.
+4) This process repeats.
+
+<b>Web APIs</b>
+JavaScript in browsers provides Web APIs for handling tasks like setTimeout, fetch, and DOM events. These APIs run in the background and, when tasks are completed, their callbacks are added to the Callback Queue.
+
+<b>Callback Queue</b>
+The Callback Queue (also known as the <b>Task Queue</b>) is where asynchronous callbacks from Web APIs wait to be executed.
+When the call stack is empty, the Event Loop picks the first task from the Callback Queue and puts it on the call stack for execution.
+
+<b>Call Stack</b>:
+Imagine the call stack as a list where JavaScript keeps track of function calls. When you call a function, it gets added to the top of this list. Once the function finishes, it’s removed. If a function calls another function, the new one gets added to the top, creating a stacking effect.
+The call stack is a simple data structure that keeps track of function calls. Think of it as a pile of books where you can only add or remove the book on top.
+
+<b>Microtask Queue</b>:
+Microtasks are usually promises and mutation observers. When a promise resolves, its .then() callback goes to the microtask queue. Microtasks are the top priority. After finishing a task in the call stack, the event loop first handles all tasks in the microtask queue before moving to the macrotask queue, ensuring crucial operations are done quickly.
+
+<b>Macrotask Queue</b>:
+Macrotasks include timers (setTimeout, setInterval), I/O operations, and other events. These tasks go into the macrotask queue. The event loop processes them one by one in a first-in, first-out (FIFO) order, but only after the call stack and microtask queue are empty.
+
+<b>Microtasks and Macrotasks</b>
+Tasks in JavaScript are divided into two categories: macrotasks and microtasks.
+<b>Macrotasks</b>: These include <u>setTimeout, setInterval</u>, and I/O operations. They are placed in the Callback Queue.
+<b>Microtasks</b>: These include <u>Promise</u> callbacks and <u>MutationObserver</u>. They are placed in the Microtask Queue.
+
+`,
+          code1: ``,
+          img: `../assets/images/javascript/EventLoop.gif`
+        },
+        {
+          text1: ``,
+          code1: ``
         },
         {
           text1: `In this example, we have a big while loop inside the task() function that emulates a time-consuming task. The task() function is a blocking function.
@@ -255,11 +300,398 @@ The following declares the variable counter with the let keyword:`,
     },
     {
       id: 1,
-      title: "JavaScript Execution Context",
+      title: "var, let and const",
       note: [
         {
           text1: `
-          <b>global execution context:</b>
+=>           <b>var</b> and <b>let</b> create variables that can be reassigned another value.
+=> <b>const</b> creates "constant" variables that cannot be reassigned another value.
+=> developers shouldn't use <b>var</b> anymore. They should use <b>let</b> or <b>const</b> instead.
+=> if you're not going to change the value of a variable, it is good practice to use <b>const</b>.
+
+=> If you create a variable outside of a function, you can use it anywhere in your code.
+=> If you create a variable inside a function, you can only use it within that function.
+
+To analyze the differences between these keywords, I'll be using three factors:
+-> Scope of variables
+-> Redeclaration and reassignment
+-> Hoisting
+
+
+<u>The scope of variables declared with <b>var</b></u>
+Variables declared with var can have a global or local scope. Global scope is for variables declared outside functions, while local scope is for variables declared inside functions.
+
+<b>How to redeclare and reassign variables declared with, var</b>
+Variables declared with var can be redeclared and reassigned
+var number = 50
+You have the <b>var</b> keyword, the name of the variable <b>number</b>, and an initial value <b>50</b>. If an initial value is not provided, the default value will be <b>undefined</b>:
+
+The <b>var</b> keyword allows for redeclaration.
+The <b>var</b> keyword also allows for reassignment. 
+
+<b>How to hoist variables declared with var</b>
+Variables declared with <b>var</b> are hoisted to the top of their global or local scope, which makes them accessible before the line they are declared.
+
+<b>Ex : 5 local scope</b>
+In the <b>print</b> function, <b>number</b> has a local scope. Due to hoisting, we can access the <b>number</b> variable before the line of declaration.
+As we see in <b>square1</b>, we assign <b>number * number</b>. Since <u>number</u> is hoisted with a default value of <b>undefined</b>, <u>square1</u> will be <b>undefined * undefined</b> which results in <b>NaN</b>.
+After the line of declaration with an initial value is executed, <u>number</u> will have a value of <b>50</b>. So in <u>square2</u>, <b>number * number</b> will be <b>50 * 50</b> which results in <b>2500</b>.
+`,
+          code1: `// ---------- var Ex : 1 ---------
+          // The "number" variable has a global scope – it's declared outside functions in the global space – so you can access it everywhere (inside and outside functions).
+          // Any attempt to access the variable outside the function where it was declared will result in a "variable is not defined"  reference error.
+                  var number = 50
+        function print() {
+            var square = number * number;
+            var localSC = 1000;
+            console.log(square)
+        }
+        console.log(number) // 50
+        console.log(localSC) // index.html:21 Uncaught ReferenceError: localSC is not defined
+        print() // 2500
+        
+
+        //---------- If an initial value is not provided, the default value will be undefined: Ex : 2 ------
+        var number
+console.log(number)
+// undefined
+
+//------------- The var keyword allows for redeclaration. Ex : 3 -----------
+As you can see, we have redeclared the variable number using the var keyword and an initial value of 100.
+var number = 50
+console.log(number) // 50
+
+var number = 100
+console.log(number) // 100
+
+
+//------------ Ex : 4
+console.log(number) // undefined
+var number = 50
+console.log(number) // 50
+
+// The number variable here has a global scope. Since it is declared with var, the variable is hoisted. This means that we can access the variable before the line where it was declared without errors.
+// But the variable is hoisted with a default value of "undefined". So that's the value returned from the variable (until the line where the variable is declared with an initial value gets executed).
+
+
+//------------ local scope Ex : 5 ----------
+        function print() {
+            var square1 = number * number
+            console.log(square1)
+
+            var number = 50
+
+            var square2 = number * number
+            console.log(square2)
+        }
+
+        print()
+        // NaN
+        // 2500
+        `
+        },
+        {
+          text1: `<b>Declare Variables with let in JavaScript</b>
+          <b>-> The scope of variables declared with let</b>
+Variables declared with <u>let</u> can have a <b>global, local</b>, or <b>block scope</b>. Block scope is for variables declared in a block. A block in JavaScript involves opening and closing curly braces:
+{
+  // a block
+}
+
+You can find blocks in <u>if, loop, switch</u>, and a couple of other statements. Any variables declared in such blocks with the <u>let</u> keyword will have a block scope. Also, you can't access these variables outside the block.
+
+In <b>Ex : 1</b> example, we have a global scope variable <b>number</b> and a local scope variable <b>square</b>. There's also block scope variable <b>anotherLargerNumber</b> because it is declared with <b>let</b> in a block.
+
+<b>largerNumber</b>, on the other hand - though declared in a block - does not have a block scope because it is declared with <b>var</b>. So <b>largerNumber</b> has a local scope as it is declared in the function <b>print</b>.
+
+We can access <b>number</b> everywhere. We can only access <b>square</b> and <b>largerNumber</b> in the function because they have local scope. But accessing <b>anotherLargerNumber</b> outside the block throws an <b>anotherLargerNumber</b> is not defined error.
+
+
+<b>-> How to redeclare and reassign variables declared with let</b>
+Just like var, variables declared with let can be reassigned to other values, but they cannot be redeclared. 
+
+<b>-> How to hoist variables declared with let</b>
+Variables declared with <b>let</b> are hoisted to the top of their global, local, or block scope, but their hoisting is a little different from the one with <b>var</b>.
+<b>var</b> variables are hoisted with a default value of <b>undefined</b>, which makes them accessible before their line of declaration (as we've seen above).
+But, <b>let</b> variables are hoisted without a default initialization. So when you try to access such variables, instead of getting <b>undefined</b>, or <b>variable is not defined error</b>, you get <b>cannot access variable before initialization</b>. Let's see an example:
+`,
+          code1: `//--------- let Ex : 1 ---------
+          let number = 50
+function print() {
+  let square = number * number
+  if (number < 60) {
+    var largerNumber = 80
+    let anotherLargerNumber = 100
+
+    console.log(square)
+  }
+  console.log(largerNumber)
+  console.log(anotherLargerNumber)
+}
+
+print()
+// 2500
+// 80
+// ReferenceError: anotherLargerNumber is not defined
+
+
+//------------ Ex : 2 -----------
+let number = 50
+console.log(number) // 50
+number = 100
+console.log(number) // 100
+// Here, we reassigned another value 100 after the initial declaration of 50.
+
+
+//------------ Ex : 3 -----------
+// But redeclaring a variable with let will throw an error:
+let number = 50
+let number = 100 // SyntaxError: Identifier 'number' has already been declared
+// You see we get a syntax error: Identifier 'number' has already been declared.
+
+
+//------------ Ex : 4 ----------
+// cannot access variable before initialization
+console.log(number)
+// ReferenceError: Cannot access 'number' before initialization
+let number = 50
+// Here, we have a global variable, "number" declared with "let". By trying to access this variable before the line of declaration, we get "ReferenceError: Cannot access 'number' before initialization".
+`
+        },
+        {
+          text1: `<b>How to Declare Variables with <u>const</u> in JavaScript</b>
+<b> => The scope of variables declared with const </b>
+Variables declared with <u>const</u> are similar to <u>let</u> in regards to <u>scope</u>. Such variables can have a <b>global, local</b>, or <b>block</b> scope.
+
+In Ex : 1 example, but I've replaced <u>let</u> with <u>const</u>. As you can see here, the <u>number</u> variable has a global scope, <u>square</u> has a local scope (declared in the <u>print</u> function), and <u>anotherLargeNumber</u> has a block scope (declared with <u>const</u>).
+There's also <u>largeNumber</u>, declared in a block. But because it is with <u>var</u>, the variable only has a local scope. Therefore, it can be accessed outside the block.
+Because <u>anotherLargeNumber</u> has a block scope, accessing it outside the block throws an <b>anotherLargerNumber is not defined</b>.
+
+
+<b> => How to redeclare and reassign variables declared with const</b>
+In this regard, <u>const</u> is different from <u>var</u> and <u>let</u>. <u>const</u> is used for declaring <b>constant</b> variables - which are variables with values that cannot be changed. So such variables cannot be redeclared, and neither can they be reassigned to other values. Attempting such would throw an error.
+
+<b> => How to hoist variables declared with const</b>
+Variables declared with <b>const</b>, just like <b>let</b>, are hoisted to the top of their global, local, or block scope - but without a default initialization.
+
+<b>var</b> variables, as you've seen earlier, are hoisted with a default value of <b>undefined</b> so they can be accessed before declaration without errors. Accessing a variable declared with <b>const</b> before the line of declaration will throw a <b>cannot access variable before initialization</b> error.
+
+Here, <u>number</u> is a globally scoped variable declared with <u>const</u>. By trying to access this variable before the line of declaration, we get <b>ReferenceError: Cannot access 'number' before initialization</b>. The same will occur if it was a locally scoped variable.
+`,
+          code1: `//---------------- Ex : 1 --------------
+          const number = 50
+function print() {
+  const square = number * number
+  if (number < 60) {
+    var largerNumber = 80
+    const anotherLargerNumber = 100
+    console.log(square)
+  }
+  console.log(largerNumber)
+  console.log(anotherLargerNumber)
+}
+
+print()
+// 2500
+// 80
+// ReferenceError: anotherLargerNumber is not defined
+
+
+//---------------- Ex : 2 -------------
+const number = 50
+const number = 100
+// SyntaxError: Identifier 'number' has already been declared
+// Here, you can see the "Identifier has already been declared syntax error".
+
+
+
+//---------------- Ex : 3 -----------
+const number = 50
+number = 100
+// TypeError: Assignment to constant variable
+// Here, you can see the "Assignment to constant variable type error".
+`
+        },
+        {
+          text1: `<b>Ex : 1 </b>
+          console.log(<span style="color:blue">number</span>)
+          <span style="color:grey"> // ReferenceError: Cannot access 'number' before initialization </span>
+let <span style="color:blue">number</span> = 10
+// or <span style="color:red">const</span> number = 10
+console.log(<span style="color:blue">number</span>)
+You get an error that says: <b>ReferenceError: Cannot access 'number' before initialization.</b>
+
+<b>Ex : 2 </b>
+console.log(<span style="color:blue">number2</span>)
+<span style="color:red">let</span> <span style="color:blue">number</span> = 10
+Running this code produces this <b>error: ReferenceError: number2 is not defined</b>
+
+<b>Ex : 1 </b> error says <b>ReferenceError: Cannot access 'number' before initialization</b> 
+<b>Ex : 2 </b> error says <b>ReferenceError: number2 is not defined.</b>
+
+This means that JavaScript <u>knows</u> about the <b>number</b>(<b>Ex : 1 </b>) variable. How does it know? Because <b>number</b> is hoisted to the top of the global scope.
+
+Well, this clarifies the difference between the hoisting behavior with <u>var</u> and <u>let/const</u>.
+Variables declared with <u>let</u> or <u>const</u> are <b>hoisted WITHOUT a default initialization</b>. So accessing them before the line they were declared throws <b>ReferenceError: Cannot access 'variable' before initialization</b>.
+But variables declared with <u>var</u> are <b>hoisted WITH a default initialization of undefined</b>. So accessing them before the line they were declared returns <u>undefined</u>.
+
+<b>Temporal Dead Zone</b>
+There's a name for the period during execution where <u>let/const</u> variables are hoisted but not accessible: it's called the <u>Temporal Dead Zone.</u>`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: `<b>Differences between var, let, and const</b>
+          <div class="class='table-res'">
+<table>
+    <thead>
+        <tr>
+            <th style="width: 233.333px;"><b><strong>var</strong></b></th>
+            <th style="width: 233.333px;"><b><strong>let</strong></b></th>
+            <th style="width: 233.333px;"><b><strong>const</strong></b></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="width: 233.333px;"><span>The scope of a </span><a
+                    href="https://www.geeksforgeeks.org/javascript-var/" target="_blank" rel="noopener"><i><em
+                            class="GFGEditorTheme__textItalic">var</em></i></a><i><em
+                        class="GFGEditorTheme__textItalic"> </em></i><span>variable is functional or global
+                    scope.</span></td>
+            <td style="width: 233.333px;"><span>The scope of a</span><i><em class="GFGEditorTheme__textItalic">
+                    </em></i><a href="https://www.geeksforgeeks.org/javascript-let/" target="_blank"
+                    rel="noopener"><i><em class="GFGEditorTheme__textItalic">let</em></i></a><span> variable is block
+                    scope.</span></td>
+            <td style="width: 233.333px;"><span>The scope of a </span><a
+                    href="https://www.geeksforgeeks.org/javascript-const/" target="_blank" rel="noopener"><i><em
+                            class="GFGEditorTheme__textItalic">const</em></i></a><span> variable is block scope.</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 233.333px;"><span>It can be updated and re-declared in the same scope.</span></td>
+            <td style="width: 233.333px;"><span>It can be updated but cannot be re-declared in the same scope.</span>
+            </td>
+            <td style="width: 233.333px;"><span>It can neither be updated or re-declared in any scope.</span></td>
+        </tr>
+        <tr>
+            <td style="width: 233.333px;"><span>It can be declared without initialization.</span></td>
+            <td style="width: 233.333px;"><span>It can be declared without initialization.</span></td>
+            <td style="width: 233.333px;"><span>It cannot be declared without initialization.</span></td>
+        </tr>
+        <tr>
+            <td style="width: 233.333px;"><span>It can be accessed without initialization as its default value is
+                    “undefined”.</span></td>
+            <td style="width: 233.333px;"><span>It cannot be accessed without initialization otherwise it will give
+                    ‘referenceError’.</span></td>
+            <td style="width: 233.333px;"><span>It cannot be accessed without initialization, as it cannot be declared
+                    without initialization.</span></td>
+        </tr>
+        <tr>
+            <td style="width: 233.333px;"><span>These variables are hoisted.</span></td>
+            <td style="width: 233.333px;"><span>These variables are hoisted but stay in the temporal dead zone untill
+                    the initialization.</span></td>
+            <td style="width: 233.333px;"><span>These variables are hoisted but stays in the temporal dead zone until
+                    the initialization.</span></td>
+        </tr>
+    </tbody>
+</table>
+</div>`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Variable Shadowing",
+      note: [
+        {
+          text1: `Variable Shadowing in JavaScript occurs when the inner variable hides or overrides the outer variable within the local scope. In this situation, the outer variable cannot be accessed within the inner scope, only the inner variable is used in that scope.
+
+-> Variable Shadowing occurs when we declare the same name for the variable in the inner and outer scope.
+-> The inner variable will hide or override the outer variable.
+-> The outer variable will become inaccessible until the code exists in the inner scope.
+<b>Key Points of Variable Shadowing:</b>
+The inner variable hides or "shadows" the outer variable.
+The inner variable only exists in the scope where it is defined (like inside a function or block).
+The outer variable remains accessible outside the scope of the inner variable.
+
+Imagine that you created two variables with exactly the same name but different values. The difference us that they are located in different scopes. One of them is located in the global scope while the other is in the function.
+
+Ex : 1
+When we declare a variable in the function scope while having a variable with the exact same name in the outer scope (global scope in this case), the value assigned in the inner scope is the value that will be stored in the memory. The inner scope usually is supposed to have access to the outer scope however when we declare variables with the same name, things change.
+
+This is called shadowing or variable shadowing in JavaScript. The inner scope variable shadowed the outer scope variable.
+
+But why is the result value apple in the second console log?
+Because the variable will be gone from the memory when the function ends and it doesn’t go outside of it. This happens due to the scope hierarchy in JavaScript. The priority of scopes goes from inner-most to outer-most scope. In other words, the inner scope has more priority than the outer scope. That is why, the variables inside the function are prioritized and then when the function ends, they are gone from the memory.
+
+<b>Shadowing with let and const</b>
+When we declare the variable with the let or const, the variable only exists inside the block (like an if statement or a loop). If we use the same name for a variable inside the block, it will hide the one outside the block. This is different from var, which is only limited to the function. Ex : 2
+
+
+As you see, things change here. The var keyword value changed because it is not block-scoped and it’s not scoped. As a result, no variable shadowing happens here.
+`,
+          code1: `let fruit = "apple"; // Outer scope variable
+
+function chooseFruit(){
+    let fruit = "orange"; // Inner scope variable, shadows the outer fruit
+    console.log(fruit); // Outputs the inner fruit value "orange"
+}
+
+chooseFruit(); // Function call
+console.log(fruit); // Outputs the outer fruit value "apple"
+
+
+//------------ Ex : 2 ---------
+let n = 10;
+if (true) {
+    let n = 20;  // Shadows the outer 'a'
+    console.log(n);  // 20
+}
+console.log(n);  // 10
+
+
+//--------- Ex : 3-----------
+var name = "Alice"; // Global scope
+
+function greet() {
+    var name = "Bob"; // Inner scope (shadows the global 'name')
+    console.log(name);  // Outputs: "Bob" (refers to the inner 'name')
+}
+
+greet();
+console.log(name); // Outputs: "Alice" (refers to the outer 'name')
+
+
+//-------------- Ex : 4 -------------
+        var fruit = "apple";
+
+        for (var fruit = 0; fruit <= 3; fruit++) {
+            console.log("Number " + fruit);
+        }
+        console.log(fruit);
+`
+        },
+        {
+          text1: `<b>How to Avoid Issues with Variable Shadowing?</b>
+<b>Use Descriptive Variable Names</b>: Choose meaningful names to reduce the chances of accidental shadowing.
+<b>Minimize Variable Scope</b>: Declare variables in the smallest scope possible to limit their visibility.
+<b>Enable Strict Mode</b>: Use "use stric"; to catch common mistakes, including some shadowing issues.
+<b>Use Linters</b>: Tools like ESLint can warn you about potential shadowing problems.
+<b>Refactor Nested Code</b>: If you find shadowing happening frequently, consider refactoring your code to reduce nesting.`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Execution Context",
+      note: [
+        {
+          text1: `<b>global execution context:</b>
           The global execution context is the top-level context in a JavaScript program. It represents the global scope, encompassing the entire program and all its components. This context sets the stage for the entire code execution process and plays a pivotal role in managing global variables and functions.
     
           There are two phases of JavaScript execution context:
@@ -401,54 +833,58 @@ The following declares the variable counter with the let keyword:`,
     },
     {
       id: 1,
-      title: "variable scope",
+      title: "scope",
       note: [
         {
-          text1: `Scope determines the visibility and accessibility of a variable. JavaScript has three scopes:
+          text1: `<a href="https://www.freecodecamp.org/news/scope-in-javascript-global-vs-local-vs-block-scope/#heading-global-scope" target="_blank">global-vs-local-vs-block-scope</a>
+          <b>scope</b> refers to the context or environment in which a variable is declared and accessible. It determines where a variable or function can be referenced or used within the code. Scope is important because it helps prevent naming conflicts and determines the lifecycle and visibility of variables.
+          JavaScript refers to the context or environment in which variables are declared and can be accessed.
+          
+          Scope determines the visibility and accessibility of a variable. JavaScript has Four scopes:
+          1) The global scope
+          2) Local scope
+          3) Block scope (started from ES6)
+          4) <a href="file:///D:/mynotes.github.io-main/mynotes.github.io-main/pages/javascript-notes.html#lexical%20scope:" target="_blank">Lexical Scope (Static Scope)</a>
+    
+          <b>The global scope</b>:
+          In JavaScript, global scope is the widest scope available. Variables declared in global scope are accessible from anywhere in your code, whether it's inside functions, conditional statements, loops, or other blocks of code.
+You can think of global scope as the "public square" of your program, where everyone can see and access what's going on.
+Variables declared outside of any function or block (<u>using var, let, or const</u>) are in the global scope.
+Global variables can be accessed anywhere in the code, including inside functions or blocks.
 
-          > The global scope
-          > Local scope
-          > Block scope (started from ES6)
-    
-          The global scope:
-          -----------------
           When the JavaScript engine executes a script, it creates a global execution context.
-    
           Also, it also assigns variables that you declare outside of functions to the global execution context. These variables are in the global scope. They are also known as global variables.
+
+          Accessing global variables is straightforward. You can use them within functions or any part of your code without any special effort
     
           See the following example:
-    
           var message = 'Hi';
           
-          The variable message is global-scoped. It can be accessible everywhere in the script.
-    
-          <----------------------->
-          Global Execution Context Execution Phase (Web Browser)
-          -------------------------
-          <----------------------->
-          Global Object: window
-          <----------------------->
-          this: window 
-          <----------------------->
-          message: 'Hi' 
-          <----------------------->
-    
-    
-          Local scope
-          The variables that you declare inside a function are local to the function. They are called local variables.`,
-          code1: `For example:
-         
+          The variable message is <b>global-scoped</b>. It can be accessible everywhere in the script.
+          <span style="background:yellow; width:300px; padding:10px;" class="text-center d-flex flex-column">
+          <b>Global Execution Context</b> </br> Execution Phase (Web Browser)
+          <span style="background:#8989ac; padding:10px; margin:3px;">Global Object: Window</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">this : window</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">message: 'Hi' </span>
+          </span>
+`,
+          code1: `// Example : 1
+var globalVariable = "I'm in global scope";
+function myFunction() {
+  // This function can access globalVariable
+  console.log(globalVariable);
+}
+myFunction();
+
+
+      //example:
           var message = 'Hi';
-    
           function say() {
               var message = 'Hello';
               console.log(message);
           }
-    
           say();
           console.log(message);
-          
-    
           // Output:
           // .......
           // Hello
@@ -456,89 +892,69 @@ The following declares the variable counter with the let keyword:`,
           `
         },
         {
-          text1: ` When the JavaScript engine executes the say() function, it creates a function execution context. The variable message declared inside the say() function is bound to the function execution context of the function, not the global execution context.
+          text1: `<b>Local scope</b>
+          The variables that you declare inside a function are local to the function. They are called local variables. When the JavaScript engine executes the say() function, it creates a function execution context. The variable message declared inside the say() function is bound to the function execution context of the function, not the global execution context.
 
-          <----------------------->
-          Global Execution Context Execution Phase (Web Browser)
-          -------------------------
-          <----------------------->
-          Global Object: window
-          <----------------------->
-          this: window 
-          <----------------------->
-          message: 'Hi' 
-          <----------------------->
-          say: function(){...}
-          <----------------------->
-    
-                    |
-                    V
-          <----------------------->
-          Function Execution Context Execution Phase 
-          -------------------------
-          <----------------------->
-          Global Object: arguments
-          <----------------------->
-          this: window 
-          <----------------------->
-          message:'Hello'
-          <----------------------->
+          <span style="background:yellow; width:300px; padding:10px;" class="text-center d-flex flex-column">
+          <b>Global Execution Context</b> </br> Execution Phase (Web Browser)
+          <span style="background:#8989ac; padding:10px; margin:3px;">Global Object: Window</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">this: window</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">message: 'Hi' </span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">say: function(){...} </span>
+          </span>
+                              |
+                              V
+          <span style="background:yellow; width:300px; padding:10px;" class="text-center d-flex flex-column">
+          <b>Function Execution Context</b> </br> Execution Phase (Web Browser)
+          <span style="background:#8989ac; padding:10px; margin:3px;">Global Object: arguments</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">this: window</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">message:'Hello'</span>
+          </span>
     `,
-          code1: `
-          // Scope chain:
-
-          // Consider the following example:
-          // -------- --- ---------- ------
-          
-          var message = 'Hi';
-          function say() {
-              console.log(message);
-          }
-          say();
-        
-          // ........
-          // Output:
-          // Hi
-          `
+          code1: `var message = 'Hi';
+function say() {
+    var message = 'Hello';
+    console.log(message);
+}
+say();
+console.log(message);
+`
         },
         {
-          text1: `In this example, we reference the variable <b>message</b> inside the <b>say()</b> function. Behind the scenes, JavaScript performs the following:
+          text1: `<b>Scope chain</b> 
+        
+          var message = 'Hi';
+function say() {
+    console.log(message);
+}
+say();
 
+Output:
+Hi
+
+In this example, we reference the variable <b>message</b> inside the <b>say()</b> function. Behind the scenes, JavaScript performs the following:
           Look up the variable <b>message</b> in the current context (function execution context) of the <b>say()</b> function. It cannot find any.
           Find the variable <b>message</b> in the outer execution context which is the global execution context. It finds the variable <b>message</b>.
           The way that JavaScript resolves a variable is by looking at it in its current scope, if it cannot find the variable, it goes up to the outer scope, which is called the scope chain.
-    
-          <----------------------->
-          Global Execution Context Execution Phase (Web Browser)
-          -------------------------
-          <----------------------->
-          Global Object: window
-          <----------------------->
-          this: window 
-          <----------------------->
-          message: 'Hi' 
-          <----------------------->
-          say: function(){...}
-          <----------------------->
+
+                    <span style="background:yellow; width:300px; padding:10px;" class="text-center d-flex flex-column">
+          <b>Global Execution Context</b> </br> Execution Phase (Web Browser)
+          <span style="background:#8989ac; padding:10px; margin:3px;">Global Object: Window</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">this: window</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">message: 'Hi' </span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">say: function(){...} </span>
+          </span>
     
                     |
                     V
-          <----------------------->
-          Function Execution Context Execution Phase 
-          -------------------------
-          <----------------------->
-          Global Object: arguments
-          <----------------------->
-          this: window 
-          <----------------------->
-    
-    
-          More scope chain example
-          Consider the following example:
+          <span style="background:yellow; width:300px; padding:10px;" class="text-center d-flex flex-column">
+          <b>Function Execution Context</b> </br> Execution Phase (Web Browser)
+          <span style="background:#8989ac; padding:10px; margin:3px;">Global Object: arguments</span>
+          <span style="background:#8989ac; padding:10px; margin:3px;">this: window</span>
+          </span>      
     `,
-          code1: `
+          code1: `// Consider the following example:
           var y = 20;
-
           function bar() {
               var y = 200;
               function baz() {  
@@ -546,7 +962,6 @@ The following declares the variable counter with the let keyword:`,
               }
               baz();
           }
-    
           bar();
           
           // Output:
@@ -559,14 +974,11 @@ The following declares the variable counter with the let keyword:`,
     
           <b>Global variable leaks: the weird part of JavaScript:</b>
           `,
-          code1: `
-          // See the following example:
-
+          code1: `// See the following example:
           function getCounter() {
               counter = 10;
               return counter;
           }
-    
           console.log(getCounter());
           
           // Output:
@@ -584,28 +996,20 @@ The following declares the variable counter with the let keyword:`,
           Then, the JavaScript engine follows the scope chain and looks up the <b>counter</b> variable in the global scope. The global scope also doesn't have the <b>counter</b> variable, so the JavaScript engine creates the <b>counter</b> variable in the global scope.
     
           To fix this “weird” behavior, you use the <b>'use strict'</b> at the top of the script or at the top of the function:`,
-          code1: `
-          'use strict'
-
+          code1: `'use strict'
           function getCounter() {
               counter = 10;
               return counter;
           }
-          
           console.log(getCounter());
-          
           // Now, the code throws an error:
-          
-          ReferenceError: counter is not defined
-          
+          // ReferenceError: counter is not defined
           // The following shows how to use the 'use strict' in the function:
-          
           function getCounter() {
               'use strict'
               counter = 10;
               return counter;
           }
-          
           console.log(getCounter());`
         },
         {
@@ -656,39 +1060,51 @@ The following declares the variable counter with the let keyword:`,
       title: "Call Stack",
       note: [
         {
-          text1: `The JavaScript execution contexts (Global execution context and function execution context) are executed via the JavaScript engine. In order to manage these execution contexts, the JS engine uses the call stack. So, the JS call stack is a data structure that keeps track information of the functions being called and executed. Thus, if the user invokes a function for execution, the specified function gets pushed/added in the call stack, and when the user returns from a function, it means the function is popped out from the call stack. Thus, call stack is a normal stack data structure that follows the stack order principal, i.e., LIFO (Last In First Out).
+          text1: `The JavaScript execution contexts (Global execution context and function execution context) are executed via the JavaScript engine. In order to manage these execution contexts, the JS engine uses the call stack. So, the JS call stack is a data structure that keeps track information of the functions being called and executed. Thus, if the user invokes a function for execution, the specified function gets pushed/added in the call stack, and when the user returns from a function, it means the function is popped out from the call stack. Thus, call stack is a normal stack data structure that follows the stack order principal, i.e., <b>LIFO (Last In First Out)</b>.
 
           Introduction to JavaScript Call Stack
           A call stack is a way for the JavaScript engine to keep track of its place in code that calls multiple functions. It has the information on what function is currently being run and what functions are invoked from within that function…
+
+          <b>Call Stack</b>: — The call stack is a data structure that keeps track of the currently executing code. It maintains a record of function calls and their respective contexts (local variables, parameters).
+
+          You've probably already heard that JavaScript is single-threaded. But what does this mean?
+<b>JavaScript can do one single thing at a time</b> because it has only one call stack.
+The call stack is a mechanism that helps the JavaScript interpreter to <b>keep track of the functions that a script calls</b>.
+Every time a script or function <b>calls</b> a function, it's <b>added to the top of the call stack</b>. Every time the function <b>exits</b>, the interpreter <b>removes it from the call stack</b>.
+A function either exits through a return statement or by reaching the end of the scope.
     
           Also, the JavaScript engine uses a call stack to manage execution contexts:
-    
           <b>The global execution context</b>
           <b>Function execution contexts</b>
           The call stack works based on the last-in-first-out (LIFO) principle.
-    
           When you execute a script, the JavaScript engine creates a global execution context and pushes it on top of the call stack.
-    
           Whenever a function is called, the JavaScript engine creates a function execution context for the function, pushes it on top of the call stack, and starts executing the function.
-    
           If a function calls another function, the JavaScript engine creates a new function execution context for the function being called and pushes it on top of the call stack.
-    
           When the current function completes, the JavaScript engine pops it off the call stack and resumes the execution where it left off.
-    
           The script will stop when the call stack is empty.
     
           <b>JavaScript call stack example</b>
           Let's start with the following example:`,
-          code1: `function add(a, b) {
-            return a + b;
-        }
-        
-        function average(a, b) {
-            return add(a, b) / 2;
-        }
-        
-        let x = average(10, 20);
-        `
+          code1: `
+function multiply(a, b){
+    console.log("multiply")
+   return a * b; 
+}
+
+function square(n){
+    console.log("square")
+    return multiply(n,n)
+}
+
+function printSquare(n){
+    console.log("printSquare")
+    let squared = square(n)
+    return squared
+}
+
+console.log(printSquare(4))
+        `,
+        img: `../assets/images/javascript/call-stack.gif`
         },
         {
           text1: `      When the JavaScript engine executes this script, it places the global execution context denoted by <b>main()</b> or <b>global()</b> function on the call stack.
@@ -716,7 +1132,17 @@ If the number of execution contexts exceeds the size of the stack, a stack overf
 
 For example, when you execute a recursive function that has no exit condition, the JavaScript engine will issue a stack overflow error:
 `,
-          code1: `function fn() {
+          code1: `function add(a, b) {
+            return a + b;
+        }
+        
+        function average(a, b) {
+            return add(a, b) / 2;
+        }
+        
+        let x = average(10, 20);
+          
+          function fn() {
             fn();
         }
         
@@ -989,7 +1415,7 @@ Before ES modules were standardized, Node.js used the CommonJS require syntax to
       title: "Functions are First-Class Citizens",
       note: [
         {
-          text1: `A programming language is said to have First-class functions if functions in that language are treated like other variables. So the functions can be assigned to any other variable or passed as an argument or can be returned by another function.
+          text1: `A programming language is said to have First-class functions if functions in that language are treated like other variables. <u>So the functions can be assigned to any other variable or passed as an argument or can be returned by another function</u>.
           JavaScript treats function as a first-class citizen. This means that functions are simply a value and are just another type of object.
           
           Functions are first-class citizens in JavaScript. In other words, you can treat functions like values of other types.
@@ -1101,20 +1527,31 @@ The following <b>compareBy()</b> function returns a function that compares two o
           text1: `A function that receives another function as an argument or that returns a new function or both is called Higher-order function. Higher-order functions are only possible because of the First-class function.
           
           A higher order function is a function that takes one or more functions as arguments, or returns a function as its result.
+
+          Higher order functions (HOFs) in JavaScript are functions that can do at least one of the following:
+=> Accept other functions as arguments.
+=> Return a function as a result.
+
+<b>1. Accepting Functions as Arguments</b>
+Higher order functions can accept other functions as arguments. This allows for dynamic behavior, where the behavior of the higher order function can be customized based on the function passed as an argument.
+
+
+<b>2. Returning Functions</b>
+Higher order functions can also return functions. This enables the creation of functions dynamically based on certain conditions or parameters.
+
+<b>3. Abstraction</b>
+Higher order functions promote abstraction by encapsulating common patterns or behaviors into reusable functions. This leads to cleaner and more modular code.
           `,
-          code1: `
-          const greet =  function(name){
+          code1: `const greet =  function(name){
             return function(m){
-          
                 console.log('Hi!! \${name}, \${m}');
             }
         }
-        
         const greet_message = greet('ABC');
         greet_message("Welcome To GeeksForGeeks")
 
-        //--------------------------------
 
+        //--------------------------------
           // Custom higher-order function: multiplyBy
           const multiplyBy = (multiplier) => {
             // Returned function takes a number and multiplies it by the multiplier
@@ -1130,6 +1567,43 @@ The following <b>compareBy()</b> function returns a function that compares two o
           // Use custom multiplier functions
           console.log(multiplyByTwo(3));   // Output: 6 (3 * 2)
           console.log(multiplyByFive(4));  // Output: 20 (4 * 5)
+
+
+          //------------------ Ex : 1 -------------
+          // Higher Order Function that accepts a callback function
+function higherOrderFunction(callback) {
+  // Performing some operations
+  console.log("Executing the higher order function...");
+
+  // Calling the callback function
+  callback();
+}
+
+// Callback function to be passed to the higher order function
+function callbackFunction() {
+  console.log("Executing the callback function...");
+}
+
+// Calling the higher order function with the callback function as argument
+higherOrderFunction(callbackFunction);
+
+
+//--------------  Ex : 2 --------------
+// Higher Order Function that returns a function
+function createGreeter(greeting) {
+  // Returning a new function
+  return function(name) {
+    console.log(\`\${greeting}, \${name}!\`);
+  };
+}
+
+// Creating a greeter function with a specific greeting
+const greetHello = createGreeter("Hello");
+greetHello("John"); // Output: Hello, John!
+
+// Creating another greeter function with a different greeting
+const greetGoodbye = createGreeter("Goodbye");
+greetGoodbye("Alice"); // Output: Goodbye, Alice!
           `
         },
       ]
@@ -1141,28 +1615,281 @@ The following <b>compareBy()</b> function returns a function that compares two o
         {
           text1: `A pure function is a function that always returns the same output given a specific input.
             
+          <b>Definition</b>
+Pure functions are building blocks of functional programming. They always yield consistent result and does not manipulate non-local state or have any side effects. There are mainly two requirements of a pure function:
+
           A pure function does not change any value or state outside of its scope and it doesn't depend on any value outside of its scope. It only depends on the input given to the function and does not produce any side effects.
-          ------------
           
-          A pure function in JavaScript is a function that returns the same result if the same arguments(input) are passed in the function. Let's see what makes a function pure in detail:
+          A pure function in JavaScript is a function that returns the same result(Consistent Results) if the same arguments(input) are passed in the function. Let's see what makes a function pure in detail:
           
           - The return value of the function on the function call should only be dependent on the input function arguments.
           - It should not modify any non-local state. It means the function should not manipulate anything other than the data - stored in the local variables declared within the function.
           The function should not have any side effects, such as reassigning non-local variables, mutating the state of any part of code that is not inside the function, or calling any non-pure functions inside it.
           
           Pure functions are building blocks of functional programming. They always yield consistent result and does not manipulate non-local state or have any side effects. There are mainly two requirements of a pure function:
-          
-          Consistent result:--
+
+          <b>Consistent result</b>:--
           - Same result for the same input every time.
           - Result is only dependent on the input arguments. As the function does not perform any operation that requires any variable or data from outside the scope of the function.
           
-          No side effects some common side effects:--
+          <b>No side effects some common side effects</b>:--
           - Making an HTTP request
           - Mutating any data that is not part of the function
           - Printing to a screen or console
           - DOM Query/Manipulation
           - Using Math.random()
-          - Getting the current time`,
+          - Getting the current time
+          
+          <b>1. Better Readability</b>
+Pure functions <b>increase the readability</b> of the javascript code because of its simplicity. A pure function always generates a consistent result and it does not mutate any non-local state. All these features of a pure function make it easier to read and understand the code.
+
+<b>2. Testable</b>
+It's <b>easier to perform unit testing on a pure function</b> than on an impure function. A pure function result only depends upon its input arguments hence the whole function can be treated as an independent entity. So we can just take that function and test it with some standard input values whose output is known. And we can compare the output we get from the pure function with the expected output to perform the testing.
+
+<b>3. Better Performance</b>
+Pure functions can be <b>memoized</b> and this makes your application faster. Memoization is an optimization technique that makes your code more efficient and hence quicker. In memorization, the computational result is stored in the cache once and can be retrieved later when it is needed again instead of computing it again.
+          
+          <b>Impure Function in Javascript</b>
+An impure function <b>gives inconsistent results (different results for the same input values)</b> and can have one or more of one side effects that we discussed earlier in the article. So impure functions in javascript are functions that can mutate non-local states and the result they return might not only be dependent on its input arguments.
+`,
+          code1: `        const highpass = (cutoff, value) => value >= cutoff;
+// The same input values will always map to the same output value:
+console.log(highpass(5, 5)); // => true
+console.log(highpass(5, 5)); // => true
+console.log(highpass(5, 5)); // => true
+
+// Many input values may map to the same output value:
+console.log(highpass(5, 123)); // true
+console.log(highpass(5, 6));   // true
+console.log(highpass(5, 18));  // true
+console.log(highpass(5, 1));   // false
+console.log(highpass(5, 3));   // false
+console.log(highpass(5, 4));   // false
+// A pure function must not rely on any external mutable state, because it would no longer be deterministic or referentially transparent.
+
+
+//-------------------------
+// Examples of an Impure Function
+// Mutating its arguments:
+
+ function impureFun(myArray, item) {
+     return myArray.push(item);
+ }
+//  In the above example, we are manipulating the myArray argument and a pure function should not change(manipulate) any part of the code. That's why this is an impure function.
+
+
+ //------------------
+// Returning value dependent on the non-local state:
+ const message = 'Hi there! ';
+ function myMessage(value) {
+     return \`\${message} \${value}\`
+ }
+ console.log(myMessage('Mudit'));
+
+// Console:
+// Hi there! Mudit
+// In the above code, the result the function is returning is dependent on the variable that is not declared inside the function, that's why this is an impure function.
+     `
+        },
+        {
+          text1: `<b>Immutability</b>
+JavaScript’s object arguments are references, which means that if a function were to mutate a property on an object or array parameter, that would mutate state that is accessible outside the function. Pure functions must not mutate external state.`,
+          code1: ``
+        },
+        {
+          text1: `<b>1. Example Using an Impure Function (Mutating the Input)</b>
+In this example, we'll modify the shopping cart directly by mutating it.
+<b>Scenario: Adding an item to the cart (Impure function)</b>
+Imagine a scenario where you have a shopping cart, and you want to add an item to it. You want to keep track of the <b>items</b> array in the cart, and when you add an item, you directly modify the <b>cart</b>.
+
+<b>Explanation</b>: (Ex : 1)
+    <b>Impure function</b>: The <u>addToCart</u> function mutates the <u>cart</u> object directly. The <u>cart.items.push()</u> adds the item to the <u>items</u> array, and it modifies the <u>cart</u> object in place.
+    <b>Side effect</b>: The cart is changed immediately when you call the <u>addToCart</u> function. The mutation happens directly on the original <u>cart</u> object.
+
+<b>2. Example Using a Pure Function (No Mutation)</b>
+Now, let's see how to implement the same functionality using a <b>pure function</b>, where no data is mutated, and we return a <b>new cart</b> instead.
+<b>Scenario: Adding an item to the cart (Pure function)</b>
+Here, we want to add an item to the cart, but we <b>return a new cart</b> with the updated items. The original cart stays unchanged.
+
+<b>Explanation</b>:
+    => <b>Pure function</b>: The <u>addToCart</u> function <b>does not mutate</b> the original <u>cart</u> object. Instead, it creates a new cart and returns it.
+    => The <u>newCart</u> contains the updated <u>items</u> array, while the original <u>cart</u> remains unchanged.
+    => <b>No side effects</b>: The original <u>cart</u> is not mutated. Each time you add an item, you create and return a new cart
+
+    <b>Real-World Scenario - Shopping Cart</b>
+<b>Scenario 1: Impure Function</b>
+    => You have a cart object. When a user adds items to the cart, you directly modify the cart object.
+    => <b>Problem</b>: If you want to track the history of the cart (e.g., undo the last action), it's harder because the cart is mutated in place. Other parts of the code might also be affected by the mutation.
+
+<b>Scenario 2: Pure Function</b>
+    => You use a new cart object every time an item is added.
+    => <b>Benefit</b>: The original cart remains unchanged, so you can keep an immutable history of the cart's state. This makes features like "undo" easier to implement.
+`,
+          code1: `// Ex : 1
+          // impure addToCart mutates existing cart
+        const addToCart = (cart, item, quantity) => {
+            cart.items.push({
+                item,
+                quantity
+            });
+            return cart;
+        };
+
+        const originalCart = {
+            items: [ {item : { item: 'Laptop', quantity: 1 }, quantity : 1}]
+        };
+        const cart = addToCart(originalCart,{ item: 'Phone', quantity: 2 },1);
+
+        const actual = cart.items.length;
+        console.log(cart.items)
+        // Output: { items: [ { item: 'Laptop', quantity: 1 }, { item: 'Phone', quantity: 2 } ] }
+        
+        
+        //-------------------------
+        // Ex : 2
+        // Pure function: Returns a new cart object without modifying the original cart
+        const addToCart = (cart, item, quantity) => {
+            const newCart = {
+                ...cart,  // Copy existing cart
+                items: [...cart.items, { item, quantity }] // Add new item to items
+            };
+            return newCart; // Return a new cart without modifying the original one
+        };
+
+        // Real-world Example: Adding items to a shopping cart
+        let cart = {
+            items: []
+        };
+
+        // Adding items to the cart
+        let newCart = addToCart(cart, { name: 'Laptop', price: 1200 }, 1);
+        newCart = addToCart(newCart, { name: 'Phone', price: 800 }, 2);
+
+        console.log(cart);  // Output: { items: [] } - Original cart remains unchanged
+        console.log(newCart);
+        // Output: { items: [ { item: 'Laptop', quantity: 1 }, { item: 'Phone', quantity: 2 } ] }
+
+        //---------------------
+        // Another Pure Way
+const pureAssoc = (key, value, object) => {
+  const newObject = { ...object };
+
+  newObject[key] = value;
+
+  return newObject;
+};
+
+const person = {
+  name: 'Bobo'
+};
+
+const result = pureAssoc('shoeSize', 400, person);
+
+console.log({
+  person,
+  result
+});
+        `
+        },
+        {
+          text1: `
+=>A function's pure if it's free from side-effects and returns the same output, given the same input.
+=> Side-effects include: mutating input, HTTP calls, writing to disk, printing to the screen.
+=> You can safely clone, then mutate, your input. Just leave the original one untouched.
+=> Spread syntax (… syntax) is the easiest way to shallowly clone objects.
+=> JSON.parse(JSON.stringify(object)) is the easiest way to deeply clone objects. Thanks again
+`,
+          code1: `//Unsafe Nested Mutation
+const person = {
+  name: 'Bobo',
+  address: { street: 'Main Street', number: 123 }
+};
+
+const shallowPersonClone = { ...person };
+shallowPersonClone.address.number = 456;
+
+console.log({ person, shallowPersonClone });
+
+
+//-------------
+//Safe Nested Mutation
+To safely mutate nested properties, we need a deep clone.
+
+const person = {
+  name: 'Bobo',
+  address: { street: 'Main Street', number: 123 }
+};
+
+const deepPersonClone = JSON.parse(JSON.stringify(person));
+deepPersonClone.address.number = 456;
+
+console.log({ person, deepPersonClone });`
+        },
+        {
+          text1: `<b>1. Using JSON.parse() and JSON.stringify()</b>
+          This is a simple and commonly used method for deep cloning objects, but it has some limitations (e.g., it doesn't handle functions, <u>undefined, Date objects, Map, Set</u>, etc.).
+          
+          <b>2. Using structuredClone() (Modern Approach)</b>
+<b>structuredClone()</b> is a built-in JavaScript function that supports cloning more complex structures like <u>Map, Set, Date, and ArrayBuffer</u>. It's supported in modern browsers (and Node.js starting from v17.0.0).
+
+<b>3. Using a Recursive Function</b>
+If you need a more custom solution, you can write a deep clone function recursively to handle more complex cases.
+
+<b>4. Using Lodash’s cloneDeep()</b>
+`,
+          code1: ``
+        },
+        {
+          text1: `//1. Using JSON.parse() and JSON.stringify()
+          const deepClone = (obj) => JSON.parse(JSON.stringify(obj));
+const original = { a: 1, b: { c: 2, d: 3 } };
+const cloned = deepClone(original);
+
+// Mutate the cloned object
+cloned.b.c = 10;
+
+console.log(original); // { a: 1, b: { c: 2, d: 3 } }
+console.log(cloned);   // { a: 1, b: { c: 10, d: 3 } }
+
+//----- structuredClone ------
+        const deepClone = (obj) => structuredClone(obj);
+
+        const original = { a: 1, b: { c: 2, d: 3 } };
+        const cloned = deepClone(original);
+
+        // Mutate the cloned object
+        cloned.b.c = 10;
+
+        console.log(original); // { a: 1, b: { c: 2, d: 3 } }
+        console.log(cloned);   // { a: 1, b: { c: 10, d: 3 } }
+
+
+        //-------------- Using a Recursive Function ---------
+        function deepClone(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  // Handle Arrays and Objects differently
+  if (Array.isArray(obj)) {
+    return obj.map(item => deepClone(item));
+  }
+
+  const clonedObj = {};
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      clonedObj[key] = deepClone(obj[key]);
+    }
+  }
+
+  return clonedObj;
+}
+
+const original = { a: 1, b: { c: 2, d: 3 } };
+const cloned = deepClone(original);
+// Mutate the cloned object
+cloned.b.c = 10;
+
+console.log(original); // { a: 1, b: { c: 2, d: 3 } }
+console.log(cloned);   // { a: 1, b: { c: 10, d: 3 } }
+`,
           code1: ``
         },
       ]
@@ -1225,7 +1952,6 @@ The following <b>compareBy()</b> function returns a function that compares two o
           text1: `In this example, count is a private variable that can only be accessed and modified through the returned object's methods.
 
           <b>Module Pattern:</b>
-          
           IIFE is often used in the module pattern, where you can create self-contained modules with private state and expose only the necessary functionalities.`,
           code1: `var module = (function() {
             var privateVar = "I am private";
@@ -2161,6 +2887,26 @@ increment();  // Outputs: 2
           person.incrementAge();
           console.log(person.getAge());  // Outputs: 1
           //  Here, createPerson returns an object with methods that have access to both name and age, creating private variables. The closure allows these variables to be accessed and modified only through the methods provided.
+
+
+          //-------------------
+                  function compareBy(propertyName) {
+            return function (a, b) {
+                let x = a[propertyName],
+                    y = b[propertyName];
+
+                if (x > y) {
+                    return 1;
+                } else if (x < y) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            };
+        }
+
+        const testFun = compareBy('name')
+        console.log(testFun({name: 6}, {name: 6}))
 `
         },
         {
@@ -2947,28 +3693,7 @@ clo(i)
         },
       ]
     },
-    {
-      id: 1,
-      section: "Array Methods",
-      title: "push()",
-      note: [
-        {
-          text1: `The push() method adds zero or more elements to the end of the array.`,
-          code1: `let city = ["New York", "Madrid", "Kathmandu"];
 
-          // add "London" to the array
-          city.push("London");
-          console.log(city);
-          // Output: [ 'New York', 'Madrid', 'Kathmandu', 'London' ]
-          
-          // The syntax of the push() method is:
-          arr.push(element1, element2, ..., elementN)
-
-          // push() Parameters
-          // The push() method takes in an arbitrary number of elements to add to the array.`
-        },
-      ]
-    },
     {
       id: 1,
       title: "unshift()",
@@ -2992,27 +3717,6 @@ clo(i)
           const countries3 = ["Nigeria", "Ghana", "Rwanda"];
           let countriesLength = countries3.unshift("South Africa", "Mali", "Kenya");
           console.log(countriesLength); // 6`
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "pop()",
-      note: [
-        {
-          text1: `The pop() method removes the last element from an array and returns that element.`,
-          code1: `let cities = ["Madrid", "New York", "Kathmandu", "Paris"];
-
-          // remove the last element
-          let removedCity = cities.pop();
-          
-          console.log(cities)         // ["Madrid", "New York", "Kathmandu"]
-          console.log(removedCity);   // Paris
-          
-          // pop() Return Value
-          // Removes the last element from array and returns that value.
-          // Returns undefined if the array is empty.
-          // Notes: This method changes the original array and its length.`
         },
       ]
     },
@@ -3047,7 +3751,7 @@ The shift() method does not accept any arguments.
     },
     {
       id: 1,
-      title: "of() - improve array creation.",
+      title: "of()",
       note: [
         {
           text1: `when you pass a number to the Array constructor, JavaScript creates an array whose length equals the number.For example:`,
@@ -3111,7 +3815,7 @@ If you execute the JavaScript in the environment that doesn't support the  'Arra
     },
     {
       id: 1,
-      title: "from() - create arrays from array-like or iterable objects.",
+      title: "from()",
       note: [
         {
           text1: `To create an array from an array-like object in ES5, you iterate over all array elements and add each of them to an intermediate array like this:`,
@@ -3152,28 +3856,22 @@ If you execute the JavaScript in the environment that doesn't support the  'Arra
           ------------------------------
           <b>JavaScript Array.from() method examples </b>
           -------------------------------
-          
           Let's take some examples of using the <b>Array.from()</b> method.
-          
           1) Create an array from an array - like object:--
-          
           The following example uses the <b>Array.from()</b> method to create a new array from the <b>arguments</b> object of a function:
           `,
           code1: `function arrayFromArgs() {
             return Array.from(arguments);
           }
-          
           console.log(arrayFromArgs(1, 'A'));
           
           // Output:
           // [1, 'A']
-          
           // In this example, we create an array from the arguments of the 'arrayFromArgs()' function and return it.
           `
         },
         {
           text1: `<b>2) JavaScript Array Array.from() with a mapping function:--</b>
-
           The <b>Array.from()</b> method accepts a callback function that allows you to execute the mapping function on every element of the array that is being created.See the following example:`,
           code1: `function addOne() {
             return Array.from(arguments, x => x + 1);
@@ -3229,7 +3927,7 @@ If you execute the JavaScript in the environment that doesn't support the  'Arra
     },
     {
       id: 1,
-      title: "flat() - flatten an array recursively up to a specified depth.",
+      title: "flat()",
       note: [
         {
           text1: `ES2019 introduced the <b>Array.prototype.flat()</b> method that creates a new array with all the elements of the subarrays concatenated to it recursively up to a specified depth.
@@ -3302,15 +4000,12 @@ console.log(sequence);
     },
     {
       id: 1,
-      title: "flatMap() - execute a mapping function on every element and flatten the result.",
+      title: "flatMap()",
       note: [
         {
           text1: ` The <b>flat()</b> method creates a new <b>array</b> with the elements of the subarrays concatenated into it.
-
             The <b>map()</b> method creates a new array whose elements are the results of a mapping function.
-          
           The <b>flatMap()</b> method is the combination of the <b>map()</b> method followed by the <b>flat()</b> method of depth 1.
-          
           The <b>flatMap()</b> method first maps each element in an array using a mapping function and then flattens the results into a new array.
           
           The following shows the syntax of the <b>flatMap()</b> method:--
@@ -3319,20 +4014,16 @@ console.log(sequence);
         },
         {
           text1: ` The <b>flatMap()</b> method takes two parameters:
-
           -------------------------------
           <b>1) The callback mapping function:--</b>
           -------------------------------
-          
            The <b>callback</b> is the mapping function has the same syntax as the one in the <b>map()</b> method:
-          
           function callback(currentValue [[, index], array]);
           
           ----------------------
           <b> 2) The thisArg argument:--</b>
           ---------------------
            The optional <b>thisArg</b> argument is a value to use as <b>this</b> when executing the <b>callback</b>.
-          
            Note that the <b>flatMap()</b> method doesn't modify the original array.
           
           ----------------------
@@ -3344,7 +4035,6 @@ console.log(sequence);
            1) Creating words from sentences example
           ----------------------
            Suppose that you have the following array:
-          
           <span style="color:red"> let sentences = ["JavaScript Array flatMap()", " ", "is", " ", "Awesome"]; </span>
           
            The following <b>map()</b> function splits the words of  sentences:`,
@@ -3450,83 +4140,18 @@ console.log(sequence);
     },
     {
       id: 1,
-      title: "join() - concatenate all elements of an array into a string separated by a separator.types",
-      note: [
-        {
-          text1: ` The <b>join()</b> method allows you to concatenate all elements of an array and returns a new string:
-          <span style="color:red"> Array.prototype.join([separator]) </span>
-          
-          The <b>join()</b> method accepts a optional argument <b>separator</b> which is a string that separates each pair of adjacent elements of the array in the result string.
-          
-            The <b>separator</b> defaults to a comma if you don't pass it to the <b>join()</b> method.
-          
-          In case the array has one element, the <b>join()</b> method returns that element as a string without using the <b>separator</b>.
-          
-          And if the array is empty, the <b>join()</b> method returns an empty string.
-          
-          When the elements of the array aren't strings, the <b>join()</b> method converts them to strings before joining.
-          
-          Note that the <b>join()</b> method converts <b>undefined, null</b>, and empty array[] to an empty string.
-          `,
-          code1: `Ex: 
-          const cssClasses = ['btn', 'btn-primary', 'btn-active'];
-          const btnClass = cssClasses.join(' ');
-          
-          console.log(btnClass);
-          
-          // Output:
-          // btn btn - primary btn - active
-          
-          // In this example, we have an array that holds a list of CSS classes.And we use the 'join()' method joins all elements of the 'cssClasses' array and return a string of the CSS classes separated by a space.
-          `
-        },
-        {
-          text1: `<b>2) Using the JavaScript Array 'join()' method to replace all occurrences of a string</b>
-          
-          This example uses the JavaScript Array 'join()' method to replace all occurrences of the space ' ' by the hyphen(-):`,
-          code1: `const title = 'JavaScript array join example';
-          const url = title.split(' ')
-            .join('-')
-            .toLowerCase();
-          
-          console.log(url);
-          
-          // Output:
-          // javascript - array - join - example
-          
-          // > First, split the title string by the space into an array by using the 'split()' string method.
-          // > Second, concatenate all elements in the result array into a string by using the 'join()' method.
-          // > Third, convert the result string to lower case by using the 'toLowerCase()' method.`
-        },
-        {
-          text1: `=> Summary
-          Use the JavaScript Array 'join()' method to concatenate all elements of an array into a string separated by a separator.`,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-
-      ]
-    },
-    {
-      id: 1,
-      title: "at() - access array elements using both positive and negative indexes.",
+      title: "at()",
       note: [
         {
           text1: `In JavaScript, you can use the square bracket <b>[]</b> to access an element of an array. For example, the <b>arr[0]</b> returns the first element in the array <b>arr</b>, the <b>arr[1]</b> returns the second element, and so on.
 
           To get the last element in an array, you use the <b>length</b> property like this:
-          
           arr[length - 1]
           
           JavaScript doesn't allow you to use a negative index to access the last element like other languages e.g., Python.For example, the following returns undefined:
-          
           arr[-1]
           
           The reason is that JavaScript also uses square brackets <b>[]</b> for accessing a property of an object.
-          
           For example, the <b>obj[1]</b> returns a property of the object <b>obj</b> with the key "1".Hence, the <b>obj[-1]</b> returns the property of an object with the key "-1".
           
           In the above example, the <b>arr[-1]</b> returns the property of the <b>arr</b> object with the key "-1".Note that the type of an array is <b>object</b>.Since the "-1" property doesn't exist in the <b>arr</b> object, it returns <b>undefined</b>.
@@ -3534,7 +4159,6 @@ console.log(sequence);
           For this reason, ES2022 introduced a new method <b>at()</b> added to the <b>prototype</b> of <b>Array</b>, <b>String</b>, and <b>TypeArray</b>.This tutorial focuses on the <b>at()</b> method of the <b>Array.prototype</b>.
           
           The <b>at()</b> method accepts an index and returns an element at that index.Here's the syntax of the <b>at()</b> method:
-          
           arr.at(index)
           
           In this syntax, the <b>index</b> specifies an array element to return.It can be zero, positive, or negative.
@@ -3664,17 +4288,8 @@ console.log(obj);
 
 // We then used the "Object.freeze()" method to freeze "obj", which makes it immutable. Once an object is frozen, its properties cannot be modified or deleted.
 
-// The output indicates that any attempt to modify a property or add a new property on a frozen object will fail silently without throwing an error.
-`
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
+// The output indicates that any attempt to modify a property or add a new property on a frozen object will fail silently without throwing an error.`
+        }
       ]
     },
     {
@@ -3820,139 +4435,8 @@ true
     },
     {
       id: 1,
-      section: `Reversing elements`,
-      title: "reverse() - reverse the order of elements in place and return the same array with the elements in the reversed order.",
-      note: [
-        {
-          text1: `The reverse() method of TypedArray instances reverses a typed array in place and returns the reference to the same typed array, the first typed array element now becoming the last, and the last typed array element becoming the first.In other words, elements order in the typed array will be turned towards the direction opposite to that previously stated.This method has the same algorithm as Array.prototype.reverse().
-
-          Using a for loop (or any other type of loop), we can loop through an array from the last time to the first item, and push those values to a new array which becomes the reversed version. Here's how:`,
-          code1: `const array = [1, 2, 3, 4]
-
-          const reversedArray = []
-          
-          for (let i = array.length - 1; i >= 0; i--) {
-            const valueAtIndex = array[i]
-            reversedArray.push(valueAtIndex)
-          }
-          
-          console.log(reversedArray)
-          // [4, 3, 2, 1]
-          
-          //By using a 'for' loop, we start looping from the index of the last 'value (array.length - 1)' to the index of the first 'value (0)'.Then we push the values accordingly to 'reversedArray'.
-
-          const array = [1, 2, 3, 4]
-          
-          array.reverse()
-          
-          console.log(array)
-          // [ 4, 3, 2, 1 ]
-          `
-        },
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "toReversed() - reverse the order of elements of an array and return the new array with the elements in the reversed order.",
-      note: [
-        {
-          text1: ` The <b>toReversed()</b> method reverses the order of elements in an array and returns a new array with the elements in reversed order.
-
-           Unlike the <b>reversed()</b> method that reverses the elements of the array in place, the <b>toReversed()</b> method does not modify the original array.Instead, it creates a new array with the elements of the original array in the reversed order.
-          
-          Here's the basic syntax of the <b>toReversed()</b> method:
-          
-             <span style="color:red">Array.prototype.toReversed()</span>
-          
-           The <b>toReversed()</b> method takes no parameters and returns a new array containing the elements in reversed order.
-          
-           When you call the <b>toReversed()</b> method on a sparse array, it treats empty slots as if they have the value <b>undefined</b>.
-          
-           This method is generic, meaning that you can call it on a non - array object that has a length property and integer - keyed properties.
-          
-          JavaScript Array toReversed() method examples
-          Let's explore some examples of using the JavaScript array toReverse() method.
-          
-          <b> 1) Using JavaScript Array toReversed() method on string arrays </b>
-          The following example uses the toReverse() method to reverse an array of strings:`,
-          code1: `const colors = ['red', 'green', 'blue'];
-          const reversedColors = colors.toReversed();
-          
-          console.log(colors);
-          console.log(reversedColors);
-          
-          // Output:
-          // ['red', 'green', 'blue']
-          // ['blue', 'green', 'red']
-          `
-        },
-        {
-          text1: `<b>3) Using JavaScript Array toReversed() method on arrays of objects</b>
-          The following example uses the toReversed() method to reverse the order of objects in an array:`,
-          code1: `const contacts = [{ name: 'John' }, { name: 'Alice' }, { name: 'Bob' }];
-          const reversedContacts = contacts.toReversed();
-          
-          console.log(contacts);
-          console.log(reversedContacts);
-          
-          // Output:
-          // [{ name: 'John' }, { name: 'Alice' }, { name: 'Bob' }]
-          // [{ name: 'Bob' }, { name: 'Alice' }, { name: 'John' }]
-          `
-        },
-        {
-          text1: `<b>4) Calling toReversed() method on sparse arrays</b>
-          When you call the toReversed() method on a sparse array, the result array remains sparse.The toReversed() method copies empty slots over their respective indices as empty slots:`,
-          code1: `const scores = [1, , 7, 5];
-          const reversedScores = scores.toReversed();
-          
-          console.log(scores);
-          console.log(reversedScores);
-          
-          // Output:
-          // [1, , 7, 5]
-          // [5, 7, undefined, 1]
-          `
-        },
-        {
-          text1: `<b>5) Calling toReversed() method on non - array objects</b>
-          The following example illustrates how to call the toReversed() method on an object that has the length property and integer - keyed properties:`,
-          code1: `const arrayLike = {
-            length: 3,
-            unrelated: "bar",
-            2: 2,
-            3: 3, // ignored because the length is 3
-          };
-          
-          const result = Array.prototype.reverse.call(arrayLike);
-          
-          console.log(result);
-          
-          // Output:
-          // { 0: 2, 3: 3, length: 3, unrelated: 'bar' }
-          `
-        },
-        {
-          text1: `In this example, the toReversed() method does the following:
-
-          First, access the length property of the object.
-            Second, iterate through each property with an integer key ranging from 0 to length / 2.
-          Third, swap the values at corresponding indices on both ends of the array.Additionally, remove any destination property without a corresponding source property.
-            Finally, return a new object with the order of the elements(or properties) in the reversed order.
-          <b>Summary</b>
-          Use the JavaScript array toReversed() method to reverse the order of elements within an array and return a new reversed array.`,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
       section: `High-order methods`,
-      title: "map() - transform array elements.",
+      title: "map()",
       note: [
         {
           text1: `In JavaScript, map() is a higher-order function that is used to iterate over elements of an array and execute a callback function on each element. It creates a new array based on the results of the callback function.
@@ -4099,7 +4583,7 @@ console.log(areas);
     },
     {
       id: 1,
-      title: "filter() - filter elements in an array.",
+      title: "filter()",
       note: [
         {
           text1: `The filter() method of Array instances creates a shallow copy of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided function.
@@ -4255,1204 +4739,7 @@ console.log(areas);
     },
     {
       id: 1,
-      title: "reduce() - reduce elements of an array to a value.",
-      note: [
-        {
-          text1: `The reduce() method executes a reducer function on each element of the array and returns a single output value.
-
-          The array reduce in JavaScript is a predefined method used to reduce an array to a single value by passing a callback function on each element of the array.It accepts a function executed on all the items of the specified array in the left - to - right sequence.The returned single value is stored in the accumulator.Thus, array reduce JavaScript is a non - mutating method.This means that instead of changing the actual value variable, it will hold the computed value in the accumulator without changing the original value variable.
-          
-            reduce() Parameters: -
-            The <b>reduce()</b> method takes in:
-          
-           1) => callback - The callback function to execute on each array element(except the first element if no <b>initialValue</b> is provided). It takes in
-          
-            > <b>accumulator</b> - It accumulates the callback's return values.
-            > <b>currentValue</b> - The current element being passed from the array.
-          
-          2) => <b>initialValue</b>(optional) - A value that will be passed to <b>callback()</b> on first call.If not provided, the first element acts as the <b>accumulator</b> on the first call and <b>callback()</b> won't execute on it.
-          
-          <b>Note: </b> Calling reduce() on an empty array without initialValue will throw TypeError.
-          
-          <b>reduce() Return Value:- </b>
-            Returns the single value resulting after reducing the array.
-
-          Notes:
-          > <b>reduce()</b> executes the given function for each value from left to right.
-          > <b>reduce()</b> does not change the original array.
-          > It is almost always safer to provide <b>initialValue</b>.
-
-          <b>Accumulator:</b> This contains the value calculated from the previous iteration. On the first iteration, if an <b>initialValue</b> will be provided, the accumulator will be set to the value of <b>initialValue</b>.
-          <b>CurrentValue:</b> The current value of the element is processed in the array.
-          <b>CurrentIndex:</b> The index of the current element is processed in the array.
-          <b>Array:</b> The original array on which the <b>reduce()</b> method was called.
-
-          When to Use the reduce() Method:--
-          As shown above, the reduce() method is recommended when you need to have a single value returned from iterating over your array.
-          
-          This includes:
-          
-          > Summarizing your values into a single value
-          > Grouping similar items together
-          > Removing duplicates from an array
-          
-          The single value returned by the method can also be an array of objects, therefore containing multiple values.
-          
-          Suppose that you have an array of numbers, like this:
-          let numbers = [1, 2, 3];
-
-          // and you want to calculate the total of elements of the array. Typically, you use a 'for' loop to iterate over the elements and add them up as shown in the following example:
-          
-          let numbers = [1, 2, 3];
-          let sum = 0;
-          for (let i = 0; i < numbers.length; i++) {
-            sum += numbers[i];
-          }
-          console.log(sum);
-          
-          // Output:
-          // 6
-          `,
-          code1: ``
-        },
-        {
-          text1: ` The script is simple and straightforward:--
-
-          > First, declare an array of three numbers 1, 2 and 3.
-            > Second, declare the sum variable and set its value to zero.
-          > Third, in the for loop, add up the elements of the numbers array to the sum variable.After the loop, the value of the sum variable is 6.
-          
-          What we have done was to 'reduce' an array into a value.
-          
-          The 'Array.prototype' allows you to reduce an array to a single value using the 'reduce()' method like this:
-          `,
-          code1: `let numbers = [1, 2, 3];
-          let sum = numbers.reduce(function(previousValue, currentValue) {
-            return previousValue + currentValue;
-          });
-          console.log(sum);`
-        },
-        {
-          text1: `JavaScript Array reduce() method in detail: --
-            The following illustrates the syntax of the 'reduce()' method:
-          
-          array.reduce(callbackFn[, initialValue])
-          
-          The 'reduce()' method takes two arguments:
-          
-          > A callback function 'callbackFn'.The function is often referred to as a reducer.
-          > An optional initial value.
-            The 'reduce()' method calls the 'callbackFn()' function for every element in the array.
-          
-              The 'reducer()' function returns a value that results from executing the 'callbackFn' to completion over the entire array.
-              1) The callbackFn() function argument
-
-               The 'callbackFn' function has the following syntax:
-              
-               function callbackFn(previousValue, currentValue, currentIndex, array) { /**/ }
-              
-              
-               The 'callbackFn' function takes four arguments:
-              
-               'previousValue':
-               The value returned from the previous call of the 'callbackFn' function. On the first call, the 'initialValue' is the 'previousValue' if you pass the 'initialValue'.Otherwise, its value is the 'array[0]'.
-              
-                 currentValue:
-               The value of the current array element.On the first call, it is 'array[0]' if you pas the 'initialValue' or 'array[1]' otherwise.
-              
-                 currentIndex:
-               The index of the currentValue in the array.On the first call, it's '0' if you pass the 'initialValue' or '1' otherwise.
-              
-               'array':
-               The array to loop through.
-
-               <b>2) The initialValue argument</b>
-               The 'initialValue' argument is optional.
-               
-               If you specify the 'initialValue', the 'callbackFn' function will initialize the 'previousValue' to the 'initialValue' and 'currentValue' to the first array's element on the first call.
-               
-               If you don't specify the 'initialValue', the the 'callbackFn' function will initialize the 'previousValue' to the first array's element(array[0]) in the array and the 'currentValue' to the second array's element(array[1]).
-               
-               The following table illustrates the logic when the 'reduce()' method executes the 'callbackFn()' function for the first time according to the 'initialValue' argument:
-
-               <div class='table-res'>
-                    <table border=1 >
-                        <tbody>
-                            <tr>
-                              <th>initialValue</th>
-                              <th>previousValue</th>
-                              <th>currentValue</th>
-                            </tr>
-
-                            <tr>
-                              <td>passed</td>
-                              <td>initialValue</td>
-                              <td>array[0]</td>
-                            </tr>
-
-                            <tr>
-                              <td>not passed</td>
-                              <td>array[0]</td>
-                              <td>array[1]</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-              `,
-          code1: `// The following example shows the progress of the reduce() function with an 'initialValue' as 100:
-
-          let numbers = [1, 2, 3];
-          
-          function getOrdinalSuffix(i) {
-            let j = i % 10, k = i % 100;
-            if (j == 1 && k != 11) return i + 'st';
-            if (j == 2 && k != 12) return i + 'nd';
-            if (j == 3 && k != 13) return i + 'rd';
-            return i + 'th';
-          }
-          
-          let call = 1;
-          let sum = numbers.reduce(function(previousValue, currentValue, currentIndex, array) {
-            let result = previousValue + currentValue;
-          
-            // show the 1st call, 2nd call, etc.
-            console.log('\${getOrdinalSuffix(call)} call');
-            call++;
-          
-            // show the immediate values
-            console.table({ previousValue, currentValue, currentIndex, result });
-          
-            return result;
-          }, 100);
-          
-          console.log('Result: \${sum}');
-          `
-        },
-        {
-          text1: `Output:
-          1st call
-
-          <div class='table-res'>
-            <table border=1 >
-                <tbody>
-                    <tr>
-                      <th> (index)  </th>
-                      <th> Values </th>
-                    </tr>
-
-                    <tr>
-                      <td>previousValue</td>
-                      <td>100</td>
-                    </tr>
-
-                    <tr>
-                      <td>currentValue</td>
-                      <td>1</td>
-                    </tr>
-
-                    <tr>
-                      <td>currentIndex</td>
-                      <td> 0 </td>
-                    </tr>
-
-                    <tr>
-                      <td>result</td>
-                      <td> 101 </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        2nd call
-
-          <div class='table-res'>
-            <table border=1 >
-                <tbody>
-                    <tr>
-                      <th> (index)  </th>
-                      <th> Values </th>
-                    </tr>
-
-                    <tr>
-                      <td>previousValue</td>
-                      <td>101</td>
-                    </tr>
-
-                    <tr>
-                      <td>currentValue</td>
-                      <td>2</td>
-                    </tr>
-
-                    <tr>
-                      <td>currentIndex</td>
-                      <td> 1 </td>
-                    </tr>
-
-                    <tr>
-                      <td>result</td>
-                      <td> 103 </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        3rd call
-
-          <div class='table-res'>
-          <table border=1 >
-              <tbody>
-                  <tr>
-                    <th> (index)  </th>
-                    <th> Values </th>
-                  </tr>
-
-                  <tr>
-                    <td>previousValue</td>
-                    <td>103</td>
-                  </tr>
-
-                  <tr>
-                    <td>currentValue</td>
-                    <td> 3 </td>
-                  </tr>
-
-                  <tr>
-                    <td>currentIndex</td>
-                    <td> 2 </td>
-                  </tr>
-
-                  <tr>
-                    <td>result</td>
-                    <td> 106 </td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-
-        Result: 106
-          `,
-          code1: ``
-        },
-        {
-          text1: ` And the following illustrates the 'reduce()' method without the 'initialValue' argument:
-        1st call
-
-          <div class='table-res'>
-          <table border=1 >
-              <tbody>
-                  <tr>
-                    <th> (index) </th>
-                    <th> Values </th>
-                  </tr>
-
-                  <tr>
-                    <td>previousValue</td>
-                    <td>1</td>
-                  </tr>
-
-                  <tr>
-                    <td>currentValue</td>
-                    <td> 2 </td>
-                  </tr>
-
-                  <tr>
-                    <td>currentIndex</td>
-                    <td> 1 </td>
-                  </tr>
-
-                  <tr>
-                    <td>result</td>
-                    <td> 3 </td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-        2nd call
-
-          <div class='table-res'>
-          <table border=1 >
-              <tbody>
-                  <tr>
-                    <th> (index) </th>
-                    <th> Values </th>
-                  </tr>
-
-                  <tr>
-                    <td>previousValue</td>
-                    <td> 3 </td>
-                  </tr>
-
-                  <tr>
-                    <td>currentValue</td>
-                    <td> 3 </td>
-                  </tr>
-
-                  <tr>
-                    <td>currentIndex</td>
-                    <td> 2 </td>
-                  </tr>
-
-                  <tr>
-                    <td>result</td>
-                    <td> 6 </td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-
-          // Result: 6
-          // More JavaScript Array reduce() examples: --
-          // Suppose that you have the following 'shoppingCart' array of product objects:`,
-          code1: `let shoppingCart = [
-            {
-              product: 'phone',
-              qty: 1,
-              price: 500,
-            },
-            {
-              product: 'Screen Protector',
-              qty: 1,
-              price: 10,
-            },
-            {
-              product: 'Memory Card',
-              qty: 2,
-              price: 20,
-            },
-          ];
-          
-          // To calculate the total amount of the products in the shopping cart, you can use the 'reduce()' method, like this:
-          
-          let total = shoppingCart.reduce(function(previousValue, currentValue) {
-            return previousValue + currentValue.qty * currentValue.price;
-          }, 0);
-          
-          // Output:
-          // 550
-          `
-        },
-        {
-          text1: `Notice that in this example, we passed in the 'initialValue' argument to the 'reduce()' method.
-
-          If we didn't do so, the 'reduce()' method would take the first element of the 'shoppingCart' array, which is an object, as an initial value and perform the calculation on this object.Hence, it would cause an incorrect result.
-          
-          
-          JavaScript Array reduceRight() method: --
-            The 'reduceRight()' method works in the same way as the 'reduce()' method, but in the opposite direction.
-          
-              The 'reduce()' method starts at the first element and travels toward the last, whereas the 'reduceRight()' method starts at the last element and travels backward the first.
-          
-          See the following example:`,
-          code1: `let numbers = [1, 2, 3];
-
-          let sum = numbers.reduceRight(function(previousValue, currentValue) {
-            console.log({ previousValue, currentValue });
-            return previousValue + currentValue;
-          });
-          
-          console.log('Result: \${sum}');
-          
-          // Output
-          
-          // { previousValue: 3, currentValue: 2 }
-          // { previousValue: 5, currentValue: 1 }
-          // Result:6
-          
-          // reduceRight() methods to reduce an array into a value.
-
-// Map
-function double(x){
-    return x * 2
-}
-const ar = [2,4,7,9];
-const dValues = ar.map(double)
-console.log(dValues)
-
-
-function total(arr) {
-   return arr.reduce(function(tot, acc, i, arrr){
-    console.log("tot ",tot)
-    console.log("acc ",acc)
-    return tot + acc
-   }, 0)
-}
-
-console.log(total([1,2,3])); // 6
-
-const userDetails = [
-    {
-        fullName: "American First Finance",
-        area: 'yes',
-    },
-    {
-        fullName: "World Health",
-        area: 'yes',
-    }
-]
-
-//-----------------
-// returning new array
-const newARR = userDetails.map(acc => {
-    const shortOb =  {...acc, shordName : acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('') }
-    return shortOb
-})
-console.log(newARR) //
-output
-[
-    { fullName: 'American First Finance', area: 'yes' },
-    { fullName: 'World Health', area: 'yes'}
-]
-
-//------------------------
-// mutated original array
-userDetails.forEach(acc => {
-    acc.shortName = acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('')
-})
-console.log(userDetails)
-output
-[
-    { fullName: 'American First Finance', area: 'yes', shordName: 'aff' },
-    { fullName: 'World Health', area: 'yes', shordName: 'wh' }
-]
-
-// ========================================
-
-
-
-// Example 1:
-const bankMovementsInDollars = [130, -50, 2000, -500, 1200, 2000, -400, -200, 500]
-const rupees = 83.64
-const credis = bankMovementsInDollars.filter(mov => mov > 0)
-                                    .map(doll => doll * rupees)
-                                    .reduce((acc, mov) => acc + mov, 0)
-console.log("total credits in rupees ",credis)
-
-// ---------
-// Example 2:   
-// For example, here is the code for getting the total number of occurrences for each fruit in an array of fruits:
-const fruits = ['Banana', 'Orange', 'Apple', 'Orange', 'Pear', 'Banana', 'Pear', 'Banana']
-
-const occursFruits = fruits.reduce((acc, currFruit) => {
-    return { ...acc, [currFruit]: (acc[currFruit] || 0) + 1 }
-    // return 1
-}, {})
-console.log(occursFruits)
-
-// Note that at each step of the iteration, the accumulator will be a hash map (i.e. a JavaScript object) with a key for each fruit in the array so far, and the values will be the number of times each fruit has occurred. This is the expression where we update the accumulator:
-
-// {...acc, [currFruit]: (acc[currFruit] || 0) + 1 }
-// Let's break this down a little. First, using the spread operator, ...acc copies over all the existing values from the accumulator.
-
-// Then, [currFruit]: sets the value for the current fruit in the array. For example, on the very first iteration over the fruits collection, this will create the Banana property. acc[currFruit] || 0 retrieves the value for that fruit from the previous version of the accumulator. If the fruit doesn't exist in the accumulator, it will start with a value of zero. 
-
-// Finally, we add 1 to the value of that fruit and return the new accumulator.
-
-// -----------
-// Example 3:
-// For example, suppose we want to get just the names of each student from an array of objects. We can reduce the array from an array of objects to an array of string values, like so:
-
-const students = [
-    { name: "Kingsley", score: 70 },
-    { name: "Jack", score: 80 },
-    { name: "Joe", score: 63 },
-    { name: "Beth", score: 75 },
-    { name: "Kareem", score: 59 },
-    { name: "Sarah", score: 93 }
-]
-
-const stuNames = students.map((stu) => {
-    return stu.name
-})
-console.log(stuNames)
-
-const stuNamesReduce = students.reduce((acc, stu) => {
-    return [...acc, stu.name]
-},[])
-console.log(stuNamesReduce)
-
-// ----------
-// Example 4:
-// total marks
-const studentsArray = [
-    { name: "Kingsley", sub1: 45, sub2: 45, sub3: 45 },
-    { name: "Jack", sub1: 41, sub2: 44, sub3: 85 },
-    { name: "Joe", sub1: 57, sub2: 49, sub3: 45 },
-    { name: "Beth", sub1: 45, sub2: 85, sub3: 65 },
-    { name: "Kareem", sub1: 15, sub2: 65, sub3: 95 },
-    { name: "Sarah", sub1: 35, sub2: 65, sub3: 5 }
-]
-
-const sutMarks = studentsArray.reduce((acc, currStu) => {
-    // return { ...acc, [currStu.name]: currStu.sub1 + currStu.sub2 + currStu.sub3 }
-    return [...acc, {...currStu, total: currStu.sub1 + currStu.sub2 + currStu.sub3 }]
-}, [])
-
-console.log(sutMarks)
-console.log(studentsArray)
-
-const students = [
-    { name: "Kingsley", score: 70 },
-    { name: "Jack", score: 80 },
-    { name: "Joe", score: 63 },
-    { name: "Beth", score: 75 },
-    { name: "Kareem", score: 59 },
-    { name: "Sarah", score: 93 }
-]
-
-const max = students.reduce((acc, currStu) => {
-    console.log(acc, currStu.score)
-    return acc ?? currStu.score > acc ? currStu.score : acc
-}, null)
-
-// console.log(max)
-
-// ---------
-// Example 5:
-let ArrayList = ["Gun", "Hat", "Hate", "Apple", "Animals", "Ball", "Bat", "Cat", "Candy", "Dog", "Dare", "Exam", "Earth", "Air"];
-const chOb = ArrayList.reduce((acc, let) => {
-    return { ...acc, [let[0]]: acc[let[0]] ? acc[let[0]].concat([let]) : [let] }
-}, {})
-
-// console.log(chOb)
-
-// // {"A":["Animals","Apple"],"B":["Ball","Bat"],"C":["Candy","Cat"],"D":["Dare","Dog"],"E":["Earth","Exam"],"G":["Gang","Gun"],"H":["Hat","Hate"]}
-          `
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "every() - check if every element in an array passes a test.",
-      note: [
-        {
-          text1: `Checking array elements using the for loop:--
-          Sometimes, you need to test whether every element of an array satisfies a specified condition.
-          
-          Typically, you use a  'for' loop to iterate all elements and check each individual element against the condition. Suppose that you have an array 'numbers' with three elements:
-          
-          let numbers = [1, 3, 5];
-          The following code checks if every element in the 'numbers' array is greater than zero:`,
-          code1: `let numbers = [1, 3, 5];
-          let result = true;
-          for (let i = 0; i < numbers.length; i++) {
-            if (numbers[i] <= 0) {
-              result = false;
-              break;
-            }
-          }
-          console.log(result);
-          // Output:
-          // true
-          // How it works:`
-        },
-        {
-          text1: `> First, initialize the  'result' variable to 'true'.
-          > Second, iterate over the elements of the 'numbers' array and check whether each element is less than or equal zero.If it is the case, set the 'result' variable to 'false' and terminate the loop immediately using the 'break' statement.In case no element is less than or equal zero, the value of the 'result' variable remains  'true'.
-          
-          This code is simple and straight forward.However, it is quite verbose.
-          
-            JavaScript 'Array' type provides the 'every()' method that allows you to check if every element of an array pass a test in a shorter and cleaner way.
-          
-          
-          Introduction to JavaScript Array every() method: --
-          
-            Starting from ES5, JavaScript Array type provides a method 'every()' that tests every element in an array.
-          
-          The following example uses the 'every()' to check if every element of the numbers array is greater than zero:`,
-          code1: `let numbers = [1, 3, 5];
-          let result = numbers.every(function(e) {
-            return e > 0;
-          });
-          
-          console.log(result);
-          
-          // Output:
-          // true
-          
-          // By using the ES6 arrow functions, the code can be even shorter:
-
-let numbers = [1, 3, 5];
-let result = numbers.every(e => e > 0);
-console.log(result);
-          `
-        },
-        {
-          text1: `  The following illustrates the syntax of the 'every()' method.
-
-              arrayObject.every(callback[, thisArg])
-          
-          The 'every()' method accepts two named arguments: 'callback' and 'thisArg'.
-          
-          1) The callback argument
-          The 'callback' is a function that tests each element of the array.The 'callback()' function has the following form:
-          
-          function callback(currentElement, index, array) {
-            //...
-          }
-          
-          The 'callback()' function takes three arguments:
-          
-          First, the 'currentElement' is the current element that is being processed.
-            Second, the 'index' is the index  of the 'currentElement'.
-              Third, the 'array' is the array that the 'every()' method was called upon.
-                The 'currentElement' argument is required whereas the 'index' and 'array' arguments are optional.
-                  2) The thisArg argument
-  The 'thisArg' argument of the 'every()' method is optional.If you pass the 'thisArg' argument into the method, the this value inside the callback function will reference the 'thisArg' argument.
-
-  The 'every()' method returns 'true' if the 'callback' function returns a truthy value for every array element; otherwise, it returns 'false'.
-
-  Note that the 'every()' method executes the 'callback()' function on every element in the array until it finds the one that causes the 'callback()' return a falsy value.
-
-  In other words, the 'every()' will stop calling the 'callback()' function and return 'false' once there is an array element that causes 'callback()' to return a falsy value.
-
-  Let's take a look at some more examples of using the 'every()' method.
-
-More JavaScript Array every() method examples
-The following example tests whether all the array elements are the even numbers
-          `,
-          code1: `let numbers = [1, 3, 5];
-          let isEven = numbers.every(function(e) {
-            return e % 2 == 0;
-          });
-          
-          console.log(isEven);
-          
-          // Output:
-          // false
-          
-          // In contrast, the following example tests if all the array elements are the odd numbers.
-
-let numbers = [1, 3, 5];
-let isOdd = numbers.every(function(e) {
-  return Math.abs(e % 2) == 1;
-});
-
-console.log(isOdd);
-
-// Output:
-// true
-
-// Suppose that you have an object with two properties: 'min' and 'max':
-
-let range = {
-  min: 0,
-  mas: 10
-};
-
-// The following example tests whether all elements in the 'numbers' array is in the range specified by the 'min' and 'max' of the 'range' object.
-
-
-let numbers = [1, 3, 5];
-
-let range = {
-  min: 0,
-  max: 10
-};
-
-let isInRange = numbers.every(function(e) {
-  return e >= this.min && e <= this.max;
-}, range);
-
-// Output:
-// true
-
-          `
-        },
-        {
-          text1: `In this example, we pass the 'range' object to the 'every()' method as the second argument.And inside the 'callback()' function, we reference the 'range' object using the this keyword.
-
-            Caution: Empty arrays: --
-              If you call the 'every()' method on an empty array, the method will always return true for any condition.For example:`,
-          code1: `let gtZero = [].every(e => e > 0); // any condition
-          let ltZero = [].every(e => e < 0); // any condition
-          
-          console.log('gtZero:', gtZero);
-          console.log('ltZero:', ltZero);
-          
-          // Output:
-          // gtZero: true
-          // ltZero: true`
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "some() - check if at least one element in an array passed a test.",
-      note: [
-        {
-          text1: ` The some() method of Array instances tests whether at least one element in the array passes the test implemented by the provided function. It returns true if, in the array, it finds an element for which the provided function returns true; otherwise it returns false. It doesn't modify the array.
-
-           The some() method is an Array.propotype (built-in) method which takes in a callback function and will test that function  on each iteration against the current item.
-          
-           The method takes in three parameters:
-          
-           > currentItem: This is the element inside of the array which is currently being iterated over
-           > index: This is the index position of the currentItem inside of the array
-           > array: This represents the array collection to which the some() method is bound
-          
-           Sometimes, you want to check if an array has at least one element that meets a specified condition.
-          
-           For example, to check if the following array has at least one element less than 5:`,
-          code1: `let marks = [4, 5, 7, 9, 10, 3];
-
-           …you typically use a 'for' loop, like this:
-          
-          let marks = [4, 5, 7, 9, 10, 3];
-          
-          let lessThanFive = false;
-          
-          for (let index = 0; index < marks.length; index++) {
-            if (marks[index] < 5) {
-              lessThanFive = true;
-              break;
-            }
-          }
-          
-          console.log(lessThanFive);
-          
-          //  Output:
-          //  true
-
-          //  > First, declare a flag variable 'lessThanFive' and set its value to 'false'.
-          //  > Second, iterate over the elements.If an element is less than 5, set the flag to 'true' and immediately exit the loop using the 'break' statement.
-          //  The code works as expected.However, it is quite verbose.
-           
-           //---------------------------
-           let marks = [4, 5, 7, 9, 10, 3];
-
-lessThanFive = marks.some(function(e) {
-  return e < 5;
-});
-
-console.log(lessThanFive);
-
-// Output
-// true
-
-// The condition is implemented via a callback function passed into the 'some()' method.
-// Now, the code is shorter.To make it more expressive, you can use the arrow function syntax in ES6:
-
-let marks = [4, 5, 7, 9, 10, 3];
-let lessThanFive = marks.some(e => e < 5);
-console.log(lessThanFive);
-           `
-        },
-        {
-          text1: ` JavaScript Array 'some()' syntax: --
-          
-           arrayObject.some(callback[, thisArg]);
-          
-           The 'some()' method accepts two arguments:
-          
-           1) The callback argument
-           The 'some()' function executes the 'callback' function once for each element in the array until it finds the one where the 'callback' function returns a 'true'.The 'some()' method immediately returns 'true' and doesn't evaluate the remaining elements.
-          
-           If no element causes the 'callback()' to return 'true', the 'some()' method returns 'false'.
-          
-             The 'callback' function takes three arguments:
-          
-           function callback(currentElement [[, currentIndex], array]) {  ...}
-          
-           > The 'currentElement' is the current element being processed in the array.
-           > The 'currentIndex' is the index of the current element being processed in the array.
-           > The 'array' is array that 'some()' was called upon.
-          
-           2) The thisArg argument: --
-             The 'thisArg' argument is optional.If you pass the 'thisArg' into the method, you can use the 'thisArg' as the 'this' value inside the 'callback' function.
-          
-           JavaScript Array some() examples: --
-           Let's take some more examples of using the 'some()' method.
-          
-           1) Check if an element exists in the array:
-           The following 'exists()' function uses the 'some()' method to check if a value exists in an array:`,
-          code1: `function exists(value, array) {
-            return array.some(e => e === value);
-          }
-          
-          let marks = [4, 5, 7, 9, 10, 2];
-          
-          console.log(exists(4, marks));
-          console.log(exists(11, marks));
-          
-          // Output:
-          // true
-          // false`
-        },
-        {
-          text1: `2) Check if an array has one element that is in a range: --
-          The following example shows how to check if any number in the 'marks' array is in the range of(8, 10):`,
-          code1: `let marks = [4, 5, 7, 9, 10, 2];
-          const range = {
-            min: 8,
-            max: 10
-          };
-          
-          let result = marks.some(function(e) {
-            return e >= this.min && e <= this.max;
-          }, range);
-          
-          console.log(result);
-          
-          // Output:
-          // true
-          
-          // > First, define a range object with min and max properties.
-// > Second, call the 'some()' method on the marks array object and pass the callback and range object.Because we pass the range object as the second argument('thisArg'), we can reference it inside the callback via the 'this' value.
-          `
-        },
-        {
-          text1: `<b>Notice</b> that if you use the arrow function in this example, the 'this' value inside the callback function doest not bind to the range 'object' but the 'global' object.
-          Caution: Empty arrays
-If you call the some() method on an empty array, the result is always false regardless of any condition. 
-For example:
-          `,
-          code1: `let result = [].some(e => e > 0);
-          console.log(result);
-          
-          result = [].some(e => e <= 0);
-          console.log(result);
-          
-          //   Output:
-          //   false
-          //   false`
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "sort() - sort elements in an array.",
-      note: [
-        {
-          text1: `The sort() function allows you to sort an array object by either the default sorting order, or by a custom sorting function.
-
-          By default, it sorts the elements in the array in ascending order based on their string Unicode values. The function takes the inputs, converts them to strings, and then sorts them using Unicode values.
-
-          The 'sort()' method allows you to sort elements of an array in place.Besides returning the sorted array, the 'sort()' method changes the positions of the elements in the original array.
-          
-          By default, the 'sort()' method sorts the array elements in ascending order with the smallest value first and largest value last.
-          
-          The 'sort()' method casts elements to strings and compares the strings to determine the orders.
-          
-          Consider the following example:`,
-          code1: `let numbers = [0, 1, 2, 3, 10, 20, 30];
-          numbers.sort();
-          console.log(numbers);
-          
-          // The output is:
-          // [0, 1, 10, 2, 20, 3, 30]`
-        },
-        {
-          text1: `In this example, the 'sort()' method places 10 before 2 because the string “10” comes before “2” when doing a string comparison.
-
-          To fix this, you need to pass a compare function to the 'sort()' method.The 'sort()' method will use the compare function to determine the orders of elements.
-          
-          The following illustrates the syntax of the 'sort()' method:
-          
-          array.sort(comparefunction)
-          
-          The 'sort()' method accepts an optional argument which is a function that compares two elements of the array.
-          
-          If you omit the compare function, the 'sort()' method sorts the elements with the sort order based on the Unicode code point values of elements as mentioned earlier.
-          
-          The compare function of the 'sort()' method accepts two arguments and returns a value that determines the sort order.The following illustrates the syntax of the compare function:
-          
-            function compare(a, b) {
-            // ...
-          }
-          
-          The 'compare()' function accepts two arguments 'a' and 'b'.The 'sort()' method will sort elements based on the return value of the 'compare()' function with the following rules:
-          
-          1). If 'compare(a, b)' is less than zero, the 'sort()' method sorts 'a' to a lower index than 'b'.In other words, a will come first.
-          2). If 'compare(a, b)' is greater than zero, the 'sort()' method sort 'b' to a lower index than 'a', i.e., b will come first.
-          3). If 'compare(a, b)' returns zero, the 'sort()' method considers a equals b and leaves their positions unchanged.
-          To fix the issue of sorting the number, you can use the following syntax:
-          `,
-          code1: `let numbers = [0, 1, 2, 3, 10, 20, 30];
-          numbers.sort(function(a, b) {
-            if (a > b) return 1;
-            if (a < b) return -1;
-            return 0;
-          });
-          
-          console.log(numbers);
-          
-          // Output:
-          // [0, 1, 2, 3, 10, 20, 30]
-          
-          // Or you can define the comparison function using the arrow function syntax:
-          
-          let numbers = [0, 1, 2, 3, 10, 20, 30];
-          numbers.sort((a, b) => {
-            if (a > b) return 1;
-            if (a < b) return -1;
-            return 0;
-          });
-          
-          console.log(numbers);
-          
-          // And the following is the simplest since the elements of the array are numbers:
-          
-          let numbers = [0, 1, 2, 3, 10, 20, 30];
-          numbers.sort((a, b) => a - b);
-          
-          console.log(numbers);
-          
-          // Sorting an array of strings: --
-          // ----------------------------
-          // Suppose you have an array of string named 'animals' as follows:
-          
-          let animals = [
-            'cat', 'dog', 'elephant', 'bee', 'ant'
-          ];
-          
-          // To sort the elements of the 'animals' array in ascending order alphabetically, you use the 'sort()' method without passing the compare function as shown in the following example:
-          
-          let animals = [
-            'cat', 'dog', 'elephant', 'bee', 'ant'
-          ];
-          animals.sort();
-          
-          console.log(animals);
-          
-          // Output:
-          // ['ant', 'bee', 'cat', 'dog', 'elephant']
-          
-          
-          // To sort the 'animals' array in descending order, you need to change the logic of the compare function and pass it to the 'sort()' method as the following example.
-          
-          let animals = [
-            'cat', 'dog', 'elephant', 'bee', 'ant'
-          ];
-          
-          animals.sort((a, b) => {
-            if (a > b)
-              return -1;
-            if (a < b)
-              return 1;
-            return 0;
-          });
-          
-          console.log(animals);
-          
-          Output:
-          ['elephant', 'dog', 'cat', 'bee', 'ant']
-          
-          // Suppose you have an array that contains elements in both uppercase and lowercase as follows:
-          
-          // sorting array with mixed cases
-          let mixedCaseAnimals = [
-            'Cat', 'dog', 'Elephant', 'bee', 'ant'
-          ];
-          
-          // To sort this array alphabetically, you need to use a custom compare function to convert all elements to the same case e.g., uppercase for comparison and pass that function to the 'sort()' method.
-          
-          let mixedCaseAnimals = [
-            'Cat', 'dog', 'Elephant', 'bee', 'ant'
-          ];
-          
-          mixedCaseAnimals.sort(function(a, b) {
-            let x = a.toUpperCase(),
-              y = b.toUpperCase();
-            return x == y ? 0 : x > y ? 1 : -1;
-          
-          });
-          
-          // Output:
-          // ['ant', 'bee', 'Cat', 'dog', 'Elephant']`
-        },
-        {
-          text1: `Sorting an array of strings with non-ASCII characters:--
-          
-          The 'sort()' method is working fine with the strings with ASCII characters.However, for the strings with non - ASCII characters e.g., é, è, etc., the 'sort()' method will not work correctly.For example:`,
-          code1: `let animaux = ['zèbre', 'abeille', 'écureuil', 'chat'];
-          animaux.sort();
-          console.log(animaux);
-
-          // As you see, the 'écureuil' string should come before the 'zèbre' string.
-          
-          // To resolve this, you use the 'localeCompare()' method of the 'String' object to compare strings in a specific locale, like this:
-          
-          animaux.sort(function(a, b) {
-            return a.localeCompare(b);
-          });
-          console.log(animaux);
-          
-          // Output:
-          // ['abeille', 'chat', 'écureuil', 'zèbre']
-          
-          // The elements of the 'animaux' array now are in the correct order.
-          
-// Sorting an array of numbers: --
-// ------- -- ----- -- --------
-//   Suppose you have an array of numbers named 'scores' as in the following example.
-
-let scores = [
-  9, 80, 10, 20, 5, 70
-];
-
-// To sort an array of numbers numerically, you need to pass into a custom comparison function that compares two numbers.
-
-// The following example sorts the 'scores' array numerically in ascending order.
-
-let scores = [
-  9, 80, 10, 20, 5, 70
-];
-// sort numbers in ascending order
-scores.sort((a, b) => a - b);
-
-console.log(scores);
-
-// Output:
-// [5, 9, 10, 20, 70, 80]
-
-
-// To sort an array of numbers numerically in descending order, you just need to reverse the logic in the compare function as shown in the following example:
-
-let scores = [
-  9, 80, 10, 20, 5, 70
-];
-// descending order
-scores.sort((a, b) => b - a);
-console.log(scores);
-
-// Output:
-// [80, 70, 20, 10, 9, 5]
-
-
-// Sorting an array of objects by a specified property: --
-// ------- -- ----- -- ------- -- - --------- --------
-//   The following is an array of 'employee' objects, where each object contains three properties: 'name', 'salary' and 'hireDate'.
-
-let employees = [
-  { name: 'John', salary: 90000, hireDate: "July 1, 2010" },
-  { name: 'David', salary: 75000, hireDate: "August 15, 2009" },
-  { name: 'Ana', salary: 80000, hireDate: "December 12, 2011" }
-];
-
-// Sorting objects by a numeric property
-// The following example shows how to sort the employees by 'salary' in ascending order.
-
-// sort by salary
-employees.sort(function(x, y) {
-  return x.salary - y.salary;
-});
-
-console.table(employees);
-
-Output: <table>
-
-
-// This example is similar to the example of sorting an array of numbers in ascending order.The difference is that it compares the 'salary' property of two objects instead.
-
-// Sorting objects by a string property:
-// ------- ------- -- - ------ --------
-// To sort the 'employees' array by 'name' property case-insensitively, you pass the compare function that compares two strings case-insensitively as follows:
-
-employees.sort(function(x, y) {
-  let a = x.name.toUpperCase(),
-    b = y.name.toUpperCase();
-  return a == b ? 0 : a > b ? 1 : -1;
-});
-
-console.table(employees);
-
-// Sorting objects by the date property:--
-// ------- ------- -- --- ---- --------
-// Suppose, you wish to sort employees based on each employee's hire date.
-
-// The hire date data is stored in the 'hireDate' property of the employee object. However, it is just a string that represents a valid date, not the 'Date' object. 
-
-// Therefore, to sort employees by hire date, you first have to create a valid 'Date' object from the date string, and then compare two dates, which is the same as comparing two numbers.
-
-// Here is the solution:
-
-employees.sort(function(x, y) {
-  let a = new Date(x.hireDate),
-    b = new Date(y.hireDate);
-  return a - b;
-});
-
-console.table(employees);
-
-// Optimizing JavaScript Array sort() method:--
-// ---------- ---------- ----- ------ ------
-// In fact, the 'sort()' method calls the compare function multiple times for each element in the array.
-
-// See the following example:
-
-let rivers = ['Nile', 'Amazon', 'Congo', 'Mississippi', 'Rio-Grande'];
-
-rivers.sort(function(a, b) {
-  console.log(a, b);
-  return a.length - b.length;
-});
-
-// Output:
-// Amazon Nile
-// Congo Amazon
-// Congo Amazon
-// Congo Nile
-// Mississippi Congo
-// Mississippi Amazon
-// Rio - Grande Amazon
-// Rio - Grande Mississippi
-          `
-        },
-        {
-          text1: `> First, declare an array 'rivers' that consists of the famous river names.
-          > Second, sort the 'rivers' array by the length of its element using the 'sort()' method.We output the elements of the 'rivers' array to the web console whenever the 'sort()' method invokes the comparison function .
-          
-          As shown in the output above, each element has been evaluated multiple times e.g., Amazon 4 times, Congo 2 times, etc.
-          
-          If the number of array elements is increasing, it will potentially decrease the performance.
-          
-          You cannot reduce the number of times that comparison function is executed. However, you can reduce the work that the comparison has to do. This technique is called Schwartzian Transform.
-          
-          To implement this, you follow these steps:
-          
-          1) First, extract the actual values into a temporary array using the map() method.
-          2) Second, sort the temporary array with the elements that are already evaluated(or transformed).
-          3) Third, walk the temporary array to get an array with the right order.
-          `,
-          code1: `// Here is the solution:
-
-          // temporary array holds objects with position
-          // and length of element
-          var lengths = rivers.map(function(e, i) {
-            return { index: i, value: e.length };
-          });
-          
-          // sorting the lengths array containing the lengths of
-          // river names
-          lengths.sort(function(a, b) {
-            return +(a.value > b.value) || +(a.value === b.value) - 1;
-          });
-          
-          // copy element back to the array
-          var sortedRivers = lengths.map(function(e) {
-            return rivers[e.index];
-          });
-          
-          console.log(sortedRivers);
-          
-          // Output:
-          // [ 'Nile', 'Congo', 'Amazon', 'Rio-Grande', 'Mississippi' ]
-          
-          // In this tutorial, you have learned how to use the JavaScript Array 'sort()' method to sort arrays of strings, numbers, dates, and objects.`
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "forEach() - loop through array elements.",
+      title: "forEach()",
       note: [
         {
           text1: ` The forEach() array method loops through any array, executing a provided function once for each array element in ascending index order. This function is referred to as a callback function.
@@ -5640,26 +4927,6 @@ rivers.sort(function(a, b) {
           > Inside the <b>find()</b> method, we use a regular function (not an arrow function) for the callback. This function references <b>this</b> to access the <b>hobbies</b> array of the <b>person</b> object.
           > We use <b>this</b> as the second argument to <b>find()</b>, binding it to the <b>person</b> object. This ensures that <b>this</b> inside the callback function refers to the <b>person</b> object.
           `,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "find",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "find",
-      note: [
-        {
-          text1: ``,
           code1: ``
         }
       ]
@@ -7519,60 +6786,69 @@ Object
         },
         {
           text1: `// In this example:
-
-          // 'Object.defineProperty' is used to define a property 'fullName' with 'get' and
+           'Object.defineProperty' is used to define a property 'fullName' with 'get' and
           'set' methods.
-          // 'enumerable: true' makes the 'fullName' property show up during enumeration
+           'enumerable: true' makes the 'fullName' property show up during enumeration
           (e.g., in 'for...in' loops).
-          // 'configurable: true' allows the property to be reconfigured or deleted.
+           'configurable: true' allows the property to be reconfigured or deleted.
 
-          //---------------------
-          // Characteristics of Accessor Properties
-          //---------------------
-          // Accessor properties have the following characteristics:
+          ---------------------
+           <b>Characteristics of Accessor Properties</b>
+          ---------------------
+           Accessor properties have the following characteristics:
 
-          // Getters: Functions that are called when the property is accessed.
-          // Setters: Functions that are called when a new value is assigned to the property.
-          // No Direct Storage: Unlike data properties, accessor properties do not store
+           Getters: Functions that are called when the property is accessed.
+           Setters: Functions that are called when a new value is assigned to the property.
+           No Direct Storage: Unlike data properties, accessor properties do not store
           values directly. The getter and setter functions handle value retrieval and
           assignment.
-          // Flexibility: Accessor properties provide a way to add logic to the process of
+           Flexibility: Accessor properties provide a way to add logic to the process of
           getting and setting property values, which can be useful for validation, computed
           properties, and encapsulation.
 
-          //----------------
-          // Object.defineProperty()
-          //----------------
+          ----------------
+           <b>Object.defineProperty()<b>
+          ----------------
 
-          // The Object.defineProperty() method adds a property or modifies an existing
+           The Object.defineProperty() method adds a property or modifies an existing
           property on an object and returns the object.
 
-          // The syntax of the defineProperty() method is:
+           The syntax of the defineProperty() method is:
 
-          // Object.defineProperty(obj, prop, descriptor)
-          // Here, 'defineProperty()' is a static method. Hence, we need to access the method
+           Object.defineProperty(obj, prop, descriptor)
+           Here, 'defineProperty()' is a static method. Hence, we need to access the method
           using the class name, Object.
 
 
-          // defineProperty() Parameters
-          // The 'defineProperty()' method takes in:
+           defineProperty() Parameters
+           The 'defineProperty()' method takes in:
 
-          // 'obj' - the object on which to define the property.
-          // 'prop' - the name or 'Symbol' of the property to be defined or modified.
-          // 'descriptor' - the descriptor for the property being defined or modified.
+           'obj' - the object on which to define the property.
+           'prop' - the name or 'Symbol' of the property to be defined or modified.
+           'descriptor' - the descriptor for the property being defined or modified.
 
-          // Each property value must either be a data descriptor or an accessor
+           Each property value must either be a data descriptor or an accessor
           descriptor.They can have the following optional properties:
 
-          // configurable - the ability to change or delete a property's attributes
-          // enumerable - the property that is visible in for...in loops and with
+           configurable - the ability to change or delete a property's attributes
+           enumerable - the property that is visible in for...in loops and with
           Object.keys().
-          // Data descriptors can also have:
+           Data descriptors can also have:
 
-          // value - the actual data stored in a property, accessible through its key.
-          // writable - the ability to change the value of a property.If false, the property's
+          value - the actual data stored in a property, accessible through its key.
+          writable - the ability to change the value of a property.If false, the property's
           value cannot be changed.`,
         }
+      ]
+    },
+    {
+      id: 1,
+      title: "weakmap and weakset",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
       ]
     },
     {
@@ -7650,16 +6926,12 @@ Object
                 console.log(this === User);
               }
             }
-            
             User.staticMethod(); // true
-            
-            
+          
             class User2 { }
-            
             User2.staticMethod2 = function() {
               console.log(this === User2);
             };
-            
             User2.staticMethod2(); // true
             `
 
@@ -11178,8 +10450,6 @@ window.onload = function() {
 
 <b>Capturing Phase</b> is when the event goes down to the element. <b>The target phase</b> is when the event reaches the element and the <b>Bubbling phase</b> is when the event bubbles up from the element.
 
-
-
 <b>1. Event Capturing</b>
 Event capturing is the first phase in the event flow process where the event is captured or detected at the highest level of the DOM hierarchy and then propagates down to the target element. Event capturing allows developers to intercept events before they reach their target, enabling global event handling and delegation. Practical use cases include implementing event delegation, validating user input, and applying consistent event handling across multiple elements.
 
@@ -11207,11 +10477,10 @@ The exact opposite of the capturing phase occurs during the bubbling phase:
 => The browser will execute if the direct parent of the element selected has a click event handler registered for the bubbling phase.
 => Then it repeats the process for the next immediate ancestor element, then the next, and so on until it reaches the &lt;html&gt; element.
 
-A click on the inner &lt;p&gt; first runs onclick:
-
-On that &lt;p&gt;.
-Then on the outer &lt;div&gt;.
-Then on the outer &lt;form&gt;.
+A click on the inner <b>&lt;p&gt;</b> first runs onclick:
+On that <b>&lt;p&gt;</b>.
+Then on the outer <b>&lt;div&gt;</b>.
+Then on the outer <b>&lt;form&gt;</b>.
 And so on upwards till the document object.
 `,
           code1: `//FORM > DIV > P
