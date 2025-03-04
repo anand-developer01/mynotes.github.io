@@ -594,6 +594,12 @@ HOCs are functions that take a component and return a new component with additio
 => Data fetching
 => Event listeners
 => State management
+
+<b>Benefits of Higher Order Components</b>
+<b>Reusability</b>: HOCs allow you to encapsulate shared functionalities and apply them to multiple components, promoting code reuse.
+<b>Separation of Concerns</b>: HOCs help maintain separate responsibilities, enabling your components to focus on their specific tasks.
+<b>Code Abstraction</b>: HOCs abstract common logic from components, making them more concise and easier to understand.
+<b>Composability</b>: You can combine various HOCs to compose complex functionalities into your components.
 `,
           code1: `//class Component HOC
           // HOC.js
@@ -904,6 +910,185 @@ import FuncrionalHoc from './f-hoc';
 export default  FuncrionalHoc(UserFunctionalComponent, 2)`
         },
         {
+          text1: `<b>When to Use HOCs?</b>
+You should use HOCs when you need to:
+<b>Share reusable logic</b>: For example, logic related to authentication, permissions, or data fetching can be shared across multiple components.
+<b>Enhance a component's behavior</b>: You can use an HOC to enhance a component with new props or lifecycle methods.
+<b>Separation of concerns</b>: If you want to keep the core functionality of a component separate from concerns like data fetching, authentication, etc.
+
+<b>Why Use HOCs?</b>
+<b>Code Reusability</b>: HOCs help in reusing common code across multiple components, which reduces redundancy and improves maintainability.
+<b>Component Composition</b>: HOCs allow you to combine different behaviors, creating a composable architecture.
+<b>Clean and Organized Code</b>: HOCs make it easier to organize the logic for things like authentication, permissions, or data fetching in a clean, reusable manner.
+          
+          We have created a simple React Componenet called as the TextComponent and when the mouse is hovered upon the TextComponent its background color changes to green.--Ex : 1`,
+          code1: `//---------- Ex : 1---------
+          // Higher Order Component that Contians the logic
+// to detect the hover.
+function withHover(WrappedComponent) {
+  return function (props) {
+    const [isHovered, setHovered] = useState(false);
+
+    function handleMouseEnter() {
+      setHovered(true);
+    }
+
+    function handleMouseLeave() {
+      setHovered(false);
+    }
+
+    return (
+      &lt;div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}&gt;
+        &lt;WrappedComponent {...props} isHovered={isHovered} /&gt;
+      &lt;/div&gt;
+    );
+  };
+}
+
+// Updated Text Component without the Hover Logic
+const TextComponent = ({ text, isHovered }) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;p style={{ backgroundColor: isHovered ? &quot;blue&quot; : &quot;white&quot; }}&gt;{text}&lt;/p&gt;
+    &lt;/&gt;
+  );
+};
+
+// Updated Input Component without the Hover Logic
+const InputComponent = ({ type, isHovered }) =&gt; {
+  return (
+    &lt;input
+      type={type}
+      style={{ backgroundColor: isHovered ? &quot;blue&quot; : &quot;white&quot; }}
+    /&gt;
+  );
+};
+
+// Creating components that contain hover logic using
+// Higher Order Component.
+const TextComponentWithHover = withHover(TextComponent);
+const InputComponentWithHover = withHover(InputComponent);
+
+// Using the Components in our App
+const App = () =&gt; {
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;TextComponentWithHover
+        text=&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.&quot;
+      /&gt;
+
+      &lt;InputComponentWithHover type=&quot;text&quot; /&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default App;
+
+
+
+
+//------------ Ex : 2 ------------
+//--------- Fetch API search input --------
+import React, { useState, useEffect, useRef, useCallback } from &#39;react&#39;;
+
+// Custom hook to debounce search input
+const useDebounce = (value, delay) =&gt; {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() =&gt; {
+    const handler = setTimeout(() =&gt; {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () =&gt; clearTimeout(handler);
+  }, [value, delay]);
+
+  return debouncedValue;
+};
+
+const withAuth = (WrappedComponent, httpComp) =&gt; {
+  return function (props) {
+    const [apiData, setApiData] = useState([]);
+    const prevSearchRef = useRef(); // Track previous search input value
+    const debouncedSearchInput = useDebounce(props.searchInput, 300); // Debounced search input
+
+    const callApi = useCallback(async () =&gt; {
+      try {
+        const apiD = await httpComp();
+        let filteredData = apiD;
+
+        if (debouncedSearchInput) {
+          filteredData = apiD.filter(f =&gt;
+            f.title.toLowerCase().includes(debouncedSearchInput.toLowerCase())
+          );
+        }
+        setApiData(filteredData);
+      } catch (err) {
+        console.log(err);
+      }
+    }, [debouncedSearchInput, httpComp]);
+
+    useEffect(() =&gt; {
+      if (debouncedSearchInput !== prevSearchRef.current) {
+        // Only call the API if the search input has actually changed
+        callApi();
+        prevSearchRef.current = debouncedSearchInput; // Update the previous search value
+      }
+    }, [debouncedSearchInput, callApi]);
+
+    return &lt;WrappedComponent {...props} apiData={apiData} /&gt;;
+  };
+};
+
+// Sample API fetch function
+const httpComp = async () =&gt; {
+  const apiRes = await fetch(&#39;https://jsonplaceholder.typicode.com/posts&#39;);
+  return await apiRes.json();
+};
+
+// Component to display API data
+const showApiData = ({ apiData }) =&gt; {
+  return (
+    &lt;div&gt;
+      {apiData.length ? (
+        apiData.map((item) =&gt; &lt;div key={item.id}&gt;{item.title}&lt;/div&gt;)
+      ) : (
+        &lt;p&gt;No data available&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+};
+
+// Export the HOC with the showApiData component
+export const ReturnHOCInputCom = withAuth(showApiData, httpComp);
+
+
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "Do We Really Need HOCs in React Functional Components?",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Render Props",
+      note: [
+        {
           text1: `<b>Render Props</b>
           A render prop is where a component's prop is assigned a function and this is called in the render method of the component. Calling the function can return a React element or component to render.
 
@@ -1049,12 +1234,6 @@ const App = () => {
 export default App;
 `
         },
-      ],
-    },
-    {
-      id: 52,
-      title: "Do We Really Need HOCs in React Functional Components?",
-      note: [
         {
           text1: ``,
           code1: ``
@@ -9223,13 +9402,32 @@ export default App;`
     },
     {
       id: 52,
-      section: `Using TypeScript`,
-      title: "aff intro",
+      title: "Use Refs to Store Old Reactive Values",
       note: [
+        {
+          text1: `non-reactive values in components and hooks. We can use this to store the values of things that we want to last between re-renders and won’t trigger a re-render when their values change.`,
+          code1: ``
+        },
         {
           text1: ``,
           code1: ``
-        }
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
       ],
     },
   ]

@@ -59,7 +59,7 @@ The Callback Queue (also known as the <b>Task Queue</b>) is where asynchronous c
 When the call stack is empty, the Event Loop picks the first task from the Callback Queue and puts it on the call stack for execution.
 
 <b>Call Stack</b>:
-Imagine the call stack as a list where JavaScript keeps track of function calls. When you call a function, it gets added to the top of this list. Once the function finishes, it’s removed. If a function calls another function, the new one gets added to the top, creating a stacking effect.
+Imagine the call stack as a list where JavaScript keeps track of function calls. When you call a function, it gets added to the top of this list. Once the function finishes, it's removed. If a function calls another function, the new one gets added to the top, creating a stacking effect.
 The call stack is a simple data structure that keeps track of function calls. Think of it as a pile of books where you can only add or remove the book on top.
 
 <b>Microtask Queue</b>:
@@ -336,6 +336,11 @@ Variables declared with <b>var</b> are hoisted to the top of their global or loc
 In the <b>print</b> function, <b>number</b> has a local scope. Due to hoisting, we can access the <b>number</b> variable before the line of declaration.
 As we see in <b>square1</b>, we assign <b>number * number</b>. Since <u>number</u> is hoisted with a default value of <b>undefined</b>, <u>square1</u> will be <b>undefined * undefined</b> which results in <b>NaN</b>.
 After the line of declaration with an initial value is executed, <u>number</u> will have a value of <b>50</b>. So in <u>square2</u>, <b>number * number</b> will be <b>50 * 50</b> which results in <b>2500</b>.
+
+Another is the <b>Local Scope</b>, variables declared inside the functions are considered to be of the local scope and it is futher divided into function scoped and block scoped.
+
+<b>Function Scope</b>: When a variable is declared inside a function, it is only accessible within that function and cannot be used outside that function.
+<b>Block Scope</b>: A variable when declared inside the if or switch conditions or inside for or while loops, are accessible within that particular condition or loop. To be consise the variables declared inside the curly braces are called as within block scope.
 `,
           code1: `// ---------- var Ex : 1 ---------
           // The "number" variable has a global scope – it's declared outside functions in the global space – so you can access it everywhere (inside and outside functions).
@@ -391,7 +396,7 @@ console.log(number) // 50
         `
         },
         {
-          text1: `<b>Declare Variables with let in JavaScript</b>
+          text1: `<b>Declare Variables with <code>let</code> in JavaScript</b>
           <b>-> The scope of variables declared with let</b>
 Variables declared with <u>let</u> can have a <b>global, local</b>, or <b>block scope</b>. Block scope is for variables declared in a block. A block in JavaScript involves opening and closing curly braces:
 {
@@ -459,7 +464,7 @@ let number = 50
 `
         },
         {
-          text1: `<b>How to Declare Variables with <u>const</u> in JavaScript</b>
+          text1: `<b>How to Declare Variables with <code>const</code> in JavaScript</b>
 <b> => The scope of variables declared with const </b>
 Variables declared with <u>const</u> are similar to <u>let</u> in regards to <u>scope</u>. Such variables can have a <b>global, local</b>, or <b>block</b> scope.
 
@@ -585,7 +590,7 @@ There's a name for the period during execution where <u>let/const</u> variables 
             <td style="width: 233.333px;"><span>It can be accessed without initialization as its default value is
                     “undefined”.</span></td>
             <td style="width: 233.333px;"><span>It cannot be accessed without initialization otherwise it will give
-                    ‘referenceError’.</span></td>
+                    ‘referenceError'.</span></td>
             <td style="width: 233.333px;"><span>It cannot be accessed without initialization, as it cannot be declared
                     without initialization.</span></td>
         </tr>
@@ -626,13 +631,13 @@ When we declare a variable in the function scope while having a variable with th
 This is called shadowing or variable shadowing in JavaScript. The inner scope variable shadowed the outer scope variable.
 
 But why is the result value apple in the second console log?
-Because the variable will be gone from the memory when the function ends and it doesn’t go outside of it. This happens due to the scope hierarchy in JavaScript. The priority of scopes goes from inner-most to outer-most scope. In other words, the inner scope has more priority than the outer scope. That is why, the variables inside the function are prioritized and then when the function ends, they are gone from the memory.
+Because the variable will be gone from the memory when the function ends and it doesn't go outside of it. This happens due to the scope hierarchy in JavaScript. The priority of scopes goes from inner-most to outer-most scope. In other words, the inner scope has more priority than the outer scope. That is why, the variables inside the function are prioritized and then when the function ends, they are gone from the memory.
 
 <b>Shadowing with let and const</b>
 When we declare the variable with the let or const, the variable only exists inside the block (like an if statement or a loop). If we use the same name for a variable inside the block, it will hide the one outside the block. This is different from var, which is only limited to the function. Ex : 2
 
 
-As you see, things change here. The var keyword value changed because it is not block-scoped and it’s not scoped. As a result, no variable shadowing happens here.
+As you see, things change here. The var keyword value changed because it is not block-scoped and it's not scoped. As a result, no variable shadowing happens here.
 `,
           code1: `let fruit = "apple"; // Outer scope variable
 
@@ -683,6 +688,36 @@ console.log(name); // Outputs: "Alice" (refers to the outer 'name')
 <b>Use Linters</b>: Tools like ESLint can warn you about potential shadowing problems.
 <b>Refactor Nested Code</b>: If you find shadowing happening frequently, consider refactoring your code to reduce nesting.`,
           code1: ``
+        },
+        {
+          text1: `<b>Illegal Shadowing</b>
+Besides just shadowing, we also have illegal shadowing in JavaScript. It means that we have some restrictions.
+
+If you create a variable in an outer scope with the let keyword and another variable with the var keyword in a block scope but with the same name, it will throw an error. This is called illegal shadowing.
+This happens because let and var both technically have the same scope meaning that the variable name fruit already exists there. The variable declared with the var in the block scope is not trapped in the block scope and is accessible to the parent, the function.
+
+Shadowing the variables declared with let and const in same scope is illegal.
+let a = 10;
+let a = 5;
+OR
+let a = 10;
+if(true){
+var a = 10;
+}
+Technically both the variables have same scope so it is not correct as I mentioned that in let declaration shadowing them in same scope is illegal.`,
+          code1: `        function eat(){
+            var vagitable = "tomato";
+            let fruit = "apple";
+            let hungry = true;
+            if(hungry){
+                let vagitable = "cucumber";
+                var fruit = "orange";
+                console.log(fruit, vagitable)
+            }
+        }
+        eat();
+        //Uncaught SyntaxError: Identifier 'fruit' has already been declared
+        `
         },
       ]
     },
@@ -1319,13 +1354,13 @@ console.log("only a is accessible (global):", a);  // Only 'a' is accessible her
           text1: `ES6 modules are automatically strict-mode code, even if you don't write <b>use strict</b>; in them.
           You can use <u>import</u> and <u>export</u> in modules.
 
-          Let’s talk about export first. Everything declared inside a module is local to the module, by default. If you want something declared in a module to be public, so that other modules can use it, you must export that feature. There are a few ways to do this. The simplest way is to add the export keyword.
+          Let's talk about export first. Everything declared inside a module is local to the module, by default. If you want something declared in a module to be public, so that other modules can use it, you must export that feature. There are a few ways to do this. The simplest way is to add the export keyword.
 
           You can <u>export</u> any top-level <u>function, class, var, let</u>, or <u>const</u>.
 
           When you run a module containing an import declaration, the modules it imports are loaded first, then each module body is executed in a depth-first traversal of the dependency graph, avoiding cycles by skipping anything already executed.
 
-          The new standard is designed to interoperate with existing CommonJS and AMD modules. So suppose you have a Node project and you’ve done npm install lodash. Your ES6 code can import individual functions from Lodash:
+          The new standard is designed to interoperate with existing CommonJS and AMD modules. So suppose you have a Node project and you've done npm install lodash. Your ES6 code can import individual functions from Lodash:
 
 import {each, map} from "lodash";
 each([3, 2, 1], x => console.log(x));
@@ -1693,7 +1728,7 @@ console.log(highpass(5, 4));   // false
         },
         {
           text1: `<b>Immutability</b>
-JavaScript’s object arguments are references, which means that if a function were to mutate a property on an object or array parameter, that would mutate state that is accessible outside the function. Pure functions must not mutate external state.`,
+JavaScript's object arguments are references, which means that if a function were to mutate a property on an object or array parameter, that would mutate state that is accessible outside the function. Pure functions must not mutate external state.`,
           code1: ``
         },
         {
@@ -1835,7 +1870,7 @@ console.log({ person, deepPersonClone });`
 <b>3. Using a Recursive Function</b>
 If you need a more custom solution, you can write a deep clone function recursively to handle more complex cases.
 
-<b>4. Using Lodash’s cloneDeep()</b>
+<b>4. Using Lodash's cloneDeep()</b>
 `,
           code1: ``
         },
@@ -1912,14 +1947,12 @@ console.log(cloned);   // { a: 1, b: { c: 10, d: 3 } }
           text1: `Let's break down the components of this pattern:
 
           <b>Function Expression:</b>
-          
           (function() { /* code */ }) is a function expression enclosed in parentheses. The parentheses around the function declaration are necessary to distinguish it from a function declaration statement.
 
           <b>Invocation (()):</b>
           The function is immediately invoked by adding an extra set of parentheses (function() { /* code */ })(). This causes the function to execute immediately after its definition.
-          Use Cases:
+          <b>Use Cases</b>:
           Encapsulation and Avoiding Global Scope Pollution:
-          
           Variables declared inside an IIFE are scoped to the function, preventing them from leaking into the global scope.`,
           code1: `(function() {
             var localVar = "I am local to the IIFE";
@@ -1927,10 +1960,7 @@ console.log(cloned);   // { a: 1, b: { c: 10, d: 3 } }
           })();`
         },
         {
-          text1: `// The following would throw an error because localVar is not defined in the global scope
-          // console.log(localVar);
-          Creating Private Variables:
-          
+          text1: `
           IIFE can be used to create private variables that are accessible only within the function scope.`,
           code1: `var counter = (function() {
             var count = 0;
@@ -2164,11 +2194,9 @@ const App = (function () {
 Arrow functions do not have their own this context. Instead, they inherit the this value from the enclosing scope (lexical scoping). This behavior is different from regular functions, which have their own this context.
          
 Understanding <b>this</b> in javascript with arrow functions
-Published Feb 02, 2018Last updated Jul 03, 2019
 This post is meant as second part of Understanding <b>This</b> in javascript.
 
 We will go through the same examples, but we will use arrow functions instead to compare the outputs.
-
 The motivation of this second post about the scope is, despite arrow functions are a powerful addition to ES6, they must not be misused or abused.
 
 Default <b>this</b> context
@@ -3693,493 +3721,6 @@ clo(i)
         },
       ]
     },
-
-    {
-      id: 1,
-      title: "unshift()",
-      note: [
-        {
-          text1: `In JavaScript, you use the <b>unshift()</b> method to add one or more elements to the beginning of an array and it returns the array's length after the new elements have been added.
-
-          If we have an array of countries and want to add a country before <b>Nigeria</b> which is currently at the first index 0, we can do so with the <b>unshift()</b> method, as shown below:`,
-          code1: `const countries = ["Nigeria", "Ghana", "Rwanda"];
-          countries.unshift("Kenya");
-          console.log(countries); // ["Kenya","Nigeria","Ghana","Rwanda"]
-          
-          // As we said, we can also add more than one element using the unshift() method:
-          
-          const countries2 = ["Nigeria", "Ghana", "Rwanda"];
-          countries2.unshift("South Africa", "Mali", "Kenya");
-          console.log(countries2); // ["South Africa","Mali","Kenya","Nigeria","Ghana","Rwanda"]
-          
-          // In our explanation of the unshift() method, we also stated that it returns the length of the new array, which is true:
-          
-          const countries3 = ["Nigeria", "Ghana", "Rwanda"];
-          let countriesLength = countries3.unshift("South Africa", "Mali", "Kenya");
-          console.log(countriesLength); // 6`
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "shift()",
-      note: [
-        {
-          text1: `The shift() method removes the first element from an array and returns that element.
-          The syntax of the shift() method is:
-arr.shift()
-
-shift() Parameters
-The shift() method does not accept any arguments.
-
-  shift() Return Value
-  Removes the first element from array and returns that value.
-  Returns undefined if the array is empty.
-  After removing the element at the 0th index, it shifts other values to consecutive indexes down.
-          `,
-          code1: `let languages = ["English", "Java", "Python", "JavaScript"];
-
-          // removes the first element of the array
-          let first = languages.shift();
-          console.log(first);
-          console.log(languages);
-          
-          // Output: English
-          //         [ 'Java', 'Python', 'JavaScript' ]`
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "of()",
-      note: [
-        {
-          text1: `when you pass a number to the Array constructor, JavaScript creates an array whose length equals the number.For example:`,
-          code1: `let numbers = new Array(2);
-          console.log(numbers.length); // 2
-          console.log(numbers[0]); // undefined
-          
-          // However, when you pass to the 'Array' constructor a value that is not a number, JavaScript creates an array that contains one element with that value.For example:
-          
-          numbers = new Array("2");
-          console.log(numbers.length); // 1
-          console.log(numbers[0]); // "2"`
-        },
-        {
-          text1: `This behavior is sometimes confusing and error - prone because you may not know the type of data that you pass to the Array constructor.
-
-          ES6 introduces the <b>Array.of()</b> method to solve this problem.
-          
-          The <b>Array.of()</b> method is similar to the Array constructor except the <b>Array.of()</b> method does not treat a single numeric value special.
-          
-          In other words, the <b>Array.of()</b> method always creates an array that contains the values that you pass to it regardless of the types or the number of arguments.
-          
-          The following shows the syntax of the <b>Array.of()</b> method:
-          
-          <span style="color:red"> Array.of(element0[, element1[, ...[, elementN]]]) </span>
-          <b>JavaScript Array.of() examples</b>
-          `,
-          code1: `// See the following example:
-
-          let numbers = Array.of(3);
-          console.log(numbers.length); // 1
-          console.log(numbers[0]); // 3
-          
-          // In this example, we passed the number 3 to the 'Array.of()' method.The 'Array.of()' method creates an array of one number.
-          
-          // Consider the following example:
-          
-          let chars = Array.of('A', 'B', 'C');
-          console.log(chars.length); // 3
-          console.log(chars); // ['A','B','C']
-          // In this example, we created an array of three strings by passing 'A', 'B', and 'C' to the 'Array.of()' method.The size of the array is 3.
-          `
-        },
-        {
-          text1: `
-         <b>JavaScript Array.of() polyfill:--</b>
-
-If you execute the JavaScript in the environment that doesn't support the  'Array.of()' method, you can use the following polyfill:
-`,
-          code1: `if (!Array.of) {
-            Array.of = function() {
-              return Array.prototype.slice.call(arguments);
-            };
-          }`
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "from()",
-      note: [
-        {
-          text1: `To create an array from an array-like object in ES5, you iterate over all array elements and add each of them to an intermediate array like this:`,
-          code1: `function arrayFromArgs() {
-            var results = [];
-            for (var i = 0; i < arguments.length; i++) {
-              results.push(arguments[i]);
-            }
-            return results;
-          }
-          var fruits = arrayFromArgs('Apple', 'Orange', 'Banana');
-          console.log(fruits);
-          
-          // Output:
-          // [ 'Apple', 'Orange', 'Banana' ]
-          
-          // To make it more concise, you can use the 'slice()' method of the 'Array.prototype' as follows:
-          
-          function arrayFromArgs() {
-            return Array.prototype.slice.call(arguments);
-          }
-          var fruits = arrayFromArgs('Apple', 'Orange', 'Banana');
-          console.log(fruits);`
-        },
-        {
-          text1: `ES6 introduces the 'Array.from()' method that creates a new instance of the 'Array' from an array-like or iterable object. The following illustrates the syntax of the 'Array.from()' method:
-
-          <span style="color:red">Array.from(target [, mapFn[, thisArg]])</span>
-          
-          In this syntax:
-          
-          > <b>target</b> is an array - like or iterable object to convert to an array.
-          > <b>mapFn</b> is the map function to call on every element of the array
-          > <b>thisArg</b> is the <b>this</b> value when executing the <b>mapFn</b> function.
-          
-          The <b>Array.from()</b> returns a new instance of <b>Array</b> that contains all elements of the <b>target</b> object.
-          
-          ------------------------------
-          <b>JavaScript Array.from() method examples </b>
-          -------------------------------
-          Let's take some examples of using the <b>Array.from()</b> method.
-          1) Create an array from an array - like object:--
-          The following example uses the <b>Array.from()</b> method to create a new array from the <b>arguments</b> object of a function:
-          `,
-          code1: `function arrayFromArgs() {
-            return Array.from(arguments);
-          }
-          console.log(arrayFromArgs(1, 'A'));
-          
-          // Output:
-          // [1, 'A']
-          // In this example, we create an array from the arguments of the 'arrayFromArgs()' function and return it.
-          `
-        },
-        {
-          text1: `<b>2) JavaScript Array Array.from() with a mapping function:--</b>
-          The <b>Array.from()</b> method accepts a callback function that allows you to execute the mapping function on every element of the array that is being created.See the following example:`,
-          code1: `function addOne() {
-            return Array.from(arguments, x => x + 1);
-          }
-          console.log(addOne(1, 2, 3));
-          
-          // Output:
-          // [2, 3, 4]
-          // In this example, we increased each argument of the 'addOne()' function by one and add the result to the new array.
-          `
-        },
-        {
-          text1: ` <b>3) JavaScript Array.from() with a this value:--</b>
-           
-          If the mapping function belongs to an object, you can optionally pass the third argument to the <b>Array.from()</b> method.The object will represent the <b>this</b> value inside the mapping function. Consider this example:`,
-          code1: `let doubler = {
-            factor: 2,
-            double(x) {
-              return x * this.factor;
-            }
-          }
-          let scores = [5, 6, 7];
-          let newScores = Array.from(scores, doubler.double, doubler);
-          console.log(newScores);
-          
-          // Output:
-          // [10, 12, 14]
-          `
-        },
-        {
-          text1: `<b>4) Create an array from an iterable object: --</b>
-          
-          Since the <b>Array.from()</b> method also works on an iterable object, you can use it to create an array from any object that has a <b>[symbol.iterator]</b> property.For example:`,
-          code1: `let even = {
-            *[Symbol.iterator]() {
-              for (let i = 0; i < 10; i += 2) {
-                yield i;
-              }
-            }
-          };
-          let evenNumbers = Array.from(even);
-          console.log(evenNumbers);
-          
-          // Output:
-          // [0, 2, 4, 6, 8]
-
-          // > First, define the 'even' object with the '[System.iterator]' that returns even numbers from 0 to 10.
-// > Then, use the 'Array.from()' method to create a new array of even numbers from the 'even' object.
-
-          `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "flat()",
-      note: [
-        {
-          text1: `ES2019 introduced the <b>Array.prototype.flat()</b> method that creates a new array with all the elements of the subarrays concatenated to it recursively up to a specified depth.
-
-          // The following shows the syntax of the <b>flat()</b> method:
-          
-          <span style="color:red"> let newArray = arrayObject.flat([depth]) </span>
-          
-          // The <b>depth</b> parameter specifies how deep the method flats the array structure.It defaults to 1.
-          // The following example shows how to flat an array of numbers:`,
-          code1: `const numbers = [1, 2, [3, 4, 5]];
-          const flatNumbers = numbers.flat();
-          
-          console.log(flatNumbers);
-          
-          // Output:
-          // [1, 2, 3, 4, 5]
-          
-          // In this example, we didn't pass the depth argument into the 'flat()' method therefore the depth is 1 by default. The 'flat()' method concatenated all the elements of the nested array[3, 4, 5] to the elements of the new array.
-          // 'Note' :- that the 'flat()' method creates a new array and doesn't change the original array:
-          console.log(numbers);
-
-// Output:
-// [1, 2, [3, 4, 5]]
-
-// The following example flats an array with two level depth:
-
-const numbers = [1, 2, [3, 4, 5, [6, 7]]];
-const flatNumbers = numbers.flat(2);
-
-console.log(flatNumbers);
-
-// Output:
-// [1, 2, 3, 4, 5, 6, 7]
-
-// When you dont know the depth level, you can pass the 'Infinity' into the 'flat()' method to recursively concatenate all elements of the sub - arrays into the new array:
-
-const numbers = [1, 2, [3, 4, 5, [6, 7, [8, 9]]]];
-const flatNumbers = numbers.flat(Infinity);
-
-console.log(flatNumbers);
-
-// If an array has empty slots, you can use the 'flat()' method to remove the holes, like this:
-
-const numbers = [1, 2, , 4, , 5];
-const sequence = numbers.flat();
-console.log(sequence);
-
-// Output:
-// [1, 2, 4, 5]
-          `
-        },
-        {
-          text1: `<b>Summary</b>
-          => Use the 'Array.prototype.flat()' method to flat an array with the nested arrays.
-          => Use the 'depth' argument to specify how deep the nested arrays should be flattened.The depth is 1 by default.
-          => The 'flat()' also removes the holes in the array with empty slots.
-          `,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "flatMap()",
-      note: [
-        {
-          text1: ` The <b>flat()</b> method creates a new <b>array</b> with the elements of the subarrays concatenated into it.
-            The <b>map()</b> method creates a new array whose elements are the results of a mapping function.
-          The <b>flatMap()</b> method is the combination of the <b>map()</b> method followed by the <b>flat()</b> method of depth 1.
-          The <b>flatMap()</b> method first maps each element in an array using a mapping function and then flattens the results into a new array.
-          
-          The following shows the syntax of the <b>flatMap()</b> method:--
-          `,
-          code1: `let newArray = arrayObject.flatMap(callback, thisArg);`
-        },
-        {
-          text1: ` The <b>flatMap()</b> method takes two parameters:
-          -------------------------------
-          <b>1) The callback mapping function:--</b>
-          -------------------------------
-           The <b>callback</b> is the mapping function has the same syntax as the one in the <b>map()</b> method:
-          function callback(currentValue [[, index], array]);
-          
-          ----------------------
-          <b> 2) The thisArg argument:--</b>
-          ---------------------
-           The optional <b>thisArg</b> argument is a value to use as <b>this</b> when executing the <b>callback</b>.
-           Note that the <b>flatMap()</b> method doesn't modify the original array.
-          
-          ----------------------
-          <b> JavaScript Array flatMap() examples </b>
-          ----------------------
-           Let's take some examples of using the <b>flatMap()</b> method.
-          
-          ----------------------
-           1) Creating words from sentences example
-          ----------------------
-           Suppose that you have the following array:
-          <span style="color:red"> let sentences = ["JavaScript Array flatMap()", " ", "is", " ", "Awesome"]; </span>
-          
-           The following <b>map()</b> function splits the words of  sentences:`,
-          code1: `let words = sentences.map(s => s.split(' '));
-          console.log(words);
-          
-          // Output:
-          // [
-          //   ['JavaScript', 'Array', 'flatMap()'],
-          //   [' '],
-          //   ['is'],
-          //   [' '],
-          //   ['Awesome']
-          // ]`
-        },
-        {
-          text1: `The result is an array of nested arrays filled by words.To flatten the result, you can use the 'flat()' method on the result of the 'map()' method.However, it'll be more concise to use the 'flatMap()' method.
-
-          The 'flatMap()' creates a flattened array by running each sentence in the array through a mapping function and flattening the mapped results:`,
-          code1: `let sentences = [
-            "JavaScript Array flatMap()",
-            " ",
-            "is",
-            " ",
-            "Awesome"
-          ];
-          
-          let words = sentences.flatMap(s => s.split(' '));
-          console.log(words);
-          
-          // Output:
-          // ['JavaScript', 'Array', 'flatMap()', '', '', 'is', '', '', 'Awesome']`
-        },
-        {
-          text1: `----------------------
-           <b>2) Adding and removing elements during mapping example:</b>
-          ----------------------
-          
-           The 'flatMap()' method allows you to add or remove elements during mapping.Consider the following example:
-           Suppose that you have the following shopping cart:`,
-          code1: `let cart = [{
-            name: 'Smartphone',
-            qty: 2,
-            price: 500,
-            freeOfCharge: false
-          },
-          {
-            name: 'Tablet',
-            qty: 1,
-            price: 800,
-            freeOfCharge: false
-          }
-          ];
-          
-          // If customers buy a smartphone, you want to give them a free screen protector.
-          // When the customer adds a smartphone to the cart, you can add a screen protector to the cart using the 'flatMap()' method as follows:
-          
-          let newCart = cart.flatMap(
-            (item) => {
-              if (item.name === 'Smartphone') {
-                return [item, {
-                  name: 'Screen Protector',
-                  qty: item.qty,
-                  price: 5,
-                  freeOfCharge: true
-                }]
-              } else {
-                return [item];
-              }
-            }
-          );
-          
-          console.log(newCart);
-          
-          // The cart will look like this:
-          
-          [
-            { name: 'Smartphone', qty: 2, price: 500, freeOfCharge: false },
-            { name: 'Screen Protector', qty: 2, price: 5, freeOfCharge: true },
-            { name: 'Tablet', qty: 1, price: 800, freeOfCharge: false }
-          ]
-          
-          // The following uses the 'reduce()' method to calculate the total amount from the items in the cart.It ignores the free - of - charge items, like screen protectors:
-          
-          const total = newCart.reduce((sum, item) => {
-            if (!item.freeOfCharge)
-              sum += item.price * item.qty;
-            return sum;
-          }, 0);
-          
-          console.log({ total });
-          
-          // Output:
-          // { total: 1800 }
-        `
-        },
-        {
-          text1: `<b>Summary</b>
-          Use the <b>flatMap()</b> method to create a flattened array of elements by running each element in the collection through a mapping function and flattening the mapped results.`,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "at()",
-      note: [
-        {
-          text1: `In JavaScript, you can use the square bracket <b>[]</b> to access an element of an array. For example, the <b>arr[0]</b> returns the first element in the array <b>arr</b>, the <b>arr[1]</b> returns the second element, and so on.
-
-          To get the last element in an array, you use the <b>length</b> property like this:
-          arr[length - 1]
-          
-          JavaScript doesn't allow you to use a negative index to access the last element like other languages e.g., Python.For example, the following returns undefined:
-          arr[-1]
-          
-          The reason is that JavaScript also uses square brackets <b>[]</b> for accessing a property of an object.
-          For example, the <b>obj[1]</b> returns a property of the object <b>obj</b> with the key "1".Hence, the <b>obj[-1]</b> returns the property of an object with the key "-1".
-          
-          In the above example, the <b>arr[-1]</b> returns the property of the <b>arr</b> object with the key "-1".Note that the type of an array is <b>object</b>.Since the "-1" property doesn't exist in the <b>arr</b> object, it returns <b>undefined</b>.
-          
-          For this reason, ES2022 introduced a new method <b>at()</b> added to the <b>prototype</b> of <b>Array</b>, <b>String</b>, and <b>TypeArray</b>.This tutorial focuses on the <b>at()</b> method of the <b>Array.prototype</b>.
-          
-          The <b>at()</b> method accepts an index and returns an element at that index.Here's the syntax of the <b>at()</b> method:
-          arr.at(index)
-          
-          In this syntax, the <b>index</b> specifies an array element to return.It can be zero, positive, or negative.
-          If the index is zero or positive, the <b>at()</b> method works like the <b>[]</b>.
-          
-          However, if you use a negative index, the method returns an element from the end of the array.For example, the <b>arr.at(-1)</b> returns the last element, <b>arr.at(-2)</b> returns the second last element, and so on.`,
-          code1: `//The following example shows how to use the 'at()' method to return an array element:
-          const scores = [5, 6, 7];
-          console.log(scores.at(1)); // same as scores[1] 
-          // get the last element
-          console.log(scores.at(-1)); // 7
-          console.log(scores.at(-1) === scores[scores.length - 1]); // true
-          
-          // Output:
-          // 6
-          // 7
-          // true
-`
-        },
-      ]
-    },
     {
       id: 1,
       title: "Object.freeze()",
@@ -4433,504 +3974,7 @@ true
         },
       ]
     },
-    {
-      id: 1,
-      section: `High-order methods`,
-      title: "map()",
-      note: [
-        {
-          text1: `In JavaScript, map() is a higher-order function that is used to iterate over elements of an array and execute a callback function on each element. It creates a new array based on the results of the callback function.
-          <span style="color:red"> const numbers = [1, 2, 3, 4, 5]; </span>
-        
-          Multiply each number by 2
-          const multipliedNumbers = numbers.map((num) => num * 2);
-          
-          console.log(numbers); // Output: [1, 2, 3, 4, 5]
-          console.log(multipliedNumbers); // Output: [2, 4, 6, 8, 10]
-          
-          Sometimes, you need to take an array, transform its elements, and include the results in a new array.
-          
-          Typically, you use a <b>for</b> loop to iterate over the elements, transform each individual one, and push the results into a new array.
-          
-          Let's take a look at an example.
-          
-          Suppose that you have an array of numbers where each element represents the radius of a circle as follows:
-          `,
-          code1: `let circles = [
-            10, 30, 50
-          ];
-          
-          // The following illustrates how to calculate the area of each circle and push the result into a new array.
-          
-          let areas = []; // to store areas of circles
-          let area = 0;
-          for (let i = 0; i < circles.length; i++) {
-            area = Math.floor(Math.PI * circles[i] * circles[i]);
-            areas.push(area);
-          }
-          console.log(areas);
 
-          // Output:
-          // [314, 2827, 7853]
-          // It takes a quite amount of code to accomplish this.
-
-// Starting from ES5, JavaScript Array type provides the map() method that allows you to transform the array elements in a cleaner way.
-
-function circleArea(radius) {
-  return Math.floor(Math.PI * radius * radius);
-}
-let areas = circles.map(circleArea);
-console.log(areas);
-
-// Output
-// [314, 2827, 7853]
-
-
-//   First, define a function that calculates the area of a circle.
-//     Then, pass the 'circleArea' function to the 'map()' method.The 'map()' method will call the 'circleArea' function on each element of the circles array and return a new array with the elements that have been transformed.
-// To make it shorter, you can pass in the 'map()' method an anonymous function as follows.
-
-let areas = circles.map(function(radius) {
-  return Math.floor(Math.PI * radius * radius);
-});
-console.log(areas);
-          `
-        },
-        {
-          text1: `Also, you can make use of the arrow function in ES6 to achieve the same result with a cleaner code:
-
-          let areas = circles.map(radius => Math.floor(Math.PI * radius * radius));
-          console.log(areas);
-          
-          JavaScript Array <b>map()</b> method in detail
-          The following illustrates the <b>map()</b> method.
-          
-            arrayObject.map(callback[, contextObject]);
-          
-          The <b>map()</b> method calls a callback function on every element of an array and returns a new array that contains the results.
-          
-            The <b>map()</b> method takes two named arguments, the first one is required whereas the second one is optional.
-          
-          Similar to the other iterative method such as <b>every()</b>, <b>some()</b>, <b>filter()</b>, <b>forEach()</b> and  <b>sort()</b>, the <b>callback()</b> function has the following form:
-          
-          function callback(currentElement, index, array) {
-            ... 
-          }
-          
-          The <b>callback()</b> function takes three arguments:
-          
-          The <b>currentElement</b> is the current element of the array that is being processed.
-          The <b>index</b> is the index of the <b>currentElement</b>.
-          The <b>array</b> is the array object being traversed.
-          The <b>currentElement</b> is required while the <b>index</b> and <b>array</b> arguments are optional.
-          
-          If you pass the <b>contextObject</b> to the <b>map()</b> method, you can reference the <b>contextObject</b> inside the <b>callback()</b> function using the <b>this</b> keyword.
-          
-          It's important to note that the <b>map()</b> method does not change the original array, it creates a new array of all elements that have been transformed by the callback function.
-          
-          More JavaScript Array map() examples: -
-          
-            The following example shows how to transform an array of numbers by using a built -in method of the <b>Math</b> type as the <b>callback()</b> function.`,
-          code1: `let numbers = [16, 25, 36];
-          let results = numbers.map(Math.sqrt);
-          console.log(results);
-          
-          // Output
-          // [4, 5, 6]
-          
-          // The new array contains the square roots of the numbers in the 'numbers' array.
-          
-          // In this tutorial, you have learned how to use the JavaScript Array 'map()' method to transform elements of an array according to a provided function.
-          
-          // Excercies:---
-          
-          const userDetails = [
-            {
-              fullName: "American First Finance",
-              area: 'yes',
-            },
-            {
-              fullName: "World Health",
-              area: 'yes',
-            }
-          ]
-          
-          // returning new array :-
-          const newARR = userDetails.map(acc => {
-              const shortOb =  {...acc, shordName : acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('') }
-              return shortOb
-          })
-          console.log(newARR) //
-          // output:-
-          // [
-          //     { fullName: 'American First Finance', area: 'yes' },
-          //     { fullName: 'World Health', area: 'yes'}
-          // ]
-          
-          // mutated original array :-
-          userDetails.forEach(acc => {
-              acc.shortName = acc.fullName.toLocaleLowerCase().split(' ').map(name => name[0]).join('')
-          })
-          console.log(userDetails)
-          // output:-
-          // [
-          //     { fullName: 'American First Finance', area: 'yes', shordName: 'aff' },
-          //     { fullName: 'World Health', area: 'yes', shordName: 'wh' }
-          // ]
-          `
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "filter()",
-      note: [
-        {
-          text1: `The filter() method of Array instances creates a shallow copy of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided function.
-
-          The filter() method takes a function as an argument. The function is called for each element in the array to determine
-          
-          The filter method in JavaScript is designed as a higher-order function that iterates over each element of an array, allowing developers to apply a specific condition to filter out elements.
-          
-          The filter method doesn't modify the original array, but instead creates and returns a new array containing only the elements that meet the specified condition.
-          
-          
-          One of the most common tasks when working with an array is to create a new array that contains a subset of elements of the original array.
-          
-          Suppose you have an array of city objects where each object contains two properties: 'name' and 'population'.`,
-          code1: `let cities = [
-            { name: 'Los Angeles', population: 3792621 },
-            { name: 'New York', population: 8175133 },
-            { name: 'Chicago', population: 2695598 },
-            { name: 'Houston', population: 2099451 },
-            { name: 'Philadelphia', population: 1526006 }
-          ];
-          
-          // To find the city whose population is greater than 3 million, you typically loop over the array elements using a for loop and test if the value of the 'population' property satisfies the condition, like this:
-          
-          let bigCities = [];
-          for (let i = 0; i < cities.length; i++) {
-            if (cities[i].population > 3000000) {
-              bigCities.push(cities[i]);
-            }
-          }
-          console.log(bigCities);
-          
-          // Output:
-          // [
-          //   { name: 'Los Angeles', population: 3792621 },
-          //   { name: 'New York', population: 8175133 }
-          // ]`
-        },
-        {
-          text1: `JavaScript Array provides the 'filter()' method that allows you to do this task in a shorter and cleaner way.
-          The following example returns the same result as the example above:`,
-          code1: `let bigCities = cities.filter(function(e) {
-            return e.population > 3000000;
-          });
-          console.log(bigCities);`
-        },
-        {
-          text1: `In this example, we call the <b>filter()</b> method of the <b>cities</b> array object and pass a function that tests each element.
-
-          Inside the function, we check if the <b>population</b> of each city in the array is greater than 3 million.If it is the case, the function returns <b>true</b> or <b>false</b> otherwise.
-          
-            The <b>filter()</b> method includes the only elements in the result array if they satisfy the test in the callback function.
-          
-          Starting with ES6, you can use the arrow function to make it more concise:`,
-          code1: `let bigCities = cities.filter(city => city.population > 3000000);
-          console.log(bigCities);`
-        },
-        {
-          text1: `JavaScript Array filter() method in detail: --
-
-          <span style="color:red"> arrayObject.filter(callback, contextObject); </span>
-          
-          The <b>filter()</b> method creates a new array with all the elements that pass the test implemented by the <b>callback()</b> function.
-          
-          Internally, the <b>filter()</b> method iterates over each element of the array and passes each element to the <b>callback</b> function. If the <b>callback</b> function returns <b>true</b>, it includes the element in the return array.
-          
-            The <b>filter()</b> method accepts two named arguments: a callback function and an optional object.
-          
-          Like other iterative methods of the Array object such as <b>every()</b>, <b>some()</b>, <b>map()</b> and <b>forEach()</b>, the <b>callback</b> function has the following form:
-          
-          <span style="color:red">
-          function callback(currentElement, index, array) {
-            ...
-          }
-          </span>
-          
-          The <b>callback</b> function takes three arguments:
-          
-          The <b>currentElement</b> argument is the current element in the array that is being processed by the <b>callback</b> function.
-          The <b>index</b> of the <b>currentElement</b> that is being processed by the <b>callback</b> function.
-          The <b>array</b> object being traversed.
-          
-          The <b>index</b> and <b>array</b> arguments are optional.
-          
-          The <b>contexObject</b> argument of the <b>filter()</b> method is optional.If you pass the <b>this</b> value, you can reference it by using <b>this</b> keyword inside the <b>callback</b> function.
-          
-          It is important to note that the <b>filter()</b> method does not change the original array.
-          
-          More JavaScript Array filter() method examples: -
-          
-          Because the <b>filter()</b> method returns a new array, you can chain the result with other array methods such as <b>sort()</b> and <b>map()</b>.
-          
-          For example, the following illustrates how to chain the three methods: <b>filter()</b>, <b>sort()</b>, and <b>map()</b>:
-          `,
-          code1: `let cities = [
-            { name: 'Los Angeles', population: 3792621 },
-            { name: 'New York', population: 8175133 },
-            { name: 'Chicago', population: 2695598 },
-            { name: 'Houston', population: 2099451 },
-            { name: 'Philadelphia', population: 1526006 }
-          ];
-
-          cities
-  .filter(city => city.population < 3000000)
-  .sort((c1, c2) => c1.population - c2.population)
-  .map(city => console.log(city.name + ':' + city.population));
-
-// Output:
-// Philadelphia: 1526006
-// Houston: 2099451
-// Chicago: 2695598
-          `
-        },
-        {
-          text1: `  > First, filter the cities whose populations are less than 3 million using the <b>filter()</b> method.
-            > Second, sort the resulting cities by the populations in descending order using the <b>sort()</b> method.
-            > Third, output array element to the console using the <b>map()</b> method.
-          
-          The following example illustrates the use of the <b>contextObject</b> argument that specifies an object which can be referenced in the <b>callback()</b> function using the <b>this</b> keyword`,
-          code1: `function isInRange(value) {
-            if (typeof value !== 'number') {
-              return false;
-            }
-            return value >= this.lower && value <= this.upper;
-          }
-          
-          let data = [10, 20, "30", 1, 5, 'JavaScript filter', undefined, 'example'];
-          
-          let range = {
-            lower: 1,
-            upper: 10
-          };
-          
-          let numberInRange = data.filter(isInRange, range);
-          console.log(numberInRange); // [10, 1, 5]
-          
-          // Output:
-          // [10, 1, 5]
-          `
-        },
-        {
-          text1: `> First, define the <b>isInRange()</b> function that checks if its argument is a number and in the range specified by the <b>lower</b> and <b>upper</b> properties of an object.
-          > Next, define an array of mixed data that contains numbers, strings, and undefined.
-          > Then, define the <b>range</b> object with two properties <b>lower</b> and <b>upper</b>.
-          > After that, call the <b>filter()</b> methods of the <b>data</b> array and pass in the <b>isInRange()</b> function and the <b>range</b> object.Because we pass in the <b>range</b> object, inside the <b>isInRange()</b> function, the <b>this</b> keyword references to the <b>range</b> object.
-          > Finally, show the result array in the console.
-          
-          In this tutorial, you have learned how to use the JavaScript Array <b>filter()</b> method to filter elements in an array based on a test provided by a callback function.
-          `,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "forEach()",
-      note: [
-        {
-          text1: ` The forEach() array method loops through any array, executing a provided function once for each array element in ascending index order. This function is referred to as a callback function.
-
-             The forEach method passes a callback function for each element of an array together with the following parameters:
-          
-            > Current Value (required) - The value of the current array element
-            > Index (optional) - The current element's index number
-            > Array (optional) - The array object to which the current element belongs
-          
-           Typically, when you want to execute a 'function' on every element of an 'array', you use a for 'loop' statement.
-          
-           For example, the following code shows every element of an array to console:`,
-          code1: `let ranks = ['A', 'B', 'C'];
-          for (let i = 0; i < ranks.length; i++) {
-            console.log(ranks[i]);
-          }
-          
-          // Output:
-          // A
-          // B
-          // C
-          
-          // JavaScript Array provides the 'forEach()' method that allows you to run a function on every element.
-          // The following code uses the 'forEach()' method that is equivalent to the code above:
-          
-          let ranks = ['A', 'B', 'C'];
-          
-          ranks.forEach(function(e) {
-            console.log(e);
-          });
-          
-          // Output:
-          // A
-          // B
-          // C`
-        },
-        {
-          text1: ` The 'forEach()' method iterates over elements in an array and executes a predefined function once per element.
-           The following illustrates the syntax of the 'forEach()' method.
-          
-           Array.forEach(callback[, thisArg]);
-          
-           The 'forEach()' method takes two arguments:
-          
-           1) callback:
-          ------------
-           The 'callback' function that the 'forEach()' method uses to execute on every element.
-          
-           The callback accepts the following arguments:
-          
-           'currentElement': is the current array element being processed.
-           'index': the index of the 'currentElement' in the array.
-           'array': the array that calls the 'forEach()' method.
-          
-           The index and array are optional.
-          
-           2) thisArg:
-          -----------
-           The 'thisArg' is a value to use as this when executing the callback.
-          
-           Note that the 'forEach()' function returns 'undefined' therefore it is not chainable like other iterative methods: 'filter()', 'map()', 'some()', 'every()', and 'sort()'.
-          
-           One limitation of the 'forEach()' method in comparison with the for loop is that you cannot use the break or continue statement to control the loop.
-          
-           To terminate the loop in the 'forEach()' method, you must throw an exception inside the callback function.
-          
-           More JavaScript Array 'forEach()' method example: --
-           ------------------------------------------------
-           Let's take a look at an example of the 'forEach()' method that uses a 'contextObject'.
-          
-           The following illustrates 'Counter' constructor function:`,
-          code1: `function Counter() {
-            this.count = 0;
-            let self = this;
-            return {
-              increase: function() {
-                self.count++;
-              },
-              current: function() {
-                return self.count;
-              },
-              reset: function() {
-                self.count = 0;
-              }
-            }
-          }
-          
-          // This example shows how to pass the counter object to the 'forEach()' method.
-          
-          var counter = new Counter();
-          var numbers = [1, 2, 3];
-          var sum = 0;
-          numbers.forEach(function(e) {
-            sum += e;
-            this.increase();
-          }, counter);
-          
-          console.log(sum); // 6
-          console.log(counter.current()); // 3
-          
-          // How it works.
-          
-          // > First, create a new 'Counter' object.
-          // > Next, define an array of three numbers.
-          // > Then, declare a variable 'sum' and assign it a value of zero.
-          // > After that, call the 'forEach()' method on the 'numbers' array.In the callback function, add the element to the 'sum' variable and call the 'increase()' method of the 'counter' object.Notice that the 'counter' object is referred to as 'this' inside the callback function.
-          // > Finally, log the value of the sum and current value of the counter in the web console.
-          
-          // In this tutorial, you have learned how to use the JavaScript Array 'forEach()' method to execute a callback on every element of an array.`
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "find",
-      note: [
-        {
-          text1: `First Filter returns all the elements that match the condition while the Find method only returns the first one and second and even more important, the Filter method returns a new array while Find only returns the element itself and not an array,
-          
-          The find method returns the first element in the array that satisfies a given test function. If no elements meet the criteria, it returns <b>undefined</b>.
-
-          The find() method returns the value of the first array element that satisfies the provided test function.
-
-          Syntax:
-          <span style="color:red"> array.find(function(currentValue, index, arr), thisValue) </span>
-
-          <b>currentValue</b>: The current element being processed in the array.
-          <b>index (optional)</b>: The index of the current element being processed in the array.
-          <b>arr (optional)</b>: The array find() was called upon.
-
-          <b>thisArg (optional)</b>: An object to which the this keyword can refer in the callback function. If not provided, <b>undefined</b> is used.
-          `,
-          code1: `let numbers = [1, 3, 4, 9, 8];
-
-          // function to check even number
-          function isEven(element) {
-            return element % 2 == 0;
-          }
-          
-          // get the first even number
-          let evenNumber = numbers.find(isEven);
-          console.log(evenNumber);
-          
-          // Output: 4`
-        },
-        {
-          text1: `The <b>thisArg</b> parameter in the <b>find()</b> method allows you to specify a value to be used as <>bthis</b> when executing the callback function. `,
-          code1: `const person = {
-            name: 'John',
-            age: 30,
-            hobbies: ['reading', 'gardening', 'cooking'],
-            findHobby(hobbyToFind) {
-              return this.hobbies.find(function(hobby) {
-                return hobby === hobbyToFind;
-              }, this); // using thisArg to bind 'this' to the 'person' object
-            }
-          };
-          
-          console.log(person.findHobby('gardening')); // Output: gardening
-          console.log(person.findHobby('swimming'));  // Output: undefined
-
-
-          //-------------
-
-          const thresholdFilter = {
-            threshold: 25,
-            numbers: [10, 20, 30, 40, 50],
-            filterNumber: function(number) {
-              return number > this.threshold;
-            },
-            filteredNumbers: function() {
-              return this.numbers.find(this.filterNumber, this);
-            }
-          };
-          
-          console.log(thresholdFilter.filteredNumbers()); // Output: 30
-          
-          `
-        },
-        {
-          text1: `
-          > We have an object called <b>person</b> with properties <b>name, age</b>, and <b>hobbies</b>.
-          > <b>findHobby</b> is a method of the <b>person</b> object. It takes a <b>hobbyToFind</b> parameter and searches for it within the <b>hobbies</b> array.
-          > Inside the <b>find()</b> method, we use a regular function (not an arrow function) for the callback. This function references <b>this</b> to access the <b>hobbies</b> array of the <b>person</b> object.
-          > We use <b>this</b> as the second argument to <b>find()</b>, binding it to the <b>person</b> object. This ensures that <b>this</b> inside the callback function refers to the <b>person</b> object.
-          `,
-          code1: ``
-        }
-      ]
-    },
     {
       id: 1,
       section: "JAVASCRIPT OBJECTS",
@@ -5212,23 +4256,19 @@ console.log(person.firstName);
       note: [{
         text1: `// In JavaScript, every object has an internal property called [[Prototype]], which is essentially a reference to another object called its prototype. This prototype is a  fundamental concept in JavaScript's object-oriented programming model.
 
+        In JavaScript, prototypes allow properties and methods to be shared among instances of the function or object
+        <b>Prototype in Javascript</b>
+In JavaScript, a prototype is a mechanism through which objects inherit properties and methods from other objects. Every object has a prototype, forming a prototype chain. When an object is created, it inherits properties and methods from its prototype, and this chain continues until a prototype with null is reached.
+
+        In JavaScript, everything is an object, including functions, arrays, and strings, which are specialized types of objects. JavaScript follows a prototype-based system, where objects inherit properties and methods from other objects through prototypes. This prototype mechanism plays a key role in how JavaScript handles inheritance and object relationships.
+
         <b>prototype:</b>: JavaScript is a prototype-based language, which means that it uses
-        prototypes to inherit properties and methods from one object to another. In
-        JavaScript,
-        objects can be linked to other objects, forming a prototype chain. When a property
-        or
-        method is accessed on an object, the JavaScript engine first checks if that property
-        or
-        method exists on the object itself. If it does not, it will check the object's
-        prototype, and so on, until it reaches the end of the prototype chain. If the
-        property
-        or method is not found, it will return undefined.
+        prototypes to inherit properties and methods from one object to another. In JavaScript, objects can be linked to other objects, forming a prototype chain. When a property or method is accessed on an object, the  JavaScript engine first checks if that property  or  method exists on the object itself. If it does not, it will check the object's  prototype, and so on, until it reaches the end of the prototype chain. If the property or method is not found, it will return undefined.
 
         // Here's a clear breakdown:
         <b>Every object has a prototype</b>: When you create an object in JavaScript, it
         automatically gets a prototype. This prototype is a regular JavaScript object
-        itself,
-        and it can have its own properties and methods.
+        itself, and it can have its own properties and methods.
 
         <b>The prototype chain</b>: When you try to access a property or method on an object,
         JavaScript first checks if that property or method exists on the object itself. If it
@@ -5644,10 +4684,7 @@ console.log(person.firstName);
         allows
         for easy inheritance and modification.
 
-        //-----------------------
-        // inheritance in javascript
-        //-----------------------
-
+        <b> inheritance in javascript</b>
         // Prototype inheritance in javascript is the linking of prototypes of a parent
         object
         to a child object to share and utilize the properties of a parent class using a
@@ -5772,11 +4809,10 @@ console.log(person.firstName);
       title: "Array destructuring",
       note: [
         {
-          text1: `//Array destructuring is a unique technique that allows you to neatly extract an array's value into new variables.
-
-          //Array destructuring in JavaScript is a syntax that allows you to extract values from arrays and assign them to variables in a concise way. It's a shorthand syntax for extracting multiple values from an array simultaneously.
+          text1: `Array destructuring is a unique technique that allows you to neatly extract an array's value into new variables.
+          Array destructuring in JavaScript is a syntax that <u>allows you to extract values from arrays and assign them to variables in a concise way</u>. It's a shorthand syntax for extracting multiple values from an array simultaneously.
           
-          // Data needed for first part of the section`,
+           Data needed for first part of the section`,
           code1: `const restaurant = {
             name: 'Classico Italiano',
             location: 'Via Angelo Tavanti 23, Firenze, Italy',
@@ -5807,28 +4843,85 @@ console.log(person.firstName);
           text1: `// Multi-level array destructuring in JavaScript allows you to extract values not only from the top level of an array but also from nested arrays within it. This is particularly useful when working with arrays of arrays (also known as nested arrays or multidimensional arrays).
           `,
           code1: `console.log(restaurant.order(2, 0))
-
           const copy2ar = [...restaurant.starterMenu, ...restaurant.mainMenu];
           console.log(copy2ar);
-          
           const { name: resName, categories: cats, starterMenu: mms } = restaurant
           console.log(resName, cats, mms)
-          
           const weekDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
-          
           const newRes = { since: 1995, newRes: [restaurant.order(1, 1), restaurant.starterMenu], rr: restaurant?.openingHours[weekDays[1]], founder: "anand" }
-          
           console.log(newRes);
           
           //------
+          // Destructuring allows you to extract values from an object and assign them to variables in a concise manner.
+//           "Initial Values": Before the destructuring, "a" is "44" and "b" is "55".
+// "Destructuring": The obb object has keys "a", "b", and "c". When you use "({ a, b } = obb)", JavaScript looks for the values of "a" and "b" in the obb object and assigns them to the variables a and b.
+// "obb.a" is "4", so "a" gets assigned "4".
+// "obb.b" is "6", so "b" gets assigned "6".
+// "After Destructuring": After the assignment, the values of "a" and "b" become "4" and "6", respectively, and the value of "c" in "obb" is ignored since it is not included in the destructuring.
           let a = 44;
           let b = 55;
           const obb = { a: 4, b: 6, c: 8 };
           ({ a, b } = obb) // => 4 6`
         },
         {
-          text1: ``,
-          code1: ``
+          text1: `userList: [
+                { id: 1, name: "Juliet Oma", email: "julie@yahoo.com", role: "admin" },
+                { id: 2, name: "James Williams", email: "jameswilly@gmail.com", role: "user" },
+                { id: 3, name: "Ahmed Ali", email: "ahmedali012@gmail.com", role: "admin" },
+                { id: 4, name: "Grace Funsho", email: "gracefunsho@gmail.com", role: "use" }
+            ], without using loop how can i print id and name like this id : \${id} - name : \${name}  
+            You can achieve this without recursion and without explicit loops or iterator methods using destructuring and the spread operator.`,
+          code1: `const userList = [
+    { id: 1, name: "Juliet Oma", email: "julie@yahoo.com", role: "admin" },
+    { id: 2, name: "James Williams", email: "jameswilly@gmail.com", role: "user" },
+    { id: 3, name: "Ahmed Ali", email: "ahmedali012@gmail.com", role: "admin" },
+    { id: 4, name: "Grace Funsho", email: "gracefunsho@gmail.com", role: "use" }
+];
+
+// Manually destructuring each element from the array
+const [user1, user2, user3, user4] = userList;
+
+const { id: id1, name: name1 } = user1;
+const { id: id2, name: name2 } = user2;
+const { id: id3, name: name3 } = user3;
+const { id: id4, name: name4 } = user4;
+
+console.log(\`id : \${id1} - name : \${name1}\`);
+console.log(\`id : \${id2} - name : \${name2}\`);
+console.log(\`id : \${id3} - name : \${name3}\`);
+console.log(\`id : \${id4} - name : \${name4}\`);
+
+
+//============ OR =============
+        const arrs = {
+            userList: [
+                { id: 1, name: "Juliet Oma", email: "julie@yahoo.com", role: "admin" },
+                { id: 2, name: "James Williams", email: "jameswilly@gmail.com", role: "user" },
+                { id: 3, name: "Ahmed Ali", email: "ahmedali012@gmail.com", role: "admin" },
+                { id: 4, name: "Grace Funsho", email: "gracefunsho@gmail.com", role: "use" }
+            ],
+            getUsers: function (userIndex) {
+                return this.userList[userIndex - 1];
+            }
+        };
+
+        // Destructuring the userList array
+        const [l1, l2, l3, l4] = arrs.userList;
+
+        // Using template literals to create strings for each user
+        const [u1, u2, u3, u4] = [
+            \`id : \${l1.id} - name : \${l1.name}\`,
+            \`id : \${l2.id} - name : \${l2.name}\`,
+            \`id : \${l3.id} - name : \${l3.name}\`,
+            \`id : \${l4.id} - name : \${l4.name}\`
+        ];
+
+        // Logging the result
+        console.log(u1); // id : 1 - name : Juliet Oma
+        console.log(u2); // id : 2 - name : James Williams
+        console.log(u3); // id : 3 - name : Ahmed Ali
+        console.log(u4); // id : 4 - name : Grace Funsho
+`
         },
         {
           text1: ``,
@@ -11394,6 +10487,137 @@ btn.dispatchEvent(clickEvent);`
       note: [
         {
           text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "CORS request",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "What is debounce?",
+      note: [
+        {
+          text1: `The term <b>debounce</b> comes from electronics. When you're pressing a button, let's say on your TV remote, the signal travels to the microchip of the remote so quickly that before you manage to release the button, it bounces, and the microchip registers your “click” multiple times.
+          To mitigate this, once a signal from the button is received, the microchip stops processing signals from the button for a few microseconds while it's physically impossible for you to press it again.
+          
+          <b>Debounce in JavaScript</b>
+In JavaScript, the use case is similar. We want to trigger a function, but only once per use case.
+Let's say that we want to show suggestions for a search query, but only after a visitor has finished typing it.
+Or we want to save changes on a form, but only when the user is not actively working on those changes, as every "save" costs us a database trip.
+
+<b>In below example</b>
+<b>debounce() function</b>: It is the higher order function that takes (delay) and function(func) as the arguments. It returns a new function that will wait for the specified delay before calling the original function.
+<b>clearTimeout()</b>: It is used to clear any previous set timeout so that if the event is triggered repeatedly the function call does not happen too quickly.
+<b>setTimeout()</b>: This method is used to set the timeout after clearing the previous timeouts.
+<b>Search function</b>: It is the placeholder for the function we want to debounce.
+<b>How Does Debouncing Work?</b>
+In JavaScript the debouncing function works when the event is being triggered. The Debounce wait for the specific period to run the function, it doesn't run the function immediately. If before the wait time is over, the event is triggered again then the previous function call is canceled and it resets the timer. Once the timer completes without any further event triggers, the function is executed. This ensures that the function is executed only after the event stops occurring for a specific period.
+
+<b>Use Cases for Debouncing in JavaScript</b>
+The use cases of the debouncing in javaScript are mentioned below:
+<b>Search Input Field</b>: In the search bar, the user types characters one after another due to which for each key press an API request is triggered. Debouncing makes sure that the API request is only sent when the user has finished typing.
+let timer;
+document.getElementById("searchInput").addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => console.log("Searching..."), 300);
+});
+
+<b>Window Resizing</b>: When we resize the window browser, in a short interval of time the resize event gets fired multiple times. Debouncing can be used in handling this event.
+let timer;
+window.addEventListener("resize", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => console.log("Window resized"), 500);
+});
+
+<b>Scroll Events</b>: When the user scrolls the webpage the scroll event is triggered multiple times per second. By debouncing the event, the scroll handler function is executed only after the user has stopped scrolling for a specific duration.
+let timer;
+window.addEventListener("scroll", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => console.log("Scrolling stopped"), 300);
+});
+
+<b>Form Validation</b>: If in real-time we are validating a form as the user types, debouncing can be used to ensure that for every keystroke the validation function is not repeatedly triggered.
+let timer;
+document.getElementById("formInput").addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => console.log("Validating..."), 500);
+});
+
+
+<b>Benefits of Debouncing</b>
+Improved Performance: Debouncing helps in optimizing the performance by reducing the number of times of function execution, especially when we are handling frequent events like type. This reduces unnecessary resource usage.
+Better User Experience: When the events are rapidly triggered then also the application remains responsive with debouncing.
+Prevents Redundant API Calls: Debouncing ensures that the API requests are only sent when the user stops interacting with the page for a specific time. This helps the server from crashing with repeated requests.
+`,
+          code1: ` &lt;main&gt;
+        &lt;div class=&quot;card blue&quot;&gt;
+            &lt;h1&gt;JS debounce&lt;/h1&gt;
+            &lt;input type=&quot;text&quot; id=&quot;searchId&quot; onkeyup=&quot;processChanges()&quot; /&gt;
+            &lt;p id=&quot;loadingMessage&quot; style=&quot;display:none;&quot;&gt;Loading...&lt;/p&gt; &lt;!-- Loading message --&gt;
+            &lt;p id=&quot;searchResult&quot;&gt;&lt;/p&gt; &lt;!-- Search result --&gt;
+        &lt;/div&gt;
+    &lt;/main&gt;
+    
+    &lt;script&gt;
+        // Debounce function
+        function debounce(func, delay) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                // Show the &quot;Loading...&quot; message as soon as the user types
+                document.getElementById(&#39;loadingMessage&#39;).style.display = &#39;block&#39;;
+                
+                timeout = setTimeout(() =&gt; {
+                    func.apply(this, args);
+                    // Hide the &quot;Loading...&quot; message after the function is called
+                    document.getElementById(&#39;loadingMessage&#39;).style.display = &#39;none&#39;;
+                }, delay);
+            };
+        }
+    
+        // Function to be debounced (search function)
+        function search(query) {
+            // Display the search query in the DOM after the debounce delay
+            document.getElementById(&#39;searchResult&#39;).textContent = \`Searching for: \${query}\`;
+        }
+    
+        // Create a debounced version of the search function
+        const dSearch = debounce(search, 500);
+    
+        // Function that gets triggered on input change
+        function processChanges() {
+            const seaKeyword = document.getElementById(&#39;searchId&#39;).value;
+            dSearch(seaKeyword);
+        }
+    &lt;/script&gt;`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "CORS request",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "JSON Server",
+      note: [
+        {
+          text1: `<a href="https://www.freecodecamp.org/news/json-server-for-frontend-development/" target="_blank" rel="noopener"> How to Use JSON Server for Front-end Development</a>`,
           code1: ``
         },
       ]

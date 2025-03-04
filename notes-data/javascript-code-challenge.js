@@ -132,7 +132,79 @@ console.log(uniqueArray);
         },
         {
           text1: ``,
-          code1: ``
+          code1: `const userList = [
+            {
+                id: 2,
+                title: "Mens Casual Premium Slim Fit T-Shirts ",
+                price: 22.3,
+                category: "men's clothing",
+            },
+            {
+                id: 3,
+                title: "Mens Cotton Jacket",
+                price: 55.99,
+                category: "men's clothing",
+            },
+            {
+                
+                id: 4,
+                title: "Mens Casual Slim Fit",
+                price: 15.99,
+                category: "men's clothing",
+            },
+            {
+                id: 7,
+                title: "White Gold Plated Princess",
+                price: 9.99,
+                category: "jewelery",
+            },
+            {
+                id: 8,
+                title: "Pierced Owl Rose Gold Plated Stainless Steel Double",
+                price: 10.99,
+                category: "jewelery",
+            },
+            {
+                id: 13,
+                title: "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin",
+                price: 599,
+                category: "electronics",
+            },
+            {
+                id: 14,
+                title: "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED ",
+                price: 999.99,
+                category: "electronics",
+            },
+            {
+                id: 17,
+                title: "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
+                price: 39.99,
+                category: "women's clothing",
+            },
+            {
+                id: 19,
+                title: "Opna Women's Short Sleeve Moisture",
+                price: 7.95,
+                category: "women's clothing",
+
+            },
+            {
+                id: 20,
+                title: "DANVOUY Womens T Shirt Casual Cotton Short",
+                price: 12.99,
+                category: "women's clothing",
+
+            }
+        ]
+
+        const cats = userList.reduce((acc, curnt) => {
+            if (!acc.includes(curnt.category)) {
+                acc.push(curnt.category)
+            }
+            return acc
+        }, [])
+        console.log(cats)`
         },
       ]
     },
@@ -957,7 +1029,7 @@ console.log(a.x, b.x, c.x, d.x, e.x); // The original objects remain unchanged.
     },
     {
       id: 1,
-      title: "Object spreading(...) inside otehr object",
+      title: "Object spreading(...) inside other object",
       note: [
         {
           text1: `1) <b>let obj = { name: "John", age: 25 };</b>
@@ -1161,6 +1233,76 @@ Hence, the correct answer is C: 3.`,
   }
 }
 `
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Three Ways to Reverse a String in JavaScript",
+      note: [
+        {
+          text1: `1. Reverse a String With Built-In Functions (Ex : 1)
+          2. Reverse a String With a Decrementing For Loop (Ex : 2)
+          3. Reverse a String With Recursion (Ex : 3)`,
+          code1: `// Ex : 1
+          function reverseString(str) {
+    // Step 1. Use the split() method to return a new array
+    var splitString = str.split(""); // var splitString = "hello".split("");
+    // ["h", "e", "l", "l", "o"]
+
+    // Step 2. Use the reverse() method to reverse the new created array
+    var reverseArray = splitString.reverse(); // var reverseArray = ["h", "e", "l", "l", "o"].reverse();
+    // ["o", "l", "l", "e", "h"]
+
+    // Step 3. Use the join() method to join all elements of the array into a string
+    var joinArray = reverseArray.join(""); // var joinArray = ["o", "l", "l", "e", "h"].join("");
+    // "olleh"
+
+    //Step 4. Return the reversed string
+    return joinArray; // "olleh"
+}
+
+reverseString("hello");
+
+
+//------------- Ex : 2-------------
+function reverseString(str) {
+    var newString = "";
+    for (var i = str.length - 1; i >= 0; i--) {
+        newString += str[i];
+    }
+    return newString;
+}
+reverseString('hello');
+
+
+//----------- Ex : 3
+function reverseString(str) {
+  if (str === "")
+    return "";
+  else
+    return reverseString(str.substr(1)) + str.charAt(0);
+}
+reverseString("hello");
+
+
+//--- Conditional (Ternary) Operator: ---
+function reverseString(str) {
+  return (str === '') ? '' : reverseString(str.substr(1)) + str.charAt(0);
+}
+reverseString("hello");
+
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
+      note: [
+        {
+          text1: ``,
+          code1: ``
         }
       ]
     },

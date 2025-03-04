@@ -1430,7 +1430,6 @@ The specification suggests use of <b>flex</b> shorthand property. This helps wri
             text1: `The align-self property is a sub-property of the Flexible Box Layout module.
 
 It makes possible to override the align-items value for specific flex items.
-
 The align-self property accepts the same 5 values as the align-items:
 
 => flex-start: cross-start margin edge of the item is placed on the cross-start line
@@ -1498,12 +1497,11 @@ The align-self property accepts the same 5 values as the align-items:
       },
       {
         id: 52,
-        title: "flex",
+        title: "flex shorthand for flex-grow, flex-shrink and flex-basis",
         note: [
           {
             text1: `This is the shorthand for flex-grow, flex-shrink and flex-basis. The second and third parameters (flex-shrink and flex-basis) are optional.
             
-
             <b>Common values for flex</b>
 <b>flex: 0 auto;</b>
 This is the same as flex: initial; and the shorthand for the default value: flex: 0 1 auto. It sizes the item based on its width/height properties (or its content if not set).

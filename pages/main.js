@@ -79,7 +79,7 @@ function mainDom(data) {
         let innerContent = `
             <li class="li-main-box">
                 <div class="card-content">
-                    <strong id="${el.title}">${el.title}</strong>
+                    <strong id="${el.title}" class="list-title">${el.title}</strong>
                     <div>${coreSnp}</div>
                 </div>
             </li>

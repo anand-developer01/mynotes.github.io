@@ -150,10 +150,10 @@ const Pagination: React.FC&lt;PaginationProps&gt; = ({
   const lastPage = paginationRange[paginationRange.length - 1];
 
   return (
-    &lt;ul className={\`pagination-container \${className || &#39;&#39;}\`}&gt;
+    &lt;ul className={\`pagination-container \${className || '}\`}&gt;
       {/* Left Navigation Arrow */}
       &lt;li
-        className={\`pagination-item \${currentPage === 1 ? &#39;disabled&#39; : &#39;&#39;}\`}
+        className={\`pagination-item \${currentPage === 1 ? 'disabled' : '}\`}
         onClick={onPrevious}
       &gt;
         &lt;div className=&quot;arrow left&quot; /&gt;
@@ -169,7 +169,7 @@ const Pagination: React.FC&lt;PaginationProps&gt; = ({
         return (
           &lt;li
             key={pageNumber} // Use pageNumber as the key
-            className={\`pagination-item \${pageNumber === currentPage ? &#39;selected&#39; : &#39;&#39;}\`}
+            className={\`pagination-item \${pageNumber === currentPage ? 'selected' : '}\`}
             onClick={() =&gt; onPageChange(pageNumber)}
           &gt;
             {pageNumber}
@@ -179,7 +179,7 @@ const Pagination: React.FC&lt;PaginationProps&gt; = ({
 
       {/* Right Navigation Arrow */}
       &lt;li
-        className={\`pagination-item \${currentPage === lastPage ? &#39;disabled&#39; : &#39;&#39;}\`}
+        className={\`pagination-item \${currentPage === lastPage ? 'disabled' : '}\`}
         onClick={onNext}
       &gt;
         &lt;div className=&quot;arrow right&quot; /&gt;
@@ -590,11 +590,439 @@ export default function Task4() {
     },
     {
       id: 52,
-      title: "aff intro",
+      title: "HOC Typescript Example",
+      note: [
+        {
+          text1: `Translation and Language Switching`,
+          code1: `import React, { useState } from 'react';
+
+// Type definitions for translations ----- Index signatures in TypeScript
+interface Translations {
+  [key: string]: {
+    [key: string]: string;
+  };
+}
+
+// Translation data
+const i18n: Translations = {
+  en: {
+    &quot;Please Login&quot;: 'Please Login',
+  },
+  es: {
+    &quot;Please Login&quot;: 'Por favor Iniciar sesión',
+  },
+  fr: {
+    &quot;Please Login&quot;: 'Veuillez vous connecter',
+  }
+};
+
+// Type definition for the props that the HOC will inject into the wrapped component
+interface WithTranslationProps {
+  t: (key: string) =&gt; string;
+  language: string;
+  changeLanguage: (lang: string) =&gt; void;
+}
+
+// Modify the HOC to accept a generic type for WrappedComponent props
+function withTranslation&lt;P extends object&gt;(
+  WrappedComponent: React.ComponentType&lt;P &amp; WithTranslationProps&gt;, // Ensure this accepts the correct props
+  translation: Translations
+) {
+  return function (props: P) {
+    const [language, setLanguage] = useState&lt;string&gt;('en');
+
+    // Translation function
+    const translate = (key: string) =&gt; translation[language][key] || key;
+
+    // Change language function
+    const changeLanguage = (lang: string) =&gt; {
+      setLanguage(lang);
+    };
+
+    return (
+      &lt;WrappedComponent
+        {...props}
+        t={translate}
+        language={language}
+        changeLanguage={changeLanguage}
+      /&gt;
+    );
+  };
+}
+
+// Type definitions for the LoginComponent props
+interface LoginComponentProps extends WithTranslationProps {}
+
+const LoginComponent: React.FC&lt;LoginComponentProps&gt; = ({ t, language, changeLanguage }) =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;{t('Please Login')}&lt;/p&gt;
+      &lt;p&gt;Current language: {language}&lt;/p&gt;
+      &lt;button onClick={() =&gt; changeLanguage('en')}&gt;English&lt;/button&gt;
+      &lt;button onClick={() =&gt; changeLanguage('es')}&gt;Español&lt;/button&gt;
+      &lt;button onClick={() =&gt; changeLanguage('fr')}&gt;Français&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+// Creating the component with translation functionality using the HOC
+const LoginComponentWithTranslation = withTranslation(LoginComponent, i18n);
+
+export default function App() {
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;LoginComponentWithTranslation /&gt;
+    &lt;/div&gt;
+  );
+}
+
+
+
+
+
+////////////////////////////////////
+// Fetch API Call and debounce HOC search input
+////////////////////////////////
+
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+
+// Define types for the API data
+interface ApiData {
+  id: number;
+  title: string;
+}
+
+// Custom hook to debounce search input
+const useDebounce = (value: string, delay: number): string =&gt; {
+  const [debouncedValue, setDebouncedValue] = useState&lt;string&gt;(value);
+
+  useEffect(() =&gt; {
+    const handler = setTimeout(() =&gt; {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () =&gt; clearTimeout(handler);
+  }, [value, delay]);
+
+  return debouncedValue;
+};
+
+// Define types for the props of the HOC and Wrapped Component
+interface WithAuthProps {
+  searchInput: string;
+}
+
+interface WrappedComponentProps {
+  apiData: ApiData[];
+}
+
+// Higher-Order Component to handle API fetching and filtering
+const withAuth = (
+  WrappedComponent: React.ComponentType&lt;WrappedComponentProps&gt;,
+  httpComp: () =&gt; Promise&lt;ApiData[]&gt;
+) =&gt; {
+  return function (props: WithAuthProps) {
+    const [apiData, setApiData] = useState&lt;ApiData[]&gt;([]);
+    const prevSearchRef = useRef&lt;string | undefined&gt;(null); // Track previous search input value
+    const debouncedSearchInput = useDebounce(props.searchInput, 300); // Debounced search input
+
+    const callApi = useCallback(async () =&gt; {
+      try {
+        const apiD = await httpComp();
+        let filteredData = apiD;
+
+        if (debouncedSearchInput) {
+          filteredData = apiD.filter((f) =&gt;
+            f.title.toLowerCase().includes(debouncedSearchInput.toLowerCase())
+          );
+        }
+        setApiData(filteredData);
+      } catch (err) {
+        console.error(err);
+      }
+    }, [debouncedSearchInput, httpComp]);
+
+    useEffect(() =&gt; {
+      // Call the API only if the search input has actually changed
+      if (debouncedSearchInput !== prevSearchRef.current) {
+        callApi();
+        prevSearchRef.current = debouncedSearchInput;
+      }
+    }, [debouncedSearchInput, callApi]);
+
+    return &lt;WrappedComponent {...props} apiData={apiData} /&gt;;
+  };
+};
+
+// Sample API fetch function
+const httpComp = async (): Promise&lt;ApiData[]&gt; =&gt; {
+  const apiRes = await fetch('https://jsonplaceholder.typicode.com/posts');
+  return await apiRes.json();
+};
+
+// Component to display API data
+const ShowApiData: React.FC&lt;{ apiData: ApiData[] }&gt; = ({ apiData }) =&gt; {
+  return (
+    &lt;div&gt;
+      {apiData.length ? (
+        apiData.map((item) =&gt; &lt;div key={item.id}&gt;{item.title}&lt;/div&gt;)
+      ) : (
+        &lt;p&gt;No data available&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+};
+
+// Export the HOC with the ShowApiData component
+export const ReturnHOCInputCom = withAuth(ShowApiData, httpComp);
+
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Authorization ROLE calling api",
       note: [
         {
           text1: ``,
-          code1: ``
+          code1: `//-----------------
+          // App.jsx
+import React, { useEffect, useState } from 'react';
+import { ReturnHOCInputCom } from './withAuth';
+import './loginHoc.css';
+
+// Define the User interface as described above
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  maidenName: string;
+  age: number;
+  gender: string;
+  email: string;
+  phone: string;
+  username: string;
+  password: string;
+  birthDate: string;
+  image: string;
+  bloodGroup: string;
+  height: number;
+  weight: number;
+  eyeColor: string;
+  hair: {
+    color: string;
+    type: string;
+  };
+  ip: string;
+  address: {
+    address: string;
+    city: string;
+    state: string;
+    stateCode: string;
+    postalCode: string;
+    coordinates: { lat: number; lng: number };
+    country: string;
+  };
+  macAddress: string;
+  university: string;
+  bank: {
+    cardExpire: string;
+    cardNumber: string;
+    cardType: string;
+    currency: string;
+    iban: string;
+  };
+  company: {
+    department: string;
+    name: string;
+    title: string;
+    address: {
+      address: string;
+      city: string;
+      state: string;
+      stateCode: string;
+      postalCode: string;
+      coordinates: { lat: number; lng: number };
+      country: string;
+    };
+  };
+  ein: string;
+  ssn: string;
+  userAgent: string;
+  crypto: {
+    coin: string;
+    wallet: string;
+    network: string;
+  };
+  role: string;
+}
+
+function AppHoc() {
+  const [users, setUsers] = useState&lt;User[]&gt;([]); // List of users
+  const [songleUser, setSongleUser] = useState&lt;User | null&gt;(null); // Single selected user
+
+  useEffect(() =&gt; {
+    const getUsers = async () =&gt; {
+      try {
+        const userRes = await fetch('https://dummyjson.com/users');
+        const data = await userRes.json();
+        setUsers(data.users); // Set users list
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUsers();
+  }, []);
+
+  const hendleSetUser = (userId: number) =&gt; {
+    const singUser = users.find((us) =&gt; us.id === userId);
+    setSongleUser(singUser || null); // Set single user or null if not found
+  };
+
+  return (
+    &lt;&gt;
+      &lt;div className=&quot;main-cont&quot;&gt;
+        &lt;div&gt;
+          &lt;ul className=&quot;ul-list-box&quot;&gt;
+            {users.length &gt; 0 &amp;&amp;
+              users.map((e) =&gt; (
+                &lt;li key={e.id} onClick={() =&gt; hendleSetUser(e.id)}&gt;
+                  {e.firstName} {e.lastName}
+                &lt;/li&gt;
+              ))}
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          {/* Pass songleUser prop to HOC, conditionally */}
+          {songleUser ? (
+            &lt;ReturnHOCInputCom songleUser={songleUser} /&gt;
+          ) : (
+            &lt;p&gt;Please select a user&lt;/p&gt;
+          )}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}
+
+export default AppHoc;
+
+
+
+
+
+
+//---------------------------
+// ReturnHOCInputCom.tsx
+          import React from 'react';
+
+// Define the User interface as above
+// Define the User interface as described above
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  maidenName: string;
+  age: number;
+  gender: string;
+  email: string;
+  phone: string;
+  username: string;
+  password: string;
+  birthDate: string;
+  image: string;
+  bloodGroup: string;
+  height: number;
+  weight: number;
+  eyeColor: string;
+  hair: {
+    color: string;
+    type: string;
+  };
+  ip: string;
+  address: {
+    address: string;
+    city: string;
+    state: string;
+    stateCode: string;
+    postalCode: string;
+    coordinates: { lat: number; lng: number };
+    country: string;
+  };
+  macAddress: string;
+  university: string;
+  bank: {
+    cardExpire: string;
+    cardNumber: string;
+    cardType: string;
+    currency: string;
+    iban: string;
+  };
+  company: {
+    department: string;
+    name: string;
+    title: string;
+    address: {
+      address: string;
+      city: string;
+      state: string;
+      stateCode: string;
+      postalCode: string;
+      coordinates: { lat: number; lng: number };
+      country: string;
+    };
+  };
+  ein: string;
+  ssn: string;
+  userAgent: string;
+  crypto: {
+    coin: string;
+    wallet: string;
+    network: string;
+  };
+  role: string;
+}
+// Define the CheckUserProps interface
+interface CheckUserProps {
+  songleUser: User | null;
+}
+
+// HOC to check if the user has the required role
+const withAuth = &lt;P extends object&gt;(
+  WrappedComponent: React.ComponentType&lt;P &amp; CheckUserProps&gt;, // Wrapped component expects CheckUserProps
+  checkPermissions: (props: CheckUserProps) =&gt; boolean
+) =&gt; {
+  return function (props: P &amp; CheckUserProps) {
+    if (checkPermissions(props)) {
+      return &lt;WrappedComponent {...props} /&gt;;
+    } else {
+      return &lt;p&gt;Please login with appropriate role&lt;/p&gt;;
+    }
+  };
+};
+
+// PrivateComponent to display the logged-in user
+const PrivateComponent: React.FC&lt;CheckUserProps&gt; = ({ songleUser }) =&gt; {
+  if (!songleUser) {
+    return &lt;p&gt;No user selected&lt;/p&gt;;
+  }
+
+  return (
+    &lt;p&gt;
+      YOU are Logged In As &lt;b&gt;{songleUser.role}&lt;/b&gt;
+    &lt;/p&gt;
+  );
+};
+
+// Check if the user has the &quot;admin&quot; role
+const yourRole = (props: CheckUserProps) =&gt; {
+  return props.songleUser?.role === 'admin'; // Check user role
+};
+
+// Export the HOC-wrapped component
+export const ReturnHOCInputCom = withAuth(PrivateComponent, yourRole);
+`
         }
       ],
     },

@@ -1,12 +1,59 @@
+const Links1 = 'typescript-notes'
+const Links2 = 'type'
+const Links3 = 'typescript-interview'
+const Links4 = 'typescript-projects'
+
+const isHighlighted = 'typescript-notes'
+
 const TypeScriptData = {
   TypeScriptNote: [
+    {
+      id: 1,
+      title: "Static vs Dynamic Typing",
+      note: [
+        {
+          text1: `Typing refers to how data and variables are categorized based on their data types like integers, strings, or boolean.  This categorization is crucial as it determines how a programming language handles and manipulates data. There are two categories of typing: static typing and dynamic typing.
+          
+          <b>Static Typing</b>
+Static typing is a typing system where variables are bound to a data type during compilation. Once a variable is assigned a data type it remains unchanged throughout the programs execution. This binding promotes type safety and detects errors at an early stage.
+
+<b>Dynamic Typing</b>
+In contrast, dynamic typing allows variables to be bound to data types at runtime instead of during compilation. This flexibility enables concise code and ease of use. It compromises on type safety as a trade-off.
+          `,
+          code1: ``,
+        },
+      ]
+    },      
+    {
+      id: 1,
+      title: "Compile Time vs Runtime:",
+      note: [
+        {
+          text1: `<b>Compile Time</b>
+          Compile time refers to the phase when the source code of a program is translated into machine code or bytecode by a compiler. During compilation, the compiler checks for syntax errors, type correctness, and some semantic issues in the code. Languages like Java, C++, and Kotlin undergo extensive compile-time checks, ensuring that potential errors such as type mismatches (e.g., assigning a string to an integer variable) are identified before the program is executed. Compile-time errors prevent the program from being executed until they are fixed, making this phase essential for ensuring code reliability and correctness.
+          
+          <b>Runtime:</b>
+          Runtime occurs when the compiled code is executed by a processor. During this phase, the program interacts with system resources (such as memory and files) and performs computations based on the instructions given in the code. Runtime errors, unlike compile-time errors, occur during program execution and can include exceptions, memory leaks, and logical errors. Languages like Python and JavaScript, which are dynamically typed, may catch some errors at runtime due to their nature of evaluating types and expressions during execution
+          
+          <b>Key Differences:</b>
+<b>Timing</b>: Compile time occurs before the program is run, allowing for early detection of syntax and type errors. Runtime occurs during program execution.
+<b>Error Handling</b>: Compile-time errors are caught by the compiler and must be fixed before the program runs. Runtime errors, on the other hand, occur while the program is running and can cause unexpected behavior or terminate the program.
+`,
+          code1: `//Example of a Compile-Time Error in Java:
+          public class CompileTimeError {
+    public static void main(String[] args) {
+        int x = "hello"; // This will cause a compile-time error because "hello" is a String, not an int
+    }
+}`,
+        },
+      ]
+    },
     {
       id: 1,
       title: "TypeScript",
       note: [
         {
-          text1: `
-            TypeScript adds static typing with optional type annotations to JavaScript.
+          text1: `TypeScript adds static typing with optional type annotations to JavaScript.
   
             TypeScript is an open-source pure object-oriented programing language. It is a strongly typed superset of JavaScript which compiles to plain JavaScript. It contains all elements of the JavaScript. It is a language designed for large-scale JavaScript application development, which can be executed on any browser, any Host, and any Operating System. The TypeScript is a language as well as a set of tools. TypeScript is the ES6 version of JavaScript with some additional features.
   
@@ -58,8 +105,7 @@ const TypeScriptData = {
       title: "Why you should use TypeScript",
       note: [
         {
-          text1: `
-            > Research has shown that TypeScript can spot 15% of common bugs.
+          text1: ` > Research has shown that TypeScript can spot 15% of common bugs.
             > Readability – it is easier to see what the code it supposed to do. And when working in a team, it is easier to see what the other developers intended to.
             > It's popular – knowing TypeScript will enable you to apply to more good jobs.
             > Learning TypeScript will give you a better understanding, and a new perspective, on JavaScript.
@@ -85,20 +131,105 @@ const TypeScriptData = {
       title: "Types in TypeScript",
       note: [
         {
-          text1: `
-            <b>Primitive types</b>
+          text1: `<b>Primitive types</b>
             In JavaScript, a primitive value is data that is not an object and has no methods. There are 7 primitive data types:
-  
-            string
-            number
-            bigint
-            boolean
-            undefined
-            null
-            symbol
+Primitives in JavaScript <b>(string, number, boolean, null, undefined, bigint, symbol)</b> are <b>immutable</b>, meaning their values <b>cannot be changed once created</b>.
+
+However, <b>variables holding primitives can be reassigned</b>, but this does not change the original primitive—it simply creates a new value and updates the reference.
             <b>Primitives are immutable</b>: they can't be altered. It is important not to confuse a primitive itself with a variable assigned a primitive value. The variable may be reassigned a new value, but the existing value can't be changed in the ways that objects, arrays, and functions can be altered.
+All primitives are <u>immutable</u>; that is, they cannot be altered. It is important not to confuse a primitive itself with a variable assigned a primitive value. The variable may be reassigned to a new value, but the existing value can not be changed in the ways that objects, arrays, and functions can be altered.
+
+           <b> Final Thoughts</b>
+✔ <b>Primitives (string, number, boolean, etc.) are immutable</b> —modifying them creates a new value.
+✔ <b>Objects and arrays are mutable</b> —modifying them changes the original reference.
+✔ <b>Variables can be reassigned</b>, but the primitive values themselves do not change.
+
+        <table data-start="2984" data-end="3464">
+            <thead data-start="2984" data-end="3038">
+                <tr data-start="2984" data-end="3038">
+                    <th data-start="2984" data-end="3005"><strong data-start="2986" data-end="3004">Primitive
+                            Type</strong></th>
+                    <th data-start="3005" data-end="3019"><strong data-start="3007" data-end="3018">Example</strong>
+                    </th>
+                    <th data-start="3019" data-end="3038"><strong data-start="3021" data-end="3036">Description</strong>
+                    </th>
+                </tr>
+            </thead>
+            <tbody data-start="3090" data-end="3464">
+                <tr data-start="3090" data-end="3140">
+                    <td><strong data-start="3092" data-end="3103">Boolean</strong></td>
+                    <td><code data-start="3106" data-end="3112">true</code>, <code data-start="3114"
+                            data-end="3121">false</code></td>
+                    <td>Logical values</td>
+                </tr>
+                <tr data-start="3141" data-end="3203">
+                    <td><strong data-start="3143" data-end="3153">Number</strong></td>
+                    <td><code data-start="3156" data-end="3160">42</code>, <code data-start="3162"
+                            data-end="3168">3.14</code></td>
+                    <td>Whole &amp; floating-point numbers</td>
+                </tr>
+                <tr data-start="3204" data-end="3242">
+                    <td><strong data-start="3206" data-end="3216">String</strong></td>
+                    <td><code data-start="3219" data-end="3228">"Hello"</code></td>
+                    <td>Text data</td>
+                </tr>
+                <tr data-start="3243" data-end="3301">
+                    <td><strong data-start="3245" data-end="3255">BigInt</strong></td>
+                    <td><code data-start="3258" data-end="3277">9007199254740991n</code></td>
+                    <td>whole numbers and floating point values, but allows larger negative and positive numbers than the <u>number</u> type. (Large whole numbers)</td>
+                </tr>
+                <tr data-start="3302" data-end="3354">
+                    <td><strong data-start="3304" data-end="3314">Symbol</strong></td>
+                    <td><code data-start="3317" data-end="3331">Symbol("id")</code></td>
+                    <td>Unique identifiers</td>
+                </tr>
+                <tr data-start="3355" data-end="3395">
+                    <td><strong data-start="3357" data-end="3365">Null</strong></td>
+                    <td><code data-start="3368" data-end="3374">null</code></td>
+                    <td>Absence of value</td>
+                </tr>
+                <tr data-start="3396" data-end="3464">
+                    <td><strong data-start="3398" data-end="3411">Undefined</strong></td>
+                    <td><code data-start="3414" data-end="3425">undefined</code></td>
+                    <td>Variable declared but not assigned</td>
+                </tr>
+            </tbody>
+        </table>
             `,
-          code1: `
+          code1: `//✅ 1️⃣ Primitive Values Are Immutable
+let message = "Hello";
+message[0] = "Y"; // ❌ This won't change "Hello" to "Yello"
+console.log(message); // Output: "Hello"
+// 🔹 Even though we tried to modify message[0], the string remains unchanged because strings are immutable.
+
+
+// ---- ✅ 2️⃣ Variables Holding Primitives Can Be Reassigned ----
+let name = "John";
+name = "Doe"; // ✅ Reassigning the variable to a new string
+console.log(name); // Output: "Doe"
+// 🔹 The original "John" string is not modified—instead, a new string ("Doe") is created, and name is updated to refer to it.
+
+// --- ✅ 3️⃣ Objects and Arrays Are Mutable ----
+// Unlike primitives, objects and arrays are mutable, meaning their contents can be changed.
+let person = { name: "Alice" };
+person.name = "Bob"; // ✅ Changing object property
+console.log(person.name); // Output: "Bob"
+// 🔹 The object itself is modified, not reassigned.
+
+
+// --- ✅ 4️⃣ Example: Primitive vs. Object Mutation ---
+// Primitive (Immutable)
+let a = "Hello";
+let b = a; // Copy value (creates a new string)
+b = "World";
+console.log(a); // Output: "Hello" (original remains unchanged)
+// Object (Mutable)
+let obj1 = { greeting: "Hello" };
+let obj2 = obj1; // Copy reference (points to the same object)
+obj2.greeting = "World";
+console.log(obj1.greeting); // Output: "World" (original object is modified)
+
+//--------------
             let name = 'Danny';
             name.toLowerCase();
             console.log(name); // Danny - the string method didn't mutate the string
@@ -106,8 +237,7 @@ const TypeScriptData = {
             let arr = [1, 3, 5, 7];
             arr.pop();
             console.log(arr); // [1, 3, 5] - the array method mutated the array
-  
-            name = 'Anna' // Assignment gives the primitive a new (not a mutated) value
+            // name = 'Anna' // Assignment gives the primitive a new (not a mutated) value
             `,
         }
       ]
@@ -286,7 +416,7 @@ printArray2(nums);  // Output: 1, 2, 3, 4
           In TypeScript, tuples are a special type of array that allows you to store a fixed number of elements, where each element can have a different type. They are useful when you need to represent a collection of elements with a known, fixed length and where each element has a specific type.`,
 
           code1: `type StringNumberPair = [string, number];
-          A tuple is defined using square brackets [], with each element having its own type:
+          // A tuple is defined using square brackets [], with each element having its own type:
 let tuple: [string, number, boolean] = ['Hello', 42, true];
           `,
         },

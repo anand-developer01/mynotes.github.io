@@ -248,7 +248,7 @@ If not provided, <b>configureStore</b> will call <b>getDefaultMiddleware</b> and
     <a href="https://redux-toolkit.js.org/api/configureStore" target="_blank">configureStore</a>
 `,
                     code1: `//Parameters of configureStore
-    // ** reducer **:
+    //-------- ** reducer ** ---------:
     const store = configureStore({
       reducer: {
         counter: counterReducer,
@@ -256,7 +256,7 @@ If not provided, <b>configureStore</b> will call <b>getDefaultMiddleware</b> and
       },
     });
 
-// ** middleware **:
+// ------------- ** middleware ** -----------:
     Type: Middleware[] | (getDefaultMiddleware: () => Middleware[]) => Middleware[]
 
     import { getDefaultMiddleware } from '@reduxjs/toolkit';
@@ -268,21 +268,24 @@ If not provided, <b>configureStore</b> will call <b>getDefaultMiddleware</b> and
       ],
     });
 
-// ** devTools **:
+// -------- ** devTools ** ---------:
     const store = configureStore({
       reducer: rootReducer,
       devTools: process.env.NODE_ENV !== 'production', // Enable only in development
     });
 
 // ** preloadedState **:
-When you create a Redux store using "configureStore" (or the traditional "createStore"), you can specify "preloadedState" like this:
+// When you create a Redux store using "configureStore" (or the traditional "createStore"), you can specify "preloadedState" like this:
 
+//------------------------
 // combineReducer.js
 import CounterReducer from './CounterReducer';
 export const RootReducer = combineReducers({
     counter: CounterReducer,
 })
 
+
+//-------------------------
 // Store.js
 const preloadedState = {
     counter: { // Key should match the slice name
@@ -294,7 +297,7 @@ const store = configureStore({
     preloadedState
 })
 
-// ** enhancers **:
+// --------- ** enhancers ** -----------:
 // store.js
 import { configureStore } from '@reduxjs/toolkit';
 import { RootReducer } from './reducer/RootReducer'
@@ -317,6 +320,7 @@ const store = configureStore({
 export default store;
 
 
+//-------------------------------
 // Here's a complete example demonstrating how to use configureStore with various parameters:
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import rootReducer from './reducers';
@@ -551,7 +555,9 @@ const todosSlice = createSlice({
 
 export const { addTodo, deleteTodo, fetchTodo } = todosSlice.actions
 
-// Ex : 1
+
+
+// ------------------ Ex : 1 ---------------
 // ** counterSlice.js ** 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -612,6 +618,7 @@ export const { increment, decrement } = counterSlice.actions;
 export default counterSlice.reducer;
 
 
+// --------- CounterComponent.jsx -----------
 // ** ExampleComponent.js ** 
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
