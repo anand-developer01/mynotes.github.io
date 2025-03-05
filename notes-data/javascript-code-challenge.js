@@ -11,7 +11,10 @@ const jScodeChallengeData = {
       title: "links",
       note: [
         {
-          text1: `<a href="https://www.codinn.dev/tricky-javascript/es6789-code-snippets-interview-questions" target="_blank">code-snippets-interview-questions</a>`,
+          text1: `<a href="https://www.codinn.dev/tricky-javascript/es6789-code-snippets-interview-questions" target="_blank">code-snippets-interview-questions</a>
+          
+          <a href="https://www.interviewbit.com/javascript-interview-questions/#recursion-in-a-programming-language" target="_blank">javascript-interview-questions</a>
+          `,
           code1: ``
         }
       ]

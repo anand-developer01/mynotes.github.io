@@ -9,6 +9,16 @@ const TypeScriptInterviewData = {
     TypeScriptInterviewNote: [
       {
         id: 1,
+        title: "links",
+        note: [
+          {
+            text1: `<a href="https://arc.dev/talent-blog/typescript-interview-questions/" target="_blank">typescript-interview-questions</a>`,
+            code1: ``,
+          },
+        ]
+      },
+      {
+        id: 1,
         title: "What is typescript",
         note: [
           {
@@ -332,15 +342,6 @@ function multiply(a: number, b: number=10) {
 function add(a: number, b: number, ...rest: number[]) {
   return a + b + rest.reduce((acc, curr) => acc+ curr, 0);
 }
-
-//-----------------------
-
-function add(a: number, b: number, ...rest: number[]) {
-  return a + b + rest.reduce((acc, curr) => acc + curr, 0);
-}
-console.log(add(2, 3)); // Output: 5
-console.log(add(1, 2, 3, 4, 5)); // Output: 15
-console.log(add(10, 20, 30, 40, 50, 60)); // Output: 210
 `,
           },
         ]

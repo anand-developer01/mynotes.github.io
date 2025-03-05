@@ -5742,6 +5742,107 @@ Object
     },
     {
       id: 1,
+      title: "new Set",
+      note: [
+        {
+          text1: `Set is similar to an <b>array</b> that allows us to store multiple items like <b>numbers, strings, objects</b>, etc. However, unlike an array, a set cannot contain duplicate values.
+          
+          A Set is a collection of unique values of any data type where each <b>value can occur only once</b>. It stores data like an Array, which is a list of values and not key-value pairs like a Map or Object. Each element in a Set is distinct and stands alone without any inherent relationship to other elements.
+
+          <b>How to create a Set</b>:
+1) Using Set.add():--
+const set= new Set();
+set.add('Muskaan')
+set.add('Mango')
+
+2. Passing Array to new Set()
+const set= new Set(['Muskaan', 'Mango'])
+
+<b>Both yield the same output</b>:
+Set(2) 
+0: "Muskaan"
+1: "Mango"
+size: 2
+
+Since Sets can only contain unique values, any attempt to add a value that already exists will be ignored.
+set.add('Mango') // set will still have two values
+
+<b>Methods</b>:
+1 <b>delete(value)</b> → Removes the specified item from a Set
+Returns true if value was already in Set, otherwise false.
+set.delete('mango');
+// output: false -> case-sensitive
+set.delete('Mango');
+// output: true
+
+2. <b>has(value)</b> → Returns true if a value exists, else false
+set.has('Muskaan');
+// output: true
+
+3. <b>intersection(set)</b> → A new Set object containing elements in both the parameter set and the other set.
+const fruits = new Set(['Apple', 'Mango', 'Guava']);
+console.log(fruits.intersection(set)); 
+// output: Set(1) {'Mango'}
+
+4. <b>isSubsetOf(set)</b> → Returns true if all elements in the parameter set are also in the other set, and false otherwise.
+const firstSet = new Set([3, 5, 13, 17]);
+const secondSet = new Set([1, 2, 3, 5, 7, 8, 13, 14, 17, 19]);
+console.log(firstSet.isSubsetOf(secondSet)); 
+// output: true
+
+5. & few more methods such as forEach(), union(), etc.
+
+          `,
+          code1: `// ------------- Ex : 1 ------------
+          //To create a Set, you need to use the new Set() constructor. For example,
+// create Set
+const set1 = new Set(); // an empty set
+console.log(set1); // Set {}
+
+// Set with multiple types of value
+const set2 = new Set([1, 'hello', {count : true}]);
+console.log(set2); // Set {1, "hello", {count: true}}
+
+//------------- Ex : 2 -------------
+// When duplicate values are passed to a Set object, the duplicate values are excluded.
+// Set with duplicate values
+const set3 = new Set([1, 1, 2, 2]);
+console.log(set3); // Set {1, 2}`
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "WeakSet",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Map",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "WeakMap",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
       section: "CLASSES",
       title: "Class",
       note: [

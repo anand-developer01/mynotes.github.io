@@ -736,50 +736,6 @@ console.log(uname(1,"ram"))
     },
     {
       id: 1,
-      title: "What is readonly?",
-      note: [
-        {
-          text1: `The readonly keyword in TypeScript is used to indicate that a property or variable cannot be modified after it has been initialized. This means that the value of the property or variable cannot be changed once it has been set.
-  
-  
-  `,
-          code1: `
-            interface Point {
-    readonly x: number;
-    readonly y: number;
-  }
-  
-  let p1: Point = { x: 10, y: 20 };
-  p1.x = 5; // error!
-  Cannot assign to 'x' because it is a read-only property.
-  `,
-        },
-        {
-          text1: `
-  <b> ReadonlyArray&lt;T&gt; </b>
-  TypeScript comes with a ReadonlyArray&lt;T&gt; type that is the same as Array&lt;T&gt; with all mutating methods removed, so you can make sure you don't change your arrays after creation:`,
-          code1: `
-  let a: number[] = [1, 2, 3, 4];
-  let ro: ReadonlyArray<number> = a;
-  
-  ro[0] = 12; // error!
-  // Index signature in type 'readonly number[]' only permits reading.
-  ro.push(5); // error!
-  // Property 'push' does not exist on type 'readonly number[]'.
-  ro.length = 100; // error!
-  // Cannot assign to 'length' because it is a read-only property.
-  a = ro; // error!
-  // The type 'readonly number[]' is 'readonly' and cannot be assigned to the mutable type 'number[]'.
-  `,
-        },
-        {
-          text1: ``,
-          code1: ``,
-        },
-      ]
-    },
-    {
-      id: 1,
       title: "Index signatures",
       note: [
         {
@@ -826,15 +782,19 @@ console.log(foo['Hello']); // World
   name: string
   area: string
 }
+
 const userDetails : User = {
     id : 1,
     name: "ram",
     area: "warangal"
 }
+
 let idexName:string = 'name'
 let idexId:string = 'id'
-console.log(userDetails[idexName]) //ram
-console.log(userDetails[idexId])// 1`,
+
+
+console.log(userDetails[idexName])
+console.log(userDetails[idexId])`,
         },
         {
           text1: ``,
@@ -845,33 +805,37 @@ console.log(userDetails[idexId])// 1`,
 
 The answer is to use an index signature!
 Let's find what are TypeScript index signatures and when they're needed.`,
-          code1: `function totalSalary(salaryObject: { [key: string]: number }): number {
-    let total = 0;
-    for (const key in salaryObject) {
-        total += salaryObject[key]; // Safe because all values are numbers
-    }
-    return total;
-}
-
+          code1: `//You have 2 objects that describe the salary of 2 software developers:
 const salary1 = {
-    baseSalary: 100_000,
-    yearlyBonus: 20_000
+  baseSalary: 100_000,
+  yearlyBonus: 20_000
 };
 
 const salary2 = {
-    contractSalary: 110_000
+  contractSalary: 110_000
 };
 
-console.log(totalSalary(salary1)); // ✅ Output: 120000
-console.log(totalSalary(salary2)); // ✅ Output: 110000
-`,
+
+// You want to implement a function that returns the total remuneration based on the salary object:
+function totalSalary(salaryObject: ???) {
+  let total = 0;
+  for (const name in salaryObject) {
+    total += salaryObject[name];
+  }
+  return total;
+}
+
+console.log(totalSalary(salary1)); // => 120_000
+console.log(totalSalary(salary2)); // => 110_000`,
         },
         {
           text1: `<b>1. Why index signature</b>
 The idea of the index signatures is to type objects of unknown structure when you only know the key and value types.
+
 An index signature fits the case of the salary parameter: the function should accept salary objects of different structures — just make sure that object values are numbers.
 
 Let's annotate the <u>salaryObject</u> parameter with an index signature:
+
 <u>{ [key: string]: number }</u> is the index signature, which tells TypeScript that <u>salaryObject</u> has to be an object with <u>string</u> type as key and <u>number</u> type as value.
 
 Now the <u>totalSalary()</u> accepts as arguments both <u>salary1</u> and <u>salary2</u> objects, since they are objects with number values.
@@ -888,7 +852,10 @@ console.log(totalSalary(salary1)); // => 120_000
 console.log(totalSalary(salary2)); // => 110_000
 
 
+
+
 // However, the function would not accept an object that has, for example, strings as values:
+
 const salary3 = {
   baseSalary: '100 thousands'
 };
@@ -901,11 +868,15 @@ totalSalary(salary3);`,
         },
         {
           text1: `<b>Non-existing properties </b>
+          
           What would happen if you try to access a non-existing property of an object whose index signature is <u>{ [key: string]: string }?</u>
 As expected, TypeScript infers the type of the value to <u>string</u>. But if you check the runtime value — it's <u>undefined:</u>
 
+
 The index signature does nothing more than translate a key type to a value type. If the mapping is not right, the value type may differ from the actual runtime data type.
+
 Mark the indexed value as string or undefined to improve typing accuracy. TypeScript becomes aware that the properties you are attempting to access may not exist :
+
 The index signature maps a key type to a value type — that's all. If you don't make that mapping correct, the value type can deviate from the actual runtime data type.
 
 To make typing more accurate, mark the indexed value as <u>string</u> or <u>undefined</u>. Doing so, 
@@ -1008,9 +979,9 @@ interface OopsDictionary {
       title: "Keyof Type Operator",
       note: [
         {
-          text1: `In TypeScript, the <u>keyof</u> keyword is used to extract the <b>keys</b> (or property names) of an object type as a union of string literals. It allows you to work with the keys of an object in a type-safe way, enabling more powerful and flexible code when working with objects.
+          text1: `In TypeScript, the <u>keyof</u> keyword is used to extract the <b>keys</b> (or property names) of an object type <u>as a union of string literals</u>. It allows you to work with the keys of an object in a type-safe way, enabling more powerful and flexible code when working with objects.
           
-          The TypeScript <b>keyof</b> operator is used to get a union of all keys in an object type. It’s useful when you want to work with the property names of an object in a type-safe way, ensuring only valid keys are used.
+          The TypeScript <b>keyof</b> operator is used to get a union of all keys in an object type. It's useful when you want to work with the property names of an object in a type-safe way, ensuring only valid keys are used.
 
 We can use it to define generic functions that work with any object type, without knowing the specific keys of that type. It can also be used to create read-only versions of an interface or to extract specific keys from an interface.
 
@@ -1270,9 +1241,9 @@ type StringType = typeof myString // 'string'
 
 
 //-------------------- Ex :2 --------------
-// "typeof" can be applied to more complex data structures, such as arrays and objects, to extract their types.
-// TypeScript typeof array
-// When used with an array, "typeof" will return the type of the elements inside the array along with an array indicator ("[]").
+"typeof" can be applied to more complex data structures, such as arrays and objects, to extract their types.
+TypeScript typeof array
+When used with an array, "typeof" will return the type of the elements inside the array along with an array indicator ("[]").
 
 let numberArray = [1, 2, 3]
 type ArrayType = typeof numberArray // 'number[]'
@@ -1310,7 +1281,6 @@ type PersonType = typeof person // { name: string; age: number; }
           text1: `A <b>const</b> assertion in TypeScript is used to indicate that a variable should be treated as a constant at compile-time. This means that the value of the variable cannot be changed after it has been initialized.
   
             Here's an example of how to use a const assertion:
-  
             const a = 10 as const;
   
             // This line will cause a compile-time error
@@ -1523,7 +1493,7 @@ const personTwo: Person<MetaData> = {
 
 Here, we've manually set the type to highlight how TypeScript handles different types with generics. However, it's important to remember that TypeScript typically infers the type automatically based on the argument provided. You don't need to manually specify the type unless you're overriding TypeScript's inference or dealing with complex types where explicit type annotations are necessary
 
-In this example, T is a type parameter that can represent any type. The actual type is determined when the function is called, whether it’s a number, string, or any other type..
+In this example, T is a type parameter that can represent any type. The actual type is determined when the function is called, whether it's a number, string, or any other type..
          
 
 Real-time examples include creating functions for:
@@ -1551,7 +1521,7 @@ console.log(stringResult); // Output: "Hello, TypeScript!"
 console.log(numberResult); // Output: 42
 //-------
 
-    <b>Use Case</b>: This is useful when you want to ensure that the input and output of a function are the same type, but you don’t know the type beforehand. The generic <b>T</b> allows the function to work with any type (string, number, etc.) and still preserve the type integrity.
+    <b>Use Case</b>: This is useful when you want to ensure that the input and output of a function are the same type, but you don't know the type beforehand. The generic <b>T</b> allows the function to work with any type (string, number, etc.) and still preserve the type integrity.
 
 
     <b>Real-Time Example 3: Generic Function for Sorting Arrays</b>
@@ -1662,75 +1632,16 @@ async function fetchData&lt;T&gt;() {
 
 // Use async function to call fetchData
 async function run() {
-  const data1 = await fetchData&lt;ObjOne&gt;();
+  const data1 = await fetchData<ObjOne>();
   console.log(data1);
 
-  const data2 = await fetchData&lt;ObjTwo&gt;();
+  const data2 = await fetchData<ObjTwo>();
   console.log(data2);
 }
 
 // Call the async function to run the code
 run();
 
-
-//----------------- Ex :6 --------------
-
-interface User {
-    readonly id: number;
-    name: string;
-    readonly DOB: string;
-}
-
-interface Role {
-    role: string;
-}
-
-interface AdminUser extends User {
-    permissions: string[];
-}
-
-function updateUser&lt;T extends AdminUser, R extends Role&gt;(users: T, roleParam: R): string {
-    return \`\${users.id} \${users.name} \${users.DOB} \${users.permissions} \${roleParam.role}\`;
-}
-
-const admin: AdminUser = {
-    id: 1,
-    name: &quot;Alice&quot;,
-    DOB: &quot;1990-01-01&quot;,
-    permissions: [&quot;read&quot;, &quot;write&quot;]
-};
-
-let roleType: Role = { role: &quot;Admin&quot; };
-
-console.log(updateUser(admin, roleType)); // ✅ Works for AdminUser
-
-
-//----------------- Ex :7 --------------
-const salary1 = {
-    baseSalary: 100_000,
-    yearlyBonus: 20_000
-};
-
-const salary2 = {
-    contractSalary: 110_000
-};
-
-
-function totalSalary&lt;T extends Record&lt;string, number&gt;&gt;(salaryObject: T): number {
-    let total = 0;
-    for (const key in salaryObject) {
-        total += salaryObject[key]; // Ensured to be a number
-    }
-    return total;
-}
-
-console.log(totalSalary(salary1)); // ✅ Output: 120000
-console.log(totalSalary(salary2)); // ✅ Output: 110000
-
-// Why Use Generics?
-// ✅ 'Flexibility': Works with any salary structure where values are numbers.
-// ✅ 'Type Safety': Ensures that salaryObject only contains numeric values.
-// ✅ 'Reusability': Can be used in multiple scenarios without modifying the function.
 `
         },
         {
@@ -2746,7 +2657,7 @@ TypeScript type inference provides a number of benefits, including:
 <b>Readability</b>: TypeScript type inference can help to make your code more readable by making it clear what the types of your variables and expressions are. This can make it easier to understand your code for both humans and machines.
 <b>Type safety</b>: TypeScript type inference can help to prevent errors by ensuring that your code is type-safe. This means that the TypeScript compiler can detect errors at compile time, rather than at runtime.
 
-<b>Advantages of type inference<b>
+<b>Advantages of type inference</b>
 Type inference offers several significant advantages:
 <b> Reduction of boilerplate code</b>: Type inference reduces the need to write explicit type annotations everywhere, making code more concise.
 <b> Improved readability</b>: Fewer type declarations can make code easier to read and understand, especially for experienced developers who can quickly identify types from context.
@@ -2764,11 +2675,10 @@ Type inference offers several significant advantages:
     },
     {
       id: 1,
-      title: "Union and Intersection Types:",
+      title: "Union Types:",
       note: [
         {
-          text1: `
-            Union types allow for the combination of two or more data types into one. This can be useful when a function or variable can accept multiple types of data.
+          text1: `Union types allow for the combination of two or more data types into one. This can be useful when a function or variable can accept multiple types of data.
 
             The TypeScript <b>union</b> has the ability to combine one or two different types of data (i.e., number, string, float, double, etc). It is the most powerful way to express a variable with multiple types. Use pipe ('|') symbol to combine two or more data types to achieve Union type.
 
@@ -2807,11 +2717,453 @@ displayType(true);
     },
     {
       id: 1,
+      title: "Intersection",
+      note: [
+        {
+          text1: `An intersection type creates a new type by combining multiple existing types. The new type has all features of the existing types.
+          An intersection type is a type that merges several kinds into one. This allows you to combine many types to create a single type with all of the properties that you require. An object of this type will have members from all of the types given. The ‘&' operator is used to create the intersection type.
+          
+          To combine types, you use the & operator as follows:
+type typeAB = typeA & typeB;
+
+The <b>typeAB</b> will have all properties from both typeA and <b>typeB</b>.
+
+Note that the union type uses the <b>|</b> operator that defines a variable that can hold a value of either <b>typeA</b> or <b>typeB</b>
+let varName = typeA | typeB; // union type
+
+Suppose that you have three interfaces: <b>BusinessPartner, Identity</b>, and <b>Contact</b>.
+
+interface BusinessPartner {
+    name: string;
+    credit: number;
+}
+
+interface Identity {
+    id: number;
+    name: string;
+}
+
+interface Contact {
+    email: string;
+    phone: string;
+}
+The following defines two intersection types:
+type Employee = Identity & Contact;
+type Customer = BusinessPartner & Contact;
+The <b>Employee</b> type contains all properties of the <b>Identity</b> and <b>Contact</b> type:
+
+type Employee = Identity & Contact;
+let e: Employee = {
+    id: 100,
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    phone: '(408)-897-5684'
+};
+
+And the <b>Customer</b> type contains all properties of the <b>BusinessPartner</b> and <b>Contact</b> type:
+
+type Customer = BusinessPartner & Contact;
+let c: Customer = {
+    name: 'ABC Inc.',
+    credit: 1000000,
+    email: 'sales@abcinc.com',
+    phone: '(408)-897-5735'
+};
+
+Later, if you want to implement employee sales, you can create a new intersection type that contains all properties of <b>Identity, Contact</b>, and <b>BusinessPartner</b> types:
+
+type Employee = Identity & BusinessPartner & Contact;
+let e: Employee = {
+    id: 100,
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    phone: '(408)-897-5684',
+    credit: 1000
+};
+
+Notice both <b>BusinessPartner</b> and <b>Identity</b> have the property <b>name</b> with the same type. If they do not, then you will have an error.
+
+<b>Type Order</b>
+When you intersect types, the order of the types doesn't matter. For example:
+type typeAB = typeA & typeB;
+type typeBA = typeB & typeA;
+`,
+          code1: `// ------------ Ex : 1 ------------
+interface Student { 
+  student_id: number; 
+  name: string; 
+} 
+  
+interface Teacher { 
+  Teacher_Id: number; 
+  teacher_name: string; 
+} 
+  
+type intersected_type = Student & Teacher; 
+  
+let obj1: intersected_type = { 
+  student_id: 3232, 
+  name: "rita", 
+  Teacher_Id: 7873, 
+  teacher_name: "seema", 
+}; 
+  
+console.log(obj1.Teacher_Id); // 7873
+console.log(obj1.name); // rita
+
+
+
+//---------------- Ex : 2 -------------
+interface A { 
+  feauA: string; 
+  feauB: string; 
+} 
+  
+interface B { 
+  feauA: number; 
+  feauB: string; 
+} 
+  
+type AB = A & B; 
+  
+  
+let obj1: AB; 
+let obj2: AB; 
+  
+// Error, Type '20' is not assignable 
+// to type 'string & number' 
+obj1.feauA = 20;  
+console.log(obj1.feauA); 
+  
+obj2.feauB = "c"; 
+console.log(obj2.feauB);
+// Example 2: In this example, we create two interfaces A and B, in which there are two properties named ‘feauA' and ‘feauB'. But the type of feauA isn't the same in both the interfaces, when we try to assign a value 20 to feauA typescript compiler raises an error as the intersection type is of the type ‘string & number'. If we try to assign a string to feauA, the error is not raised as to when intersected the type is String.
+
+
+
+//------------- Ex : 3 -----------------
+interface A { 
+  prop1: String; 
+} 
+  
+interface B { 
+  prop2: String; 
+} 
+  
+interface C { 
+  prop3: String; 
+} 
+  
+let obj1: A & B = { prop1: "length", prop2: "width" }; 
+let obj2: B & A = { prop1: "length", prop2: "width" }; 
+let obj3: A & (B & C) = { prop1: "", prop2: "", prop3: "" }; 
+let obj4: (A & B) & C = { prop1: "", prop2: "", prop3: "" }; 
+  
+obj3.prop3 = "height"; 
+console.log(obj3.prop3); 
+  
+obj4.prop1 = "length"; 
+console.log(obj4.prop1); 
+  
+console.log(obj3 == obj4); // false 
+console.log(typeof obj3 == typeof obj4); // true 
+console.log(typeof obj1 == typeof obj2); // true
+// Output:-------
+// height
+// length
+// false
+// true
+// true
+
+
+// Example 3: "\`Intersection types are commutative and associative\`": The order of the intersection doesn't matter when we intersect two or more types. Even if the order of intersection changes the type of the intersected objects are the same, the ‘typeof' operator is used to check that, the properties of the intersected objects are also the same. 
+`,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "any",
+      note: [
+        {
+          text1: `<b>any</b> is essentially an escape hatch from TypeScript's type checking. It allows a variable to hold a value of absolutely any type — number, string, object, you name it.
+          
+->           Disables type checking, allowing you to assign any value.
+-> Allows all operations without type errors.
+-> Not recommended because it defeats TypeScript's type safety.
+
+          When to Use:
+-> Migrating a JavaScript project to TypeScript gradually
+-> Working with 3rd party libraries that don't have type definitions
+-> Prototyping where types are not yet fully defined
+<b>The Dangers of 'any'</b>: Using 'any' disables much of TypeScript's benefits because it can lead to runtime errors that compile-time checks might have caught. You lose type safety and the compiler can't help you much. Think of 'any' as a last resort.
+`,
+          code1: `// ---------- Ex : 1 -----------
+          let something: any = 42; 
+something = "Hello";  // No problem with TypeScript
+something.someMethod(); // This could crash at runtime if 'something' isn't an object with a 'someMethod'
+
+
+//------------  Ex : 2 --------
+let value: any;
+value = 10;         // ✅ Allowed
+value = "Hello";    // ✅ Allowed
+value = true;       // ✅ Allowed
+
+let num: number;
+num = value;        // ✅ No type-checking
+ `,
+        },
+        {
+          text1: ``,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "unknown The Type-Safe Alternative",
+      note: [
+        {
+          text1: `<b>unknown</b> is a much safer counterpart to <b>any</b>. It represents a variable whose type we don't yet know.
+<u>When you are not sure about the type. You can assign unknown and you can check the type at runtime </u>
+
+<b>Use case</b>: When you don't know the exact type at first but want to enforce type checks before using the value.
+
+<b>Unknown: The Safe Type</b>
+The unknown type in TypeScript is similar to the any type, as it can hold any value. However, the unknown type is more restrictive than the any type, as it does not allow us to perform any operation on it without first checking its type. For example:
+When to Use:
+-> Dealing with untrusted data from user input or 3rd party APIs
+-> When type information is missing but you want to preserve type safety.
+<b>Enforcing Checks</b>: Unlike <b>any</b>, you cannot directly perform operations on <b>unknown</b> variables. TypeScript forces you to do type narrowing before using them.`,
+          code1: `// ----------- Ex : 1 -------------
+          function processData(data: unknown) {
+  if (typeof data === 'string') {
+      // TypeScript now understands data is a string here
+      console.log(data.toUpperCase()); 
+  } else if (typeof data === 'number') {
+      // TypeScript considers data a number in this block
+      console.log(data * 2)
+  } 
+}
+  
+
+//-------------  Ex : 2 --------------
+let value: unknown;
+value = "Hello";    // ✅ Allowed
+value = 42;         // ✅ Allowed
+
+let num: number;
+// num = value;     // ❌ Error: Type 'unknown' is not assignable to type 'number'.
+
+if (typeof value === "number") {
+    num = value;    // ✅ Allowed after type check
+}
+console.log(num)
+
+//------------- Ex : 3 --------------
+let z: unknown = "hello";
+z = 42; // OK, z is now a number
+z = true; // OK, z is now a boolean
+z.foo(); // Error, Object is of type 'unknown'
+z + 1; // Error, Object is of type 'unknown'
+if (typeof z === "string") {
+  z.toUpperCase(); // OK, z is a string inside this block
+}
+console.log(z)
+
+
+//-------------- Ex : 4 ---------------
+    // TypeScript infers types dynamically when using type narrowing.
+    // "unknown enforces type checks before use", ensuring safe inference.
+    // Once the type is checked (e.g., using typeof or instanceof), TypeScript narrows it to a more specific type.
+
+function processValue(value: unknown) {
+    if (typeof value === "string") {
+        // TypeScript now infers 'value' as 'string' inside this block
+        console.log(value.toUpperCase()); // ✅ Allowed
+    }
+    // Outside this block, 'value' remains 'unknown'
+}
+`,
+        },        
+        {
+          text1: `<table>
+    <thead>
+        <tr>
+            <th>
+                <p dir="ltr"><span> unknown</span></p>
+
+
+            </th>
+            <th>
+                <p dir="ltr"><span> any</span></p>
+
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <p dir="ltr"><span>The variables with unknown type can store the values of any type with strict type
+                        checking.</span></p>
+
+
+            </td>
+            <td>
+                <p dir="ltr"><span>The any type also allows the variables to store values of any type but causes
+                        type-checking errors.</span></p>
+
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p dir="ltr"><span>It offers type inference with refined type checking. </span></p>
+
+
+            </td>
+            <td>
+                <p dir="ltr"><span>It does not offer the type inference.</span></p>
+
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p dir="ltr"><span>Type checking is enforced more strictly on these variables.</span></p>
+
+
+            </td>
+            <td>
+                <p dir="ltr"><span>Type checks can not be enforced on any type variable.</span></p>
+
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p dir="ltr"><span>Variables with unknown type are not compatible with all other types.</span></p>
+
+
+            </td>
+            <td>
+                <p dir="ltr"><span>any type variables are compatible with all other types available in
+                        TypeScript.</span></p>
+
+
+            </td>
+        </tr>
+    </tbody>
+</table>`,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "never",
+      note: [
+        {
+          text1: `<b>Never: The Impossible Type</b>
+The never type in TypeScript represents a value that never occurs, such as the return type of a function that always throws an error or never returns. We cannot assign any value to a variable of type never, and we cannot perform any operation on it.
+
+The never type is useful when we want to express that something is impossible or unreachable in our code, such as a branch of a switch statement that should never be executed. It helps us to catch errors and bugs at compile time, and to make our code more expressive and accurate.
+
+The <b>never</b> type signifies a value that will never occur
+
+When to Use:
+Functions that never return (e.g., throw an exception, loop infinitely)
+Exhaustive checking in switch/case statements to ensure all cases are handled
+
+never is the most impossible type, as it represents a value that never occurs. It helps us to express that something is impossible or unreachable in our code, and to catch errors and bugs at compile time. Use never to indicate that a function never returns or a branch never executes, and avoid assigning any value to it.`,
+          code1: `// -------------- Ex : 1 -------------
+          function throwError(message: string): never {
+  throw new Error(message);
+}
+
+function loopForever(): never {
+  while (true) {}
+}
+
+let a: never = throwError("something went wrong"); // OK, a is never assigned
+let b: never = loopForever(); // OK, b is never assigned
+let c: never = 42; // Error, Type 'number' is not assignable to type 'never'
+let d: never = a; // OK, d is also never
+d.foo(); // Error, Object is of type 'never'
+d + 1; // Error, Object is of type 'never'
+
+
+
+// ----------- Ex : 2 -----------
+function keepProcessing(): never { 
+  while (true) { 
+    console.log('I always does something and never ends.')
+  }
+}
+  
+//----------
+type Color = "red" | "blue" | "green";
+function assertUnreachable(x: never): never {
+    throw new Error("Didn't expect to get here");
+}
+function f(c: Color): number {
+  switch(c) {
+    case "red":
+      return 1;
+    case "blue":
+      return 2;
+    case "green":
+      return 3;
+    default:
+      assertUnreachable(c);
+  }
+}
+
+console.log(f("blue"));`,
+        },
+        {
+          text1: `<table data-start="1988" data-end="2413">
+    <thead data-start="1988" data-end="2061">
+        <tr data-start="1988" data-end="2061">
+            <th data-start="1988" data-end="1999">Type</th>
+            <th data-start="1999" data-end="2020">Accepts Any Value?</th>
+            <th data-start="2020" data-end="2044">Allows Any Operation?</th>
+            <th data-start="2044" data-end="2061">Best Use Case</th>
+        </tr>
+    </thead>
+    <tbody data-start="2132" data-end="2413">
+        <tr data-start="2132" data-end="2223">
+            <td><code data-start="2134" data-end="2139">any</code></td>
+            <td>✅ Yes</td>
+            <td>✅ Yes</td>
+            <td>Avoiding type checking (not recommended)</td>
+        </tr>
+        <tr data-start="2224" data-end="2309">
+            <td><code data-start="2226" data-end="2235">unknown</code></td>
+            <td>✅ Yes</td>
+            <td>❌ No (without checks)</td>
+            <td>Handling dynamic data safely</td>
+        </tr>
+        <tr data-start="2310" data-end="2413">
+            <td><code data-start="2312" data-end="2319">never</code></td>
+            <td>❌ No</td>
+            <td>❌ No</td>
+            <td>Functions that never return or exhaustive type checks</td>
+        </tr>
+    </tbody>
+</table>`,
+          code1: ``,
+        }
+      ]
+    },
+    {
+      id: 1,
       title: "Type Guards:",
       note: [
         {
-          text1: `
-            Type guards are a feature in TypeScript that allow developers to check the type of a variable at runtime. This can be useful when working with union types or other situations where the type of a variable may not be known
+          text1: `Type guards are a feature in TypeScript that allow developers to check the type of a variable at runtime. This can be useful when working with union types or other situations where the type of a variable may not be known
             `,
           code1: ``,
         }
@@ -2822,8 +3174,7 @@ displayType(true);
       title: "Decorators:",
       note: [
         {
-          text1: `
-            Decorators are a feature in TypeScript that allow for the addition of metadata to classes, methods, and properties. They can be used to modify the behavior of a class or to provide additional information for tools like code analyzers.
+          text1: `Decorators are a feature in TypeScript that allow for the addition of metadata to classes, methods, and properties. They can be used to modify the behavior of a class or to provide additional information for tools like code analyzers.
             `,
           code1: ``,
         }
@@ -2844,7 +3195,8 @@ displayType(true);
     },
     {
       id: 1,
-      title: "Utility Types",
+      section:"Utility Types",
+      title: "Partial",
       note: [
         {
           text1: ``,
@@ -2852,6 +3204,79 @@ displayType(true);
         },
       ]
     },
-
+    {
+      id: 1,
+      title: "Omit",
+      note: [
+        {
+          text1: ``,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Pick",
+      note: [
+        {
+          text1: ``,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Record",
+      note: [
+        {
+          text1: ``,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "What is readonly?",
+      note: [
+        {
+          text1: `The readonly keyword in TypeScript is used to indicate that a property or variable cannot be modified after it has been initialized. This means that the value of the property or variable cannot be changed once it has been set.
+  
+  
+  `,
+          code1: `
+            interface Point {
+    readonly x: number;
+    readonly y: number;
+  }
+  
+  let p1: Point = { x: 10, y: 20 };
+  p1.x = 5; // error!
+  Cannot assign to 'x' because it is a read-only property.
+  `,
+        },
+        {
+          text1: `
+  <b> ReadonlyArray&lt;T&gt; </b>
+  TypeScript comes with a ReadonlyArray&lt;T&gt; type that is the same as Array&lt;T&gt; with all mutating methods removed, so you can make sure you don't change your arrays after creation:`,
+          code1: `
+  let a: number[] = [1, 2, 3, 4];
+  let ro: ReadonlyArray<number> = a;
+  
+  ro[0] = 12; // error!
+  // Index signature in type 'readonly number[]' only permits reading.
+  ro.push(5); // error!
+  // Property 'push' does not exist on type 'readonly number[]'.
+  ro.length = 100; // error!
+  // Cannot assign to 'length' because it is a read-only property.
+  a = ro; // error!
+  // The type 'readonly number[]' is 'readonly' and cannot be assigned to the mutable type 'number[]'.
+  `,
+        },
+        {
+          text1: ``,
+          code1: ``,
+        },
+      ]
+    },
   ]
 }

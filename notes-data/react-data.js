@@ -13,7 +13,12 @@ const reactData = {
       title: "intro",
       note: [
         {
-          text1: `self closed component <ABC/>`,
+          text1: `self closed component <ABC/>
+          
+         <iframe src="../db/React-js.pdf" width="100%" height="600px"></iframe>
+
+
+          `,
           code1: ``
         }
       ]
@@ -2934,6 +2939,43 @@ export default ShadowComponent;
           text1: `<b>dangerouslySetInnerHTML</b> is a React attribute that allows you to set HTML directly from a React component. It can be useful when you need to render HTML content that comes from a source like a database or user input, but it carries certain risks.`,
           code1: ``
         }
+      ],
+    },
+    {
+      id: 52,
+      title: "children prop",
+      note: [
+        {
+          text1: `
+          
+          <b>Using the FC type Ex : 1</b>
+There is a standard React type, FC, that we can use on arrow function components. FC stands for Function Component, and it aliases a type called FunctionComponent.
+
+<a href="https://www.carlrippon.com/react-children-with-typescript/" target="_blank">react-children-with-typescript</a>
+<a href="https://dev.to/debs_obrien/typescript-and-react-children-4epg" target="_blank">typescript-and-react-children</a> 
+`,
+          code1: `//---------------- Ex : 1 ------------
+type Props = {
+  title: string,
+};
+const Page: React.FC&lt;Props&gt; = ({
+  title,
+  children,
+}) =&gt; (
+  &lt;div&gt;
+    &lt;h1&gt;{title}&lt;/h1&gt;
+    {children}
+  &lt;/div&gt;
+);`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
       ],
     },
     {

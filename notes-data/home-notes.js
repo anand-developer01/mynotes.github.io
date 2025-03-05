@@ -1,6 +1,5 @@
 const commonData = {
     commonNote: [
-
         {
             id: 1,
             title: "aff intro",
@@ -29,6 +28,82 @@ const commonData = {
             A rent-to-own lease refers to an alternative method of acquiring quality household items like furniture (including mattresses), appliances, electronics, or other consumer goods. Also known as a lease-to-own payment plan, this option can allow consumers with bad credit an option to access products without making substantial upfront payments.
             ===========
             `
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "React js Interview Topics",
+            note: [
+                {
+                    text1: `<b>React.js</b>
+
+    React Lifecycle Methods (Class & Functional components with hooks)
+    React Hooks (useState, useEffect, useMemo, useCallback, useContext, useRef, useReducer)
+    Component Optimization (React.memo, useMemo, useCallback, Virtual DOM)
+    State Management (Props, Context API, Redux, Zustand, Recoil)
+    React Router (Dynamic Routes, Lazy Loading)
+    Error Boundaries
+    HOC (Higher-Order Components) & Render Props
+    Performance Optimization (Code Splitting, Lazy Loading, Concurrent Mode)
+
+TypeScript:
+    Types & Interfaces (Basic Types, Unions, Intersection, Generics)
+    Utility Types (Partial, Omit, Pick, Record, Readonly)
+    Type Assertions & Type Guards (typeof, instanceof, in)
+    Function Overloading
+    Handling Props & State in React with TypeScript
+
+JavaScript
+
+    ES6+ Features (Destructuring, Spread, Rest, Async/Await, Modules)
+    Closures & Lexical Scope
+    Prototype & Prototypal Inheritance
+    Event Loop & Asynchronous JavaScript
+    Promises & Callbacks
+    Debounce & Throttle
+    Shallow & Deep Copy (JSON.parse/stringify, structuredClone, lodash)
+    Map, Filter, Reduce
+    Hoisting & Temporal Dead Zone (TDZ)
+    WeakMap & WeakSet
+
+Redux
+
+    Redux Flow (Actions, Reducers, Store, Middleware)
+    Redux Toolkit (createSlice, createAsyncThunk)
+    Middleware (Redux-Thunk vs Redux-Saga)
+    Connecting Redux with React (useSelector, useDispatch)
+    Immer.js (Immutable State Updates)
+    When to Use Redux vs Context API
+
+Mock Interview Questions
+
+✅ React
+
+    What is the difference between controlled and uncontrolled components?
+    How does useEffect work? What is the dependency array?
+    How do you prevent unnecessary re-renders in React?
+    Explain React Fiber and how it improves performance.
+    Difference between React context and Redux?
+
+✅ TypeScript
+6. What is the difference between type and interface in TypeScript?
+7. How does generics work? Can you give an example?
+8. How to define React component props with TypeScript?
+9. What are Mapped Types in TypeScript?
+
+✅ JavaScript
+10. Explain event delegation in JavaScript.
+11. How does debouncing and throttling work?
+12. Explain the difference between == and ===.
+13. What is the difference between var, let, and const?
+14. What are JavaScript Design Patterns?
+
+✅ Redux
+15. What are Redux Middleware and their use cases?
+16. What is the difference between Redux and Redux Toolkit?
+17. Explain Redux-thunk vs Redux-saga.
+18. How does reducer composition work?`
                 }
             ]
         },
