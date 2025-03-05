@@ -332,6 +332,15 @@ function multiply(a: number, b: number=10) {
 function add(a: number, b: number, ...rest: number[]) {
   return a + b + rest.reduce((acc, curr) => acc+ curr, 0);
 }
+
+//-----------------------
+
+function add(a: number, b: number, ...rest: number[]) {
+  return a + b + rest.reduce((acc, curr) => acc + curr, 0);
+}
+console.log(add(2, 3)); // Output: 5
+console.log(add(1, 2, 3, 4, 5)); // Output: 15
+console.log(add(10, 20, 30, 40, 50, 60)); // Output: 210
 `,
           },
         ]

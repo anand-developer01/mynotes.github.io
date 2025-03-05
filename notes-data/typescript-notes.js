@@ -826,19 +826,15 @@ console.log(foo['Hello']); // World
   name: string
   area: string
 }
-
 const userDetails : User = {
     id : 1,
     name: "ram",
     area: "warangal"
 }
-
 let idexName:string = 'name'
 let idexId:string = 'id'
-
-
-console.log(userDetails[idexName])
-console.log(userDetails[idexId])`,
+console.log(userDetails[idexName]) //ram
+console.log(userDetails[idexId])// 1`,
         },
         {
           text1: ``,
@@ -849,37 +845,33 @@ console.log(userDetails[idexId])`,
 
 The answer is to use an index signature!
 Let's find what are TypeScript index signatures and when they're needed.`,
-          code1: `//You have 2 objects that describe the salary of 2 software developers:
+          code1: `function totalSalary(salaryObject: { [key: string]: number }): number {
+    let total = 0;
+    for (const key in salaryObject) {
+        total += salaryObject[key]; // Safe because all values are numbers
+    }
+    return total;
+}
+
 const salary1 = {
-  baseSalary: 100_000,
-  yearlyBonus: 20_000
+    baseSalary: 100_000,
+    yearlyBonus: 20_000
 };
 
 const salary2 = {
-  contractSalary: 110_000
+    contractSalary: 110_000
 };
 
-
-// You want to implement a function that returns the total remuneration based on the salary object:
-function totalSalary(salaryObject: ???) {
-  let total = 0;
-  for (const name in salaryObject) {
-    total += salaryObject[name];
-  }
-  return total;
-}
-
-console.log(totalSalary(salary1)); // => 120_000
-console.log(totalSalary(salary2)); // => 110_000`,
+console.log(totalSalary(salary1)); // ✅ Output: 120000
+console.log(totalSalary(salary2)); // ✅ Output: 110000
+`,
         },
         {
           text1: `<b>1. Why index signature</b>
 The idea of the index signatures is to type objects of unknown structure when you only know the key and value types.
-
 An index signature fits the case of the salary parameter: the function should accept salary objects of different structures — just make sure that object values are numbers.
 
 Let's annotate the <u>salaryObject</u> parameter with an index signature:
-
 <u>{ [key: string]: number }</u> is the index signature, which tells TypeScript that <u>salaryObject</u> has to be an object with <u>string</u> type as key and <u>number</u> type as value.
 
 Now the <u>totalSalary()</u> accepts as arguments both <u>salary1</u> and <u>salary2</u> objects, since they are objects with number values.
@@ -896,10 +888,7 @@ console.log(totalSalary(salary1)); // => 120_000
 console.log(totalSalary(salary2)); // => 110_000
 
 
-
-
 // However, the function would not accept an object that has, for example, strings as values:
-
 const salary3 = {
   baseSalary: '100 thousands'
 };
@@ -912,15 +901,11 @@ totalSalary(salary3);`,
         },
         {
           text1: `<b>Non-existing properties </b>
-          
           What would happen if you try to access a non-existing property of an object whose index signature is <u>{ [key: string]: string }?</u>
 As expected, TypeScript infers the type of the value to <u>string</u>. But if you check the runtime value — it's <u>undefined:</u>
 
-
 The index signature does nothing more than translate a key type to a value type. If the mapping is not right, the value type may differ from the actual runtime data type.
-
 Mark the indexed value as string or undefined to improve typing accuracy. TypeScript becomes aware that the properties you are attempting to access may not exist :
-
 The index signature maps a key type to a value type — that's all. If you don't make that mapping correct, the value type can deviate from the actual runtime data type.
 
 To make typing more accurate, mark the indexed value as <u>string</u> or <u>undefined</u>. Doing so, 
@@ -1285,9 +1270,9 @@ type StringType = typeof myString // 'string'
 
 
 //-------------------- Ex :2 --------------
-"typeof" can be applied to more complex data structures, such as arrays and objects, to extract their types.
-TypeScript typeof array
-When used with an array, "typeof" will return the type of the elements inside the array along with an array indicator ("[]").
+// "typeof" can be applied to more complex data structures, such as arrays and objects, to extract their types.
+// TypeScript typeof array
+// When used with an array, "typeof" will return the type of the elements inside the array along with an array indicator ("[]").
 
 let numberArray = [1, 2, 3]
 type ArrayType = typeof numberArray // 'number[]'
@@ -1677,16 +1662,75 @@ async function fetchData&lt;T&gt;() {
 
 // Use async function to call fetchData
 async function run() {
-  const data1 = await fetchData<ObjOne>();
+  const data1 = await fetchData&lt;ObjOne&gt;();
   console.log(data1);
 
-  const data2 = await fetchData<ObjTwo>();
+  const data2 = await fetchData&lt;ObjTwo&gt;();
   console.log(data2);
 }
 
 // Call the async function to run the code
 run();
 
+
+//----------------- Ex :6 --------------
+
+interface User {
+    readonly id: number;
+    name: string;
+    readonly DOB: string;
+}
+
+interface Role {
+    role: string;
+}
+
+interface AdminUser extends User {
+    permissions: string[];
+}
+
+function updateUser&lt;T extends AdminUser, R extends Role&gt;(users: T, roleParam: R): string {
+    return \`\${users.id} \${users.name} \${users.DOB} \${users.permissions} \${roleParam.role}\`;
+}
+
+const admin: AdminUser = {
+    id: 1,
+    name: &quot;Alice&quot;,
+    DOB: &quot;1990-01-01&quot;,
+    permissions: [&quot;read&quot;, &quot;write&quot;]
+};
+
+let roleType: Role = { role: &quot;Admin&quot; };
+
+console.log(updateUser(admin, roleType)); // ✅ Works for AdminUser
+
+
+//----------------- Ex :7 --------------
+const salary1 = {
+    baseSalary: 100_000,
+    yearlyBonus: 20_000
+};
+
+const salary2 = {
+    contractSalary: 110_000
+};
+
+
+function totalSalary&lt;T extends Record&lt;string, number&gt;&gt;(salaryObject: T): number {
+    let total = 0;
+    for (const key in salaryObject) {
+        total += salaryObject[key]; // Ensured to be a number
+    }
+    return total;
+}
+
+console.log(totalSalary(salary1)); // ✅ Output: 120000
+console.log(totalSalary(salary2)); // ✅ Output: 110000
+
+// Why Use Generics?
+// ✅ 'Flexibility': Works with any salary structure where values are numbers.
+// ✅ 'Type Safety': Ensures that salaryObject only contains numeric values.
+// ✅ 'Reusability': Can be used in multiple scenarios without modifying the function.
 `
         },
         {
