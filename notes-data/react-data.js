@@ -1117,7 +1117,6 @@ The idea is to pass a function as a prop to a component, which the component wil
     <b>Parent Component</b>: This component holds state or logic and passes a function to its child as a prop.
     <b>Child Component</b>: This component uses the function prop to render whatever it needs based on the parent's state or logic.
 
-
     <b>Breakdown of the Example</b>
     <b>MouseTracker Component</b>: This component tracks the mouse position. It has its own state to keep track of the mouse coordinates and updates it whenever the mouse moves.
     <b>Render Prop</b>: The <u>MouseTracker</u> accepts a <u>render</u> prop, which is a function that takes the current mouse position as an argument and returns React elements. This allows the parent component to determine how to display the mouse position.
@@ -1168,6 +1167,63 @@ const App = () => {
 };
 
 export default App;
+
+//---------------- Ex : 2 -----------------
+import OnClick from &#39;./OnClick&#39;;
+import OnHover from &#39;./OnHover&#39;;
+import Counter from &#39;./Counter&#39;;
+const AppHocTextHighlight = () =&gt; {
+
+  return (
+    &lt;&gt;
+      &lt;Counter render={(count, incrementCount) =&gt; &lt;OnClick count={count} incrementCount={incrementCount}/&gt;}/&gt;
+
+      &lt;Counter render={(count, incrementCount) =&gt; &lt;OnHover count={count} incrementCount={incrementCount}/&gt;}/&gt;
+    &lt;/&gt;
+  );
+
+}
+
+export default AppHocTextHighlight
+
+
+//----------- Counter.js -------
+import { useState } from &#39;react&#39;;
+
+function Counter({ render }) {
+    const [count, setCount] = useState(0)
+    const incrementCount = () =&gt; {
+        setCount(prev =&gt; prev + 1)
+    }
+    return (
+        &lt;div&gt;
+            {render(count, incrementCount)}
+        &lt;/div&gt;
+    )
+}
+export default Counter
+
+// ------------- OnClick.js ------
+const OnClick = ({ count, incrementCount }) =&gt; {
+    return (
+      &lt;&gt;
+          &lt;button onClick={() =&gt; incrementCount()}&gt; click {count}&lt;/button&gt;
+      &lt;/&gt;
+    );
+  };
+
+  export default OnClick
+
+
+//------------- OnHover.js -------
+const OnHover = ({ count, incrementCount }) =&gt; {
+    return (
+      &lt;&gt;
+        &lt;button onMouseEnter={() =&gt; incrementCount()}&gt; On Hover {count}&lt;/button&gt;
+      &lt;/&gt;
+    );
+  };
+export default OnHover 
 `
         },
         {
@@ -3452,7 +3508,8 @@ export default App
       title: "useState",
       note: [
         {
-          text1: `useState is React Hook that allows you to add state to a functional component. It returns an array with two values: the current state and a function to update it. The Hook takes an initial state value as an argument and returns an updated state value whenever the setter function is called. 
+          text1: `State is an object that holds data that can change over time in a React component. It represents the mutable part of the component
+useState is React Hook that allows you to add state to a functional component. It returns an array with two values: the current state and a function to update it. The Hook takes an initial state value as an argument and returns an updated state value whenever the setter function is called. 
 
                     <span style="color:red"> const [state, setState] = useState(initialValue); </span>
                     using array destructuring we can set the variable name and function name
