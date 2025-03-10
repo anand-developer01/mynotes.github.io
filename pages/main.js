@@ -34,6 +34,18 @@ function mainDom(data) {
         if(eleLink2.split('.')[0] === isHighlighted){
             document.getElementById('link2').setAttribute("class","active"); 
         }
+
+        const eleLink3 = document.getElementById('link3').getAttribute("href");
+        console.log(eleLink3.split('.')[0] === isHighlighted)
+        if(eleLink3.split('.')[0] === isHighlighted){
+            document.getElementById('link3').setAttribute("class","active"); 
+        }
+
+        const eleLink4 = document.getElementById('link4').getAttribute("href");
+        console.log(eleLink4.split('.')[0] === isHighlighted)
+        if(eleLink4.split('.')[0] === isHighlighted){
+            document.getElementById('link4').setAttribute("class","active"); 
+        }
     }
 
     data.map(el => {

@@ -13,7 +13,7 @@ const jScodeChallengeData = {
         {
           text1: `<a href="https://www.codinn.dev/tricky-javascript/es6789-code-snippets-interview-questions" target="_blank">code-snippets-interview-questions</a>
           
-          <a href="https://www.interviewbit.com/javascript-interview-questions/#recursion-in-a-programming-language" target="_blank">javascript-interview-questions</a>
+          <a href="https://www.interviewbit.com/javascript-interview-questions/#recursion-in-a-programming-language" target="_blank">javascript-interview-questionsx</a>
           `,
           code1: ``
         }
@@ -829,6 +829,52 @@ console.log(z == x);
     },
     {
       id: 1,
+      title: "3. (Check for Anagram) Write a function to check if two given strings are anagrams (i.e., they contain the same characters but in different orders).",
+      note: [
+        {
+          text1: ``,
+          code1: `// ---------- Ex : 1 ---------
+          function isAnagram(st1, st2) {
+    if (st1.length !== st2.length) return false; // Step 1: Length check
+
+    let count = {}; // Step 2: Create a frequency map
+
+    for (let char of st1) {
+        count[char] = (count[char] || 0) + 1; // Count occurrences in st1
+    }
+
+    for (let char of st2) {
+        if (!count[char]) return false; // If char is missing or overused
+        count[char]--;
+    }
+
+    return true; // Step 3: If all counts match, it's an anagram
+}
+
+// Test Cases
+console.log(isAnagram("listen", "silent")); // ✅ true
+console.log(isAnagram("tanw", "ant"));      // ❌ false
+console.log(isAnagram("racecar", "carrace"));// ✅ true
+console.log(isAnagram("hello", "world"));   // ❌ false
+console.log(isAnagram("aabb", "abab"));     // ✅ 
+
+// -------- Ex : 2 -----------
+function isAnagram(st1, st2) {
+    return st1.length === st2.length &&
+           st1.split('').sort().join('') === st2.split('').sort().join('');
+}
+
+// Test Cases
+console.log(isAnagram("listen", "silent")); // ✅ true
+console.log(isAnagram("tanw", "ant"));      // ❌ false
+console.log(isAnagram("racecar", "carrace"));// ✅ true
+console.log(isAnagram("hello", "world"));   // ❌ false
+console.log(isAnagram("aabb", "abab"));     // ✅ true`
+        }
+      ]
+    },
+    {
+      id: 1,
       title: "JavaScript Event Loop",
       note: [
         {
@@ -1296,6 +1342,129 @@ function reverseString(str) {
 reverseString("hello");
 
 `
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "FizzBuzz Variation",
+      note: [
+        {
+          text1: `Write a function that prints numbers from 1 to 50. But for multiples of 3, print "Alpha", for multiples of 5, print "Beta", and for numbers that are multiples of both 3 and 5, print "AlphaBeta". `,
+          code1: `function isMul() {
+    for (let i = 1; i <= 50; i++) {  // Corrected loop range
+        if (i % 5 === 0 && i % 3 === 0) {
+            console.log("AlphaBeta");  // Multiples of both 3 and 5
+        } else if (i % 3 === 0) {
+            console.log("Alpha");  // Multiples of 3
+        } else if (i % 5 === 0) {
+            console.log("Beta");  // Multiples of 5
+        } else {
+            console.log(i);  // Print number if not a multiple of 3 or 5
+        }
+    }
+}
+
+isMul();
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Find First Non-Repeating Character",
+      note: [
+        {
+          text1: `Given a string, find the first character that does not repeat. Example Input: const str = 'swiss'; Expected Output:'w'`,
+          code1: `function firstNonRepeatingChar(str) {
+    let charCount = {}; // Step 1: Create a frequency map
+
+    for (let char of str) {
+        charCount[char] = (charCount[char] || 0) + 1; // Count occurrences
+    }
+
+    for (let char of str) { // Step 2: Find the first character with count = 1
+        if (charCount[char] === 1) {
+            return char; // Return the first non-repeating character
+        }
+    }
+
+    return null; // If all characters repeat, return null
+}
+
+// Example Usage:
+console.log(firstNonRepeatingChar("swiss")); // Output: "w"
+console.log(firstNonRepeatingChar("racecar")); // Output: "e"
+console.log(firstNonRepeatingChar("aabbcc")); // Output: null
+console.log(firstNonRepeatingChar("javascript")); // Output: "j"
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Find the Missing Number",
+      note: [
+        {
+          text1: `You have an array of numbers from 1 to N, but one number is missing. Write a function to find the missing number.
+Example Input:
+const arr = [1, 2, 3, 5, 6]; 
+
+Expected Output:
+4
+Hint: Use the sum formula (N * (N + 1)) / 2 or XOR approach.
+
+Answer : 
+<b>What is (n * (n + 1)) / 2?</b>
+This is the <b>formula for the sum of the first N natural numbers.</b>
+
+<b>Formula Explanation</b>:
+The sum of the first N natural numbers (1, 2, 3, ..., N) is given by:
+S=1+2+3+...+N
+Using mathematical derivation, this sum can be computed directly with the formula:
+
+S = N * (N+1)/ 2
+This formula helps <b>calculate the total sum of numbers from 1 to N instantly, without looping.</b>
+
+<b>Finding the Missing Number</b>:
+1️⃣ <b>Calculate the expected sum</b> using the formula.
+2️⃣ <b>Find the actual sum</b> by adding up the array elements.
+3️⃣ <b>The difference between the expected sum and actual sum</b> gives the missing number:
+Missing Number = Expected Sum - Actual Sum
+`,
+          code1: `function findMissingNumber(arr) {
+    let n = arr.length + 1;  // The total count of numbers (including the missing one)
+    let expectedSum = (n * (n + 1)) / 2; // Sum formula
+    let actualSum = arr.reduce((sum, num) => sum + num, 0); // Sum of given numbers
+
+    return expectedSum - actualSum; // The missing number
+}
+
+// Example Usage:
+console.log(findMissingNumber([1, 2, 3, 5, 6])); // Output: 4
+console.log(findMissingNumber([1, 2, 4, 5]));    // Output: 3
+console.log(findMissingNumber([2, 3, 4, 5, 6])); // Output: 1 (Also works when \`1\` is missing)
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
+      note: [
+        {
+          text1: ``,
+          code1: ``
         }
       ]
     },
