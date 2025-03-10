@@ -303,8 +303,7 @@ The following declares the variable counter with the let keyword:`,
       title: "var, let and const",
       note: [
         {
-          text1: `
-=>           <b>var</b> and <b>let</b> create variables that can be reassigned another value.
+          text1: `=>           <b>var</b> and <b>let</b> create variables that can be reassigned another value.
 => <b>const</b> creates "constant" variables that cannot be reassigned another value.
 => developers shouldn't use <b>var</b> anymore. They should use <b>let</b> or <b>const</b> instead.
 => if you're not going to change the value of a variable, it is good practice to use <b>const</b>.
@@ -317,11 +316,11 @@ To analyze the differences between these keywords, I'll be using three factors:
 -> Redeclaration and reassignment
 -> Hoisting
 
-
-<u>The scope of variables declared with <b>var</b></u>
+<span class="sub-heading"> var </span>
+<b>1) The scope of variables declared with <u>var</u></b>
 Variables declared with var can have a global or local scope. Global scope is for variables declared outside functions, while local scope is for variables declared inside functions.
 
-<b>How to redeclare and reassign variables declared with, var</b>
+<b>2) How to redeclare and reassign variables declared with, var</b>
 Variables declared with var can be redeclared and reassigned
 var number = 50
 You have the <b>var</b> keyword, the name of the variable <b>number</b>, and an initial value <b>50</b>. If an initial value is not provided, the default value will be <b>undefined</b>:
@@ -329,7 +328,7 @@ You have the <b>var</b> keyword, the name of the variable <b>number</b>, and an 
 The <b>var</b> keyword allows for redeclaration.
 The <b>var</b> keyword also allows for reassignment. 
 
-<b>How to hoist variables declared with var</b>
+<b>3) How to hoist variables declared with var</b>
 Variables declared with <b>var</b> are hoisted to the top of their global or local scope, which makes them accessible before the line they are declared.
 
 <b>Ex : 5 local scope</b>
@@ -396,8 +395,8 @@ console.log(number) // 50
         `
         },
         {
-          text1: `<b>Declare Variables with <code>let</code> in JavaScript</b>
-          <b>-> The scope of variables declared with let</b>
+          text1: `<b><span class="sub-heading">Declare Variables with <code>let</code> in JavaScript</span></b>
+          <b>1) The scope of variables declared with let</b>
 Variables declared with <u>let</u> can have a <b>global, local</b>, or <b>block scope</b>. Block scope is for variables declared in a block. A block in JavaScript involves opening and closing curly braces:
 {
   // a block
@@ -412,10 +411,10 @@ In <b>Ex : 1</b> example, we have a global scope variable <b>number</b> and a lo
 We can access <b>number</b> everywhere. We can only access <b>square</b> and <b>largerNumber</b> in the function because they have local scope. But accessing <b>anotherLargerNumber</b> outside the block throws an <b>anotherLargerNumber</b> is not defined error.
 
 
-<b>-> How to redeclare and reassign variables declared with let</b>
+<b>2) How to redeclare and reassign variables declared with let</b>
 Just like var, variables declared with let can be reassigned to other values, but they cannot be redeclared. 
 
-<b>-> How to hoist variables declared with let</b>
+<b>3) How to hoist variables declared with let</b>
 Variables declared with <b>let</b> are hoisted to the top of their global, local, or block scope, but their hoisting is a little different from the one with <b>var</b>.
 <b>var</b> variables are hoisted with a default value of <b>undefined</b>, which makes them accessible before their line of declaration (as we've seen above).
 But, <b>let</b> variables are hoisted without a default initialization. So when you try to access such variables, instead of getting <b>undefined</b>, or <b>variable is not defined error</b>, you get <b>cannot access variable before initialization</b>. Let's see an example:
@@ -464,19 +463,18 @@ let number = 50
 `
         },
         {
-          text1: `<b>How to Declare Variables with <code>const</code> in JavaScript</b>
-<b> => The scope of variables declared with const </b>
+          text1: `<b><span class="sub-heading">How to Declare Variables with <code>const</code> in JavaScript</span></b>
+<b> 1) The scope of variables declared with const </b>
 Variables declared with <u>const</u> are similar to <u>let</u> in regards to <u>scope</u>. Such variables can have a <b>global, local</b>, or <b>block</b> scope.
 
 In Ex : 1 example, but I've replaced <u>let</u> with <u>const</u>. As you can see here, the <u>number</u> variable has a global scope, <u>square</u> has a local scope (declared in the <u>print</u> function), and <u>anotherLargeNumber</u> has a block scope (declared with <u>const</u>).
 There's also <u>largeNumber</u>, declared in a block. But because it is with <u>var</u>, the variable only has a local scope. Therefore, it can be accessed outside the block.
 Because <u>anotherLargeNumber</u> has a block scope, accessing it outside the block throws an <b>anotherLargerNumber is not defined</b>.
 
-
-<b> => How to redeclare and reassign variables declared with const</b>
+<b> 2) How to redeclare and reassign variables declared with const</b>
 In this regard, <u>const</u> is different from <u>var</u> and <u>let</u>. <u>const</u> is used for declaring <b>constant</b> variables - which are variables with values that cannot be changed. So such variables cannot be redeclared, and neither can they be reassigned to other values. Attempting such would throw an error.
 
-<b> => How to hoist variables declared with const</b>
+<b> 3) How to hoist variables declared with const</b>
 Variables declared with <b>const</b>, just like <b>let</b>, are hoisted to the top of their global, local, or block scope - but without a default initialization.
 
 <b>var</b> variables, as you've seen earlier, are hoisted with a default value of <b>undefined</b> so they can be accessed before declaration without errors. Accessing a variable declared with <b>const</b> before the line of declaration will throw a <b>cannot access variable before initialization</b> error.
@@ -541,8 +539,20 @@ Variables declared with <u>let</u> or <u>const</u> are <b>hoisted WITHOUT a defa
 But variables declared with <u>var</u> are <b>hoisted WITH a default initialization of undefined</b>. So accessing them before the line they were declared returns <u>undefined</u>.
 
 <b>Temporal Dead Zone</b>
-There's a name for the period during execution where <u>let/const</u> variables are hoisted but not accessible: it's called the <u>Temporal Dead Zone.</u>`,
-          code1: ``
+There's a name for the period during execution where <u>let/const</u> variables are hoisted but not accessible: it's called the <u>Temporal Dead Zone.</u>
+
+The <b>Temporal Dead Zone</b> refers to the period between the entering of a scope and the actual declaration of a variable using <b>let</b> or <b>const</b>. During this period, the variable is in an "uninitialized" state and accessing it will result in a <span style="color:red;">ReferenceError</span>.
+
+A <b>temporal dead zone (TDZ)</b> is the area of a block where a variable is inaccessible until the moment the computer completely initializes it with a value.
+
+The temporal dead zone (TDZ) is a specific period in the execution of JavaScript code where variables declared with let and const exist but cannot be accessed or assigned any value. During this phase, accessing or using the variable will result in a ReferenceError.
+`,
+          code1: `        let x
+        console.log(x) //undefined
+        x = "y"
+
+        console.log(y) // index.html:103 Uncaught ReferenceError: Cannot access 'y' before initialization
+        let y = 1`
         },
         {
           text1: ``,

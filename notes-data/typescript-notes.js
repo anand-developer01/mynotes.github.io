@@ -736,6 +736,50 @@ console.log(uname(1,"ram"))
     },
     {
       id: 1,
+      title: "What is readonly?",
+      note: [
+        {
+          text1: `The readonly keyword in TypeScript is used to indicate that a property or variable cannot be modified after it has been initialized. This means that the value of the property or variable cannot be changed once it has been set.
+  
+  
+  `,
+          code1: `
+            interface Point {
+    readonly x: number;
+    readonly y: number;
+  }
+  
+  let p1: Point = { x: 10, y: 20 };
+  p1.x = 5; // error!
+  Cannot assign to 'x' because it is a read-only property.
+  `,
+        },
+        {
+          text1: `
+  <b> ReadonlyArray&lt;T&gt; </b>
+  TypeScript comes with a ReadonlyArray&lt;T&gt; type that is the same as Array&lt;T&gt; with all mutating methods removed, so you can make sure you don't change your arrays after creation:`,
+          code1: `
+  let a: number[] = [1, 2, 3, 4];
+  let ro: ReadonlyArray<number> = a;
+  
+  ro[0] = 12; // error!
+  // Index signature in type 'readonly number[]' only permits reading.
+  ro.push(5); // error!
+  // Property 'push' does not exist on type 'readonly number[]'.
+  ro.length = 100; // error!
+  // Cannot assign to 'length' because it is a read-only property.
+  a = ro; // error!
+  // The type 'readonly number[]' is 'readonly' and cannot be assigned to the mutable type 'number[]'.
+  `,
+        },
+        {
+          text1: ``,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
       title: "Index signatures",
       note: [
         {
@@ -981,7 +1025,7 @@ interface OopsDictionary {
         {
           text1: `In TypeScript, the <u>keyof</u> keyword is used to extract the <b>keys</b> (or property names) of an object type <u>as a union of string literals</u>. It allows you to work with the keys of an object in a type-safe way, enabling more powerful and flexible code when working with objects.
           
-          The TypeScript <b>keyof</b> operator is used to get a union of all keys in an object type. It's useful when you want to work with the property names of an object in a type-safe way, ensuring only valid keys are used.
+          The TypeScript <b>keyof</b> operator is used to get a union of all keys in an object type. It’s useful when you want to work with the property names of an object in a type-safe way, ensuring only valid keys are used.
 
 We can use it to define generic functions that work with any object type, without knowing the specific keys of that type. It can also be used to create read-only versions of an interface or to extract specific keys from an interface.
 
@@ -1281,6 +1325,7 @@ type PersonType = typeof person // { name: string; age: number; }
           text1: `A <b>const</b> assertion in TypeScript is used to indicate that a variable should be treated as a constant at compile-time. This means that the value of the variable cannot be changed after it has been initialized.
   
             Here's an example of how to use a const assertion:
+  
             const a = 10 as const;
   
             // This line will cause a compile-time error
@@ -1493,7 +1538,7 @@ const personTwo: Person<MetaData> = {
 
 Here, we've manually set the type to highlight how TypeScript handles different types with generics. However, it's important to remember that TypeScript typically infers the type automatically based on the argument provided. You don't need to manually specify the type unless you're overriding TypeScript's inference or dealing with complex types where explicit type annotations are necessary
 
-In this example, T is a type parameter that can represent any type. The actual type is determined when the function is called, whether it's a number, string, or any other type..
+In this example, T is a type parameter that can represent any type. The actual type is determined when the function is called, whether it’s a number, string, or any other type..
          
 
 Real-time examples include creating functions for:
@@ -1521,7 +1566,7 @@ console.log(stringResult); // Output: "Hello, TypeScript!"
 console.log(numberResult); // Output: 42
 //-------
 
-    <b>Use Case</b>: This is useful when you want to ensure that the input and output of a function are the same type, but you don't know the type beforehand. The generic <b>T</b> allows the function to work with any type (string, number, etc.) and still preserve the type integrity.
+    <b>Use Case</b>: This is useful when you want to ensure that the input and output of a function are the same type, but you don’t know the type beforehand. The generic <b>T</b> allows the function to work with any type (string, number, etc.) and still preserve the type integrity.
 
 
     <b>Real-Time Example 3: Generic Function for Sorting Arrays</b>
@@ -2721,7 +2766,7 @@ displayType(true);
       note: [
         {
           text1: `An intersection type creates a new type by combining multiple existing types. The new type has all features of the existing types.
-          An intersection type is a type that merges several kinds into one. This allows you to combine many types to create a single type with all of the properties that you require. An object of this type will have members from all of the types given. The ‘&' operator is used to create the intersection type.
+          An intersection type is a type that merges several kinds into one. This allows you to combine many types to create a single type with all of the properties that you require. An object of this type will have members from all of the types given. The ‘&’ operator is used to create the intersection type.
           
           To combine types, you use the & operator as follows:
 type typeAB = typeA & typeB;
@@ -2784,7 +2829,7 @@ let e: Employee = {
 Notice both <b>BusinessPartner</b> and <b>Identity</b> have the property <b>name</b> with the same type. If they do not, then you will have an error.
 
 <b>Type Order</b>
-When you intersect types, the order of the types doesn't matter. For example:
+When you intersect types, the order of the types doesn’t matter. For example:
 type typeAB = typeA & typeB;
 type typeBA = typeB & typeA;
 `,
@@ -2837,7 +2882,7 @@ console.log(obj1.feauA);
   
 obj2.feauB = "c"; 
 console.log(obj2.feauB);
-// Example 2: In this example, we create two interfaces A and B, in which there are two properties named ‘feauA' and ‘feauB'. But the type of feauA isn't the same in both the interfaces, when we try to assign a value 20 to feauA typescript compiler raises an error as the intersection type is of the type ‘string & number'. If we try to assign a string to feauA, the error is not raised as to when intersected the type is String.
+// Example 2: In this example, we create two interfaces A and B, in which there are two properties named ‘feauA’ and ‘feauB’. But the type of feauA isn’t the same in both the interfaces, when we try to assign a value 20 to feauA typescript compiler raises an error as the intersection type is of the type ‘string & number’. If we try to assign a string to feauA, the error is not raised as to when intersected the type is String.
 
 
 
@@ -2876,7 +2921,7 @@ console.log(typeof obj1 == typeof obj2); // true
 // true
 
 
-// Example 3: "\`Intersection types are commutative and associative\`": The order of the intersection doesn't matter when we intersect two or more types. Even if the order of intersection changes the type of the intersected objects are the same, the ‘typeof' operator is used to check that, the properties of the intersected objects are also the same. 
+// Example 3: "\`Intersection types are commutative and associative\`": The order of the intersection doesn’t matter when we intersect two or more types. Even if the order of intersection changes the type of the intersected objects are the same, the ‘typeof’ operator is used to check that, the properties of the intersected objects are also the same. 
 `,
         },
       ]
@@ -2886,35 +2931,6 @@ console.log(typeof obj1 == typeof obj2); // true
       title: "any",
       note: [
         {
-          text1: `<b>any</b> is essentially an escape hatch from TypeScript's type checking. It allows a variable to hold a value of absolutely any type — number, string, object, you name it.
-          
-->           Disables type checking, allowing you to assign any value.
--> Allows all operations without type errors.
--> Not recommended because it defeats TypeScript's type safety.
-
-          When to Use:
--> Migrating a JavaScript project to TypeScript gradually
--> Working with 3rd party libraries that don't have type definitions
--> Prototyping where types are not yet fully defined
-<b>The Dangers of 'any'</b>: Using 'any' disables much of TypeScript's benefits because it can lead to runtime errors that compile-time checks might have caught. You lose type safety and the compiler can't help you much. Think of 'any' as a last resort.
-`,
-          code1: `// ---------- Ex : 1 -----------
-          let something: any = 42; 
-something = "Hello";  // No problem with TypeScript
-something.someMethod(); // This could crash at runtime if 'something' isn't an object with a 'someMethod'
-
-
-//------------  Ex : 2 --------
-let value: any;
-value = 10;         // ✅ Allowed
-value = "Hello";    // ✅ Allowed
-value = true;       // ✅ Allowed
-
-let num: number;
-num = value;        // ✅ No type-checking
- `,
-        },
-        {
           text1: ``,
           code1: ``,
         },
@@ -2922,141 +2938,10 @@ num = value;        // ✅ No type-checking
     },
     {
       id: 1,
-      title: "unknown The Type-Safe Alternative",
+      title: "unknown",
       note: [
         {
-          text1: `<b>unknown</b> is a much safer counterpart to <b>any</b>. It represents a variable whose type we don't yet know.
-<u>When you are not sure about the type. You can assign unknown and you can check the type at runtime </u>
-
-<b>Use case</b>: When you don't know the exact type at first but want to enforce type checks before using the value.
-
-<b>Unknown: The Safe Type</b>
-The unknown type in TypeScript is similar to the any type, as it can hold any value. However, the unknown type is more restrictive than the any type, as it does not allow us to perform any operation on it without first checking its type. For example:
-When to Use:
--> Dealing with untrusted data from user input or 3rd party APIs
--> When type information is missing but you want to preserve type safety.
-<b>Enforcing Checks</b>: Unlike <b>any</b>, you cannot directly perform operations on <b>unknown</b> variables. TypeScript forces you to do type narrowing before using them.`,
-          code1: `// ----------- Ex : 1 -------------
-          function processData(data: unknown) {
-  if (typeof data === 'string') {
-      // TypeScript now understands data is a string here
-      console.log(data.toUpperCase()); 
-  } else if (typeof data === 'number') {
-      // TypeScript considers data a number in this block
-      console.log(data * 2)
-  } 
-}
-  
-
-//-------------  Ex : 2 --------------
-let value: unknown;
-value = "Hello";    // ✅ Allowed
-value = 42;         // ✅ Allowed
-
-let num: number;
-// num = value;     // ❌ Error: Type 'unknown' is not assignable to type 'number'.
-
-if (typeof value === "number") {
-    num = value;    // ✅ Allowed after type check
-}
-console.log(num)
-
-//------------- Ex : 3 --------------
-let z: unknown = "hello";
-z = 42; // OK, z is now a number
-z = true; // OK, z is now a boolean
-z.foo(); // Error, Object is of type 'unknown'
-z + 1; // Error, Object is of type 'unknown'
-if (typeof z === "string") {
-  z.toUpperCase(); // OK, z is a string inside this block
-}
-console.log(z)
-
-
-//-------------- Ex : 4 ---------------
-    // TypeScript infers types dynamically when using type narrowing.
-    // "unknown enforces type checks before use", ensuring safe inference.
-    // Once the type is checked (e.g., using typeof or instanceof), TypeScript narrows it to a more specific type.
-
-function processValue(value: unknown) {
-    if (typeof value === "string") {
-        // TypeScript now infers 'value' as 'string' inside this block
-        console.log(value.toUpperCase()); // ✅ Allowed
-    }
-    // Outside this block, 'value' remains 'unknown'
-}
-`,
-        },        
-        {
-          text1: `<table>
-    <thead>
-        <tr>
-            <th>
-                <p dir="ltr"><span> unknown</span></p>
-
-
-            </th>
-            <th>
-                <p dir="ltr"><span> any</span></p>
-
-
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <p dir="ltr"><span>The variables with unknown type can store the values of any type with strict type
-                        checking.</span></p>
-
-
-            </td>
-            <td>
-                <p dir="ltr"><span>The any type also allows the variables to store values of any type but causes
-                        type-checking errors.</span></p>
-
-
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p dir="ltr"><span>It offers type inference with refined type checking. </span></p>
-
-
-            </td>
-            <td>
-                <p dir="ltr"><span>It does not offer the type inference.</span></p>
-
-
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p dir="ltr"><span>Type checking is enforced more strictly on these variables.</span></p>
-
-
-            </td>
-            <td>
-                <p dir="ltr"><span>Type checks can not be enforced on any type variable.</span></p>
-
-
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p dir="ltr"><span>Variables with unknown type are not compatible with all other types.</span></p>
-
-
-            </td>
-            <td>
-                <p dir="ltr"><span>any type variables are compatible with all other types available in
-                        TypeScript.</span></p>
-
-
-            </td>
-        </tr>
-    </tbody>
-</table>`,
+          text1: ``,
           code1: ``,
         },
       ]
@@ -3066,96 +2951,9 @@ function processValue(value: unknown) {
       title: "never",
       note: [
         {
-          text1: `<b>Never: The Impossible Type</b>
-The never type in TypeScript represents a value that never occurs, such as the return type of a function that always throws an error or never returns. We cannot assign any value to a variable of type never, and we cannot perform any operation on it.
-
-The never type is useful when we want to express that something is impossible or unreachable in our code, such as a branch of a switch statement that should never be executed. It helps us to catch errors and bugs at compile time, and to make our code more expressive and accurate.
-
-The <b>never</b> type signifies a value that will never occur
-
-When to Use:
-Functions that never return (e.g., throw an exception, loop infinitely)
-Exhaustive checking in switch/case statements to ensure all cases are handled
-
-never is the most impossible type, as it represents a value that never occurs. It helps us to express that something is impossible or unreachable in our code, and to catch errors and bugs at compile time. Use never to indicate that a function never returns or a branch never executes, and avoid assigning any value to it.`,
-          code1: `// -------------- Ex : 1 -------------
-          function throwError(message: string): never {
-  throw new Error(message);
-}
-
-function loopForever(): never {
-  while (true) {}
-}
-
-let a: never = throwError("something went wrong"); // OK, a is never assigned
-let b: never = loopForever(); // OK, b is never assigned
-let c: never = 42; // Error, Type 'number' is not assignable to type 'never'
-let d: never = a; // OK, d is also never
-d.foo(); // Error, Object is of type 'never'
-d + 1; // Error, Object is of type 'never'
-
-
-
-// ----------- Ex : 2 -----------
-function keepProcessing(): never { 
-  while (true) { 
-    console.log('I always does something and never ends.')
-  }
-}
-  
-//----------
-type Color = "red" | "blue" | "green";
-function assertUnreachable(x: never): never {
-    throw new Error("Didn't expect to get here");
-}
-function f(c: Color): number {
-  switch(c) {
-    case "red":
-      return 1;
-    case "blue":
-      return 2;
-    case "green":
-      return 3;
-    default:
-      assertUnreachable(c);
-  }
-}
-
-console.log(f("blue"));`,
-        },
-        {
-          text1: `<table data-start="1988" data-end="2413">
-    <thead data-start="1988" data-end="2061">
-        <tr data-start="1988" data-end="2061">
-            <th data-start="1988" data-end="1999">Type</th>
-            <th data-start="1999" data-end="2020">Accepts Any Value?</th>
-            <th data-start="2020" data-end="2044">Allows Any Operation?</th>
-            <th data-start="2044" data-end="2061">Best Use Case</th>
-        </tr>
-    </thead>
-    <tbody data-start="2132" data-end="2413">
-        <tr data-start="2132" data-end="2223">
-            <td><code data-start="2134" data-end="2139">any</code></td>
-            <td>✅ Yes</td>
-            <td>✅ Yes</td>
-            <td>Avoiding type checking (not recommended)</td>
-        </tr>
-        <tr data-start="2224" data-end="2309">
-            <td><code data-start="2226" data-end="2235">unknown</code></td>
-            <td>✅ Yes</td>
-            <td>❌ No (without checks)</td>
-            <td>Handling dynamic data safely</td>
-        </tr>
-        <tr data-start="2310" data-end="2413">
-            <td><code data-start="2312" data-end="2319">never</code></td>
-            <td>❌ No</td>
-            <td>❌ No</td>
-            <td>Functions that never return or exhaustive type checks</td>
-        </tr>
-    </tbody>
-</table>`,
+          text1: ``,
           code1: ``,
-        }
+        },
       ]
     },
     {
@@ -3195,8 +2993,7 @@ console.log(f("blue"));`,
     },
     {
       id: 1,
-      section:"Utility Types",
-      title: "Partial",
+      title: "Utility Types",
       note: [
         {
           text1: ``,
@@ -3204,79 +3001,6 @@ console.log(f("blue"));`,
         },
       ]
     },
-    {
-      id: 1,
-      title: "Omit",
-      note: [
-        {
-          text1: ``,
-          code1: ``,
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "Pick",
-      note: [
-        {
-          text1: ``,
-          code1: ``,
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "Record",
-      note: [
-        {
-          text1: ``,
-          code1: ``,
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "What is readonly?",
-      note: [
-        {
-          text1: `The readonly keyword in TypeScript is used to indicate that a property or variable cannot be modified after it has been initialized. This means that the value of the property or variable cannot be changed once it has been set.
-  
-  
-  `,
-          code1: `
-            interface Point {
-    readonly x: number;
-    readonly y: number;
-  }
-  
-  let p1: Point = { x: 10, y: 20 };
-  p1.x = 5; // error!
-  Cannot assign to 'x' because it is a read-only property.
-  `,
-        },
-        {
-          text1: `
-  <b> ReadonlyArray&lt;T&gt; </b>
-  TypeScript comes with a ReadonlyArray&lt;T&gt; type that is the same as Array&lt;T&gt; with all mutating methods removed, so you can make sure you don't change your arrays after creation:`,
-          code1: `
-  let a: number[] = [1, 2, 3, 4];
-  let ro: ReadonlyArray<number> = a;
-  
-  ro[0] = 12; // error!
-  // Index signature in type 'readonly number[]' only permits reading.
-  ro.push(5); // error!
-  // Property 'push' does not exist on type 'readonly number[]'.
-  ro.length = 100; // error!
-  // Cannot assign to 'length' because it is a read-only property.
-  a = ro; // error!
-  // The type 'readonly number[]' is 'readonly' and cannot be assigned to the mutable type 'number[]'.
-  `,
-        },
-        {
-          text1: ``,
-          code1: ``,
-        },
-      ]
-    },
+
   ]
 }

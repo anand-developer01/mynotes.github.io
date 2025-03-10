@@ -1,5 +1,6 @@
 const commonData = {
     commonNote: [
+
         {
             id: 1,
             title: "aff intro",
