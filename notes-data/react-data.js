@@ -13,7 +13,12 @@ const reactData = {
       title: "intro",
       note: [
         {
-          text1: `self closed component <ABC/>`,
+          text1: `self closed component <ABC/>
+          
+         <iframe src="../db/React-js.pdf" width="100%" height="600px"></iframe>
+
+
+          `,
           code1: ``
         }
       ]
@@ -51,6 +56,9 @@ react-scripts start sets up the development environment and starts a server, as 
           text1: `JSX stands for JavaScript XML. It is a syntax extension for JavaScript that looks similar to XML or HTML but allows you to write JavaScript code in a more declarative way, especially when defining UI components in React.js.
 
                     JSX makes it easier to describe the structure of UI components in a syntax that resembles HTML. While it might look like a template language, JSX is ultimately just syntactic sugar over regular JavaScript. It gets transpiled into JavaScript code that creates and manipulates React elements
+                    in JSX, all self-closing tags must be properly closed, unlike regular HTML where you can omit the closing slash.
+                    &lt;input&gt;   {/* ❌ ERROR: Self-closing tags must be closed */}
+                    &lt;input /&gt;   {/* ✅ Correct */}
 
                     As stated in the official docs of React, JSX provides syntactic sugar for React.createElement( ) function.
                    
@@ -1112,7 +1120,6 @@ The idea is to pass a function as a prop to a component, which the component wil
     <b>Parent Component</b>: This component holds state or logic and passes a function to its child as a prop.
     <b>Child Component</b>: This component uses the function prop to render whatever it needs based on the parent's state or logic.
 
-
     <b>Breakdown of the Example</b>
     <b>MouseTracker Component</b>: This component tracks the mouse position. It has its own state to keep track of the mouse coordinates and updates it whenever the mouse moves.
     <b>Render Prop</b>: The <u>MouseTracker</u> accepts a <u>render</u> prop, which is a function that takes the current mouse position as an argument and returns React elements. This allows the parent component to determine how to display the mouse position.
@@ -1163,6 +1170,63 @@ const App = () => {
 };
 
 export default App;
+
+//---------------- Ex : 2 -----------------
+import OnClick from &#39;./OnClick&#39;;
+import OnHover from &#39;./OnHover&#39;;
+import Counter from &#39;./Counter&#39;;
+const AppHocTextHighlight = () =&gt; {
+
+  return (
+    &lt;&gt;
+      &lt;Counter render={(count, incrementCount) =&gt; &lt;OnClick count={count} incrementCount={incrementCount}/&gt;}/&gt;
+
+      &lt;Counter render={(count, incrementCount) =&gt; &lt;OnHover count={count} incrementCount={incrementCount}/&gt;}/&gt;
+    &lt;/&gt;
+  );
+
+}
+
+export default AppHocTextHighlight
+
+
+//----------- Counter.js -------
+import { useState } from &#39;react&#39;;
+
+function Counter({ render }) {
+    const [count, setCount] = useState(0)
+    const incrementCount = () =&gt; {
+        setCount(prev =&gt; prev + 1)
+    }
+    return (
+        &lt;div&gt;
+            {render(count, incrementCount)}
+        &lt;/div&gt;
+    )
+}
+export default Counter
+
+// ------------- OnClick.js ------
+const OnClick = ({ count, incrementCount }) =&gt; {
+    return (
+      &lt;&gt;
+          &lt;button onClick={() =&gt; incrementCount()}&gt; click {count}&lt;/button&gt;
+      &lt;/&gt;
+    );
+  };
+
+  export default OnClick
+
+
+//------------- OnHover.js -------
+const OnHover = ({ count, incrementCount }) =&gt; {
+    return (
+      &lt;&gt;
+        &lt;button onMouseEnter={() =&gt; incrementCount()}&gt; On Hover {count}&lt;/button&gt;
+      &lt;/&gt;
+    );
+  };
+export default OnHover 
 `
         },
         {
@@ -1398,7 +1462,7 @@ Wrap elements in &lt;Fragment&gt; to group them together in situations where you
 <b>Props</b> 
 optional key: Fragments declared with the explicit &lt;Fragment&gt; syntax may have keys.
 
-<b> Caveats </b> 
+<b> Warnings </b> 
 If you want to pass key to a Fragment, you can't use the &lt;&gt;...&lt;/&gt; syntax. You have to explicitly import Fragment from 'react' and render &lt;Fragment key={yourKey}&gt;...&lt;/Fragment&gt;.
 
 React does not reset state when you go from rendering &lt;&gt;&lt;Child /&gt;&lt;/&gt; to [&lt;Child /&gt;]  or back, or when you go from rendering &lt;&gt;&lt;Child /&gt;&lt;/&gt; to &lt;Child /&gt; and back. This only works a single level deep: for example, going from &lt;&gt;&lt;&gt;&lt;Child /&gt;&lt;/&gt;&lt;/&gt; to &lt;Child /&gt; resets the state. See the precise semantics here.
@@ -2938,6 +3002,43 @@ export default ShadowComponent;
     },
     {
       id: 52,
+      title: "children prop",
+      note: [
+        {
+          text1: `
+          
+          <b>Using the FC type Ex : 1</b>
+There is a standard React type, FC, that we can use on arrow function components. FC stands for Function Component, and it aliases a type called FunctionComponent.
+
+<a href="https://www.carlrippon.com/react-children-with-typescript/" target="_blank">react-children-with-typescript</a>
+<a href="https://dev.to/debs_obrien/typescript-and-react-children-4epg" target="_blank">typescript-and-react-children</a> 
+`,
+          code1: `//---------------- Ex : 1 ------------
+type Props = {
+  title: string,
+};
+const Page: React.FC&lt;Props&gt; = ({
+  title,
+  children,
+}) =&gt; (
+  &lt;div&gt;
+    &lt;h1&gt;{title}&lt;/h1&gt;
+    {children}
+  &lt;/div&gt;
+);`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
       title: "aff intro",
       note: [
         {
@@ -3410,7 +3511,8 @@ export default App
       title: "useState",
       note: [
         {
-          text1: `useState is React Hook that allows you to add state to a functional component. It returns an array with two values: the current state and a function to update it. The Hook takes an initial state value as an argument and returns an updated state value whenever the setter function is called. 
+          text1: `State is an object that holds data that can change over time in a React component. It represents the mutable part of the component
+useState is React Hook that allows you to add state to a functional component. It returns an array with two values: the current state and a function to update it. The Hook takes an initial state value as an argument and returns an updated state value whenever the setter function is called. 
 
                     <span style="color:red"> const [state, setState] = useState(initialValue); </span>
                     using array destructuring we can set the variable name and function name
@@ -7396,187 +7498,6 @@ export default App;
       ],
     },
     {
-      id: 27,
-      title: "Lazy loading",
-      note: [
-        {
-          text1: `Lazy loading is a strategy that delays the loading of some assets (e.g., images) until they are needed by the user based on the user's activity and navigation pattern; typically, these assets are only loaded when they are scrolled into view.
-
-                    lazy loading is an optimization technique or a design pattern in which the loading of an item, whether it's a picture, video, web page, music file, or document, is delayed until it is required, saving bandwidth and precious computing resources.
-
-                    In simple terms, lazy loading is a design pattern. It allows you to load parts of your application on-demand to reduce the initial load time. For example, you can initially load the components and modules related to user login and registration. Then, you can load the rest of the components based on user navigation.
-                    
-                    lazy lets you defer loading component's code until it is rendered for the first time.
-<span style="color:red"> const SomeComponent = lazy(load) </span>
-Call <b>lazy</b> outside your components to declare a lazy-loaded React component:
-<span style="color:red">
-import { lazy } from 'react';
-const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));</span>
-
-<b>Parameters</b> 
-<b>load</b>: A function that returns a Promise or another thenable (a Promise-like object with a <b>then</b> method). React will not call <b>load</b> until the first time you attempt to render the returned component. After React first calls <b>load</b>, it will wait for it to resolve, and then render the resolved value's <b>.default</b> as a React component. Both the returned Promise and the Promise's resolved value will be cached, so React will not call <b>load</b> more than once. If the Promise rejects, React will <b>throw</b> the rejection reason for the nearest Error Boundary to handle.
-<b>Returns </b>
-<b>lazy</b> returns a React component you can render in your tree. While the code for the lazy component is still loading, attempting to render it will suspend. Use <b> &lt;Suspense&gt; </b> to display a loading indicator while it's loading.
-
-<b>Lazy Loading in React JS</b> helps to optimize the performance of React applications. The data is only rendered when visited or scrolled it can be images, scripts, etc. Lazy loading helps to load the web page quickly and presents the limited content to the user that is needed for the interaction lazy loading can be more helpful in applications that have high-resolution images or data that alters the loading time of the application.
-
-<b>Lazy Loading in React</b>:
-Lazy loading is a technique in React that allows you to load components, modules, or assets asynchronously, improving the loading time of your application. React provides a built-in React.lazy() method and Suspense component to achieve lazy loading.
-
-1) <b>Code-Splitting</b>: You split your code into smaller chunks, typically by creating separate bundles for different parts of your application.
-2) <b>Dynamic Import</b>: Instead of importing components directly at the top of your file, you use dynamic import() to import them only when they are needed.
-3) <b>React.lazy()</b>: You wrap the dynamic import() call with React.lazy(), which allows React to render a fallback component while the requested component is being loaded.
-
-<b>Steps to Implement Lazy Loading</b>:
-Recognize the component you want to Lazy Load. These are mostly Large or complex which is not necessary for all the users when the page loads.
-Import the <b>lazy()</b> and Suspense components from the React package
-Use the <b>lazy()</b> function to dynamically import the component you want to lazy load:
-Note that the argument to the <b>lazy()</b> function should be a function that returns the result of the import() function. 
-Wrap the lazy-loaded component in a <b>Suspense</b> component, which will display a fallback UI while the component is being loaded:
-
-<b>React.lazy()</b>
-React.lazy() allows developers to easily create components with dynamic imports and render them as normal components. When the component is rendered, it will automatically load the bundle that contains the rendered component.
-
-You need to provide a single input parameter to call <b>React.lazy()</b>. It accepts a function as an input parameter, and that function should return a promise after loading the component using <b>import()</b>. Finally, the returned promise from <b>React.lazy()</b> will give you a module with a default export containing the React component.
-
-<b>Advantages of Lazy Loading</b>
-=> Reduces initial loading time by reducing the bundle size.
-=> Reduces browser workload.
-=> Improves application performance in low bandwidth situations.
-=> Improves user experience at initial loading.
-=> Optimizes resource usage.
-<b>advantages</b>:
-<u>Faster Initial Load Time</u>: By only loading the necessary components when they are needed, lazy loading reduces the initial bundle size of your application. This results in faster load times, especially for large applications with many components or heavy assets.
-<u>Improved Performance</u>: Smaller initial bundle sizes lead to quicker parsing and execution by the browser, resulting in improved overall performance. Users experience faster page load times and smoother interactions, particularly on slower networks or devices.
-<u>Reduced Network Usage</u>: Lazy loading decreases the amount of data transferred over the network during the initial page load. This can be beneficial for users on limited data plans or slower connections, as it reduces the time required to download and render the initial content.
-<u>Optimized Resource Usage</u>: Components or resources that are not immediately needed are deferred until they are required, optimizing resource usage and minimizing memory consumption. This can help improve the efficiency of your application, especially on devices with limited resources.
-<u>Enhanced User Experience</u>: By prioritizing the loading of critical content and deferring non-essential components, lazy loading can enhance the user experience. Users can interact with the core functionality of the application more quickly, leading to higher user satisfaction and engagement.
-<u>Scalability and Maintainability</u>: Lazy loading promotes a modular approach to development, allowing you to split your codebase into smaller, more manageable chunks. This makes it easier to maintain and scale your application over time, as you can add new features or components without significantly impacting the initial load time.
-
-
-<b>Disadvantages of Lazy Loading</b>
-=> Not suitable for small-scale applications.
-=> Placeholders can slow down quick scrolling.
-=> Requires additional communication with the server to fetch resources.
-=> Can affect SEO and ranking.
-                    `,
-          code1: `
-                    // Implement Lazy Loding with React.Lazy method
-const MyComponent = React.lazy(() => import('./MyComponent'));
-
-&lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
-      &lt;MyComponent /&gt;
-&lt;/Suspense&gt;
-
-//------------
-//Example : 1
-//Parent.js
-import React from "react";
-import { Suspense, lazy } from "react";
-
-const MyComponent1 = lazy(() => import('./MComponent1'))
-const MyComponent2 = lazy(() => import('./MComponent2'))
-
-function LazyLoadingApp() {
-  return (
-    &lt;&gt;
-      &lt;h1&gt; Lazy Load&lt;/h1&gt;
-      &lt;Suspense fallback={&lt;div&gt;Component1 are loading please wait...&lt;/div&gt;}&gt;
-        &lt;MyComponent1 /&gt;
-        &lt;MyComponent2 /&gt;
-      &lt;/Suspense&gt;
-    &lt;/&gt;
-  );
-}
-export default LazyLoadingApp;
-
-// MyComponent1.js
-
-import React from "react";
-function MyComponent1() {
-  return (
-    &lt;&gt;
-      &lt;p&gt; myComponent1 &lt;/p&gt;
-    &lt;/&gt;
-  );
-}
-export default MyComponent1;
-
-// MComponent2.js
-import React, { useEffect, useState } from "react";
-function MComponent2() {
-    const [val, setVal] = useState(0)
-
-    useEffect(() => {
-        for (let i = 0; i < 1000000; i++) {
-            setVal(val => val + i)
-        }
-    }, [])
-
-    return (
-        &lt;&gt;
-            &lt;p&gt; myComponent2 { val }&lt;/p&gt;
-        &lt;/&gt;
-    );
-}
-export default MComponent2;
-
-//---------------
-//Example : 2
-//Parent.js
-
-import { useState, Suspense, lazy } from 'react';
-import Loading from './Loading.js';
-
-const MarkdownPreview = lazy(() => delayForDemo(import('./MarkdownPreview.js')));
-
-export default function MarkdownEditor() {
-  const [showPreview, setShowPreview] = useState(false);
-  const [markdown, setMarkdown] = useState('Hello, **world**!');
-  return (
-    &lt;&gt;
-      &lt;textarea value={markdown} onChange={e =&gt; setMarkdown(e.target.value)} /&gt;
-      &lt;label&gt;
-        &lt;input type=&quot;checkbox&quot; checked={showPreview} onChange={e =&gt; setShowPreview(e.target.checked)} /&gt;
-        Show preview
-      &lt;/label&gt;
-      &lt;hr /&gt;
-      {showPreview &amp;&amp; (
-        &lt;Suspense fallback={&lt;Loading /&gt;}&gt;
-          &lt;h2&gt;Preview&lt;/h2&gt;
-          &lt;MarkdownPreview markdown={markdown} /&gt;
-        &lt;/Suspense&gt;
-      )}
-    &lt;/&gt;
-  );
-}
-
-// Add a fixed delay so you can see the loading state
-function delayForDemo(promise) {
-  return new Promise(resolve => {
-    setTimeout(resolve, 2000);
-  }).then(() => promise);
-}
-
-// Loading.js
-export default function Loading() {
-    return &lt;p&gt;&lt;i&gt;Loading...&lt;/i&gt;&lt;/p&gt;;
-  }
-  
-// MarkdownPreview.js
-export default function MarkdownPreview({ markdown }) {
-  return (
-    &lt;&gt;
-        &lt;p&gt;{markdown}&lt;/p&gt;
-    &lt;/&gt;
-  );
-}
-
-`
-        }
-      ],
-    },
-    {
       id: 34,
       title: "In which situation would you use useMemo() in React?",
       note: [
@@ -8106,6 +8027,478 @@ const {name, age} = props;
 export default PureComponent;
                     // In this example, PureComponent is a functional component that behaves like a pure function. It takes name and age as input through the props parameter and produces a Virtual DOM representation based on these props. It doesn't have any internal state, doesn't cause side effects, and is deterministic.
 `
+        }
+      ],
+    },
+    {
+      id: 52,
+      section: `Code Splitting`,
+      title: "Dynamic Import",
+      note: [
+        {
+          text1: `Dynamic imports in React allow you to load modules (like components) on demand, improving performance by reducing initial load times and optimizing code splitting.
+          
+          <b>How It Works?</b>(Ex : 1)
+✔️ We store the dynamically imported component in state (Component).
+✔️ Clicking the button triggers import() manually.
+✔️ No need for <b>Suspense</b> since React treats it as a normal component.
+
+
+<b>How This Works</b>Ex : 2:
+✔️ import() loads the module asynchronously.
+✔️ setDynamicComponent() updates state only when the module is loaded.
+✔️ React rerenders the component once it's available.`,
+          code1: `//---------------- Ex : 1 -----------
+          //App.jsx
+          import React, { useState } from &#39;react&#39;;
+const App = () =&gt; {
+  const [Component, setComponent] = useState(null);
+
+  const loadComponent = async () =&gt; {
+    const { default: DynamicComponent } = await import(&#39;./DynamicComponent&#39;);
+    setComponent(() =&gt; DynamicComponent);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Dynamic Import Without Lazy &amp; Suspense&lt;/h1&gt;
+      &lt;button onClick={loadComponent}&gt;Load Component&lt;/button&gt;
+      {Component &amp;&amp; &lt;Component /&gt;}
+    &lt;/div&gt;
+  );
+};
+export default App;
+
+
+//--------- DynamicComponent.jsx ----------
+export default function DynamicComponent() {          
+    return (
+        &lt;&gt;
+            &lt;h1&gt;Dynamic&lt;/h1&gt;
+        &lt;/&gt;
+    );
+}
+
+
+
+//------------------  Ex : 2 ------------
+//App.jsx
+//const MyComponent = import(&#39;./DynamicComponent&#39;); // Returns a Promise
+import React, { useState, useEffect } from &quot;react&quot;;
+const App = () =&gt; {
+  const [DynamicComponent, setDynamicComponent] = useState(null);
+  useEffect(() =&gt; {
+    import(&quot;./DynamicComponent&quot;).then((module) =&gt; {
+      setDynamicComponent(() =&gt; module.default); // Set the component in state
+    });
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Dynamic Import Example&lt;/h1&gt;
+      {DynamicComponent ? &lt;DynamicComponent /&gt; : &lt;p&gt;Loading component...&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+};
+export default App;
+
+
+
+// DynamicComponent.jsx
+export default function DynamicComponent() {
+
+    return (
+        &lt;&gt;
+            &lt;h1&gt;Dynamic&lt;/h1&gt;
+        &lt;/&gt;
+    );
+}
+`
+        },
+        {
+          text1: `<b>When to Use Dynamic Imports Inside useEffect?</b>
+
+✅ When you want to lazy load a component without lazy() and Suspense
+✅ When a module is needed only after a certain action (e.g., user clicks a button)
+✅ When working with large third-party libraries (like lodash, moment, or d3.js)
+✅ When optimizing bundle size and reducing initial load time`,
+          code1: `//----------- Ex : 1 ----------
+          // Here’s how you can dynamically import a component inside useEffect and store it in state.
+          import React, { useState, useEffect } from "react";
+
+const App = () => {
+  const [DynamicComponent, setDynamicComponent] = useState(null);
+
+  useEffect(() => {
+    import("./DynamicComponent").then((module) => {
+      setDynamicComponent(() => module.default);
+    });
+  }, []); // Runs only once when the component mounts
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Dynamic Import Inside useEffect&lt;/h1&gt;
+      {DynamicComponent ? &lt;DynamicComponent /&gt; : &lt;p&gt;Loading component...&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+};
+
+export default App;
+
+//----------- Ex : 2 ----------
+// Example: Dynamically Importing a Function Inside "useEffect"
+// You can also use "useEffect" to dynamically import utility functions.
+import React, { useState, useEffect } from "react";
+
+const App = () => {
+  const [result, setResult] = useState(null);
+  useEffect(() => {
+    import("./mathUtils").then((module) => {
+      const add = module.add;
+      setResult(add(5, 3));
+    });
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Dynamic Import for Functions&lt;/h1&gt;
+      {result !== null ? &lt;p&gt;Result: {result}&lt;/p&gt; : &lt;p&gt;Loading function...&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+};
+export default App;
+
+
+//----------- Ex : 3 ----------
+// Example: Dynamic Import Based on User Action ("useEffect" with Dependency)
+// If you want to load a module when a specific state changes, add a dependency to "useEffect".
+import React, { useState, useEffect } from "react";
+
+const App = () => {
+  const [showComponent, setShowComponent] = useState(false);
+  const [DynamicComponent, setDynamicComponent] = useState(null);
+
+  useEffect(() => {
+    if (showComponent) {
+      import("./DynamicComponent").then((module) => {
+        setDynamicComponent(() => module.default);
+      });
+    }
+  }, [showComponent]); // Runs when showComponent changes
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Conditional Dynamic Import&lt;/h1&gt;
+      &lt;button onClick={() =&gt; setShowComponent(true)}&gt;Load Component&lt;/button&gt;
+      {showComponent &amp;&amp; DynamicComponent ? &lt;DynamicComponent /&gt; : null}
+    &lt;/div&gt;
+  );
+};
+
+export default App;
+
+`
+        },
+        {
+          text1: `Dynamic Import of Redux Reducers (Code-Splitting in Redux)`,
+          code1: `//  Setup: Store Configuration (store.js)
+          import { configureStore } from "@reduxjs/toolkit";
+
+const store = configureStore({
+  reducer: {}, // Empty initially, will be populated dynamically
+});
+
+// Function to inject reducers dynamically
+export const injectReducer = (key, reducer) => {
+  if (!store.asyncReducers) store.asyncReducers = {};
+  if (!store.asyncReducers[key]) {
+    store.asyncReducers[key] = reducer;
+    store.replaceReducer(store.asyncReducers);
+  }
+};
+
+export default store;
+
+//------- DynamicComponent.js ------------
+import React, { useEffect } from &quot;react&quot;;
+import { useDispatch, useSelector } from &quot;react-redux&quot;;
+
+const DynamicComponent = () =&gt; {
+  const dispatch = useDispatch();
+  const count = useSelector((state) =&gt; state.counter?.value);
+
+  useEffect(() =&gt; {
+    import(&quot;./counterSlice&quot;).then((module) =&gt; {
+      const counterReducer = module.default;
+      import(&quot;../store&quot;).then(({ injectReducer }) =&gt; {
+        injectReducer(&quot;counter&quot;, counterReducer);
+        dispatch({ type: &quot;counter/increment&quot; });
+      });
+    });
+  }, [dispatch]);
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Dynamic Redux Reducer&lt;/h1&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default DynamicComponent;
+
+`
+        }
+      ],
+    },
+    {
+      id: 27,
+      title: "Lazy loading",
+      note: [
+        {
+          text1: `Lazy loading is a strategy that delays the loading of some assets (e.g., images) until they are needed by the user based on the user's activity and navigation pattern; typically, these assets are only loaded when they are scrolled into view.
+
+                    lazy loading is an optimization technique or a design pattern in which the loading of an item, whether it's a picture, video, web page, music file, or document, is delayed until it is required, saving bandwidth and precious computing resources.
+
+                    In simple terms, lazy loading is a design pattern. It allows you to load parts of your application on-demand to reduce the initial load time. For example, you can initially load the components and modules related to user login and registration. Then, you can load the rest of the components based on user navigation.
+                    
+                    lazy lets you defer loading component's code until it is rendered for the first time.
+<span style="color:red"> const SomeComponent = lazy(load) </span>
+Call <b>lazy</b> outside your components to declare a lazy-loaded React component:
+<span style="color:red">
+import { lazy } from 'react';
+const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));</span>
+
+<b>Parameters</b> 
+<b>load</b>: A function that returns a Promise or another thenable (a Promise-like object with a <b>then</b> method). React will not call <b>load</b> until the first time you attempt to render the returned component. After React first calls <b>load</b>, it will wait for it to resolve, and then render the resolved value's <b>.default</b> as a React component. Both the returned Promise and the Promise's resolved value will be cached, so React will not call <b>load</b> more than once. If the Promise rejects, React will <b>throw</b> the rejection reason for the nearest Error Boundary to handle.
+<b>Returns </b>
+<b>lazy</b> returns a React component you can render in your tree. While the code for the lazy component is still loading, attempting to render it will suspend. Use <b> &lt;Suspense&gt; </b> to display a loading indicator while it's loading.
+
+<b>Lazy Loading in React JS</b> helps to optimize the performance of React applications. The data is only rendered when visited or scrolled it can be images, scripts, etc. Lazy loading helps to load the web page quickly and presents the limited content to the user that is needed for the interaction lazy loading can be more helpful in applications that have high-resolution images or data that alters the loading time of the application.
+
+<b>Lazy Loading in React</b>:
+Lazy loading is a technique in React that allows you to load components, modules, or assets asynchronously, improving the loading time of your application. React provides a built-in React.lazy() method and Suspense component to achieve lazy loading.
+
+1) <b>Code-Splitting</b>: You split your code into smaller chunks, typically by creating separate bundles for different parts of your application.
+2) <b>Dynamic Import</b>: Instead of importing components directly at the top of your file, you use dynamic import() to import them only when they are needed.
+3) <b>React.lazy()</b>: You wrap the dynamic import() call with React.lazy(), which allows React to render a fallback component while the requested component is being loaded.
+
+<b>Steps to Implement Lazy Loading</b>:
+Recognize the component you want to Lazy Load. These are mostly Large or complex which is not necessary for all the users when the page loads.
+Import the <b>lazy()</b> and Suspense components from the React package
+Use the <b>lazy()</b> function to dynamically import the component you want to lazy load:
+Note that the argument to the <b>lazy()</b> function should be a function that returns the result of the import() function. 
+Wrap the lazy-loaded component in a <b>Suspense</b> component, which will display a fallback UI while the component is being loaded:
+
+<b>React.lazy()</b>
+React.lazy() allows developers to easily create components with dynamic imports and render them as normal components. When the component is rendered, it will automatically load the bundle that contains the rendered component.
+
+You need to provide a single input parameter to call <b>React.lazy()</b>. It accepts a function as an input parameter, and that function should return a promise after loading the component using <b>import()</b>. Finally, the returned promise from <b>React.lazy()</b> will give you a module with a default export containing the React component.
+
+<b>Advantages of Lazy Loading</b>
+=> Reduces initial loading time by reducing the bundle size.
+=> Reduces browser workload.
+=> Improves application performance in low bandwidth situations.
+=> Improves user experience at initial loading.
+=> Optimizes resource usage.
+<b>advantages</b>:
+<u>Faster Initial Load Time</u>: By only loading the necessary components when they are needed, lazy loading reduces the initial bundle size of your application. This results in faster load times, especially for large applications with many components or heavy assets.
+<u>Improved Performance</u>: Smaller initial bundle sizes lead to quicker parsing and execution by the browser, resulting in improved overall performance. Users experience faster page load times and smoother interactions, particularly on slower networks or devices.
+<u>Reduced Network Usage</u>: Lazy loading decreases the amount of data transferred over the network during the initial page load. This can be beneficial for users on limited data plans or slower connections, as it reduces the time required to download and render the initial content.
+<u>Optimized Resource Usage</u>: Components or resources that are not immediately needed are deferred until they are required, optimizing resource usage and minimizing memory consumption. This can help improve the efficiency of your application, especially on devices with limited resources.
+<u>Enhanced User Experience</u>: By prioritizing the loading of critical content and deferring non-essential components, lazy loading can enhance the user experience. Users can interact with the core functionality of the application more quickly, leading to higher user satisfaction and engagement.
+<u>Scalability and Maintainability</u>: Lazy loading promotes a modular approach to development, allowing you to split your codebase into smaller, more manageable chunks. This makes it easier to maintain and scale your application over time, as you can add new features or components without significantly impacting the initial load time.
+
+
+<b>Disadvantages of Lazy Loading</b>
+=> Not suitable for small-scale applications.
+=> Placeholders can slow down quick scrolling.
+=> Requires additional communication with the server to fetch resources.
+=> Can affect SEO and ranking.
+                    `,
+          code1: `
+                    // Implement Lazy Loding with React.Lazy method
+const MyComponent = React.lazy(() => import('./MyComponent'));
+
+&lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+      &lt;MyComponent /&gt;
+&lt;/Suspense&gt;
+
+//------------
+//Example : 1
+//Parent.js
+import React from "react";
+import { Suspense, lazy } from "react";
+
+const MyComponent1 = lazy(() => import('./MComponent1'))
+const MyComponent2 = lazy(() => import('./MComponent2'))
+
+function LazyLoadingApp() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt; Lazy Load&lt;/h1&gt;
+      &lt;Suspense fallback={&lt;div&gt;Component1 are loading please wait...&lt;/div&gt;}&gt;
+        &lt;MyComponent1 /&gt;
+        &lt;MyComponent2 /&gt;
+      &lt;/Suspense&gt;
+    &lt;/&gt;
+  );
+}
+export default LazyLoadingApp;
+
+// MyComponent1.js
+
+import React from "react";
+function MyComponent1() {
+  return (
+    &lt;&gt;
+      &lt;p&gt; myComponent1 &lt;/p&gt;
+    &lt;/&gt;
+  );
+}
+export default MyComponent1;
+
+// MComponent2.js
+import React, { useEffect, useState } from "react";
+function MComponent2() {
+    const [val, setVal] = useState(0)
+
+    useEffect(() => {
+        for (let i = 0; i < 1000000; i++) {
+            setVal(val => val + i)
+        }
+    }, [])
+
+    return (
+        &lt;&gt;
+            &lt;p&gt; myComponent2 { val }&lt;/p&gt;
+        &lt;/&gt;
+    );
+}
+export default MComponent2;
+
+//---------------
+//Example : 2
+//Parent.js
+
+import { useState, Suspense, lazy } from 'react';
+import Loading from './Loading.js';
+
+const MarkdownPreview = lazy(() => delayForDemo(import('./MarkdownPreview.js')));
+
+export default function MarkdownEditor() {
+  const [showPreview, setShowPreview] = useState(false);
+  const [markdown, setMarkdown] = useState('Hello, **world**!');
+  return (
+    &lt;&gt;
+      &lt;textarea value={markdown} onChange={e =&gt; setMarkdown(e.target.value)} /&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;checkbox&quot; checked={showPreview} onChange={e =&gt; setShowPreview(e.target.checked)} /&gt;
+        Show preview
+      &lt;/label&gt;
+      &lt;hr /&gt;
+      {showPreview &amp;&amp; (
+        &lt;Suspense fallback={&lt;Loading /&gt;}&gt;
+          &lt;h2&gt;Preview&lt;/h2&gt;
+          &lt;MarkdownPreview markdown={markdown} /&gt;
+        &lt;/Suspense&gt;
+      )}
+    &lt;/&gt;
+  );
+}
+
+// Add a fixed delay so you can see the loading state
+function delayForDemo(promise) {
+  return new Promise(resolve => {
+    setTimeout(resolve, 2000);
+  }).then(() => promise);
+}
+
+// Loading.js
+export default function Loading() {
+    return &lt;p&gt;&lt;i&gt;Loading...&lt;/i&gt;&lt;/p&gt;;
+  }
+  
+// MarkdownPreview.js
+export default function MarkdownPreview({ markdown }) {
+  return (
+    &lt;&gt;
+        &lt;p&gt;{markdown}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}
+
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "React Error Boundary",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Suspense for Code Splitting",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "React Router Code Splitting(Route based Code Splitting)",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Webpack and Code Splitting",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Bundle Analysis & Optimization",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Preloading & Prefetching",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Server-side Rendering (SSR) and Code Splitting",
+      note: [
+        {
+          text1: ``,
+          code1: ``
         }
       ],
     },

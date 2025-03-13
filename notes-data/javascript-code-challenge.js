@@ -1460,21 +1460,56 @@ console.log(findMissingNumber([2, 3, 4, 5, 6])); // Output: 1 (Also works when \
     },
     {
       id: 1,
-      title: "JavaScript Event Loop",
+      title: "Write a JavaScript function to recursively flatten a nested array into a single-level array.",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `Input : const ar = ["A", "b", ["C", ["A", ["E"]]], "c"];
+  Output : ["A", "b", "C", "A", "E", "c"]
+
+
+  <b>Step-by-Step Execution</b>:
+
+    <b>Base Case (Non-array Elements)</b>:
+        If <u>curr</u> is not an array, push it directly into <u>acc</u>.
+
+    <b>Recursive Case (Nested Arrays)</b>:
+        If <u>curr</u> is an array, recursively call <u>arrToAr(curr)</u>, which flattens it.
+        The <u>...</u> (spread operator) is used to unpack the flattened elements before pushing them into acc.
+
+        Now, let's backtrack and merge the results step by step:
+    arrToAr(["E"]) → ["E"]
+    arrToAr(["A", ["E"]]) → ["A", "E"]
+    arrToAr(["C", ["A", ["E"]]]) → ["C", "A", "E"]
+    arrToAr(["A", "b", ["C", ["A", ["E"]]], "c"]) → ["A", "b", "C", "A", "E", "c"]
+`,
+          code1: `    const ar = ["A","b",["C",["A",["E"]]],"c" ]
+function arrToAr(ar) {
+    return ar.reduce((acc, curr) => {
+        Array.isArray(curr) 
+            ? acc.push(...arrToAr(curr))  // Recursively flatten the nested array
+            : acc.push(curr);             // Push non-array elements directly
+        return acc;
+    }, []);
+}
+    console.log(arrToAr(ar))`
         }
       ]
     },
     {
       id: 1,
-      title: "JavaScript Event Loop",
+      title: "Find biggest value in array",
       note: [
         {
           text1: ``,
-          code1: ``
+          code1: `    const ar = [1, 4, 3, 25, 5, 16, 7, 10, 14, 21]
+   
+   let bigger = 0
+   for(let i=0; i < ar.length; i++){
+        if(bigger < ar[i]){
+            bigger = ar[i]
+        } 
+   }
+    console.log(bigger)`
         }
       ]
     },
