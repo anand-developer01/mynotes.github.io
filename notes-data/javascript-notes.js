@@ -8,6 +8,24 @@ const javascriptData = {
   javascriptNote: [
     {
       id: 1,
+      title: "Master Advanced JavaScript Concepts",
+      note: [
+        {
+          text1: `-> <b>Deep dive into JavaScript</b>: Make sure you're comfortable with advanced topics such as:
+-> <b>Closures, Promises, Async/Await</b>
+-> <b>Event loop</b> and how JavaScript handles asynchronous operations
+-> <b>Prototype inheritance, this</b> keyword, and <b>bind/call/apply</b>
+-> <b>Memory management, Garbage Collection</b>
+-> <b>Module systems</b> (CommonJS, ES6 modules)
+-> <b>Functional programming</b> concepts (immutability, currying, higher-order functions)
+-> <b>Design Patterns</b>: Learn common design patterns like Singleton, Factory, Observer, and Module patterns.
+`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
       section: `JAVASCRIPT RUNTIME`,
       title: "JavaScript Event Loop",
       note: [
@@ -10709,6 +10727,90 @@ Prevents Redundant API Calls: Debouncing ensures that the API requests are only 
             const seaKeyword = document.getElementById(&#39;searchId&#39;).value;
             dSearch(seaKeyword);
         }
+    &lt;/script&gt;
+    
+    
+    //----------- Ex : 2 ----------
+        &lt;div class=&quot;card blue&quot;&gt;
+        &lt;button class=&quot;increment_bin&quot;&gt; increment &lt;/button&gt;
+        &lt;p&gt; button pressed &lt;span class=&quot;increment_pressed&quot;&gt;0&lt;/span&gt; times &lt;/p&gt;
+        &lt;p&gt; triggered &lt;span class=&quot;increment_count&quot;&gt;0&lt;/span&gt; times &lt;/p&gt;
+    &lt;/div&gt;
+    
+            const btnCount = document.querySelector('.increment_count')
+        let pressedCount = 0
+        let triggeredCount = 0
+
+        function debounce(func, delay) {
+            let timeout
+            return function () {
+                if(timeout) clearTimeout(timeout)
+                timeout = setTimeout(() => {
+                    func()
+                }, delay)
+            }
+        }
+        function incCount() {
+            btnCount.innerHTML = ++triggeredCount
+        }
+        const runDeb = debounce(incCount, 800)
+        btn.addEventListener("click", () => {
+            btnPressed.innerHTML = ++pressedCount
+            runDeb()
+        })
+            
+        
+        // -------------- Ex : 3 ------------
+            &lt;div class=&quot;card blue&quot;&gt;
+        &lt;input type=&quot;text&quot; id=&quot;inputText&quot; /&gt;
+        &lt;br /&gt;
+        &lt;p&gt; Dafault : &lt;span id=&quot;defaultText&quot;&gt;&lt;/span&gt; &lt;/p&gt;
+        &lt;p&gt; Debounce : &lt;span id=&quot;DebounceText&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+        &lt;p&gt;Throttle : &lt;span id=&quot;ThrottleText&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;/div&gt;
+    
+        &lt;script&gt;
+        const inputText = document.getElementById('inputText')
+        const defaultText = document.getElementById('defaultText')
+        const DebounceText = document.getElementById('DebounceText')
+        const ThrottleText = document.getElementById('ThrottleText')
+
+        // debounce
+        function debounce(cbFun, delay){
+            let timeout
+            return function(...args){
+                timeout = setTimeout(() => {
+                    cbFun.apply(this, args)
+                },delay)
+            }
+        }
+        function cbFunDebounce(inputText){
+            DebounceText.textContent = inputText
+        }
+        const callDebounce = debounce(cbFunDebounce, 1000)
+
+        //throttle
+        function throttle(cbFun, delay){
+            let last = 0
+            return function(...args){
+                let now = new Date().getTime()
+                if(now - last < delay) return;
+                last = now;
+                cbFun.apply(this, args)
+            }
+        }
+
+        function cbFunThrottle(inputText) {
+            ThrottleText.textContent = inputText
+        }
+
+        const callThrottle = throttle(cbFunThrottle, 1000)
+        
+         inputText.addEventListener('input', (e) => {
+            defaultText.textContent = e.target.value
+            callDebounce(e.target.value)
+            callThrottle(e.target.value)
+        })
     &lt;/script&gt;`
         },
       ]
@@ -10717,6 +10819,77 @@ Prevents Redundant API Calls: Debouncing ensures that the API requests are only 
       id: 1,
       title: "CORS request",
       note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "What is Throttling?",
+      note: [
+        {
+          text1: `Throttling is a technique that limits the rate at which a function can be called. It ensures that a function is executed at most once in a specified time interval, regardless of how many times it's invoked. This is particularly useful for performance-intensive operations or when you want to control the rate of API calls.
+          
+<b>How Throttling Works</b>
+-> When a throttled function is called, it checks if enough time has passed since its last execution.
+-> If the time threshold has not been met, the function call is ignored.
+-> If the time threshold has been met, the function is executed and the timer is reset.
+
+<b>How to Implement Throttling in JavaScript</b>
+Let's first understand what we want to achieve with throttling:
+-> Call the function immediately the first time.
+-> After each call, prevent the function from being called again for a certain time period.
+-> Once that time period has passed, the function can be called again.
+
+<b>Why is Throttling Needed?</b>
+Certain user interactions, like scrolling or window resizing, trigger events multiple times per second. Executing event handlers at such a high frequency can lead to performance issues, including:
+-> Increased CPU and memory usage.
+-> Unresponsive user interfaces.
+-> Inefficient API calls leading to server strain.
+`,
+          code1: `//------------- Ex : 1 --------------
+              &lt;div class=&quot;card blue&quot;&gt;
+        &lt;button class=&quot;increment_bin&quot;&gt; increment &lt;/button&gt;
+        &lt;p&gt; button pressed &lt;span class=&quot;increment_pressed&quot;&gt;0&lt;/span&gt; times &lt;/p&gt;
+        &lt;p&gt; triggered &lt;span class=&quot;increment_count&quot;&gt;0&lt;/span&gt; times &lt;/p&gt;
+    &lt;/div&gt;
+
+
+                  const btn = document.querySelector('.increment_bin')
+        const btnPressed = document.querySelector('.increment_pressed')
+        const btnCount = document.querySelector('.increment_count')
+
+        let pressedCount = 0
+        let triggeredCount = 0
+
+        function myThrottle(func, delay) {
+            
+            let last = 0
+            return function(){
+                let now = new Date().getTime()
+                if(now - last < delay) {
+                    return null;
+                }
+                last = now;
+                func();
+            }
+        }
+
+        function incCount() {
+            console.log(1)
+            btnCount.innerHTML = ++triggeredCount
+        }
+
+        const runDeb = myThrottle(incCount, 1000)
+
+        btn.addEventListener("click", () => {
+            btnPressed.innerHTML = ++pressedCount
+            runDeb()
+        })
+            `
+        },
         {
           text1: ``,
           code1: ``
