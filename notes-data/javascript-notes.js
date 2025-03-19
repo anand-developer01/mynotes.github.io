@@ -8,6 +8,38 @@ const javascriptData = {
   javascriptNote: [
     {
       id: 1,
+      title: "Master Advanced JavaScript Concepts",
+      note: [
+        {
+          text1: `-> <b>Deep dive into JavaScript</b>: Make sure you're comfortable with advanced topics such as:
+-> <b>Closures, Promises, Async/Await</b>
+-> <b>Event loop</b> and how JavaScript handles asynchronous operations
+-> <b>Prototype inheritance, this</b> keyword, and <b>bind/call/apply</b>
+-> <b>Memory management, Garbage Collection</b>
+-> <b>Module systems</b> (CommonJS, ES6 modules)
+-> <b>Functional programming</b> concepts (immutability, currying, higher-order functions)
+-> <b>Design Patterns</b>: Learn common design patterns like Singleton, Factory, Observer, and Module patterns.
+
+
+Web Components Development
+Responsive Design
+Data Security
+Performance Optimization
+Cross-Browser Compatibility
+UI/UX Best Practices
+Version Control (Git, GitHub)
+Agile & Scrum Methodologies
+API Integration
+Testing & Debugging
+Problem-Solving
+Project Estimations
+`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
       section: `JAVASCRIPT RUNTIME`,
       title: "JavaScript Event Loop",
       note: [
@@ -3309,19 +3341,24 @@ clo(i)
       title: "call() method",
       note: [
         {
-          text1: `The call() method calls a function by passing this and specified values as arguments.
-
-          The syntax of the call() method is:
+          text1: `The <b>call()</b> method in JavaScript is a built-in method that allows you to call a function with a specified <b>this</b> value and individual arguments passed one by one.
+          The syntax of the <b>call()</b> method is:
     
           func.call(thisArg, arg1, ... argN)
    
           The call() method can take two parameters:
-    
           <b>thisArg</b> - The thisArg is the object that the this object references inside the function func (or) The value to be passed as the this parameter when the function is called..
-          <b>arg1</b>, ... argN (optional) - Arguments for the function func.
+          <b>arg1, arg2, ...argN</b>: Arguments to be passed to the function. These arguments will be provided individually, not as an array.
 
-          In JavaScript, the call() method is a built-in method that is used to invoke a function with a specified this value and individual arguments provided as separate arguments. It allows you to call a function and explicitly set the context (the value of this) for that function, as well as pass arguments one by one.`,
-          code1: `function sayHello() {
+          In JavaScript, the call() method is a built-in method that is used to invoke a function with a specified this value and individual arguments provided as separate arguments. It allows you to call a function and explicitly set the context (the value of this) for that function, as well as pass arguments one by one.
+          <b>Note</b>: By default, in a function this refers to the global object i.e, window in web browsers and global in node.js.
+
+<b>call() Return Values</b>
+Returns the result obtained from calling the function with the specified this value and arguments.
+<b>Note</b>: By using call(), we can use the functions belonging to one object to be assigned and called for a different object.
+`,
+          code1: `// ----------- Ex : 1 ----------
+          function sayHello() {
             console.log('Hello, \${this.name}!');
         }
   
@@ -3332,10 +3369,8 @@ clo(i)
         sayHello.call(person); // Outputs: "Hello, John!"
         // In this example, sayHello.call(person) calls the 'sayHello' function with person as the value of this, so within the function, this.name refers to John.
         
-        //----------
-
+        //---------- Ex : 2 ------------
         // You can also use call() to borrow methods from one object and apply them to another:
-
       const person1 = {
           firstName: 'John',
           lastName: 'Doe',
@@ -3352,6 +3387,85 @@ clo(i)
       console.log(person1.getFullName.call(person2)); // Outputs: "Jane Doe"
 
       // In this example, person1.getFullName.call(person2) borrows the 'getFullName' method from person1 and applies it to person2, effectively setting this inside 'getFullName' to refer to person2.
+
+      //------------- Ex : 3 -------------
+      //  Using call() Method
+      function sum(a, b) {
+  return a + b;
+}
+// invoking sum() by passing this and 'a', 'b' arguments 
+let result = sum.call(this, 5, 3);
+console.log(result);
+
+
+//------------- Ex : 4 -------------
+// With and Without Using call() Metho
+// function that finds product of two numbers
+function product(a, b) {
+  return a * b;
+}
+
+// invoking product() without using call() method
+let result1 = product(5, 2);
+console.log("Return value Without using call() method: " + result1);
+
+// invoking product() using call() method
+let result2 = product.call(this, 5, 2);
+console.log("Return value Using call() method: " + result2);
+
+// Output:
+// Return value Without using call() method: 10
+// Return value Using call() method: 10
+
+//------------- Ex : 5 -------------
+// Passing Object as this Value in call()
+// object definition
+const human = {
+  firstName: "Judah",
+  lastName: "Parker",
+  age: 26,
+};
+
+// function definition
+function greet() {
+  const string = \`My name is \${this.firstName} \${this.lastName}. I am \${this.age} years old.\`;
+  console.log(string);
+}
+
+// passing object as this value in call() method
+greet.call(human);
+
+// Output :
+// My name is Judah Parker. I am 26 years old.
+
+//------------- Ex : 6 -------------
+//Using call() to Chain Constructors
+//function definition 
+function Animal(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+//function definition 
+function Horse(name, age) {
+  Animal.call(this, name, age);
+  this.sound = "Neigh";
+}
+
+//function definition 
+function Snake(name, age) {
+  Animal.call(this, name, age);
+  this.sound = "Hiss";
+}
+
+const snake1 = new Snake("Harry", 5);
+console.log(snake1.name, snake1.age, snake1.sound);
+
+const horse1 = new Horse("Arnold", 8);
+console.log(horse1.name, horse1.age, horse1.sound);
+// Output
+// Harry 5 Hiss
+// Arnold 8 Neigh
         `
         },
         {
@@ -3436,11 +3550,82 @@ clo(i)
           console.log(ob.maFun())`
         },
         {
-          text1: ``,
+          text1: `<b>Key Benefits of call() Method</b>:
+<b>1) Explicit Control Over this</b>:
+-> <b>call()</b> allows you to explicitly specify the value of <b>this</b> when invoking a function. This is particularly useful when you want to control the context in which a function operates, rather than relying on the default behavior of <b>this</b>.
+-> In JavaScript, <b>this</b> can refer to different things depending on how and where a function is called, so controlling this ensures the correct behavior.
+
+function greet(name) {
+    console.log(\`\${this.name} says Hello to \${name}\`);
+}
+const person = { name: 'Alice' };
+greet.call(person, 'Bob'); // Alice says Hello to Bob
+
+<b>2) Method Borrowing</b>:
+-> <b>Borrowing methods</b> from one object and using them with another object is a key benefit of <b>call()</b>. It allows you to reuse functionality from one context (or object) on another.
+-> This is useful when you want to reuse an existing method without having to redefine it or copy its code.
+
+const person = {
+    name: 'Alice',
+    greet: function() {
+        console.log(\`Hello, my name is \${this.name}\`);
+    }
+};
+const anotherPerson = { name: 'Bob' };
+// Borrowing the greet method from person
+person.greet.call(anotherPerson); // Hello, my name is Bob
+
+
+<b>3) Multiple Arguments Passed</b>:
+With <b>call()</b>, you can pass arguments individually to the function, allowing you to control the function's input parameters in a very precise manner.
+
+function add(a, b) {
+    return a + b;
+}
+console.log(add.call(null, 5, 10)); // 15
+
+
+<b>4) Function Overloading</b>:
+You can use <b>call()</b> to invoke a function with different arguments in different contexts, essentially simulating <b>function overloading</b>. This can be helpful when you want a function to behave differently based on the context in which it's called.
+
+
+<b>5) Can Be Used with Constructor Functions</b>:
+You can use <b>call()</b> with constructor functions to create instances of objects and set the this value explicitly. This can be especially useful for setting up inheritance and chaining constructors.
+
+function Animal(name) {
+    this.name = name;
+}
+function Dog(name, breed) {
+    Animal.call(this, name); // Call the parent constructor
+    this.breed = breed;
+}
+const myDog = new Dog('Buddy', 'Golden Retriever');
+console.log(myDog.name); // Buddy
+console.log(myDog.breed); // Golden Retriever
+
+
+<b>Enabling Function Chaining</b>:
+<b>call()</b> is useful when you want to chain multiple functions together, especially in object-oriented patterns or with method chaining.
+
+function Calculator() {
+    this.result = 0;
+    this.add = function (value) {
+        this.result += value;
+        return this;
+    };
+    this.subtract = function (value) {
+        this.result -= value;
+        return this;
+    };
+}
+const calc = new Calculator();
+calc.add(5).subtract(3);
+console.log(calc.result); // 2
+`,
           code1: ``
         },
         {
-          text1: ``,
+          text1: `Note: The difference between <b>call()</b> and <b>apply()</b> is that <b>call()</b> accepts an argument list, while <b>apply()</b> accepts a single array of arguments.`,
           code1: ``
         },
 
@@ -10709,6 +10894,90 @@ Prevents Redundant API Calls: Debouncing ensures that the API requests are only 
             const seaKeyword = document.getElementById(&#39;searchId&#39;).value;
             dSearch(seaKeyword);
         }
+    &lt;/script&gt;
+    
+    
+    //----------- Ex : 2 ----------
+        &lt;div class=&quot;card blue&quot;&gt;
+        &lt;button class=&quot;increment_bin&quot;&gt; increment &lt;/button&gt;
+        &lt;p&gt; button pressed &lt;span class=&quot;increment_pressed&quot;&gt;0&lt;/span&gt; times &lt;/p&gt;
+        &lt;p&gt; triggered &lt;span class=&quot;increment_count&quot;&gt;0&lt;/span&gt; times &lt;/p&gt;
+    &lt;/div&gt;
+    
+            const btnCount = document.querySelector('.increment_count')
+        let pressedCount = 0
+        let triggeredCount = 0
+
+        function debounce(func, delay) {
+            let timeout
+            return function () {
+                if(timeout) clearTimeout(timeout)
+                timeout = setTimeout(() => {
+                    func()
+                }, delay)
+            }
+        }
+        function incCount() {
+            btnCount.innerHTML = ++triggeredCount
+        }
+        const runDeb = debounce(incCount, 800)
+        btn.addEventListener("click", () => {
+            btnPressed.innerHTML = ++pressedCount
+            runDeb()
+        })
+            
+        
+        // -------------- Ex : 3 ------------
+            &lt;div class=&quot;card blue&quot;&gt;
+        &lt;input type=&quot;text&quot; id=&quot;inputText&quot; /&gt;
+        &lt;br /&gt;
+        &lt;p&gt; Dafault : &lt;span id=&quot;defaultText&quot;&gt;&lt;/span&gt; &lt;/p&gt;
+        &lt;p&gt; Debounce : &lt;span id=&quot;DebounceText&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+        &lt;p&gt;Throttle : &lt;span id=&quot;ThrottleText&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;/div&gt;
+    
+        &lt;script&gt;
+        const inputText = document.getElementById('inputText')
+        const defaultText = document.getElementById('defaultText')
+        const DebounceText = document.getElementById('DebounceText')
+        const ThrottleText = document.getElementById('ThrottleText')
+
+        // debounce
+        function debounce(cbFun, delay){
+            let timeout
+            return function(...args){
+                timeout = setTimeout(() => {
+                    cbFun.apply(this, args)
+                },delay)
+            }
+        }
+        function cbFunDebounce(inputText){
+            DebounceText.textContent = inputText
+        }
+        const callDebounce = debounce(cbFunDebounce, 1000)
+
+        //throttle
+        function throttle(cbFun, delay){
+            let last = 0
+            return function(...args){
+                let now = new Date().getTime()
+                if(now - last < delay) return;
+                last = now;
+                cbFun.apply(this, args)
+            }
+        }
+
+        function cbFunThrottle(inputText) {
+            ThrottleText.textContent = inputText
+        }
+
+        const callThrottle = throttle(cbFunThrottle, 1000)
+        
+         inputText.addEventListener('input', (e) => {
+            defaultText.textContent = e.target.value
+            callDebounce(e.target.value)
+            callThrottle(e.target.value)
+        })
     &lt;/script&gt;`
         },
       ]
@@ -10717,6 +10986,77 @@ Prevents Redundant API Calls: Debouncing ensures that the API requests are only 
       id: 1,
       title: "CORS request",
       note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "What is Throttling?",
+      note: [
+        {
+          text1: `Throttling is a technique that limits the rate at which a function can be called. It ensures that a function is executed at most once in a specified time interval, regardless of how many times it's invoked. This is particularly useful for performance-intensive operations or when you want to control the rate of API calls.
+          
+<b>How Throttling Works</b>
+-> When a throttled function is called, it checks if enough time has passed since its last execution.
+-> If the time threshold has not been met, the function call is ignored.
+-> If the time threshold has been met, the function is executed and the timer is reset.
+
+<b>How to Implement Throttling in JavaScript</b>
+Let's first understand what we want to achieve with throttling:
+-> Call the function immediately the first time.
+-> After each call, prevent the function from being called again for a certain time period.
+-> Once that time period has passed, the function can be called again.
+
+<b>Why is Throttling Needed?</b>
+Certain user interactions, like scrolling or window resizing, trigger events multiple times per second. Executing event handlers at such a high frequency can lead to performance issues, including:
+-> Increased CPU and memory usage.
+-> Unresponsive user interfaces.
+-> Inefficient API calls leading to server strain.
+`,
+          code1: `//------------- Ex : 1 --------------
+              &lt;div class=&quot;card blue&quot;&gt;
+        &lt;button class=&quot;increment_bin&quot;&gt; increment &lt;/button&gt;
+        &lt;p&gt; button pressed &lt;span class=&quot;increment_pressed&quot;&gt;0&lt;/span&gt; times &lt;/p&gt;
+        &lt;p&gt; triggered &lt;span class=&quot;increment_count&quot;&gt;0&lt;/span&gt; times &lt;/p&gt;
+    &lt;/div&gt;
+
+
+                  const btn = document.querySelector('.increment_bin')
+        const btnPressed = document.querySelector('.increment_pressed')
+        const btnCount = document.querySelector('.increment_count')
+
+        let pressedCount = 0
+        let triggeredCount = 0
+
+        function myThrottle(func, delay) {
+            
+            let last = 0
+            return function(){
+                let now = new Date().getTime()
+                if(now - last < delay) {
+                    return null;
+                }
+                last = now;
+                func();
+            }
+        }
+
+        function incCount() {
+            console.log(1)
+            btnCount.innerHTML = ++triggeredCount
+        }
+
+        const runDeb = myThrottle(incCount, 1000)
+
+        btn.addEventListener("click", () => {
+            btnPressed.innerHTML = ++pressedCount
+            runDeb()
+        })
+            `
+        },
         {
           text1: ``,
           code1: ``

@@ -14,6 +14,7 @@ const jScodeChallengeData = {
           text1: `<a href="https://www.codinn.dev/tricky-javascript/es6789-code-snippets-interview-questions" target="_blank">code-snippets-interview-questions</a>
           
           <a href="https://www.interviewbit.com/javascript-interview-questions/#recursion-in-a-programming-language" target="_blank">javascript-interview-questionsx</a>
+          <a href="https://leetcode.com/studyplan/30-days-of-javascript/" target="_blank">30-days-of-javascript</a>
           `,
           code1: ``
         }
@@ -1450,66 +1451,99 @@ console.log(findMissingNumber([2, 3, 4, 5, 6])); // Output: 1 (Also works when \
     },
     {
       id: 1,
-      title: "",
+      title: "Bubble Sort",
+      note: [
+        {
+          text1: `implementation of the <b>Bubble Sort</b> algorithm`,
+          code1: `
+        function orderNum(num) {
+            let temp;
+            // Outer loop: Repeat n-1 times
+            for (let i = 0; i < num.length - 1; i++) {
+                // Inner loop: Compare adjacent elements and swap if necessary
+                for (let j = 0; j < num.length - 1 - i; j++) {
+                    if (num[j] > num[j + 1]) {
+                        temp = num[j];
+                        num[j] = num[j + 1];
+                        num[j + 1] = temp;
+                    }
+                }
+            }
+            return num;
+        }
+
+        console.log(orderNum([12, 2, 8, 10, 4, 17, 9, 29]));`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Code to Group Consecutive Numbers:",
+      note: [
+        {
+          text1: ``,
+          code1: `function groupConsecutiveNumbers(arr) {
+    // To store the result
+    let grouped = [];
+    let temp = [];
+
+    // Loop through the array
+    for (let i = 0; i < arr.length; i++) {
+        // If temp is empty, start a new group with the first number
+        if (temp.length === 0) {
+            temp.push(arr[i]);
+        } else {
+            // Check if the current number is consecutive to the last one
+            if (arr[i] === temp[temp.length - 1] + 1) {
+                temp.push(arr[i]);
+            } else {
+                // If it's not consecutive, push the group and start a new one
+                grouped.push(temp);
+                temp = [arr[i]];
+            }
+        }
+    }
+    // Don't forget to add the last group
+    if (temp.length > 0) {
+        grouped.push(temp);
+    }
+
+    return grouped;
+}
+
+// Test the function with your example array
+let arr = [1, 2, 3, 7, 8, 10, 11, 12, 15];
+console.log(groupConsecutiveNumbers(arr));
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "print 1 to 5 every number with 1 sec gap",
+      note: [
+        {
+          text1: ``,
+          code1: `        // print 1 to 5 every number with 1 sec gap
+        function runNum(num) {
+            if (num <= 5) {
+                setTimeout(() => {
+                    console.log(num)
+                    runNum(num + 1)
+                }, 1000)
+            }
+        }
+        runNum(1)`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
       note: [
         {
           text1: ``,
           code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Write a JavaScript function to recursively flatten a nested array into a single-level array.",
-      note: [
-        {
-          text1: `Input : const ar = ["A", "b", ["C", ["A", ["E"]]], "c"];
-  Output : ["A", "b", "C", "A", "E", "c"]
-
-
-  <b>Step-by-Step Execution</b>:
-
-    <b>Base Case (Non-array Elements)</b>:
-        If <u>curr</u> is not an array, push it directly into <u>acc</u>.
-
-    <b>Recursive Case (Nested Arrays)</b>:
-        If <u>curr</u> is an array, recursively call <u>arrToAr(curr)</u>, which flattens it.
-        The <u>...</u> (spread operator) is used to unpack the flattened elements before pushing them into acc.
-
-        Now, let's backtrack and merge the results step by step:
-    arrToAr(["E"]) → ["E"]
-    arrToAr(["A", ["E"]]) → ["A", "E"]
-    arrToAr(["C", ["A", ["E"]]]) → ["C", "A", "E"]
-    arrToAr(["A", "b", ["C", ["A", ["E"]]], "c"]) → ["A", "b", "C", "A", "E", "c"]
-`,
-          code1: `    const ar = ["A","b",["C",["A",["E"]]],"c" ]
-function arrToAr(ar) {
-    return ar.reduce((acc, curr) => {
-        Array.isArray(curr) 
-            ? acc.push(...arrToAr(curr))  // Recursively flatten the nested array
-            : acc.push(curr);             // Push non-array elements directly
-        return acc;
-    }, []);
-}
-    console.log(arrToAr(ar))`
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Find biggest value in array",
-      note: [
-        {
-          text1: ``,
-          code1: `    const ar = [1, 4, 3, 25, 5, 16, 7, 10, 14, 21]
-   
-   let bigger = 0
-   for(let i=0; i < ar.length; i++){
-        if(bigger < ar[i]){
-            bigger = ar[i]
-        } 
-   }
-    console.log(bigger)`
         }
       ]
     },
