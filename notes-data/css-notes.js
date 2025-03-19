@@ -1208,6 +1208,75 @@ h2 {
     },
     {
       id: 52,
+      title: "margin: auto;",
+      note: [
+        {
+          text1: `The <b>margin: auto;</b> property works to center an element horizontally, but only when certain conditions are met. If it's not working in your case, there could be a few reasons why it's not centering as expected. Here's what to check and correct:
+
+<b>1. Width is Required</b>:
+For margin: auto to work and center the element, the element must have a defined width. If no width is set, the element will expand to the width of its parent container, and auto margins won't have an effect.
+
+<b>2. Block Display (default for div)</b>:
+The margin: auto works for block-level elements. By default, most elements like &lt;div&gt; are block elements, so this should work without needing any additional properties.
+If the element is an inline or inline-block element, you will need to change it to a block-level element or apply other centering techniques.
+
+<b>3. Parent Container</b>:
+Ensure the parent container (the element surrounding <b>.main-box</b>) has enough space. If the parent container has limited space, <b>margin: auto;</b> may not work effectively.
+If <b>.main-box</b> is inside <b>.parent-container</b>, this can help center it perfectly within the parent.
+
+<b>4. Centering Vertically</b>:
+If you want to center the <b>.main-box</b> both horizontally <b>and vertically</b>, you can use <b>flexbox</b> or <b>grid</b>.
+Here's how you can use <b>Flexbox</b> to center both horizontally and vertically:
+`,
+          code1: ` // Width is Required:
+          .main-box {
+    background-color: rgb(112, 120, 158);
+    width: 50%; /* or any specific width like px or % */
+    margin: auto;
+}
+
+// Block Display (default for div):
+.main-box {
+    display: block; /* Ensure it is a block-level element */
+    background-color: rgb(112, 120, 158);
+    width: 50%; /* Set a width */
+    margin: auto;
+}
+
+
+//Parent Container:
+.parent-container {
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+//Centering Vertically:
+.parent-container {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: 100vh; /* Take up the full viewport height */
+}
+
+.main-box {
+    background-color: rgb(112, 120, 158);
+    width: 50%; /* Set a width */
+}
+
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
       title: "CSS Padding",
       note: [
         {
@@ -2220,6 +2289,102 @@ When clearing floats, you should match the clear to the float: If an element is 
     },
     {
       id: 52,
+      title: "display: block",
+      note: [
+        {
+          text1: `A block-level element takes up the full width of its parent container (by default) and always starts on a new line. It stretches across the width of its parent element, with any content following it appearing on a new line.
+
+<b>Characteristics of Block Elements</b>:
+-> They <b>occupy the full width</b> of their parent container (unless a width is explicitly set).
+-> They <b>start on a new line</b> and push subsequent elements down to the next line.
+-> Can have <b>height, width, margin, padding</b>, etc.
+`,
+          code1: `        .main-box {
+            background-color: rgb(112, 120, 158);
+            width: 50%;
+            margin: auto;
+            padding:5px;
+        }
+
+        .class-block {
+            display: block;
+            background-color: #455de7;
+            padding: 12px;
+            margin:10px;
+        }
+            
+            &lt;div class=&quot;main-box&quot;&gt;
+        &lt;div class=&quot;class-block&quot;&gt;Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-block&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-block&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-block&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-block&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-block&quot;&gt;Another Block Element&lt;/div&gt;
+    &lt;/div&gt;`
+        },
+        {
+          text1: `    <div class="main-box">
+        <div class="class-block">Block Element</div>
+        <div class="class-block">Another Block Element</div>
+        <div class="class-block">Another Block Element</div>
+        <div class="class-block">Another Block Element</div>
+        <div class="class-block">Another Block Element</div>
+        <div class="class-block">Another Block Element</div>
+    </div>`,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "display: inline",
+      note: [
+        {
+          text1: `The <b>display: inline;</b> CSS property is used to make an element behave like an inline element. An <b>inline</b> element does not start on a new line and only takes up as much width as necessary for its content. It will appear <b>next to other inline elements</b> in the same line, and they will flow horizontally across the parent container.
+
+<b>Key Characteristics of display: inline;</b>:
+<b>Does not create a new line</b>: Inline elements do not start on a new line. They are placed in the same line as other inline elements (if space allows).
+<b>Width and height</b>: You cannot set the width or height properties on inline elements directly. The element will only take as much space as its content requires.
+<b>Padding and margin</b>: You can set padding and margin on inline elements, but only horizontally (left and right). Vertical margins or padding (top and bottom) do not affect the layout in the same way they do for block elements.
+<b>Cannot contain block elements</b>: Inline elements cannot contain block-level elements directly.`,
+          code1: `            .main-box {
+            background-color: rgb(112, 120, 158);
+            width: 50%;
+            margin: auto;
+            padding:5px;
+        }
+            
+        .class-inline {
+            display:inline;
+            background-color: #455de7;
+            padding: 12px;
+            margin:10px;
+        }
+            
+            &lt;div class=&quot;main-box&quot;&gt;
+        &lt;div class=&quot;class-inline&quot;&gt;Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-inline&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-inline&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-inline&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-inline&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-inline&quot;&gt;Another Block Element&lt;/div&gt;
+    &lt;/div&gt;`
+        },
+        {
+          text1: `    <div class="main-box">
+        <div class="class-inline">Block Element</div>
+        <div class="class-inline">Another Block Element</div>
+        <div class="class-inline">Another Block Element</div>
+        <div class="class-inline">Another Block Element</div>
+        <div class="class-inline">Another Block Element</div>
+        <div class="class-inline">Another Block Element</div>
+    </div>`,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
       title: "display: inline-block",
       note: [
         {
@@ -2229,57 +2394,41 @@ Compared to <u>display: inline</u>, the major difference is that <u>display: inl
 Also, with <u>display: inline-block</u>, the top and bottom margins/paddings are respected, but with <u>display: inline</u> they are not.
 
 Compared to <u>display: block</u>, the major difference is that <u>display: inline-block</u> does not add a line-break after the element, so the element can sit next to other elements.
+The following example shows the different behavior of <u>display: inline, display: inline-block</u> and <u>display: block:</u>
 
-The following example shows the different behavior of <u>display: inline, display: inline-block</u> and <u>display: block:</u>`,
-          code1: `&lt;html&gt;
-&lt;head&gt;
-&lt;style&gt;
-span.a {
-  display: inline; /* the default for span */
-  width: 100px;
-  height: 100px;
-  padding: 5px;
-  border: 1px solid blue;  
-  background-color: yellow; 
-}
+An <b>inline-block</b> element is similar to an <b>inline</b> element in that it does not force a new line, but it behaves like a <b>block</b> element in terms of allowing <b>width, height, margin</b>, and <b>padding</b> to be applied.
 
-span.b {
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-  padding: 5px;
-  border: 1px solid blue;    
-  background-color: yellow; 
-}
-
-span.c {
-  display: block;
-  width: 100px;
-  height: 100px;
-  padding: 5px;
-  border: 1px solid blue;    
-  background-color: yellow; 
-}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1&gt;The display Property&lt;/h1&gt;
-
-&lt;h2&gt;display: inline&lt;/h2&gt;
-&lt;div&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat scelerisque elit sit amet consequat. Aliquam erat volutpat. &lt;span class=&quot;a&quot;&gt;Aliquam&lt;/span&gt; &lt;span class=&quot;a&quot;&gt;venenatis&lt;/span&gt; gravida nisl sit amet facilisis. Nullam cursus fermentum velit sed laoreet. &lt;/div&gt;
-
-&lt;h2&gt;display: inline-block&lt;/h2&gt;
-&lt;div&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat scelerisque elit sit amet consequat. Aliquam erat volutpat. &lt;span class=&quot;b&quot;&gt;Aliquam&lt;/span&gt; &lt;span class=&quot;b&quot;&gt;venenatis&lt;/span&gt; gravida nisl sit amet facilisis. Nullam cursus fermentum velit sed laoreet. &lt;/div&gt;
-
-&lt;h2&gt;display: block&lt;/h2&gt;
-&lt;div&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat scelerisque elit sit amet consequat. Aliquam erat volutpat. &lt;span class=&quot;c&quot;&gt;Aliquam&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;venenatis&lt;/span&gt; gravida nisl sit amet facilisis. Nullam cursus fermentum velit sed laoreet. &lt;/div&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;`
+<b>Characteristics of Inline-block Elements</b>:
+-> They <b>do not take up the full width</b> of their parent container. They only take up the width necessary for their content, just like <b>inline</b> elements.
+-> They <b>do not break onto a new line</b>. Multiple <b>inline-block</b> elements can appear <b>side by side</b> on the same line.
+-> Can have <b>height, width, margin, padding</b>, etc.
+-> Unlike <b>inline</b> elements, they can respect <b>width and height</b>.
+`,
+          code1: `        .class-inline-block {
+            display: inline-block;
+            background-color: #455de7;
+            padding: 12px;
+            margin:10px;
+        }
+            
+        &lt;div class=&quot;main-box&quot;&gt;
+        &lt;div class=&quot;class-inline-block&quot;&gt;Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-inline-block&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-inline-block&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-inline-block&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-inline-block&quot;&gt;Another Block Element&lt;/div&gt;
+        &lt;div class=&quot;class-inline-block&quot;&gt;Another Block Element&lt;/div&gt;
+    &lt;/div&gt;`
         },
         {
-          text1: ``,
+          text1: `    <div class="main-box">
+        <div class="class-inline-block">Block Element</div>
+        <div class="class-inline-block">Another Block Element</div>
+        <div class="class-inline-block">Another Block Element</div>
+        <div class="class-inline-block">Another Block Element</div>
+        <div class="class-inline-block">Another Block Element</div>
+        <div class="class-inline-block">Another Block Element</div>
+    </div>`,
           code1: ``
         },
       ],
@@ -4731,7 +4880,8 @@ The polygon() function is used with the clip-path property and the shape-outside
           code1: ``
         },
       ],
-    },    {
+    },    
+    {
       id: 52,
       title: "new topic",
       note: [
