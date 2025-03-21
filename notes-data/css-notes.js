@@ -3666,8 +3666,9 @@ writing-mode
         {
           text1: `CSS 2D Transforms
 CSS transforms allow you to move, rotate, scale, and skew elements.
-Mouse over the element below to see a 2D transformation:
+CSS transforms allow you to modify the appearance of an element by rotating, scaling, skewing, or translating it without affecting the document flow. This is done using the <b>transform</b> property.
 
+Mouse over the element below to see a 2D transformation:
 <b>CSS 2D Transforms Methods</b>With the CSS transform property you can use the following 2D transformation methods:
 
 translate()
@@ -3933,8 +3934,14 @@ The parameters are as <b>follow: matrix(scaleX(), skewY(), skewX(), scaleY(), tr
 }`
         },
         {
-          text1: ``,
-          code1: ``
+          text1: `<b>Combine Transform Functions</b>
+
+Instead of writing transform multiple times, combine all transformations into one declaration using space-separated values:`,
+          code1: `.mon-box:hover {
+  background-color: black;
+  transform: scale(0.5) rotate(45deg); /* Combine both transforms */
+}
+`
         },
 
       ],
@@ -4935,6 +4942,34 @@ The polygon() function is used with the clip-path property and the shape-outside
     },    
     {
       id: 52,
+      title: "filter: blur()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "backdrop-filter: blur()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
       title: "new topic",
       note: [
         {
@@ -5107,11 +5142,63 @@ Flexbox is a Grid layout with a one-dimensional system either within a row or a 
     },
     {
       id: 52,
-      title: "new topic",
+      title: "horizontally and vertically center an element ",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `<b>1. Using Flexbox (Best Method)</b>
+          
+           This method is responsive and works well for most layouts.
+           `,
+          code1: `.container {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  height: 100vh; /* Full viewport height */
+}
+`
+        },
+        {
+          text1: `<b>2. Using Grid (Modern Approach)</b>
+          
+          The place-items: center; is a shorthand for justify-items (horizontal) and align-items (vertical).
+          `,
+          code1: `.container {
+  display: grid;
+  place-items: center; /* Centers both horizontally & vertically */
+  height: 100vh;
+}
+`
+        },
+        {
+          text1: `<b>3. Using Absolute Positioning & Transform</b>
+          Moves the element to the center by shifting it back by <b>50% of its own width and height.</b>`,
+          code1: `.element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+`
+        },
+        {
+          text1: `<b>4. Using Margin Auto (For Block Elements)</b>
+          If the element has a fixed width and height, use this:
+          This works only for elements with fixed dimensions.
+
+
+          <b>Best Choice?</b>
+✔ <b>Use Flexbox</b> or <b>CSS Grid</b> for modern and responsive designs.
+✔ Use <b>position: absolute</b> for centering in a specific area.
+          `,
+          code1: `.element {
+  width: 200px;
+  height: 100px;
+  margin: auto;
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+}
+`
         },
         {
           text1: ``,
