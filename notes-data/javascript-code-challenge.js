@@ -1557,5 +1557,424 @@ console.log(groupConsecutiveNumbers(arr));
         }
       ]
     },
+    {
+      id: 1,
+      section: "Promise code challenge",
+      title: "Promise Time Limit",
+      note: [
+        {
+          text1: `Given an asynchronous function fn and a time t in milliseconds, return a new time limited version of the input function. fn takes arguments provided to the time limited function.
+
+The time limited function should follow these rules:
+
+If the fn completes within the time limit of t milliseconds, the time limited function should resolve with the result.
+If the execution of the fn exceeds the time limit, the time limited function should reject with the string "Time Limit Exceeded".
+ 
+
+<b>Example 1</b>:
+Input:---- 
+fn = async (n) => { 
+  await new Promise(res => setTimeout(res, 100)); 
+  return n * n; 
+}
+inputs = [5]
+t = 50
+Output: {"rejected":"Time Limit Exceeded","time":50}
+Explanation:
+const limited = timeLimit(fn, t)
+const start = performance.now()
+let result;
+try {
+   const res = await limited(...inputs)
+   result = {"resolved": res, "time": Math.floor(performance.now() - start)};
+} catch (err) {
+   result = {"rejected": err, "time": Math.floor(performance.now() - start)};
+}
+console.log(result) // Output
+The provided function is set to resolve after 100ms. However, the time limit is set to 50ms. It rejects at t=50ms because the time limit was reached.
+
+<b>Example 2</b>:
+Input: 
+fn = async (n) => { 
+  await new Promise(res => setTimeout(res, 100)); 
+  return n * n; 
+}
+inputs = [5]
+t = 150
+Output: {"resolved":25,"time":100}
+Explanation:
+The function resolved 5 * 5 = 25 at t=100ms. The time limit is never reached.
+Example 3:
+
+Input: 
+fn = async (a, b) => { 
+  await new Promise(res => setTimeout(res, 120)); 
+  return a + b; 
+}
+inputs = [5,10]
+t = 150
+Output: {"resolved":15,"time":120}
+Explanation:
+​​​​The function resolved 5 + 10 = 15 at t=120ms. The time limit is never reached.
+
+<b>Example 4</b>:
+Input: 
+fn = async () => { 
+  throw "Error";
+}
+inputs = []
+t = 1000
+Output: {"rejected":"Error","time":0}
+Explanation:
+The function immediately throws an error.
+ 
+
+Constraints:
+0 <= inputs.length <= 10
+0 <= t <= 1000
+fn returns a promise
+`,
+          code1: `
+        var timeLimit = function (fn, t) {
+            return async function (...args) {
+                // Record the start time for performance measurement
+                const start = performance.now();
+
+                // Create a timeout promise that will reject after 't' milliseconds
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject("Time Limit Exceeded"), t)
+                );
+
+                // Create a promise from the function 'fn'
+                const fnPromise = fn(...args);
+
+                try {
+                    // Wait for whichever promise resolves/rejects first
+                    const result = await Promise.race([fnPromise, timeoutPromise]);
+                    return { resolved: result, time: Math.floor(performance.now() - start) };
+                } catch (err) {
+                    // If the promise was rejected (either by timeout or error), handle it
+                    return { rejected: err, time: Math.floor(performance.now() - start) };
+                }
+            };
+        };
+
+        
+        // Example usage:
+        async function runExample() {
+            //------ Example 1 -------
+            const fn1 = async (n) => {
+                await new Promise(res => setTimeout(res, 100));
+                return n * n;
+            };
+            const inputs1 = [5];
+            const t1 = 50;
+            const limited1 = timeLimit(fn1, t1);
+            let result1;
+            try {
+                const res = await limited1(...inputs1);
+                result1 = res;
+            } catch (err) {
+                result1 = err;
+            }
+            console.log(result1); // Output: {"rejected":"Time Limit Exceeded","time":50}
+
+            //------ Example 2 ------
+            const fn2 = async (n) => {
+                await new Promise(res => setTimeout(res, 100));
+                return n * n;
+            };
+            const inputs2 = [5];
+            const t2 = 150;
+            const limited2 = timeLimit(fn2, t2);
+            let result2;
+            try {
+                const res = await limited2(...inputs2);
+                result2 = res;
+            } catch (err) {
+                result2 = err;
+            }
+            console.log(result2); // Output: {"resolved":25,"time":100}
+
+            //------ Example 3 ------
+            const fn3 = async (a, b) => {
+                await new Promise(res => setTimeout(res, 120));
+                return a + b;
+            };
+            const inputs3 = [5, 10];
+            const t3 = 150;
+            const limited3 = timeLimit(fn3, t3);
+            let result3;
+            try {
+                const res = await limited3(...inputs3);
+                result3 = res;
+            } catch (err) {
+                result3 = err;
+            }
+            console.log(result3); // Output: {"resolved":15,"time":120}
+
+            //------ Example 4 ------
+            const fn4 = async () => {
+                throw "Error";
+            };
+            const inputs4 = [];
+            const t4 = 1000;
+            const limited4 = timeLimit(fn4, t4);
+            let result4;
+            try {
+                const res = await limited4(...inputs4);
+                result4 = res;
+            } catch (err) {
+                result4 = err;
+            }
+            console.log(result4); // Output: {"rejected":"Error","time":0}
+        }
+
+        // Run the examples
+        runExample();`
+        },
+        {
+          text1: `<b>Breakdown below code</b>:
+<b>1) TestPromise()</b>:
+This function is <b>asynchronous</b> (because it's marked with <b>async</b>).
+It returns a <b>Promise</b>, which resolves after 100 milliseconds due to the <b>setTimeout</b>.
+The <b>await</b> pauses the function until the promise inside <b>new Promise(res => setTimeout(res, 100)) is resolved.</b>
+
+<b>2) new Promise(res => setTimeout(res, 100))</b>:
+The <b>new Promise</b> constructor creates a new promise that resolves after 100ms.
+Since there is no value passed to the <b>res</b> (resolve) function, the promise resolves with the value <b>undefined</b>.
+
+<b>3) await</b>:
+The <b>await</b> keyword is used to pause the <b>TestPromise</b> function execution until the <b>Promise</b> resolves.
+Even though you have <b>await</b>, the promise resolves with <b>undefined</b> because <b>res()</b> is called without any arguments.
+
+<b>4) .then(e => console.log(e))</b>:
+After <b>TestPromise()</b> resolves, <b>.then(e => console.log(e))</b> is called.
+Since the promise resolves with <b>undefined</b> (because <b>res</b> was called without any argument), the value of <b>e</b> is <b>undefined</b>, and that is logged to the console.
+`,
+          code1: `async function TestPromise(){
+    return await new Promise(res => setTimeout(res, 100)) 
+}
+
+TestPromise().then(e => console.log(e));
+`
+        },
+        {
+          text1: `<b>Breakdown below code</b>:
+          <b> setTimeout(() => { resolve("success") }, 1000);</b>: The <b>resolve("success")</b> is inside a callback function, which ensures it is invoked <b>only after 1000 milliseconds.</b>
+
+<b>Date.now() - start</b>: This will correctly return the time elapsed, which is roughly 1000 ms.`,
+          code1: `async function ssss() {
+    const start = Date.now();
+
+    try {
+        // Corrected: passing the resolve function correctly to setTimeout
+        const testVal = await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve("success"); // Resolve the promise after 1000ms
+            }, 1000);
+        });
+
+        return { message: testVal, time: Date.now() - start };
+    } catch (err) {
+        return { error: err, time: Date.now() - start };
+    }
+}
+
+ssss().then(e => console.log(e));
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      section: "Function Transformations",
+      title: "Allow One Function Call",
+      note: [
+        {
+          text1: `Given a function fn, return a new function that is identical to the original function except that it ensures fn is called at most once.
+The first time the returned function is called, it should return the same result as fn.
+Every subsequent time it is called, it should return undefined.
+ 
+
+<b>Example 1</b>:
+Input: fn = (a,b,c) => (a + b + c), calls = [[1,2,3],[2,3,6]]
+Output: [{"calls":1,"value":6}]
+Explanation:
+const onceFn = once(fn);
+onceFn(1, 2, 3); // 6
+onceFn(2, 3, 6); // undefined, fn was not called
+
+<b>Example 2</b>:
+Input: fn = (a,b,c) => (a * b * c), calls = [[5,7,4],[2,3,6],[4,6,8]]
+Output: [{"calls":1,"value":140}]
+Explanation:
+const onceFn = once(fn);
+onceFn(5, 7, 4); // 140
+onceFn(2, 3, 6); // undefined, fn was not called
+onceFn(4, 6, 8); // undefined, fn was not called
+
+Constraints:
+calls is a valid JSON array
+1 <= calls.length <= 10
+1 <= calls[i].length <= 100
+2 <= JSON.stringify(calls).length <= 1000`,
+          code1: `var once = function (fn) {
+    let isCalled = false;
+    return function (...args) {
+        if (!isCalled) {
+            const result = fn(...args);  // Call the function and store the result
+            isCalled = true;  // Mark that the function has been called
+            return result;  // Return the result of the first call
+        } else {
+            return undefined;  // Return \`undefined\` on subsequent calls
+        }
+    }
+};
+
+let fn = (a, b, c) => (a + b + c);
+let onceFn = once(fn);
+
+console.log(onceFn(1, 2, 3));  // 6
+console.log(onceFn(2, 3, 6));  // undefined
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Function Composition",
+      note: [
+        {
+          text1: `Given an array of functions [f1, f2, f3, ..., fn], return a new function fn that is the function composition of the array of functions.
+The function composition of [f(x), g(x), h(x)] is fn(x) = f(g(h(x))).
+The function composition of an empty list of functions is the identity function f(x) = x.
+You may assume each function in the array accepts one integer as input and returns one integer as output.
+
+ 
+<b>Example 1</b>:
+Input: functions = [x => x + 1, x => x * x, x => 2 * x], x = 4
+Output: 65
+Explanation:
+Evaluating from right to left ...
+Starting with x = 4.
+2 * (4) = 8
+(8) * (8) = 64
+(64) + 1 = 65
+
+
+<b>Example 2</b>:
+Input: functions = [x => 10 * x, x => 10 * x, x => 10 * x], x = 1
+Output: 1000
+Explanation:
+Evaluating from right to left ...
+10 * (1) = 10
+10 * (10) = 100
+10 * (100) = 1000
+Example 3:
+
+Input: functions = [], x = 42
+Output: 42
+Explanation:
+The composition of zero functions is the identity function
+ 
+
+Constraints:
+-1000 <= x <= 1000
+0 <= functions.length <= 1000
+all functions accept and return a single integer`,
+          code1: `//---------  for loop example ---------------
+          // Define the compose function that takes an array of functions as an argument
+var compose = function (functions) {
+    // Return a new function that takes the input \`x\`
+    return function (x) {
+        let valX = x; // Initialize the value with the input \`x\`
+        
+        // Loop through the functions array from right to left
+        // We start at the last function and move backward to the first function
+        for (let i = functions.length - 1; i >= 0; i--) {
+            // Apply the current function to the current value of \`valX\`
+            valX = functions[i](valX);
+        }
+        
+        // Return the final result after applying all functions
+        return valX;
+    };
+};
+
+// Example usage of the compose function:
+const fn = compose([x => x + 1, x => x * x, x => 2 * x]);
+
+// Call the composed function \`fn\` with input \`4\`
+console.log(fn(4)); // Output: 65
+
+// Explanation of the output: 
+// 1. Starting with x = 4
+// 2. Apply x => 2 * x => 2 * 4 = 8
+// 3. Apply x => x * x => 8 * 8 = 64
+// 4. Apply x => x + 1 => 64 + 1 = 65
+
+
+//------------- reducer function --------
+// Key Steps:----
+// "Identity Function": If the array is empty, the composition should return the identity function, i.e., "f(x) = x", because there are no functions to apply.
+// "Composition": If there are functions in the array, the composition of the functions should be applied in reverse order, i.e., "f(g(h(x)))", where "h(x)" is applied first, followed by "g(h(x))", and then "f(g(h(x)))".
+
+        var compose = function (functions) {
+            return function (x) {
+                // If functions array is empty, return identity function
+                return functions.reduceRight((acc, fn) => fn(acc), x);
+            };
+        };
+
+        // Example 1
+        const functions1 = [x => x + 1, x => x * x, x => 2 * x];
+        console.log(compose(functions1)(4));  // Output: 65
+
+        // Example 2
+        const functions2 = [x => 10 * x, x => 10 * x, x => 10 * x];
+        console.log(compose(functions2)(1));  // Output: 1000
+
+        // Example 3
+        const functions3 = [];
+        console.log(compose(functions3)(42));  // Output: 42
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
   ]
 }

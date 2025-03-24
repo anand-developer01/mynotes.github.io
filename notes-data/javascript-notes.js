@@ -19,6 +19,20 @@ const javascriptData = {
 -> <b>Module systems</b> (CommonJS, ES6 modules)
 -> <b>Functional programming</b> concepts (immutability, currying, higher-order functions)
 -> <b>Design Patterns</b>: Learn common design patterns like Singleton, Factory, Observer, and Module patterns.
+
+
+Web Components Development
+Responsive Design
+Data Security
+Performance Optimization
+Cross-Browser Compatibility
+UI/UX Best Practices
+Version Control (Git, GitHub)
+Agile & Scrum Methodologies
+API Integration
+Testing & Debugging
+Problem-Solving
+Project Estimations
 `,
           code1: ``
         },
@@ -2228,7 +2242,11 @@ We will go through the same examples, but we will use arrow functions instead to
 The motivation of this second post about the scope is, despite arrow functions are a powerful addition to ES6, they must not be misused or abused.
 
 Default <b>this</b> context
-Arrow functions do not bind their own this, instead, they inherit the one from the parent scope, which is called <b>lexical scoping</b>. This makes arrow functions to be a great choice in some scenarios but a very bad one in others
+Arrow functions do not bind their own this, instead, they inherit the one from the <b>parent scope</b>, which is called <b>lexical scoping</b>. This makes arrow functions to be a great choice in some scenarios but a very bad one in others
+
+arrow functions do <b>not</b> bind <b>this</b> to the object in which they are defined (unlike regular functions). Instead, <b>this</b> will refer to the global object (or undefined in strict mode)
+
+For <b>arrow functions, this</b> is lexically bound, meaning it takes the value of <b>this</b> from the surrounding code's context. Ex : 2
 
 If we look at the first example but using arrow functions
 `,
@@ -2239,6 +2257,28 @@ If we look at the first example but using arrow functions
           // call it
 myFunction();
 
+
+//---------     Ex : 2 --------
+//Non-Strict Mode:
+// The arrow function iAmArrow inherits this from the surrounding scope(global  scope)
+// In non-strict mode, the "this" context is the global object (in browsers, "window"). So, this line assigns a property "abc" to the global object "(window.abc = "I am arrow function")".
+        this.abc = "I am arrow function"
+        const iAmArrow = () => {
+            console.log(this) // Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+            console.log(this.abc) // I am arrow function
+        }
+        iAmArrow()
+
+
+// Strict Mode:
+// In strict mode, "this" is "undefined" in the global context. Attempting to set "this.abc" will throw a "TypeError" because "this" is "undefined", and you cannot assign properties to "undefined".
+        "use strict";
+        this.abc = "I am arrow function"
+        const iAmArrow = () => {
+            console.log(this) //undefined
+            console.log(this.abc) //Uncaught TypeError: Cannot set properties of undefined (setting 'abc')
+        }
+        iAmArrow()
           `
         },
         {
@@ -2369,25 +2409,19 @@ myFunction();
           `
         },
         {
-          text1: `
-          When to Use Arrow Functions:
-          ----------------------------
+          text1: `<b>When to Use Arrow Functions</b>:
           
-          1) Short, Concise Functions:
+          <b>1) Short, Concise Functions</b>:
           Arrow functions are well-suited for short, concise functions, especially when the function body is a single expression.
-          
-          2) Avoiding this Binding Issues:
+          <b>2) Avoiding this Binding Issues</b>:
           Arrow functions are useful in scenarios where you want to maintain the this context of the enclosing scope, avoiding common issues related to this binding in regular functions.
-          
-          3) Callbacks and Higher-Order Functions:
+         <b> 3) Callbacks and Higher-Order Functions</b>:
           Arrow functions are commonly used as callbacks in functions like map, filter, and reduce due to their concise syntax.
           
-          Drawbacks:
-          ---------
-          1) No arguments Object:
+          <b>Drawbacks</b>:
+          <b>1) No arguments Object</b>:
           Arrow functions do not have their own arguments object. If you need to access the arguments passed to the function, you should use the rest parameters syntax (...args).
-          
-          2) Not Suitable for All Cases:
+         <b> 2) Not Suitable for All Cases</b>:
           While arrow functions are convenient for many scenarios, they may not be suitable for all use cases, especially when you need the this context to be dynamically determined.
           
           In summary, arrow functions provide a concise syntax for writing functions in JavaScript and are commonly used in modern codebases. They are particularly useful for short, simple functions and for avoiding this binding issues in certain scenarios. However, it's essential to be aware of their behavior and limitations, especially when working with more complex use cases.`,
@@ -2445,13 +2479,12 @@ myFunction();
 
           Working of recursion in JavaScript
           A recursive function must have a condition to stop calling itself. Otherwise, the function is called indefinitely.
-
           Once the condition is met, the function stops calling itself. This is called a base condition.
 
-          To prevent infinite recursion, you can use if...else statement (or similar approach) where one branch makes the recursive call, and the other doesn't.
-
-          So, it generally looks like this.`,
-          code1: `            function recurse() {
+          To prevent infinite recursion, you can use <b>if...else statement</b> (or similar approach) where one branch makes the recursive call, and the other doesn't.
+`,
+          code1: ` // So, it generally looks like this.
+             function recurse() {
             if(condition) {
                 recurse();
             }
@@ -2461,21 +2494,15 @@ myFunction();
         }
 
         //------------------
-
         // recurse();
         //     A simple example of a recursive function would be to count down the value to 1.
-
             // Example 1: Print Numbers:
-            
             // program to count down numbers to 1
             function countDown(number) {
-
                 // display the number
                 console.log(number);
-
                 // decrease the number value
                 const newNumber = number - 1;
-
                 // base case
                 if (newNumber > 0) {
                     countDown(newNumber);
@@ -2503,16 +2530,13 @@ myFunction();
           countDown(2) prints 2 and calls countDown(1)
           countDown(1) prints 1 and calls countDown(0)
           When the number reaches 0, the base condition is met, and the function is not called anymore.`,
-          code1: `
-          // Example 2: Find Factorial
+          code1: `// Example 2: Find Factorial
           // program to find the factorial of a number
           function factorial(x) {
-          
               // if number is 0
               if (x === 0) {
                   return 1;
               }
-          
               // if number is positive
               else {
                   return x * factorial(x - 1);
@@ -2520,7 +2544,6 @@ myFunction();
           }
           
           const num = 3;
-          
           // calling factorial() if num is non-negative
           if (num > 0) {
               let result = factorial(num);
@@ -3327,19 +3350,24 @@ clo(i)
       title: "call() method",
       note: [
         {
-          text1: `The call() method calls a function by passing this and specified values as arguments.
-
-          The syntax of the call() method is:
+          text1: `The <b>call()</b> method in JavaScript is a built-in method that allows you to call a function with a specified <b>this</b> value and individual arguments passed one by one.
+          The syntax of the <b>call()</b> method is:
     
           func.call(thisArg, arg1, ... argN)
    
           The call() method can take two parameters:
-    
           <b>thisArg</b> - The thisArg is the object that the this object references inside the function func (or) The value to be passed as the this parameter when the function is called..
-          <b>arg1</b>, ... argN (optional) - Arguments for the function func.
+          <b>arg1, arg2, ...argN</b>: Arguments to be passed to the function. These arguments will be provided individually, not as an array.
 
-          In JavaScript, the call() method is a built-in method that is used to invoke a function with a specified this value and individual arguments provided as separate arguments. It allows you to call a function and explicitly set the context (the value of this) for that function, as well as pass arguments one by one.`,
-          code1: `function sayHello() {
+          In JavaScript, the call() method is a built-in method that is used to invoke a function with a specified this value and individual arguments provided as separate arguments. It allows you to call a function and explicitly set the context (the value of this) for that function, as well as pass arguments one by one.
+          <b>Note</b>: By default, in a function this refers to the global object i.e, window in web browsers and global in node.js.
+
+<b>call() Return Values</b>
+Returns the result obtained from calling the function with the specified this value and arguments.
+<b>Note</b>: By using call(), we can use the functions belonging to one object to be assigned and called for a different object.
+`,
+          code1: `// ----------- Ex : 1 ----------
+          function sayHello() {
             console.log('Hello, \${this.name}!');
         }
   
@@ -3350,10 +3378,8 @@ clo(i)
         sayHello.call(person); // Outputs: "Hello, John!"
         // In this example, sayHello.call(person) calls the 'sayHello' function with person as the value of this, so within the function, this.name refers to John.
         
-        //----------
-
+        //---------- Ex : 2 ------------
         // You can also use call() to borrow methods from one object and apply them to another:
-
       const person1 = {
           firstName: 'John',
           lastName: 'Doe',
@@ -3370,6 +3396,85 @@ clo(i)
       console.log(person1.getFullName.call(person2)); // Outputs: "Jane Doe"
 
       // In this example, person1.getFullName.call(person2) borrows the 'getFullName' method from person1 and applies it to person2, effectively setting this inside 'getFullName' to refer to person2.
+
+      //------------- Ex : 3 -------------
+      //  Using call() Method
+      function sum(a, b) {
+  return a + b;
+}
+// invoking sum() by passing this and 'a', 'b' arguments 
+let result = sum.call(this, 5, 3);
+console.log(result);
+
+
+//------------- Ex : 4 -------------
+// With and Without Using call() Metho
+// function that finds product of two numbers
+function product(a, b) {
+  return a * b;
+}
+
+// invoking product() without using call() method
+let result1 = product(5, 2);
+console.log("Return value Without using call() method: " + result1);
+
+// invoking product() using call() method
+let result2 = product.call(this, 5, 2);
+console.log("Return value Using call() method: " + result2);
+
+// Output:
+// Return value Without using call() method: 10
+// Return value Using call() method: 10
+
+//------------- Ex : 5 -------------
+// Passing Object as this Value in call()
+// object definition
+const human = {
+  firstName: "Judah",
+  lastName: "Parker",
+  age: 26,
+};
+
+// function definition
+function greet() {
+  const string = \`My name is \${this.firstName} \${this.lastName}. I am \${this.age} years old.\`;
+  console.log(string);
+}
+
+// passing object as this value in call() method
+greet.call(human);
+
+// Output :
+// My name is Judah Parker. I am 26 years old.
+
+//------------- Ex : 6 -------------
+//Using call() to Chain Constructors
+//function definition 
+function Animal(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+//function definition 
+function Horse(name, age) {
+  Animal.call(this, name, age);
+  this.sound = "Neigh";
+}
+
+//function definition 
+function Snake(name, age) {
+  Animal.call(this, name, age);
+  this.sound = "Hiss";
+}
+
+const snake1 = new Snake("Harry", 5);
+console.log(snake1.name, snake1.age, snake1.sound);
+
+const horse1 = new Horse("Arnold", 8);
+console.log(horse1.name, horse1.age, horse1.sound);
+// Output
+// Harry 5 Hiss
+// Arnold 8 Neigh
         `
         },
         {
@@ -3454,11 +3559,82 @@ clo(i)
           console.log(ob.maFun())`
         },
         {
-          text1: ``,
+          text1: `<b>Key Benefits of call() Method</b>:
+<b>1) Explicit Control Over this</b>:
+-> <b>call()</b> allows you to explicitly specify the value of <b>this</b> when invoking a function. This is particularly useful when you want to control the context in which a function operates, rather than relying on the default behavior of <b>this</b>.
+-> In JavaScript, <b>this</b> can refer to different things depending on how and where a function is called, so controlling this ensures the correct behavior.
+
+function greet(name) {
+    console.log(\`\${this.name} says Hello to \${name}\`);
+}
+const person = { name: 'Alice' };
+greet.call(person, 'Bob'); // Alice says Hello to Bob
+
+<b>2) Method Borrowing</b>:
+-> <b>Borrowing methods</b> from one object and using them with another object is a key benefit of <b>call()</b>. It allows you to reuse functionality from one context (or object) on another.
+-> This is useful when you want to reuse an existing method without having to redefine it or copy its code.
+
+const person = {
+    name: 'Alice',
+    greet: function() {
+        console.log(\`Hello, my name is \${this.name}\`);
+    }
+};
+const anotherPerson = { name: 'Bob' };
+// Borrowing the greet method from person
+person.greet.call(anotherPerson); // Hello, my name is Bob
+
+
+<b>3) Multiple Arguments Passed</b>:
+With <b>call()</b>, you can pass arguments individually to the function, allowing you to control the function's input parameters in a very precise manner.
+
+function add(a, b) {
+    return a + b;
+}
+console.log(add.call(null, 5, 10)); // 15
+
+
+<b>4) Function Overloading</b>:
+You can use <b>call()</b> to invoke a function with different arguments in different contexts, essentially simulating <b>function overloading</b>. This can be helpful when you want a function to behave differently based on the context in which it's called.
+
+
+<b>5) Can Be Used with Constructor Functions</b>:
+You can use <b>call()</b> with constructor functions to create instances of objects and set the this value explicitly. This can be especially useful for setting up inheritance and chaining constructors.
+
+function Animal(name) {
+    this.name = name;
+}
+function Dog(name, breed) {
+    Animal.call(this, name); // Call the parent constructor
+    this.breed = breed;
+}
+const myDog = new Dog('Buddy', 'Golden Retriever');
+console.log(myDog.name); // Buddy
+console.log(myDog.breed); // Golden Retriever
+
+
+<b>Enabling Function Chaining</b>:
+<b>call()</b> is useful when you want to chain multiple functions together, especially in object-oriented patterns or with method chaining.
+
+function Calculator() {
+    this.result = 0;
+    this.add = function (value) {
+        this.result += value;
+        return this;
+    };
+    this.subtract = function (value) {
+        this.result -= value;
+        return this;
+    };
+}
+const calc = new Calculator();
+calc.add(5).subtract(3);
+console.log(calc.result); // 2
+`,
           code1: ``
         },
         {
-          text1: ``,
+          text1: `Note: The difference between <b>call()</b> and <b>apply()</b> is that <b>call()</b> accepts an argument list, while <b>apply()</b> accepts a single array of arguments.`,
           code1: ``
         },
 
@@ -3618,19 +3794,41 @@ clo(i)
     
           In JavaScript, the <b>bind()</b> method is used to create a new function that, when called, has its <b>this</b> keyword set to a specific value. It allows you to explicitly specify the value of <b>this</b> when a function is executed. The <b>bind()</b> method does not invoke the function immediately; instead, it returns a new function with the specified <b>this</b> value and, optionally, initial arguments.
     
-          // The bind() method creates a new function, when invoked, has the this sets to a provided value.
-          // The bind() method allows an object to borrow a method from another object without making a copy of that method. This is known as function borrowing in JavaScript.`,
-          code1: `const originalFunction = function() {
+          -> The bind() method creates a new function, when invoked, has the this sets to a provided value.
+          -> The bind() method allows an object to borrow a method from another object without making a copy of that method. This is known as function borrowing in JavaScript.`,
+          code1: `// --------- Ex : 1 ---------
+          const originalFunction = function() {
             console.log(this.name);
           };
-
           const obj = { name: 'Example' };
 
           // Using bind to create a new function with a specific 'this' value
           const boundFunction = originalFunction.bind(obj);
-
           // Calling the new function
-          boundFunction(); // Output: Example`
+          boundFunction(); // Output: Example
+          
+          
+
+          //------------ Ex : 2 ------------
+                  const person = {
+            name: 'Pedro',
+            area: 'Sanchez',
+            arFun: function() {
+                return \`\${this.name} - \${this.area}\`
+            }
+        }
+        const person2 = {
+            name: 'ram',
+            area: 'wgl',
+        }
+        console.log(person.arFun());
+
+        //"call()" immediately invokes the function with the specified "this" context and any arguments passed.
+        console.log(person.arFun.call(person2)); // ram - wgl
+
+        //bind() returns a "new function" with the specified "this" context and arguments, but "does not call" the function immediately.
+        console.log(person.arFun.bind(person2)()); // ram - wgl
+          `
         },
         {
           text1: `In this example, originalFunction is a simple function that logs the name property of whatever object it is called on. We then use bind() to create a new function boundFunction where this is explicitly set to the obj object. When we call boundFunction(), it prints the name property of obj.

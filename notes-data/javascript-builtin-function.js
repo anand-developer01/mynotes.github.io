@@ -4802,5 +4802,135 @@ typeof /regex/; //   "object"        (regular expressions start and end with '/'
         }
       ]
     },
+    {
+      id: 1,
+      section:"Object. class provides several built-in methods",
+      title: "Object. class provides several built-in methods",
+      note: [
+        {
+          text1: `1. Object.keys()
+Purpose: Returns an array of a given object's own enumerable property names.
+Syntax: Object.keys(obj)
+
+Example:
+const obj = { name: "Alice", age: 25 };
+console.log(Object.keys(obj)); // ['name', 'age']
+2. Object.values()
+Purpose: Returns an array of a given object's own enumerable property values.
+Syntax: Object.values(obj)
+
+Example:
+const obj = { name: "Alice", age: 25 };
+console.log(Object.values(obj)); // ['Alice', 25]
+3. Object.entries()
+Purpose: Returns an array of a given object's own enumerable string-keyed property [key, value] pairs.
+Syntax: Object.entries(obj)
+
+Example:
+const obj = { name: "Alice", age: 25 };
+console.log(Object.entries(obj)); // [['name', 'Alice'], ['age', 25]]
+4. Object.assign()
+Purpose: Copies all enumerable own properties from one or more source objects to a target object.
+Syntax: Object.assign(target, ...sources)
+
+Example:
+const obj1 = { name: "Alice" };
+const obj2 = { age: 25 };
+const newObj = Object.assign({}, obj1, obj2);
+console.log(newObj); // { name: "Alice", age: 25 }
+5. Object.freeze()
+Purpose: Freezes an object, preventing the addition of new properties, deletion of existing properties, or the modification of existing properties.
+Syntax: Object.freeze(obj)
+
+Example:
+const obj = { name: "Alice" };
+Object.freeze(obj);
+obj.name = "Bob"; // Will not work because the object is frozen
+console.log(obj); // { name: "Alice" }
+6. Object.seal()
+Purpose: Seals an object, preventing the addition of new properties, but allows modification of existing properties.
+Syntax: Object.seal(obj)
+
+Example:
+const obj = { name: "Alice" };
+Object.seal(obj);
+obj.name = "Bob"; // Works fine
+obj.age = 25; // Cannot add new properties
+console.log(obj); // { name: "Bob" }
+7. Object.getOwnPropertyNames()
+Purpose: Returns an array of all own property names (including non-enumerable properties) of an object.
+Syntax: Object.getOwnPropertyNames(obj)
+
+Example:
+const obj = { name: "Alice" };
+Object.defineProperty(obj, 'hidden', { value: 'secret', enumerable: false });
+console.log(Object.getOwnPropertyNames(obj)); // ['name', 'hidden']
+8. Object.getOwnPropertyDescriptor()
+Purpose: Returns a property descriptor for a given property of an object.
+Syntax: Object.getOwnPropertyDescriptor(obj, prop)
+
+Example:
+const obj = { name: "Alice" };
+const descriptor = Object.getOwnPropertyDescriptor(obj, 'name');
+console.log(descriptor); 
+// { value: 'Alice', writable: true, enumerable: true, configurable: true }
+9. Object.getPrototypeOf()
+Purpose: Returns the prototype (i.e., the internal [[Prototype]] property) of an object.
+Syntax: Object.getPrototypeOf(obj)
+
+Example:
+const obj = { name: "Alice" };
+console.log(Object.getPrototypeOf(obj)); // The prototype of the object
+10. Object.setPrototypeOf()
+Purpose: Sets the prototype (i.e., the internal [[Prototype]] property) of an object.
+Syntax: Object.setPrototypeOf(obj, prototype)
+
+Example:
+const obj = { name: "Alice" };
+const prototypeObj = { greet: () => "Hello!" };
+Object.setPrototypeOf(obj, prototypeObj);
+console.log(obj.greet()); // "Hello!"
+11. Object.is()
+Purpose: Determines whether two values are the same value.
+Syntax: Object.is(value1, value2)
+
+Example:
+console.log(Object.is(25, 25)); // true
+console.log(Object.is(25, '25')); // false
+console.log(Object.is(NaN, NaN)); // true
+12. Object.create()
+Purpose: Creates a new object with the specified prototype object and optional properties.
+Syntax: Object.create(proto, propertiesObject)
+
+Example:
+const person = { name: "Alice" };
+const newPerson = Object.create(person);
+console.log(newPerson.name); // Alice
+13. Object.prototype.hasOwnProperty()
+Purpose: Checks if the object has a property as its own (not inherited).
+Syntax: obj.hasOwnProperty(prop)
+
+Example:
+const obj = { name: "Alice" };
+console.log(obj.hasOwnProperty('name')); // true
+console.log(obj.hasOwnProperty('age')); // false
+14. Object.prototype.toString()
+Purpose: Returns a string representation of the object.
+Syntax: obj.toString()
+
+Example:
+const obj = { name: "Alice" };
+console.log(obj.toString()); // "[object Object]"
+15. Object.prototype.valueOf()
+Purpose: Returns the primitive value of the specified object.
+Syntax: obj.valueOf()
+
+Example:
+const obj = { name: "Alice" };
+console.log(obj.valueOf()); // { name: "Alice" }`,
+          code1: ``
+        }
+      ]
+    },
   ]
 }
