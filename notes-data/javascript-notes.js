@@ -2265,7 +2265,11 @@ We will go through the same examples, but we will use arrow functions instead to
 The motivation of this second post about the scope is, despite arrow functions are a powerful addition to ES6, they must not be misused or abused.
 
 Default <b>this</b> context
-Arrow functions do not bind their own this, instead, they inherit the one from the parent scope, which is called <b>lexical scoping</b>. This makes arrow functions to be a great choice in some scenarios but a very bad one in others
+Arrow functions do not bind their own this, instead, they inherit the one from the <b>parent scope</b>, which is called <b>lexical scoping</b>. This makes arrow functions to be a great choice in some scenarios but a very bad one in others
+
+arrow functions do <b>not</b> bind <b>this</b> to the object in which they are defined (unlike regular functions). Instead, <b>this</b> will refer to the global object (or undefined in strict mode)
+
+For <b>arrow functions, this</b> is lexically bound, meaning it takes the value of <b>this</b> from the surrounding code's context. Ex : 2
 
 If we look at the first example but using arrow functions
 `,
@@ -2276,6 +2280,28 @@ If we look at the first example but using arrow functions
           // call it
 myFunction();
 
+
+//---------     Ex : 2 --------
+//Non-Strict Mode:
+// The arrow function iAmArrow inherits this from the surrounding scope(global  scope)
+// In non-strict mode, the "this" context is the global object (in browsers, "window"). So, this line assigns a property "abc" to the global object "(window.abc = "I am arrow function")".
+        this.abc = "I am arrow function"
+        const iAmArrow = () => {
+            console.log(this) // Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+            console.log(this.abc) // I am arrow function
+        }
+        iAmArrow()
+
+
+// Strict Mode:
+// In strict mode, "this" is "undefined" in the global context. Attempting to set "this.abc" will throw a "TypeError" because "this" is "undefined", and you cannot assign properties to "undefined".
+        "use strict";
+        this.abc = "I am arrow function"
+        const iAmArrow = () => {
+            console.log(this) //undefined
+            console.log(this.abc) //Uncaught TypeError: Cannot set properties of undefined (setting 'abc')
+        }
+        iAmArrow()
           `
         },
         {
@@ -2406,25 +2432,19 @@ myFunction();
           `
         },
         {
-          text1: `
-          When to Use Arrow Functions:
-          ----------------------------
+          text1: `<b>When to Use Arrow Functions</b>:
           
-          1) Short, Concise Functions:
+          <b>1) Short, Concise Functions</b>:
           Arrow functions are well-suited for short, concise functions, especially when the function body is a single expression.
-          
-          2) Avoiding this Binding Issues:
+          <b>2) Avoiding this Binding Issues</b>:
           Arrow functions are useful in scenarios where you want to maintain the this context of the enclosing scope, avoiding common issues related to this binding in regular functions.
-          
-          3) Callbacks and Higher-Order Functions:
+         <b> 3) Callbacks and Higher-Order Functions</b>:
           Arrow functions are commonly used as callbacks in functions like map, filter, and reduce due to their concise syntax.
           
-          Drawbacks:
-          ---------
-          1) No arguments Object:
+          <b>Drawbacks</b>:
+          <b>1) No arguments Object</b>:
           Arrow functions do not have their own arguments object. If you need to access the arguments passed to the function, you should use the rest parameters syntax (...args).
-          
-          2) Not Suitable for All Cases:
+         <b> 2) Not Suitable for All Cases</b>:
           While arrow functions are convenient for many scenarios, they may not be suitable for all use cases, especially when you need the this context to be dynamically determined.
           
           In summary, arrow functions provide a concise syntax for writing functions in JavaScript and are commonly used in modern codebases. They are particularly useful for short, simple functions and for avoiding this binding issues in certain scenarios. However, it's essential to be aware of their behavior and limitations, especially when working with more complex use cases.`,
@@ -2482,13 +2502,12 @@ myFunction();
 
           Working of recursion in JavaScript
           A recursive function must have a condition to stop calling itself. Otherwise, the function is called indefinitely.
-
           Once the condition is met, the function stops calling itself. This is called a base condition.
 
-          To prevent infinite recursion, you can use if...else statement (or similar approach) where one branch makes the recursive call, and the other doesn't.
-
-          So, it generally looks like this.`,
-          code1: `            function recurse() {
+          To prevent infinite recursion, you can use <b>if...else statement</b> (or similar approach) where one branch makes the recursive call, and the other doesn't.
+`,
+          code1: ` // So, it generally looks like this.
+             function recurse() {
             if(condition) {
                 recurse();
             }
@@ -2498,21 +2517,15 @@ myFunction();
         }
 
         //------------------
-
         // recurse();
         //     A simple example of a recursive function would be to count down the value to 1.
-
             // Example 1: Print Numbers:
-            
             // program to count down numbers to 1
             function countDown(number) {
-
                 // display the number
                 console.log(number);
-
                 // decrease the number value
                 const newNumber = number - 1;
-
                 // base case
                 if (newNumber > 0) {
                     countDown(newNumber);
@@ -2540,16 +2553,13 @@ myFunction();
           countDown(2) prints 2 and calls countDown(1)
           countDown(1) prints 1 and calls countDown(0)
           When the number reaches 0, the base condition is met, and the function is not called anymore.`,
-          code1: `
-          // Example 2: Find Factorial
+          code1: `// Example 2: Find Factorial
           // program to find the factorial of a number
           function factorial(x) {
-          
               // if number is 0
               if (x === 0) {
                   return 1;
               }
-          
               // if number is positive
               else {
                   return x * factorial(x - 1);
@@ -2557,7 +2567,6 @@ myFunction();
           }
           
           const num = 3;
-          
           // calling factorial() if num is non-negative
           if (num > 0) {
               let result = factorial(num);
@@ -3808,19 +3817,41 @@ console.log(calc.result); // 2
     
           In JavaScript, the <b>bind()</b> method is used to create a new function that, when called, has its <b>this</b> keyword set to a specific value. It allows you to explicitly specify the value of <b>this</b> when a function is executed. The <b>bind()</b> method does not invoke the function immediately; instead, it returns a new function with the specified <b>this</b> value and, optionally, initial arguments.
     
-          // The bind() method creates a new function, when invoked, has the this sets to a provided value.
-          // The bind() method allows an object to borrow a method from another object without making a copy of that method. This is known as function borrowing in JavaScript.`,
-          code1: `const originalFunction = function() {
+          -> The bind() method creates a new function, when invoked, has the this sets to a provided value.
+          -> The bind() method allows an object to borrow a method from another object without making a copy of that method. This is known as function borrowing in JavaScript.`,
+          code1: `// --------- Ex : 1 ---------
+          const originalFunction = function() {
             console.log(this.name);
           };
-
           const obj = { name: 'Example' };
 
           // Using bind to create a new function with a specific 'this' value
           const boundFunction = originalFunction.bind(obj);
-
           // Calling the new function
-          boundFunction(); // Output: Example`
+          boundFunction(); // Output: Example
+          
+          
+
+          //------------ Ex : 2 ------------
+                  const person = {
+            name: 'Pedro',
+            area: 'Sanchez',
+            arFun: function() {
+                return \`\${this.name} - \${this.area}\`
+            }
+        }
+        const person2 = {
+            name: 'ram',
+            area: 'wgl',
+        }
+        console.log(person.arFun());
+
+        //"call()" immediately invokes the function with the specified "this" context and any arguments passed.
+        console.log(person.arFun.call(person2)); // ram - wgl
+
+        //bind() returns a "new function" with the specified "this" context and arguments, but "does not call" the function immediately.
+        console.log(person.arFun.bind(person2)()); // ram - wgl
+          `
         },
         {
           text1: `In this example, originalFunction is a simple function that logs the name property of whatever object it is called on. We then use bind() to create a new function boundFunction where this is explicitly set to the obj object. When we call boundFunction(), it prints the name property of obj.
