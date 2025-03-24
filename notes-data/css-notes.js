@@ -1,8 +1,8 @@
 const isHighlighted = 'css-notes'
 const Links1 = 'css-notes'
 const Links2 = 'flex-notes'
-const Links3 = 'vue-x'
-const Links4 = 'vuejs-projects'
+const Links3 = 'bootstrap'
+const Links4 = 'css-projects'
 
 function removeElement() {
   document.getElementById("imgbox1").style.display = "none";
@@ -1097,6 +1097,50 @@ Creates a pseudo-element that is the last child of the selected element. It is o
       ],
     },
     {
+      id: 1,
+      title: ":root Selector",
+      note: [
+        {
+          text1: `The :root <b>selector is a CSS</b> pseudo-class that matches the root element of the document. In an HTML document, this is the <b> <html> element</b>.
+        (Ex : 2)
+While it behaves similarly to the <b>html</b> selector, the :root selector has higher specificity and is commonly used to define global styles or CSS custom properties (variables).
+
+<b>:root Selector for CSS Variables</b> Ex : 2
+The :root selector is particularly useful for defining CSS custom properties (variables), which can be used throughout the entire stylesheet for consistent theming.`,
+          code1: `// ---------- Ex : 1 ----------
+          :root {
+    /* CSS properties */
+    background-color: lightgray;
+    font-size: 16px;
+}
+    
+
+
+//------------ Ex : 2 ---------
+       :root {
+    --main-bg-color: #f0f0f0;
+    --main-text-color: #333;
+    --primary-color: #4CAF50;
+    --font-size: 18px;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    font-size: var(--font-size);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}`
+        },
+      ]
+    },
+    {
       id: 52,
       title: "background",
       note: [
@@ -1377,13 +1421,21 @@ The CSS box model is essentially a box that wraps around every HTML element. It 
       note: [
         {
           text1: `CSS has the following outline properties:
+The CSS <b>outline</b> property is used to draw a line outside an element's border. Unlike <b>border</b>, it does not take up space in the box model and does not affect element dimensions. It is often used for accessibility (e.g., focus styles) and highlighting elements.
+
+width → Specifies the thickness (e.g., 1px, 2px, thick).
+style → Defines the outline style (solid, dashed, dotted, etc.).
+color → Specifies the outline color.
 
 outline-style
 outline-color
 outline-width
 outline-offset
 outline`,
-          code1: ``
+          code1: `      button {
+  outline: 2px solid red;
+}
+  &lt;button&gt; btn &lt;/button&gt;`
         },
         {
           text1: ``,
@@ -3614,8 +3666,9 @@ writing-mode
         {
           text1: `CSS 2D Transforms
 CSS transforms allow you to move, rotate, scale, and skew elements.
-Mouse over the element below to see a 2D transformation:
+CSS transforms allow you to modify the appearance of an element by rotating, scaling, skewing, or translating it without affecting the document flow. This is done using the <b>transform</b> property.
 
+Mouse over the element below to see a 2D transformation:
 <b>CSS 2D Transforms Methods</b>With the CSS transform property you can use the following 2D transformation methods:
 
 translate()
@@ -3881,8 +3934,14 @@ The parameters are as <b>follow: matrix(scaleX(), skewY(), skewX(), scaleY(), tr
 }`
         },
         {
-          text1: ``,
-          code1: ``
+          text1: `<b>Combine Transform Functions</b>
+
+Instead of writing transform multiple times, combine all transformations into one declaration using space-separated values:`,
+          code1: `.mon-box:hover {
+  background-color: black;
+  transform: scale(0.5) rotate(45deg); /* Combine both transforms */
+}
+`
         },
 
       ],
@@ -4881,6 +4940,286 @@ The polygon() function is used with the clip-path property and the shape-outside
         },
       ],
     },    
+    {
+      id: 52,
+      title: "filter: blur()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "backdrop-filter: blur()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "new topic",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "new topic",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      section:"Interview",
+      title: "Explain responsive web design. ",
+      note: [
+        {
+          text1: `Responsive Design is a web page creation approach that uses flexible images, layouts, and CSS media queries. This design approach aims to build web pages that detect visitors' orientation and screen size so that the layout can be changed accordingly.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "How do you specify units in the CSS? What are the different ways to do it?new topic",
+      note: [
+        {
+          text1: `The CSS mainly uses four different units: px, em, pt, and percentage (%).
+CSS units are classified into two types:
+    <b>Absolute Units</b> (Fixed size)
+    <b>Relative Units</b> (Size depends on the parent or viewport)
+
+
+    
+-> Px (Pixel) is used for fine-grained control and alignment, not cascade. To get it sharp, we can use 1px or multiple of px.
+-> Em is used to maintain relative size and responsive fonts. 1em = 16px, which is also the same font size. In common practice, it is advisable to set the font size to 10px.
+-> Pt (point) is a fixed-size unit that is used in print. 1pt = 1/72 inch.
+-> Percentage (%) is used to set the font size relative to the font size of the body. Thus, it is necessary to set a reasonable font size for the body.
+`,
+          code1: ``
+        },
+        {
+          text1: ` <b>1. Absolute Units (Fixed)</b>
+Absolute units have a fixed size regardless of the screen or parent element.
+ <table data-start="457" data-end="714" node="[object Object]">
+    <thead data-start="457" data-end="480">
+      <tr data-start="457" data-end="480">
+        <th data-start="457" data-end="465">Unit</th>
+        <th data-start="465" data-end="480">Description</th>
+      </tr>
+    </thead>
+    <tbody data-start="505" data-end="714">
+      <tr data-start="505" data-end="543">
+        <td><code data-start="507" data-end="511">px</code></td>
+        <td>Pixels (most commonly used)</td>
+      </tr>
+      <tr data-start="544" data-end="601">
+        <td><code data-start="546" data-end="550">pt</code></td>
+        <td>Points (1 pt = 1/72 inch, used in print media)</td>
+      </tr>
+      <tr data-start="602" data-end="624">
+        <td><code data-start="604" data-end="608">cm</code></td>
+        <td>Centimeters</td>
+      </tr>
+      <tr data-start="625" data-end="647">
+        <td><code data-start="627" data-end="631">mm</code></td>
+        <td>Millimeters</td>
+      </tr>
+      <tr data-start="648" data-end="682">
+        <td><code data-start="650" data-end="654">in</code></td>
+        <td>Inches (1 in = 2.54 cm)</td>
+      </tr>
+      <tr data-start="683" data-end="714">
+        <td><code data-start="685" data-end="689">pc</code></td>
+        <td>Picas (1 pc = 12 pt)</td>
+      </tr>
+    </tbody>
+  </table>`,
+          code1: ``
+        },
+        {
+          text1: `<b>2. Relative Units (Flexible)</b>
+          Relative units depend on the viewport, parent element, or font size.
+          
+            <table data-start="1060" data-end="1562" node="[object Object]">
+    <thead data-start="1060" data-end="1083">
+      <tr data-start="1060" data-end="1083">
+        <th data-start="1060" data-end="1068">Unit</th>
+        <th data-start="1068" data-end="1083">Description</th>
+      </tr>
+    </thead>
+    <tbody data-start="1108" data-end="1562">
+      <tr data-start="1108" data-end="1159">
+        <td><code data-start="1110" data-end="1113">%</code></td>
+        <td>Percentage relative to the parent element</td>
+      </tr>
+      <tr data-start="1160" data-end="1213">
+        <td><code data-start="1162" data-end="1166">em</code></td>
+        <td>Relative to the parent element's font size</td>
+      </tr>
+      <tr data-start="1214" data-end="1265">
+        <td><code data-start="1216" data-end="1221">rem</code></td>
+        <td>Relative to the root (<code data-start="1246" data-end="1252">html</code>) font size</td>
+      </tr>
+      <tr data-start="1266" data-end="1305">
+        <td><code data-start="1268" data-end="1272">vw</code></td>
+        <td>Percentage of viewport width</td>
+      </tr>
+      <tr data-start="1306" data-end="1346">
+        <td><code data-start="1308" data-end="1312">vh</code></td>
+        <td>Percentage of viewport height</td>
+      </tr>
+      <tr data-start="1347" data-end="1396">
+        <td><code data-start="1349" data-end="1355">vmin</code></td>
+        <td>Based on the smaller of <code data-start="1382" data-end="1386">vw</code> or <code data-start="1390"
+            data-end="1394">vh</code></td>
+      </tr>
+      <tr data-start="1397" data-end="1445">
+        <td><code data-start="1399" data-end="1405">vmax</code></td>
+        <td>Based on the larger of <code data-start="1431" data-end="1435">vw</code> or <code data-start="1439"
+            data-end="1443">vh</code></td>
+      </tr>
+      <tr data-start="1446" data-end="1503">
+        <td><code data-start="1448" data-end="1452">ch</code></td>
+        <td>Width of the "0" character in the current font</td>
+      </tr>
+      <tr data-start="1504" data-end="1562">
+        <td><code data-start="1506" data-end="1510">ex</code></td>
+        <td>Height of the lowercase "x" in the current font</td>
+      </tr>
+    </tbody>
+  </table>`,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "Difference between CSS grid vs flexbox?",
+      note: [
+        {
+          text1: `CSS Grid Layout is a two-dimensional system along with rows and columns. It is used for large-sized layouts.
+Flexbox is a Grid layout with a one-dimensional system either within a row or a column. It is used for an application's components.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "horizontally and vertically center an element ",
+      note: [
+        {
+          text1: `<b>1. Using Flexbox (Best Method)</b>
+          
+           This method is responsive and works well for most layouts.
+           `,
+          code1: `.container {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  height: 100vh; /* Full viewport height */
+}
+`
+        },
+        {
+          text1: `<b>2. Using Grid (Modern Approach)</b>
+          
+          The place-items: center; is a shorthand for justify-items (horizontal) and align-items (vertical).
+          `,
+          code1: `.container {
+  display: grid;
+  place-items: center; /* Centers both horizontally & vertically */
+  height: 100vh;
+}
+`
+        },
+        {
+          text1: `<b>3. Using Absolute Positioning & Transform</b>
+          Moves the element to the center by shifting it back by <b>50% of its own width and height.</b>`,
+          code1: `.element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+`
+        },
+        {
+          text1: `<b>4. Using Margin Auto (For Block Elements)</b>
+          If the element has a fixed width and height, use this:
+          This works only for elements with fixed dimensions.
+
+
+          <b>Best Choice?</b>
+✔ <b>Use Flexbox</b> or <b>CSS Grid</b> for modern and responsive designs.
+✔ Use <b>position: absolute</b> for centering in a specific area.
+          `,
+          code1: `.element {
+  width: 200px;
+  height: 100px;
+  margin: auto;
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+}
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "new topic",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
     {
       id: 52,
       title: "new topic",

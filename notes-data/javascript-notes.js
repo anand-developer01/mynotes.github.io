@@ -352,6 +352,26 @@ To analyze the differences between these keywords, I'll be using three factors:
 <b>1) The scope of variables declared with <u>var</u></b>
 Variables declared with var can have a global or local scope. Global scope is for variables declared outside functions, while local scope is for variables declared inside functions.
 
+<b>i). Function Scope</b>
+When a variable is declared with <b>var</b> inside a function, it is <b>accessible throughout the entire function.</b>
+function example() {
+    var x = 10;
+    console.log(x); // ✅ Accessible here
+}
+console.log(x); // ❌ Error: x is not defined (because it's inside the function)
+Variables declared with <b>var</b> inside a function are <b>not accessible outside that function.</b>
+
+<b>ii). Global Scope</b>
+If var is declared <b>outside any function</b>, it becomes a <b>global variable</b> attached to the <b>window object</b> (in browsers).
+
+<b>iii). No Block Scope (Function-Scoped Instead)</b>
+Unlike let and const, <b>var</b> does <b>not respect block scope</b> ({} blocks like if, for, etc.).
+if (true) {
+    var z = 30;
+}
+console.log(z); // ✅ Accessible outside the if block (unexpected behavior)
+Even though <b>z</b> is declared inside the <b>if</b> block, it <b>leaks</b> out and is accessible outside.
+
 <b>2) How to redeclare and reassign variables declared with, var</b>
 Variables declared with var can be redeclared and reassigned
 var number = 50
@@ -362,6 +382,7 @@ The <b>var</b> keyword also allows for reassignment.
 
 <b>3) How to hoist variables declared with var</b>
 Variables declared with <b>var</b> are hoisted to the top of their global or local scope, which makes them accessible before the line they are declared.
+but their <b>value is not initialized </b> until the declaration line is reached.
 
 <b>Ex : 5 local scope</b>
 In the <b>print</b> function, <b>number</b> has a local scope. Due to hoisting, we can access the <b>number</b> variable before the line of declaration.
@@ -2202,7 +2223,7 @@ const App = (function () {
       title: "arrow functions:",
       note: [
         {
-          text1: `Arrow functions are a concise way to write function expressions in JavaScript. They were introduced in ECMAScript 6 (ES6) and provide a more compact syntax compared to traditional function expressions. Arrow functions are particularly useful for short, anonymous functions and for handling the scoping of the this keyword.`,
+          text1: `Arrow functions are a concise way to write function expressions in JavaScript. They were introduced in ECMAScript 6 (ES6) and provide a more compact syntax compared to traditional function expressions. Arrow functions are particularly useful <b>for short, anonymous functions and for handling the scoping of the <u>this</u> keyword.</b>`,
           code1: `
           // Basic Syntax:
           
@@ -2234,6 +2255,8 @@ const App = (function () {
           
           <b>this Binding:</b>
 Arrow functions do not have their own this context. Instead, they inherit the this value from the enclosing scope (lexical scoping). This behavior is different from regular functions, which have their own this context.
+
+<b>arrow functions inherit <u>this</u> from their parent scope</b> (also called <b>lexical scoping</b>). Unlike regular functions, they <b>do not create their own <u>this</u> context</b>. Instead, they use the <u>this</u> value from the surrounding function or execution context.
          
 Understanding <b>this</b> in javascript with arrow functions
 This post is meant as second part of Understanding <b>This</b> in javascript.

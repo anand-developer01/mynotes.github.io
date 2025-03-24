@@ -572,6 +572,7 @@ export default UncontrolledForm;
     },
     {
       id: 15,
+      section: "Reusable Components & Design Patterns",
       title: "What are Higher-Order Components?",
       note: [
         {
@@ -1298,6 +1299,16 @@ const App = () => {
 export default App;
 `
         },
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Compound Components",
+      note: [
         {
           text1: ``,
           code1: ``
