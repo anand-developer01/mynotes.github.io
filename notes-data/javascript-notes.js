@@ -2223,7 +2223,7 @@ const App = (function () {
       title: "arrow functions:",
       note: [
         {
-          text1: `Arrow functions are a concise way to write function expressions in JavaScript. They were introduced in ECMAScript 6 (ES6) and provide a more compact syntax compared to traditional function expressions. Arrow functions are particularly useful for short, anonymous functions and for handling the scoping of the this keyword.`,
+          text1: `Arrow functions are a concise way to write function expressions in JavaScript. They were introduced in ECMAScript 6 (ES6) and provide a more compact syntax compared to traditional function expressions. Arrow functions are particularly useful <b>for short, anonymous functions and for handling the scoping of the <u>this</u> keyword.</b>`,
           code1: `
           // Basic Syntax:
           
@@ -2255,6 +2255,8 @@ const App = (function () {
           
           <b>this Binding:</b>
 Arrow functions do not have their own this context. Instead, they inherit the this value from the enclosing scope (lexical scoping). This behavior is different from regular functions, which have their own this context.
+
+<b>arrow functions inherit <u>this</u> from their parent scope</b> (also called <b>lexical scoping</b>). Unlike regular functions, they <b>do not create their own <u>this</u> context</b>. Instead, they use the <u>this</u> value from the surrounding function or execution context.
          
 Understanding <b>this</b> in javascript with arrow functions
 This post is meant as second part of Understanding <b>This</b> in javascript.
