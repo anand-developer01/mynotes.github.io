@@ -1543,17 +1543,58 @@ console.log(groupConsecutiveNumbers(arr));
       note: [
         {
           text1: ``,
-          code1: ``
+          code1: `function groupConsecutiveNumbers(arr) {
+    // To store the result
+    let grouped = [];
+    let temp = [];
+
+    // Loop through the array
+    for (let i = 0; i < arr.length; i++) {
+        // If temp is empty, start a new group with the first number
+        if (temp.length === 0) {
+            temp.push(arr[i]);
+        } else {
+            // Check if the current number is consecutive to the last one
+            if (arr[i] === temp[temp.length - 1] + 1) {
+                temp.push(arr[i]);
+            } else {
+                // If it's not consecutive, push the group and start a new one
+                grouped.push(temp);
+                temp = [arr[i]];
+            }
+        }
+    }
+    // Don't forget to add the last group
+    if (temp.length > 0) {
+        grouped.push(temp);
+    }
+
+    return grouped;
+}
+
+// Test the function with your example array
+let arr = [1, 2, 3, 7, 8, 10, 11, 12, 15];
+console.log(groupConsecutiveNumbers(arr));
+`
         }
       ]
     },
     {
       id: 1,
-      title: "JavaScript Event Loop",
+      title: "print 1 to 5 every number with 1 sec gap",
       note: [
         {
           text1: ``,
-          code1: ``
+          code1: `        // print 1 to 5 every number with 1 sec gap
+        function runNum(num) {
+            if (num <= 5) {
+                setTimeout(() => {
+                    console.log(num)
+                    runNum(num + 1)
+                }, 1000)
+            }
+        }
+        runNum(1)`
         }
       ]
     },

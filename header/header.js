@@ -15,6 +15,7 @@ const navHeader = `
 <ul class="nav-list">
     <li><a href="./base-template.html">Base Template</a></li>
     <li><a href="./base-template2.html">Base Template2</a></li>
+    <li><a href="./devotional.html">devotional</a></li>
     
     <li><a href="./index.html">Home</a></li>
     <li><a href="./javascript-notes.html">Javascript</a></li>
@@ -27,4 +28,5 @@ const navHeader = `
     <li><a href="./js-code-challenges.html">Code Challenges</a></li>
     <li><a href="./python-notes.html">Python</a></li>
     <li><a href="./english.html">English</a></li>
+    <li><a href="./MERN-notes.html">MERN</a></li>
 </ul>`
