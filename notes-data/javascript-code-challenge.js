@@ -837,7 +837,6 @@ console.log(z == x);
           code1: `// ---------- Ex : 1 ---------
           function isAnagram(st1, st2) {
     if (st1.length !== st2.length) return false; // Step 1: Length check
-
     let count = {}; // Step 2: Create a frequency map
 
     for (let char of st1) {
@@ -848,7 +847,6 @@ console.log(z == x);
         if (!count[char]) return false; // If char is missing or overused
         count[char]--;
     }
-
     return true; // Step 3: If all counts match, it's an anagram
 }
 
@@ -858,6 +856,7 @@ console.log(isAnagram("tanw", "ant"));      // ❌ false
 console.log(isAnagram("racecar", "carrace"));// ✅ true
 console.log(isAnagram("hello", "world"));   // ❌ false
 console.log(isAnagram("aabb", "abab"));     // ✅ 
+
 
 // -------- Ex : 2 -----------
 function isAnagram(st1, st2) {
@@ -871,6 +870,16 @@ console.log(isAnagram("tanw", "ant"));      // ❌ false
 console.log(isAnagram("racecar", "carrace"));// ✅ true
 console.log(isAnagram("hello", "world"));   // ❌ false
 console.log(isAnagram("aabb", "abab"));     // ✅ true`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
+      note: [
+        {
+          text1: ``,
+          code1: ``
         }
       ]
     },
@@ -1581,20 +1590,293 @@ console.log(groupConsecutiveNumbers(arr));
     },
     {
       id: 1,
-      title: "print 1 to 5 every number with 1 sec gap",
+      section: "Closures",
+      title: "Counter",
+      note: [
+        {
+          text1: `Given an integer <b>n</b>, return a <b>counter</b> function. This <b>counter</b> function initially returns <b>n</b> and then returns 1 more than the previous value every subsequent time it is called <b>(n, n + 1, n + 2, etc)</b>.
+
+Example 1:
+Input: 
+n = 10 
+["call","call","call"]
+Output: [10,11,12]
+Explanation: 
+counter() = 10 // The first time counter() is called, it returns n.
+counter() = 11 // Returns 1 more than the previous time.
+counter() = 12 // Returns 1 more than the previous time.
+
+Example 2:
+Input: 
+n = -2
+["call","call","call","call","call"]
+Output: [-2,-1,0,1,2]
+Explanation: counter() initially returns -2. Then increases after each sebsequent call.
+ 
+
+Constraints:
+
+-1000 <= n <= 1000
+0 <= calls.length <= 1000
+calls[i] === "call"`,
+          code1: `var createCounter = function (n) {
+    // Define the counter function that will return the incremented value
+    return function() {
+        return n++;  // Post-increment operator will return n and then increment n
+    };
+};
+
+// Example usage:
+const counter1 = createCounter(10);
+console.log(counter1());  // 10
+console.log(counter1());  // 11
+console.log(counter1());  // 12
+
+const counter2 = createCounter(-2);
+console.log(counter2());  // -2
+console.log(counter2());  // -1
+console.log(counter2());  // 0
+console.log(counter2());  // 1
+console.log(counter2());  // 2
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "To Be Or Not To Be (function <b>expect</b> that returns an object with two methods:)",
+      note: [
+        {
+          text1: `Write a function <b>expect</b> that helps developers test their code. It should take in any value <b>val</b> and return an object with the following two functions.
+
+-> <b>toBe(val)</b> accepts another value and returns <b>true</b> if the two values <b>===</b> each other. If they are not equal, it should throw an error <b>"Not Equal"</b>.
+-> <b>notToBe(val)</b> accepts another value and returns <b>true</b> if the two values <b>!==</b> each other. If they are equal, it should throw an error <b>"Equal"</b>.
+ 
+
+Example 1:
+Input: func = () => expect(5).toBe(5)
+Output: {"value": true}
+Explanation: 5 === 5 so this expression returns true.
+Example 2:
+
+Input: func = () => expect(5).toBe(null)
+Output: {"error": "Not Equal"}
+Explanation: 5 !== null so this expression throw the error "Not Equal".
+
+Example 3:
+Input: func = () => expect(5).notToBe(null)
+Output: {"value": true}
+Explanation: 5 !== null so this expression returns true.`,
+          code1: `function expect(val) {
+    return {
+        toBe: function(expectedVal) {
+            if (val === expectedVal) {
+                return { "value": true };
+            } else {
+                throw new Error("Not Equal");
+            }
+        },
+        notToBe: function(expectedVal) {
+            if (val !== expectedVal) {
+                return { "value": true };
+            } else {
+                throw new Error("Equal");
+            }
+        }
+    };
+}
+
+// Example usage:
+
+// Example 1:
+try {
+    console.log(expect(5).toBe(5));  // { "value": true }
+} catch (e) {
+    console.log({ "error": e.message });
+}
+
+// Example 2:
+try {
+    console.log(expect(5).toBe(null));  // throws "Not Equal"
+} catch (e) {
+    console.log({ "error": e.message });
+}
+
+// Example 3:
+try {
+    console.log(expect(5).notToBe(null));  // { "value": true }
+} catch (e) {
+    console.log({ "error": e.message });
+}
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Counter II (function(createCounter) should return an object with three functions(increment(), decrement(), reset()).)",
+      note: [
+        {
+          text1: `Write a function createCounter. It should accept an initial integer init. It should return an object with three functions.
+
+The three functions are:
+<b>increment()</b> increases the current value by <b>1</b> and then returns it.
+<b>decrement()</b> reduces the current value by <b>1</b> and then returns it.
+<b>reset()</b> sets the current value to <b>init</b> and then returns it.
+ 
+
+Example 1:
+Input: init = 5, calls = ["increment","reset","decrement"]
+Output: [6,5,4]
+Explanation:
+const counter = createCounter(5);
+counter.increment(); // 6
+counter.reset(); // 5
+counter.decrement(); // 4
+
+Example 2:
+Input: init = 0, calls = ["increment","increment","decrement","reset","reset"]
+Output: [1,2,1,0,0]
+Explanation:
+const counter = createCounter(0);
+counter.increment(); // 1
+counter.increment(); // 2
+counter.decrement(); // 1
+counter.reset(); // 0
+counter.reset(); // 0
+ 
+
+Constraints:
+-1000 <= init <= 1000
+0 <= calls.length <= 1000
+calls[i] is one of "increment", "decrement" and "reset`,
+          code1: `        var createCounter = function (init) {
+            let currentValue = init; // Store the initial value
+
+            return {
+                increment: function () {
+                    currentValue += 1; // Increase by 1
+                    return currentValue;
+                },
+                decrement: function () {
+                    currentValue -= 1; // Decrease by 1
+                    return currentValue;
+                },
+                reset: function () {
+                    currentValue = init; // Reset to the initial value
+                    return currentValue;
+                }
+            };
+        };
+
+        // Example usage:
+        const counter1 = createCounter(5);
+        console.log(counter1.increment()); // 6
+        console.log(counter1.increment()); // 7
+        console.log(counter1.decrement()); // 6
+        console.log(counter1.reset()); // 5
+
+
+        console.log("------------")
+        const counter2 = createCounter(0);
+        console.log(counter2.increment()); // 1
+        console.log(counter2.increment()); // 2
+        console.log(counter2.decrement()); // 1
+        console.log(counter2.reset()); // 0
+        console.log(counter2.reset()); // 0`
+        }
+      ]
+    },
+    {
+      id: 1,
+      section: "Basic Array Transformations",
+      title: "Apply Transform Over Each Element in Array (create a map kind of method)",
+      note: [
+        {
+          text1: `Given an integer array <b>arr</b> and a mapping function <b>fn</b>, return a new array with a transformation applied to each element.
+The returned array should be created such that <b>returnedArray[i] = fn(arr[i], i)</b>.
+Please solve it without the built-in <b>Array.map</b> method.
+
+Example 1:
+Input: arr = [1,2,3], fn = function plusone(n) { return n + 1; }
+Output: [2,3,4]
+Explanation:
+const newArray = map(arr, plusone); // [2,3,4]
+The function increases each value in the array by one. 
+
+Example 2:
+Input: arr = [1,2,3], fn = function plusI(n, i) { return n + i; }
+Output: [1,3,5]
+Explanation: The function increases each value by the index it resides in.
+Example 3:
+
+Input: arr = [10,20,30], fn = function constant() { return 42; }
+Output: [42,42,42]
+Explanation: The function always returns 42.`,
+          code1: `var map = function (arr, fn) {
+    let newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        let newV = fn(arr[i], i); // Pass both element and index to the function
+        newArr.push(newV);
+    }
+    return newArr;
+};
+
+// Example 1:
+const arr1 = [1, 2, 3];
+const fn1 = function plusone(n) { return n + 1; };
+console.log(map(arr1, fn1)); // Output: [2, 3, 4]
+
+// Example 2:
+const arr2 = [1, 2, 3];
+const fn2 = function plusI(n, i) { return n + i; };
+console.log(map(arr2, fn2)); // Output: [1, 3, 5]
+
+// Example 3:
+const arr3 = [10, 20, 30];
+const fn3 = function constant() { return 42; };
+console.log(map(arr3, fn3)); // Output: [42, 42, 42]
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
       note: [
         {
           text1: ``,
-          code1: `        // print 1 to 5 every number with 1 sec gap
-        function runNum(num) {
-            if (num <= 5) {
-                setTimeout(() => {
-                    console.log(num)
-                    runNum(num + 1)
-                }, 1000)
-            }
+          code1: ``
         }
-        runNum(1)`
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
+      note: [
+        {
+          text1: ``,
+          code1: ``
         }
       ]
     },
@@ -2005,6 +2287,307 @@ console.log(fn(4)); // Output: 65
         console.log(compose(functions3)(42));  // Output: 42
 `
         }
+      ]
+    },
+    {
+      id: 1,
+      title: "return a <b>memoized</b> version of that function.",
+      note: [
+        {
+          text1: `Given a function fn, return a memoized version of that function.
+A memoized function is a function that will never be called twice with the same inputs. Instead it will return a cached value.
+
+<b>sum</b> accepts two integers <b>a</b> and <b>b</b> and returns <b>a + b</b>. Assume that if a value has already been cached for the arguments <b>(b, a)</b> where <b>a != b</b>, it cannot be used for the arguments <b>(a, b)</b>. For example, if the arguments are <b>(3, 2)</b>`,
+          code1: `        function memoize(fn) {
+            const cache = {}; // Use an object to store cached results
+
+            return function (...args) {
+                // Sort the arguments and convert to string to form a unique key
+                const key = args.slice().sort().join(',');
+
+                // If the result is already cached, return the cached value
+                if (key in cache) {
+                    return \`cached \${cache[key]}\`
+                }
+
+                // If not cached, call the function and cache the result
+                const result = fn(...args);
+                cache[key] = result; // Store the result in the cache object
+                return result;
+            };
+        }
+
+        // Example of sum function
+        const sum = (a, b) => a + b;
+
+        // Create memoized version of the sum function
+        const memoizedSum = memoize(sum);
+
+        // Example usage:
+        console.log(memoizedSum(2, 3)); // Calculates and stores result, returns 5
+        console.log(memoizedSum(3, 2)); // Uses cached result, returns 5
+        console.log(memoizedSum(1, 2)); // Calculates and stores result, returns 3
+        console.log(memoizedSum(2, 2)); // Calculates and stores result, returns 4
+        console.log(memoizedSum(1, 2)); // Uses cached result, returns 3
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "return a <b>memoized</b> version of that function. for 3 possible input functions: sum, fib, and factorial.",
+      note: [
+        {
+          text1: `Given a function fn, return a <b>memoized</b> version of that function.
+
+A <b>memoized</b> function is a function that will never be called twice with the same inputs. Instead it will return a cached value.
+
+You can assume there are <b>3</b> possible input functions: <b>sum, fib</b>, and <b>factorial</b>.
+-> <b>sum</b> accepts two integers <b>a</b> and <b>b</b> and returns <b>a + b</b>. Assume that if a value has already been cached for the arguments <b>(b, a)</b> where <b>a != b</b>, it cannot be used for the arguments <b>(a, b)</b>. For example, if the arguments are <b>(3, 2)</b> and <b>(2, 3)</b>, two separate calls should be made.
+-> <b>fib</b> accepts <b>a</b> single integer <b>n</b> and returns <b>1</b> if <b>n <= 1</b> or <b>fib(n - 1) + fib(n - 2)</b> otherwise.
+-> <b>factorial</b> accepts a single integer <b>n</b> and returns <b>1</b> if <b>n <= 1</b> or <b>factorial(n - 1) * n</b> otherwise.
+ 
+
+<b>Example 1</b>:
+Input:
+fnName = "sum"
+actions = ["call","call","getCallCount","call","getCallCount"]
+values = [[2,2],[2,2],[],[1,2],[]]
+Output: [4,4,1,3,2]
+Explanation:
+const sum = (a, b) => a + b;
+const memoizedSum = memoize(sum);
+memoizedSum(2, 2); // "call" - returns 4. sum() was called as (2, 2) was not seen before.
+memoizedSum(2, 2); // "call" - returns 4. However sum() was not called because the same inputs were seen before.
+// "getCallCount" - total call count: 1
+memoizedSum(1, 2); // "call" - returns 3. sum() was called as (1, 2) was not seen before.
+// "getCallCount" - total call count: 2
+
+<b>Example 2</b>:
+Input:
+fnName = "factorial"
+actions = ["call","call","call","getCallCount","call","getCallCount"]
+values = [[2],[3],[2],[],[3],[]]
+Output: [2,6,2,2,6,2]
+Explanation:
+const factorial = (n) => (n <= 1) ? 1 : (n * factorial(n - 1));
+const memoFactorial = memoize(factorial);
+memoFactorial(2); // "call" - returns 2.
+memoFactorial(3); // "call" - returns 6.
+memoFactorial(2); // "call" - returns 2. However factorial was not called because 2 was seen before.
+// "getCallCount" - total call count: 2
+memoFactorial(3); // "call" - returns 6. However factorial was not called because 3 was seen before.
+// "getCallCount" - total call count: 2
+
+<b>Example 3</b>:
+Input:
+fnName = "fib"
+actions = ["call","getCallCount"]
+values = [[5],[]]
+Output: [8,1]
+Explanation:
+fib(5) = 8 // "call"
+// "getCallCount" - total call count: 1
+ 
+
+<b>Constraints</b>:
+0 <= a, b <= 105
+1 <= n <= 10
+1 <= actions.length <= 105
+actions.length === values.length
+actions[i] is one of "call" and "getCallCount"
+fnName is one of "sum", "factorial" and "fib"`,
+          code1: ` function memoize(fnName) {
+            let callCount = 0;
+            const cache = new Map();
+
+            // Helper function to get the cache key
+            function getCacheKey(args) {
+                return JSON.stringify(args); // Convert arguments into a unique string
+            }
+
+            // Memoized sum function
+            const sum = (a, b) => a + b;
+
+            // Memoized factorial function
+            const factorial = (n) => (n <= 1 ? 1 : n * factorial(n - 1));
+
+            // Memoized fibonacci function
+            const fib = (n) => (n <= 1 ? 1 : fib(n - 1) + fib(n - 2));
+
+            let fn;
+            if (fnName === "sum") {
+                fn = sum;
+            } else if (fnName === "factorial") {
+                fn = factorial;
+            } else if (fnName === "fib") {
+                fn = fib;
+            }
+
+            // Memoized version of the function
+            const memoizedFn = (...args) => {
+                const cacheKey = getCacheKey(args);
+
+                // Check if the result is in the cache
+                if (cache.has(cacheKey)) {
+                    return cache.get(cacheKey); // Return the cached result
+                }
+
+                // Call the function and cache the result
+                const result = fn(...args);
+                cache.set(cacheKey, result);
+                callCount++;
+                return result;
+            };
+
+            // Handle actions
+            const actions = [];
+            const getCallCount = () => callCount;
+
+            return (action, values) => {
+                if (action === "call") {
+                    // Call the memoized function with the values
+                    return memoizedFn(...values);
+                } else if (action === "getCallCount") {
+                    // Get the call count
+                    return getCallCount();
+                }
+            };
+        }
+
+        // Test the implementation
+        const actions1 = ["call", "call", "getCallCount", "call", "getCallCount"];
+        const values1 = [[2, 2], [2, 2], [], [1, 2], []];
+        const fnName1 = "sum";
+        const memoizedSum = memoize(fnName1);
+        const result1 = actions1.map((action, i) => memoizedSum(action, values1[i]));
+        console.log(result1);  // Expected: [4, 4, 1, 3, 2]
+
+        const actions2 = ["call", "call", "call", "getCallCount", "call", "getCallCount"];
+        const values2 = [[2], [3], [2], [], [3], []];
+        const fnName2 = "factorial";
+        const memoizedFactorial = memoize(fnName2);
+        const result2 = actions2.map((action, i) => memoizedFactorial(action, values2[i]));
+        console.log(result2);  // Expected: [2, 6, 2, 2, 6, 2]
+
+        const actions3 = ["call", "getCallCount"];
+        const values3 = [[5], []];
+        const fnName3 = "fib";
+        const memoizedFib = memoize(fnName3);
+        const result3 = actions3.map((action, i) => memoizedFib(action, values3[i]));
+        console.log(result3);  // Expected: [8, 1]
+        
+        
+        
+        
+        // -------------- Without Map --------------
+                function memoize(fn) {
+            // Cache and callCount initialization
+            const cache = {};
+            let callCount = 0;
+
+            // Memoized function that uses cache
+            function memoized(...args) {
+                // Generate a key for the cache based on arguments
+                let key = JSON.stringify(args);
+
+                // If the result is in cache, return the cached value
+                if (cache[key] !== undefined) {
+                    return cache[key];
+                }
+
+                // Increment callCount as function is called
+                callCount++;
+
+                // Calculate the result and store it in the cache
+                const result = fn(...args);
+                cache[key] = result;
+
+                return result;
+            }
+
+            // Attach a getter function to get the call count
+            memoized.getCallCount = function () {
+                return callCount;
+            };
+
+            return memoized;
+        }
+
+        // Helper functions for sum, factorial, and Fibonacci
+        function sum(a, b) {
+            return a + b;
+        }
+
+        function factorial(n) {
+            return n <= 1 ? 1 : n * factorial(n - 1);
+        }
+
+        function fib(n) {
+            if (n <= 1) return 1;
+            return fib(n - 1) + fib(n - 2);
+        }
+
+        // Test with examples
+
+        const actions1 = ["call", "call", "getCallCount", "call", "getCallCount"];
+        const values1 = [[2, 2], [2, 2], [], [1, 2], []];
+        const fn1 = memoize(sum);
+        let results1 = [];
+
+        for (let i = 0; i < actions1.length; i++) {
+            const action = actions1[i];
+            const value = values1[i];
+
+            if (action === "call") {
+                results1.push(fn1(...value));
+            } else if (action === "getCallCount") {
+                results1.push(fn1.getCallCount());
+            }
+        }
+
+        console.log(results1); // [4, 4, 1, 3, 2]
+
+        const actions2 = ["call", "call", "call", "getCallCount", "call", "getCallCount"];
+        const values2 = [[2], [3], [2], [], [3], []];
+        const fn2 = memoize(factorial);
+        let results2 = [];
+
+        for (let i = 0; i < actions2.length; i++) {
+            const action = actions2[i];
+            const value = values2[i];
+
+            if (action === "call") {
+                results2.push(fn2(...value));
+            } else if (action === "getCallCount") {
+                results2.push(fn2.getCallCount());
+            }
+        }
+
+        console.log(results2); // [2, 6, 2, 2, 6, 2]
+
+        const actions3 = ["call", "getCallCount"];
+        const values3 = [[5], []];
+        const fn3 = memoize(fib);
+        let results3 = [];
+
+        for (let i = 0; i < actions3.length; i++) {
+            const action = actions3[i];
+            const value = values3[i];
+
+            if (action === "call") {
+                results3.push(fn3(...value));
+            } else if (action === "getCallCount") {
+                results3.push(fn3.getCallCount());
+            }
+        }
+
+        console.log(results3); // [8, 1] `
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
       ]
     },
     {
