@@ -8,21 +8,21 @@ const isHighlighted = 'react-notes'
 
 const reactData = {
   reactNote: [
-    {
-      id: 2,
-      title: "intro",
-      note: [
-        {
-          text1: `self closed component <ABC/>
+    // {
+    //   id: 2,
+    //   title: "intro",
+    //   note: [
+    //     {
+    //       text1: `self closed component <ABC/>
           
-         <iframe src="../db/React-js.pdf" width="100%" height="600px"></iframe>
+    //      <iframe src="../db/React-js.pdf" width="100%" height="600px"></iframe>
 
 
-          `,
-          code1: ``
-        }
-      ]
-    },
+    //       `,
+    //       code1: ``
+    //     }
+    //   ]
+    // },
     {
       id: 2,
       title: "intro",
@@ -3016,15 +3016,72 @@ export default ShadowComponent;
       title: "children prop",
       note: [
         {
-          text1: `
+          text1: `In React.js, the children prop is a special prop that allows you to pass components or other elements as data to a component. Essentially, it represents whatever is placed between the opening and closing tags of a component when it's used.
+
+Here's a breakdown:
+<b>What it is</b>:
+The children prop is a way to make components more flexible and reusable.
+It allows a parent component to inject arbitrary content (HTML elements, other React components, or even text) into a child component.
+This is particularly useful for creating "wrapper" components that provide a consistent layout or structure.
+
+<b>How it works</b>:
+When you place content between the opening and closing tags of a component in JSX, that content becomes the value of the children prop within that component.
+Inside the child component, you can access this content using props.children.
           
-          <b>Using the FC type Ex : 1</b>
+<b>Conditionally rendering children</b>(Ex : 2)
+You can also conditionally render children based on the parent component's state or props. This is useful when you want to create a component that can be customized based on user input or other factors.
+
+          <b>Using the FC type</b>)(Ex : 3)
 There is a standard React type, FC, that we can use on arrow function components. FC stands for Function Component, and it aliases a type called FunctionComponent.
 
 <a href="https://www.carlrippon.com/react-children-with-typescript/" target="_blank">react-children-with-typescript</a>
 <a href="https://dev.to/debs_obrien/typescript-and-react-children-4epg" target="_blank">typescript-and-react-children</a> 
 `,
-          code1: `//---------------- Ex : 1 ------------
+          code1: `// ---------------- Ex : 1 ----------
+          function Card(props) {
+  return (
+    &lt;div style={{ border: &#39;1px solid gray&#39;, padding: &#39;10px&#39;, background : &#39;#a99f09&#39; }}&gt;
+      {props.children}
+    &lt;/div&gt;
+  );
+}
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Card&gt;
+        &lt;h2&gt;Welcome!&lt;/h2&gt;
+        &lt;p&gt;This is some content inside the card.&lt;/p&gt;
+      &lt;/Card&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App
+
+//------------- Ex : 2 ------------
+function ToggleButton(props) {
+  const [showContent, setShowContent] = useState(false);
+  const handleClick = () =&gt; {
+    setShowContent(!showContent);
+  };
+  return (
+    &lt;div&gt;
+      &lt;button onClick={handleClick}&gt;{props.buttonText}&lt;/button&gt;
+      {showContent &amp;&amp; props.children}
+    &lt;/div&gt;
+  );
+}
+function App() {
+  return (
+    &lt;ToggleButton buttonText=&quot;Show Content&quot;&gt;
+      &lt;p&gt;Some hidden content here&lt;/p&gt;
+    &lt;/ToggleButton&gt;
+  );
+}
+
+
+//------------ Ex : 3 ------------
 type Props = {
   title: string,
 };
@@ -6749,6 +6806,43 @@ export default React.memo(newComponent);`
                     );
           };`
         }
+
+      ],
+    },
+    {
+      id: 52,
+      title: "useId",
+      note: [
+        {
+          text1: `<b>useId</b> is a React Hook for generating unique IDs that can be passed to accessibility attributes.
+          <span style="color:red">const</span> id = <span style="color:#7F00FF">useId</span>()
+
+          Call useId at the top level of your component to generate a unique ID:
+          The useId hook is part of React and was introduced to help generate unique IDs for components, which is especially useful for accessibility (e.g., associating labels with form elements) and for handling unique key generation in lists.
+          `,
+          code1: `import { useId } from &#39;react&#39;;
+
+function PasswordField() {
+  const userId = useId();
+  const checkboxId = useId();
+
+  return (
+    &lt;&gt;
+      &lt;div style={{ display: &#39;flex&#39;, alignItems: &#39;center&#39;, justifyContent: &#39;space-around&#39;,background:&#39;#ca8ac9&#39; }}&gt;
+        &lt;label htmlFor={checkboxId}&gt; checkbox &lt;/label&gt;
+        &lt;input type=&quot;checkbox&quot; id={checkboxId} /&gt;
+      &lt;/div&gt;
+
+      &lt;div style={{ display: &#39;flex&#39;, alignItems: &#39;center&#39;, justifyContent: &#39;space-around&#39;,background:&#39;#ca8ac9&#39; }}&gt;
+        &lt;label htmlFor={userId}&gt;First Name&lt;/label&gt;
+        &lt;input id={userId} type=&quot;text&quot; placeholder={\`Generated id --&gt; \${userId}\`} /&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  )
+}
+
+export default PasswordField`
+        }
       ],
     },
     {
@@ -8044,6 +8138,143 @@ export default PureComponent;
     {
       id: 52,
       section: `Code Splitting`,
+      title: "Code splitting",
+      note: [
+        {
+          text1: `Code splitting consists of separating the code into several packages or components that can be loaded on demand or in parallel. This means that they are not loaded until they are needed.
+
+          Code splitting is a technique in web development, especially within single-page applications (SPAs) built with frameworks like React, Angular, and Vue, that involves dividing your application's code into smaller, more manageable chunks. Instead of loading the entire application's code at once, code splitting enables you to load only the code that's needed for the initial render or for specific user interactions.
+          
+          <b>The benefits of code splitting are</b>:
+The speed at which a website loads and displays content becomes faster.
+The interaction time improves.
+The percentage of users who abandon the web page without interacting with it decreases.
+
+1- Profile.tsx (Ex : 1)
+        
+2- About.tsx
+3- Contact.tsx
+4- FAQs.tsx
+5- Login.tsx
+
+<a href="https://dev.to/franklin030601/code-splitting-in-react-js-4o2g" target="_blank">code-splitting-in-react-js</a>`,
+          code1: `// --------- Ex : 1 -----------
+          export const Profile = () =&gt; {
+    return (
+        &lt;div&gt;Profile&lt;/div&gt;
+    )
+}
+    
+
+//--------- PrivateRoutes ---------- 
+export const PrivateRoutes = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;NavBar /&gt;
+      &lt;Routes&gt;
+        &lt;Route path=&#39;profile&#39; element={ &lt;Profile /&gt; } /&gt;
+        &lt;Route path=&#39;about&#39;   element={ &lt;About /&gt;   } /&gt;
+        &lt;Route path=&#39;contact&#39; element={ &lt;Contact /&gt; } /&gt;
+        &lt;Route path=&#39;faqs&#39;    element={ &lt;FAQs /&gt;    } /&gt;
+
+        &lt;Route path=&#39;/*&#39;      element={&lt;Navigate to=&#39;/profile&#39; replace /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/&gt;
+  )
+}
+
+
+// ---------- PublicRoutes ------------
+export const PublicRoutes = () =&gt; {
+  return (
+    &lt;Routes&gt;
+      &lt;Route path=&#39;login&#39; element={ &lt;Login /&gt; } /&gt;
+
+      &lt;Route path=&#39;/*&#39; element={&lt;Navigate to=&#39;/login&#39; replace /&gt;} /&gt;
+    &lt;/Routes&gt;
+  )
+}
+
+
+//-------------- App ---------------
+const isAuthenticated = false
+
+const App = () =&gt; {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Routes&gt;
+        {
+          (isAuthenticated)
+            ? &lt;Route path=&quot;/*&quot; element={&lt;PrivateRoutes /&gt;} /&gt;
+            : &lt;Route path=&quot;/*&quot; element={&lt;PublicRoutes /&gt;} /&gt;
+        }
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  )
+}
+export default App
+
+
+
+
+//---------------- Final Example --------------
+import { lazy, Suspense } from &#39;react&#39;;
+import { BrowserRouter, Navigate, Route, Routes } from &#39;react-router-dom&#39;;
+import { NavBar } from &#39;./components/NavBar&#39;;
+// import { About, Contact, FAQs, Profile, Login } from &#39;./pages&#39;
+
+const Profile = lazy(() =&gt; import(&#39;./pages/Profile&#39;));
+const About = lazy(() =&gt; import(&#39;./pages/About&#39;));
+const Contact = lazy(() =&gt; import(&#39;./pages/Contact&#39;));
+const FAQs = lazy(() =&gt; import(&#39;./pages/FAQs&#39;));
+const Login = lazy(() =&gt; import(&#39;./pages/Login&#39;));
+
+const isAuthenticated = false
+
+const App = () =&gt; {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Routes&gt;
+        {
+          (isAuthenticated)
+            ? &lt;Route path=&quot;/*&quot; element={&lt;PrivateRoutes /&gt;} /&gt;
+            : &lt;Route path=&quot;/*&quot; element={&lt;PublicRoutes /&gt;} /&gt;
+        }
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  )
+}
+export default App
+
+export const PublicRoutes = () =&gt; {
+  return (
+    &lt;Routes&gt;
+      &lt;Route path=&#39;login&#39; element={&lt;Suspense fallback={&lt;&gt;...&lt;/&gt;}&gt; &lt;Login /&gt;&lt;/Suspense&gt;} /&gt;
+      &lt;Route path=&#39;/*&#39; element={&lt;Navigate to=&#39;/login&#39; replace /&gt;} /&gt;
+    &lt;/Routes&gt;
+  )
+}
+
+export const PrivateRoutes = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;NavBar /&gt;
+      &lt;Routes&gt;
+        &lt;Route path=&#39;profile&#39; element={&lt;Suspense fallback={&lt;&gt;...&lt;/&gt;}&gt; &lt;Profile /&gt;&lt;/Suspense&gt;} /&gt;
+        &lt;Route path=&#39;about&#39; element={&lt;Suspense fallback={&lt;&gt;...&lt;/&gt;}&gt; &lt;About /&gt;&lt;/Suspense&gt;} /&gt;
+        &lt;Route path=&#39;contact&#39; element={&lt;Suspense fallback={&lt;&gt;...&lt;/&gt;}&gt; &lt;Contact /&gt;&lt;/Suspense&gt;} /&gt;
+        &lt;Route path=&#39;faqs&#39; element={&lt;Suspense fallback={&lt;&gt;...&lt;/&gt;}&gt; &lt;FAQs /&gt;&lt;/Suspense&gt;} /&gt;
+        &lt;Route path=&#39;/*&#39; element={&lt;Navigate to=&#39;/profile&#39; replace /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/&gt;
+  )
+}
+`
+        }
+      ],
+    },
+    {
+      id: 52,
       title: "Dynamic Import",
       note: [
         {
@@ -8264,7 +8495,7 @@ export default DynamicComponent;
     },
     {
       id: 27,
-      title: "Lazy loading",
+      title: "Lazy loading - (Component-Based Splitting)",
       note: [
         {
           text1: `Lazy loading is a strategy that delays the loading of some assets (e.g., images) until they are needed by the user based on the user's activity and navigation pattern; typically, these assets are only loaded when they are scrolled into view.
@@ -8522,6 +8753,8 @@ export default function MarkdownPreview({ markdown }) {
           text1: `The component lifecycle has three distinct lifecycle phases:
 
                   <b>Mounting</b>:The component is ready to mount in the browser DOM. This phase covers initialization from constructor(), getDerivedStateFromProps(), render(), and componentDidMount() lifecycle methods.
+                  <b>In functional component</b>
+                  To run logic when a functional component is mounted, you can use the useEffect hook with an empty dependency array []. This ensures that the effect will only run once, right after the initial render — effectively mimicking componentDidMount() in class components.
 
                   <b>Updating</b>: In this phase, the component gets updated in two ways, sending the new props and updating the state either from setState() or forceUpdate(). This phase covers getDerivedStateFromProps(), shouldComponentUpdate(), render(), getSnapshotBeforeUpdate() and componentDidUpdate() lifecycle methods.
 
