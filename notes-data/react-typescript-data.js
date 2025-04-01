@@ -19,6 +19,813 @@ const reactTypescriptData = {
       ]
     },
     {
+      id: 2,
+      title: "React Synthetic Event types.(typescript react DOM events)",
+      note: [
+        {
+          text1: `These are the types provided by React's <b>SyntheticEvent system</b>, which wraps the native DOM events and normalizes their behavior across different browsers. React uses its synthetic event system to provide consistent event handling that works across all platforms and browsers.
+
+In TypeScript, these event types are often prefixed with <b>React</b>. and are specific to the type of DOM element (e.g., <b>HTMLButtonElement</b>, <b>HTMLInputElement</b>, etc.) to ensure that the events are properly typed.
+
+So, when you refer to events like React.ChangeEvent&lt;HTMLInputElement&gt;, React.MouseEvent&lt;HTMLButtonElement&gt;, or React.FormEvent&lt;HTMLFormElement&gt;, you're referring to React Synthetic Event types.
+
+<b>1. Mouse Events</b>
+React.MouseEvent<T>: A mouse event for a specific element type (e.g., HTMLButtonElement, HTMLDivElement, etc.).
+<b>Example</b>: React.MouseEvent<HTMLButtonElement>
+Used for events like click, mousedown, mouseup, mouseover, mousemove, mouseout, etc.
+
+const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  console.log('Button clicked!');
+};
+
+<b>2. Keyboard Events</b>
+React.KeyboardEvent<T>: A keyboard event for a specific element type (e.g., HTMLInputElement).
+<b>Example</b>: React.KeyboardEvent<HTMLInputElement>
+Used for events like keydown, keyup, keypress.
+
+const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  console.log('Key pressed:', e.key);
+};
+
+<b>3. Focus Events</b>
+React.FocusEvent<T>: A focus event for a specific element type.
+<b>Example</b>: React.FocusEvent<HTMLInputElement>
+Used for events like focus, blur.
+
+const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+  console.log('Input focused!');
+};
+
+<b>4. Form Events</b>
+React.FormEvent<T>: A form event for a specific element type (e.g., HTMLFormElement).
+<b>Example</b>: React.FormEvent<HTMLFormElement>
+Used for events like submit, reset.
+
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  console.log('Form submitted!');
+};
+
+React.ChangeEvent<T>: A change event for input elements like input, select, textarea.
+<b>Example</b>: React.ChangeEvent<HTMLInputElement>
+Used for events like change.
+
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  console.log('Input changed:', e.target.value);
+};
+
+React.InputEvent<T>: An event for the input element (for real-time input value changes).
+<b>Example</b>: React.InputEvent<HTMLInputElement>
+Used for events like input (fires on every keystroke or value change in text fields).
+
+const handleInput = (e: React.InputEvent<HTMLInputElement>) => {
+  console.log('Input value:', e.target.value);
+};
+
+<b>5. Clipboard Events</b>
+React.ClipboardEvent<T>: A clipboard event for a specific element type.
+<b>Example</b>: React.ClipboardEvent<HTMLInputElement>
+Used for events like copy, cut, paste.
+
+const handleCopy = (e: React.ClipboardEvent<HTMLInputElement>) => {
+  console.log('Text copied!');
+};
+
+<b>6. Drag Events</b>
+React.DragEvent<T>: A drag event for a specific element type.
+<b>Example</b>: React.DragEvent<HTMLDivElement>
+Used for events like dragstart, drag, dragend, dragenter, dragleave, dragover, drop.
+
+const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
+  console.log('Element dragged!');
+};
+
+<b>7. Touch Events</b>
+React.TouchEvent<T>: A touch event for a specific element type (used for mobile devices).
+<b>Example</b>: React.TouchEvent<HTMLDivElement>
+Used for events like touchstart, touchmove, touchend, touchcancel.
+
+const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+  console.log('Touch started!');
+};
+
+<b>8. Pointer Events</b>
+React.PointerEvent<T>: A pointer event for a specific element type (works with mouse, pen, and touch).
+<b>Example</b>: React.PointerEvent<HTMLButtonElement>
+Used for events like pointerdown, pointerup, pointermove, pointerover, pointerout.
+
+const handlePointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
+  console.log('Pointer down!');
+};
+
+<b>9. Wheel Events</b>
+React.WheelEvent<T>: A wheel event for a specific element type.
+<b>Example</b>: React.WheelEvent<HTMLDivElement>
+Used for events like wheel (mouse wheel scrolling).
+
+const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+  console.log('Wheel event:', e.deltaY);
+};
+
+<b>10. Animation Events</b>
+React.AnimationEvent<T>: An animation event for a specific element type.
+<b>Example</b>: React.AnimationEvent<HTMLDivElement>
+Used for events like animationstart, animationend, animationiteration.
+
+const handleAnimationEnd = (e: React.AnimationEvent<HTMLDivElement>) => {
+  console.log('Animation ended!');
+};
+
+<b>11. Transition Events</b>
+React.TransitionEvent<T>: A transition event for a specific element type.
+<b>Example</b>: React.TransitionEvent<HTMLDivElement>
+Used for events like transitionstart, transitionend, transitionrun.
+
+const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+  console.log('Transition ended!');
+};`,
+        code1: ``
+        },
+        {
+          text1: `        <table>
+          <thead>
+          <tr data-start="5407" data-end="5502">
+          <th data-start="5407" data-end="5431">
+          <strong data-start="5409" data-end="5422">DOM Event</strong>
+          </th>
+          <th data-start="5431" data-end="5468"><strong data-start="5433" data-end="5447">React Type</strong></th><th data-start="5468" data-end="5502"><strong data-start="5470" data-end="5481">Example</strong></th></tr></thead><tbody data-start="5599" data-end="6638"><tr data-start="5599" data-end="5702"><td><code data-start="5601" data-end="5608">click</code></td><td><code data-start="5625" data-end="5646">React.MouseEvent&lt;T&gt;</code></td><td><code data-start="5662" data-end="5699">React.MouseEvent&lt;HTMLButtonElement&gt;</code></td></tr><tr data-start="5703" data-end="5807"><td><code data-start="5705" data-end="5714">keydown</code></td><td><code data-start="5729" data-end="5753">React.KeyboardEvent&lt;T&gt;</code></td><td><code data-start="5766" data-end="5805">React.KeyboardEvent&lt;HTMLInputElement&gt;</code></td></tr><tr data-start="5808" data-end="5911"><td><code data-start="5810" data-end="5818">submit</code></td><td><code data-start="5834" data-end="5854">React.FormEvent&lt;T&gt;</code></td><td><code data-start="5871" data-end="5905">React.FormEvent&lt;HTMLFormElement&gt;</code></td></tr><tr data-start="5912" data-end="6015"><td><code data-start="5914" data-end="5922">change</code></td><td><code data-start="5938" data-end="5960">React.ChangeEvent&lt;T&gt;</code></td><td><code data-start="5975" data-end="6012">React.ChangeEvent&lt;HTMLInputElement&gt;</code></td></tr><tr data-start="6016" data-end="6119"><td><code data-start="6018" data-end="6025">input</code></td><td><code data-start="6042" data-end="6063">React.InputEvent&lt;T&gt;</code></td><td><code data-start="6079" data-end="6115">React.InputEvent&lt;HTMLInputElement&gt;</code></td></tr><tr data-start="6120" data-end="6223"><td><code data-start="6122" data-end="6129">focus</code></td><td><code data-start="6146" data-end="6167">React.FocusEvent&lt;T&gt;</code></td><td><code data-start="6183" data-end="6219">React.FocusEvent&lt;HTMLInputElement&gt;</code></td></tr><tr data-start="6224" data-end="6327"><td><code data-start="6226" data-end="6232">blur</code></td><td><code data-start="6250" data-end="6271">React.FocusEvent&lt;T&gt;</code></td><td><code data-start="6287" data-end="6323">React.FocusEvent&lt;HTMLInputElement&gt;</code></td></tr><tr data-start="6328" data-end="6432"><td><code data-start="6330" data-end="6336">copy</code></td><td><code data-start="6354" data-end="6379">React.ClipboardEvent&lt;T&gt;</code></td><td><code data-start="6391" data-end="6431">React.ClipboardEvent&lt;HTMLInputElement&gt;</code></td></tr><tr data-start="6433" data-end="6535"><td><code data-start="6435" data-end="6441">drag</code></td><td><code data-start="6459" data-end="6479">React.DragEvent&lt;T&gt;</code></td><td><code data-start="6496" data-end="6529">React.DragEvent&lt;HTMLDivElement&gt;</code></td></tr><tr data-start="6536" data-end="6638"><td><code data-start="6538" data-end="6545">wheel</code></td><td><code data-start="6562" data-end="6583">React.WheelEvent&lt;T&gt;</code></td><td><code data-start="6599" data-end="6633">React.WheelEvent&lt;HTMLDivElement&gt;</code></td></tr></tbody>
+        </table>`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 52,
+      title: "1. Mouse Events",
+      note: [
+        {
+          text1: `<b>Full Example Using TypeScript with Mouse Events</b>
+Here is a complete example where we handle different mouse events in a React component.`,
+          code1: `import React, { useState } from 'react';
+
+const MouseEventComponent: React.FC = () => {
+  const [message, setMessage] = useState<string>('');
+
+  // Handle click event
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setMessage('Button clicked!');
+    console.log('Mouse clicked at:', event.clientX, event.clientY);
+  };
+
+  // Handle double-click event
+  const handleDoubleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setMessage('Div double-clicked!');
+    console.log('Mouse double-clicked at:', event.clientX, event.clientY);
+  };
+
+  // Handle mouse enter event
+  const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setMessage('Mouse entered the div!');
+    console.log('Mouse entered at:', event.clientX, event.clientY);
+  };
+
+  // Handle mouse leave event
+  const handleMouseLeave = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setMessage('Mouse left the div!');
+    console.log('Mouse left at:', event.clientX, event.clientY);
+  };
+
+  // Handle mouse move event
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    console.log('Mouse moved at:', event.clientX, event.clientY);
+  };
+
+  // Handle mouse down event
+  const handleMouseDown = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    console.log('Mouse button pressed down at:', event.clientX, event.clientY);
+  };
+
+  // Handle mouse up event
+  const handleMouseUp = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    console.log('Mouse button released at:', event.clientX, event.clientY);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;div 
+        style={{ width: &#39;300px&#39;, height: &#39;200px&#39;, backgroundColor: &#39;lightblue&#39; }} 
+        onMouseEnter={handleMouseEnter} 
+        onMouseLeave={handleMouseLeave} 
+        onMouseMove={handleMouseMove}
+      &gt;
+        &lt;p&gt;{message}&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;button
+        style={{ marginTop: &#39;20px&#39; }}
+        onClick={handleClick}
+        onDoubleClick={handleDoubleClick}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+      &gt;
+        Click Me!
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default MouseEventComponent;`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "2. Keyboard Events",
+      note: [
+        {
+          text1: `<b>Handling Keyboard Events in React with TypeScript</b>
+Keyboard events are triggered when the user interacts with a keyboard. In React, you can handle events such as key presses, key down, and key up.
+
+Common Keyboard Events:
+<b>onKeyDown</b>: Triggered when a key is pressed down.
+<b>onKeyPress (deprecated in some cases)</b>: Triggered when a key is pressed and the character is produced (like pressing a letter or number).
+<b>onKeyUp</b>: Triggered when a key is released.
+
+In React, <b>React.KeyboardEvent</b> is a synthetic event that is triggered when a keyboard event occurs. It is part of React’s event system, which wraps the native DOM events in a cross-browser compatible way. React events are normalized, meaning the same event works in all browsers.
+
+When you use <b>React.KeyboardEvent</b>, you are specifically working with events related to keyboard interactions, such as pressing and releasing keys.
+
+<b>Understanding React.KeyboardEvent&lt;HTMLInputElement&gt;</b>:
+In TypeScript, you can use <b>React.KeyboardEvent</b> to handle keyboard events. The generic <b>React.KeyboardEvent&lt;T&gt;</b> takes an element type <b>T</b> that the event is being applied to. In your case, you're dealing with an <b>&lt;input&gt;</b> element, so the event will be typed as React.<b>KeyboardEvent&lt;HTMLInputElement&gt;</b>.
+`,
+          code1: `import React, { useState } from &#39;react&#39;;
+
+const KeyboardEventComponent: React.FC = () =&gt; {
+  const [key, setKey] = useState&lt;string&gt;(&#39;&#39;);
+  const [message, setMessage] = useState&lt;string&gt;(&#39;&#39;);
+
+  // Handle key down event
+  const handleKeyDown = (event: React.KeyboardEvent&lt;HTMLInputElement&gt;) =&gt; {
+    setKey(event.key); // Store the pressed key
+    setMessage(\`Key down: \${event.key}\`);
+  };
+
+  // Handle key up event
+  const handleKeyUp = (event: React.KeyboardEvent&lt;HTMLInputElement&gt;) =&gt; {
+    setMessage(\`Key up: \${event.key}\`);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;React Keyboard Event Handling with TypeScript&lt;/h2&gt;
+      &lt;input
+        type=&quot;text&quot;
+        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
+        placeholder=&quot;Press any key&quot;
+      /&gt;
+      &lt;p&gt;Last pressed key: {key}&lt;/p&gt;
+      &lt;p&gt;{message}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default KeyboardEventComponent;
+`
+        },
+        {
+          text1: `<b>Key Event Properties in TypeScript:</b>
+1) <b>event.key</b> The value of the key pressed, e.g., <b>a</b>, <b>Enter</b>, <b>Backspace</b>, etc.
+
+2) <b>event.code</b> The physical key on the keyboard. It'’'s not affected by the shift key or the keyboard layout. For example, it can be <b>KeyA</b> for the <b>A</b> key, <b>Enter</b> for the Enter key.
+
+3) <b>event.altKey, event.ctrlKey, event.shiftKey, event.metaKey</b> Boolean values indicating whether the respective modifier keys <b>(Alt, Ctrl, Shift, Meta/Command)</b> are pressed when the event occurs.
+
+4) <b>event.repeat</b> A boolean indicating if the key is being held down and repeating (e.g., when holding a key down for a prolonged period).`,
+          code1: `import React, { useState } from &#39;react&#39;;
+
+const KeyboardEventComponent: React.FC = () =&gt; {
+  const [key, setKey] = useState&lt;string&gt;(&#39;&#39;);
+  const [message, setMessage] = useState&lt;string&gt;(&#39;&#39;);
+
+  // Handle key down event
+  const handleKeyDown = (event: React.KeyboardEvent&lt;HTMLInputElement&gt;) =&gt; {
+    const { key, altKey, ctrlKey, shiftKey, metaKey } = event;
+    
+    let modifierMessage = &#39;&#39;;
+    if (altKey) modifierMessage += &#39;Alt + &#39;;
+    if (ctrlKey) modifierMessage += &#39;Ctrl + &#39;;
+    if (shiftKey) modifierMessage += &#39;Shift + &#39;;
+    if (metaKey) modifierMessage += &#39;Meta + &#39;;
+    
+    setKey(key);
+    setMessage(\`Key down: \${modifierMessage}\${key}\`);
+  };
+
+  // Handle key up event
+  const handleKeyUp = (event: React.KeyboardEvent&lt;HTMLInputElement&gt;) =&gt; {
+    setMessage(\`Key up: \${event.key}\`);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;React Keyboard Event Handling with TypeScript&lt;/h2&gt;
+      &lt;input
+        type=&quot;text&quot;
+        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
+        placeholder=&quot;Press any key&quot;
+      /&gt;
+      &lt;p&gt;Last pressed key: {key}&lt;/p&gt;
+      &lt;p&gt;{message}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default KeyboardEventComponent;
+`
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "3. Focus Events",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "4. Form Events",
+      note: [
+        {
+          text1: `<b>1. Typing the Input Change Event (onChange)</b>(Ex : 1) 
+For each input field, you'll handle the <b>onChange</b> event, which is triggered whenever the user modifies the value. In TypeScript, you'll use the <b>React.ChangeEvent&lt;HTMLInputElement&gt;</b> type to capture the event.
+
+<b>2. Typing the Form Submit Event (onSubmit)</b>(Ex : 2)
+For form submissions, use <b>React.FormEvent&lt;HTMLFormElement&gt;</b> to type the onSubmit event handler. This ensures that TypeScript understands the event is coming from a &lt;form&gt; element and that it is a submit event.
+
+<b>React.FormEvent&lt;HTMLFormElement&gt;</b>: The event is typed as <b>FormEvent&lt;HTMLFormElement&gt;</b>, which ensures that TypeScript understands it is a submit event triggered by a &lt;form&gt; element.
+
+<b>3. Typing Focus Events (onFocus / onBlur)</b>(Ex : 3)
+When dealing with focus-related events (e.g., when an input gains or loses focus), use the <b>React.ChangeEvent&lt;HTMLInputElement&gt;</b> type.`,
+          code1: `//----------- Ex : 1 ------------
+          import React, { useState } from &#39;react&#39;;
+
+interface FormData {
+  username: string;
+  email: string;
+  password: string;
+}
+
+const FormComponent: React.FC = () =&gt; {
+  const [formData, setFormData] = useState&lt;FormData&gt;({
+    username: &#39;&#39;,
+    email: &#39;&#39;,
+    password: &#39;&#39;,
+  });
+
+  // Handle the change of input fields
+  const handleInputChange = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value, // Dynamically update the field based on its name
+    });
+  };
+
+  return (
+    &lt;form&gt;
+      &lt;input
+        type=&quot;text&quot;
+        name=&quot;username&quot;
+        value={formData.username}
+        onChange={handleInputChange}
+      /&gt;
+      &lt;input
+        type=&quot;email&quot;
+        name=&quot;email&quot;
+        value={formData.email}
+        onChange={handleInputChange}
+      /&gt;
+      &lt;input
+        type=&quot;password&quot;
+        name=&quot;password&quot;
+        value={formData.password}
+        onChange={handleInputChange}
+      /&gt;
+    &lt;/form&gt;
+  );
+};
+
+export default FormComponent;
+
+
+
+//------------ Ex : 2 -------------
+const handleSubmit = (e: React.FormEvent&lt;HTMLFormElement&gt;) => {
+  e.preventDefault();  // Prevents page reload on submit
+  console.log(formData);
+};
+
+return (
+  &lt;form onSubmit={handleSubmit}&gt;
+    &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+  &lt;/form&gt;
+);
+
+
+
+//----------- Ex : 3 ----------
+const handleFocus = (e: React.FocusEvent&lt;HTMLInputElement&gt;) =&gt; {
+  console.log(&#39;Input focused:&#39;, e.target.name);
+};
+
+const handleBlur = (e: React.FocusEvent&lt;HTMLInputElement&gt;) =&gt; {
+  console.log(&#39;Input blurred:&#39;, e.target.name);
+};
+
+return (
+  &lt;form&gt;
+    &lt;input
+      type=&quot;text&quot;
+      name=&quot;username&quot;
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+    /&gt;
+  &lt;/form&gt;
+);
+
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Clipboard Events",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Drag Events",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Touch Events",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Pointer Events",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Wheel Events",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Animation Events",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Transition Events",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "ReactNode",
+      note: [
+        {
+          text1: `In React and TypeScript, ReactNode is a type that represents any value that can be rendered as a child of a React component. It is a union type encompassing various renderable values, including:
+
+          In ReactJS with TypeScript, ReactNode is a type that represents a React element, an array of React elements, or a string, number, or boolean. It is defined in the react module and can be used to specify the type of a variable that can hold any of these types.
+
+<b>ReactElement</b>: A JSX element, representing a component instance.
+<b>string</b>: Text content.
+<b>number</b>: Numerical content.
+<b>ReactFragment</b>: A way to group multiple children without adding extra DOM elements.
+<b>ReactPortal</b>: A way to render children into a different DOM subtree.
+<b>boolean, null, undefined</b>: These are valid ReactNode types but do not render anything.
+
+<b>Children</b>
+There are two common paths to describing the children of a component. The first is to use the React.ReactNode type, which is a union of all the possible types that can be passed as children in JSX:
+
+interface ModalRendererProps {
+  title: string;
+  children: React.ReactNode;
+}`,
+          code1: `// Sample example
+          import React from &#39;react&#39;;
+
+interface Props {
+  children: React.ReactNode;
+}
+
+const MyComponent: React.FC&lt;Props&gt; = ({ children }) =&gt; {
+  return &lt;div&gt;{children}&lt;/div&gt;;
+};
+
+// Usage examples:
+&lt;MyComponent&gt;Hello&lt;/MyComponent&gt;
+&lt;MyComponent&gt;123&lt;/MyComponent&gt;
+&lt;MyComponent&gt;{[&lt;p&gt;Item 1&lt;/p&gt;, &lt;p&gt;Item 2&lt;/p&gt;]}&lt;/MyComponent&gt;
+
+//----------  Ex : 2 --------
+import React, { ReactNode } from &#39;react&#39;;
+
+function MyComponent(props: { children: ReactNode }) {
+  return &lt;div&gt;{props.children}&lt;/div&gt;;
+}`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "useContext",
+      note: [
+        {
+          text1: `Typescript Theme change`,
+          code1: `//---------- ThemeContext.tsx --------
+           import React, { createContext, useState, useContext, ReactNode } from &#39;react&#39;;
+
+// Define types for the context
+type Theme = &#39;light&#39; | &#39;dark&#39;;
+
+interface ThemeContextType {
+  theme: Theme;
+  toggleTheme: () =&gt; void;
+}
+
+// Create a context with a default value
+const ThemeContext = createContext&lt;ThemeContextType | undefined&gt;(undefined);
+
+// Define a provider component
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+export const ThemeProvider: React.FC&lt;ThemeProviderProps&gt; = ({ children }) =&gt; {
+  const [theme, setTheme] = useState&lt;Theme&gt;(&#39;light&#39;); // default theme is light
+
+  const toggleTheme = () =&gt; {
+    setTheme((prevTheme) =&gt; (prevTheme === &#39;light&#39; ? &#39;dark&#39; : &#39;light&#39;));
+  };
+
+  return (
+    &lt;ThemeContext.Provider value={{ theme, toggleTheme }}&gt;
+      {children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+};
+
+// Custom hook to use the ThemeContext
+export const useTheme = (): ThemeContextType =&gt; {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error(&#39;useTheme must be used within a ThemeProvider&#39;);
+  }
+  return context;
+};
+
+
+//----------- App.tsx --------
+import React from &#39;react&#39;;
+import { ThemeProvider } from &#39;./ThemeContext&#39;;
+import { ThemeSwitcher } from &#39;./ThemeSwitcher&#39;;
+
+const App: React.FC = () =&gt; {
+  return (
+    &lt;ThemeProvider&gt;
+      &lt;div className=&quot;App&quot;&gt;
+        &lt;h1&gt;Theme Toggle with TypeScript and Context API&lt;/h1&gt;
+        &lt;ThemeSwitcher /&gt;
+      &lt;/div&gt;
+    &lt;/ThemeProvider&gt;
+  );
+};
+
+export default App;
+
+
+//-------- ThemeSwitcher.tsx--------
+import React from &#39;react&#39;;
+import { useTheme } from &#39;./ThemeContext&#39;;
+
+export const ThemeSwitcher: React.FC = () =&gt; {
+  const { theme, toggleTheme } = useTheme(); // Access the theme and toggle function
+
+  return (
+    &lt;div style={{ padding: &#39;20px&#39;, textAlign: &#39;center&#39; }}&gt;
+      &lt;p&gt;Current theme: &lt;strong&gt;{theme}&lt;/strong&gt;&lt;/p&gt;
+      &lt;button onClick={toggleTheme}&gt;Toggle Theme&lt;/button&gt;
+      &lt;div
+        style={{
+          marginTop: &#39;20px&#39;,
+          padding: &#39;20px&#39;,
+          backgroundColor: theme === &#39;light&#39; ? &#39;#fff&#39; : &#39;#333&#39;,
+          color: theme === &#39;light&#39; ? &#39;#000&#39; : &#39;#fff&#39;,
+        }}
+      &gt;
+        &lt;p&gt;This is a {theme} themed box!&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+
+
+//------------ styles.css -------
+/* styles.css */
+
+/* Light theme */
+body[data-theme='light'] {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Dark theme */
+body[data-theme='dark'] {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Issue in passing typescript props",
+      note: [
+        {
+          text1: `Why User Doesn't Work Directly:
+React.FC&lt;User&gt; is telling TypeScript that the component expects <b>User</b> to be the <b>entire props object</b>. This means <b>props</b> will be of type <b>User</b>, so when you try to destructure <b>userData</b> from <b>props</b>, TypeScript can't find that field in the <b>User</b> interface because it is expecting the entire props object to directly match the <b>User</b> type.
+
+export interface User {
+  username: string;
+  area: string;
+  phone: number;
+  age: number;
+}
+In that case, props should directly have these fields (username, area, phone, age), not a nested userData field.
+
+
+<b>Correct Approach</b>:
+-> Define the props interface that includes <b>userData</b>:
+-> Create an explicit <b>UserComponentProps</b> interface where <b>userData</b> is a property, and use <b>React.FC&lt;UserComponentProps&gt;</b>.
+
+-> Use User directly for props if the component accepts the entire object.
+`,
+          code1: `//----------   ----------
+          // Property 'userData' does not exist on type 'User'
+          // in parent compoent
+           &lt;UserComponent userData = {userDet}/&gt;
+
+           // ----------- UserComponent.tsx ---------
+          const UserComponent: React.FC = ({userData}: User) => {
+  return (
+    &lt;&gt;
+      &lt;div&gt;
+          { JSON.stringify(userData)}
+      &lt;/div&gt;;
+    &lt;/&gt;
+  )
+};
+
+          
+          // --------- ------
+          // in parent compoent
+          &lt;UserComponent userData = {userDet}/&gt;
+          
+
+          // UserComponent
+          interface UserComponentProps {
+  userData : User
+}
+          const UserComponent: React.FC&lt;UserComponentProps&gt; = ({userData}) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;div&gt;
+          { JSON.stringify(userData)}
+      &lt;/div&gt;;
+    &lt;/&gt;
+  )
+};`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
       id: 52,
       title: "React Typescritp Pagination",
       note: [
@@ -1023,6 +1830,36 @@ const yourRole = (props: CheckUserProps) =&gt; {
 // Export the HOC-wrapped component
 export const ReturnHOCInputCom = withAuth(PrivateComponent, yourRole);
 `
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
         }
       ],
     },

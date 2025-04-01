@@ -912,6 +912,25 @@ console.log(isAnagram("aabb", "abab"));     // ✅ true`
     },
     {
       id: 1,
+      title: "",
+      note: [
+        {
+          text1: `In below code this pointing to window object. window object doesn't any name. <b>IamUser.ref.name</b> will be empty`,
+          code1: `        function makeUser(){
+            return {
+                myName : "anand",
+                name : "org name",
+                ref : this
+            }
+        }
+
+        const IamUser = makeUser()
+        console.log(IamUser.ref.name)`
+        }
+      ]
+    },
+    {
+      id: 1,
       title: "print sequence number using setTimeout and ver in loop, avoid using let - (use closures)",
       note: [
         {
