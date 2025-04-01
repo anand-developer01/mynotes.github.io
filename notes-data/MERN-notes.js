@@ -1,7 +1,7 @@
-const isHighlighted = 'javascript-notes'
+const isHighlighted = 'mongodb-notes'
 const Links1 = 'MERN-notes'
-const Links2 = 'mongodb'
-const Links3 = 'express js'
+const Links2 = 'mongodb-notes'
+const Links3 = 'express-js'
 const Links4 = 'javascript-projects'
 
 const mernData = {
@@ -458,9 +458,198 @@ server.listen(8010, () => {
             title: "What is NPM?",
             note: [
                 {
-                    text1: ``,
+                    text1: `NPM <b>(Node Package Manager)</b> is the default package manager for the Node.js runtime environment. It is a command-line tool that helps developers manage and share JavaScript code, libraries, and utilities that are used in a Node.js environment.
+
+                    <b>Packages</b>
+npm installs, updates and manages downloads of dependencies of your project. Dependencies are pre-built pieces of code, such as libraries and packages, that your Node.js application needs to work.
+
+                    <b>NPM consists of two main parts:</b>
+a CLI (command-line interface) tool for publishing and downloading packages, and
+an online repository that hosts JavaScript packages
+
+<b>Key Features of NPM</b>:
+<b>Package Management</b>:
+=> NPM allows developers to <b>install, manage, and share</b> libraries (also known as packages) of code. These packages can be anything from utility functions, frameworks (like Express), databases, and even build tools.
+=> With NPM, you can easily add dependencies to your project, manage their versions, and ensure that your project works consistently across different environments.
+
+<b>Repository</b>:
+=> NPM provides an <b>online repository</b> (https://www.npmjs.com/) where developers can publish and share their packages with the global community. This repository has millions of packages available for use.
+=> When you run the <b>npm install</b> command, it downloads packages from the <b>NPM registry</b>.
+
+<b>Dependency Management</b>:
+=> NPM allows you to declare dependencies (libraries your project needs) in a <b>package.json</b> file. This file tracks all the dependencies, along with their versions, for your project.
+=> You can also specify which versions of dependencies are required or allowed using semantic versioning.
+
+<b>Scripts</b>:
+=> NPM allows you to define <b>scripts</b> in the <b>package.json</b> file. These scripts are commonly used for automation tasks like testing, building, or starting your project. For example, you can run <b>npm run test</b> to execute your test suite.
+
+<b>Versioning and Updates</b>:
+=> NPM helps you manage the versions of packages you install. You can define specific versions of packages or use a range of versions.
+=> You can easily <b>update</b> dependencies by running <b>npm update</b>.
+
+<b>Global vs Local Installation</b>:
+=> You can install packages <b>globally</b> (making them available anywhere on your system) or locally (only within a specific project).
+=> Global installations are typically used for command-line tools (e.g., <b>npm install -g webpack</b>), while local installations are for project-specific dependencies (e.g., <b>npm install express</b>).
+`,
                     code1: ``
-                }
+                },
+                {
+                    text1: `<b> package.json </b>
+                    <b>package.json</b> is a <b>configuration file</b> that is essential in any Node.js project. It contains metadata about your project, including its name, version, dependencies, scripts, and more. This file is used by npm (Node Package Manager) to manage your project's dependencies and configuration, and it plays a key role in the development, testing, and deployment of a Node.js application.
+                    
+                    Every project in JavaScript - whether it's Node.js or a browser application - can be scoped as an npm package with its own package information and its <b>package.json</b> job to describe the project.
+
+We can think of <b>package.json</b> as stamped labels on those npm good boxes that our army of Wombats delivers around.
+
+<b>package.json</b> will be generated when <b>npm init</b> is run to initialise a JavaScript/Node.js project, with these basic metadata provided by developers:
+
+<b>name</b>: the name of your JavaScript library/project. It should be a unique identifier (lowercase, with dashes or underscores allowed).
+<b>version</b>: the version of your project. Often times, for application development, this field is often neglected as there's no apparent need for versioning opensource libraies. But still, it can come handy as a source of the deployment's version. Defines the version of the project using semantic versioning (major.minor.patch). Helps you track different versions of the project.
+
+<b>^</b>: latest minor release. For example, a <b>^1.0.4</b> specification might install version <b>1.3.0</b> if that's the latest minor version in the <b>1</b> major series.
+<b>~</b>: latest patch release. In the same way as <b>^</b> for minor releases, <b>~1.0.4</b> specification might install version <b>1.0.7</b> if that's the latest minor version in the <b>1.0</b> minor series.
+
+<b>description</b>: the project's description
+<b>license</b>: the project's license
+
+<b>scripts</b>
+<b>package.json</b> also supports a <b>scripts</b> property that can be defined to run command-line tools that are installed in the project's local context. For example, the <b>scripts</b> portion of an npm project can look something like this:
+
+{
+  "scripts": {
+  "start": "node index.js",
+    "build": "tsc",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "lint": "eslint src/**/*.ts",
+    "pack": "ncc build",
+    "test": "jest",
+    "all": "npm run build && npm run format && npm run lint && npm run pack && npm test"
+  }
+}
+with <b>eslint, prettier, ncc, jest</b> not necessarily installed as global executables but rather as local to your project inside <b>node_modules/.bin/.</b>
+
+<b>dependencies</b>:
+Lists all the packages (and their versions) your project depends on to run.
+These packages are installed when you run <b>npm install</b>
+
+npm install &lt;package-name&gt;
+
+"dependencies": {
+  "express": "^4.17.1",
+  "mongoose": "^5.9.1"
+}
+  
+<b>devDependencies</b>:
+Lists the packages needed for development purposes, such as testing libraries, build tools, or transpilers (e.g., Babel, Webpack).
+These packages are not required in the production environment and can be installed with the <b>--dev</b> flag.
+
+npm install &lt;package-name&gt; --save-dev
+
+"devDependencies": {
+  "mocha": "^8.0.0",
+  "chai": "^4.2.0"
+}
+  
+
+<b>package-lock.json</b>
+This file describes the exact versions of the dependencies used in an npm JavaScript project. If <b>package.json</b> is a generic descriptive label, <b>package-lock.json</b> is an ingredient table.
+
+<b>package-lock.json</b> is usually generated by the <b>npm install</b> command, and is also read by our NPM CLI tool to ensure reproduction of build environments for the project with <b>npm ci</b>.
+
+
+<b>npm install</b>
+This is the most commonly used command as we develop JavaScript/Node.js applications nowadays.
+
+By default, <b>npm install &lt;package-name&gt;</b> will install the latest version of a package with the <b>^</b> version sign. An <b>npm install</b> within the context of an npm project will download packages into the project's <b>node_modules</b> folder according to <b>package.json</b> specifications, upgrading the package version (and in turn regenerating <b>package-lock.json</b>) wherever it can based on <b>^</b> and <b>~</b> version matching.
+
+You can specify a global flag <b>-g</b> if you want to install a package in the global context which you can use anywhere across your machine
+
+
+Here’s a breakdown of the differences between:
+npm install &lt;package-name&gt;
+npm install &lt;package-name&gt; --save
+npm install &lt;package-name&gt; --save-dev
+
+<b>1) npm install &lt;package-name&gt;</b>
+This is the most basic form of the <b>npm install</b> command. It installs a package and adds it to your <b>node_modules</b> directory.
+
+Behavior:
+By default, as of <b>npm version 5</b> and later, running <b>npm install &lt;package-name&gt;</b> automatically saves the package to the <b>dependencies</b> section of your <b>package.json</b> file.
+The package will be installed in the node_modules folder of your project.
+
+<b>2) npm install &lt;package-name&gt; --save</b>
+Before <b>npm version 5</b>, you needed to explicitly use the <b>--save</b> flag to add the package to the <b>dependencies</b> section of your <b>package.json</b>. However, <b>in npm version 5 and later</b>, this behavior became the default, so you don't have to use <b>--save</b> anymore.
+
+<b>3) npm install &lt;package-name&gt; --save-dev</b>
+The <b>--save-dev</b> flag tells npm that the package is only required during the development of your project, not in production. These packages are typically tools for development (like testing libraries, build tools, or compilers) and aren't needed when running the app in a production environment.
+
+Behavior:
+-> The package is installed and saved under the <b>devDependencies</b> section in your <b>package.json</b>.
+-> This is useful for tools like testing frameworks, bundlers, and other development tools that are not required in production.
+
+<b>--save-dev</b> installs and adds the entry to the <b>package.json</b> file devDependencies
+<b>--no-sav</b>e installs but does not add the entry to the package.json file dependencies
+<b>--save-optional</b> installs and adds the entry to the package.json file optionalDependencies
+<b>--no-optional</b> will prevent optional dependencies from being installed
+`,
+                    code1: ``
+                },
+                {
+                    text1: `NPX stands for <b>Node Package eXecute</b>. It is simply an NPM(Node Package Manager) package runner. It allows developers to execute any Javascript Package available on the NPM registry without even installing it. NPX is installed automatically with NPM version 5.2.0 and above.
+
+NPX is a utility that complements the experience of using packages from the npm registry. 
+Since npm version 5.2.0 npx is pre-bundled with npm. So it's pretty much a standard nowadays.
+npx is also a CLI tool whose purpose is to make it easy to install and manage dependencies hosted in the npm registry.
+
+It's now very easy to run any sort of Node.js based executable that you would normally install via npm.
+You can run the following command to see if it is already installed for your current npm version:
+
+$ which npx
+If it's not, you can install it like this:
+
+$ npm install -g npx
+Once you make sure you have it installed, let's see a few of the use cases that make npx extremely helpful.`,
+                    code1: ``
+                },
+                {
+                    text1: `<b> NVM</b>
+                    <b>NVM</b> stands for <b>Node Version Manager</b> and is a command-line utility that allows developers to easily install, switch between, and manage multiple versions of <b>Node.js</b> on their system, which is particularly useful when working on projects with different Node.js version requirements. 
+                    
+                    nvm stands for <b>Node Version Manager</b>, a command-line utility that allows you to install and manage multiple versions of Node.js on the same system. It is particularly useful for developers who work on multiple projects that may require different versions of Node.js.
+                    
+                    <b>Common Commands in nvm</b>:
+<b>1) Install a Specific Version of Node.js</b>: To install a specific version of Node.js, use:
+nvm install <version>
+Example:
+nvm install 16.13.0
+
+<b>2) List Installed Node.js Versions</b>: To view all the versions of Node.js installed via nvm:
+nvm ls
+
+<b>3) Use a Specific Version of Node.js</b>: To switch to a particular version of Node.js that you’ve installed:
+nvm use <version>
+Example:
+nvm use 14.17.6
+
+<b>4) Set Default Node.js Version</b>: To set a default Node.js version to be used whenever a new terminal session starts:
+nvm alias default <version>
+Example:
+nvm alias default 16.13.0
+
+<b>5) Uninstall a Version of Node.js</b>: To uninstall a specific version of Node.js:
+nvm uninstall <version>
+Example:
+nvm uninstall 14.17.6
+
+<b>6) Install Latest Node.js (LTS)</b>: To install the latest LTS (Long Term Support) version of Node.js:
+nvm install --lts
+
+<b>7) Check the Current Version of Node.js</b>: To check the current version of Node.js you're using:
+nvm current
+`,
+                    code1: ``
+                },
             ]
         },
         {
@@ -505,12 +694,113 @@ server.listen(8010, () => {
         },
         {
             id: 1,
-            title: "Callbacks",
+            title: "CORS (Cross-Origin Resource Sharing)",
             note: [
+                {
+                    text1: `CORS stands for <b>Cross-Origin Resource Sharing</b>. It is a security mechanism that allows or restricts web applications running at one origin (domain) from making requests for resources hosted on a different origin (domain). CORS is implemented by web browsers to prevent potentially malicious behavior (like cross-site request forgery or data theft) when your website or web application makes requests to a server that is hosted on a different domain.
+                    
+                    CORS is a security feature created to selectively relax the SOP restrictions and enable controlled access to resources from different domains. CORS rules allow domains to specify which domains can request information from them by adding specific HTTP headers in the response.
+                   
+                    <b>CORS Headers</b>
+There are several important CORS-related headers:
+
+<b>Access-Control-Allow-Origin</b>: Specifies which origins are allowed to access the resource.
+Example: Access-Control-Allow-Origin: https://example.com or Access-Control-Allow-Origin: * (which allows all origins).
+<b>Access-Control-Allow-Credentials</b>: Indicates whether or not the response to the request can expose cookies or authorization headers.
+Example: Access-Control-Allow-Credentials: true.
+<b>Access-Control-Allow-Methods</b>: Specifies which HTTP methods (GET, POST, PUT, DELETE, etc.) are allowed when accessing the resource.
+Example: Access-Control-Allow-Methods: GET, POST, PUT.
+<b>Access-Control-Allow-Headers</b>: Specifies which headers can be included in the actual request.
+Example: Access-Control-Allow-Headers: Content-Type, X-Custom-Header.
+<b>Access-Control-Expose-Headers</b>: Specifies which headers are safe to expose to the browser.
+Example: Access-Control-Expose-Headers: Content-Length.
+<b>Access-Control-Max-Age</b>: Specifies how long the results of a preflight request can be cached by the browser.
+
+                    There are several HTTP headers related to CORS, but we are interested in the two related to the commonly seen vulnerabilities — <b>**Access-Control-Allow-Origin**</b> and <b>**Access-Control-Allow-Credentials**</b>.
+               
+                    I) <b>Access-Control-Allow-Origin</b>: This header specifies the allowed domains to read the response contents. The value can be either a wildcard character <b>**(*)**</b>, which indicates all domains are allowed, or a comma-separated list of domains.
+
+#All domain are allowed
+Access-Control-Allow-Origin: <b>*</b>   
+
+#comma-separated list of domains
+Access-Control-Allow-Origin: <b>example.com, metrics.com</b>    
+                
+
+II) <b>Access-Control-Allow-Credentials</b>: This header determines whether the domain allows for passing credentials — such as cookies or authorization headers in the cross-origin requests.
+
+The value of the header is either True or False. If the header is set to <b>true</b> the domain allows sending credentials. If it is set to <b>false</b> or not included in the response, then it is not allowed.
+
+#allow passing credenitals in the requests
+Access-Control-Allow-Credentials: true
+
+#Disallow passing in the requests
+Access-Control-Allow-Credentials: false
+
+<b>benefits of CORS</b>
+<b>1. Enables Cross-Domain Resource Sharing</b>
+<b>Benefit</b>: CORS allows resources (APIs, images, data, etc.) to be shared between different origins. This is crucial in modern web applications where data often needs to be fetched from multiple domains.
+<b>Example</b>: A front-end application hosted at https://frontend.com can request data from a backend API hosted at https://api.<b>example</b>.com.
+
+<b>2. Improved Security</b>
+<b>Benefit</b>: CORS provides a security layer by ensuring that only authorized domains (origins) can access a server's resources. It does this by adding specific headers that indicate which origins are allowed to make requests, preventing unauthorized access to sensitive resources.
+<b>Example</b>: A server can restrict access to its resources so that only requests coming from trusted domains, such as https://mytrusteddomain.com, are allowed.
+
+<b>3. Prevents Cross-Site Request Forgery (CSRF)</b>
+<b>Benefit</b>: CORS helps mitigate attacks like <b>Cross-Site Request Forgery (CSRF)</b>. By enforcing restrictions on which domains can access a resource, CORS prevents malicious websites from making unauthorized requests on behalf of users, particularly when sensitive data is involved (like submitting a form or modifying user settings).
+<b>Example</b>: Without CORS, an attacker could create a malicious site that makes requests to your server on behalf of a user (using their credentials). CORS prevents this by ensuring that only specific trusted origins are allowed.
+
+<b>4) Reduces the Risk of Data Theft </b>: Attackers can use CORS vulnerabilities to steal sensitive data from applications like API keys, SSH keys, Personal identifiable information (PII), or users’ credentials.
+<b>Benefit</b>: By restricting cross-origin requests, CORS reduces the risk of data theft or unauthorized access to sensitive data on a server. This is especially important for APIs handling private user data or other sensitive information.
+<b>Example</b>: A social media platform can ensure that only specific websites (such as <b>https://app.mysocialapp.com</b>) can access the user's profile information, preventing malicious sites from scraping data.
+
+<b>5) Cross-Site Scripting (XSS)</b>: Attackers can use CORS vulnerabilities to perform XSS attacks by injecting malicious scripts into web pages to steal session tokens or perform unauthorized actions on behalf of the user.
+<b>Remote Code Execution</b> in some cases (StackStorm case)
+                    `,
+                    code1: ``
+                },
+                {
+                    text1: `<b>Same-Origin Policy (SOP)</b>
+                    All web browsers implement a security model known as the <b>Same-Origin Policy (SOP)</b>. It restricts domains from accessing and retrieving data from other domains' resources.
+                    The SOP policy helps protect users from malicious scripts that could access their sensitive data or perform unauthorized actions on their behalf.
+                    For example, if <b>**business.com**</b> tries to make an HTTP request to <b>**metrics.com**</b>, the browser, by default, will block the request because it comes from a different domain.
+
+As much as the SOP sounds like a proper protection policy, it doesn't scale well in today's technologies that depend on each other for operation. For example, it presents challenges to APIs and microservices which have legitimate use cases for accessing and sharing information between domains.
+
+Because of cases like this, there was a need for a new security mechanism that would allow for cross-domain interactions. It's known as Cross-Origin Resource Sharing (CORS).`,
+                    code1: ``
+                },
+                {
+                    text1: `CORS is an HTTP header-based system that allows a server to specify any other origins (domain, scheme, or port) from which a browser should enable resources to be loaded other than its own.
+                    <b>Example of CORS with Credentials and Custom Headers:</b>`,
+                    code1: `const express = require('express');
+const cors = require('cors');
+const app = express();
+const port = 3000;
+
+// CORS configuration with credentials and custom headers
+app.use(cors({
+  origin: 'http://your-frontend-app.com',  // Allow only specific origin
+  methods: ['GET', 'POST'],  // Allow only specific HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'],  // Allow specific headers
+  credentials: true  // Allow credentials (cookies, HTTP authentication)
+}));
+
+// Example API route
+app.get('/data', (req, res) => {
+  res.json({ message: 'Hello from the CORS-enabled server with credentials!' });
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(\`Server running on http://localhost:\${port}\`);
+});
+`
+                },
                 {
                     text1: ``,
                     code1: ``
-                }
+                },
             ]
         },
         {
@@ -576,11 +866,334 @@ server.listen(8010, () => {
         },
         {
             id: 1,
-            title: "Authentication & Authorization (JWT, OAuth)",
+            title: "(JWT, OAuth) & bcrypt",
             note: [
+                {
+                    text1: `<b>JWT</b>
+                    A <b>JSON Web Token</b>, or JWT, is an open standard for securely creating and sending data between two parties, usually a client and a server.
+                    
+                    JSON Web Token (JWT) is a compact, URL-safe token used to represent claims between two parties. It works by encoding a JSON object into a string, which is then signed using a cryptographic algorithm to ensure its integrity and authenticity.
+
+                    <b>JWT (JSON Web Token)</b> is a compact and self-contained way to represent information between two parties in a secure manner. It's commonly used for <b>authentication</b> and <b>authorization</b> in modern web applications and APIs. JWT allows for transmitting data as a JSON object, and it can be verified and trusted because it is digitally signed.
+                    
+                    "JWTs are typically used to represent user identities and ensure secure communication between a client (such as a web or mobile app) and a server. They allow the server to verify the identity of a user, determine whether they are authorized to access a resource, and maintain a stateless authentication mechanism."
+
+                    JWTs are usually used to manage user sessions on a website. While they're an important part of the token based authentication process, JWTs themselves are used for <b>authorization</b>, not <b>authentication</b>.
+                    
+                    When you sign in to a site with a username and password, or with a third party method like Google, you're proving who you are with those sensitive details or access. This process is called <b>authentication</b>.
+
+Once you're signed in, the site's server sends back a JWT that allows you access to things like your settings page, shopping cart, and so on. This process is called <b>authorization</b>.
+
+JWTs are just bits of encoded JSON data with a cryptographic signature at the end.
+Here's an example of a JWT:
+<span style="color:red">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span> .eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlF1aW5jeSBMYXJzb24iLCJpYXQiOjE1MTYyMzkwMjJ9. <span style="color:#09ca9a">WcPGXClpKD7Bc1C0CCDA1060E2GGlTfamrd8-W0ghBE</span>
+Each JWT is made up of three segments, each separated by a dot (.). These three segments are the <b>header</b>, <b>payload</b>, and <b>signature.</b>  
+If you copy and paste that JWT into the <a target="_blank" href="https://jwt.io/">JWT.io Debugger</a>, you can see the decoded versions of those three segments. 
+
+A JSON Web Token (JWT) consists of three parts: the <b>header</b>, the <b>payload</b>, and the <b>signature</b>. The header contains metadata about the token and the algorithm used for signing, the payload holds the claims, and the signature ensures the token's integrity.
+
+<b>Header Segment</b>
+The header segment of a JWT contains information about the algorithm and token type.
+
+Here's the header segment of the example JWT token above:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+The header segment is base 64 URL encoded, and decodes to the following JSON object:
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+<b>alg</b> is the type of algorithm used in the last segment, the cryptographic signature. In this case, the HMAC SHA256 algorithm is used, though RSA is also common.
+<b>typ</b> is the type of token the segmented string is, which in this case is JWT.
+<b>What is the purpose of the header in a JWT?</b>
+The purpose of the header in a JWT is to contain metadata about the token, including the type of token and the signing algorithm used. This information is crucial for verifying the token's integrity and ensuring it hasn't been tampered with.
+
+<b>Payload Segment</b>
+The payload segment of a JWT contains registered claims or identifying information, usually for a user.
+Here's the payload segment of the example JWT token above:
+eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlF1aW5jeSBMYXJzb24iLCJpYXQiOjE1MTYyMzkwMjJ9
+The payload segment is also base 64 URL encoded, and decodes to the following JSON object:
+{
+  "sub": "1234567890",
+  "name": "Quincy Larson",
+  "iat": 1516239022
+}
+Since JWTs are usually used as part of the authentication method for sites, the payload segment usually contains identifying information for a user. These claims fall into three categories: registered, public, and private.
+Registered claims are a set of predefined claims defined here that are optional, but recommended when using JWTs.
+Public clams are optional claims, usually from the IANA JSON Web Token Registry.
+
+Private claims are optional, and are any claims that don't fall under the registered or public claims categories.
+<b>iat</b> is the <b>issued at</b> date for the token, and is a registered claim.
+
+<b>Signature Segment</b>
+The signature segment of a JWT contains the cryptographic signature of the token.
+Here's the signature segment of the example JWT token above:
+
+WcPGXClpKD7Bc1C0CCDA1060E2GGlTfamrd8-W0ghBE
+The signature segment is made up of the base 64 URL encoded header and payload segments, a secret (usually the contents of a key in a signing algorithm), and hashed using the algorithm defined in the header segment:
+
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  your-256-bit-secret
+)
+The signature helps ensure that the data in the header and payload segments haven't been tampered with, and the JWT can be trusted.
+However, it's important to note that the cryptographic signature at the end of the JWT is just for validation. It doesn't encrypt any data in the header or payload segments of the token. So you should never send sensitive information like a user's password in a JWT – everything in the header and payload can and should be public.`,
+                    code1: ``
+                },
+                {
+                    text1: `<b>How do you create a JWT in Node.js?</b>
+                    To create a JWT in Node.js, you first need to install the jsonwebtoken library. Then, you can create a payload with the necessary claims and sign the token using a secret key and the sign method.
+
+                    <b>1) Install Necessary Dependencies</b>
+npm install jsonwebtoken
+
+<b>2) Create the JWT Token </b>
+When the user logs in, you can generate a JWT using the jwt.sign() method from the jsonwebtoken package.
+  -> Normally, you'd validate the user credentials here
+  const user = {
+    id: 1,
+    username: 'john_doe',
+    role: 'admin',
+  };
+
+  The <b>jwt.sign()</b> method takes the following parameters:
+<b>Payload</b>: The user's information that you want to store in the token (e.g., user ID, roles).
+<b>Secret key</b>: A secret string used to sign the token, which ensures its authenticity and integrity.
+<b>Options</b>: Optional parameters such as expiresIn to specify how long the token is valid.
+
+const token = jwt.sign(
+    { id: 1, username: 'john_doe', role: 'admin' }, // Payload
+    'your-secret-key', // Secret key
+    { expiresIn: '1h' } // Options (optional)
+);
+
+   payload contains the user's ID, username, and role. The token will expire in 1 hour <b>('1h')</b>.
+
+   <b>3) Send the JWT to the Client</b>
+res.json({ token });
+
+<b>4) Verify the JWT on the Server (JWT Payload and Decoding)</b>
+jwt.<span style="color:red">verify</span>(token, 'your-secret-key', (err, decoded) => {
+  if (err) {
+    return res.status(401).send('Unauthorized');
+    OR
+    return res.status(401).send('Token has expired or is invalid');
+  }
+
+  // Access the decoded data
+  console.log(decoded.id);    // User's ID
+  console.log(decoded.role);  // User's role (admin, user, etc.)
+
+  res.json({ message: 'Access granted', user: decoded });
+});
+
+<b>5) Send the JWT with Subsequent Requests</b>
+For any protected resources, the client will send the JWT in the Authorization header of subsequent requests. The format is usually Bearer <token>.
+Example request (in JavaScript for a browser client):
+
+fetch('http://localhost:3000/protected', {
+  method: 'GET',
+  headers: {
+    'Authorization': \`Bearer \${token}\`,
+  },
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.log('Error:', error));
+                    `,
+                    code1: `const jsonServer = require('json-server');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const server = jsonServer.create();
+const router = jsonServer.router('db.json');
+const middlewares = jsonServer.defaults();
+const cors = require('cors');
+
+// Use default middlewares (e.g. logger, static, CORS, etc.)
+server.use(middlewares);
+server.use(jsonServer.bodyParser);
+
+// Apply general CORS for all routes
+// CORS configuration with credentials and custom headers
+server.use(cors({
+    origin: 'http://localhost:3000',  // Allow only specific origin
+    methods: ['GET', 'POST'],  // Allow only specific HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'],  // Allow specific headers
+    credentials: true  // Allow credentials (cookies, HTTP authentication)
+  }));
+
+// Secret key for JWT
+const SECRET_KEY = 'your_secret_key_here';  // Change this to a secure key in production
+
+// Custom login route
+server.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  const db = router.db; // Access the in-memory db
+  const users = db.get('users').value(); // Fetch the 'users' collection
+
+  // Find user by username
+  const user = users.find(user => user.username === username);
+  
+  if (user) {
+    // Compare the password (you should have hashed passwords in your db)
+    bcrypt.compare(password, user.password, (err, result) => {
+      if (err || !result) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+      }
+
+      // Generate a JWT token
+      const token = jwt.sign(
+        { id: user.id, userDetails: user },  // Payload
+        SECRET_KEY,                               // Secret key
+        { expiresIn: '1h' }                      // Token expiration time
+      );
+
+      // Send the token as the response
+      res.status(200).json({ token });
+    });
+  } else {
+    // If user not found, send error
+    res.status(401).json({ message: 'Invalid credentials' });
+  }
+});
+
+// Middleware to check the JWT token for protected routes
+const authenticateJWT = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];  // Extract Bearer token
+  if (!token) {
+    return res.status(403).json({ message: 'Access denied, token missing' });
+  }
+
+  // Verify the token
+  jwt.verify(token, SECRET_KEY, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: 'Invalid token' });
+    }
+    req.user = user;  // Attach the user info to the request
+    next();
+  });
+};
+
+// Protected route
+server.post('/protected', authenticateJWT, (req, res) => {
+  res.status(200).json({ message: 'This is protected data', user: req.user });
+});
+
+// Use the default router to handle other routes
+server.use(router);
+
+// Start the server on port 5000
+server.listen(5000, () => {
+  console.log('JSON Server is running on http://localhost:5000');
+});
+`
+                },
                 {
                     text1: ``,
                     code1: ``
+                },
+                {
+                    text1: `<b>bcrypt</b>
+                    <b>What is Hashing?</b>
+Hashing involves converting a given key or string of characters into another value. This is typically represented by a shorter, fixed-length value or key that represents the original value and facilitates the retrieval.
+
+<b>What is Password Hashing?</b>
+Password Hashing is a process of converting an input password into a fixed-length string of characters, typically for the purpose of securely storing and transmitting the password.
+
+Password hash functions are designed to be one-way functions. This means it should not be computationally possible to reverse the process and get the original input password from the hashed value.
+
+For example, suppose we want to hash a password like <b>password123</b>. The password will be transformed into a fixed-length character string using a hash algorithm like bcrypt. And we'll get a hashed result once the hash function has processed our password.
+
+The hashed output of <b>password123</b> using <b>bcrypt</b>, for instance, would look like this:
+e234dsdom3k2kmdl3l43iwes9vjro44223m3n32kn5n2ksdo4
+
+<b>What is bcrypt?</b>
+Bcrypt is a cryptographic algorithm that hashes passwords and creates a fixed-length string (the hash) that represents the original password. Hashing is a one-way function, meaning that once a password is hashed, it cannot be easily reversed back to the original password. This makes bcrypt useful for securely storing passwords in databases.
+
+bcrypt is a type of cryptographic algorithm used to securely store passwords. It scrambles a user's password into a unique code. This way, even if a thief takes the database, they won't be able to recover the original passwords readily.
+
+<b>How bcrypt works</b>:
+<b>Salting</b>: When you hash a password with bcrypt, it automatically generates a salt and combines it with the password.
+To improve security, bcrypt incorporates a random number called a salt. This salt is unique to each password and is attached to it before hashing. The combined value (password + salt) is then passed to the hashing function.
+<b>Hashing</b>: Bcrypt then hashes the salted password with the cryptographic algorithm, resulting in a hash that is hard to reverse.
+ Bcrypt processes a user's password using a sophisticated mathematical function. This function converts the password to a fixed-length string of characters that appear random and meaningless. The hashed value is what is kept in the database, not the original password. Because the hashing function is one-way, reversing the hash will not produce the original password.
+<b>Storing</b>: The resulting hash includes the salt and other information needed to verify the password (the cost factor and the salt itself). So, you don't need to store the original password; you store the hash and the salt.
+
+<b>How bcrypt is used in practice</b>:
+When a user logs in, the system compares the hash of the password they input with the stored hash in the database.
+<b>Hash the password</b>: When a user registers, bcrypt hashes the password with a salt and stores the hash in the database.
+<b>Verification</b>: When a user logs in, the system uses bcrypt to hash the password they provide and compares it to the stored hash in the database. Since bcrypt includes the salt in the hash, it can correctly compare the two without needing the original password.
+
+<b>Benefits of bcrypt</b>:
+<b>Security</b>: The salt and adaptive cost factor make bcrypt resistant to common attacks like rainbow table attacks and brute-force attacks.
+<b>Automatic salting</b>: Bcrypt automatically handles salting, so you don’t need to worry about managing salts yourself.
+<b>Slow and adaptive</b>: The ability to adjust the cost factor makes bcrypt resilient against increasing computational power, allowing you to make it slower as technology improves.
+
+<b>1) bcrypt.hash()</b>: This function is used to generate a hash of a plaintext password. It takes the plaintext password and a salt factor (optional) as input parameters and returns the hashed password asynchronously.
+<b>2) bcrypt.compare()</b>: This function is used to compare a plaintext password with its hashed counterpart. It takes the plaintext password and the hashed password as input parameters and returns a boolean value indicating whether the passwords match.
+
+
+To begin, we require the bcrypt module in our Node.js application:
+const bcrypt = require('bcrypt');
+
+To ensure the strength of our password hashes, we determine the number of salt rounds. This value dictates the computational cost of hashing and, consequently, the level of security:
+const saltRounds = 10; // Typically a value between 10 and 12
+
+With our configuration established, we can generate a salt asynchronously using the <b>bcrypt.genSalt()</b> function. This salt will be unique for each password hash, enhancing security:
+bcrypt.genSalt(saltRounds, (err, salt) => {
+if (err) {
+    // Handle error
+    return;
+}
+
+// Salt generation successful, proceed to hash the password
+});
+
+Once the salt is generated, we combine it with the user's password to compute the hash using the <b>bcrypt.hash()</b> function. This results in a securely hashed password ready for storage:
+const userPassword = 'user_password'; // Replace with the actual password
+bcrypt.hash(userPassword, salt, (err, hash) => {
+    if (err) {
+        // Handle error
+        return;
+    }
+
+// Hashing successful, 'hash' contains the hashed password
+console.log('Hashed password:', hash);
+});
+
+
+<b>How to Verify Passwords</b>
+To verify a password using bcrypt, use the <b>bcrypt.compare()</b> function. This function compares a plaintext password provided by the user during login with the hashed password stored in the database.`,
+                    code1: `// ---------- Hashing a password: -----------
+const bcrypt = require('bcryptjs');
+const password = 'mySuperSecretPassword';
+// Hash the password
+bcrypt.hash(password, 10, (err, hash) => {
+  if (err) {
+    console.error('Error hashing password:', err);
+  } else {
+    console.log('Hashed password:', hash);
+  }
+});
+Here, 10 is the cost factor (higher values make the hashing process slower and more secure).
+
+
+
+//------------- Verifying a password: ------------
+const storedHash = '$2a$10$ZQF7xGr69lKmm12k5Iyz9uFsdhrDovw1A4KZGk5WoUoEZTIwLVOee'; // Example hash
+const inputPassword = 'mySuperSecretPassword';
+
+// Compare the password entered by the user with the stored hash
+bcrypt.compare(inputPassword, storedHash, (err, result) => {
+  if (err) {
+    console.error('Error comparing password:', err);
+  } else if (result) {
+    console.log('Password matches!');
+  } else {
+    console.log('Password does not match!');
+  }
+});`
                 },
                 {
                     text1: ``,
@@ -789,6 +1402,16 @@ server.listen(5000, () => {
         },
         {
             id: 1,
+            title: "Authentication & Authorization",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
             title: "Error Handling",
             note: [
                 {
@@ -810,16 +1433,6 @@ server.listen(5000, () => {
         {
             id: 1,
             title: "WebSockets with socket.io",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "Error Handling",
             note: [
                 {
                     text1: ``,

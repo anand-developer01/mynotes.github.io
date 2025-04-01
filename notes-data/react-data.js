@@ -3107,6 +3107,26 @@ const Page: React.FC&lt;Props&gt; = ({
     },
     {
       id: 52,
+      title: "key",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
       title: "aff intro",
       note: [
         {
@@ -8280,6 +8300,11 @@ export const PrivateRoutes = () =&gt; {
         {
           text1: `Dynamic imports in React allow you to load modules (like components) on demand, improving performance by reducing initial load times and optimizing code splitting.
           
+          Dynamic <b>imports</b> in React allow you to dynamically load JavaScript modules at runtime, which can significantly improve your application's performance and load times. This technique is particularly useful for code splitting and lazy loading, ensuring that only the necessary code is loaded when needed.
+
+The import() function returns a Promise that resolves to the module you want to use dynamic import.
+A normal import in JavaScript (using the <b>import</b> statement) does not return a Promise. It's a synchronous operation and returns the exported values from the imported module.
+
           <b>How It Works?</b>(Ex : 1)
 ✔️ We store the dynamically imported component in state (Component).
 ✔️ Clicking the button triggers import() manually.
@@ -8355,6 +8380,32 @@ export default function DynamicComponent() {
         &lt;/&gt;
     );
 }
+
+// ------------- Ex : 3 -----------
+import {useEffect, useState} from &#39;react&#39;;
+
+const MyComponent = () =&gt; {
+  const [importedComponent, setImportedComponent] = useState(null);
+
+  useEffect(() =&gt; {
+    const importComponent = async () =&gt; {
+      const module = await import(&#39;./Task1&#39;);
+      const AnotherComponent = module.default;
+      setImportedComponent(&lt;AnotherComponent /&gt;);
+    };
+
+    importComponent();
+  }, []);
+
+  return (
+    &lt;div&gt;
+      {importedComponent}
+      &lt;div&gt;This is my functional component!&lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default MyComponent;
 `
         },
         {
@@ -8363,7 +8414,11 @@ export default function DynamicComponent() {
 ✅ When you want to lazy load a component without lazy() and Suspense
 ✅ When a module is needed only after a certain action (e.g., user clicks a button)
 ✅ When working with large third-party libraries (like lodash, moment, or d3.js)
-✅ When optimizing bundle size and reducing initial load time`,
+✅ When optimizing bundle size and reducing initial load time
+<b>1. Dynamic Import with Default Export</b>
+A default export is when you export a single entity (like a function or a class) from a module as the default export. In the case of React components, you typically use default exports.
+<b>2. Dynamic Import with Named Export</b>
+A named export is when you export one or more specific elements (like functions, variables, or components) from a module with a specific name.`,
           code1: `//----------- Ex : 1 ----------
           // Here’s how you can dynamically import a component inside useEffect and store it in state.
           import React, { useState, useEffect } from "react";
@@ -8439,6 +8494,71 @@ const App = () => {
 
 export default App;
 
+
+// Async/ await default export
+//------------- Ex : 5 -----------
+import { useEffect, useState } from 'react';
+
+const MyComponent = () => {
+  const [importedComponent, setImportedComponent] = useState(null);
+
+  useEffect(() => {
+    const importComponent = async () => {
+      const module = await import('./AnotherComponent');
+      const AnotherComponent = module.default;  // Access default export
+      setImportedComponent(&lt;AnotherComponent /&gt;);
+    };
+
+    importComponent();
+  }, []);
+
+  return (
+    &lt;div&gt;
+      {importedComponent}
+      &lt;div&gt;This is my functional component!&lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default MyComponent;
+
+
+
+
+// Named export
+//------------- Ex : 5 -----------
+import { useEffect, useState } from 'react';
+
+const MyComponent = () => {
+  const [importedComponent, setImportedComponent] = useState(null);
+
+  useEffect(() => {
+    const importComponent = async () => {
+      const module = await import('./AnotherComponent');
+      const AnotherComponent = module.AnotherComponent;  // Using named export
+      setImportedComponent(&lt;AnotherComponent /&gt;);
+    };
+
+    importComponent();
+  }, []);
+
+  return (
+    &lt;div&gt;
+      {importedComponent}
+      &lt;div&gt;This is my functional component!&lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default MyComponent;
+//---------------  AnotherComponent.jsx    ---------------
+// Named export
+import React from 'react';
+
+export const AnotherComponent = () => {
+  return &lt;div&gt;Another component loaded dynamically!&lt;/div&gt;;
+};
+
 `
         },
         {
@@ -8509,7 +8629,13 @@ export default DynamicComponent;
 Call <b>lazy</b> outside your components to declare a lazy-loaded React component:
 <span style="color:red">
 import { lazy } from 'react';
+// Dynamic import using \`default\` export
 const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));</span>
+
+<b>Default in Dynamic Imports in React</b>
+The <b>default</b> keyword in a <b>dynamic import</b> is related to <b>default exports</b> in JavaScript ES6.
+
+In JavaScript, when a module exports a single value, it can be exported as a <b>default export</b>. You can use the <b>default</b> keyword in dynamic imports to refer to the default export of the module.
 
 <b>Parameters</b> 
 <b>load</b>: A function that returns a Promise or another thenable (a Promise-like object with a <b>then</b> method). React will not call <b>load</b> until the first time you attempt to render the returned component. After React first calls <b>load</b>, it will wait for it to resolve, and then render the resolved value's <b>.default</b> as a React component. Both the returned Promise and the Promise's resolved value will be cached, so React will not call <b>load</b> more than once. If the Promise rejects, React will <b>throw</b> the rejection reason for the nearest Error Boundary to handle.
@@ -8557,6 +8683,9 @@ You need to provide a single input parameter to call <b>React.lazy()</b>. It acc
 => Placeholders can slow down quick scrolling.
 => Requires additional communication with the server to fetch resources.
 => Can affect SEO and ranking.
+
+<b>Importing Named Exports Dynamically:</b>
+If MyComponent was exported as a <b>named export</b> (not default), you would need to import it differently.
                     `,
           code1: `
                     // Implement Lazy Loding with React.Lazy method
@@ -8670,6 +8799,32 @@ export default function MarkdownPreview({ markdown }) {
   );
 }
 
+
+
+//------------- Ex : 3 -----------
+// Without default Export (Named Exports)
+import React, { Suspense, lazy } from 'react';
+
+// Use dynamic import for named export
+const MyComponent = lazy(() => import('./MyComponent').then(module => ({ default: module.MyComponent })));
+
+function App() {
+  return (
+    <div>
+      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+        &lt;MyComponent /&gt;
+      &lt;/Suspense&gt;
+    </div>
+  );
+}
+export default App;
+
+// Named export ------- AnotherComponent.jsx -------
+import React from 'react';
+export const AnotherComponent = () => {
+  return &lt;div&gt;Another component loaded dynamically!&lt;/div&gt;;
+};
+
 `
         }
       ],
@@ -8679,9 +8834,186 @@ export default function MarkdownPreview({ markdown }) {
       title: "React Error Boundary",
       note: [
         {
+          text1: `   If the other module fails to load (for example, due to network failure), it will trigger an error. You can handle these errors to show a nice user experience and manage recovery with Error Boundaries. Once you’ve created your Error Boundary, you can use it anywhere above your lazy components to display an error state when there’s a network error.`,
+          code1: `// ----------- ErrorBoundary.jsx ---------- 
+          import React, { Component } from &#39;react&#39;;
+
+class ErrorBoundary extends Component {
+  state = { hasError: false, error: null, errorInfo: null };
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    // You can log the error to an external service here
+    console.error(&quot;Error caught in ErrorBoundary:&quot;, error, errorInfo);
+    this.setState({ error, errorInfo });
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // Fallback UI
+      return (
+        &lt;div&gt;
+          &lt;h1&gt;Something went wrong.&lt;/h1&gt;
+          {/* You can use the error details in your fallback UI */}
+        &lt;/div&gt;
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+export default ErrorBoundary;
+
+
+
+// ----------- App.jsx ---------- 
+import React, { useState } from 'react';
+import ErrorBoundaryFunctional from './Task1';
+
+const BuggyComponent = () => {
+  const [shouldThrowError, setShouldThrowError] = useState(false);
+
+  if (shouldThrowError) {
+    throw new Error('I crashed!');
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;No error here!&lt;/h1&gt;
+      &lt;button onClick={() =&gt; setShouldThrowError(true)}&gt;Trigger Error&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+const App = () => {
+  return (
+    &lt;ErrorBoundaryFunctional&gt;
+      &lt;BuggyComponent /&gt;
+    &lt;/ErrorBoundaryFunctional&gt;
+  );
+};
+
+export default App;
+
+
+`
+        },
+        {
+          text1: `Functinal compnent`,
+          code1: `//   --------------  BuggyComponent.jsx  ---------------
+          import React, { useState } from &#39;react&#39;;
+
+const BuggyComponent = () =&gt; {
+  const [shouldThrowError, setShouldThrowError] = useState(false);
+  const [hasError, setHasError] = useState(false); // To control if an error should be shown
+
+  const handleClick = () =&gt; {
+    try {
+      if (shouldThrowError) {
+        // Simulate an error
+        throw new Error(&#39;I crashed!&#39;);
+      }
+    } catch (error) {
+      // Catch the error and set state to display an error message
+      console.error(&#39;Caught error:&#39;, error);
+      setHasError(true); // This will show an error message in the UI
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      {hasError ? (
+        &lt;div&gt;
+          &lt;h1&gt;Something went wrong!&lt;/h1&gt;
+          &lt;p&gt;The error message is: I crashed!&lt;/p&gt;
+        &lt;/div&gt;
+      ) : (
+        &lt;div&gt;
+          &lt;h1&gt;No error here!&lt;/h1&gt;
+          &lt;button onClick={() =&gt; {
+            setShouldThrowError(true); // Enable error throwing
+            handleClick(); // Attempt to trigger the error
+          }}&gt;
+            Trigger Error
+          &lt;/button&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+};
+
+export default BuggyComponent;
+
+
+
+// ------------- ErrorBoundary.jsx  -------------
+// src/components/ErrorBoundary.tsx
+import React, { useState, useEffect } from &#39;react&#39;;
+
+const ErrorBoundary = ({ children }) =&gt; {
+  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState(null);
+
+  // This effect simulates catching errors that happen in child components
+  useEffect(() =&gt; {
+    const handleError = (error) =&gt; {
+      setHasError(true);
+      setError(error);
+    };
+
+    window.addEventListener(&#39;error&#39;, (event) =&gt; {
+      handleError(event.error);
+    });
+
+    return () =&gt; {
+      window.removeEventListener(&#39;error&#39;, (event) =&gt; {
+        handleError(event.error);
+      });
+    };
+  }, []);
+
+  if (hasError) {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Something went wrong!&lt;/h1&gt;
+        &lt;p&gt;{error?.message}&lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+
+  return &lt;&gt;{children}&lt;/&gt;;
+};
+
+export default ErrorBoundary;
+
+
+// ------------- App.jsx ---------- 
+import React from &#39;react&#39;;
+import BuggyComponent from &#39;./BuggyComponent&#39;;
+import ErrorBoundary from &#39;./ErrorBoundary&#39;;
+
+const App = () =&gt; {
+  return (
+    &lt;ErrorBoundary&gt;
+      &lt;BuggyComponent /&gt;
+    &lt;/ErrorBoundary&gt;
+  );
+};
+
+export default App;
+
+
+`
+        },
+        {
           text1: ``,
           code1: ``
-        }
+        },
       ],
     },
     {
@@ -8689,8 +9021,31 @@ export default function MarkdownPreview({ markdown }) {
       title: "Suspense for Code Splitting",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `<b>React.lazy</b> takes a function that must call a dynamic <b>import()</b>. This must return a <b>Promise</b> which resolves to a module with a <b>default</b> export containing a React component.
+
+The lazy component should then be rendered inside a <b>Suspense</b> component, which allows us to show some fallback content (such as a loading indicator) while we're waiting for the lazy component to load.
+The <b>fallback</b> prop accepts any React elements that you want to render while waiting for the component to load. You can place the <b>Suspense</b> component anywhere above the lazy component. You can even wrap multiple lazy components with a single <b>Suspense</b> component.`,
+          code1: `
+          
+          // --------------- Ex : 2 ---------
+          // You can even wrap multiple lazy components with a single Suspense
+          import React, { Suspense } from &#39;react&#39;;
+
+const OtherComponent = React.lazy(() =&gt; import(&#39;./OtherComponent&#39;));
+const AnotherComponent = React.lazy(() =&gt; import(&#39;./AnotherComponent&#39;));
+
+function MyComponent() {
+  return (
+    &lt;div&gt;
+      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+        &lt;section&gt;
+          &lt;OtherComponent /&gt;
+          &lt;AnotherComponent /&gt;
+        &lt;/section&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  );
+}`
         }
       ],
     },
@@ -8699,9 +9054,54 @@ export default function MarkdownPreview({ markdown }) {
       title: "React Router Code Splitting(Route based Code Splitting)",
       note: [
         {
+          text1: `
+          
+          The code written for the UsersPage will be loaded only when the user navigates to the /users path which will decrease the bundle size for the first load and increase the overall performance.(Ex : 1)`,
+          code1: `// ------------- Ex : 1 ------------
+          import React, { lazy, Suspense } from &#39;react&#39;;
+import { BrowserRouter as Router, Route, Switch } from &#39;react-router-dom&#39;;
+
+const AdminPage = lazy(() =&gt; import(&#39;./AdminPage&#39;));
+const UsersPage = lazy(() =&gt; import(&#39;./UsersPage&#39;));
+
+const App = () =&gt; {
+  return (
+    &lt;Router&gt;
+      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+        &lt;Switch&gt;
+          &lt;Route path=&quot;/&quot; exact component={AdminPage} /&gt;
+          &lt;Route path=&quot;/users&quot; component={AdminPage} /&gt;
+        &lt;/Switch&gt;
+      &lt;/Suspense&gt;
+    &lt;/Router&gt;
+  );
+};
+
+export default App;
+          
+          
+// ------------- Ex : 2 ------------
+          import React, { Suspense, lazy } from &#39;react&#39;;
+import { BrowserRouter as Router, Routes, Route } from &#39;react-router-dom&#39;;
+
+const Home = lazy(() =&gt; import(&#39;./routes/Home&#39;));
+const About = lazy(() =&gt; import(&#39;./routes/About&#39;));
+
+const App = () =&gt; (
+  &lt;Router&gt;
+    &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+      &lt;Routes&gt;
+        &lt;Route path=&quot;/&quot; element={&lt;Home /&gt;} /&gt;
+        &lt;Route path=&quot;/about&quot; element={&lt;About /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/Suspense&gt;
+  &lt;/Router&gt;
+);`
+        },
+        {
           text1: ``,
           code1: ``
-        }
+        },
       ],
     },
     {
@@ -8709,7 +9109,10 @@ export default function MarkdownPreview({ markdown }) {
       title: "Webpack and Code Splitting",
       note: [
         {
-          text1: ``,
+          text1: `<b>Understanding Code-Splitting</b>
+At its core, code-splitting is a technique that involves breaking down a large JavaScript bundle into smaller, more manageable chunks. These chunks, also known as bundles, are loaded asynchronously, allowing for faster initial page loads and better overall performance. Code-splitting ensures that only the necessary code is loaded when a specific feature or page is accessed, reducing the time it takes for the application to become interactive.
+
+Webpack, a popular module bundler for JavaScript applications, offers built-in support for code-splitting. It provides a seamless way to create dynamic bundles that are loaded on demand, revolutionizing the way we optimize web applications.`,
           code1: ``
         }
       ],
@@ -8739,7 +9142,8 @@ export default function MarkdownPreview({ markdown }) {
       title: "Server-side Rendering (SSR) and Code Splitting",
       note: [
         {
-          text1: ``,
+          text1: `<b>What is Server-Side Rendering (SSR)?</b>
+Server-side rendering (SSR) is the technique where the HTML of a web page is generated on the server rather than in the browser. When a user requests a page, the server sends a fully rendered HTML page to the browser, which is then displayed to the user. This contrasts with client-side rendering (CSR), where the browser loads an empty HTML page and then uses JavaScript to render the content dynamically.`,
           code1: ``
         }
       ],
@@ -10061,6 +10465,240 @@ export default App;`
           text1: ``,
           code1: ``
         },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      section: "ApolloClient (graphql)",
+      title: "ApolloClient",
+      note: [
+        {
+          text1: `Apollo is a library that brings together two incredibly useful technologies used to build web and mobile apps: React and GraphQL.
+          
+          <b>Apollo Client</b> is a powerful, flexible, and comprehensive state management library for JavaScript applications, specifically designed to manage data fetching and cache synchronization in a GraphQL environment. It is the client-side counterpart of Apollo Server, which helps you query, mutate, and manage data in your GraphQL-enabled applications.
+
+          React was made for creating great user experiences with JavaScript. GraphQL is a very straightforward and declarative new language to more easily and efficiently fetch and change data, whether it is from a database or even from static files.
+          
+          Apollo Client is a comprehensive state management library for JavaScript. It enables you to manage both local and remote data with GraphQL. Use it to fetch, cache, and modify application data, all while automatically updating your UI.
+
+Apollo Client helps you structure code in an economical, predictable, and declarative way that's consistent with modern development practices. `,
+          code1: ``
+        },
+        {
+          text1: `Apollo Client is UI framework agnostic, which is super beneficial. You could use it with Angular, Vue, React or even native iOS and Android applications. The frontend application sends the GraphQL query to the Apollo Client, which processes the query and requests data from the GraphQL server. Note that the Apollo Client is agnostic of your GraphQL server's technology. It is compatible across any build setup and GraphQL API.
+
+The GraphQL server then sends the data response back to the Apollo Client. Which then normalizes and stores the data. The frontend application receives the UI updates. Apollo Client basically does some of the hard lifting work for the frontend application. It also provides intelligent caching out of the box.
+
+<b>Integrate Apollo Client</b>
+Installation
+The very first step is to install the following packages.
+npm install @apollo/client graphql
+
+<b>apollo/client</b>: Contains everything you need to setup Apollo Client 
+<b>graphql</b>: Provides logic for parsing GraphQL queries.
+
+<b>Imports</b>
+In the root of your app, which is usually index.js or App.js, let’s get the imports ready.
+
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  useQuery,
+  gql
+} from "@apollo/client";
+
+<b>Create Apollo Client</b>
+initialize the Apollo Client within the app.
+
+const client = new ApolloClient({
+  uri: ”https://my-example-url.com”, // Your running GraphQL server URL
+  cache: new InMemoryCache()
+});
+
+Within the root of your app, initialize an instance of the Apollo Client as shown above and provide it the GraphQL server URL. This can also be a local schema path.
+
+<b>Connect Apollo Client to React with Apollo Provider</b>
+The next step is to connect the Apollo Client to React with the Apollo Provider component. It wraps the React app and places the client on the context. This allows access to the Apollo Client from all the components within the app. Wrap the provider within the root of your application.
+&lt;ApolloProvider client = {client}&gt;
+  &lt;App /&gt;
+&lt;/ApolloProvider&gt;
+
+<b>Consume GraphQL API and Execute Queries</b>
+The initial setup work is done. Now we are ready to actually consume the GraphQL API and request data using GraphQL queries.
+
+<b>useQuery Hook</b>
+Queries provides clients the power to ask for exactly what they need and nothing more.
+
+<i>The useQuery is a React hook, which is the API for executing queries in an Apollo application.</i>
+
+First we write the GraphQL query that we want to execute, using the gql symbol. Below is the query, that queries for the fields we want to display on the conference sessions page.
+
+const ALL_SESSIONS = gql\`
+  query sessions {
+    sessions {
+    id
+    title
+    startsAt
+    day
+    room
+    level
+    speakers {
+      id
+      name
+    }    
+  }
+}\`;
+
+const { loading, error, data } = useQuery(ALL_SESSIONS);
+
+The useQuery hook returns the loading and error states that are tracked by the Apollo Client. This will help the frontend component code for loading and error states to display to the user. When the result of the query comes back from the GraphQL Server, the data property is populated. The data property contains the json response from the GraphQL API.
+
+Let’s add the hook to a component, this will ensure that when the component renders, the useQuery hook is executed. The AllSessionList component renders the sessions when the data is returned after executing the query. The loading sessions message is displayed briefly, until the data is returned.
+
+function AllSessionList() {
+  const { loading, error, data } = useQuery(ALL_SESSIONS);
+  if (loading) return &lt;p&gt;Loading Sessions..&lt;/p&gt;;
+  if (error) return &lt;p&gt;Error loading sessions!&lt;/p&gt;;
+  return data.sessions.map((session) => (
+    &lt;SessionItem
+      key={session.id}
+      session={{
+        ...session,
+      }}
+    /&gt;
+  ));
+}
+`,
+          code1: `//-------- Ex : 1 ----------
+          // src/queries.js
+import { gql } from '@apollo/client';
+
+export const GET_USER_BY_ID = gql\`
+  query GetUserById($id: String!) {
+    user(id: $id) {
+      id
+      username
+      email
+      role
+    }
+  }
+\`;
+ 
+
+//----------- UserDetail.jsx --------
+
+import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_USER_BY_ID } from '../../graphql/queries.js';
+
+const UserDetail = () => {
+  const [userId, setUserId] = useState('1'); // Default user ID (can be dynamic)
+
+  // Use Apollo Client's useQuery hook to fetch user by ID
+  const { loading, error, data } = useQuery(GET_USER_BY_ID, {
+    variables: { id: userId },
+  });
+
+  if (loading) return &lt;div&gt;Loading...&lt;/div&gt;;
+  if (error) return &lt;div&gt;Error: {error.message}&lt;/div&gt;;
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;User Details&lt;/h2&gt;
+      {data.user ? (
+        &lt;div&gt;
+          &lt;p&gt;&lt;strong&gt;ID:&lt;/strong&gt; {data.user.id}&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;Username:&lt;/strong&gt; {data.user.username}&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;Email:&lt;/strong&gt; {data.user.email}&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;Role:&lt;/strong&gt; {data.user.role}&lt;/p&gt;
+        &lt;/div&gt;
+      ) : (
+        &lt;p&gt;No user found with ID {userId}&lt;/p&gt;
+      )}
+
+      {/* Buttons to switch users */}
+      &lt;div&gt;
+        &lt;button onClick={() =&gt; setUserId(&#39;1&#39;)}&gt;User 1&lt;/button&gt;
+        &lt;button onClick={() =&gt; setUserId(&#39;2&#39;)}&gt;User 2&lt;/button&gt;
+        &lt;button onClick={() =&gt; setUserId(&#39;3&#39;)}&gt;User 3&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default UserDetail;
+
+
+//-------- ApolloClient.js --------
+// ApolloClient.js
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+// Create Apollo Client instance
+const client = new ApolloClient({
+  uri: 'http://localhost:5000/graphql',  // Replace with your GraphQL server URL
+  cache: new InMemoryCache(),
+});
+
+export { client };
+
+
+//---------- App.jsx -------
+import { ApolloProvider } from '@apollo/client';
+import { client } from './ApolloClient';
+const App = () => {
+  return (
+      &lt;ApolloProvider client={client}&gt;
+          &lt;PrivateMainRoute /&gt;
+      &lt;/ApolloProvider&gt;
+  );
+}
+
+export default App;
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "ApolloClient",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "ApolloClient",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "ApolloClient",
+      note: [
         {
           text1: ``,
           code1: ``
