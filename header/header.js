@@ -14,7 +14,7 @@ const navHeader = `
 </div>
 <ul class="nav-list">
     <li><a href="./base-template.html">Base Template</a></li>
-    <li><a href="./base-template2.html">Base Template2</a></li>
+    <li><a href="./html-notes.html"> html </a></li>
     <li><a href="./devotional.html">devotional</a></li>
     
     <li><a href="./index.html">Home</a></li>

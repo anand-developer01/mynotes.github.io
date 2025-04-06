@@ -2,20 +2,7 @@ const isHighlighted = 'css-notes'
 const Links1 = 'css-notes'
 const Links2 = 'flex-notes'
 const Links3 = 'bootstrap'
-const Links4 = 'css-projects'
-
-function removeElement() {
-  document.getElementById("imgbox1").style.display = "none";
-}
-
-function changeVisibility() {
-  document.getElementById("imgbox2").style.visibility = "hidden";
-}
-
-function resetElement() {
-  document.getElementById("imgbox1").style.display = "block";
-  document.getElementById("imgbox2").style.visibility = "visible";
-}
+const Links4 = 'scss-sass'
 
 const cssData = {
   cssNote: [
