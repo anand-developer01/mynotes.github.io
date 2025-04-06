@@ -36,8 +36,8 @@ const commonData = {
             id: 52,
             title: "AFF",
             note: [
-              {
-                text1: `American First Finance offers a variety of financial products and services designed to provide flexible payment options, especially for individuals with less-than-perfect credit. Their offerings include:
+                {
+                    text1: `American First Finance offers a variety of financial products and services designed to provide flexible payment options, especially for individuals with less-than-perfect credit. Their offerings include:
 
 <b>Retail Installment Sales Contracts</b>: These agreements allow consumers to purchase products and pay over time through amortizing payment schedules, with flexible early payoff options. 
 
@@ -48,16 +48,16 @@ const commonData = {
 <b>Flexible Payment Options</b>: Approval amounts range from $300 to $5,000, with access to a network of over 20,000 stores. Consumers can apply online and receive approval decisions in minutes. 
 
 <b>Products Financing</b>: Consumers can obtain financing for a variety of products and services, including furniture, appliances, electronics, jewelry, auto repairs, dental work, and more.`,
-                code1: ``
-              }
+                    code1: ``
+                }
             ],
-          },
-          {
+        },
+        {
             id: 52,
             title: "LTO and RISA",
             note: [
-              {
-                text1: `<b>1. LTO (Lease-To-Own)</b>:
+                {
+                    text1: `<b>1. LTO (Lease-To-Own)</b>:
 Lease-To-Own (LTO) is a type of financing option that allows consumers to lease a product with the option to own it after completing a series of payments. It's a flexible alternative to traditional credit or financing that typically doesn't require a large upfront payment.
 
 How it works:
@@ -84,16 +84,16 @@ Common Uses:
 -> Payment Flexibility: LTO may offer more flexibility in terms of returning the product if the customer decides not to purchase it. In contrast, RISA usually does not offer the option to return the product unless the customer defaults on the payments.
 
 Interest and Fees: RISAs typically involve an interest rate on the remaining balance of the product, whereas LTO agreements can sometimes have higher fees or interest rates due to the flexibility they offer.`,
-                code1: ``
-              }
+                    code1: ``
+                }
             ],
-          },
-          {
+        },
+        {
             id: 52,
             title: "Dealer Portal",
             note: [
-              {
-                text1: `The Dealer Portal in the context of American First Finance (or similar financial services companies) serves as an online platform for merchants and retailers (dealers) to manage their customer financing applications and transactions. The portal allows dealers to offer financing options to their customers directly, providing tools to streamline the approval process, track applications, and manage payments.
+                {
+                    text1: `The Dealer Portal in the context of American First Finance (or similar financial services companies) serves as an online platform for merchants and retailers (dealers) to manage their customer financing applications and transactions. The portal allows dealers to offer financing options to their customers directly, providing tools to streamline the approval process, track applications, and manage payments.
 
 Here are some of the key purposes and features of a Dealer Portal:
 
@@ -129,16 +129,16 @@ They can also monitor the status of past-due payments and communicate with custo
 
 <b>7. Promotions and Special Offers</b>
 Some dealer portals provide promotional tools, allowing dealers to offer special financing rates or deals during specific promotional periods.`,
-                code1: ``
-              }
+                    code1: ``
+                }
             ],
-          },
-          {
+        },
+        {
             id: 52,
             title: "Universal app",
             note: [
-              {
-                text1: `<b>1. Start With the Project Overview</b>
+                {
+                    text1: `<b>1. Start With the Project Overview</b>
 Explain the context of the project and the goal of the Universal Web App.
 
 Example: "I worked on the development of the Universal Web App for American First Finance, which was aimed at providing customers with a seamless and accessible way to manage their financing agreements, make payments, and track their accounts. The app was designed to be user-friendly and available across multiple devices, ensuring that users could access their financial information from anywhere."
@@ -184,20 +184,20 @@ Here's an example of how you might frame your response during an interview:
 "In my previous role as a frontend developer at American First Finance, I had the opportunity to contribute to the development of the Universal Web App, which was designed to offer customers easy access to their financing accounts, payments, and account management. My primary responsibilities included building the user interface using React.js and TypeScript while ensuring the app was responsive and optimized for a variety of devices. I worked closely with backend developers to integrate APIs, as well as with the design team to ensure the UI matched the brand's aesthetic and was user-friendly.
 
 One of the challenges I faced was optimizing the app for performance, especially as we needed it to handle a large volume of concurrent users. To address this, I implemented code splitting and lazy loading, which helped reduce the initial load time and improve the overall user experience. We also followed an Agile workflow, which allowed for continuous improvement and quick iterations. By the end of the project, the app was successfully launched and led to increased customer engagement, with higher adoption rates of financing services. It was a rewarding experience, and I gained a lot of hands-on knowledge in React, TypeScript, and performance optimization."`,
-                code1: ``
-              }
+                    code1: ``
+                }
             ],
-          },
-          {
+        },
+        {
             id: 52,
             title: "Clipboard Events",
             note: [
-              {
-                text1: ``,
-                code1: ``
-              }
+                {
+                    text1: ``,
+                    code1: ``
+                }
             ],
-          },
+        },
         {
             id: 1,
             title: "React js Interview Topics",
@@ -273,6 +273,188 @@ Mock Interview Questions
 18. How does reducer composition work?`
                 }
             ]
+        },
+        {
+            id: 52,
+            title: "Clipboard Events",
+            note: [
+                {
+                    text1: `When preparing for an interview involving Playwright, a popular tool for automating web applications and end-to-end testing, you can expect questions that assess both your knowledge of Playwright and general testing principles. Here’s a list of possible Playwright interview questions, broken down into categories:
+
+Basic Playwright Knowledge
+What is Playwright?
+
+Playwright is an open-source automation library for end-to-end testing of web applications. It supports multiple browsers (Chromium, Firefox, WebKit) and offers rich features like intercepting network requests, generating screenshots, and simulating user interactions.
+
+How does Playwright differ from Selenium?
+
+While Selenium is widely used for automating browsers, Playwright is designed to be faster, more reliable, and capable of automating multiple browsers (Chromium, WebKit, Firefox) with a single API. Playwright also provides more features out of the box like capturing screenshots, recording videos, and more robust browser interaction (e.g., multiple contexts).
+
+What browsers are supported by Playwright?
+
+Playwright supports Chromium, WebKit (Safari), and Firefox.
+
+What are the key features of Playwright?
+
+Cross-browser testing (Chromium, WebKit, Firefox)
+
+Automated screenshots and screen recordings
+
+Network interception and mocking
+
+Simulating multiple devices and geolocation
+
+Headless browser support
+
+Handling pop-ups, alerts, and navigation events
+
+Custom wait mechanisms (e.g., wait for elements, navigation)
+
+Playwright API Questions
+What is browser.newContext() used for?
+
+browser.newContext() creates a new browser context. A context is like an isolated session, where cookies, storage, and other browser data are kept separate from other contexts. It’s useful for scenarios like simulating multiple users or testing in incognito mode.
+
+How do you handle file uploads in Playwright?
+
+Playwright allows handling file uploads by setting the file path for the input element in the form.
+
+await page.setInputFiles('input[type="file"]', 'path/to/file');
+What is the purpose of page.waitForSelector()?
+
+page.waitForSelector() waits for an element to appear in the DOM before performing actions on it. This is essential for ensuring the element is present before interacting with it (e.g., clicking a button).
+
+await page.waitForSelector('.button');
+await page.click('.button');
+How do you handle network requests in Playwright?
+
+You can intercept network requests and responses with Playwright’s route feature. This allows for mocking responses or manipulating requests.
+
+await page.route('**/api/**', (route) => {
+  route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: '{"message": "success"}'
+  });
+});
+Test Automation Concepts
+What are Playwright Test Fixtures?
+
+Playwright Test Fixtures are reusable pieces of code that help set up the state for tests (like opening a browser, logging in, or setting up mock data) and can be shared between tests.
+
+How do you run Playwright tests in parallel?
+
+Playwright supports parallel test execution out of the box using Playwright Test Runner. You can configure the number of parallel workers in the playwright.config.js file.
+
+test('test 1', async ({ page }) => {
+  await page.goto('https://example.com');
+});
+
+test('test 2', async ({ page }) => {
+  await page.goto('https://example.com/another-page');
+});
+You can also set workers to control the level of parallelism.
+
+How do you run Playwright tests headlessly?
+
+Playwright runs in headless mode by default, meaning it doesn’t display a browser window. However, you can explicitly set it with the headless option.
+
+const browser = await playwright.chromium.launch({ headless: true });
+Explain the role of test.beforeAll() and test.afterAll()?
+
+These hooks are used to set up or clean up resources before or after all tests in a test suite.
+
+test.beforeAll(): Executes once before the first test.
+
+test.afterAll(): Executes once after the last test.
+
+How do you use Playwright’s locator API?
+
+The locator API allows you to target elements more efficiently than using page.$() or page.$$().
+
+const button = page.locator('button#submit');
+await button.click();
+Advanced Playwright Topics
+What is Playwright's headless mode?
+
+In headless mode, Playwright runs the browser without a graphical user interface (GUI), which is useful for automation tasks, continuous integration, and faster tests.
+
+How do you handle pop-ups or modals in Playwright?
+
+Playwright automatically handles pop-ups (like alerts and dialogs). You can listen for events like dialog to interact with them:
+
+page.on('dialog', async dialog => {
+  await dialog.accept(); // Accept the dialog
+});
+How do you test mobile devices using Playwright?
+
+You can simulate mobile devices by using the device option provided by Playwright, which mimics real mobile behaviors (like viewport size and touch events).
+
+const iphone = playwright.devices['iPhone 12'];
+await page.emulate(iphone);
+What is the context in Playwright, and how do you use it?
+
+A browser context allows multiple independent sessions (like multiple users) within the same browser instance. Each context has its own cookies, storage, and cache.
+
+const context = await browser.newContext();
+const page = await context.newPage();
+Playwright vs. Other Testing Tools
+What are the advantages of Playwright over Selenium and Cypress?
+
+Speed: Playwright tends to be faster because it uses native browser interactions and provides better support for headless browsers.
+
+Cross-Browser Testing: Playwright supports Chromium, Firefox, and WebKit, allowing cross-browser testing.
+
+Native Mobile Support: Playwright supports testing on mobile devices out of the box.
+
+Network Interception: Playwright provides better support for network request interception and manipulation.
+
+Parallel Execution: Playwright can run tests in parallel more easily compared to Selenium or Cypress.
+
+Behavior-Driven Development (BDD) with Playwright
+How do you use Playwright with BDD frameworks like Cucumber?
+
+Playwright can be used alongside Cucumber.js to run behavior-driven tests. You can write features in Gherkin syntax and map them to step definitions in JavaScript using Playwright to interact with the web.
+
+Performance and Troubleshooting
+How do you capture performance metrics with Playwright?
+
+Playwright provides access to performance metrics through the page.metrics() method, which gives you details about the page’s performance.
+
+How do you debug Playwright tests?
+
+You can use Playwright's built-in debugging tools like page.pause() to pause test execution at a certain point and inspect the state of the page.
+
+await page.pause();  // This will pause the test execution for interactive debugging
+Practical Coding Questions
+Write a Playwright script to log into a website and check if a user dashboard is displayed.
+
+Create a test that performs a form submission and verifies the result on the page.
+
+Write a Playwright script to intercept API requests and mock responses for a login API.`,
+                    code1: ``
+                }
+            ],
+        },
+        {
+            id: 52,
+            title: "Clipboard Events",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ],
+        },
+        {
+            id: 52,
+            title: "Clipboard Events",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ],
         },
     ]
 }

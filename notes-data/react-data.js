@@ -9645,6 +9645,92 @@ Server-side rendering (SSR) is the technique where the HTML of a web page is gen
     },
     {
       id: 52,
+      title: "What is the difference between React.memo() and useMemo()? When would you use each?",
+      note: [
+        {
+          text1: `<b>1. React.memo()</b>
+React.memo() is a higher-order component (HOC) used to optimize functional components by preventing unnecessary re-renders. It memorizes the component and only re-renders it if its props have changed.
+
+<b>Usage</b>:
+React.memo(Component) wraps a functional component and returns a memoized version of that component.
+
+It will only re-render the component if the props passed to it have changed.
+
+<b>When to use</b>:
+Use React.memo() when you have a pure functional component that only depends on its props and doesn't have side effects or require internal state changes.
+
+It’s useful when you have a component that receives complex objects or arrays as props that may not change often, as React would re-render it unnecessarily without memoization.
+
+<b>Example</b>:
+const MyComponent = React.memo((props) => {
+  console.log("Rendering MyComponent");
+  return &lt;div&gt;{props.value}&lt;/div&gt;;
+});
+export default MyComponent;
+
+In this example, MyComponent will only re-render if props.value changes. If props.value remains the same between renders, React will skip rendering this component, thus improving performance.
+
+<b>Props Comparison</b>:
+By default, React.memo() does a shallow comparison of the props to determine if the component should re-render.
+If you need a custom comparison, you can pass a second argument to React.memo():
+
+React.memo(Component, (prevProps, nextProps) => {
+  return prevProps.someProp === nextProps.someProp;
+});
+`,
+          code1: ``
+        },
+        {
+          text1: `<b>2. useMemo()</b>
+<b>useMemo()</b> is a React hook that memorizes the result of a function (value calculation) between renders. It prevents the recalculation of a value unless the dependencies have changed.
+
+<b>Usage</b>:
+<b>useMemo(fn, deps)</b> takes a function <b>fn</b> and an array of dependencies <b>deps</b>. The value returned by <b>fn</b> is cached and will only be recalculated when any of the values in the dependency array <b>(deps)</b> change.
+
+Unlike <b>React.memo()</b>, which is for <b>components</b>, <b>useMemo()</b> is for <b>values</b> (calculations, objects, arrays) inside components.
+
+<b>When to use</b>:
+Use <b>useMemo()</b> when you have expensive calculations or complex objects/arrays that don't need to be recalculated every render.
+It's especially useful for preventing unnecessary recalculations of values when they depend on props or state that don't change on every render.
+
+
+In this example, the <b>expensiveCalculation</b> function will only be called when num changes. Otherwise, the result will be reused, improving performance.`,
+          code1: `const expensiveCalculation = (num) => {
+  console.log("Expensive calculation");
+  return num * 2;
+};
+
+const MyComponent = ({ num }) => {
+  // Memoize the calculation to avoid recalculating on every render
+  const memoizedValue = useMemo(() => expensiveCalculation(num), [num]);
+  return &lt;div&gt;{memoizedValue}&lt;/div&gt;;
+};`
+        },
+        {
+          text1: `<table>
+          <thead>
+          <tr>
+          <th><strong data-start="117" data-end="128">Feature</strong></th><th data-start="140" data-end="208"><strong data-start="142" data-end="160"><code data-start="144" data-end="158">React.memo()</code></strong></th><th data-start="208" data-end="276"><strong data-start="210" data-end="225"><code data-start="212" data-end="223">useMemo()</code></strong></th></tr></thead><tbody data-start="439" data-end="1797"><tr data-start="439" data-end="602"><td><strong data-start="441" data-end="452">Purpose</strong></td><td>Memoizes a component to prevent re-renders if props are unchanged</td><td>Memoizes values or computations to avoid unnecessary recalculation</td></tr><tr data-start="603" data-end="764"><td><strong data-start="605" data-end="613">Type</strong></td><td>Higher-order component (HOC)</td><td>React hook</td></tr><tr data-start="765" data-end="928"><td><strong data-start="767" data-end="776">Usage</strong></td><td>Wraps a component to optimize rendering based on props comparison</td><td>Memoizes a value or result of an expensive function or computation</td></tr><tr data-start="929" data-end="1138"><td><strong data-start="931" data-end="946">When to Use</strong></td><td>When you want to optimize re-rendering of a component based on its props</td><td>When you have expensive calculations or derived values that don't need to be recalculated on every render</td></tr><tr data-start="1139" data-end="1297"><td><strong data-start="1141" data-end="1162">What It Optimizes</strong></td><td>Component re-renders based on props</td><td>Expensive computations or derived values</td></tr><tr data-start="1298" data-end="1470"><td><strong data-start="1300" data-end="1316">Dependencies</strong></td><td>Compares previous and current props to decide whether to re-render</td><td>Takes a dependency array to determine when to recompute the memoized value</td></tr><tr data-start="1471" data-end="1630"><td><strong data-start="1473" data-end="1489">Return Value</strong></td><td>Returns a memoized version of the component</td><td>Returns the memoized value (result of the computation)</td></tr><tr data-start="1631" data-end="1797"><td><strong data-start="1633" data-end="1650">Example Usage</strong></td><td><code data-start="1658" data-end="1709">const MemoizedComponent = React.memo(MyComponent)</code></td><td><code data-start="1725" data-end="1795">const memoizedValue = useMemo(() =&gt; expensiveFunction(data), [data])</code></td></tr></tbody></table>
+          
+          <b>Quick Recap</b>:
+<p><b>React.memo()</b> is used to avoid unnecessary re-renders of a component based on props.</p>
+<b>useMemo()</b> is used to avoid re-calculating a value or performing expensive operations on every render.`,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
       title: "aff intro",
       note: [
         {
