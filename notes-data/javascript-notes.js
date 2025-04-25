@@ -10593,6 +10593,16 @@ Similar to document screen can be accessed either by window.screen or screen obj
     },
     {
       id: 1,
+      title: "Event Delegation",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
       title: "Custom event",
       note: [
         {

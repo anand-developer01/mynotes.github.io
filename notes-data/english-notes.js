@@ -784,6 +784,95 @@ const SubjectList = {
                 },
             ],
         },
+        {
+            id: 1,
+            section:"Common Phrases",
+            topic: "Phrases",
+            explain:'',
+            formation:'',
+            note:'',
+            content:[
+                {
+                    id: 1,
+                    eng: "A piece of cake",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "Break the ice",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "On cloud nine",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "Spill the beans",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "Once in a blue moon",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "See you later",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "Just a moment",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "I really appreciate it",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "That's very nice of you",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "I'm sorry to hear that",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "Thank you kindly",
+                    tel:'',
+                    tense:'Present tense'
+                },
+                {
+                    id: 1,
+                    eng: "Thank you kindly",
+                    tel:'',
+                    tense:'Present tense'
+                },
+
+                {
+                    id: 1,
+                    eng: "Thank you kindly",
+                    tel:'',
+                    tense:'Present tense'
+                },
+            ],
+        },
     ],
     Tense: [
         {

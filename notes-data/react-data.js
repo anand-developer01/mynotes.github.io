@@ -1103,6 +1103,8 @@ export const ReturnHOCInputCom = withAuth(showApiData, httpComp);
 
           Render Props is a pattern in React for sharing code between components using a prop that is a function. This function returns a React element, which allows you to dynamically render content based on the state or behavior provided by the component using the render prop.
 
+Render props are a technique for sharing code between React components using a prop whose value is a function. A component with a render prop takes a function that returns a React element and calls it instead of implementing its own render logic.
+
           Render Props is considered to be an alternative pattern to HoC. The premise of a Render Prop is similar though in that it also creates a parent wrapper that has the reusable state/functions - but it doesn't do this as a wrapper to our component:
 
           <b>What do render props solve?</b>
@@ -8163,6 +8165,8 @@ export default PureComponent;
         {
           text1: `Code splitting consists of separating the code into several packages or components that can be loaded on demand or in parallel. This means that they are not loaded until they are needed.
 
+          <b>Code splitting</b> is a performance optimization technique in React where the application's JavaScript code is divided into smaller chunks, allowing parts of the app to be loaded only when they are needed, rather than loading the entire app at once.
+
           Code splitting is a technique in web development, especially within single-page applications (SPAs) built with frameworks like React, Angular, and Vue, that involves dividing your application's code into smaller, more manageable chunks. Instead of loading the entire application's code at once, code splitting enables you to load only the code that's needed for the initial render or for specific user interactions.
           
           <b>The benefits of code splitting are</b>:
@@ -10783,12 +10787,152 @@ export default App;
     },
     {
       id: 52,
-      title: "ApolloClient",
+      section:"Micro Frontend Architecture",
+      title: "Micro Frontend Architecture in React JS",
       note: [
+        {
+          text1: `<b>Micro Frontend Architecture in React JS</b> is a way of structuring a large React application by splitting it into smaller, independently developed, and deployed micro-frontends. These micro-frontends can be built using React or other frameworks, but in this case, we'll focus on React. Each part of the UI (or feature) is developed as a separate React app, which can be independently updated, deployed, and integrated into a larger, cohesive UI.
+          
+          
+          <b>Key Concepts of Micro Frontend Architecture in React</b>:
+<b>Componentization</b>:
+In a typical React app, components are already modular. In a micro frontend setup, you take this concept further by breaking the app down into larger pieces, with each piece having its own separate React app or module.
+
+<b>Independent Deployment</b>:
+Each micro frontend can be developed, tested, and deployed independently. For example, the user profile page could be developed as a separate React app, the shopping cart as another, and they can each be deployed separately.
+
+<b>Integration of Micro Frontends</b>:
+The micro frontends need to be integrated at runtime to appear as one cohesive application. This can be done in a number of ways, like using single-spa, Module Federation (Webpack 5), or iframe-based integration.
+
+<b>Shared State Management</b>:
+Micro frontends need to communicate with each other and share states (like user authentication or shopping cart data). There are different ways to handle this, such as through <b>global stores</b> (e.g., using Redux or Context API) or <b> custom events.</b>
+
+
+
+
+
+
+
+<b>How Micro Frontends Work in React</b>:
+<b>1. Designing the Micro Frontends</b>:
+Start by identifying the various features or domains of your app that can be isolated. For example:
+-> Header (a navigation bar)
+-> Product List
+-> User Profile
+-> Shopping Cart
+
+Each of these can be a separate React app, developed by different teams if necessary.
+
+<b>2. Choosing an Integration Method</b>:
+There are several ways to integrate React micro frontends:
+
+<b>i) Single-spa (Most Common Approach)</b>:
+Single-spa is a popular JavaScript framework for orchestrating multiple micro frontends. It allows you to load multiple micro-frontends (even if they are built with different frameworks like React, Angular, or Vue) into the same application.
+
+You configure each React app as a micro frontend, and then use single-spa to manage the routing, loading, and rendering of these apps.
+
+
+
+<b>ii) Webpack Module Federation (for Shared Code)</b>:
+Webpack 5 introduced Module Federation, which allows micro frontends to share code (like React or utility functions) at runtime. This is especially useful when you want to avoid duplicating common libraries or dependencies across micro frontends.
+
+
+<b>iii) Iframe-Based Integration</b>:
+You can also load each micro frontend as an iframe within the main application. This is a simpler, but less flexible, approach. However, it might be suitable for completely isolated micro-frontends or legacy apps that cannot be deeply integrated.
+
+Example:
+const IframeMicroFrontend = () => (
+  &lt;iframe src=&quot;http://localhost:3001&quot; title=&quot;Product List&quot; /&gt;
+);
+
+
+<b>3. Communication Between Micro Frontends</b>:
+<b>Global State Management</b>:
+You can use React Context API, Redux, or MobX to manage shared state (like user authentication or the shopping cart). This helps ensure that all micro frontends can access and update shared data.
+
+
+Example using React Context API:
+const AppContext = React.createContext();
+
+const AppProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  return (
+    <AppContext.Provider value={{ user, setUser }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+<b>Custom Events or Pub/Sub Mechanism</b>:
+Another approach to share data or trigger actions across micro frontends is through Custom Events or using a Pub/Sub system (e.g., RxJS, EventEmitter).
+
+Example using custom events:
+// Micro frontend A (emitting event)
+window.dispatchEvent(new CustomEvent('userUpdated', { detail: { user } }));
+
+// Micro frontend B (listening to event)
+window.addEventListener('userUpdated', (e) => {
+  const updatedUser = e.detail;
+  // Update state or UI based on the new user data
+});`,
+          code1: `// Example of integration using single-spa:
+import { registerApplication, start } from 'single-spa';
+
+registerApplication(
+  'header',
+  () => import('./header-app'), // Dynamically load the header React app
+  location => location.pathname === '/' // Only load when on homepage
+);
+
+registerApplication(
+  'product-list',
+  () => import('./product-list-app'),
+  location => location.pathname === '/products'
+);
+start();
+
+
+
+// Example of Webpack Module Federation configuration:
+// webpack.config.js of Host Application
+module.exports = {
+  name: 'host-app',
+  remotes: {
+    'product-list': 'productListApp@http://localhost:3001/remoteEntry.js',
+  },
+};
+
+// webpack.config.js of Micro Frontend (Product List)
+module.exports = {
+  name: 'productListApp',
+  exposes: {
+    './ProductList': './src/ProductList',
+  },
+};
+// Here, the host app dynamically imports the ProductList component from a remote micro frontend at runtime.`
+        },
         {
           text1: ``,
           code1: ``
         },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "Login Redirect or Post-login Redirect",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
       ],
     },
   ]

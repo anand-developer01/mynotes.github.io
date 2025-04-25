@@ -448,12 +448,67 @@ Write a Playwright script to intercept API requests and mock responses for a log
         },
         {
             id: 52,
-            title: "Clipboard Events",
+            title: "my Cognizant details",
             note: [
+                {
+                    text1: `18005720473 () it infra support
+
+
+GSD no- 1800-572-0473
+ passwordreset@cognizant.com or  Infravoiceleads@cognizant.com  
+
+
+ associate id
+ 2410407@cognizant.com
+ **** Srihashemmu@123# *****
+ 
+
+ OneITRequestFulfil(Cognizant) <OneITRequestFulfil@cognizant.com>
+ 
+ https://onecognizant.cognizant.com/Home
+ 
+ https://cognizantonline.sharepoint.com/sites/Be.Cognizant/SitePages/Home.aspx
+ 
+ oneCognizant
+ 
+ Associate 360 App
+ peopleSoft HCM protal 
+ BNC app
+ 
+ 
+ trueTime vs ESA Timesheet
+ 
+ project : Telstra T25 WP1 CSCE Build`,
+                    code1: ``
+                }
+            ],
+        },
+        {
+            id: 52,
+            title: "Cognizant",
+            note: [
+                {
+                    text1: `Business continuity management
+                    
+                    <b>Global Business Resilience - Planning & Recovery (GBR PnR)</b> is the process by which a company prepares for and recovers from unexpected disruptions, like natural disasters, cyberattacks, or economic crises. It involves making sure that the business can keep running or quickly get back on track after a problem.`,
+                    code1: ``
+                },
                 {
                     text1: ``,
                     code1: ``
-                }
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
             ],
         },
     ]
