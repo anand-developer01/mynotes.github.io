@@ -7792,6 +7792,14 @@ These features are helpful and make things work just the right way if we use fin
           text1: `A Promise is an object representing the eventual completion or failure of an asynchronous operation.
           Chaining: When you chain promises, you can perform a series of asynchronous operations in a specific order. Each .then() method returns a new promise, which can be used to perform the next asynchronous operation.
           
+          <b> Running promises sequentially </b>
+          Sequential execution of promises means that when we have multiple promises, they will be run in the order in which they appear. Each promise must wait for the completion of the previous one before beginning its execution. 
+
+          <b> Promise Chain (Sequential Execution) </b>
+    => Promises are executed <b>one after another</b>.
+    => Each promise <b>waits for the previous one</b> to resolve before starting.
+    => Used when tasks are <b>dependent</b> or must run in <b>order</b>.
+
           A common need is to execute two or more asynchronous operations back to back, where each subsequent operation starts when the previous operation succeeds, with the result from the previous step. In the old days, doing several asynchronous operations in a row would lead to the classic callback hell:
           
           With promises, we accomplish this by creating a promise chain. The API design of promises makes this great, because callbacks are attached to the returned promise object, instead of being passed into a function.
@@ -10795,7 +10803,55 @@ let btn = document.querySelector('.btn');
  });
 
 let clickEvent = new Event('click');
-btn.dispatchEvent(clickEvent);`
+btn.dispatchEvent(clickEvent);
+
+
+
+
+//------------ Ex : 1 -------------
+    &lt;div class=&quot;mon-box&quot;&gt;
+      &lt;div id=&quot;app1&quot;&gt;&lt;/div&gt;
+      &lt;div id=&quot;app2&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;!-- Load two microfrontends --&gt;
+  &lt;script src=&quot;app1.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;app2.js&quot;&gt;&lt;/script&gt;
+
+  // Mount App 1 into the div
+const app1Root = document.getElementById('app1');
+const button = document.createElement('button');
+button.innerText = 'Send Message to App 2';
+app1Root.appendChild(button);
+
+// On button click, dispatch a custom event
+button.addEventListener('click', () => {
+  const event = new CustomEvent('app1ToApp2', {
+    detail: {
+      text: 'Hello App 2! 👋 from App 1',
+      timestamp: new Date()
+    }
+  });
+  
+  window.dispatchEvent(event); // Global event dispatch
+});
+
+
+
+// Mount App 2 into the div
+const app2Root = document.getElementById('app2');
+const messageDiv = document.createElement('div');
+messageDiv.innerText = 'Waiting for message...';
+app2Root.appendChild(messageDiv);
+
+// Listen for the custom event
+window.addEventListener('app1ToApp2', (e) => {
+  console.log('Received event in App 2:', e.detail);
+
+  messageDiv.innerText = \`Message Received: "\${e.detail.text}" at \${e.detail.timestamp}\`;
+});
+
+`
         },
         {
           text1: ``,

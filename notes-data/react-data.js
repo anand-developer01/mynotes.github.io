@@ -14,7 +14,7 @@ const reactData = {
     //   note: [
     //     {
     //       text1: `self closed component <ABC/>
-          
+
     //      <iframe src="../db/React-js.pdf" width="100%" height="600px"></iframe>
 
 
@@ -44,6 +44,598 @@ react-scripts start sets up the development environment and starts a server, as 
           text1: `Data binding is a concept in web development that establishes a connection between the data in an application and the user interface (UI) elements that display that data. The purpose of data binding is to ensure that changes in one part of the application are automatically reflected in another part, creating synchronization between the data and the UI.
           
           react-scripts is a library that is automatically installed when you create a new React application using the create-react-app tool. It contains the configuration and scripts necessary to build, test, and run a React app. This library abstracts away the complexity of setting up a React development environment, so developers can focus on writing code without worrying about configuration for tools like Webpack, Babel, ESLint, Jest, and others.`,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 5,
+      section: "configuration",
+      title: "Webpack",
+      note: [
+        {
+          text1: `<b>What is module bundler</b> : It is a tool used in web development that processes the multiple JavaScript modules/source files of an application into single file utilized by the browser
+
+          <b>module bundler</b>. A module bundler is a tool in web development that processes multiple JavaScript (and sometimes CSS or other asset) modules and combines them into a single file — or a few optimized, minified, and compressed files — that can be used efficiently by a browser.
+Common Module Bundlers:
+    <b>Webpack </b> - The most widely used bundler, highly configurable.
+    <b>Rollup </b> - Focused on bundling ES6 modules with tree-shaking.
+    <b>Parcel </b> - Zero-config bundler, great for quick setups.
+    <b>Vite </b> - Uses Rollup under the hood for production builds, with blazing-fast dev server using native ES modules.
+
+     <b> Why Multiple Bundled Files?</b> 
+    <b>Code Splitting</b> 
+    Breaks the code into smaller chunks (e.g., by route or feature), so the browser only loads what's needed.
+    <b>Example</b>:
+        main.bundle.js - core app
+        dashboard.chunk.js - loaded only on /dashboard
+        vendors.bundle.js - third-party libraries (like React)
+
+    <b>Lazy Loading</b> 
+    Some files are loaded on-demand (e.g., when a user navigates to a specific page).
+
+    The primary purpose of the bundlers is to organize modules and dependencies in front-end projects, optimize websites performance, and reduce output bundle size
+
+          <b>What is Webpack? </b>
+Webpack is a module bundler for JavaScript applications. It processes your application’s modules and packages them into one or more bundles, often a single bundle.js file, optimizing loading time for browsers.
+
+ <b>Example Output From a Bundler (like Webpack)</b>
+dist/
+├── index.html
+├── main.bundle.js          <-- Your app’s logic
+├── vendors.bundle.js       <-- Third-party libraries
+├── 456.chunk.js            <-- A dynamically imported module (code split)
+├── main.bundle.js.map      <-- Source map (for debugging)
+
+At its core, webpack is a static module bundler for modern JavaScript applications. When webpack processes your application, it internally builds a <b>Dependency Graph</b> from one or more entry points and then combines every module your project needs into one or more bundles, which are static assets to serve your content from.
+
+<b>Dependency Graph</b>
+Any time one file depends on another, webpack treats this as a dependency. This allows webpack to take non-code assets, such as images or web fonts, and also provide them as dependencies for your application.
+
+At its core, webpack is a module bundler. It examines all of the modules in your application, creates a dependency graph, then intelligently puts all of them together into one or more bundle(s) that your index.html file can reference.
+
+App.js --->     |         |
+Dashboard.js -> | Bundler | -> bundle.js
+About.js --->   |         |
+
+<b> Why Do We Need Webpack? </b>
+Developers prefer to work with many small, manageable files, which improves the development experience and code maintainability. However, this modular approach can introduce order-of-operation issues, where a module depends on another that hasn’t yet loaded. Additionally, getting each file from the server would require a HTTP request, and more files mean more requests, this can slow down performance.
+
+It handles not just JavaScript, but also CSS, images, and more, transforming them into a format that's ready for the web.
+
+Setting up Webpack involves organizing your project, installing Webpack, and configuring it according to your needs.
+
+<b>What problem is webpack solving?</b>
+
+Historically when building a JavaScript application, your JavaScript code would be separated by files (these files may or may not have been actual modules). Then in your <b>index.html</b> file, you'd have to include &lt;script&gt; tags to every JavaScript file you had.
+
+Not only was this tedious, but it was also error-prone. There were the obvious issues like typos or forgetting to include a file, but more than that, the order of the &lt;script&gt; tags mattered. If you loaded a script that depended on React before loading the React script, things would break. Because webpack (intelligently) creates a bundle for you, both of those problems go away. You don't have to worry about forgetting a &lt;script&gt; and you don't have to worry about the order.
+
+As we'll soon see, the "module bundling" aspect is just one part of webpack. If needed, you're also able to tell webpack to make certain transformations on your modules before adding them to the bundle. Examples might include transforming SASS/LESS to regular CSS or "modern JavaScript" to ES5 that the browser can understand.
+
+<b>Project Structure</b>
+When you start a project with Webpack, it's a good idea to keep your files organized in <b>src</b> and <b>dist</b> folders:
+<b>src</b> - This is where all your original code goes before Webpack bundles it. This includes your JavaScript, CSS, images, fonts, and more.
+<b>dist</b> - After Webpack does its magic, it puts the finished, optimized code here. This is what you'll put on the web.
+
+<a href="https://ui.dev/webpack" target="_blank"> webpack </a>
+
+<b>Installing webpack</b>
+npm i webpack webpack-dev-server webpack-cli --save--dev
+
+`,
+          code1: ``
+        },
+        {
+          text1: `    
+          <b>Loaders</b>: babel-loader, css-loader, style-loader, file-loader, sass-loader
+<b>Plugins</b>:
+    <b>HtmlWebpackPlugin</b>: generates HTML with the bundled script injected
+    <b>MiniCssExtractPlugin</b>: extracts CSS into separate files
+    <b>CleanWebpackPlugin</b>: cleans output folder before each build
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Section</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>entry</code>
+          </td>
+          <td>Tells Webpack where to start the bundling process
+            (your main JS file).</td>
+        </tr>
+        <tr>
+          <td><code>output</code>
+          </td>
+          <td>Specifies where the bundled files should be saved and
+            with what name.</td>
+        </tr>
+        <tr>
+          <td><code ata-end="1339">module.rules</code></td>
+          <td>Defines how different types of files should be
+            handled (via <strong>loaders</strong>). For example, using <code>babel-loader</code> for JS, <code
+              ata-end="1470">css-loader</code> for CSS.</td>
+        </tr>
+        <tr>
+          <td><code ata-end="1493">plugins</code></td>
+          <td>Used to extend Webpack's functionality (e.g.,
+            injecting scripts into HTML, extracting CSS).</td>
+        </tr>
+        <tr>
+          <td><code>mode</code>
+          </td>
+          <td>Tells Webpack whether you're in <code>development</code> (with source maps, faster
+            builds) or <code>production</code> (with optimizations like minification).</td>
+        </tr>
+      </tbody>
+    </table>`,
+          code1: `const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ASSET_PATH = process.env.ASSET_PATH || '/';
+
+module.exports = {
+    entry: path.join(__dirname, "src", "index.js"),
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        publicPath: ASSET_PATH,
+    },
+    mode: "development",
+    module: {
+        rules: [
+            {
+                test: /\.?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
+                }
+            },
+            {
+                test: /\.(sa|sc|c)ss$/, // styles files
+                use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.(png|jp(e*)g|svg|gif|icon)$/,
+                use: ['file-loader'],
+            },
+            {
+                test: /\.svg$/,
+                use: ['@svgr/webpack'],
+            },
+        ]
+    },
+    devServer: {
+        historyApiFallback: true,
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, "public", "index.html"),
+        }),
+    ],
+}`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 5,
+      title: "vite",
+      note: [
+        {
+          text1: `Vite (French: [vit], like “veet”)
+          Vite is a frontend build tool and development server used to speed up web development, particularly with modern frameworks like React and Vue. It's designed to provide a faster and leaner development experience by leveraging native ES modules and using optimized build processes.
+          
+          Vite is a powerful build tool and development server designed to speed up modern web development.
+          
+          Vite is a modern build tool and development server for front-end projects, created by Evan You (the creator of Vue.js). It's designed to be <b>fast, lightweight</b>, and <b>developer-friendly</b>, especially compared to older bundlers like Webpack.
+          
+          <b>How HMR Works in Vite</b>
+          HMR is built into the Vite dev server. Here's the simplified flow:
+🧩 <b>Step-by-Step</b>:
+    You edit <u>Button.jsx</u>.
+    Vite <b>detects the file change</b>.
+    It <b>re-processes only that file</b> (using <u>esbuild</u>).
+    Vite pushes the new module to the browser via <b>WebSocket</b>.
+    The browser's <b>HMR runtime</b> replaces the old module <b>without reloading the page</b>.
+    If you're using React, Vite uses <b>React Refresh</b> to preserve component state.
+    
+    
+    ✅ <b>1. Vite Has Smart Defaults </b>
+Vite is <b>opinionated</b> — it comes with sensible defaults, which means:
+    No need to configure file watching
+    No need to manually set up HMR
+    No need to set up Babel or TypeScript transformations
+
+It just <b>works out of the box</b>.
+
+⚙️ <b>2. The react() Plugin Adds React-Specific Logic </b>
+plugins: [react()],
+
+This line does a <b>lot</b> behind the scenes:
+    Adds <b>JSX support</b>
+    Injects <b>React Fast Refresh</b> for HMR
+    Supports .jsx, .tsx files
+    Configures HMR for React components
+So even though it looks like one line, this plugin is internally setting up:
+    Babel transforms (if needed)
+    HMR boundaries
+    State-preserving updates
+
+🧪 <b>3. HMR Is Built-In — No Need to Configure It </b>
+Vite internally runs its <b>own development server</b> using:
+    <b>esbuild</b> for lightning-fast transformation
+    <b>WebSocket</b> server for HMR
+    <b>Native ES Modules (ESM)</b> for browser delivery
+
+That's why you don't see things like <b>entry, output</b>, or <b>devServer</b> like in Webpack — it's all <b>abstracted.</b>`,
+          code1: ``
+        },
+        {
+          text1: ` <b>eslint-plugin-react-refresh vs vite </b>
+          
+          🧠 <b>Breakdown</b>
+✅ <b>Vite</b>:
+    Has built-in support for HMR.
+    Uses native <b>ES Modules</b> and a <b>WebSocket server</b> to push hot updates.
+    Applies HMR to <b>any module </b>(JS, CSS, etc.).
+
+✅ <b><span style="color:red">@vitejs/plugin-react</span></b>:
+    Adds <b>React Fast Refresh</b> on top of Vite's HMR.
+    Makes HMR React-aware (preserving component state across edits).
+
+✅ <b>eslint-plugin-react-refresh</b>:
+    Doesn't provide HMR at all.
+    Only adds lint rules to enforce proper component exports, so HMR doesn't break.
+    Example: It warns if you write this:
+
+// ⚠️ This can break Fast Refresh
+export const value = 42;
+
+🟢 <b>Final Answer</b>:
+    HMR is powered by Vite.
+    eslint-plugin-react-refresh just helps you write code that plays nicely with React Fast Refresh.
+          
+          <table class="w-fit min-w-(--thread-content-width)">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Vite</th>
+          <th>Webpack</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dev startup time</td>
+          <td>⚡ Very fast (no bundling)</td>
+          <td>🐢 Slow (bundles entire app)</td>
+        </tr>
+        <tr>
+          <td>Rebuild speed</td>
+          <td>⚡ Instant (per file)</td>
+          <td>🐌 Slower (rebuilds chunks)</td>
+        </tr>
+        <tr>
+          <td>HMR performance</td>
+          <td>⚡ Near-instant</td>
+          <td>🐌 Often slower + state loss</td>
+        </tr>
+        <tr>
+          <td>Uses esbuild</td>
+          <td>✅ Yes</td>
+          <td>❌ No (uses slower JS-based tools)</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    </br>
+    </br>
+    
+    <table class="w-fit min-w-(--thread-content-width)">
+      <thead>
+        <tr>
+          <th data-col-size="sm">Feature</th>
+          <th data-col-size="sm">Create React App (CRA)</th>
+          <th data-col-size="md">Vite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-col-size="sm"><strong>Bundler</strong></td>
+          <td data-col-size="sm">Webpack</td>
+          <td data-col-size="md">ESBuild (dev) + Rollup (build)</td>
+        </tr>
+        <tr>
+          <td data-col-size="sm"><strong>Dev Server
+              Speed</strong></td>
+          <td data-col-size="sm">Slower startup and reloads</td>
+          <td data-col-size="md">Very fast due to native ES modules &amp; ESBuild</td>
+        </tr>
+        <tr>
+          <td data-col-size="sm"><strong>Build
+              Speed</strong></td>
+          <td data-col-size="sm">Slower (Webpack-based)</td>
+          <td data-col-size="md">Much faster (Rollup + ESBuild optimized)</td>
+        </tr>
+        <tr>
+          <td data-col-size="sm"><strong>Hot Module
+              Reload (HMR)</strong></td>
+          <td data-col-size="sm">Slower, especially in large projects</td>
+          <td data-col-size="md">Near-instant, more efficient</td>
+        </tr>
+        <tr>
+          <td " " 1082" data-col-size="sm"><strong>Initial
+              Setup</strong></td>
+          <td " " 1135" data-col-size="sm"><code>npx create-react-app my-app</code></td>
+          <td data-col-size="md"><code>npm create vite@latest my-app</code></td>
+        </tr>
+        <tr " " 1321">
+          <td " " 1216" data-col-size="sm"><strong "              " 1206">Customization</strong></td>
+          <td data-col-size="sm" " " 1269">Requires <code "              " 1234">eject</code> (irreversible)</td>
+          <td data-col-size="md" " " 1321">Easy to customize via <code "              " 1309">vite.config.js</code></td>
+        </tr>
+        <tr>
+          <td " " 1351" data-col-size="sm"><strong>Modern
+              Syntax Support</strong></td>
+          <td data-col-size="sm" " " 1404">Good, uses Babel</td>
+          <td data-col-size="md">Excellent, via ESBuild (faster than Babel)</td>
+        </tr>
+        <tr>
+          <td " " 1486" data-col-size="sm"><strong>Built-in
+              TypeScript</strong></td>
+          <td " " 1539" data-col-size="sm">Optional, with template</td>
+          <td data-col-size="md">Optional, with template</td>
+        </tr>
+        <tr>
+          <td data-col-size="sm"><strong>SSR
+              Support</strong></td>
+          <td data-col-size="sm">Not built-in</td>
+          <td data-col-size="md">Supported (with plugins)</td>
+        </tr>
+        <tr>
+          <td data-col-size="sm"><strong>Out-of-the-box Features</strong></td>
+          <td data-col-size="sm">Linting, testing with Jest</td>
+          <td data-col-size="md">Minimal, but you can add what you want</td>
+        </tr>
+        <tr>
+          <td data-col-size="sm"><strong>File Size
+              (node_modules)</strong></td>
+          <td data-col-size="sm">Large (~200MB+)</td>
+          <td data-col-size="md">Smaller (~50MB+)</td>
+        </tr>
+        <tr>
+          <td data-col-size="sm"><strong>Ecosystem
+              Maturity</strong></td>
+          <td data-col-size="sm">Older, widely adopted</td>
+          <td data-col-size="md">Newer, rapidly growing adoption</td>
+        </tr>
+      </tbody>
+    </table>`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 5,
+      title: "Setting up a React project with Vite",
+      note: [
+        {
+          text1: `<b>1. Create a new Vite React project</b>
+<b>npm create vite@latest my-react-app -- --template react</b>
+
+    <b>my-react-app</b>: Your project folder name.
+    <b>--template react</b>: Tells Vite to scaffold with the React + JavaScript template.
+        For TypeScript, use: <b>--template react-ts</b>
+        
+        <b>2. Navigate into your project folder</b>
+cd my-react-app
+<b>3. Install dependencies</b>
+npm install
+<b>4. Start the development server</b>
+npm run dev
+
+    You'll see a local dev server running at something like http://localhost:5173
+
+<b>🛠 Project Structure (default)</b>
+my-react-app/
+├── index.html
+├── package.json
+├── vite.config.js
+├── src/
+│   ├── main.jsx
+│   └── App.jsx
+└── ...
+
+    <b>main.jsx</b>: Entry point that renders &lt;App /&gt;
+    <b>App.jsx</b>: The main React component`,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: "Hot Module Replacement (HMR)",
+      note: [
+        {
+          text1: `HMR is a feature in modern development tools (like Webpack or Vite) that allows you to update parts of your web app (JavaScript, CSS, etc.) without refreshing the entire page.
+          
+          When you develop a React app (e.g., using Vite, Webpack, or Next.js), HMR lets you edit a component, and the browser updates just that component without reloading the whole page
+          
+          Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running, without a full reload. This can significantly speed up development.
+
+          Hot Module Replacement (or HMR) is one of the most useful features offered by webpack. It allows all kinds of modules to be updated at runtime without the need for a full refresh. This page focuses on <b>implementation</b> while the concepts page gives more details on how it works and why it's useful.
+
+<b>warning </b>
+HMR is not intended for use in production, meaning it should only be used in development. See the building for production guide for more information.
+
+<b>Setup</b>
+The goals of development and production builds differ greatly. In development, we want strong source mapping and a localhost server with live reloading or hot module replacement. In production, our goals shift to a focus on minified bundles, lighter weight source maps, and optimized assets to improve load time. With this logical separation at hand, we typically recommend writing separate webpack configurations for each environment.
+
+While we will separate the production and development specific bits out, note that we'll still maintain a "common" configuration to keep things DRY. In order to merge these configurations together, we'll use a utility called webpack-merge. With the "common" configuration in place, we won't have to duplicate code within the environment-specific configurations.
+
+
+<b> About below diagram </b>
+✅ <b> Step 1: Developer Edits Code </b>
+    You modify a file using a text editor (like <u>App.js</u>).
+    This change is saved to the <b>file system</b>.
+
+✅ <b> Step 2: Webpack Detects Change </b>
+    The <b>Webpack Compiler</b> watches the file system.
+    When it sees a file change, it <b>recompiles only the updated modules</b>, not the whole app.
+
+✅ <b> Step 3: HMR Server Gets the Update </b>
+    The <b>HMR Server</b> inside the Webpack Dev Server receives the new compiled module.
+
+✅ <b> Step 4: Push Update to Browser </b>
+    The <b>HMR Server</b> sends the updated module to the browser using a <b>WebSocket connection</b>.
+    This update is sent in a small package — only the changed code (not the full page).
+
+✅ <b> Step 5: HMR Runtime Updates Code </b>
+    In the browser:
+        The <b>HMR Runtime</b> is already running inside  <b>bundle.js</b>.
+        It <b>swaps out the old module</b> with the new one, live, while the app is running.
+        <b>No page reload</b> happens.
+        <b>State is preserved</b> (like your React component's state).
+
+🧠 <b> What's Inside Each Box? </b>
+📦 <b> Webpack Dev Server </b>
+    <b>Bundle Server </b>: Serves the regular files like <b>bundle.js</b>, HTML, etc.
+    <b>HMR Server </b>: Manages WebSocket communication and updates modules live.
+
+🧠 <b> Webpack Compiler </b>
+    Compiles updated code when files change.
+    Works with both HMR Server and Bundle Server.
+
+🌐 <b> Browser </b>
+    Loads <b>bundle.js</b>, which includes:
+        <b>HMR Runtime</b>: Handles hot updates.
+        <b>Your App's JS Code</b>: The actual React components, etc.
+
+
+<div>
+<b>🔧 Tools Needed in React </b>
+    <table>
+      <thead>
+        <tr>
+          <th data-col-size="sm">Tool</th>
+          <th data-col-size="md">What It Does</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-col-size="sm"><code>react-refresh</code></td>
+          <td data-col-size="md">Enables component state preservation in HMR</td>
+        </tr>
+        <tr>
+          <td data-col-size="sm"><code>@vitejs/plugin-react</code></td>
+          <td data-col-size="md">Vite plugin that includes React Refresh</td>
+        </tr>
+        <tr>
+          <td data-col-size="sm"><code>react-refresh-webpack-plugin</code></td>
+          <td data-col-size="md">Webpack plugin for React HMR</td>
+        </tr>
+      </tbody>
+    </table>
+
+</br>
+</br>
+
+    <b> Step-by-Step Validation</b>
+        <table>
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th>Description in Image</th>
+          <th>Is It Correct?</th>
+          <th>Why?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>Text Editor ➝
+              File System</strong></td>
+          <td>✅ Yes</td>
+          <td>Developer changes are saved to the filesystem.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>File System ➝
+              Webpack Compiler</strong></td>
+          <td>✅ Yes</td>
+          <td>Webpack watches files and triggers recompilation on
+            changes.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>Webpack
+              Compiler ➝ HMR Server</strong></td>
+          <td>✅ Yes</td>
+          <td>Updated modules are passed to the HMR server for
+            distribution.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>HMR Server ➝
+              Browser (via WebSocket)</strong></td>
+          <td>✅ Yes</td>
+          <td>HMR server sends updated module chunks over WebSocket
+            to the browser.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>HMR Runtime ➝
+              Updates JS Code</strong></td>
+          <td>✅ Yes</td>
+          <td>The browser's HMR runtime replaces the changed module
+            in place, keeping app state intact.</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<a href="https://remix.run/docs/en/main/discussion/hot-module-replacement" target="_blank"> hot-module-replacement </a>
+`,
+          code1: ``,
+          img: `../assets/images/react/webpack-overview-diagram.png`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },        
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 5,
+      title: "new topic",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: "new topic",
+      note: [
+        {
+          text1: ``,
           code1: ``
         }
       ]
@@ -1690,7 +2282,7 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 <b>Key Features of &lt;Profiler&gt;</b>
    <b> Performance Measurement</b>: The &lt;Profiler&gt; component measures how often a component renders and how long these renderings take.
     <b>Custom Callback</b>: It allows you to specify a callback function that gets called after the component renders, providing you with the timing data.
-    <b>Granular Insights</b>: You can use &lt;Profiler&gt; to gain insights into the performance of specific components rather than the entire application.`, 
+    <b>Granular Insights</b>: You can use &lt;Profiler&gt; to gain insights into the performance of specific components rather than the entire application.`,
           code1: `import React, { Profiler } from 'react';
 
 const MyComponent = () => {
@@ -10498,7 +11090,7 @@ export default App;`
     },
     {
       id: 52,
-      section : `effect, pure and rules`,
+      section: `effect, pure and rules`,
       title: ``,
     },
     {
@@ -10787,7 +11379,7 @@ export default App;
     },
     {
       id: 52,
-      section:"Micro Frontend Architecture",
+      section: "Micro Frontend Architecture",
       title: "Micro Frontend Architecture in React JS",
       note: [
         {

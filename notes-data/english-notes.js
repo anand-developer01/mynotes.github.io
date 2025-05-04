@@ -1045,10 +1045,224 @@ const SubjectList = {
                     tel:'వర్షం పడితే, మీరు తడిసిపోయేవారు',
                     tense:'Present tense'
                 },
+                {
+                    id: 1,
+                    eng: `<table border="1" style="border-spacing: 0px;"><tbody>
+<tr><td align="center" colspan="3" style="font-weight: bold;">కూరగాయలు (Vegetables) - English - Telugu - తెలుగు</td></tr>
+<tr><th style="width: 185px;">Name in English</th><th style="width: 185px;">Name in Telugu</th><th style="width: 195px;">తెలుగు పేరు</th></tr>
+<tr><td>Brinjal / Egg plant</td><td>Vankaya</td><td>వంకాయ</td></tr>
+<tr><td>Radish</td><td>Mullangi</td><td>ముల్లంగి</td></tr>
+<tr><td>Potato</td><td>Aalu, Bangala dumpa</td><td>ఆలు, బంగాళదుంప</td></tr>
+<tr><td>Onion</td><td>Ulli</td><td>ఉల్లి గడ్డ</td></tr>
+<tr><td>Garlic</td><td>Vellulli, Elligadda</td><td>వెల్లుల్లి, ఎల్లిగడ్డ</td></tr>
+<tr><td>Ginger</td><td>Allam</td><td>అల్లం</td></tr>
+<tr><td>Chilli</td><td>Mirapakaya</td><td>మిరపకాయ</td></tr>
+<tr><td>Lady finger / Okra</td><td>Bendakaya</td><td>బెండకాయ</td></tr>
+<tr><td>Drumstick</td><td>Mulagakada</td><td>ములగకాడ</td></tr>
+<tr><td>Cucumber</td><td>Dosakaya</td><td>దోసకాయ</td></tr>
+<tr><td>Bitter Gourd</td><td>Kakarakaya</td><td>కాకరకాయ</td></tr>
+<tr><td>Teasel Gourd</td><td>Boda Kakarakaya, Aakakarakaya</td><td>బోడ కాకరకాయ, ఆకాకరకాయ</td></tr>
+<tr><td>Snake Gourd</td><td>Potlakaya</td><td>పొట్లకాయ</td></tr>
+<tr><td>Pumpkin</td><td>Gummadikaya</td><td>గుమ్మడికాయ</td></tr>
+<tr><td>Tindora, Gherkin, Pointed Gourd</td><td>Dondakaya</td><td>దొండకాయ</td></tr>
+<tr><td>Tomato</td><td>Tamata, Thakkali</td><td>టమాట, తక్కాళి</td></tr>
+<tr><td>Cauliflower</td><td>Kosu Puvu</td><td>కోసు పువ్వు</td></tr>
+<tr><td>Ridge Gourd</td><td>Beerakaya</td><td>బీరకాయ</td></tr>
+<tr><td>Bottle Gourd</td><td>Sorakaya</td><td>సొరకాయ, అన్యపుకాయ</td></tr>
+<tr><td>Cluster Beans</td><td>Goru Chikkudu</td><td>గోరు చిక్కుడు</td></tr>
+<tr><td>Suran, Yam, Sweet Potato</td><td>Kanda Gadda</td><td>కంద గడ్డ</td></tr>
+<tr><td>Colocasia, Taro</td><td>Chemadumpa, Chemagadda</td><td>చేమదుంప, చేమగడ్డ</td></tr>
+<tr><td>Broad Beans, Fresh Beans</td><td>Chikkudukaya, Pedda chikkudukaya</td><td>చిక్కుడుకాయ, పెద్ద చిక్కుడుకాయ</td></tr>
+<tr><td>Ash Gourd</td><td>Boodida Gummadikaya</td><td>బూడిద గుమ్మడికాయ</td></tr>
+<tr><td>Plantain</td><td>Aratikaya</td><td>అరటికాయ</td></tr>
+<tr><td>Carrot</td><td>Gajaragadda</td><td>గాజరగడ్డ</td></tr>
+<tr><td>Green Peas</td><td>Batani</td><td>పచ్చి బఠానీ</td></tr>
+<tr><td>Betal Leaves</td><td>Tamalapakulu</td><td>తమలపాకులు</td></tr>
+<tr><td>Mushroom</td><td>Puttagodugu</td><td>పుట్టగొడుగు</td></tr>
+<tr><td>Lemon</td><td>Nimma Kaya</td><td>నిమ్మకాయ</td></tr></tbody></table>
+
+</br>
+</br>
+</br>
+
+<table border="1" style="border-spacing: 0px;"><tbody>
+<tr><td align="center" colspan="3" style="font-weight: bold;">ఆకు కూరలు (Leafy Vegetables) - English - Telugu - తెలుగు</td></tr>
+<tr><th style="width: 185px;">Name in English</th><th style="width: 185px;">Name in Telugu</th><th style="width: 195px;">తెలుగు పేరు</th></tr>
+<tr><td>Spinach</td><td>Palakura</td><td>పాలకూర</td></tr>
+<tr><td>Malabar Spinach / Chinese Spinach</td><td>Bachalikura</td><td>బచ్చలికూర</td></tr>
+<tr><td>Amaranthus</td><td>Thotakura</td><td>తోటకూర</td></tr>
+<tr><td>Red Amaranthus</td><td>Koyya Thotakura</td><td>కొయ్య తోటకూర</td></tr>
+<tr><td>Kenaf Leaves / Sorrel Leaves</td><td>Gongura</td><td>గోంగూర</td></tr>
+<tr><td>Curry Leaves</td><td>Karivepaku</td><td>కరివేపాకు</td></tr>
+<tr><td>Purslane</td><td>Gangavalli Aaku / Gangabala Aaku</td><td>గంగవల్లి ఆకు / గంగబాయల ఆకు</td></tr>
+<tr><td>Fenugreek Leaves</td><td>Menthikura</td><td>మెంతికూర</td></tr>
+<tr><td>Plantain Flower</td><td>Arati Puvvu</td><td>అరటి పువ్వు</td></tr>
+<tr><td>Coriander Leaves</td><td>Kothimeera</td><td>కొత్తిమీర</td></tr>
+<tr><td>Mint Leaves</td><td>Poodina</td><td>పూదిన</td></tr>
+<tr><td>Chives</td><td>Ulli aaku</td><td>ఉల్లి ఆకు</td></tr>
+<tr><td>Mustard Leaves</td><td>Aava Aakulu</td><td>ఆవ ఆకులు</td></tr>
+<tr><td>Spring Onions/ Leeks</td><td>Ulli Kaadalu</td><td>ఉల్లి కాడలు</td></tr>
+<tr><td>Garden Sorrel / Red Sorrel</td><td>Chukkakura</td><td>చుక్కకూర</td></tr>
+<tr><td>Dwarf Copperleaf / Water Amaranth / Sessile Joyweed</td><td>Ponnaganti Kura</td><td>పొన్నగంటి కూర</td></tr>
+<tr><td>Tamarind Tender Leaves</td><td>Chinta Chiguru</td><td>చింత చిగురు</td></tr></tbody></table>
+
+</br>
+</br>
+</br>
+
+<table border="1" style="border-spacing: 0px;"><tbody>
+<tr><td align="center" colspan="3" style="font-weight: bold;">పండ్లు (Fruits) - English - Telugu - తెలుగు</td></tr>
+<tr><th style="width: 185px;">Name in English</th><th style="width: 185px;">Name in Telugu</th><th style="width: 195px;">తెలుగు పేరు</th></tr>
+<tr><td>Apple</td><td>Sepulu / Apil</td><td>సేపులు / ఆపిల్</td></tr>
+<tr><td>Mango</td><td>Mamidi</td><td>మామిడి</td></tr>
+<tr><td>Orange</td><td>Narinja</td><td>నారింజ</td></tr>
+<tr><td>Banana</td><td>Arati Pandu</td><td>అరటిపండు</td></tr>
+<tr><td>Grapes</td><td>Draksha</td><td>ద్రాక్ష</td></tr>
+<tr><td>Pomegranate</td><td>Danimma</td><td>దానిమ్మ</td></tr>
+<tr><td>Fig</td><td>Anjeera / Atti Pandu</td><td>అంజీర / అత్తి పండు</td></tr>
+<tr><td>Guava</td><td>Jama</td><td>జామ</td></tr>
+<tr><td>Jackfruit</td><td>Panasa</td><td>పనస</td></tr>
+<tr><td>Papaya</td><td>Boppayi</td><td>బొప్పాయి</td></tr>
+<tr><td>Water Melon</td><td>Pucchakaya</td><td>పుచ్చకాయ</td></tr>
+<tr><td>Canataloupe / Musk Melon</td><td>Kharbuja</td><td>ఖర్బుజా</td></tr>
+<tr><td>Pear</td><td>Bery Pandu</td><td>బేరిపండు</td></tr>
+<tr><td>Pineapple</td><td>Anasa Pandu</td><td>అనాస పండు</td></tr>
+<tr><td>Sapodilla / Chickoo</td><td>Sapota</td><td>సపోటా</td></tr>
+<tr><td>Sweet Lime</td><td>Batthayi</td><td>బత్తాయి</td></tr>
+<tr><td>Custard Apple</td><td>Sitaphalam</td><td>సీతాఫలం</td></tr>
+<tr><td>Avocado</td><td>Venna Pandu</td><td>వెన్నపండు</td></tr>
+<tr><td>Plum / Jujebi</td><td>Regipandu</td><td>రేగిపండు</td></tr>
+<tr><td>Bokhara Plum</td><td>Seema Regu / Ganga Regu</td><td>సీమరేగు / గంగరేగు</td></tr>
+<tr><td>Litchi</td><td>Lychee</td><td>లీచీ</td></tr>
+<tr><td>Black Berry</td><td>Neredu</td><td>నేరేడు</td></tr>
+<tr><td>Blue Berry</td><td>Phal Sa</td><td>ఫాల్ సా</td></tr>
+<tr><td>Mulberry</td><td>Bontapandu</td><td>బొంతపండు</td></tr>
+<tr><td>Straw Berry</td><td>Strawberry Pandu</td><td>స్ట్రాబెర్రీ పండు</td></tr>
+<tr><td>Cran Berry</td><td>Cranberry Pandu</td><td>క్రాన్బెర్రీ పండు</td></tr>
+<tr><td>Currant</td><td>Kismis</td><td>కిస్మిస్</td></tr>
+<tr><td>Black Currant</td><td>Nalla Kismis</td><td>నల్ల కిస్మిస్</td></tr>
+<tr><td>Carambola / Star Fruit</td><td>Nakshatra Pandu</td><td>నక్షత్ర పండు</td></tr>
+<tr><td>Apricot</td><td>Jaldaru Pandu</td><td>జల్దారు పండు</td></tr>
+<tr><td>Peach</td><td>Shaptalu Pandu</td><td>శాప్తాలు పండు</td></tr>
+<tr><td>Dates</td><td>Kharjura</td><td>ఖర్జూర</td></tr>
+<tr><td>Cashew</td><td>Jeedipappu</td><td>జీడిపప్పు</td></tr>
+<tr><td>Almond</td><td>Badam</td><td>బాదాం</td></tr>
+<tr><td>Pistachios</td><td>Pista Pappu</td><td>పిస్తాపప్పు</td></tr>
+<tr><td>Walnut</td><td>Akrot</td><td>అక్రోటు</td></tr>
+<tr><td>Kiwi</td><td>Kivi</td><td>కివి</td></tr>
+<tr><td>Cherry</td><td>Cherri Pandu</td><td>చెర్రీ పండు</td></tr></tbody></table>
+
+</br>
+</br>
+</br>
+
+<table border="1" style="border-spacing: 0px;"><tbody>
+<tr><td align="center" colspan="3" style="font-weight: bold;">పప్పు దినుసులు (Pulses) - English - Telugu - తెలుగు</td></tr>
+<tr><th style="width: 185px;">Name in English</th><th style="width: 185px;">Name in Telugu</th><th style="width: 195px;">తెలుగు పేరు</th></tr>
+<tr><td>Toor Dal / Pigeon Peas /Red Gram</td><td>Kandi Pappu</td><td>కంది పప్పు</td></tr>
+<tr><td>Chana Dal / Bengal Gram Dal</td><td>Senaga Pappu</td><td>శనగ పప్పు</td></tr>
+<tr><td>Whole Moong Dal</td><td>Pesarlu</td><td>పెసర్లు</td></tr>
+<tr><td>Moong Dal</td><td>Pesaru Pappu</td><td>పెసర పప్పు</td></tr>
+<tr><td>Urad Dal / Black Dal</td><td>Minapa Pappu</td><td>మినప పప్పు</td></tr>
+<tr><td>Masoor Dal</td><td>Mysur Pappu</td><td>మైసూర్ పప్పు</td></tr>
+<tr><td>Green Moong Dal</td><td>Pottu Pesaru Pappu</td><td>పొట్టు పెసర పప్పు</td></tr>
+<tr><td>Red Kidney Beans</td><td>Rajma</td><td>రాజ్మా</td></tr>
+<tr><td>Black Chickpeas/ Kala Chana</td><td>Senagalu</td><td>శెనగలు</td></tr>
+<tr><td>White Chickpeas / Kabuli Chana</td><td>Kabuli Senagalu</td><td>కాబూలీ శెనగలు</td></tr>
+<tr><td>Horse Gram</td><td>Ulavalu</td><td>ఉలవలు</td></tr>
+<tr><td>Adzuki Beans</td><td>Chikkudu Ginjalu</td><td>చిక్కుడు గింజలు</td></tr>
+<tr><td>Poppy Seeds</td><td>Gasagasalu</td><td>గసగసాలు</td></tr>
+<tr><td>Black Eyed Beans / Cow Peas / Lobia</td><td>Alasandalu / Bobbarlu</td><td>అలసందలు / బొబ్బర్లు</td></tr>
+<tr><td>Hyacinth Bean</td><td>Anumulu</td><td>అనుములు</td></tr></tbody></table>
+
+
+</br>
+</br>
+</br>
+
+
+<table border="1" style="border-spacing: 0px;"><tbody>
+<tr><td align="center" colspan="3" style="font-weight: bold;">చిరుధాన్యాలు / సిరిధాన్యాలు (Millets) - English - Telugu - తెలుగు</td></tr>
+<tr><th style="width: 185px;">Name in English</th><th style="width: 185px;">Name in Telugu</th><th style="width: 195px;">తెలుగు పేరు</th></tr>
+<tr><td>Kangni / Foxtail millet</td><td>Korralu</td><td>కొర్రలు</td></tr>
+<tr><td>Little Millet /Moraiyo / Kutki / Shavan</td><td>Samalu</td><td>సామలు</td></tr>
+<tr><td>Kodo Millet</td><td>Arikelu</td><td>అరికెలు</td></tr>
+<tr><td>Barnyard Millet</td><td>Oodalu / Odalu</td><td>వూదలు / ఓదెలు</td></tr>
+<tr><td>Browntop</td><td>Andu Korralu</td><td>అండు కొర్రెలు</td></tr>
+<tr><td>Ragi / Finger Millet</td><td>Ragi / Ragulu</td><td>రాగులు</td></tr>
+<tr><td>Proso Millet</td><td>Origalu</td><td>ఒరిగలు</td></tr>
+<tr><td>Bajra / Pearl Millet</td><td>Sajjalu</td><td>సజ్జలు</td></tr>
+<tr><td>Jowar / Sorghum / Great Millet</td><td>Jonnalu</td><td>జొన్నలు</td></tr>
+<tr><td>Green Sorghum</td><td>Paccha Jonnalu / Pajjonnalu</td><td>పచ్చ జొన్నలు</td></tr>
+<tr><td>Rajgira or Amaranth</td><td>Thotakura Ginjalu</td><td>తోటకూర గింజలు</td></tr>
+<tr><td>Till / Sesame Seeds / Gingely Seeds</td><td>Nuvvulu</td><td>నువ్వులు</td></tr></tbody></table>
+
+
+</br>
+</br>
+</br>
+
+
+<table border="1" style="border-spacing: 0px;"><tbody>
+<tr><td align="center" colspan="3" style="font-weight: bold;">కిరాణా (Groceries) - English - Telugu - తెలుగు</td></tr>
+<tr><th style="width: 185px;">Name in English</th><th style="width: 185px;">Name in Telugu</th><th style="width: 195px;">తెలుగు పేరు</th></tr>
+<tr><td>Puffed Rice</td><td>Moramoralu, Maramaralu</td><td>మొరమోరాలు, మరమరాలు, పేలాలు</td></tr>
+<tr><td>Dried Ginger</td><td>Sonti</td><td>సొంఠి</td></tr>
+<tr><td>Ceylon Cinnamon</td><td>Dalchana Chekka</td><td>దాల్చన చెక్క</td></tr>
+<tr><td>Jackfruit</td><td>Panasakaya</td><td>పనసకాయ</td></tr>
+<tr><td>Gooseberry / Amla</td><td>Usirikaya</td><td>ఉసిరికాయ</td></tr>
+<tr><td>Black Pepper</td><td>Miriyalu</td><td>మిరియాలు</td></tr>
+<tr><td>Cardamom</td><td>Elaichi, Yalakkaya</td><td>ఇలైచి, యాలక్కాయ</td></tr>
+<tr><td>Cloves</td><td>Lavangam</td><td>లవంగం</td></tr>
+<tr><td>Coriander Seeds</td><td>Dhaniyalu</td><td>ధనియాలు</td></tr>
+<tr><td>Cumin Seeds</td><td>Jeelakarra</td><td>జీలకర్ర</td></tr>
+<tr><td>Fenugreek</td><td>Menthulu</td><td>మెంతులు</td></tr>
+<tr><td>Jaggery</td><td>Bellam</td><td>బెల్లం</td></tr>
+<tr><td>Mustard</td><td>Aavalu</td><td>ఆవాలు</td></tr>
+<tr><td>Poppy Seeds</td><td>Gaslu, Gasagasalu</td><td>గసాలు, గసగసాలు</td></tr>
+<tr><td>Raisins</td><td>Yendu Draksha</td><td>ఎండు ద్రాక్ష</td></tr>
+<tr><td>Yogurt</td><td>Perugu</td><td>పెరుగు</td></tr>
+<tr><td>Semolina / Suji</td><td>Upma Ravva</td><td>ఉప్మా రవ్వ</td></tr>
+<tr><td>Vermicelli</td><td>Semia</td><td>సేమియా</td></tr>
+<tr><td>Ground Nuts / Peanuts</td><td>Pallilu / Veru Senagalu</td><td>పల్లీలు / వేరు శెనగలు</td></tr>
+<tr><td>Roasted Split Chickpeas</td><td>Putnalu</td><td>పుట్నాలు</td></tr>
+<tr><td>Nutmeg</td><td>Jajikaya</td><td>జాజికాయ</td></tr>
+<tr><td>Mace</td><td>Japathri</td><td>జాపత్రి</td></tr>
+<tr><td>Bay leaf</td><td>Biryani Aaku</td><td>బిర్యాని ఆకు</td></tr>
+<tr><td>Star Anise</td><td>Anasa Puvvu</td><td>అనాస పువ్వు</td></tr>
+<tr><td>Alsi Seeds / Flax Seeds / Linseed</td><td>Aviselu</td><td>అవిసెలు</td></tr>
+<tr><td>Sweet Basil Seeds</td><td>Sabja</td><td>సబ్జా గింజలు</td></tr>
+<tr><td>Barley</td><td>Barlee</td><td>బార్లీ</td></tr>
+<tr><td>Fennel / Soanf</td><td>Sompu</td><td>సోంపు</td></tr>
+<tr><td>Long Pepper</td><td>Toka Miryalu</td><td>తోక మిరియాలు</td></tr>
+<tr><td>Wailong</td><td>Marati Mogga</td><td>మరాఠీ మొగ్గ</td></tr>
+<tr><td>Dry Chilli</td><td>Endu Mirapa</td><td>ఎండు మిరప</td></tr>
+<tr><td>Sago</td><td>Saggu Biyyam</td><td>సగ్గు బియ్యం</td></tr>
+<tr><td>Beatal Nut</td><td>Vakka</td><td>వక్క</td></tr>
+<tr><td>Flattend Rice / Rice Flakes</td><td>Atukulu</td><td>అటుకులు</td></tr>
+<tr><td>Maize / Corn</td><td>Mokka Jonnalu</td><td>మొక్క జొన్నలు</td></tr>
+<tr><td>Gall Nut</td><td>Machi Kaya</td><td>మాచి కాయ</td></tr>
+<tr><td>Soap Nuts</td><td>Kunkudu Kayalu</td><td>కుంకుడు కాయలు</td></tr>
+<tr><td>Basil</td><td>Tulasi</td><td>తులసి</td></tr>
+<tr><td>Candy Sugar</td><td>Patika Bellam</td><td>పటిక బెల్లం</td></tr>
+<tr><td>Assafoetida</td><td>Enguva</td><td>ఇంగువ</td></tr>
+<tr><td>Carom Seed / Bishops Weed / Ajowan Caraway</td><td>Vamu</td><td>వాము</td></tr>
+<tr><td>Saffron</td><td>Kumkuma Puvvu</td><td>కుంకుమపువ్వు</td></tr>
+<tr><td>Camphor</td><td>Karpuram</td><td>కర్పూరం</td></tr>
+<tr><td>Copra</td><td>Kobbari / Kuduka</td><td>కొబ్బరి / కుడుక</td></tr>
+<tr><td>Tamarind</td><td>Chintapandu</td><td>చింతపండు</td></tr>
+<tr><td>Sour Mango Powder</td><td>Amchoor</td><td>ఆంచూర్</td></tr>
+<tr><td>Black Cardamom</td><td>Nalla Yalakulu</td><td>నల్ల యాలకులు</td></tr>
+<tr><td>Chironji</td><td>Sara Pappu</td><td>సారా పప్పు</td></tr>
+<tr><td>Black Salt</td><td>Nalla Uppu</td><td>నల్ల ఉప్పు</td></tr>
+<tr><td>Kalonji / Black Cumin</td><td>Nalla Jeelakarra</td><td>నల్ల జీలకర్ర</td></tr>
+<tr><td>Chebulic Myrobalan</td><td>Karakkaya</td><td>కరక్కాయ</td></tr>
+</tbody></table>`,
+                    tel:'',
+                    tense:''
+                },
             ],
-        }
-    ],
-    conditionalSentences: [
+        },
         {
             id: 1,
             topic: "Conditional Sentences",
@@ -1091,5 +1305,49 @@ const SubjectList = {
                 }
             ],
         }
-    ]
+    ],
+    // conditionalSentences: [
+    //     {
+    //         id: 1,
+    //         topic: "Conditional Sentences",
+    //         explain:'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
+    //         formation:'If + Subject + had + past Participle - Subject + would have + past Participle',
+    //         content:[
+    //             {
+    //                 id: 1,
+    //                 eng: "If it had rained, you would have gotten wet",
+    //                 tel:'వర్షం పడితే, మీరు తడిసిపోయేవారు',
+    //             },
+    //             {
+    //                 id: 2,
+    //                 eng: "You would have gotten wet if it had rained",
+    //                 tel:'',
+    //             },
+    //             {
+    //                 id: 3,
+    //                 eng: "You would have passed your exam if you had worked harder",
+    //                 tel:'',
+    //             },                {
+    //                 id: 4,
+    //                 eng: "If you had worked harder, you would have passed your exam",
+    //                 tel:'',
+    //             },
+    //             {
+    //                 id: 5,
+    //                 eng: "I would have believed you if you hadn't lied to me before",
+    //                 tel:'',
+    //             },
+    //             {
+    //                 id: 6,
+    //                 eng: "If you hadn't lied to me before, I would have believed you",
+    //                 tel:'',
+    //             },
+    //             {
+    //                 id: 7,
+    //                 eng: '',
+    //                 tel:'',
+    //             }
+    //         ],
+    //     }
+    // ]
 }
