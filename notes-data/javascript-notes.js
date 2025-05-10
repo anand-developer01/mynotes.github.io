@@ -9163,6 +9163,10 @@ new Promise(function() {
           2) The next difference is how these two methods handle errors. With <b>await</b> we are able to create a <b>try</b> and <b>catch</b> code block.
 
           This code block is acting as an <b>if-else</b> but one designed for acting with requests. What this is doing is in the <b>try</b> if the requests is successful, continue on and return the object; otherwise, throw this error to the console and tell me the error with the requests. With <b>catch()</b>, your errors are handled in your promise chain just as your <b>then()</b>s are.
+
+          <b>Key Difference</b>:
+    => <b>.then()</b> and <b>.catch()</b> are methods on a <b>Promise</b> object — they expect <b>callback functions</b> as <b>arguments</b>.
+    => <b>try {}</b> and <b>catch {}</b> are <b>language constructs</b> — part of <b>JavaScript syntax</b>, not functions.
           `,
           code1: `const apiCall = async () => {
             try{
@@ -9178,9 +9182,7 @@ new Promise(function() {
          `
                  },
                  {
-                   text1: `This snippet functions exactly the same as done <b>with</b> the await example but the difference is that here, <b>catch()</b> is expecting a callback function.
-                   
-                   3) The third key difference between the <b>await</b> and <b>then()</b> comes down to code organization. I have touched on it already but using <b>await</b> allows you to write your code in a more linear and organized manner. You can perform subsequent operations on the fetched response immediately after the <b>await</b> statement, which can make the code flow more naturally. With <b>then()</b>, you need to chain multiple <b>then()</b> calls to handle the response and subsequent processing. This can sometimes lead to nested or cascading <b>then()</b> calls, which may make the code harder to read and maintain.
+                   text1: `3) The third key difference between the <b>await</b> and <b>then()</b> comes down to code organization. I have touched on it already but using <b>await</b> allows you to write your code in a more linear and organized manner. You can perform subsequent operations on the fetched response immediately after the <b>await</b> statement, which can make the code flow more naturally. With <b>then()</b>, you need to chain multiple <b>then()</b> calls to handle the response and subsequent processing. This can sometimes lead to nested or cascading <b>then()</b> calls, which may make the code harder to read and maintain.
                    `,
                    code1: `const apiCall = () => {
             fetch('https://api.example.com/data')
@@ -10380,7 +10382,13 @@ export default MyComponent;`
         {
           text1: ``,
           code1: ``
-        },
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Event Propagation",
+      note: [
         {
           text1: ``,
           code1: ``
@@ -10899,26 +10907,6 @@ window.addEventListener('app1ToApp2', (e) => {
     },
     {
       id: 1,
-      title: "CORS request",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: "CORS request",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
       title: "What is debounce?",
       note: [
         {
@@ -11104,16 +11092,6 @@ Prevents Redundant API Calls: Debouncing ensures that the API requests are only 
     },
     {
       id: 1,
-      title: "CORS request",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 1,
       title: "What is Throttling?",
       note: [
         {
@@ -11189,6 +11167,16 @@ Certain user interactions, like scrolling or window resizing, trigger events mul
       note: [
         {
           text1: `<a href="https://www.freecodecamp.org/news/json-server-for-frontend-development/" target="_blank" rel="noopener"> How to Use JSON Server for Front-end Development</a>`,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "add topic",
+      note: [
+        {
+          text1: ``,
           code1: ``
         },
       ]

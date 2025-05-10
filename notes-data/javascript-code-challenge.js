@@ -1901,7 +1901,349 @@ console.log(map(arr3, fn3)); // Output: [42, 42, 42]
     },
     {
       id: 1,
-      section: "Promise code challenge",
+      section: "Promises and Time",
+      title: "Add Two Promises",
+      note: [
+        {
+          text1: `Given two promises promise1 and promise2, return a new promise. promise1 and promise2 will both resolve with a number. The returned promise should resolve with the sum of the two numbers.
+
+<b>Example 1</b>:
+Input: 
+promise1 = new Promise(resolve => setTimeout(() => resolve(2), 20)), 
+promise2 = new Promise(resolve => setTimeout(() => resolve(5), 60))
+Output: 7
+Explanation: The two input promises resolve with the values of 2 and 5 respectively. The returned promise should resolve with a value of 2 + 5 = 7. The time the returned promise resolves is not judged for this problem.
+
+<b>Example 2</b>:
+Input: 
+promise1 = new Promise(resolve => setTimeout(() => resolve(10), 50)), 
+promise2 = new Promise(resolve => setTimeout(() => resolve(-12), 30))
+Output: -2
+Explanation: The two input promises resolve with the values of 10 and -12 respectively. The returned promise should resolve with a value of 10 + -12 = -2.`,
+          code1: `    const addTwoPromises = async function (promise1, promise2) {
+      const val1 = await promise1
+      const val2 = await promise2
+      return val1 + val2
+    };
+
+    const promise1 = new Promise(resolve => setTimeout(() => resolve(2), 20));
+    const promise2 = new Promise(resolve => setTimeout(() => resolve(5), 60));
+
+    addTwoPromises(promise1, promise2).then(res => console.log(res))`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "sleep",
+      note: [
+        {
+          text1: `Given a positive integer millis, write an asynchronous function that sleeps for millis milliseconds. It can resolve any value.
+
+Note that minor deviation from millis in the actual sleep duration is acceptable.
+
+<b>Example 1</b>:
+Input: millis = 100
+Output: 100
+Explanation: It should return a promise that resolves after 100ms.
+let t = Date.now();
+sleep(100).then(() => {
+  console.log(Date.now() - t); // 100
+});
+
+<b>Example 2</b>:
+Input: millis = 200
+Output: 200
+Explanation: It should return a promise that resolves after 200ms.`,
+          code1: `// Sleep function that returns a promise which resolves after \`millis\` milliseconds
+async function sleep(millis) {
+  return new Promise(resolve => setTimeout(resolve, millis));
+}
+
+// Test the sleep function
+let t = Date.now();
+
+sleep(200).then(() => {
+  console.log(\`Elapsed time: \${Date.now() - t}ms\`); // Should print around 200ms
+});
+
+//-----------------
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Sleep Button Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id=&quot;myButton&quot;&gt;Click Me&lt;/button&gt;
+
+  &lt;script&gt;
+    // Reusable sleep function
+    async function sleep(millis) {
+      return new Promise(resolve =&gt; setTimeout(resolve, millis));
+    }
+
+    // Button click handler
+    const button = document.getElementById(&#39;myButton&#39;);
+    button.addEventListener(&#39;click&#39;, async () =&gt; {
+      button.disabled = true;
+      button.textContent = &quot;Processing...&quot;;
+
+      await sleep(3000); // Wait 3 seconds
+
+      button.disabled = false;
+      button.textContent = &quot;Click Me&quot;;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+//-----------
+
+async function fetchWithRetry(url, retries = 3, delay = 1000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Bad response");
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(\`Attempt \${i + 1} failed. Retrying in \${delay}ms...\`);
+      await sleep(delay); // <-- Use sleep here before retrying
+    }
+  }
+  throw new Error("All retries failed");
+}
+
+// Example usage:
+fetchWithRetry("https://jsonplaceholder.typicode.com/users/1")
+  .then(data => console.log("Fetched data:", data))
+  .catch(error => console.error("Final error:", error.message));
+
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Timeout Cancellation",
+      note: [
+        {
+          text1: `Given a function <b>fn</b>, an array of arguments <b>args</b>, and a timeout <b>t</b> in milliseconds, return a cancel function <b>cancelFn</b>.
+
+After a delay of <b>cancelTimeMs</b>, the returned cancel function <b>cancelFn</b> will be invoked.
+
+<b>setTimeout(cancelFn, cancelTimeMs)</b>
+Initially, the execution of the function <b>fn</b> should be delayed by <b>t</b> milliseconds.
+
+If, before the delay of <b>t</b> milliseconds, the function <b>cancelFn</b> is invoked, it should cancel the delayed execution of <b>fn</b>. Otherwise, if <b>cancelFn</b> is not invoked within the specified delay <b>t</b>, fn should be executed with the provided <b>args</b> as arguments.
+
+ 
+
+<b>Example 1</b>:
+Input: fn = (x) => x * 5, args = [2], t = 20
+Output: [{"time": 20, "returned": 10}]
+Explanation: 
+const cancelTimeMs = 50;
+const cancelFn = cancellable((x) => x * 5, [2], 20);
+setTimeout(cancelFn, cancelTimeMs);
+
+The cancellation was scheduled to occur after a delay of cancelTimeMs (50ms), which happened after the execution of fn(2) at 20ms.
+
+<b>Example 2</b>:
+Input: fn = (x) => x**2, args = [2], t = 100
+Output: []
+Explanation: 
+const cancelTimeMs = 50;
+const cancelFn = cancellable((x) => x**2, [2], 100);
+setTimeout(cancelFn, cancelTimeMs);
+
+The cancellation was scheduled to occur after a delay of cancelTimeMs (50ms), which happened before the execution of fn(2) at 100ms, resulting in fn(2) never being called.
+          
+          <b>Problem</b>:
+Given a function <b>fn</b>, an array of arguments <b>args</b>, and a timeout <b>t</b> in milliseconds, return a cancel function <b>cancelFn</b>.
+
+After a delay of <b>t</b>, <b>fn</b> should be called with <b>args</b> passed as parameters unless <b>cancelFn</b> was invoked before the delay of <b>t</b> milliseconds elapses, specifically at <b>cancelT</b> ms. In that case, <b>fn</b> should never be called.`,
+          code1: `/**
+ * Schedules the execution of a function after a specified delay,
+ * and returns a cancel function that can prevent its execution if called in time.
+ *
+ * @param {Function} fn - The function to be executed after delay.
+ * @param {Array} args - The arguments to pass to the function.
+ * @param {number} t - Delay in milliseconds before executing the function.
+ * @return {Function} cancelFn - A function that cancels the scheduled execution if invoked before time t.
+ */
+ function cancellable(fn, args, t) {
+    const start = Date.now();
+    let executed = false; // Track if fn has been executed
+
+    // Schedule the execution
+    const timeoutId = setTimeout(() => {
+        executed = true;
+        const result = fn(...args);
+        console.log([{ time: Date.now() - start, returned: result }]);
+    }, t);
+
+    // Cancel function with proper message
+    const cancelFn = () => {
+        const elapsed = Date.now() - start;
+        if (!executed) {
+            clearTimeout(timeoutId);
+            console.log(\`Cancelled at \${elapsed}ms (before scheduled execution at \${t}ms)\`);
+        } else {
+            console.log(\`Cancelled at \${elapsed}ms (too late, function already executed)\`);
+        }
+    };
+
+    return cancelFn;
+}
+
+
+const cancelTimeMs = 50;
+
+const cancelFn = cancellable((x) => x * 5, [2], 20);
+setTimeout(cancelFn, cancelTimeMs); // Try canceling after 50ms`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Interval Cancellation",
+      note: [
+        {
+          text1: `Given a function fn, an array of arguments args, and an interval time t, return a cancel function cancelFn.
+
+After a delay of cancelTimeMs, the returned cancel function cancelFn will be invoked.
+
+setTimeout(cancelFn, cancelTimeMs)
+The function fn should be called with args immediately and then called again every t milliseconds until cancelFn is called at cancelTimeMs ms.
+
+ 
+<b>Example 1</b>:
+Input: fn = (x) => x * 2, args = [4], t = 35
+Output: 
+[
+   {"time": 0, "returned": 8},
+   {"time": 35, "returned": 8},
+   {"time": 70, "returned": 8},
+   {"time": 105, "returned": 8},
+   {"time": 140, "returned": 8},
+   {"time": 175, "returned": 8}
+]
+Explanation: 
+const cancelTimeMs = 190;
+const cancelFn = cancellable((x) => x * 2, [4], 35);
+setTimeout(cancelFn, cancelTimeMs);
+
+Every 35ms, fn(4) is called. Until t=190ms, then it is cancelled.
+1st fn call is at 0ms. fn(4) returns 8.
+2nd fn call is at 35ms. fn(4) returns 8.
+3rd fn call is at 70ms. fn(4) returns 8.
+4th fn call is at 105ms. fn(4) returns 8.
+5th fn call is at 140ms. fn(4) returns 8.
+6th fn call is at 175ms. fn(4) returns 8.
+Cancelled at 190ms
+
+<b>Example 2</b>:
+Input: fn = (x1, x2) => (x1 * x2), args = [2, 5], t = 30
+Output: 
+[
+   {"time": 0, "returned": 10},
+   {"time": 30, "returned": 10},
+   {"time": 60, "returned": 10},
+   {"time": 90, "returned": 10},
+   {"time": 120, "returned": 10},
+   {"time": 150, "returned": 10}
+]
+Explanation: 
+const cancelTimeMs = 165; 
+const cancelFn = cancellable((x1, x2) => (x1 * x2), [2, 5], 30) 
+setTimeout(cancelFn, cancelTimeMs)
+
+Every 30ms, fn(2, 5) is called. Until t=165ms, then it is cancelled.
+1st fn call is at 0ms 
+2nd fn call is at 30ms 
+3rd fn call is at 60ms 
+4th fn call is at 90ms 
+5th fn call is at 120ms 
+6th fn call is at 150ms
+Cancelled at 165ms
+
+<b>Example 3</b>:
+Input: fn = (x1, x2, x3) => (x1 + x2 + x3), args = [5, 1, 3], t = 50
+Output: 
+[
+   {"time": 0, "returned": 9},
+   {"time": 50, "returned": 9},
+   {"time": 100, "returned": 9},
+   {"time": 150, "returned": 9}
+]
+Explanation: 
+const cancelTimeMs = 180;
+const cancelFn = cancellable((x1, x2, x3) => (x1 + x2 + x3), [5, 1, 3], 50)
+setTimeout(cancelFn, cancelTimeMs)
+
+Every 50ms, fn(5, 1, 3) is called. Until t=180ms, then it is cancelled. 
+1st fn call is at 0ms
+2nd fn call is at 50ms
+3rd fn call is at 100ms
+4th fn call is at 150ms
+Cancelled at 180ms
+`,
+          code1: `   /**
+     * Repeatedly calls \`fn(...args)\` starting immediately, then every \`t\` milliseconds.
+     * Returns a cancel function that stops the repeated execution.
+     *
+     * @param {Function} fn - The function to call.
+     * @param {Array} args - Arguments to pass to the function.
+     * @param {number} t - Time interval in milliseconds between function calls.
+     * @return {Function} cancelFn - A function that cancels the repeated execution.
+     */
+    function cancellable(fn, args, t) {
+      const start = Date.now(); // Record the start time to calculate relative times in logs
+
+      // Call the function immediately with given arguments and log the result
+      const result = fn(...args);
+      console.log([{ time: 0, returned: result }]);
+
+      // Set up an interval to repeatedly call fn every t milliseconds
+      const intervalId = setInterval(() => {
+        const timeElapsed = Date.now() - start;
+        const result = fn(...args);
+        console.log([{ time: timeElapsed, returned: result }]);
+      }, t);
+
+      // Define and return the cancel function
+      const cancelFn = () => {
+        clearInterval(intervalId); // Stop further execution of fn
+        const timeElapsed = Date.now() - start;
+        console.log(\`Cancelled at \${timeElapsed}ms\`);
+      };
+
+      return cancelFn;
+    }
+
+
+    const cancelTimeMs = 190;
+    const cancelFn = cancellable((x) => x * 2, [4], 35);
+    setTimeout(cancelFn, cancelTimeMs);`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "JavaScript Event Loop",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
       title: "Promise Time Limit",
       note: [
         {

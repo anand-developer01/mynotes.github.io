@@ -7461,6 +7461,66 @@ export default PasswordField`
     },
     {
       id: 52,
+      title: "useActionState",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "useFormStatus",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "useOptimistic",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "useTransition",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "useDeferredValue",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "useInsertionEffect",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
       section: `Router`,
       title: "Router",
       note: [
