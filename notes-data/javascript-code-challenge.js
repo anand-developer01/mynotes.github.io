@@ -2317,6 +2317,41 @@ Constraints:
 0 <= inputs.length <= 10
 0 <= t <= 1000
 fn returns a promise
+
+
+
+    <table>
+      <thead>
+        <tr>
+          <th data-col-size="sm"><strong>Version</strong></th>
+          <th data-col-size="md"><strong>What It
+              Does</strong></th>
+          <th data-col-size="md"><strong>Why It's a
+              Problem / Correct</strong></th>
+          <th data-col-size="sm"><strong>Works as
+              Intended?</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-col-size="sm"><code>setTimeout(reject(...), t)</code></td>
+          <td data-col-size="md">Immediately calls <code>reject("Time Limit Exceeded")</code> and passes the result to
+            <code>setTimeout</code></td>
+          <td data-col-size="md">Rejection happens <strong>right away</strong>, not after <code>t</code> milliseconds.
+            Timeout is ignored.</td>
+          <td data-col-size="sm">❌ <strong>No</strong>
+          </td>
+        </tr>
+        <tr>
+          <td data-col-size="sm"><code>setTimeout(() =&gt; reject(...), t)</code></td>
+          <td data-col-size="md">Delays the call to <code>reject("Time Limit Exceeded")</code> by <code>t</code>
+            milliseconds using a callback</td>
+          <td data-col-size="md">Rejection only occurs <strong>after <code>t</code> ms</strong> if <code>fn</code>
+            hasn't completed. This is correct.</td>
+          <td data-col-size="sm">✅ <strong>Yes</strong></td>
+        </tr>
+      </tbody>
+    </table>
 `,
           code1: `
         var timeLimit = function (fn, t) {
@@ -2415,7 +2450,50 @@ fn returns a promise
         }
 
         // Run the examples
-        runExample();`
+        runExample();
+        
+        
+        //---------------- Another way -----------
+    function timeLimit(fn, t) {
+      return async function (...args) {
+        return Promise.race([
+          fn(...args),
+          new Promise((_, reject) =>
+            setTimeout(() => reject("Time Limit Exceeded"), t)
+          ),
+        ]);
+      };
+    }
+
+    const fn = async (n) => {
+      await new Promise(res => setTimeout(res, 100));
+      return n * n;
+    };
+
+    const limited = timeLimit(fn, 500);
+    const start = performance.now();
+
+    limited(5).then(
+      res => console.log({ resolved: res, time: Math.floor(performance.now() - start) }),
+      err => console.log({ rejected: err, time: Math.floor(performance.now() - start) })
+    );
+
+
+    //------------- debugging ---------
+function TimeLimit(fn, t) {
+  return async function (...args) {
+    return Promise.race([
+      fn(...args),
+      new Promise((_, reject) => setTimeout(reject("Time Limit Exceeded"), t)) // ❌
+    ]);
+  };
+}
+
+// setTimeout(reject("Time Limit Exceeded"), t)
+
+// Here, "reject("Time Limit Exceeded")" is "called immediately", and its return value (which is undefined) is passed to setTimeout. So this becomes effectively:
+
+// setTimeout(undefined, t)`
         },
         {
           text1: `<b>Breakdown below code</b>:
