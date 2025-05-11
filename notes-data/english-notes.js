@@ -871,6 +871,12 @@ const SubjectList = {
                     tel:'',
                     tense:'Present tense'
                 },
+                {
+                    id: 1,
+                    eng: "Everything happens for our good or It's all for our own good",
+                    tel:'అంతా మన మంచికే',
+                    tense:'Present tense'
+                },
             ],
         },
     ],

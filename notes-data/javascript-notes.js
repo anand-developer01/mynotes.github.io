@@ -10390,6 +10390,22 @@ export default MyComponent;`
       title: "Event Propagation",
       note: [
         {
+          text1: `Event Propagation is the process that defines how events move through the DOM tree in the browser when an event (like a click) occurs. There are <b>three main phases</b> of event propagation:
+          
+          🔁 <b>1. Capturing Phase (a.k.a. capture or trickle down)</b>
+    The event starts from the root (<html>) and travels down the DOM tree to the target element.
+    Event listeners with { capture: true } will run in this phase.
+
+🎯 <b>2. Target Phase</b>
+    The event reaches the target element — the actual element that was interacted with (e.g., clicked).
+    Event listeners on the target element are triggered here regardless of capture/bubble settings.
+
+🔼 <b>3. Bubbling Phase</b>
+    The event bubbles up from the target element back to the root.
+    Event listeners with { capture: false } (or default) are triggered in this phase.`,
+          code1: ``
+        },
+        {
           text1: ``,
           code1: ``
         },
@@ -10611,6 +10627,61 @@ Similar to document screen can be accessed either by window.screen or screen obj
       id: 1,
       title: "Event Delegation",
       note: [
+        {
+          text1: `Event delegation is a technique in JavaScript where a single event listener is attached to a parent element to handle events for all of its child elements. It leverages the concept of event bubbling, where an event on a child element propagates up the DOM tree to its parent elements. Instead of attaching individual event listeners to each child, the parent listener checks the event target to determine which child triggered the event and then executes the appropriate code.
+          
+          <b>How Event Delegation Works</b>
+Instead of attaching event listeners to multiple child elements, a single event listener is attached to a common ancestor (parent element). When an event occurs on a child, it bubbles up to the parent, where the event listener checks if the event originated from a specific child element and handles it accordingly.
+
+Event delegation is a design pattern in JavaScript used to efficiently manage and handle events on multiple child elements by attaching a single event listener to a common ancestor element. This pattern is particularly valuable in scenarios where you have a large number of similar elements, such as list items, and want to optimize event handling.
+
+<b>Benefits of Event Delegation</b>
+<b>Improves Performance</b>
+=> Attaching event listeners to multiple elements (e.g., hundreds of list items) consumes memory and CPU resources.
+=> A single event listener on the parent reduces memory usage and speeds up execution.
+=> Attaching a single event listener is more efficient than attaching multiple event listeners to individual elements, especially for large or dynamic lists. This reduces memory usage and improves overall performance.
+
+<b>Handles Dynamically Added Elements</b>
+=> If new elements are added to the DOM dynamically (e.g., via AJAX or JavaScript), they automatically inherit the event handling without requiring new event listeners.
+=> vent delegation automatically handles events for dynamically added or removed elements within the parent element. There's no need to manually attach or remove event listeners when the DOM structure changes
+
+<b>Reduces Redundant Code</b>
+Instead of duplicating event listeners for each child, one event listener efficiently manages all child elements.
+
+<b>Simplifies Code Maintenance</b>
+Modifying or removing event handling logic is easier when it's centralized on a parent rather than scattered across multiple child elements.
+
+<b>How event delegation works</b>
+=> <b>Attach a listener to a common ancestor</b>: Instead of attaching individual event listeners to each child element, you attach a single event listener to a common ancestor element higher in the DOM hierarchy.
+=> <b>Event bubbling</b>: When an event occurs on a child element, it bubbles up through the DOM tree to the common ancestor element. During this propagation, the event listener on the common ancestor can intercept and handle the event.
+=> <b>Determine the target</b>: Within the event listener, you can inspect the event object to identify the actual target of the event (the child element that triggered the event). You can use properties like event.target or event.currentTarget to determine which specific child element was interacted with.
+=> <b>Perform action based on target</b>: Based on the target element, you can perform the desired action or execute code specific to that element. This allows you to handle events for multiple child elements with a single event listener.
+
+🚫 <b>Avoid event delegation when</b>:
+    <b>Events Don't Bubble</b>
+        Some events like focus, blur, mouseenter, and mouseleave do not bubble up the DOM tree.
+        Event delegation relies on bubbling, so it won't work with these.
+
+    <b>Precise Targeting Is Required</b>
+        If different child elements have distinct behaviors, and you need to handle them separately with specific logic,
+        Delegating the event to a common ancestor can make the logic messy or error-prone.
+`,
+          code1: `//--------------- Ex : 1 -----------
+              &lt;div id=&quot;del&quot;&gt;
+      &lt;button&gt;Button 1&lt;/button&gt;
+      &lt;button&gt;Button 2&lt;/button&gt;
+      &lt;button&gt;Button 3&lt;/button&gt;
+      &lt;button&gt;Button 4&lt;/button&gt;
+    &lt;/div&gt;
+          
+              const div = document.getElementById('del')
+
+    div.addEventListener("click", (event) => {
+      if (event.target.tagName === 'BUTTON') {
+        console.log(event.target.innerText)
+      }
+    })`
+        },
         {
           text1: ``,
           code1: ``
