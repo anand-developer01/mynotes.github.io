@@ -1434,6 +1434,25 @@ each([3, 2, 1], x => console.log(x));
 
 <b>Named Exports</b>
 Named exports allow you to export multiple values (functions, variables, objects, etc.) from a module. You <b>export</b> each item explicitly by using the <u>export</u> keyword, either inline with the declaration or at the end of the module. When importing these values into another module, you must use the exact names used in the export.
+
+
+<b>Named Exports</b>
+<b>Multiple</b> Exports Yes
+<b>Import</b> Syntax Curly braces {} required
+<b>Renaming</b> Possible during import
+<b>Code Readability</b> Easy to identify exported items
+
+<b>Default Export</b>
+<b>Multiple</b> Exports No
+<b>Import</b> Syntax No curly braces needed
+<b>Renaming</b> Import name can be chosen
+<b>Code Readability</b> Less obvious, single value
+
+<b>Benefits of ES6 Modules</b>
+<b>Encapsulation</b>: Keeps code organized and avoids polluting the global namespace.
+<b>Reusability</b>: Easily reuse logic across files.
+<b>Lazy Loading</b>: Modules can be loaded on demand for performance optimization.
+<b>Improved Readability</b>: Clear dependency management makes code easier to understand.
           `,
           code1: `//Named Exports
 //You can export multiple values from a file using named exports.
@@ -1463,25 +1482,6 @@ export default function greet(name) {
 // app.js
  import greet from './greeting.js';
 console.log(greet('Raj')); // Output: Hello, Raj! 
-
-
-<b>Named Exports</b>
-<b>Multiple</b> Exports Yes
-<b>Import</b> Syntax Curly braces {} required
-<b>Renaming</b> Possible during import
-<b>Code Readability</b> Easy to identify exported items
-
-<b>Default Export</b>
-<b>Multiple</b> Exports No
-<b>Import</b> Syntax No curly braces needed
-<b>Renaming Import name can be chosen
-<b>Code Readability</b> Less obvious, single value
-
-<b>Benefits of ES6 Modules</b>
-<b>Encapsulation</b>: Keeps code organized and avoids polluting the global namespace.
-<b>Reusability</b>: Easily reuse logic across files.
-<b>Lazy Loading</b>: Modules can be loaded on demand for performance optimization.
-<b>Improved Readability</b>: Clear dependency management makes code easier to understand.
 `
         },
         {
@@ -1633,14 +1633,14 @@ The following <b>compareBy()</b> function returns a function that compares two o
 <b>1. Accepting Functions as Arguments</b>
 Higher order functions can accept other functions as arguments. This allows for dynamic behavior, where the behavior of the higher order function can be customized based on the function passed as an argument.
 
-
 <b>2. Returning Functions</b>
 Higher order functions can also return functions. This enables the creation of functions dynamically based on certain conditions or parameters.
 
 <b>3. Abstraction</b>
 Higher order functions promote abstraction by encapsulating common patterns or behaviors into reusable functions. This leads to cleaner and more modular code.
           `,
-          code1: `const greet =  function(name){
+          code1: `// ------------ Ex: 1 ----------
+          const greet =  function(name){
             return function(m){
                 console.log('Hi!! \${name}, \${m}');
             }
@@ -1649,7 +1649,8 @@ Higher order functions promote abstraction by encapsulating common patterns or b
         greet_message("Welcome To GeeksForGeeks")
 
 
-        //--------------------------------
+
+        //--------------- Ex: 2 -------------
           // Custom higher-order function: multiplyBy
           const multiplyBy = (multiplier) => {
             // Returned function takes a number and multiplies it by the multiplier
@@ -1667,7 +1668,8 @@ Higher order functions promote abstraction by encapsulating common patterns or b
           console.log(multiplyByFive(4));  // Output: 20 (4 * 5)
 
 
-          //------------------ Ex : 1 -------------
+
+          //------------------ Ex : 3 -------------
           // Higher Order Function that accepts a callback function
 function higherOrderFunction(callback) {
   // Performing some operations
@@ -1686,7 +1688,8 @@ function callbackFunction() {
 higherOrderFunction(callbackFunction);
 
 
-//--------------  Ex : 2 --------------
+
+//--------------  Ex : 4 --------------
 // Higher Order Function that returns a function
 function createGreeter(greeting) {
   // Returning a new function
@@ -2589,6 +2592,114 @@ myFunction();
           code1: ``
         },
 
+      ]
+    },
+    {
+      id: 1,
+      title: "Memoization And Dynamic Programming",
+      note: [
+        {
+          text1: `<b>Memoization</b> is a technique used to <b>speed up function calls</b> by caching previously computed results. If a function is called with the same arguments, the cached result is returned instead of recalculating.
+          
+          <b>Use Cases</b>:
+    Expensive calculations (e.g., recursion like Fibonacci)
+    API result caching (within the same session)
+    Repeated DOM computations
+    Component rendering optimization (React: useMemo, React.memo)
+    
+    <b>Note</b> : Memoization uses closures to preserve the cache between function calls.`,
+          code1: `// ------------ Ex : 1 ----------
+              const memoizeVal = [];
+
+    function repeat(n) {
+      if (memoizeVal[n] != null) {
+        return memoizeVal[n];
+      }
+
+      let result = 0;
+      for (let i = 1; i <= n; i++) {
+        for (let j = 1; j <= n; j++) {
+          result += n;
+        }
+      }
+
+      memoizeVal[n] = result;
+      return result;
+    }
+
+    console.log(repeat(30000)); // Expensive calculation
+    console.log(repeat(30000)); // Cached
+    console.log(repeat(30000)); // Cached
+    
+    // ----------- Ex : 2 ----------
+    function memoize(fn) {
+  const cache = {};
+  return function(arg) {
+    if (cache[arg] !== undefined) {
+      return cache[arg];
+    }
+    const result = fn(arg);
+    cache[arg] = result;
+    return result;
+  };
+}
+
+// Example: Expensive recursive calculation
+function slowSquare(n) {
+  console.log('Calculating...');
+  return n * n;
+}
+
+const memoizedSquare = memoize(slowSquare);
+
+console.log(memoizedSquare(4)); // Calculates
+console.log(memoizedSquare(4)); // Returns cached
+
+
+//----------- Ex : 3 ---------
+function memoize(fn) {
+  const cache = new Map();
+
+  return function(...args) {
+    const key = JSON.stringify(args); // Simple key generation
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
+  };
+}
+
+// Example: Add
+const add = (a, b) => a + b;
+const memoizedAdd = memoize(add);
+
+console.log(memoizedAdd(2, 3)); // 5 (Calculates)
+console.log(memoizedAdd(2, 3)); // 5 (Cached)
+
+
+//----------- Ex : 4 ---------
+// mplementation of the Fibonacci function using memoization
+function fib(n, prevVal = []) {
+  if (prevVal[n] != null) {
+    return prevVal[n]; // return cached result if available
+  }
+
+  let result = 0;
+  if (n <= 1) return n; // base case
+
+  result = fib(n - 1, prevVal) + fib(n - 2, prevVal); // recursive step
+  prevVal[n] = result; // store in cache
+  return result;
+}
+
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
       ]
     },
     {
@@ -4501,6 +4612,31 @@ console.log(person.firstName);
     },
     {
       id: 1,
+      title: "constructor.name",
+      note: [
+        {
+          text1: `typeof and constructor.name both help identify data types in JavaScript, but they work differently and are suited to different use cases.
+          
+          ✅<b> Use it for</b>:
+    Custom classes or constructor-based objects
+    Differentiating between object types like Array, Date, or user-defined classes
+
+❗ <b>Limitations</b>:
+    Can throw an error if the value is <b>null</b> or <b>undefined</b> (because those have no constructor)
+    Constructor name might change if minified or obfuscated`,
+          code1: `[].constructor.name           // "Array"
+(new Date()).constructor.name // "Date"
+(new Map()).constructor.name  // "Map"
+
+class Person {}
+const p = new Person();
+p.constructor.name           // "Person"
+`
+        }
+      ]
+    },
+    {
+      id: 1,
       title: "Prototypes",
       note: [{
         text1: `// In JavaScript, every object has an internal property called [[Prototype]], which is essentially a reference to another object called its prototype. This prototype is a  fundamental concept in JavaScript's object-oriented programming model.
@@ -5656,11 +5792,11 @@ console.log(op1, cl1);
       title: "Nullish coalescing operator (??)",
       note: [
         {
-          text1: `// Nullish coalescing operator (??)
+          text1: `Nullish coalescing operator (??)
 
-        // The nullish coalescing (??) operator is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
+        The nullish coalescing (??) operator is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
         
-        // Remember that a nullish value and a falsy value are different concepts. While <b>null, undefined, 0, '', false, and NaN</b> are considered falsy values, only <b>null</b> and <b>undefined</b> are considered nullish values.
+        Remember that a nullish value and a falsy value are different concepts. While <b>null, undefined, 0, '', false, and NaN</b> are considered falsy values, only <b>null</b> and <b>undefined</b> are considered nullish values.
         `,
           code1: `       
         const foo = null ?? 'default value';
@@ -6106,30 +6242,55 @@ console.log(set3); // Set {1, 2}`
       title: "getter and setter",
       note: [
         {
-          text1: ` // In JavaScript, accessor properties are methods that get or set the value of an
+          text1: ` In JavaScript, accessor properties are methods that get or set the value of an
           object. For that, we use these two keywords:
 
-          // get - to define a getter method to get the property value
-          // set - to define a setter method to set the property value
+          <b>get</b> - to define a getter method to get the property value
+          <b>set</b> - to define a setter method to set the property value
 
-
-          // In JavaScript, accessor properties are properties that allow you to define custom
+          In JavaScript, accessor properties are properties that allow you to define custom
           behavior for getting and setting a property's value. They are different from data
           properties, which have a straightforward value assignment. Accessor properties use
           getter and setter functions to control how values are retrieved or modified.
 
-          //------------------
-          // Understanding Accessor Properties:--
-          //------------------
-          // Accessor properties are defined by providing getter and/or setter methods. These
+          <b>Understanding Accessor Properties</b>:--
+          Accessor properties are defined by providing getter and/or setter methods. These
           methods can be defined either within an object literal using special 'get' and 'set'
           syntax or by using 'Object.defineProperty'.
 
-          // Defining Accessor Properties in an Object Literal
-          // When using object literals, you can define accessor properties directly within
+          Defining Accessor Properties in an Object Literal
+          When using object literals, you can define accessor properties directly within
           the object by specifying 'get' and 'set' functions.
 `,
-          code1: ` const person = {
+          code1: ` //------------ Ex : 1 ------------
+          class namesGet {
+  constructor(name){
+    this._name = name
+  }
+
+  get name(){
+    return this._name.toUpperCase()
+  }
+
+  set name(newName){
+    if(newName.length < 5){
+      throw new Error("Please enter valid name")
+      // return "Please enter valid name"
+    }
+
+    this._name = newName
+  }
+}
+
+const nameOb =  new namesGet("Ram")
+console.log(nameOb.name)
+nameOb.name = "vamshi"
+console.log(nameOb.name)
+nameOb.name = ""
+
+
+//--------- Ex : 2 -----------
+          const person = {
             firstName: 'John',
             lastName: 'Doe',
 
@@ -6157,9 +6318,7 @@ console.log(set3); // Set {1, 2}`
           properties, which have a straightforward value assignment. Accessor properties use
           getter and setter functions to control how values are retrieved or modified.
 
-          //-------------------
-          // Understanding Accessor Properties
-          //-------------------
+          <b> Understanding Accessor Properties </b>
           // Accessor properties are defined by providing getter and/or setter methods. These
           methods can be defined either within an object literal using special get and set
           syntax or by using Object.defineProperty.
@@ -6191,15 +6350,13 @@ console.log(set3); // Set {1, 2}`
           console.log(person.firstName); // Outputs: Jane
           console.log(person.lastName);  // Outputs: Smith
 
-          In this example:
-
-          The 'get' method for 'fullName' constructs a full name by combining 'firstName' and 'lastName'.
-            The 'set' method for 'fullName' splits the provided name into 'firstName' and 'lastName'.`
+          // In this example:
+          // The 'get' method for 'fullName' constructs a full name by combining 'firstName' and 'lastName'.
+          //   The 'set' method for 'fullName' splits the provided name into 'firstName' and 'lastName'.`
         },
         {
-          text1: `//----------------
-          // Defining Accessor Properties with 'Object.defineProperty'
-          //----------------
+          text1: `<b>Defining Accessor Properties with 'Object.defineProperty'</b>
+          
           // You can also define accessor properties using the 'Object.defineProperty' method,
           which allows for more detailed control over the property attributes.`,
           code1: `            const person = {
@@ -6235,9 +6392,7 @@ console.log(set3); // Set {1, 2}`
           (e.g., in 'for...in' loops).
            'configurable: true' allows the property to be reconfigured or deleted.
 
-          ---------------------
            <b>Characteristics of Accessor Properties</b>
-          ---------------------
            Accessor properties have the following characteristics:
 
            Getters: Functions that are called when the property is accessed.
@@ -6249,9 +6404,7 @@ console.log(set3); // Set {1, 2}`
           getting and setting property values, which can be useful for validation, computed
           properties, and encapsulation.
 
-          ----------------
-           <b>Object.defineProperty()<b>
-          ----------------
+           <b>Object.defineProperty()</b>
 
            The Object.defineProperty() method adds a property or modifies an existing
           property on an object and returns the object.
