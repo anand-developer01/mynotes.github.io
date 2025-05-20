@@ -1202,7 +1202,7 @@ function printSquare(n){
 
 console.log(printSquare(4))
         `,
-        img: `../assets/images/javascript/call-stack.gif`
+          img: `../assets/images/javascript/call-stack.gif`
         },
         {
           text1: `      When the JavaScript engine executes this script, it places the global execution context denoted by <b>main()</b> or <b>global()</b> function on the call stack.
@@ -4326,6 +4326,68 @@ true
     },
     {
       id: 1,
+      title: "Currying",
+      note: [
+        {
+          text1: `Currying is a technique of transforming a function that takes <b>multiple arguments</b> into a series of functions that each take one argument.
+          
+          Currying in JavaScript is a transformation of a function with multiple arguments into a sequence of functions, each taking a single argument. It allows for partial application, where some arguments are fixed, creating specialized functions. 
+          
+          <b>Currying</b>	Transforms a function so it takes one argument at a time
+<b>Partial Application</b>	Pre-fills some arguments but may still accept multiple at once`,
+          code1: `// --------- Ex: 1 ----------
+          function add(a) {
+  return function(b) {
+    return a + b;
+  };
+}
+add(2)(3); // 5
+
+
+//------------- Ex : 2 -------
+const add = a => b => a + b;
+console.log(add(2)(3)); // 5
+
+
+// ----------- Ex : 3 -----------
+// Example of partial:
+function add(a, b, c) {
+  return a + b + c;
+}
+const add5 = add.bind(null, 2, 3); // pre-fills 2 and 3
+console.log(add5(4)); // 9
+
+
+//------------- Ex : 4 -----------
+function curry(fn) {
+  return function curried(...args) {
+    if (args.length >= fn.length) {
+      return fn.apply(this, args);
+    } else {
+      return function(...nextArgs) {
+        return curried.apply(this, args.concat(nextArgs));
+      };
+    }
+  };
+}
+
+function sum(a, b, c) {
+  return a + b + c;
+}
+
+const curriedSum = curry(sum);
+console.log(curriedSum(1)(2)(3)); // 6
+
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
       title: "add new topic",
       note: [
         {
@@ -4430,7 +4492,7 @@ Object methods are defined within the object literal notation or added to an obj
         },
       ]
     },
-        {
+    {
       id: 1,
       title: "Constructor Function",
       note: [
@@ -7606,7 +7668,7 @@ let checkEven = new Promise((resolve, reject) => {
         checkEven
             .then((message) => console.log(message)) // On success
             .catch((error) => console.error(error)); // On failure`,
-          img : `../assets/images/javascript/Promise.webp`
+          img: `../assets/images/javascript/Promise.webp`
         },
         {
           text1: `<table border="0">
@@ -7674,7 +7736,7 @@ The <u>promise</u> object returned by the <u>new</u> Promise constructor has the
   // executor (the producing code, "singer")
 });
 `
-        },        
+        },
         {
           text1: `Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a function. Imagine a function, createAudioFileAsync(), which asynchronously generates a sound file given a configuration record and two callback functions: one called if the audio file is successfully created, and the other called if an error occurs.`,
           code1: `function successCallback(result) {
@@ -9333,11 +9395,11 @@ new Promise(function() {
             };
          };
          `
-                 },
-                 {
-                   text1: `3) The third key difference between the <b>await</b> and <b>then()</b> comes down to code organization. I have touched on it already but using <b>await</b> allows you to write your code in a more linear and organized manner. You can perform subsequent operations on the fetched response immediately after the <b>await</b> statement, which can make the code flow more naturally. With <b>then()</b>, you need to chain multiple <b>then()</b> calls to handle the response and subsequent processing. This can sometimes lead to nested or cascading <b>then()</b> calls, which may make the code harder to read and maintain.
+        },
+        {
+          text1: `3) The third key difference between the <b>await</b> and <b>then()</b> comes down to code organization. I have touched on it already but using <b>await</b> allows you to write your code in a more linear and organized manner. You can perform subsequent operations on the fetched response immediately after the <b>await</b> statement, which can make the code flow more naturally. With <b>then()</b>, you need to chain multiple <b>then()</b> calls to handle the response and subsequent processing. This can sometimes lead to nested or cascading <b>then()</b> calls, which may make the code harder to read and maintain.
                    `,
-                   code1: `const apiCall = () => {
+          code1: `const apiCall = () => {
             fetch('https://api.example.com/data')
             .then((resp) => resp.json)
             .then((data) => {
@@ -9547,7 +9609,7 @@ Ok, let's now work through a more complex example. Here is a function <u>f3()</u
 `,
           code1: ``,
           img: `../assets/images/javascript/Synchronous-flow.gif`,
-          
+
         },
         {
           text1: `//----------------- below IMG - 2 ---------------
@@ -9910,7 +9972,7 @@ The Proxy takes two parameters:
     },
     {
       id: 1,
-      section:'JavaScript Event',
+      section: 'JavaScript Event',
       title: "JavaScript Event",
       note: [
         {
@@ -9950,7 +10012,7 @@ customEvent.initEvent("customEventType", true, true);
 var targetElement = document.getElementById("targetElement");
 targetElement.dispatchEvent(customEvent);`,
           img: `../assets/images/javascript/javascript-events.png`
-        },        
+        },
         {
           text1: `The browser can trigger many different types of events on the DOM(Document Object Model). The full list of all DOM event types are located here: MDN. For this blog, I'll go over some of the more frequently used DOM events, explain what the event does, and how each one is used.
 
@@ -10138,7 +10200,7 @@ In <u>form.onclick</u> handler:
 => <u>event.target</u> is the actual element inside the form that was clicked.
 `,
           code1: ``
-        },        {
+        }, {
           text1: `<b>Stopping bubbling</b>
 A bubbling event goes from the target element straight up. Normally it goes upwards till &lt;html&gt;, and then to document object, and some events even reach window, calling all handlers on the path.
 
@@ -10897,7 +10959,7 @@ document.addEventListener("start", () => {
 document.dispatchEvent(startEvent);
           
 `
-        },        
+        },
         {
           text1: `<b>Creating a custom event using CustomEvent</b>:
 Creating custom events using the CustomEvent interface has an advantage as it can send custom data. The below steps are followed in order to create a new CustomEvent.

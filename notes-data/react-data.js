@@ -5155,8 +5155,37 @@ The following are some ref use-cases in React:
 <b>You shouldn't use refs in the following cases</b>:
 => <u>Declarative cases</u>: As highlighted above, React is declarative by design. Do not use refs if you can write declarative code.
 => <u>Elements affecting state</u>: Mutating a ref doesn't re-render a component. Therefore, don't use refs when state changes need to trigger a re-render.
-=> <u>Accessing functional components</u>: You can reference DOM elements and class components using refs because they have instances. On the other hand, functional components do not have instances. Therefore, the code below will not work.`,
-          code1: `
+=> <u>Accessing functional components</u>: You can reference DOM elements and class components using refs because they have instances. On the other hand, functional components do not have instances. Therefore, the code below will not work.
+
+
+<b>Ref Form Ex : 5</b>
+use a <b>single useRef object</b> to hold multiple input refs like { fullname, area }, 
+
+The <b>double arrow function</b> in this line:
+React expects the ref prop to be either:
+   1) A <b>ref object</b> (e.g., useRef()), or
+   2) A callback function of the form <b>(element) => { ... }</b>
+const setRef = (field) => (el) => {
+  userDetailsRef.current[field] = el;
+};
+
+
+In your case, you want to assign multiple refs (e.g., fullname, area, etc.) dynamically using just one shared logic.
+
+ref={setRef('fullname')}
+will call setRef('fullname'), which returns a function:
+(el) => {
+  userDetailsRef.current['fullname'] = el;
+}
+That returned function becomes the callback ref, which React calls with the actual DOM element (el).
+
+here's the expanded version without the double arrow:
+function setRef(field) {
+  return function (el) {
+    userDetailsRef.current[field] = el;
+  };
+}`,
+          code1: `// ----------- Ex : 1 -----------
                     // Storing Mutable Data:(doesn't cause a re-render)
                     import React, { useRef } from 'react';
 
@@ -5177,7 +5206,7 @@ function MyComponent() {
 
 export default MyComponent;
 
-//--------------------------
+// ----------- Ex : 2 -----------
 // Referencing Interval or Timeout IDs (like with clearInterval or clearTimeout)
 
 import React, { useRef, useEffect, useState } from 'react';
@@ -5207,7 +5236,7 @@ function TimerComponent() {
 export default TimerComponent;
 
 
-//--------------------------
+// ----------- Ex : 3 -----------
 // Tracking Previous State or Props
 // State tracking
 import React, { useState, useRef, useEffect } from 'react';
@@ -5234,7 +5263,8 @@ function PreviousStateExample() {
 }
 export default PreviousStateExample;
 
-//-----------------
+
+// ----------- Ex : 4 -----------
 // Prop tracking
 // Parent
 import React, { useState } from 'react';
@@ -5306,6 +5336,58 @@ function usePrevious(value) {
   return ref.current;
 }
 export default usePrevious;
+
+
+
+// ----------- Ex : 5 -----------
+use a single useRef object to hold multiple input refs like { fullname, area }, 
+import React, { useRef } from &#39;react&#39;;
+
+const UserInput = () =&gt; {
+  const userDetailsRef = useRef({
+    fullname: null,
+    area: null,
+  });
+
+  // Reusable callback function to assign refs - curried function
+  const setRef = (field) =&gt; (el) =&gt; {
+    userDetailsRef.current[field] = el;
+  };
+
+  const handleSubmit = (e) =&gt; {
+    e.preventDefault();
+    const fullname = userDetailsRef.current.fullname.value;
+    const area = userDetailsRef.current.area.value;
+
+    console.log(&#39;Full Name:&#39;, fullname);
+    console.log(&#39;Area:&#39;, area);
+  };
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;h2&gt;Registration Form&lt;/h2&gt;
+
+      &lt;label&gt;Full Name:&lt;/label&gt;
+      &lt;input
+        type=&quot;text&quot;
+        name=&quot;fullname&quot;
+        defaultValue=&quot;sdfsd&quot;
+        ref={setRef(&#39;fullname&#39;)}
+      /&gt;
+
+      &lt;label&gt;Area :&lt;/label&gt;
+      &lt;input
+        type=&quot;text&quot;
+        name=&quot;area&quot;
+        ref={setRef(&#39;area&#39;)}
+      /&gt;
+
+      &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+};
+
+export default UserInput;
 
 `
         },
