@@ -11669,5 +11669,42 @@ module.exports = {
         }
       ],
     },
+        {
+      id: 52,
+      title: "Checking performance",
+      note: [
+        {
+          text1: `in redux generally we use pending, fulfilled, rejected right
+so rendering multiple times is common  or issue
+
+<b>In Redux with <u>createAsyncThunk</u> and the usual <u>pending / fulfilled / rejected</u> lifecycle</b>:
+Yes, multiple renders are expected and normal because:
+    When you dispatch an async thunk, first the <b>pending</b> action updates your state (usually to set <b>loading = true</b>).
+    This triggers a render because the state changed.
+    When the async request completes successfully, the <b>fulfilled</b> action updates the state again (e.g., updates <b>tasks</b> and sets <b>loading = false</b>).
+    This triggers another render because the state changed again.
+    If there's an error, the <b>rejected</b> action runs, updating error state and triggering a render.
+
+<b>So the typical lifecycle causes multiple renders per async action:</b>
+    Component renders initially.
+    You dispatch fetchTasks.
+    fetchTasks.pending updates state → render #1
+    After API response, fetchTasks.fulfilled updates state → render #2
+    If error: fetchTasks.rejected updates state → render #2 or another render
+
+<b>What does this mean for your app?</b>
+    // Multiple renders here are expected and not a problem.
+    This is how React + Redux work together naturally.
+    // The key is to keep your state updates minimal and efficient, so you don’t cause unnecessary renders beyond those triggered by meaningful state changes.
+    // Avoid other state changes or props changes that cause even more renders beyond these lifecycle renders.
+    `,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
   ]
 }

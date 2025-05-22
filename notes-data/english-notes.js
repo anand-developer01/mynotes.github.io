@@ -933,8 +933,8 @@ const SubjectList = {
             content:[
                 {
                     id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel:'వర్షం పడితే, మీరు తడిసిపోయేవారు',
+                    eng: "I have been sick for 2 days",
+                    tel:'నాకు 2 రోజులుగా ఒంట్లో బాలేదు.',
                     tense:'Present tense'
                 },
             ],
@@ -971,28 +971,110 @@ const SubjectList = {
         {
             id: 7,
             topic: "Past Perfect Tense",
-            explain:'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation:'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain:`ast Time లో రెండు actions జరిగినప్పుడు ఆ రెండింటిలో ఏ action ముందుగా జరిగింది అనే విషయాన్నీ తెలియజేయాల్సిన ఆవశ్యకత ఉన్నపుడు ముందుగా జరిగిన action ను Past Perfect Tense లో చెప్పాలి. తరువాత జరిగిన action ను simple past లో చెప్పాలి.`,
+            formation:`Past Perfect Tense లో మొదటి జరిగిన action ను సూచించడానికి had + main varb యొక్క past participle (మూడవ రూపం) వాడాలి
+            <br/>
+             <div> -> use <i>Past Perfect</i> for the earlier action</div>
+              </div>-> and <i>Simple Past</i> for the later action.</div>
+            `,
             content:[
                 {
                     id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel:'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense:'Present tense'
+                    eng: `After the peon had rung the bell, we went home`,
+                    tel:'పియోన్ గంట కొట్టాక మేము ఇంటికి వెళ్లాము.',
+                    tense:'Past Perfect Tense'
+                },
+                                {
+                    id: 1,
+                    eng: `The code had been deployed before it was reviewed by me.`,
+                    tel:'నేను సమీక్షించే ముందు కోడ్ డిప్లాయ్ చేయబడింది.',
+                    tense:'Past Perfect Tense'
+                },
+                                {
+                    id: 1,
+                    eng: `She had left the office before I reached.`,
+                    tel:'నేను ఆఫీస్‌కి చేరకముందే ఆమె వెళ్ళిపోయింది.',
+                    tense:'Past Perfect Tense'
+                },
+                                {
+                    id: 1,
+                    eng: `They had already eaten when we got there.`,
+                    tel:'మేము అక్కడికి వచ్చేలోగా వారు ఇప్పటికే తినేశారు.',
+                    tense:'Past Perfect Tense'
+                },
+                {
+                    id: 1,
+                    eng: `The developer had committed the code before the review started.`,
+                    tel:'రివ్యూ ప్రారంభించకముందే డెవలపర్ కోడ్ commit చేశాడు.',
+                    tense:'Past Perfect Tense'
+                },
+                {
+                    id: 1,
+                    eng: `I had finished the report before the manager arrived.`,
+                    tel:'మేనేజర్ రాకముందే నేను రిపోర్ట్ పూర్తి చేశాను.',
+                    tense:'Past Perfect Tense'
+                },
+                {
+                    id: 1,
+                    eng: `They had eaten dinner before the guests arrived.`,
+                    tel:'అతిథులు రావడానికి ముందే వారు డిన్నర్ తిన్నారు.',
+                    tense:'Past Perfect Tense'
+                },
+                                {
+                    id: 1,
+                    eng: `The code had been deployed before the testing started.`,
+                    tel:'టెస్టింగ్ ప్రారంభించకముందే కోడ్ డిప్లాయ్ చేయబడింది.',
+                    tense:'Past Perfect Tense'
                 },
             ],
         },
         {
             id: 8,
             topic: "Past Perfect Continuous Tense",
-            explain:'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation:'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain:'Past Perfect Continuous Tense (అవతలి భూతకాల కొనసాగింపు కాలం) అనేది ఒక పని గతంలోనే ప్రారంభమై, ఇంకొక గత క్రియ జరిగినంత వరకూ కొనసాగిందని తెలియజెప్పడానికి ఉపయోగిస్తారు.',
+            formation:'Subject + had been + verb + ing + time expression (optional)',
             content:[
                 {
                     id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel:'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense:'Present tense'
+                    eng: "I had been working on a critical issue before the server crashed.",
+                    tel:'సర్వర్ క్రాష్ కాకముందు నేను ఒక క్రిటికల్ ఇష్యూపై పనిచేస్తున్న వాడిని.',
+                    tense:'Past Perfect Continuous'
+                },       
+                {
+                    id: 1,
+                    eng: "We had been deploying the release before the client call started.",
+                    tel:'క్లయింట్ కాల్ ప్రారంభమయ్యే ముందు మేము రీలీజ్ డిప్లాయ్ చేస్తున్నాం.',
+                    tense:'Past Perfect Continuous'
+                },
+                {
+                    id: 1,
+                    eng: "She had been debugging the code all night before she found the solution.",
+                    tel:'ఆమె పరిష్కారం కనుగొనడానికి ముందు రాత్రంతా కోడ్ డీబగ్ చేస్తోంది.',
+                    tense:'Past Perfect Continuous'
+                },
+                {
+                    id: 1,
+                    eng: "I had been using JavaScript before I switched to TypeScript.",
+                    tel:'నేను TypeScriptకి మారేముందు JavaScript వాడుతున్న వాడిని.',
+                    tense:'Past Perfect Continuous'
+                },
+                {
+                    id: 1,
+                    eng: "They had been testing the app before the QA team took over.",
+                    tel:'QA టీం టెస్టింగ్ ప్రారంభించే ముందు వారు ఆ యాప్‌ను టెస్ట్ చేస్తున్నారు.',
+                    tense:'Past Perfect Continuous'
+                },
+                {
+                    id: 1,
+                    eng: "She had been learning Java before she switched to Python.",
+                    tel:'ఆమె పైథాన్‌కి మారడానికి ముందు జావా నేర్చుకుంటూ ఉండేది.',
+                    tense:'Past Perfect Continuous'
+                },
+                {
+                    id: 1,
+                    eng: "We had been fixing bugs when the server crashed.",
+                    tel:'మేము బగ్‌లను పరిష్కరిస్తున్నప్పుడు సర్వర్ క్రాష్ అయ్యింది.',
+                    tense:'Past Perfect Continuous'
                 },
             ],
         },
@@ -1277,6 +1359,51 @@ const SubjectList = {
             content:[
                 {
                     id: 1,
+                    eng: "<b>0 (Zero)</b> : Real, Always, General truths, Scientific facts, Universal rules",
+                    tel:'వాస్తవాలు, శాశ్వత నిజాలు - <b>Structure</b> : If + present, present',
+                },
+                {
+                    id: 1,
+                    eng: "If you heat water, it boils.",
+                    tel:'నీటిని వేడి చేస్తే, అది మరుగుతుంది.',
+                },
+                {
+                    id: 7,
+                    eng: '',
+                    tel:'',
+                },
+                {
+                    id: 1,
+                    eng: "<b>1 (First)</b> : Real future possibilities, ",
+                    tel:'నిజంగా జరగే అవకాశాలు - <b>Structure</b> : If + present, will + verb',
+                },
+                {
+                    id: 6,
+                    eng: "If I study, I will pass the test.",
+                    tel:'నేను చదివితే, పరీక్షలో ఉత్తీర్ణత పొందుతాను.',
+                },
+                {
+                    id: 1,
+                    eng: "<b>2 (Second)</b> : Unreal present/future, Imaginary Condition (Present/Future) ",
+                    tel:'కల్పిత పరిస్థితులు- <b>Structure</b> : If + simple past, would + base verb',
+                },
+                {
+                    id: 6,
+                    eng: "If I were you, I would apply for the job.",
+                    tel:'నేను నీ స్థానం లో ఉంటే, నేను ఆ జాబ్‌కు అప్లై చేసేవాడిని.',
+                },
+                {
+                    id: 6,
+                    eng: "If she studied more, she would pass the exam.",
+                    tel:'ఆమె ఎక్కువగా చదివితే, పరీక్షలో పాస్ అవుతుంది.',
+                },
+                {
+                    id: 1,
+                    eng: "<b>3 (Third)</b> : Unreal Past (Regret or Hypothetical Past), did not happen ",
+                    tel:'గతంలో జరగకపోయినవి- <b>Structure</b> : If + past perfect, would have + past participle (V3)',
+                },
+                                {
+                    id: 1,
                     eng: "If it had rained, you would have gotten wet",
                     tel:'వర్షం పడితే, మీరు తడిసిపోయేవారు',
                 },
@@ -1304,11 +1431,6 @@ const SubjectList = {
                     eng: "If you hadn't lied to me before, I would have believed you",
                     tel:'',
                 },
-                {
-                    id: 7,
-                    eng: '',
-                    tel:'',
-                }
             ],
         }
     ],
