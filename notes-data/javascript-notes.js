@@ -71,10 +71,12 @@ Project Estimations
         },
         {
           text1: `<b>Event Loop</b>:
-The event loop is like a diligent coordinator, making sure everything runs smoothly. <u>It watches over the <b>call stack</b> and <b>task queues</b></u>. If the call stack is empty, it checks the task queues and moves tasks to the call stack for execution. This helps keep your applications responsive and free from freezing.
+The event loop is like a diligent coordinator, making sure everything runs smoothly. <u>It watches over the <b>call stack</b> and <b>task queues (event queue)</b></u>. If the call stack is empty, it checks the task queues and moves tasks to the call stack for execution. This helps keep your applications responsive and free from freezing, even when handling asynchronous operations like <b>setTimeout, fetch</b>, or <b>promises</b>.
 When you have a setTimeOut and a Delay, It's not the dalay until it gets moved onto the call stack. no it's the delay until it gets moved to the task queue 
 
 <b>Event Loop</b>: — The event loop continuously monitors the call stack and the event queue. When the call stack is empty (i.e., no code is executing), the event loop takes the first event from the event queue and pushes its corresponding callback function onto the call stack. This process is known as “popping an event off the queue.”
+
+The <b>Event Loop</b> is a mechanism that <b>continuously checks the call stack and the task queue</b>, and <b>executes queued tasks (callbacks) when the call stack is empty</b>.
 
 <b>Event Loop</b>
 The Event Loop is like a manager who keeps an eye on the call stack and the Callback Queue. Here's how it works:
@@ -5580,14 +5582,11 @@ console.log(op1, cl1);
         `
         },
         {
-          text1: `
-          // <b>Concatenating Arrays</b>:- It allows for easily concatenating or merging multiple arrays into a single array.
-          
-          // <b>Passing Arguments</b>:- Spread is frequently used when calling functions that expect a variable number of arguments. It can pass each element of an array as an argument to the function.
-          
-          // <b>Object Literals</b>:- It can also be used to merge properties of objects into a new object.
-          
-          // <b>Iterating Over Strings</b>: With strings, the spread operator can be used to split the string into individual characters.`,
+          text1: `<b>Concatenating Arrays</b>:- It allows for easily concatenating or merging multiple arrays into a single array.
+          <b>Passing Arguments</b>:- Spread is frequently used when calling functions that expect a variable number of arguments. It can pass each element of an array as an argument to the function.
+          <b>Object Literals</b>:- It can also be used to merge properties of objects into a new object.
+          <b>Iterating Over Strings</b>: With strings, the spread operator can be used to split the string into individual characters.
+          `,
           code1: `const restaurant = {
             name: 'Classico Italiano',
             location: 'Via Angelo Tavanti 23, Firenze, Italy',

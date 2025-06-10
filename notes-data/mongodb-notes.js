@@ -8,7 +8,41 @@ const mongodbData = {
     mongodbNote: [
         {
             id: 1,
-            title: "Error Handling",
+            title: "topic",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Data Modeling in MongoDB",
+            note: [
+                {
+                    text1: `<b> Embedded Documents </b>	Storing related data within a single document.
+<b> Referenced Documents </b>Linking data between multiple collections using ObjectId references.
+<b> Denormalization </b> Duplicating data for read performance. (e.g., product name inside cart)
+<b> Normalization </b> Keeping data in separate collections (like SQL-style design).
+<b> One-to-One / One-to-Many / Many-to-Many relationships </b>Designing relationships between models (like user → orders).
+<b> Document Size Limitations </b>MongoDB has a 16MB limit per document — embedded designs must respect that.
+<b> $lookup for Joins </b> When using references, you can use aggregation pipelines to "join" collections.`,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+            ]
+        },  
+        {
+            id: 1,
+            title: "topic",
             note: [
                 {
                     text1: ``,

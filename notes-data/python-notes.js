@@ -41,17 +41,50 @@ const pythonData = {
         },
         {
             id: 1,
-            title: "What does %d do in Python? ",
+            title: "What does %d do in Python?",
             note: [
                 {
-                    text1: `
-The %d operator is used as a placeholder to specify integer values, decimals, or numbers. It allows us to print numbers within strings or other values. The %d operator is put where the integer is to be specified.`,
+                    text1: `The %d operator is used as a placeholder to specify integer values, decimals, or numbers. It allows us to print numbers within strings or other values. The %d operator is put where the integer is to be specified.`,
                     code1: `# declaring numeric variables
-num = 2021
+                    num = 2021
 
-# concatenating numeric value within string
-print("%d is here!!" % num)`
+                    # concatenating numeric value within string
+                    print("%d is here!!" % num)`
                 }
+            ]
+        },
+        {
+            id: 1,
+            title: "(f-string) : formatted string literal",
+            note: [
+                {
+                    text1: `The f in strings like this:
+                    f"Hello, {name}!"
+                    is short for f-string, which stands for formatted string literal.
+                    
+                    <b>f-String Syntax</b>
+f"some text {variable_or_expression} more text"
+
+                    <b>What is an f-string?</b>
+An f-string lets you insert variables or expressions directly into a string using {}.
+It was introduced in Python 3.6 and makes string formatting easier and cleaner.
+🔍 Without f-string (older way):
+name = "Anand"
+print("Hello, " + name + "!")
+
+✅ With f-string (modern way):
+name = "Anand"
+print(f"Hello, {name}!")`,
+                    code1: `//------------ Ex : 1 ---------
+                    a = 10
+b = 5
+print(f"The sum of {a} and {b} is {a + b}")
+//Output: The sum of 10 and 5 is 15`
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
             ]
         },
         {
@@ -79,11 +112,11 @@ print("%d is here!!" % num)`
     for variable in [value1, value2, etc.]:
        statement(s) # notice the indent from of this line relative to the for
 `,
-                    code1: `for variable in [value1, value2, etc.]:
-   statement(s) # notice the indent from of this line relative to the for
+                    code1: `//for variable in [value1, value2, etc.]:
+//    statement(s) # notice the indent from of this line relative to the for
 
 //    Examples of for loops
-//    Example:
+//    --------- Ex : 1 ---------
 //    # This program demonstrates a simple for loop
 //    # that uses a list of numbers.
    print('I will display the numbers 1 through 5.')
@@ -96,24 +129,8 @@ print("%d is here!!" % num)`
 //    3
 //    4
 //    5
-   //------------
 
-//    Example:
-//    # This program also demonstrates a simple for
-//    # loop that uses a list of numbers.
-
-   print('I will display the odd numbers 1 through 9.')
-   for num in [1, 3, 5, 7, 9]:
-       print(num)
-//    Output:
-//    I will display the odd numbers 1 through 9.
-//    1
-//    3
-//    5
-//    7
-//    9
-//--------
-//    Example:
+// ------------   Ex: 2 ----------
 //    # This program also demonstrates a simple for
 //    # loop that uses a list of strings.
 
@@ -131,9 +148,9 @@ for name in ['Winken', 'Blinken', 'Nod']:
 // Blinken
 // Nod
 
-//    **** Using the range function with the for loop *****
+//    **** Using the \`range\` function with the for loop *****
 //    "range" simplifies count-controlled "for" loops
-//    Example:
+// ------------   Ex: 3 ----------
    for num in range(5):
        print num
 //    Numbers from 0 through and up till, but not including, 5 are generated. Equivalent to:
@@ -148,7 +165,7 @@ for name in ['Winken', 'Blinken', 'Nod']:
 //    3
 //    4
 
-   //----------
+// ------------   Ex: 4 ----------
 //    By default the range function increments by 1, passing a third argument defines the step amount:
    for num in range(1, 10, 2):
        print num
@@ -159,7 +176,7 @@ for name in ['Winken', 'Blinken', 'Nod']:
 //    7
 //    9
 
-//-----------
+// ------------   Ex: 5 ----------
 //    The target value can be used in the loop:
 //    # Print the table headings.
 print ('%-10s%-10s' % ('Number', 'Square'))
@@ -172,7 +189,7 @@ for number in range(1, 11):
   print ('%10d%10d' % (number, square))
 //    Output:
 //    Number    Square    
-//    --------------------
+//    ------------------
 //             1         1
 //             2         4
 //             3         9
@@ -184,17 +201,18 @@ for number in range(1, 11):
 //             9        81
 //            10       100
 
-//---------
+
+// ------------   Ex: 6 ----------
 print("1st example")
 
 lst = [1, 2, 3]
 for i in range(len(lst)):
-     print(lst[i], end = " \n")
+     print(lst[i], end = " \\n")
 
 print("2nd example")
 
 for j in range(0,5):
-    print(j, end = " \n")
+    print(j, end = " \\n")
    `
                 },
                 {
@@ -241,8 +259,7 @@ else:
  .
  .
 
- //----------
-
+// ------------   Ex: 1 ----------
  for count in range(6):
    print ("Iteration no. {}".format(count))
 else:
@@ -260,13 +277,13 @@ print ("End of for loop")
 // End of for loop
 
 
-//-------------
+// ------------   Ex: 2 ----------
 // In the following program, we use the for-else loop without break statement.
 for i in ['T','P']:
    print(i)
 else:
-   # Loop else statement
-   # there is no break statement in for loop, hence else part gets executed directly
+//    # Loop else statement
+//    # there is no break statement in for loop, hence else part gets executed directly
    print("ForLoop-else statement successfully executed")
 
 //    On executing, the above program will generate the following output -
@@ -274,7 +291,7 @@ else:
 // P
 // ForLoop-else statement successfully executed
 
-//-----------
+// ------------   Ex: 3 ----------
 // For-Else Construct with break statement
 // In case of forceful termination (by using break statement) of the loop, else statement is overlooked by the interpreter and hence its execution is skipped.
 
@@ -282,8 +299,8 @@ for i in ['T','P']:
    print(i)
    break
 else:
-   # Loop else statement
-   # terminated after 1st iteration due to break statement in for loop
+//    # Loop else statement
+//    # terminated after 1st iteration due to break statement in for loop
    print("Loop-else statement successfully executed")
 
 //    Output:
@@ -461,18 +478,18 @@ If we use break statement inside a for loop, it interrupts the normal flow of pr
       break
 
       //Example
-In this example, we will see the working of break statement in for loop.
+// In this example, we will see the working of break statement in for loop.
 for letter in 'Python':    
    if letter == 'h':
       break
    print ("Current Letter :", letter)
 print ("Good bye!")
 
-Output:-
-Current Letter : P
-Current Letter : y
-Current Letter : t
-Good bye!
+// Output:-
+// Current Letter : P
+// Current Letter : y
+// Current Letter : t
+// Good bye!
       `
                 },
                 {
@@ -541,12 +558,138 @@ else:
         {
             id: 1,
             section: `Functions & Modules`,
-            title: "What is Python?",
+            title: "Functions",
             note: [
+                {
+                    text1: `In Python, functions are reusable blocks of code that perform a specific task. They help you organize your code better, avoid repetition, and make it easier to read and maintain.
+                    
+                    <b>1. Define a Function</b>
+Use the def keyword:
+def greet():
+    print("Hello, Anand!")
+
+    You call (run) the function using its name followed by parentheses:
+greet()
+
+<b>2. Function with Parameters</b>
+You can pass data into functions using parameters:
+
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("Anand")
+greet("John")
+
+<b> 3. Function with Return Value </b>
+Use the return keyword to return a result:
+
+def add(a, b):
+    return a + b
+
+result = add(10, 5)
+print(result)  # Output: 15
+
+<b> 4. Default Parameters </b>
+You can give default values to parameters:
+
+def greet(name="Guest"):
+    print(f"Hello, {name}!")
+
+greet()          # Hello, Guest!
+greet("Anand")   # Hello, Anand!
+
+<b> 5. Keyword Arguments </b>
+You can use the parameter names when calling a function:
+
+def show_info(name, age):
+    print(f"{name} is {age} years old.")
+
+function call (run) : show_info(age=30, name="Anand")
+
+<b> 6. Variable-Length Arguments </b>
+    *args: For many positional arguments
+    **kwargs: For many keyword arguments
+
+def add_all(*args):
+    return sum(args)
+
+print(add_all(1, 2, 3, 4))  # Output: 10`,
+                    code1: `//----------- Ex : 1 -----------
+                    def send_emails(*emails):
+    for email in emails:
+        print(f"Sending email to {email}...")
+
+send_emails("anand@example.com", "ayesha@example.com", "john@example.com")
+
+
+//----------- Ex : 2 -----------
+def log_user_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+log_user_info(name="Anand", age=30, country="India")
+
+
+//----------- Ex : 3 -----------
+// The Fibonacci series is a sequence of numbers where each number is the sum of the two preceding ones.
+// 0, 1, 1, 2, 3, 5, 8, 13, 21, ...
+F(0) = 0
+F(1) = 1
+F(n) = F(n-1) + F(n-2) for n > 1
+
+
+// 1. Using a for loop
+def fibonacci_series(n):
+    a, b = 0, 1
+    for _ in range(n):
+        print(a, end=' ')
+        a, b = b, a + b
+
+fibonacci_series(10)
+
+
+// 2. Store in a List and Return
+def get_fibonacci(n):
+    series = []
+    a, b = 0, 1
+    for _ in range(n):
+        series.append(a)
+        a, b = b, a + b
+    return series
+
+print(get_fibonacci(10))
+
+Output:
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+
+
+//----------- Ex : 4 -----------
+from pyapis import api_service
+todo = get_todo(1)
+print("To-do Title:", todo.get("title", "No title found"))
+
+
+//api_service.py
+import requests
+def get_todo(todo_id):
+    try:
+        url = f"https://jsonplaceholder.typicode.com/todos/{todo_id}"
+        response = requests.get(url)
+        response.raise_for_status()  # raise error if status != 200
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print("API call failed:", e)
+        return None
+`
+                },
                 {
                     text1: `What is Python?`,
                     code1: ``
-                }
+                },
+                 {
+                    text1: `What is Python?`,
+                    code1: ``
+                },
             ]
         },
         {
@@ -791,7 +934,7 @@ You can also change multiple items using slicing:
 `,
                     code1: `// Syntex:
                     list1[i] = newvalue
-                    //------------
+                    //------------ Ex : 1 ------------
 // Change List Items
 colors = ['Red', 'Black', 'Green']
 print('Original List:', colors)
@@ -801,7 +944,7 @@ colors[2] = 'Blue'
 
 print('Updated List:', colors)
 
-//------------
+//------------ Ex : 2 ------------
 // In the following code, we change the value at index 2 of the given list.
 list3 = [1, 2, 3, 4, 5]
 print ("Original list ", list3)
@@ -829,7 +972,8 @@ my_list = [10, 20, 30, 40]
 my_list[1:3] = [25, 35]
 print(my_list)  # Output: [10, 25, 35, 40]
 // Output: [10, 25, 35, 40]
-//-------------
+
+//------------ Ex : 3 ------------
 // # Example 2 list
 list1 = ["a", "b", "c", "d"]
 print ("Original list: ", list1)
@@ -839,7 +983,9 @@ print ("List after changing with sublist: ", list1)
 // output -
 // Original list: ['a', 'b', 'c', 'd']
 // List after changing with sublist: ['a', 'X', 'Y', 'Z', 'd']
-//------------
+
+
+//------------ Ex : 4 ------------
 // # Example 3 list
 // If the sublist with which a slice of original list is to be replaced, has lesser items, the items with match will be replaced and rest of the items in original list will be removed.
 
@@ -854,12 +1000,12 @@ print ("List after changing with sublist: ", list1)
 // Original list: ['a', 'b', 'c', 'd']
 // List after changing with sublist: ['a', 'Z', 'd']
 
-//------------
+//------------ Ex : 5 ------------
 // Changing Items with a Loop
-# Example 4 list
+// # Example 4 list
 my_list = [10, 20, 30, 40]
 
-# Change items that are greater than 25
+// # Change items that are greater than 25
 for i in range(len(my_list)):
     if my_list[i] > 25:
         my_list[i] = my_list[i] * 2

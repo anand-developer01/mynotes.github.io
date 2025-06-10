@@ -1,4 +1,4 @@
-const isHighlighted = 'mongodb-notes'
+const isHighlighted = 'MERN-notes'
 const Links1 = 'MERN-notes'
 const Links2 = 'mongodb-notes'
 const Links3 = 'express-js'

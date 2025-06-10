@@ -1703,18 +1703,12 @@ The &lt;script&gt; element uses display: none; as default.
 This panel contains a &lt;div&gt; element, which is hidden by default <u>(display: none;)</u>.
 It is styled with CSS, and we use JavaScript to show it (change it to <u>(display: block;)</u>.
 
-
 <b>Override The Default Display Value</b>
 As mentioned, every element has a default display value. However, you can override this.
 
 Changing an inline element to a block element, or vice versa, can be useful for making the page look a specific way, and still follow the web standards.
 
-
-
-
 <b>Note</b>: Setting the display property of an element only changes how the element is displayed, NOT what kind of element it is. So, an inline element with display: block; is not allowed to have other block elements inside it.
-
-
 `,
           code1: `//A common example is making inline &lt;li&gt; elements for horizontal menus:
           li {
@@ -5195,10 +5189,138 @@ Flexbox is a Grid layout with a one-dimensional system either within a row or a 
     },
     {
       id: 52,
+      title: "What is the difference between visibility: hidden and display: none?",
+      note: [
+        {
+          text1: `visibility: hidden hides the element but it still occupies space in the layout, while display: none removes the element completely from the document flow, making it not occupy any space.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+        {
+      id: 52,
+      title: "What is Grid Layout in CSS?",
+      note: [
+        {
+          text1: `CSS Grid Layout is a two-dimensional layout system that allows you to create complex grid-based designs with rows and columns. It’s more powerful than Flexbox for building two-dimensional layouts.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+     {
+      id: 52,
+      title: "What is the difference between rem and em units in CSS?",
+      note: [
+        {
+          text1: `rem (root em) is relative to the font-size of the root element (<html>), while em is relative to the font-size of the element itself or its parent.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+     {
+      id: 52,
       title: "new topic",
       note: [
         {
           text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "new topic",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+        {
+      id: 52,
+      section:"Advanced CSS Interview Questions:",
+      title: "What is the <b>calc()</b> function in CSS?",
+      note: [
+        {
+          text1: `The <b>calc()</b> function allows you to perform calculations to determine CSS property values dynamically. For example, <b>width: calc(100% - 50px)</b> allows you to subtract values from one side.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+        {
+      id: 52,
+      title: "What is the purpose of will-change in CSS?",
+      note: [
+        {
+          text1: `The <b>will-change</b> property lets the browser know which properties of an element are likely to change in the near future. This can help optimize rendering performance by allowing the browser to prepare for these changes in advance.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+        {
+      id: 52,
+      title: "What are CSS Custom Properties (CSS Variables)",
+      note: [
+        {
+          text1: `CSS Custom Properties, or CSS Variables, are reusable values that can be defined in a stylesheet and referenced throughout the CSS using the <b>var()</b> function. This makes it easier to maintain and update styles globally.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+        {
+      id: 52,
+      title: "What is containment in CSS and when would you use it?",
+      note: [
+        {
+          text1: `The <b>contain</b> property in CSS can be used to optimize the rendering of an element and its descendants. It restricts the browser's rendering process to a particular subtree and is useful for performance optimization in complex layouts.`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      section:"What are media queries in CSS?",
+      title: "What are media queries in CSS?",
+      note: [
+        {
+          text1: `Media queries are used in CSS to apply different styles for different devices or screen sizes. They help make responsive designs that adapt to the user's viewport width, height, and other characteristics.`,
           code1: ``
         },
         {

@@ -1,11 +1,11 @@
 const graphqlData = {
-    graphqlNote: [
-      {
-        id: 1,
-        title: "Graphql setup",
-        note: [
-          {
-            text1: `<b>What is GraphQL?</b>
+  graphqlNote: [
+    {
+      id: 1,
+      title: "What is GraphQL?",
+      note: [
+        {
+          text1: `<b>What is GraphQL?</b>
 GraphQL is a specification for how to talk to an API. It's typically used over HTTP where the key idea is to POST a "query" to an HTTP endpoint, instead of hitting different HTTP endpoints for different resources.
 
 <b>GraphQL</b> is a query language for APIs and a runtime for executing those queries. It allows clients to request exactly the data they need and nothing more, making it an efficient alternative to REST. It’s declarative, flexible, and provides more control to the client over the data it receives.
@@ -28,31 +28,367 @@ Give examples of where GraphQL is useful:
 "GraphQL is great for situations where clients need to interact with multiple data sources or need fine-grained control over what data is fetched. For example, in a mobile app, you might want to minimize the amount of data sent over the network, and GraphQL lets you request exactly what you need."
 
 "It's also very useful for modern applications that involve a lot of real-time data, such as messaging or collaborative apps, where you can use GraphQL subscriptions to get updates as they happen."`,
-            code1: ``,
-          },
-          {
-            text1: `<b>2. How does GraphQL work?</b>
+          code1: ``,
+        },
+        {
+          text1: `<b>2. How does GraphQL work?</b>
 Explain how GraphQL is structured and how it works:
 
 "In GraphQL, you send a query to a single endpoint, typically /graphql, and the server responds with exactly the data requested in a structured format. This is different from REST, where you typically have multiple endpoints for different resources. GraphQL allows you to request data from multiple sources in a single query, and you can nest queries to retrieve related data in one go.`,
-            code1: ``,
-          },
-          {
-            text1: `A`,
-            code1: ``,
-          },
-          {
-            text1: ``,
-            code1: ``,
-          },
-        ]
-      },
-      {
-        id: 1,
-        title: "Interview",
-        note: [
-          {
-            text1: `<b>What are the core features of GraphQL?</b>
+          code1: ``,
+        },
+        {
+          text1: `A`,
+          code1: ``,
+        },
+        {
+          text1: ``,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Terminologies involved in GraphQL (GraphQL Core Concepts)",
+      note: [
+        {
+          text1: `<b>Some Terminologies involved in GraphQL</b>
+<b>Query</b>: A query in GraphQL is used to request data. It resembles the shape of the data you want to receive and is similar to a JSON object.
+<b>Mutation</b>: Mutations are used for modifying data on the server. They are like queries but are used for creating, updating, or deleting data.
+<b>Schema</b>: The schema defines the structure of your data in GraphQL. It includes object typesfields on those types and the relationships between them.
+<b>Type</b>: In GraphQL, types define the shape of the data. There are two main types</b>: Object types (representing real-world entities) and Scalar types (representing primitive data like String, Int, Boolean, etc.).
+<b>Field</b>: A field is a specific piece of data that can be requested on an object type. Fields can also be nested to retrieve related data.
+<b>Resolver</b>: Resolvers are functions that determine how to fetch the data for a specific field. Each field in your schema has a corresponding resolver.
+<b>Subscription</b>: Subscriptions enable real-time data updates. Clients can subscribe to specific events, and the server sends data to the client when those events occur.
+
+
+<b>1) Query</b>
+    Used to <b>fetch (read) data</b> from the server.
+    The query structure <b>resembles the shape</b> of the response (similar to JSON).
+
+    query {
+  user(id: "1") {
+    name
+    email
+  }
+}
+  
+<b>2) Mutation </b>
+    Used to <b>create, update, or delete</b> data on the server.
+    Works like a query but <b>modifies</b> data.
+    
+    mutation {
+  createUser(name: "Anand", email: "anand@example.com") {
+    id
+    name
+  }
+}
+
+<b>3) Schema </b>
+    A blueprint of your API.
+    Describes:
+        => What data is available (<b>types</b>)
+        => What operations can be done (<b>Query, Mutation, Subscription</b>)
+        type Query {
+  users: [User]
+}
+
+
+<b>4) Type </b>
+    Types define the <b>shape of data</b> in your API.
+    There are two main categories:
+        <b>Object types</b>: Represent real entities like <b>User, Product</b>
+        <b>Scalar types</b>: Built-in types like <b>String, Int, Float, Boolean, ID</b>
+        type User {
+  id: ID
+  name: String
+  age: Int
+}
+
+
+<b>5) Field </b>
+    A single <b>piece of data</b> on an object type.
+    Fields can be <b>nested</b> to get related data.
+
+    type Post {
+  title: String
+  author: User
+}
+
+<b>6) Resolver </b>
+    A function that tells the server <b>how to get the data</b> for a field.
+    Every field in your schema can have a corresponding resolver.
+
+    const resolvers = {
+  Query: {
+    user: (_, args) => {
+      return users.find(u => u.id === args.id);
+    }
+  }
+};
+
+<b>7) Subscription </b>
+    Allows <b>real-time updates</b> over WebSockets.
+    Clients <b>subscribe to events</b>, and server pushes data when those events happen.
+
+subscription {
+  messageAdded {
+    id
+    content
+  }
+}
+        `,
+          code1: `//<b>1) Query</b>
+    query {
+  user(id: "1") {
+    name
+    email
+  }
+}
+
+
+//--------------
+// <b>2) Mutation </b>
+    mutation {
+  createUser(name: "Anand", email: "anand@example.com") {
+    id
+    name
+  }
+}
+
+//--------------
+// <b>3) Schema </b>
+        type Query {
+  users: [User]
+}
+
+//--------------
+// <b>4) Type </b>
+        type User {
+  id: ID
+  name: String
+  age: Int
+}
+
+//--------------
+// <b>5) Field </b>
+    type Post {
+  title: String
+  author: User
+}
+
+//--------------
+// <b>6) Resolver </b>
+    const resolvers = {
+  Query: {
+    user: (_, args) => {
+      return users.find(u => u.id === args.id);
+    }
+  }
+};
+
+//--------------
+// <b>7) Subscription </b>
+subscription {
+  messageAdded {
+    id
+    content
+  }
+}
+  
+
+// ----------------- Ex : 1 ------------
+// mongoose Schema
+// User.js
+const mongoose = require("mongoose");
+
+const UserSchema = new mongoose.Schema({
+  userName: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  area: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    default: "user",
+  },
+});
+
+const User = mongoose.model("User", UserSchema);
+module.exports = User;
+
+
+//Post.js
+const mongoose = require("mongoose")
+
+const PostSchema = new mongoose.Schema({
+    title : {
+        type : String,
+        required: true
+    },
+    desc : {
+        type: String
+    },
+    auth : {
+        type: String
+    }
+})
+
+const Post = mongoose.model("Post", PostSchema)
+module.exports = Post;
+
+
+//typeDefs.js
+const { gql } = require("apollo-server-express");
+
+module.exports = gql\`
+  type User {
+    id: ID!
+    userName: String!
+    area: String!
+    role: String!
+  }
+
+  type Post {
+    id: ID!
+    title : String!
+    desc : String!
+    auth : String!
+  }
+
+  type Query {
+    users : [User]
+    posts : [Post]
+    post(id : ID!) : Post
+  }
+
+  type Mutation {
+    addUser(title: String!, desc:String!, auth:String!): User
+    addPost(title: String!, desc:String!, auth:String!): Post
+  }
+\`;
+
+
+// resolvers.js
+const User = require("../models/User");
+const Post = require("../models/Post");
+
+const resolvers = {
+  Query: {
+    users: async () => {
+      try {
+        return await User.find();
+      } catch (err) {
+        console.error("Error fetching users:", err);
+        return null;
+      }
+    }
+  },
+
+  Query: {
+    posts: async () => {
+      try {
+        return await Post.find()
+      } catch (err) {
+        console.error("Error fetching users:", err);
+        return null;
+      }
+    },
+    post: async (_, { id }) => {
+      try {
+        return await Post.findById(id)
+      } catch (err) {
+        console.error("Error fetching users:", err);
+        return null;
+      }
+    }
+  },
+
+  Mutation: {
+    addUser: async (_, { userName, area, role }) => {
+      const newUser = new User({
+        userName,
+        area,
+        role
+      })
+
+      await newUser.save()
+      return newUser
+    },
+    addPost: async (_, { title, desc, auth }) => {
+      const newPost = new Post({
+        title,
+        desc,
+        auth
+      })
+
+      await newPost.save()
+      return newPost
+    }
+  },
+}
+
+module.exports = resolvers
+
+
+//----- test in grqphql sandbox explorer ---
+mutation {
+  addPost(title: "js", desc: "this is javascript book", auth: "kumar") {
+    id
+    title
+    desc
+    auth
+  }
+}
+
+query {
+  post(id : "684808a407b6969921fdb1fc") {
+    id 
+    title
+    desc
+  } 
+}
+
+query {
+  posts {
+    id
+    title
+    desc
+  }
+}
+
+`,
+        },
+        {
+          text1: ``,
+          code1: ``,
+        },
+        {
+          text1: ``,
+          code1: ``,
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Graphql setup",
+      note: [
+        {
+          text1: ``,
+          code1: ``,
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Interview",
+      note: [
+        {
+          text1: `<b>What are the core features of GraphQL?</b>
 <b>Answer</b>: The key features of GraphQL include:
 <b>Declarative Data Fetching</b>: Clients can request exactly the data they need.
 <b>Single Endpoint</b>: All queries are sent to a single endpoint.
@@ -183,24 +519,24 @@ In practice, both have similar structures, but mutations typically involve state
 <b>Answer</b>: In GraphQL, APIs are typically versionless. Instead of creating new versions of the API, clients can request only the data they need, and changes to the schema can be made incrementally by adding new fields or deprecating old ones.
 
 `,
-            code1: ``,
-          },
-          {
-            text1: `A`,
-            code1: ``,
-          },
-          {
-            text1: `A`,
-            code1: ``,
-          },
-        ]
-      },
-      {
-        id: 1,
-        title: "Graphql setup",
-        note: [
-          {
-            text1: `db.json -> JSON Data:
+          code1: ``,
+        },
+        {
+          text1: ``,
+          code1: ``,
+        },
+        {
+          text1: ``,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Graphql sample program",
+      note: [
+        {
+          text1: `db.json -> JSON Data:
             {
     "users": [
       {
@@ -531,7 +867,7 @@ In practice, both have similar structures, but mutations typically involve state
       }
     ]
   }`,
-            code1: `// ---------- grqphql-server.js --------
+          code1: `// ---------- grqphql-server.js --------
             // src/graphql-server.js
 
 // Import necessary modules from Apollo Server and json-server
@@ -684,19 +1020,19 @@ async function startServer() {
 startServer();
 
 `,
-          },
-          {
-            text1: `A`,
-            code1: ``,
-          },
-        ]
-      },
-      {
-        id: 1,
-        title: "Graphql setup",
-        note: [
-          {
-            text1: `1)    Open CMD or command console 
+        },
+        {
+          text1: ``,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Installation setup",
+      note: [
+        {
+          text1: `1)    Open CMD or command console 
 
             $> npm init –y 
             
@@ -711,7 +1047,7 @@ startServer();
             $>  npm install -D nodemon 
             
             There are a few more fields you will add at this point. To package.json, make the following highlighted changes: `,
-            code1: ` 
+          code1: ` 
 
             // { 
             
@@ -741,13 +1077,13 @@ startServer();
             
             // } 
             `,
-          },
-          {
-            text1: `5)    Next, create a file called server.js. In it, you will create a simple Express server, listen on port 4001, and send a request saying Hello, GraphQL!. To set this up, add the following lines to your new file: 
+        },
+        {
+          text1: `5)    Next, create a file called server.js. In it, you will create a simple Express server, listen on port 4001, and send a request saying Hello, GraphQL!. To set this up, add the following lines to your new file: 
             
             <span style="font-size:20px;"><b>server.js</b></span> 
             `,
-            code1: `import express from 'express' 
+          code1: `import express from 'express' 
 
             import cors from 'cors' 
             
@@ -774,9 +1110,9 @@ startServer();
               console.log('Running a server at http://localhost: \${port}') 
             
             }) `,
-          },
-          {
-            text1: `npm run dev 
+        },
+        {
+          text1: `npm run dev 
            <b> Setting Up GraphQL HTTP Server Middleware</b> 
 
     To begin integrating GraphQL into the Express server, you will install three packages: graphql, express-graphql, and @graphql-tools/schema. Run the following command: 
@@ -793,7 +1129,7 @@ $> npm install graphql@14 express-graphql @graphql-tools/schema
 
     You can import these packages in the server.js file by adding the highlighted lines: 
             `,
-            code1: ` 
+          code1: ` 
 
             // import express from 'express' 
             
@@ -802,15 +1138,15 @@ $> npm install graphql@14 express-graphql @graphql-tools/schema
             import { graphqlHTTP } from 'express-graphql' 
             
             import { makeExecutableSchema } from '@graphql-tools/schema' `,
-          },
-          {
-            text1: `     
+        },
+        {
+          text1: `     
             8) The next step is to create an executable GraphQL schema. 
             
             To avoid the overhead of setting up a database, you can use an in-memory store for the data the GraphQL server will query. You can create a data object with the values your database would have. Add the highlighted lines to your file: 
             
              `,
-            code1: `
+          code1: `
             // import express from 'express' 
 
             // import cors from 'cors' 
@@ -838,38 +1174,38 @@ $> npm install graphql@14 express-graphql @graphql-tools/schema
             ... 
             
             ... `,
-          },
-          {
-            text1: `9)     The data structure here represents a database table called warriors that has two rows 
+        },
+        {
+          text1: `9)     The data structure here represents a database table called warriors that has two rows 
 
             `,
-            code1: `type Warrior { 
+          code1: `type Warrior { 
 
                 id: ID! 
               
                 name: String! 
               
               } `,
-          },
-          {
-            text1: `10) The id has an ID type, and the name has a String type. These are both built-in scalars, or primitive types. The exclamation point (!) means the field is non-nullable, and a value will be required for any instance of this type. 
+        },
+        {
+          text1: `10) The id has an ID type, and the name has a String type. These are both built-in scalars, or primitive types. The exclamation point (!) means the field is non-nullable, and a value will be required for any instance of this type. 
             
             The only additional piece of information you need to get started is a base Query type, which is the entry point to the GraphQL query. We will define warriors as an array of Warrior types. `,
-            code1: `type Query { 
+          code1: `type Query { 
 
                 warriors: [Warrior] 
               
               } `,
-          },
-          {
-            text1: `11)  With these two types, you have a valid schema that can be used in the GraphQL HTTP middleware. Ultimately, the schema you define here will be passed into the makeExecutableSchema function provided by graphql-tools as typeDefs. The two properties passed into an object on the makeExecutableSchema function will be as follows: 
+        },
+        {
+          text1: `11)  With these two types, you have a valid schema that can be used in the GraphQL HTTP middleware. Ultimately, the schema you define here will be passed into the makeExecutableSchema function provided by graphql-tools as typeDefs. The two properties passed into an object on the makeExecutableSchema function will be as follows: 
             
             <b> typeDefs </b>: a GraphQL schema language string. 
             
             resolvers: functions that are called to execute a field and produce a value. 
             
             In server.js, after importing the dependencies, create a typeDefs variable and assign the GraphQL schema as a string, as shown here: `,
-            code1: `const data = { 
+          code1: `const data = { 
 
             //     warriors: [ 
             //       { id: '001', name: 'Jaime' }, 
@@ -894,9 +1230,9 @@ $> npm install graphql@14 express-graphql @graphql-tools/schema
               ....
               
                `,
-          },
-          {
-            text1: ` 12)    Now you have your data set as well as your schema defined, as data and typeDefs, respectively. Next, you'll create resolvers so the API knows what to do with incoming requests. 
+        },
+        {
+          text1: ` 12)    Now you have your data set as well as your schema defined, as data and typeDefs, respectively. Next, you'll create resolvers so the API knows what to do with incoming requests. 
             
             <b>GraphQL Resolver Functions</b> 
 
@@ -914,7 +1250,7 @@ In this case, you will make a resolver for the root  <b>Query </b> type and retu
 
 To get started with this example server, pass the in-memory data store from earlier in this section by adding the highlighted lines to  <b>server.js </b>: 
             `,
-            code1: `... 
+          code1: `... 
 
             // const typeDefs = ' 
             // type Warrior { 
@@ -932,14 +1268,14 @@ To get started with this example server, pass the in-memory data store from earl
               }, 
             } 
             ... `,
-          },
-          {
-            text1: `13) The entry point into the GraphQL server will be through the root <b>Query</b> type on the resolvers. You have now added one resolver function, called <b>warriors</b>, which will return <b>warriors</b> from <b>context.context</b> is where your database entry point will be contained, and for this specific implementation, it will be the <b>data</b> variable that contains your in-memory data store. 
+        },
+        {
+          text1: `13) The entry point into the GraphQL server will be through the root <b>Query</b> type on the resolvers. You have now added one resolver function, called <b>warriors</b>, which will return <b>warriors</b> from <b>context.context</b> is where your database entry point will be contained, and for this specific implementation, it will be the <b>data</b> variable that contains your in-memory data store. 
 
             Each individual resolver function has four parameters: <b>obj, args, context</b>, and <b>info</b>. The most useful and relevant parameter to our schema right now is <b>context</b>, which is an object shared by the resolvers. It is often used as the connection between the GraphQL server and a database. 
             
             Finally, with the <b>typeDefs</b> and <b>resolvers</b> all set, you have enough information to create an executable schema. Add the highlighted lines to your file: `,
-            code1: `... 
+          code1: `... 
 
             // const resolvers = { 
             //   Query: { 
@@ -953,12 +1289,12 @@ To get started with this example server, pass the in-memory data store from earl
             }) 
             
             ... `,
-          },
-          {
-            text1: `14) The makeExecutableSchema function creates a complete schema that you can pass into the GraphQL endpoint. 
+        },
+        {
+          text1: `14) The makeExecutableSchema function creates a complete schema that you can pass into the GraphQL endpoint. 
 
             Now replace the default root endpoint that is currently returning Hello, GraphQL! with the following /graphql endpoint by adding the highlighted lines: `,
-            code1: `... 
+          code1: `... 
 
             //     const executableSchema = makeExecutableSchema({ 
             //      typeDefs, 
@@ -975,12 +1311,12 @@ To get started with this example server, pass the in-memory data store from earl
            ) 
            
            ...`,
-          },
-          {
-            text1: `15) The convention is that a GraphQL server will use the /graphql endpoint. Using the graphqlHTTP middleware requires passing in the schema and a context, which in this case, is your mock data store. 
+        },
+        {
+          text1: `15) The convention is that a GraphQL server will use the /graphql endpoint. Using the graphqlHTTP middleware requires passing in the schema and a context, which in this case, is your mock data store. 
 
             You now have everything necessary to begin serving the endpoint. Your server.js code should look like this: `,
-            code1: `import express from 'express' 
+          code1: `import express from 'express' 
 
             import cors from 'cors' 
             
@@ -1077,59 +1413,58 @@ To get started with this example server, pass the in-memory data store from earl
             }) 
             
              `,
-          },
-          {
-            text1: `Save and close the file when you’re done. 
+        },
+        {
+          text1: `Save and close the file when you’re done. 
 
             Now you should be able to go to <b>http://localhost:4000/graphql</b> and explore your schema using the <b>GraphiQL IDE.</b>`,
-            code1: ``,
-          },
-          {
-            text1: `A`,
-            code1: ``,
-          },
-        ]
-      },
-      {
-        id: 1,
-        title: "Graphql setup",
-        note: [
-          {
-            text1: `A`,
-            code1: ``,
-          },
-        ]
-      },
-      {
-        id: 1,
-        title: "Graphql setup",
-        note: [
-          {
-            text1: `A`,
-            code1: ``,
-          }
-        ]
-      },
-      {
-        id: 1,
-        title: "Graphql setup",
-        note: [
-          {
-            text1: `A`,
-            code1: ``,
-          }
-        ]
-      },
-      {
-        id: 1,
-        title: "Graphql setup",
-        note: [
-          {
-            text1: `A`,
-            code1: ``,
-          }
-        ]
-      },
-
-    ]
+          code1: ``,
+        },
+        {
+          text1: `A`,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Graphql setup",
+      note: [
+        {
+          text1: `A`,
+          code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Graphql setup",
+      note: [
+        {
+          text1: `A`,
+          code1: ``,
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Graphql setup",
+      note: [
+        {
+          text1: `A`,
+          code1: ``,
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Graphql setup",
+      note: [
+        {
+          text1: `A`,
+          code1: ``,
+        }
+      ]
+    },
+  ]
 }
