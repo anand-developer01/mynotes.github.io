@@ -27,7 +27,9 @@ const pythonData = {
 ✅ Testing	unittest, pytest
 ✅ Real Projects	REST APIs, games, automation, data analysis, etc.
 
+Note: It’s just convention. Python follows PEP 8, which recommends <b>snake_case</b> for function and variable names, and <b>PascalCase</b> for class names.
 
+EX : function name : show_my_name
 `,
                     code1: ``
                 }
@@ -628,7 +630,8 @@ function call (run) : show_info(age=30, name="Anand")
 def add_all(*args):
     return sum(args)
 
-print(add_all(1, 2, 3, 4))  # Output: 10`,
+print(add_all(1, 2, 3, 4))  # Output: 10
+`,
                     code1: `//----------- Ex : 1 -----------
                     def send_emails(*emails):
     for email in emails:
@@ -1684,18 +1687,63 @@ for i in range(1, 10, 2):
             title: "class",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `classes (blueprints) and objects (real items based on those blueprints).
+                    A class is a collection of objects. Classes are blueprints for creating objects. A class defines a set of attributes and methods that the created objects (instances) can have.`,
+                    code1: `// ------------ Ex : 1 ---------
+                    class Person:
+    def __init__(self, myname):
+        self.myname = myname
+
+    def show_my_name(self):
+        print(f"my name is {self.myname}")
+
+ob1 = Person("anand")
+ob1.show_my_name()
+
+
+// ------------ Ex : 2 ---------
+class Dog:
+    species = "Canine"  # Class attribute
+
+    def __init__(self, name, age):
+        self.name = name  # Instance attribute
+        self.age = age  # Instance attribute
+
+# Creating an object of the Dog class
+dog1 = Dog("Buddy", 3)
+
+print(dog1.name) 
+print(dog1.species)`
                 }
             ]
         },
                 {
             id: 1,
-            title: "__init__()",
+            title: "__init__() - Constructor",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `<b>__init__</b> method is the constructor in Python, automatically called when a new object is created. It initializes the attributes of the class.
+                    
+                    The __init__() method can take any number of parameters, but the first one is always a variable known as <b>self</b>, which corresponds to the instance being created. This means self points to the address of the current object of a class, which enables you to access the data of the object’s variables. So, if there are a thousand instances of a class, we can get data of individual objects using <b>self</b> as it points to the address of a particular object and returns the respective value. 
+
+                    <b>__init__</b>: Special method used for initialization.
+<b>self.name and self.age</b>: Instance attributes initialized in the constructor.
+<b>Class and Instance Variables</b>
+In Python, variables defined in a class can be either class variables or instance variables, and understanding the distinction between them is crucial for object-oriented programming.
+
+<b>Class Variables</b>
+These are the variables that are shared across all instances of a class. It is defined at the class level, outside any methods. All objects of the class share the same value for a class variable unless explicitly overridden in an object.
+
+<b>Instance Variables</b>
+Variables that are unique to each instance (object) of a class. These are defined within the __init__ method or other instance methods. Each object maintains its own copy of instance variables, independent of other objects.`,
+                    code1: `// ------------ Ex : 1 ---------
+                    class Dog:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+dog1 = Dog("Buddy", 3)
+print(dog1.name)`
                 }
             ]
         },
@@ -1704,7 +1752,7 @@ for i in range(1, 10, 2):
             title: "self",
             note: [
                 {
-                    text1: `What is Python?`,
+                    text1: `<b>self</b> parameter is a reference to the current instance of the class. It allows us to access the attributes and methods of the object.`,
                     code1: ``
                 }
             ]
@@ -1712,6 +1760,76 @@ for i in range(1, 10, 2):
         {
             id: 1,
             title: "methods",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                {
+            id: 1,
+            title: "Inheritance",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                {
+            id: 1,
+            title: "Encapsulation",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Abstraction",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Polymorphism",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "protected vs private attributes",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "getters and setters",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Static methods",
             note: [
                 {
                     text1: `What is Python?`,
