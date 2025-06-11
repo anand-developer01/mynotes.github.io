@@ -13,7 +13,22 @@ const pythonData = {
             title: "What is Python?",
             note: [
                 {
-                    text1: `What is Python?`,
+                    text1: `
+                    
+                    ✅ Core Python	variables, data types, functions, loops, dicts, lists
+✅ OOP	classes, inheritance, encapsulation
+✅ Data structures & algorithms	recursion, sorting, search, stacks, queues
+✅ File handling	read/write files, JSON, CSV
+✅ Exception handling	try-except, custom errors
+✅ Modules & Packages	import, pip, virtual environments
+✅ Advanced Python	decorators, generators, lambda, *args/**kwargs
+✅ Standard Libraries	datetime, collections, itertools, os
+✅ Tools	Jupyter, VS Code, pip, virtualenv
+✅ Testing	unittest, pytest
+✅ Real Projects	REST APIs, games, automation, data analysis, etc.
+
+
+`,
                     code1: ``
                 }
             ]
@@ -662,12 +677,92 @@ print(get_fibonacci(10))
 Output:
 [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
+//----------- Ex : 4-----------
+// 1. Calculator Function (Basic Math)
 
-//----------- Ex : 4 -----------
+def calculator(a, b, operator):
+    if operator == "+":
+        return a + b
+    elif operator == "-":
+        return a - b
+    elif operator == "*":
+        return a * b
+    elif operator == "/":
+        return a / b
+    else:
+        return "Invalid operator"
+
+# Example
+print(calculator(10, 5, "+"))  # 15
+
+//----------- Ex : 5 -----------
+// 🔁 2. Unit Converter (KM to Miles, Celsius to Fahrenheit)
+
+def km_to_miles(km):
+    return km * 0.621371
+
+def celsius_to_fahrenheit(c):
+    return (c * 9/5) + 32
+
+# Example
+print(km_to_miles(5))             # 3.11 miles
+print(celsius_to_fahrenheit(30))  # 86.0 F
+
+
+//----------- Ex : 6 -----------
+// ✅ 3. Email Validator (Basic Format Check)
+
+def is_valid_email(email):
+    return "@" in email and "." in email and len(email) > 5
+
+# Example
+print(is_valid_email("anand@gmail.com"))  # True
+print(is_valid_email("anand@com"))        # False
+
+💼 4. Salary Tax Calculator (Real-world use case)
+
+def calculate_tax(salary):
+    if salary <= 250000:
+        return 0
+    elif salary <= 500000:
+        return (salary - 250000) * 0.05
+    elif salary <= 1000000:
+        return (salary - 500000) * 0.2 + 12500
+    else:
+        return (salary - 1000000) * 0.3 + 112500
+
+print(calculate_tax(750000))  # Tax amount
+
+//----------- Ex : 7 -----------
+// 👨‍👩‍👧‍👦 5. Age Group Categorizer
+def age_group(age):
+    if age < 13:
+        return "Child"
+    elif age < 20:
+        return "Teenager"
+    elif age < 60:
+        return "Adult"
+    else:
+        return "Senior"
+
+print(age_group(45))  # Adult
+
+//----------- Ex : 8 -----------
+// 🔄 6. Reusable Discount Function for Products
+
+def apply_discount(price, discount_percent):
+    return price - (price * discount_percent / 100)
+
+print(apply_discount(1000, 10))  # ₹900.0
+
+//----------- Ex : 9 -----------
 from pyapis import api_service
 todo = get_todo(1)
 print("To-do Title:", todo.get("title", "No title found"))
 
+// todo is a dictionary (dict) in Python.
+// You access dictionary values with either todo["title"] or todo.get("title").
+// .get("title", "default") 
 
 //api_service.py
 import requests
@@ -693,6 +788,16 @@ def get_todo(todo_id):
             ]
         },
         {
+            id: 1,
+            title: "Arguments (*args, **kwargs)",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                {
             id: 1,
             title: "What is Python?",
             note: [
@@ -1234,16 +1339,6 @@ print(result)
         },
         {
             id: 1,
-            title: "What is Python?",
-            note: [
-                {
-                    text1: `What is Python?`,
-                    code1: ``
-                }
-            ]
-        },
-        {
-            id: 1,
             section: `Tuples`,
             title: "What is Python?",
             note: [
@@ -1270,18 +1365,294 @@ print(result)
             title: "Dictionaries",
             note: [
                 {
+                    text1: `Python dictionaries are a powerful built-in data type that allows you to store key-value pairs for efficient data retrieval and manipulation.
+                    Dictionaries are Python's implementation of a data structure that is more generally known as an associative array. A dictionary consists of a collection of key-value pairs. Each key-value pair maps the key to its associated value.
+
+You can define a dictionary by enclosing a comma-separated list of key-value pairs in curly braces ({}). A colon (:) separates each key from its associated value:
+
+-> A dictionary in Python is a <b>mutable collection of key-value pairs</b> that allows for efficient data retrieval using unique keys.
+-> Both dict() and {} can create dictionaries in Python. Use {} for <b>concise syntax</b> and dict() for <b>dynamic creation</b> from iterable objects.
+-> <b>dict()</b> is a <b>class</b> used to create dictionaries. However, it's <b>commonly called a built-in function</b> in Python.
+-> <b>.__dict__ is a special attribute</b> in Python that holds an object's <b>writable attributes</b> in a dictionary.
+-> Python dict is implemented as a <b>hashmap</b>, which allows for <b>fast key lookups</b>.
+
+Dictionaries are one of Python’s most important and useful built-in data types. They provide a mutable collection of key-value pairs that lets you efficiently access and mutate values through their corresponding keys:
+
+<b>Python's dictionaries have the following characteristics</b>:
+<b>Mutable</b>: The dictionary values can be updated in place.
+<b>Dynamic</b>: Dictionaries can grow and shrink as needed.
+<b>Efficient</b>: They're implemented as hash tables, which allows for fast key lookup.
+person["city"] = "Hyderabad" # Add new key-value
+<b>Ordered</b>: Starting with Python 3.7, dictionaries keep their items in the same order they were inserted.
+The keys of a dictionary have a couple of restrictions. They need to be:
+
+<b>Hashable</b>: This means that you can't use unhashable objects like lists as dictionary keys.
+<b>Unique</b>: This means that your dictionaries won't have duplicate keys.
+
+<b>1. Keys must be unique</b>
+d = {"a": 1, "b": 2, "a": 3}
+print(d)  # {'a': 3, 'b': 2}
+The last "a" overwrites the first.
+
+<b>2. Values can be of any type</b>
+person = {
+    "name": "Anand",
+    "age": 30,
+    "skills": ["Python", "React"],
+    "is_employed": True
+}
+
+<b>3. Accessing Values</b>
+print(person["name"])      # Output: Anand
+print(person.get("age"))   # Output: 30
+print(person.get("city", "Unknown"))  # Default if key not found
+
+<b>4. Adding or Updating Items</b>
+person["city"] = "Hyderabad"         # Add new key-value
+person["age"] = 31                   # Update existing
+
+<b>5. Deleting Items</b>
+del person["city"]        # Deletes key 'city'
+person.pop("skills")      # Removes and returns the value of 'skills'
+
+<b>6. Check key </b>
+"name" in person	// Returns True
+
+<b>Nested Dictionaries</b>
+users = {
+    "anand": {"age": 30, "role": "admin"},
+    "ravi": {"age": 25, "role": "user"}
+}
+
+<b>dict.keys()</b>	Get all keys
+<b>dict.values()</b>	Get all values
+<b>dict.items()</b>	Get key-value pairs as tuples
+<b>dict.get(k)</b>	Safe access to value (returns None if not found)
+<b>dict.pop(k)</b>	Remove a key and return its value
+<b>dict.update()</b>	Merge/overwrite with another dictionary
+<b>dict.clear()</b>	Remove all items
+
+
+<b>for ... in list</b>	Loop through list items
+<b>for ... in dict.items()</b>	Loop through key-value pairs
+<b>enumerate()</b>	Get index + item from a list
+<b>zip()</b>	Combine two or more lists together
+<b>range()</b>	Generate number sequences (looping)
+`,
+                    code1: `d = {
+    key: value,
+    key: value,
+      .
+      .
+      .
+    key: value
+}
+    
+
+//---------- Ex :1 -----------`
+                },
+                {
                     text1: `What is Python?`,
                     code1: ``
+                },
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "items() - Looping through both keys and values",
+            note: [
+                {
+                    text1: `The .items() method is used on a dictionary to return a view object that contains all the key-value pairs as tuples.
+                    
+                    <b>.items()</b> returns a <b>dict_items</b> object, which is an iterable view (not a list).
+                    <b>1. Looping through both keys and values</b>
+for key, value in person.items():
+    print(f"{key} => {value}")
+    `,
+                    code1: `// ----------- Ex : 1 ---------
+                    person = {
+    "name": "Anand",
+    "age": 30,
+    "city": "Hyderabad"
+}
+print(person.items())
+
+// 🔁 Output:
+// dict_items([('name', 'Anand'), ('age', 30), ('city', 'Hyderabad')])
+
+// ----------- Ex : 2 ---------
+// Looping through both keys and values
+person = {
+    "name": "Anand",
+    "age": 30,
+    "city": "Hyderabad"
+}
+for key, value in person.items():
+    print(f"{key} => {value}")
+
+// ------------ Ex : 3 ---------
+// Sorting by keys or values
+sorted_by_key = dict(sorted(person.items()))
+# {'age': 30, 'city': 'Hyderabad', 'name': 'Anand'}
+
+// ------------ Ex : 4 ---------
+marks = {
+    "Math": 85,
+    "Science": 92,
+    "English": 78
+}
+
+# Total and average
+total = sum(marks.values())
+avg = total / len(marks)
+
+// ------------ Ex : 5 ---------
+invoice = {
+    "invoice_no": "INV1001",
+    "date": "2025-06-12",
+    "items": [
+        {"name": "Pen", "price": 10, "qty": 2},
+        {"name": "Notebook", "price": 50, "qty": 1}
+    ]
+}
+
+# Calculate total
+total = sum(item["price"] * item["qty"] for item in invoice["items"])
+print(total)
+
+
+// ------------ Ex : 6 ---------
+// API Response (Weather App)
+weather = {
+    "city": "Hyderabad",
+    "temperature": 34,
+    "unit": "Celsius",
+    "condition": "Sunny"
+}
+
+print(f"{weather['city']} - {weather['temperature']}°{weather['unit']}")
+
+
+// ------------ Ex : 6 ---------
+// Analytics / Counters
+words = ["apple", "banana", "apple", "orange", "banana", "apple"]
+
+freq = {}
+for word in words:
+    freq[word] = freq.get(word, 0) + 1
+
+# freq => {'apple': 3, 'banana': 2, 'orange': 1}
+
+
+// ------------ Ex : 7 ---------
+// Loop through keys:
+person = {"name": "Anand", "age": 30, "city": "Hyderabad"}
+
+for key in person:
+    print(key)  # name, age, city
+
+    // ------------ Ex : 8 ---------
+// Loop through values:
+for value in person.values():
+    print(value)
+
+// ------------ Ex : 9 ---------
+// 🔸 Loop through key-value pairs:
+for key, value in person.items():
+    print(f"{key} = {value}")
+`
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "List of Dictionaries",
+            note: [
+                {
+                    text1: `A list of dictionaries is exactly what it sounds like:
+    A <b>list</b> ([]) that contains multiple <b>dictionary</b> ({}) entries.
+    Each dictionary represents a record or object with key: value pairs.`,
+                    code1: `students = [
+    {"name": "Anand", "age": 20, "marks": 85},
+    {"name": "Ravi", "age": 21, "marks": 90},
+    {"name": "Sneha", "age": 19, "marks": 95}
+]
+
+for student in students:
+    print(student["name"], student["marks"])
+
+//------------ Ex : 2 ---------
+// Filter students above 90 marks
+top_students = [s for s in students if s["marks"] > 90]
+print(top_students)
+
+//------------ Ex : 3 ---------
+// Extract specific fields
+names = [s["name"] for s in students]
+print(names)  # ['Anand', 'Ravi', 'Sneha']
+    `
                 }
             ]
         },
         {
             id: 1,
-            title: "What is Python?",
+            title: "enumerate()",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `Returns both index and value while looping a list.`,
+                    code1: `//------------ Ex : 1 ---------
+                    colors = ["red", "green", "blue"]
+
+for index, color in enumerate(colors):
+    print(index, color)
+
+// Output:
+// 0 red
+// 1 green
+// 2 blue
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "zip()",
+            note: [
+                {
+                    text1: `Combines multiple sequences together.`,
+                    code1: `//------------ Ex : 1 ---------
+                    names = ["Anand", "Ravi", "Meena"]
+scores = [90, 85, 88]
+
+for name, score in zip(names, scores):
+    print(f"{name} scored {score}")
+
+// Output:
+// Anand scored 90
+// Ravi scored 85
+// Meena scored 88
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "range()",
+            note: [
+                {
+                    text1: `Used to generate a sequence of numbers:
+                    range(start, stop, step):
+                    `,
+                    code1: `//------------ Ex : 1 ---------
+                    for i in range(5):
+    print(i)  # 0 to 4
+range(start, stop, step):
+for i in range(1, 10, 2):
+    print(i)  # 1, 3, 5, 7, 9`
                 }
             ]
         },
@@ -1310,7 +1681,48 @@ print(result)
         {
             id: 1,
             section: `Oops`,
-            title: "What is Python?",
+            title: "class",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                {
+            id: 1,
+            title: "__init__()",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "self",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "methods",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            section: `Python (FastAPI or Flask) for backend APIs`,
+            title: "Flask",
             note: [
                 {
                     text1: `What is Python?`,
