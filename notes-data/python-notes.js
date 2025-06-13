@@ -564,6 +564,18 @@ else:
         },
         {
             id: 1,
+            title: "Pass Statement",
+            note: [
+                {
+                    text1: `The “pass” statement is a placeholder in Python code that signifies that a particular code block is empty or yet to be written. It is used to suppress errors and prevent unexpected behavior, and it is often employed in functions, classes, loops, and conditional statements.
+                    
+                    Python <b>pass statement</b> is used when a statement is required syntactically but you do not want any command or code to execute. It is a null which means nothing happens when it executes. This is also useful in places where piece of code will be added later, but a placeholder is required to ensure the program runs without errors.`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
             title: "What is Python?",
             note: [
                 {
@@ -1752,8 +1764,49 @@ print(dog1.name)`
             title: "self",
             note: [
                 {
-                    text1: `<b>self</b> parameter is a reference to the current instance of the class. It allows us to access the attributes and methods of the object.`,
-                    code1: ``
+                    text1: `<b>self</b> parameter is a reference to the current instance of the class. It allows us to access the attributes and methods of the object.
+                    
+                    In Python, self is a conventional first parameter of instance methods in a class. It refers to the current instance of the class through which the method is being called.
+                    
+                    It represents the instance of the class being used. Whenever we create an object from a class, self refers to the current object instance. It is essential for accessing attributes and methods within the class.
+
+->                      It allows <b>access to instance variables and methods</b> from within the class.
+->  It is <b>automatically passed</b> by Python when an instance method is called using an object.
+->  It must be <b>explicitly declared</b> in the method definition.
+                    <b>Why is self needed?</b>
+Python does not implicitly use this like JavaScript or Java. Instead, you must explicitly define self as the first parameter in every instance method.`,
+                    code1: `// ------------- Ex : 1 ---------
+                    class Mynumber:
+    def __init__(self, value):
+        self.value = value
+    
+    def print_value(self):
+        print(self.value)
+
+obj1 = Mynumber(17)
+obj1.print_value() // 17
+
+
+//--------------- Ex : 2 -----------
+class Counter:
+    def __init__(self):
+        self.count = 0
+
+    def increment(self):
+        self.count += 1
+
+    def decrement(self):
+        self.count -= 1
+
+    def get_count(self):
+        return self.count
+
+# using the Counter class
+counter = Counter()
+counter.increment()
+counter.increment()
+counter.decrement()
+print(counter.get_count())`
                 }
             ]
         },
@@ -1772,9 +1825,112 @@ print(dog1.name)`
             title: "Inheritance",
             note: [
                 {
+                    text1: `(OOP) that allows a class (called a child or derived class) to inherit attributes and methods from another class (called a parent or base class). This promotes code reuse, modularity, and a hierarchical class structure. 
+                    
+                    <b>super()</b> function, which is a built-in function that returns a temporary object of the superclass, so you can access its methods without explicitly naming the parent class. 
+                    
+                    <b>Types of Inheritance</b>
+                    <b>Single</b> :	One parent, one child	Ex : class B(A)
+<b>Multilevel</b> :	Chain of inheritance Ex :	A → B → C
+<b>Hierarchical</b> :	One parent, multiple children Ex :	A → B, A → C
+<b>Multiple</b> :	Multiple parents, one child Ex :	class C(A, B)
+                    `,
+                    code1: `// ------------- Ex : 1 ------------
+class Parent:
+    def speak(self):
+        print("Parent speaking")
+
+class Child(Parent):  # Inheriting from Parent
+    def play(self):
+        print("Child playing")
+
+c = Child()
+c.speak()  # ✅ Inherited method
+c.play()   # ✅ Own method
+
+// ------------- Ex : 2 ------------
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+class Student(Person):
+    def __init__(self, name, roll):
+        super().__init__(name)  # Calls Persons __init__
+        self.roll = roll
+
+s = Student("Anand", 101)
+print(s.name)   # Anand
+print(s.roll)   # 101
+
+
+// ------------- Ex : 3 ------------
+                    # Parent class
+class Animal:
+    def __init__(self, name):
+        self.name = name  # Initialize the name attribute
+
+    def speak(self):
+        pass  # Placeholder method to be overridden by child classes
+// Note: Use the pass keyword when you do not want to add any other properties or methods to the class.
+# Child class inheriting from Animal
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} barks!"  # Override the speak method
+
+# Creating an instance of Dog
+dog = Dog("Buddy")
+print(dog.speak())
+// Output
+// Buddy barks!
+//------
+// Animal is the parent class with an __init__ method and a speak method.
+// Dog is the child class that inherits from Animal.
+// The speak method is overridden in the Dog class to provide specific behavior.
+
+
+
+// ------------- Ex : 4 ------------
+// Multilevel Example:
+
+class A:
+    def show_a(self): print("A")
+
+class B(A):
+    def show_b(self): print("B")
+
+class C(B):
+    def show_c(self): print("C")
+
+c = C()
+c.show_a()  # From A
+c.show_b()  # From B
+c.show_c()  # Own
+
+
+// ------------- Ex : 5 ------------
+// Multiple Inheritance Example:
+
+class A:
+    def show(self): print("From A")
+
+class B:
+    def show(self): print("From B")
+
+class C(A, B):  # MRO: A -> B
+    pass
+
+c = C()
+c.show()  # From A (left-to-right)
+
+// ------------- Ex : 6 ------------
+// ------------- Ex : 7 ------------
+// ------------- Ex : 8 ------------
+`
+                },
+                {
                     text1: `What is Python?`,
                     code1: ``
-                }
+                },
             ]
         },
                 {
@@ -1792,8 +1948,138 @@ print(dog1.name)`
             title: "Abstraction",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `Abstraction in Python is a process of handling complexity by hiding unnecessary details and showing only the essential information to the user. It is one of the core principles of Object-Oriented Programming (OOP), which allows developers to implement more complex functionality without worrying about the underlying complexity.
+
+                    <b>Abstraction</b> means <b>hiding the complex implementation details</b> and showing only the <b>essential features</b> of an object. It's a fundamental concept in Object-Oriented Programming (OOP), and Python supports it using:
+
+                    In Python, abstraction can be achieved using Abstract Classes and Abstract Methods. Let’s explore how we can implement this using Python’s built-in abc module.
+                    Abstract Base Classes (ABC)
+<b>@abstractmethod</b> decorator
+<b>Abstract Method</b>: An abstract method is a method that is declared but contains no implementation. It is just a placeholder that tells the programmer that this method must be overridden by subclasses.
+ In Python, abstract method feature is not a default feature. To create abstract method and abstract classes we have to import the "ABC" and "abstractmethod" classes from abc (Abstract Base Class) library. Abstract method of base class force its child class to write the implementation of the all abstract methods defined in base class. If we do not implement the abstract methods of base class in the child class then our code will give error. In the below code method_1 is a abstract method created using @abstractmethod decorator.
+<b>Abstract Class</b>: A class containing one or more abstract methods is called an abstract class. You cannot create an instance of an abstract class directly.
+
+<b>ABC</b>	Base class for defining abstract classes
+<b>@abstractmethod</b>	Marks a method that must be implemented in child classes
+<b>Cannot instantiate</b>	You cannot create an object of an abstract class
+<b>Enforces implementation</b>	All abstract methods must be implemented in child classes
+
+
+  <table data-start="382" data-end="742" class="w-fit min-w-(--thread-content-width)">
+    <thead data-start="382" data-end="409">
+      <tr data-start="382" data-end="409">
+        <th data-start="382" data-end="392" data-col-size="sm">Feature</th>
+        <th data-start="392" data-end="399" data-col-size="sm">Java</th>
+        <th data-start="399" data-end="409" data-col-size="sm">Python</th>
+      </tr>
+    </thead>
+    <tbody data-start="437" data-end="742">
+      <tr data-start="437" data-end="497">
+        <td data-start="437" data-end="457" data-col-size="sm"><strong data-start="439" data-end="456">Language
+            type</strong></td>
+        <td data-col-size="sm" data-start="457" data-end="476">Statically typed</td>
+        <td data-col-size="sm" data-start="476" data-end="497">Dynamically typed</td>
+      </tr>
+      <tr data-start="498" data-end="586">
+        <td data-start="498" data-end="527" data-col-size="sm"><strong data-start="500" data-end="526">Abstract class
+            support</strong></td>
+        <td data-col-size="sm" data-start="527" data-end="560">Built into the language syntax</td>
+        <td data-col-size="sm" data-start="560" data-end="586">Added via <code data-start="572"
+            data-end="577">abc</code> module</td>
+      </tr>
+      <tr data-start="587" data-end="648">
+        <td data-start="587" data-end="612" data-col-size="sm"><strong data-start="589" data-end="611">Method
+            enforcement</strong></td>
+        <td data-col-size="sm" data-start="612" data-end="630">Compiler checks</td>
+        <td data-col-size="sm" data-start="630" data-end="648">Runtime checks</td>
+      </tr>
+      <tr data-start="649" data-end="742">
+        <td data-start="649" data-end="678" data-col-size="sm"><strong data-start="651" data-end="677">Interfaces /
+            Contracts</strong></td>
+        <td data-col-size="sm" data-start="678" data-end="707">Interface + Abstract Class</td>
+        <td data-col-size="sm" data-start="707" data-end="742">Abstract Base Class (<code data-start="730"
+            data-end="739">abc.ABC</code>)</td>
+      </tr>
+    </tbody>
+  </table>
+                    `,
+                    code1: `//------------- Ex : 1 -----------
+                    from abc import ABC, abstractmethod
+
+// # Abstract class
+class Animal(ABC):
+    
+    @abstractmethod
+    def sound(self):
+        pass  # Abstract method, must be implemented by child classes
+
+// # Concrete class
+class Dog(Animal):
+    def sound(self):
+        return "Barks"
+
+class Cat(Animal):
+    def sound(self):
+        return "Meows"
+
+// # Usage
+dog = Dog()
+cat = Cat()
+
+print(dog.sound())  # Output: Barks
+print(cat.sound())  # Output: Meows
+
+                    
+                    //------------- Ex : 2 -----------
+                    // # Import required modules
+from abc import ABC, abstractmethod
+
+// # Create Abstract base class
+class Car(ABC):
+    def __init__(self, brand, model, year):
+        self.brand = brand
+        self.model = model
+        self.year = year
+    
+    // # Create abstract method      
+    @abstractmethod
+    def printDetails(self):
+        pass
+  
+    // # Create concrete method
+    def accelerate(self):
+        print("Speed up ...")
+  
+    def break_applied(self):
+        print("Car stopped")
+
+// # Create a child class
+class Hatchback(Car):
+    def printDetails(self):
+        print("Brand:", self.brand)
+        print("Model:", self.model)
+        print("Year:", self.year)
+  
+    def sunroof(self):
+        print("Not having this feature")
+
+// # Create a child class
+class Suv(Car):
+    def printDetails(self):
+        print("Brand:", self.brand)
+        print("Model:", self.model)
+        print("Year:", self.year)
+  
+    def sunroof(self):
+        print("Available")
+
+// # Create an instance of the Hatchback class
+car1 = Hatchback("Maruti", "Alto", "2022")
+
+// # Call methods
+car1.printDetails()
+car1.accelerate()
+car1.sunroof()`
                 }
             ]
         },
