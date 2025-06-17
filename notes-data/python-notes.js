@@ -106,6 +106,16 @@ print(f"The sum of {a} and {b} is {a + b}")
         },
         {
             id: 1,
+            title: "chained comparison",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
             section: `Python Control Statements`,
             title: "Iterative Statements / Repetition statement",
             note: [
@@ -1938,9 +1948,111 @@ c.show()  # From A (left-to-right)
             title: "Encapsulation",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
-                }
+                    text1: `<b>Encapsulation</b> is the concept of <b>hiding internal data</b> and only exposing what is necessary.
+It <b>binds data (variables)</b> and <b>methods (functions)</b> that work on that data into a single unit (class), and it <b>restricts direct access</b> to some of the object’s components.
+
+It involves combining data and its related methods into a single unit called “class”, which restricts direct access to variables and methods and helps prevent unintended changes to the data.
+
+This promotes better code organization and reusability. Overall, encapsulation is essential for building robust software systems.
+
+In object-oriented programming, encapsulation is a mechanism that enables the bundling of data and methods and restricts access to the data from outside the class. Private and public variables are two ways of controlling access to class variables.
+
+-> A real-life example of this concept could be a car. The car's driver can interact with various features, such as the steering wheel, pedals, and dashboard. These features are accessible to the driver and are similar to public variables. 
+ -> However, the driver cannot see or interact with many parts of the car, such as the engine and transmission. These parts are similar to private variables, accessible only within the class or object.
+ -> By using private and public variables in encapsulation, we can control access to an object's data and ensure that it is only modified in a controlled way. 
+ -> It makes managing the object's behavior easier and protects its internal data from being accidentally modified.
+
+ Encapsulation in Python is achieved through the use of access modifiers which restrict access to the methods and variables of a class. This helps in bundling the data (variables) and the methods that act on the data into a single unit or class. Python primarily uses two types of access modifiers: public and private.
+
+1. Public Members: In Python, members of a class that are accessible from outside the class are public. By default, all attributes and methods in a Python class are public. They can be accessed using the dot operator on an object.
+
+2. Private Members: To make an attribute or method private (i.e., accessible only within the class), you precede its name with two underscores (\`__\`). This triggers a name mangling process, where the interpreter modifies the name of the variable in a way that makes it harder to create subclasses that accidentally override the private attributes and methods.
+
+<b>Public</b>	self.name	Accessible from outside
+<b>Protected</b>	self._name	Convention: Treat as internal
+<b>Private</b>	self.__name	Name mangling (harder to access directly)
+
+<b>public</b>	No underscore	Can be accessed from anywhere.
+<b>_protected</b>	Single underscore <b>( _var )</b>	Shouldn't be accessed outside the class (not enforced).
+<b>__private</b>	Double underscore <b>( __var )</b>	Name mangled to prevent outside access (enforced).
+`,
+                    code1: `// ---------- Ex : 1 --------
+                    class BankAccount:
+    def __init__(self, account_holder, balance):
+        self.account_holder = account_holder  # Public
+        self.__balance = balance              # Private
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+        else:
+            print("Insufficient balance")
+
+    def get_balance(self):
+        return self.__balance  # Safe access method
+
+# Creating an object
+account = BankAccount("Anand", 1000)
+
+# Accessing public attribute
+print(account.account_holder)
+
+# Accessing private attribute directly (Not recommended)
+# print(account.__balance)  ❌ This will raise an error
+
+# Accessing private attribute using getter
+print(account.get_balance()) # ✅
+
+# Deposit money
+account.deposit(500)
+print(account.get_balance())  # Output: 1500
+
+
+
+//----------- Ex : 2 ----------
+class Employee:
+    def __init__(self, name, salary):
+        self.name = name              # Public
+        self.__salary = salary        # Private (name-mangled)
+
+    def show_info(self):
+        print(f"Name: {self.name}")
+        print(f"Salary: {self.__salary}")
+
+    def update_salary(self, new_salary):
+        if new_salary > 0:
+            self.__salary = new_salary
+        else:
+            print("Invalid salary")
+
+# Create object
+emp = Employee("Anand", 50000)
+
+# Access public variable
+print(emp.name)  # ✅ Works
+
+# Access private variable directly
+# print(emp.__salary)  ❌ Error: AttributeError
+
+# Access through public method
+emp.show_info()  # ✅ Works
+
+# Access private using name mangling (not recommended)
+print(emp._Employee__salary)  # 😬 Works but not good practice
+
+# Update private variable using method
+emp.update_salary(60000)
+emp.show_info()
+
+# emp.__salary = 999999  # ❌ Creates a new public variable, doesn't change the original __salary
+
+
+`
+                },
             ]
         },
         {
@@ -2088,8 +2200,159 @@ car1.sunroof()`
             title: "Polymorphism",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `Polymorphism means <b>"many forms"</b>. In Python, it refers to the ability of different classes to provide different implementations for methods that share the same name.
+                    
+                    <b>Real-life Example</b>:
+    -> A person behaves differently as a teacher, a father, or a friend — depending on the situation.
+    -> Similarly, in Python, a method name can behave differently based on the object calling it.
+
+    <b>Method Overriding</b>
+    Method overriding is a fundamental concept in <u>object-oriented programming (OOP)</u> that allows a subclass to provide a specific implementation of a method that is already defined in its superclass.
+
+This concept is crucial as it enables polymorphism, where different classes can implement methods in different ways while sharing the same method name. By overriding methods, developers can customise or extend the behavior of inherited methods without altering the original class.
+
+<b>Implementation in Python</b>
+In Python, method overriding occurs when a subclass defines a method with the same name and signature as a method in its superclass. When an instance of the subclass calls this method, the overridden version in the subclass executes, replacing the superclass’s method.
+
+This behavior demonstrates Python’s support for dynamic method dispatch, a key feature of polymorphism.
+
+To override a method in Python, you simply define a method in the subclass with the same name as the one in the superclass. Python does not require any special syntax for overriding methods, making it straightforward to implement. Here’s an example:(Ex: 1)
+
+    <b>Method Overloading</b>
+    Method overloading is a feature in programming that allows multiple methods to have the same name but different parameters. It enhances code readability and reusability by enabling methods to perform different tasks based on the arguments passed.
+
+This concept is particularly useful in data science for creating flexible and adaptable functions, such as those used in data manipulation or statistical calculations.
+
+<b>Implementation in Python</b>
+Unlike some other programming languages, Python does not support method overloading natively. In Python, defining multiple methods with the same name within a class will overwrite the previous definitions. However, Python’s dynamic nature and support for default arguments, variable-length arguments, and keyword arguments allow for similar functionality.
+
+To achieve method overloading, developers can use default arguments or variable-length arguments (*args and **kwargs). These techniques enable a single method to handle different numbers and types of arguments, simulating the effect of method overloading.(Ex : 4)
+
+<b>*args</b>	Variable number of positional arguments	<u>Tuple</u>
+<b>**kwargs</b>	Variable number of keyword arguments	<u>Dictionary</u>
+
+    <b>Note</b>: Python does not support method overloading. We may overload the methods but can only use the latest defined method.
+
+ <b>   Practical Applications in Data Science</b>
+Understanding method overloading and overriding in Python has practical benefits in data science. These concepts play a critical role in simplifying and enhancing various data science tasks, from preprocessing data to evaluating models and customising algorithms.
+
+
+<table class="table table-bordered" style="text-align: center;">
+<tbody>
+<tr>
+<th><p style="text-align: center; ">Method Overloading </p></th>
+<th><p style="text-align: center; ">Method Overriding</p></th>
+</tr>
+<tr>
+<td><p style="text-align: left; ">Refers to defining multiple methods with the same name but different parameters</p></td>
+<td><p style="text-align: left;">Refers to defining a method in a subclass that has the same name as the one in its superclass</p></td>
+</tr>
+<tr>
+<td><p style="text-align: left;">Can be achieved in Python using default arguments</p></td>
+<td><p style="text-align: left;">Can be achieved by defining a method in a subclass with the same name as the one in its superclass</p></td>
+</tr>
+<tr>
+<td><p style="text-align: left;">Allows a class to have multiple methods with the same name but different behaviors based on the input parameters </p></td>
+<td><p style="text-align: left;">Allows a subclass to provide its own implementation of a method defined in its superclass </p></td>
+</tr>
+<tr>
+<td><p style="text-align: left;">The choice of which method to call is determined at compile-time based on the number and types of arguments passed to the method </p></td>
+<td><p style="text-align: left;">The choice of which method to call is determined at runtime based on the actual object being referred to </p></td>
+</tr>
+<tr>
+<td><p style="text-align: left;">Not supported natively in Python</p></td>
+<td><p style="text-align: left;">Supported natively in Python</p></td>
+</tr>
+</tbody>
+</table>
+    `,
+                    code1: `//------------- Ex : 1 ----------
+class Animal:
+    def speak(self):
+        return "Animal Make a Sound"
+
+class Cat:
+    def speak(self):
+        return "Meow"
+
+class Dog:
+    def speak(self):
+        return "Bark"
+
+# Polymorphism in action
+def animal_sound(animal):
+    print(animal.speak())
+
+animal = Animal()
+cat = Cat()
+dog = Dog()
+
+animal_sound(cat)  # Output: Meow
+animal_sound(dog)  # Output: Bark
+animal_sound(animal)
+
+
+//------------- Ex : 2 ----------
+// Built-in Polymorphism Example:
+print(len("Python"))   # 6 (length of string)
+print(len([1, 2, 3]))   # 3 (length of list)
+print(len({1: "a", 2: "b"}))  # 2 (length of dict)
+    // len() behaves differently for string, list, and dictionary — but the function name is the same.
+
+
+//------------- Ex : 3 ----------
+    //  Polymorphism with Inheritance:
+
+class Animal:
+    def speak(self):
+        return "Some sound"
+
+class Cow(Animal):
+    def speak(self):
+        return "Moo"
+
+animal = Animal()
+cow = Cow()
+
+print(animal.speak())  # Some sound
+print(cow.speak())     # Moo
+
+// Here, Cow overrides the speak() method from Animal. That’s runtime polymorphism (method overriding).
+
+//------------- Ex : 4 ----------
+
+class Calculator:
+    def add(self, a, b=2):
+        return a+b
+
+calc = Calculator()
+print(calc.add(5))           # Output: 5
+print(calc.add(5, 10))       # Output: 15
+
+
+//-------------  Ex:5 -----------
+//Using Variable-Length Arguments
+class Calculator:
+    def add(self, *args):
+        return sum(args)
+
+calc = Calculator()
+print(calc.add(5))           # Output: 5
+print(calc.add(5, 10))       # Output: 15
+print(calc.add(1, 2, 3, 4))  # Output: 10
+
+//------------- Ex : 6 ----------
+class Person:
+    def show_info(self, **kwargs):
+        for key, value in kwargs.items():
+            print(f"{key}: {value}")
+
+p = Person()
+p.show_info(name="Anand", age=30)
+p.show_info(name="Ravi", location="Hyderabad", hobby="Reading")
+
+
+`
                 }
             ]
         },
@@ -2118,8 +2381,61 @@ car1.sunroof()`
             title: "Static methods",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `A <b>static method</b> is a method that <b>belongs to a class</b> rather than an instance. It <b>does not access or modify class or instance variables.</b>
+                    
+                    a <b>static method</b> is a type of method that does not require any instance to be called. It is very similar to the class method but the difference is that the static method doesn't have a mandatory argument like reference to the object − <b>self</b> or reference to the class − <b>cls</b>.
+
+                    There can be some functionality that relates to the class, but does not require any instance(s) to do some work, static methods can be used in such cases. A static method is a method which is bound to the class and not the object of the class. It can’t access or modify class state. It is present in a class because it makes sense for the method to be present in class. A static method does not receive an implicit first argument. 
+
+                    <b>How to Create Static Method in Python?</b>
+There are two ways to create Python static methods −
+Using staticmethod() Function
+Using @staticmethod Decorator
+
+<b>Using staticmethod() Function</b>
+Python's standard library function named staticmethod() is used to create a static method. It accepts a method as an argument and converts it into a static method.
+
+Syntax
+staticmethod(method)
+
+When function decorated with @staticmethod is called, we don’t pass an instance of the class to it as it is normally done with methods. It means that the function is put inside the class but it cannot access the instance of that class. <b>Example #1</b>:
+
+<b>Static vs Class vs Instance Methods</b>
+<table data-start="1391" data-end="1973" class="w-fit min-w-(--thread-content-width)"><thead data-start="1391" data-end="1507"><tr data-start="1391" data-end="1507"><th data-start="1391" data-end="1410" data-col-size="sm">Type</th><th data-start="1410" data-end="1429" data-col-size="sm">Decorator</th><th data-start="1429" data-end="1446" data-col-size="sm">Access <code data-start="1438" data-end="1444">self</code>?</th><th data-start="1446" data-end="1462" data-col-size="sm">Access <code data-start="1455" data-end="1460">cls</code>?</th><th data-start="1462" data-end="1507" data-col-size="md">Use Case</th></tr></thead><tbody data-start="1626" data-end="1973"><tr data-start="1626" data-end="1741"><td data-start="1626" data-end="1645" data-col-size="sm">Instance Method</td><td data-col-size="sm" data-start="1645" data-end="1664"><em data-start="1647" data-end="1663">(no decorator)</em></td><td data-col-size="sm" data-start="1664" data-end="1680">✅ Yes</td><td data-col-size="sm" data-start="1680" data-end="1695">❌ No</td><td data-col-size="md" data-start="1695" data-end="1741">Regular methods, need object state</td></tr><tr data-start="1742" data-end="1857"><td data-start="1742" data-end="1761" data-col-size="sm">Class Method</td><td data-col-size="sm" data-start="1761" data-end="1780"><code data-start="1763" data-end="1777">@classmethod</code></td><td data-col-size="sm" data-start="1780" data-end="1796">❌ No</td><td data-col-size="sm" data-start="1796" data-end="1811">✅ Yes</td><td data-col-size="md" data-start="1811" data-end="1857">Access/modify class state (<code data-start="1840" data-end="1845">cls</code>)</td></tr><tr data-start="1858" data-end="1973"><td data-start="1858" data-end="1877" data-col-size="sm">Static Method</td><td data-col-size="sm" data-start="1877" data-end="1896"><code data-start="1879" data-end="1894">@staticmethod</code></td><td data-col-size="sm" data-start="1896" data-end="1912">❌ No</td><td data-col-size="sm" data-start="1912" data-end="1927">❌ No</td><td data-col-size="md" data-start="1927" data-end="1973">Utility methods not tied to object or class</td></tr></tbody></table>
+
+                    `,
+                    code1: `✅ Syntax:
+
+class MyClass:
+    @staticmethod
+    def my_static_method():
+        print("I'm a static method")
+
+You can call it using:
+
+MyClass.my_static_method()  # ✅ Recommended
+obj = MyClass()
+obj.my_static_method()      # ✅ Also works
+
+
+//---------------- Ex: 1 -----------
+                    # Python program to 
+# demonstrate static methods
+
+class Maths():
+    
+    @staticmethod
+    def addNum(num1, num2):
+        return num1 + num2
+        
+# Drive s code
+if __name__ == "__main__":
+    
+    # Calling method of class
+    # without creating instance
+    res = Maths.addNum(1, 2)
+    print("The result is", res)
+    `
                 }
             ]
         },
