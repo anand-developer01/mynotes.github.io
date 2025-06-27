@@ -1,5 +1,5 @@
 const Links1 = 'python-notes'
-const Links2 = 'python-notes'
+const Links2 = 'python-ai'
 const Links3 = 'python-toolkit'
 const Links4 = 'python-projects'
 
@@ -27,7 +27,7 @@ const pythonData = {
 ✅ Testing	unittest, pytest
 ✅ Real Projects	REST APIs, games, automation, data analysis, etc.
 
-Note: It’s just convention. Python follows PEP 8, which recommends <b>snake_case</b> for function and variable names, and <b>PascalCase</b> for class names.
+Note: It's just convention. Python follows PEP 8, which recommends <b>snake_case</b> for function and variable names, and <b>PascalCase</b> for class names.
 
 EX : function name : show_my_name
 `,
@@ -594,6 +594,16 @@ else:
                 }
             ]
         },
+                {
+            id: 1,
+            title: "if and elif",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
         {
             id: 1,
             section: `Functions & Modules`,
@@ -805,11 +815,7 @@ def get_todo(todo_id):
                 {
                     text1: `What is Python?`,
                     code1: ``
-                },
-                 {
-                    text1: `What is Python?`,
-                    code1: ``
-                },
+                }
             ]
         },
         {
@@ -824,11 +830,123 @@ def get_todo(todo_id):
         },
                 {
             id: 1,
+            title: "Lambda, map, filter, reduce",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                        {
+            id: 1,
+            title: "Decorators",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                        {
+            id: 1,
+            title: "Generators & Iterators",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                        {
+            id: 1,
+            title: "Virtual Environments",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                                {
+            id: 1,
+            title: "Unit Testing (unittest, pytest)",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                                {
+            id: 1,
             title: "What is Python?",
             note: [
                 {
                     text1: `What is Python?`,
                     code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "__name__",
+            note: [
+                {
+                    text1: `<b>What is __name__?</b>
+In contrast, the “__main__“ string that is being matched in the if statement does have special semantics. Each time a Python module is imported, Python automatically assigns a string name to the dunder name (__name__) variable in that module's namespace; normally this is the name of the module being imported as defined by its source file name (or package hierarchy name). The outermost module—the one that is there every time you run Python and requires no import—is always assigned “__main__“ as its name. It is the main module that is always present. (See the Python Execution Model documentation for more details.)
+
+The if __name__ == "__main__" block in Python allows you to define code that will only run when the file is executed directly as a script, but not when it's imported as a module into another script.
+
+=> Every Python file (module) has a special built-in variable called <b>__name__</b>.
+=> When a Python file is run directly (like <b>python myfile.py</b>), then Python sets <b>__name__ = "__main__"</b> in that file.
+=> But if the file is <b>imported</b> from another file (like import myfile), then <b>__name__ = "myfile"</b> (i.e., the module name).
+
+<b>Why is __name__ useful?</b>
+The reason that <b>__name__</b> is useful has to do with the fact that Python runs the code that it is importing as a module. Doing an import populates the module's namespace with the variables, functions, and classes defined in the module. With <b>__name__</b> I have a way to control what actually runs and the context in which it runs.
+
+Purpose of <b>if __name__ == "__main__":</b>
+It tells Python:
+<b>Only run the below code if this file is being executed directly, not when imported.</b>
+`,
+                    code1: `// ------------ Ex : 1 -----------
+                    // # file: payment.py
+
+def greet():
+    print("Welcome to the payment system!")
+
+if __name__ == "__main__":
+    greet()
+
+//     Output:
+//     If you run python payment.py → Output:
+// Welcome to the payment system!
+
+// If you do:
+// import payment
+//  Nothing prints, because __name__ is not "__main__".
+
+
+// ------------ Ex : 2 -----------
+🧪 Real-Time Example:
+
+# utils.py
+def add(a, b):
+    return a + b
+
+if __name__ == "__main__":
+    print(add(3, 4))  # Only runs when this file is executed directly
+
+# main.py
+import utils
+print(utils.add(10, 5))
+
+//     Output when running main.py:
+// 15
+
+// Output when running utils.py:
+// 7
+`
                 }
             ]
         },
@@ -1080,7 +1198,7 @@ list3 = [1, 2, 3, 4, 5]
 print ("Original list ", list3)
 list3[2] = 10
 print ("List after changing value at index 2: ", list3)
-// output −
+// output -
 // Original list [1, 2, 3, 4, 5]
 // List after changing value at index 2: [1, 2, 10, 4, 5]
 
@@ -1401,7 +1519,7 @@ You can define a dictionary by enclosing a comma-separated list of key-value pai
 -> <b>.__dict__ is a special attribute</b> in Python that holds an object's <b>writable attributes</b> in a dictionary.
 -> Python dict is implemented as a <b>hashmap</b>, which allows for <b>fast key lookups</b>.
 
-Dictionaries are one of Python’s most important and useful built-in data types. They provide a mutable collection of key-value pairs that lets you efficiently access and mutate values through their corresponding keys:
+Dictionaries are one of Python's most important and useful built-in data types. They provide a mutable collection of key-value pairs that lets you efficiently access and mutate values through their corresponding keys:
 
 <b>Python's dictionaries have the following characteristics</b>:
 <b>Mutable</b>: The dictionary values can be updated in place.
@@ -1746,7 +1864,7 @@ print(dog1.species)`
                 {
                     text1: `<b>__init__</b> method is the constructor in Python, automatically called when a new object is created. It initializes the attributes of the class.
                     
-                    The __init__() method can take any number of parameters, but the first one is always a variable known as <b>self</b>, which corresponds to the instance being created. This means self points to the address of the current object of a class, which enables you to access the data of the object’s variables. So, if there are a thousand instances of a class, we can get data of individual objects using <b>self</b> as it points to the address of a particular object and returns the respective value. 
+                    The __init__() method can take any number of parameters, but the first one is always a variable known as <b>self</b>, which corresponds to the instance being created. This means self points to the address of the current object of a class, which enables you to access the data of the object's variables. So, if there are a thousand instances of a class, we can get data of individual objects using <b>self</b> as it points to the address of a particular object and returns the respective value. 
 
                     <b>__init__</b>: Special method used for initialization.
 <b>self.name and self.age</b>: Instance attributes initialized in the constructor.
@@ -1949,7 +2067,7 @@ c.show()  # From A (left-to-right)
             note: [
                 {
                     text1: `<b>Encapsulation</b> is the concept of <b>hiding internal data</b> and only exposing what is necessary.
-It <b>binds data (variables)</b> and <b>methods (functions)</b> that work on that data into a single unit (class), and it <b>restricts direct access</b> to some of the object’s components.
+It <b>binds data (variables)</b> and <b>methods (functions)</b> that work on that data into a single unit (class), and it <b>restricts direct access</b> to some of the object's components.
 
 It involves combining data and its related methods into a single unit called “class”, which restricts direct access to variables and methods and helps prevent unintended changes to the data.
 
@@ -2064,7 +2182,7 @@ emp.show_info()
 
                     <b>Abstraction</b> means <b>hiding the complex implementation details</b> and showing only the <b>essential features</b> of an object. It's a fundamental concept in Object-Oriented Programming (OOP), and Python supports it using:
 
-                    In Python, abstraction can be achieved using Abstract Classes and Abstract Methods. Let’s explore how we can implement this using Python’s built-in abc module.
+                    In Python, abstraction can be achieved using Abstract Classes and Abstract Methods. Let's explore how we can implement this using Python's built-in abc module.
                     Abstract Base Classes (ABC)
 <b>@abstractmethod</b> decorator
 <b>Abstract Method</b>: An abstract method is a method that is declared but contains no implementation. It is just a placeholder that tells the programmer that this method must be overridden by subclasses.
@@ -2212,11 +2330,11 @@ car1.sunroof()`
 This concept is crucial as it enables polymorphism, where different classes can implement methods in different ways while sharing the same method name. By overriding methods, developers can customise or extend the behavior of inherited methods without altering the original class.
 
 <b>Implementation in Python</b>
-In Python, method overriding occurs when a subclass defines a method with the same name and signature as a method in its superclass. When an instance of the subclass calls this method, the overridden version in the subclass executes, replacing the superclass’s method.
+In Python, method overriding occurs when a subclass defines a method with the same name and signature as a method in its superclass. When an instance of the subclass calls this method, the overridden version in the subclass executes, replacing the superclass's method.
 
-This behavior demonstrates Python’s support for dynamic method dispatch, a key feature of polymorphism.
+This behavior demonstrates Python's support for dynamic method dispatch, a key feature of polymorphism.
 
-To override a method in Python, you simply define a method in the subclass with the same name as the one in the superclass. Python does not require any special syntax for overriding methods, making it straightforward to implement. Here’s an example:(Ex: 1)
+To override a method in Python, you simply define a method in the subclass with the same name as the one in the superclass. Python does not require any special syntax for overriding methods, making it straightforward to implement. Here's an example:(Ex: 1)
 
     <b>Method Overloading</b>
     Method overloading is a feature in programming that allows multiple methods to have the same name but different parameters. It enhances code readability and reusability by enabling methods to perform different tasks based on the arguments passed.
@@ -2224,7 +2342,7 @@ To override a method in Python, you simply define a method in the subclass with 
 This concept is particularly useful in data science for creating flexible and adaptable functions, such as those used in data manipulation or statistical calculations.
 
 <b>Implementation in Python</b>
-Unlike some other programming languages, Python does not support method overloading natively. In Python, defining multiple methods with the same name within a class will overwrite the previous definitions. However, Python’s dynamic nature and support for default arguments, variable-length arguments, and keyword arguments allow for similar functionality.
+Unlike some other programming languages, Python does not support method overloading natively. In Python, defining multiple methods with the same name within a class will overwrite the previous definitions. However, Python's dynamic nature and support for default arguments, variable-length arguments, and keyword arguments allow for similar functionality.
 
 To achieve method overloading, developers can use default arguments or variable-length arguments (*args and **kwargs). These techniques enable a single method to handle different numbers and types of arguments, simulating the effect of method overloading.(Ex : 4)
 
@@ -2317,7 +2435,7 @@ cow = Cow()
 print(animal.speak())  # Some sound
 print(cow.speak())     # Moo
 
-// Here, Cow overrides the speak() method from Animal. That’s runtime polymorphism (method overriding).
+// Here, Cow overrides the speak() method from Animal. That's runtime polymorphism (method overriding).
 
 //------------- Ex : 4 ----------
 
@@ -2352,6 +2470,60 @@ p.show_info(name="Anand", age=30)
 p.show_info(name="Ravi", location="Hyderabad", hobby="Reading")
 
 
+//------------ Ex : 7 ---------
+class Circle:
+    def draw(self):
+        print("Drawing circle")
+
+class Rectangle:
+    def draw(self):
+        print("Drawing rectangle")
+
+for shape in [Circle(), Rectangle()]:
+    shape.draw()
+
+
+// ------------ Ex : 8 ----------
+class Car:
+    def __init__(self, car_break, modal, speed):
+        self.car_break = car_break
+        self.modal = modal
+        self.speed = speed
+
+    def start(self):
+        print(f"{self.modal} car started with {self.speed}")
+
+    def stop(self):
+        print(f"cat stopped with breaks{self.car_break}")
+
+
+class Motorcycle:
+    def __init__(self, car_break, modal, speed):
+        self.car_break = car_break
+        self.modal = modal
+        self.speed = speed
+
+    def start(self):
+        print(f"{self.modal} car started with {self.speed}")
+
+    def stop(self):
+        print(f"cat stopped with breaks{self.car_break}")
+
+
+vehicles = [Car("break On", "patha modal", "100/km"), Motorcycle("break On", "chala kotha modal", "40/km")]
+
+for v in vehicles:
+    
+    if isinstance(v, Car):
+        print("Car---------")
+        v.start()
+        v.stop()
+    
+    if isinstance(v, Motorcycle):
+        print("Motarcycle--------")
+        v.start()
+        v.stop()
+
 `
                 }
             ]
@@ -2371,8 +2543,63 @@ p.show_info(name="Ravi", location="Hyderabad", hobby="Reading")
             title: "getters and setters",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `<b>Getter</b>: A method used to <b>read</b> (access) the value of a private attribute.
+<b>Setter</b>: A method used to <b>modify</b> (update) the value of a private attribute.
+In Python, you can define them <b>manually</b> or use the <b>@property decorator</b>.`,
+                    code1: `// --------- Ex : 1 -----------
+                    //Using Methods
+                     class Person:
+    def __init__(self, name):
+        self.__name = name  # private variable
+
+    def get_name(self):      # getter
+        return self.__name
+
+    def set_name(self, new_name):  # setter
+        if len(new_name) >= 2:
+            self.__name = new_name
+        else:
+            print("Name is too short.")
+
+            // Output:
+            p = Person("Anand")
+print(p.get_name())     # Anand
+
+p.set_name("A")         # Name is too short.
+print(p.get_name())     # Anand
+
+p.set_name("Arun")
+print(p.get_name())     # Arun
+
+
+            // --------- Ex : 2 -----------
+            // Using @property (Pythonic way)
+            class Person:
+    def __init__(self, name):
+        self.__name = name
+
+    @property
+    def name(self):        # getter
+        return self.__name
+
+    @name.setter
+    def name(self, value):  # setter
+        if len(value) >= 2:
+            self.__name = value
+        else:
+            print("Invalid name!")
+
+            //Output:
+            p = Person("Anand")
+print(p.name)           // # Anand
+
+p.name = "A"            // # Invalid name!
+print(p.name)           // # Anand
+
+p.name = "Kumar"
+print(p.name)           // # Kumar
+
+`
                 }
             ]
         },
@@ -2383,12 +2610,12 @@ p.show_info(name="Ravi", location="Hyderabad", hobby="Reading")
                 {
                     text1: `A <b>static method</b> is a method that <b>belongs to a class</b> rather than an instance. It <b>does not access or modify class or instance variables.</b>
                     
-                    a <b>static method</b> is a type of method that does not require any instance to be called. It is very similar to the class method but the difference is that the static method doesn't have a mandatory argument like reference to the object − <b>self</b> or reference to the class − <b>cls</b>.
+                    a <b>static method</b> is a type of method that does not require any instance to be called. It is very similar to the class method but the difference is that the static method doesn't have a mandatory argument like reference to the object - <b>self</b> or reference to the class - <b>cls</b>.
 
-                    There can be some functionality that relates to the class, but does not require any instance(s) to do some work, static methods can be used in such cases. A static method is a method which is bound to the class and not the object of the class. It can’t access or modify class state. It is present in a class because it makes sense for the method to be present in class. A static method does not receive an implicit first argument. 
+                    There can be some functionality that relates to the class, but does not require any instance(s) to do some work, static methods can be used in such cases. A static method is a method which is bound to the class and not the object of the class. It can't access or modify class state. It is present in a class because it makes sense for the method to be present in class. A static method does not receive an implicit first argument. 
 
                     <b>How to Create Static Method in Python?</b>
-There are two ways to create Python static methods −
+There are two ways to create Python static methods -
 Using staticmethod() Function
 Using @staticmethod Decorator
 
@@ -2398,13 +2625,13 @@ Python's standard library function named staticmethod() is used to create a stat
 Syntax
 staticmethod(method)
 
-When function decorated with @staticmethod is called, we don’t pass an instance of the class to it as it is normally done with methods. It means that the function is put inside the class but it cannot access the instance of that class. <b>Example #1</b>:
+When function decorated with @staticmethod is called, we don't pass an instance of the class to it as it is normally done with methods. It means that the function is put inside the class but it cannot access the instance of that class. <b>Example #1</b>:
 
 <b>Static vs Class vs Instance Methods</b>
 <table data-start="1391" data-end="1973" class="w-fit min-w-(--thread-content-width)"><thead data-start="1391" data-end="1507"><tr data-start="1391" data-end="1507"><th data-start="1391" data-end="1410" data-col-size="sm">Type</th><th data-start="1410" data-end="1429" data-col-size="sm">Decorator</th><th data-start="1429" data-end="1446" data-col-size="sm">Access <code data-start="1438" data-end="1444">self</code>?</th><th data-start="1446" data-end="1462" data-col-size="sm">Access <code data-start="1455" data-end="1460">cls</code>?</th><th data-start="1462" data-end="1507" data-col-size="md">Use Case</th></tr></thead><tbody data-start="1626" data-end="1973"><tr data-start="1626" data-end="1741"><td data-start="1626" data-end="1645" data-col-size="sm">Instance Method</td><td data-col-size="sm" data-start="1645" data-end="1664"><em data-start="1647" data-end="1663">(no decorator)</em></td><td data-col-size="sm" data-start="1664" data-end="1680">✅ Yes</td><td data-col-size="sm" data-start="1680" data-end="1695">❌ No</td><td data-col-size="md" data-start="1695" data-end="1741">Regular methods, need object state</td></tr><tr data-start="1742" data-end="1857"><td data-start="1742" data-end="1761" data-col-size="sm">Class Method</td><td data-col-size="sm" data-start="1761" data-end="1780"><code data-start="1763" data-end="1777">@classmethod</code></td><td data-col-size="sm" data-start="1780" data-end="1796">❌ No</td><td data-col-size="sm" data-start="1796" data-end="1811">✅ Yes</td><td data-col-size="md" data-start="1811" data-end="1857">Access/modify class state (<code data-start="1840" data-end="1845">cls</code>)</td></tr><tr data-start="1858" data-end="1973"><td data-start="1858" data-end="1877" data-col-size="sm">Static Method</td><td data-col-size="sm" data-start="1877" data-end="1896"><code data-start="1879" data-end="1894">@staticmethod</code></td><td data-col-size="sm" data-start="1896" data-end="1912">❌ No</td><td data-col-size="sm" data-start="1912" data-end="1927">❌ No</td><td data-col-size="md" data-start="1927" data-end="1973">Utility methods not tied to object or class</td></tr></tbody></table>
 
                     `,
-                    code1: `✅ Syntax:
+                    code1: `//✅ Syntax:
 
 class MyClass:
     @staticmethod
@@ -2419,20 +2646,19 @@ obj.my_static_method()      # ✅ Also works
 
 
 //---------------- Ex: 1 -----------
-                    # Python program to 
-# demonstrate static methods
-
+//                     # Python program to 
+// # demonstrate static methods
 class Maths():
     
     @staticmethod
     def addNum(num1, num2):
         return num1 + num2
         
-# Drive s code
+// # Drive s code
 if __name__ == "__main__":
     
-    # Calling method of class
-    # without creating instance
+    // # Calling method of class
+    // # without creating instance
     res = Maths.addNum(1, 2)
     print("The result is", res)
     `
@@ -2441,8 +2667,347 @@ if __name__ == "__main__":
         },
         {
             id: 1,
+            title: "self vs cls",
+            note: [
+                {
+                    text1: ` we have <b>self</b> and <b>cls</b> “keywords” 
+                    <b>self</b>
+    Refers to the <b>current instance</b> of the class.
+    Used in <b>instance methods.</b>
+    Lets you access or modify <b>instance variables</b> (data unique to each object).
+    
+    
+    <b>cls</b>
+    Refers to the <b>class itself</b>, not an instance.
+    Used in <b>class methods.</b>
+    Lets you access or modify <b>class-level attributes</b> (shared across all instances).
+To use cls, you must use the <b>@classmethod</b> decorator.
+`,
+                    code1: `//  ---------- Ex : 1  ----------
+                    class Dog:
+    def __init__(self, name, age):
+        // # Instance variables initialized using self
+        self.name = name
+        self.age = age
+
+    def speak(self):
+        // # Accessing instance variable using self
+        return f"{self.name} says woof!"
+
+    def birthday(self):
+        // # Modifying instance variable using self
+        self.age += 1
+        return f"Happy Birthday, {self.name}! You are now {self.age} years old."
+
+    def get_info(self):
+        return f"{self.name} is {self.age} years old."
+
+
+
+        // # Creating dog objects
+dog1 = Dog("Tommy", 5)
+dog2 = Dog("Rocky", 3)
+
+// # Calling instance methods
+print(dog1.speak())        # Tommy says woof!
+print(dog2.get_info())     # Rocky is 3 years old.
+
+// # Celebrate Rocky's birthday
+print(dog2.birthday())     # Happy Birthday, Rocky! You are now 4 years old.
+print(dog2.get_info())     # Rocky is 4 years old.
+
+// Output:---
+// Tommy says woof!
+// Rocky is 3 years old.
+// Happy Birthday, Rocky! You are now 4 years old.
+// Rocky is 4 years old.
+
+                    
+                    //  ---------- Ex : 2  ----------
+                    // To use cls, you must use the @classmethod decorator.
+                    class Dog:
+    species = "Canis familiaris"
+
+    @classmethod
+    def get_species(cls):
+        return cls.species
+
+        // ----------- Ex : 3 -----------
+        class Dog:
+    # Class variable shared by all Dog instances
+    species = "Canis familiaris"
+
+    # Constructor: initializes instance variables
+    def __init__(self, name, age):
+        self.name = name      # instance variable
+        self.age = age        # instance variable
+
+    # Instance method using 'self'
+    def speak(self):
+        return f"{self.name} barks!"
+
+    # Another instance method
+    def get_details(self):
+        return f"{self.name} is {self.age} years old."
+
+    # Class method using 'cls' to access class variable
+    @classmethod
+    def get_species(cls):
+        return f"All dogs belong to the species: {cls.species}"
+
+    # Class method to change species for all dogs
+    @classmethod
+    def change_species(cls, new_species):
+        cls.species = new_species
+
+
+        # Creating two dog objects
+dog1 = Dog("Tommy", 5)
+dog2 = Dog("Rocky", 3)
+
+# Instance method calls
+print(dog1.speak())           # Tommy barks!
+print(dog2.get_details())     # Rocky is 3 years old.
+
+# Class method call
+print(Dog.get_species())      # All dogs belong to the species: Canis familiaris
+
+# Changing species using class method
+Dog.change_species("Canis lupus")
+
+# Check updated species
+print(dog1.get_species())     # All dogs belong to the species: Canis lupus
+print(dog2.get_species())     # All dogs belong to the species: Canis lupus
+
+
+// Tommy barks!
+// Rocky is 3 years old.
+// All dogs belong to the species: Canis familiaris
+// All dogs belong to the species: Canis lupus
+// All dogs belong to the species: Canis lupus
+
+`
+                }
+            ]
+        },
+        {
+            id: 1,
             section: `Python (FastAPI or Flask) for backend APIs`,
             title: "Flask",
+            note: [
+                {
+                    text1: `Flask is a lightweight and powerful web framework for Python. It’s often called a "micro-framework" because it provides the essentials for web development without unnecessary complexity. Unlike Django, which comes with built-in features like authentication and an admin panel, Flask keeps things minimal and lets us add only what we need.
+                    
+                    <b>Flask</b> is a <b>micro web framework</b> for Python.
+Called "micro" because it's <b>lightweight</b> and <b>simple</b>, yet very <b>powerful</b>.
+Perfect for building <b>APIs, small web apps</b>, or even <b>full-stack websites</b>.
+
+                    <b>Interesting Facts about Flask</b>
+Here are some interesting facts about Flask:
+
+<b>Microframework</b>: Flask is considered a "micro" web framework because it is lightweight and simple to use, with minimal dependencies. It doesn't come with the full set of tools that more extensive frameworks like Django provide, giving developers more control and flexibility over the application structure.
+<b>Werkzeug and Jinja2</b>: Flask is built on top of two powerful libraries:
+<b>Werkzeug</b>: A comprehensive WSGI web server library that helps manage the application's request and response cycles.
+vJinja2</b>: A templating engine that allows you to use dynamic HTML in your application, making it easy to build web pages with variables and loops.
+<b>Routing</b>: Flask’s routing system is extremely simple and intuitive. You define routes with decorators that map URLs to Python functions. This makes it very easy to set up and control the flow of your application.
+<b>No ORM by Default</b>: Unlike Django, Flask does not come with a built-in Object-Relational Mapping (ORM) tool like Django’s ORM. Instead, it lets developers choose their ORM, such as SQLAlchemy or simply use raw SQL.
+<b>RESTful API Support</b>: Flask is popular for building RESTful APIs. Its simplicity and flexibility make it a great choice for building APIs and many developers use it for creating microservices and backends for single-page applications.
+<b>Development Server</b>: Flask comes with a built-in development server that makes it easy to test and run the application locally. This server is lightweight and designed for use during development rather than production.
+
+
+<b>Flask()</b>	Creates the app
+<b>@app.route()</b>	Maps URL to a function
+<b>debug=True</b>	Auto reloads app and shows error messages`,
+                    code1: `// ------------- Ex : 1 ------------
+                    //Basic Flask App Example
+//📁 File: app.py
+
+from flask import Flask
+
+//# Create Flask app
+app = Flask(__name__)
+
+//# Route: Home page
+@app.route('/')
+def home():
+    return "Hello, Flask!"
+
+//------------
+    @app.route('/about')
+def about():
+    return "This is the About page"
+
+
+//# Run the app
+if __name__ == '__main__':
+    app.run(debug=True)
+    
+//     Make sure Flask is installed:
+// pip install flask
+
+// Run the app:
+// python app.py
+
+// Open browser and go to:
+// http://localhost:5000/ // Hello, Flask! -> in browser
+
+// This is just a reminder: Flask’s built-in server is only for development/testing.
+// In production, you should use a WSGI server like Gunicorn, uWSGI, or Waitress behind Nginx/Apache.
+
+
+// ------------- Ex : 2 -------------
+from flask import Flask, jsonify
+app = Flask(__name__)
+
+@app.route('/products')
+def get_products():
+    return jsonify(["Mobile", "Laptop", "Headphones"])
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+Output:
+// http://localhost:5000/products
+// [
+//   "Mobile",
+//   "Laptop",
+//   "Headphones"
+// ]
+
+//------------- Ex : 3 -------------
+from flask import Flask, request, redirect, render_template_string
+
+app = Flask(__name__)
+
+# In-memory task list
+tasks = []
+
+# Jinja2 HTML Template (fixed: no enumerate)
+html_template = """
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;To-Do App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;📝 To-Do List&lt;/h2&gt;
+
+    &lt;form method=&quot;POST&quot; action=&quot;/add&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;task&quot; placeholder=&quot;Enter a task&quot; required&gt;
+        &lt;button type=&quot;submit&quot;&gt;Add Task&lt;/button&gt;
+    &lt;/form&gt;
+
+    &lt;ul&gt;
+        {% for task in tasks %}
+        &lt;li&gt;
+            {{ loop.index }}. {{ task }}
+            &lt;form method=&quot;POST&quot; action=&quot;/delete&quot; style=&quot;display:inline;&quot;&gt;
+                &lt;input type=&quot;hidden&quot; name=&quot;index&quot; value=&quot;{{ loop.index0 }}&quot;&gt;
+                &lt;button type=&quot;submit&quot;&gt;❌ Delete&lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/li&gt;
+        {% else %}
+        &lt;li&gt;No tasks yet.&lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"""
+
+@app.route('/')
+def index():
+    return render_template_string(html_template, tasks=tasks)
+
+@app.route('/add', methods=['POST'])
+def add():
+    task = request.form.get('task')
+    if task:
+        tasks.append(task)
+    return redirect('/')
+
+@app.route('/delete', methods=['POST'])
+def delete():
+    index = int(request.form.get('index'))
+    if 0 <= index < len(tasks):
+        tasks.pop(index)
+    return redirect('/')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "request.form (Flask Forms + POST)",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Werkzeug - (Backend HTTP toolkit) and Jinja2",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Jinja2 - (Frontend templating engine)",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Build a Flask REST API",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Bonus Fact: Extensibility",
+            note: [
+                {
+                    text1: `<b>Flask-Login</b> (Authentication)
+
+<b>Flask-Mail</b> (Email)
+
+<b>Flask-Migrate<b> (Database migrations)
+
+<b>Flask-CORS</b>, Flask-JWT, etc.`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "topic",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "CORS Note - (flask-cors)",
             note: [
                 {
                     text1: `What is Python?`,
@@ -2464,7 +3029,389 @@ if __name__ == "__main__":
         {
             id: 1,
             section: `Multithreading`,
-            title: "What is Python?",
+            title: "What is Multithreading?",
+            note: [
+                {
+                    text1: `Running multiple tasks <b>at the same time</b> in a single process using threads.
+                    A thread is a lightweight unit of a process
+Threads share memory space with the main thread
+
+In Python, multithreading allows you to run multiple threads concurrently within a single process, which is also known as thread-based parallelism. This means a program can perform multiple tasks at the same time, enhancing its efficiency and responsiveness.
+
+A thread is an entity within a process that can be scheduled for execution. Also, it is the smallest unit of processing that can be performed in an OS (Operating System). In simple words, a thread is a sequence of such instructions within a program that can be executed independently of other code. For simplicity, you can assume that a thread is simply a subset of a process! A thread contains all this information in a Thread Control Block (TCB) :
+
+Multithreading in Python involves creating and managing multiple threads within a program. Threads execute concurrently, enabling parallel execution of tasks. This can improve performance, facilitate concurrent operations, and enhance responsiveness, especially for I/O-bound tasks or operations involving waiting.
+
+To achieve multithreading in Python, we can use the following two modules:
+The Thread Module
+The Threading Module
+
+Each thread runs <b>independently</b>, so:
+    Your main program continues
+    Background tasks (like a timer, loader, or scheduled function) run in parallel
+    
+    <b>Delayed Execution</b>	time.sleep() ->	setTimeout()
+<b>Repeated Execution</b>	threading.Timer() ->  setInterval()
+<b>True Multithreading</b>	threading.Thread ->	Web Workers (kinda)
+<b>Async Execution</b>	asyncio ->	JS Promises/async
+
+We use threading.main_thread() function to get the main thread object. In normal conditions, the main thread is the thread from which the Python interpreter was started. name attribute of the thread object is used to get the name of the thread. Then we use the threading.current_thread() function to get the current thread object.
+
+The main thread will exit whenever it has finished executing all the code in your script that is not started in a separate thread. For instance, when you start a new thread using start() method, the main thread will continue to execute the remaining code in the script until it reaches the end and then exit.
+
+<b>Which thread starts first: Main thread or Child thread?</b>
+    <b>The main thread always starts first.</b>
+It is the entry point of every Python program. When you run a script, it begins executing in the main thread. Only after that can you create and start child threads.
+In Python, when a program starts, the default thread that executes the program's code is the Main Thread. Any other threads created within the program, referred to as Child Threads, are initiated by the Main Thread.
+
+Therefore, the Main Thread starts first, as it is the initial entry point for the program's execution. Child threads are subsequently created and started by the Main Thread using methods like <b>Thread.start()</b>. While child threads run concurrently with the Main Thread after being started, the Main Thread is always the first to begin execution.
+
+You can check which thread your code is running on with <b>threading.current_thread() == threading.main_thread().</b>
+
+<b>Key Point for Interviews</b>:
+    Even though you call <b>t.start()</b> from the main thread, the actual execution of the child thread is <b>scheduled by the OS</b>, so their <b>execution order may vary</b>, but the <b>main thread always starts first</b>.
+`,
+                    code1: `// ------------ Ex : 1 ----------
+                    import threading
+
+def greet():
+    print("Hi! I'm running in a thread")
+    threading.Timer(2, greet).start()
+
+greet()
+
+                    
+                    
+                    // ------------ Ex : 2 ----------
+                    import time
+
+for val in range(10):
+    print(val)
+    time.sleep(1)
+
+                    
+                    // ------------ Ex : 3 ----------
+          import threading
+import time
+
+def print_hello():
+    while True:
+        print("Hello from thread")
+        time.sleep(2)
+
+# Start background thread
+threading.Thread(target=print_hello, daemon=True).start()
+
+# Main thread
+for i in range(5):
+    print(f"Main loop: {i}")
+    time.sleep(1)
+          
+                    
+                    // ------------ Ex : 4 ----------
+                    // Main Thread Behavior in Python
+         import threading
+import time
+
+def func(x):
+   print('Current Thread Details:',threading.current_thread())
+   for n in range(x):
+      print('Internal Thread Running', n)
+   print('Internal Thread Finished...')
+
+t = threading.Thread(target=func, args=(6,))
+t.start()
+
+for i in range(3):
+   print('Main Thread Running',i)
+print("Main Thread Finished...")           
+                    
+                    // ------------ Ex : 5 ----------
+                    import threading
+
+def child_task():
+    print("Child thread started")
+
+print("Main thread started")
+
+t = threading.Thread(target=child_task)
+t.start()
+
+print("Main thread finished")
+
+// Output:
+// Main thread started
+// Main thread finished
+// Child thread started
+
+// Or sometimes:
+// Main thread started
+// Child thread started
+// Main thread finished
+                    
+                    // ------------ Ex : 6 ----------`
+                },
+                {
+                    text1: `<b>Creating Threads</b> 
+                    Using <b>threading.Thread()</b>
+
+                    To create a new thread, we create an object of the Thread class. It takes the 'target' and 'args' as the parameters. The target is the function to be executed by the thread whereas the args is the arguments to be passed to the target function.
+                    t1 = threading.Thread(target, args)
+t2 = threading.Thread(target, args)
+
+<b>Start a Thread</b>
+To start a thread, we use the start() method of the Thread class.
+t1.start()
+t2.start()
+                    `,
+                    code1: `// Syntax : 
+                    // threading.Thread(target=callable, args=())
+                    // ----------- Ex : 1 ---------
+                    // Creating Threads - ( threading.Thread() )
+                    import threading
+
+def task():
+    print("Task running")
+
+t = threading.Thread(target=task)
+t.start()
+
+
+
+// ----------- Ex : 2 ---------
+import threading
+
+
+def print_cube(num):
+    print("Cube: {}" .format(num * num * num))
+
+
+def print_square(num):
+    print("Square: {}" .format(num * num))
+
+
+if __name__ =="__main__":
+    t1 = threading.Thread(target=print_square, args=(10,))
+    t2 = threading.Thread(target=print_cube, args=(10,))
+
+    t1.start()
+    t2.start()
+
+    t1.join()
+    t2.join()
+
+    print("Done!")
+
+
+// ---------- Ex : 3 --------
+import threading
+import time
+
+def crawl(link, delay=3):
+    print(f"crawl started for {link}")
+    time.sleep(delay)  # Blocking I/O (simulating a network request)
+    print(f"crawl ended for {link}")
+
+links = [
+    "https://python.org",
+    "https://docs.python.org",
+    "https://peps.python.org",
+]
+
+// # Start threads for each link
+threads = []
+for link in links:
+    // # Using \`args\` to pass positional arguments and \`kwargs\` for keyword arguments
+    t = threading.Thread(target=crawl, args=(link,), kwargs={"delay": 2})
+    threads.append(t)
+
+// # Start each thread
+for t in threads:
+    t.start()
+
+// # Wait for all threads to finish
+for t in threads:
+    t.join()
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Joining Threads",
+            note: [
+                {
+                    text1: `Wait for a thread to finish using <b>.join()</b>
+                    The join() method in Python's threading module is used to block the calling thread (typically the main thread) until the thread on which join() is called has completed its execution. 
+
+                    In Python, thread_object.join() is used to block the calling thread until the thread on which join() is called has finished executing. It ensures that a thread completes its task before the main program or another thread continues. This is essential for managing dependencies between threads and avoiding race conditions.
+                    
+                    The .join() method delays a program’s flow of execution until the target thread has been completely read.
+                    
+                    The following example features two threads, <b>thread_A</b> and <b>thread_B</b>. Each thread makes a call to <b>.start()</b>, immediately followed by a call to <b>.join()</b>.
+                    
+                    The second thread, <b>thread_B</b>, cannot start before <b>thread_A</b> is finished due to <b>.join()</b>.`,
+                    code1: `// Syntax
+                    // thread_object.join(timeout)
+// ------------- Ex : 1 -----------
+import threading
+import time
+
+def worker():
+    print("Child thread: started")
+    time.sleep(2)
+    print("Child thread: finished")
+
+# This runs in the main thread
+print("Main thread: starting")
+
+t = threading.Thread(target=worker)
+t.start()
+
+t.join()  # Main thread waits here
+
+print("Main thread: all done")
+
+// Output:
+// Main thread: starting
+// Child thread: started
+// Child thread: finished
+// Main thread: all done
+
+// ------------- Ex : 2 -----------
+                    import threading
+
+def is_divisible(dividend, divisor):
+  print("Starting...")
+  if(dividend % divisor == 0):
+    print(True)
+  else:
+    print(False)
+  print("Finished")
+
+thread_A = threading.Thread(target=is_divisible, args=(28, 14))
+thread_B = threading.Thread(target=is_divisible, args=(34, 7))
+
+thread_A.start()
+thread_A.join()
+
+thread_B.start()
+thread_B.join()
+
+//Output: 
+// Starting...
+// True
+// Finished
+// Starting...
+// False
+// Finished
+`
+                }
+            ]
+        }, 
+        {
+            id: 1,
+            title: "Daemon Threads",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        },     
+        {
+            id: 1,
+            title: "Race Conditions",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        },    
+        {
+            id: 1,
+            title: "Locks / Synchronization",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        },   
+                {
+            id: 1,
+            title: "Thread-safe Code",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        }, 
+                        {
+            id: 1,
+            title: "Timers",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        }, 
+                        {
+            id: 1,
+            title: "ThreadPoolExecutor",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        }, 
+        {
+            id: 1,
+            title: "Multithreading vs Multiprocessing",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        }, 
+                {
+            id: 1,
+            title: "Queues in Multithreading",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        }, 
+                {
+            id: 1,
+            title: "Deadlock & Avoidance",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        }, 
+        {
+            id: 1,
+            title: "async / await",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "topic",
             note: [
                 {
                     text1: `What is Python?`,
@@ -2490,6 +3437,31 @@ if __name__ == "__main__":
             note: [
                 {
                     text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "What is Python?",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            section: `dvanced Python`,
+            title: "dvanced opics",
+            note: [
+                {
+                    text1: `✅ Itertools & functools	❌ Not yet
+✅ Threading & Multiprocessing	❌ Not yet
+✅ Type Hinting (Python 3.9+)	❌ Not yet
+✅ Async/Await	❌ Not yet
+✅ Logging & Debugging`,
                     code1: ``
                 }
             ]
