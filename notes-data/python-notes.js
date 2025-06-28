@@ -3018,6 +3018,329 @@ if __name__ == '__main__':
         {
             id: 1,
             section: `Errors & Exceptions`,
+            title: "What is Exception Handling?",
+            note: [
+                {
+                    text1: `Exception handling allows you to catch and manage runtime errors in your code, so the application doesn’t crash and can respond gracefully.
+                    
+                    Python Exception Handling handles errors that occur during the execution of a program. Exception handling allows to respond to the error, instead of crashing the running program. It enables you to catch and manage errors, making your code more robust and user-friendly. 
+                    
+                    <b>Difference Between Exception and Error</b>
+<b>Error</b>: Errors are serious issues that a program should not try to handle. They are usually problems in the code's logic or configuration and need to be fixed by the programmer. Examples include syntax errors and memory errors.
+<b>Exception</b>: Exceptions are less severe than errors and can be handled by the program. They occur due to situations like invalid input, missing files or network issues.
+
+<b>Syntax and Usage</b>
+try:
+      # Code that might raise an exception
+except SomeException:
+      # Code to handle the exception
+else:
+     # Code to run if no exception occurs
+finally:
+    # Code to run regardless of whether an exception occurs
+    
+    <b>try, except, else and finally Blocks</b>
+<b>try Block</b>: try block lets us test a block of code for errors. Python will "try" to execute the code in this block. If an exception occurs, execution will immediately jump to the except block.
+<b>except Block</b>: except block enables us to handle the error or exception. If the code inside the try block throws an error, Python jumps to the except block and executes it. We can handle specific exceptions or use a general except to catch all exceptions.
+<b>else Block</b>: else block is optional and if included, must follow all except blocks. The else block runs only if no exceptions are raised in the try block. This is useful for code that should execute if the try block succeeds.
+The <b>else</b> block <b>executes only if there is no error</b> in the <b>try</b> block.
+<b>finally Block</b>: finally block always runs, regardless of whether an exception occurred or not. It is typically used for cleanup operations (closing files, releasing resources).
+
+<b>1. Catching Multiple Exceptions</b>
+We can catch multiple exceptions in a single block if we need to handle them in the same way or we can separate them if different types of exceptions require different handling.
+
+<b>2. Custom Exception Classes Ex : 4, Ex : 5, Ex : 6</b>
+For domain-specific errors, define your own exceptions:
+
+<b>3. Logging Exceptions</b>
+In production apps (Flask/Django), you shouldn't just print() errors — you should log them.
+
+import logging
+logging.basicConfig(level=logging.ERROR)
+try:
+    1 / 0
+except ZeroDivisionError as e:
+    logging.error("Error occurred: %s", e)
+
+    <b>4. Re-raising Exceptions : Ex : 3</b>
+Sometimes you want to log or partially handle, but still raise the error up:
+
+<b>5. Exception Handling in async / await</b>
+Async code can raise exceptions too:
+
+async def fetch_data():
+    try:
+        response = await some_async_call()
+    except TimeoutError:
+        print("Request timed out")
+
+    <b>6. Global Exception Handling in Flask</b>
+Useful for consistent API error responses:
+from flask import jsonify
+
+@app.errorhandler(Exception)
+def handle_global_error(e):
+    return jsonify(error=str(e)), 500
+
+    <b>7. Returning Structured JSON Error Responses</b>
+Build a standard JSON format for your API:
+
+{
+  "success": False,
+  "error": {
+    "type": "ValueError",
+    "message": "Invalid input value"
+  }
+}
+
+<b>Exception hierarchy (built-in exceptions) </b>
+BaseException
+ └── Exception
+     ├── ArithmeticError
+     │   ├── ZeroDivisionError
+     │   └── OverflowError
+     ├── LookupError
+     │   ├── IndexError
+     │   └── KeyError
+     ├── TypeError
+     ├── ValueError
+     ├── FileNotFoundError
+     └── ...
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Exception</th>
+      <th>When it Occurs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ZeroDivisionError</code></td>
+      <td>Division or modulo by zero (<code>10 / 0</code>)</td>
+    </tr>
+    <tr>
+      <td><code>ValueError</code></td>
+      <td>Invalid value passed (e.g. <code>int("abc")</code>)</td>
+    </tr>
+    <tr>
+      <td><code>TypeError</code></td>
+      <td>Operation between wrong types (e.g. <code>"1" + 2</code>)</td>
+    </tr>
+    <tr>
+      <td><code>IndexError</code></td>
+      <td>Accessing out-of-range list index (<code>mylist[5]</code>)</td>
+    </tr>
+    <tr>
+      <td><code>KeyError</code></td>
+      <td>Accessing a non-existent dictionary key</td>
+    </tr>
+    <tr>
+      <td><code>FileNotFoundError</code></td>
+      <td>Opening a file that doesn’t exist</td>
+    </tr>
+    <tr>
+      <td><code>NameError</code></td>
+      <td>Using a variable that hasn’t been defined</td>
+    </tr>
+    <tr>
+      <td><code>AttributeError</code></td>
+      <td>Calling a non-existent method on an object</td>
+    </tr>
+    <tr>
+      <td><code>ImportError</code></td>
+      <td>Module not found during <code>import</code></td>
+    </tr>
+    <tr>
+      <td><code>IndentationError</code></td>
+      <td>Wrong indentation in code</td>
+    </tr>
+    <tr>
+      <td><code>SyntaxError</code></td>
+      <td>Invalid Python syntax</td>
+    </tr>
+    <tr>
+      <td><code>RuntimeError</code></td>
+      <td>A generic error that doesn’t fit other categories</td>
+    </tr>
+    <tr>
+      <td><code>StopIteration</code></td>
+      <td>Raised by <code>next()</code> when no items are left</td>
+    </tr>
+    <tr>
+      <td><code>MemoryError</code></td>
+      <td>Not enough memory to continue execution</td>
+    </tr>
+    <tr>
+      <td><code>PermissionError</code></td>
+      <td>Access denied (e.g. opening a restricted file)</td>
+    </tr>
+    <tr>
+      <td><code>OSError</code></td>
+      <td>General OS-level error (disk I/O, network fail, etc.)</td>
+    </tr>
+    <tr>
+      <td><code>TimeoutError</code></td>
+      <td>Operation exceeded allowed time</td>
+    </tr>
+    <tr>
+      <td><code>RecursionError</code></td>
+      <td>Maximum recursion depth exceeded</td>
+    </tr>
+  </tbody>
+</table>
+
+    `,
+                    code1: `//----------- Ex : 1 ----------
+                    // # ZeroDivisionError (Exception)
+n = 10
+res = n / 0
+
+
+
+//----------- Ex : 2 ----------
+try:
+    # Risky code here
+    result = 10 / 0
+except ZeroDivisionError:
+    print("You can't divide by zero.")
+
+
+   //----------- Ex : 2 ----------
+   try:
+    n = 0
+    res = 100 / n
+    
+except ZeroDivisionError:
+    print("You can't divide by zero!")
+    
+except ValueError:
+    print("Enter a valid number!")
+    
+else:
+    print("Result is", res)
+    
+finally:
+    print("Execution complete.") 
+
+//----------- Ex : 2 ----------
+// Catching Multiple Exceptions
+    a = ["10", "twenty", 30]  # Mixed list of integers and strings
+try:
+    total = int(a[0]) + int(a[1])  # 'twenty' cannot be converted to int
+    
+except (ValueError, TypeError) as e:
+    print("Error", e)
+    
+except IndexError:
+    print("Index out of range.")
+
+
+    // ---------- Ex : 3 --------
+    // def risky_function():
+    raise ValueError("Something went wrong")
+
+try:
+    risky_function()
+except Exception as e:
+    print("Logging the error")
+    raise  # re-raise the same exception
+
+
+    // ---------- Ex : 4 --------
+class UnderAgeError(Exception):
+    def __init__(self, age, message="Age must be 18 or above"):
+        self.age = age
+        self.message = message
+        super().__init__(f"{message}. Provided: {age}")
+
+def register_user(age):
+    if age < 18:
+        raise UnderAgeError(age)
+    return "User registered successfully!"
+
+try:
+    print(register_user(15))
+except UnderAgeError as e:
+    print("Custom Error Caught:", e)
+
+
+    // ---------- Ex : 5 --------
+from flask import Flask, jsonify
+
+# ✅ Define app first
+app = Flask(__name__)
+
+# ✅ Define custom exception
+class InvalidID(Exception):
+    def __init__(self, message="Invalid user ID"):
+        self.message = message
+        super().__init__(self.message)
+
+# ✅ Route using custom exception
+@app.route('/user/<int:user_id>')
+def get_user(user_id):
+    if user_id <= 0:
+        raise InvalidID("User ID must be a positive number")
+    return jsonify({"user_id": user_id})
+
+# ✅ Custom error handler
+@app.errorhandler(InvalidID)
+def handle_invalid_id(e):
+    return jsonify({"error": str(e)}), 400
+
+# ✅ Run the app
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+    // ---------- Ex : 6 --------
+    from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# ✅ Custom Exception Class
+class UnderAgeError(Exception):
+    def __init__(self, age, message="User must be 18 years or older"):
+        self.age = age
+        self.message = message
+        super().__init__(f"{message}. Given age: {age}")
+
+# ✅ Route that uses custom exception
+@app.route('/register', methods=['POST'])
+def register_user():
+    data = request.get_json()
+    age = data.get("age")
+
+    try:
+        if age is None:
+            raise ValueError("Age is required")
+        if age < 18:
+            raise UnderAgeError(age)
+
+        return jsonify({"message": "Registration successful!"})
+    
+    except UnderAgeError as e:
+        return jsonify({"error": str(e)}), 400
+    
+    except ValueError as ve:
+        return jsonify({"error": str(ve)}), 422
+
+# ✅ Optional: Handle all unknown exceptions globally
+@app.errorhandler(Exception)
+def handle_unexpected_error(e):
+    return jsonify({"error": f"Internal server error: {str(e)}"}), 500
+
+# ✅ Run the app
+if __name__ == '__main__':
+    app.run(debug=True)
+
+`
+                }
+            ]
+        },
+        {
+            id: 1,
             title: "What is Python?",
             note: [
                 {
@@ -3401,28 +3724,211 @@ thread_B.join()
         }, 
         {
             id: 1,
+            section: `Synchronization`,
+            title: "Asynchronous Programming with Asyncio",
+            note: [
+                {
+                    text1: `In the programming world, the concept of "non-blocking" is pervasive. JavaScript developers often use the term "asynchronous" because it is one of JavaScript's strengths. However, to truly understand asynchronous programming, it's essential to grasp the concepts of concurrent and parallel programming.
+
+<b>Concurrent Programming</b>
+When several independent entities are working simultaneously, the programming is concurrent. It doesn't necessarily mean that these tasks are running at the exact same time. Instead, it means that tasks are making progress over time by sharing resources, such as CPU time. The main advantage of concurrent programming is its robustness: if one process crashes, the rest of your program continues to function.
+
+<b>Parallel Programming</b>
+If an algorithm can divide its work into several parts, it is parallel. The more processors you have, the more you benefit from parallelism. Efficient parallel programming optimizes the resources of modern machines for better performance.
+
+<b>Illustrating Concurrency vs. Parallelism with Cooking</b>
+<b>Concurrency Example</b>:
+Imagine you are preparing a meal where you need to grill some meat and make a sauce. You start by putting the meat on the barbecue. While the meat is grilling, you chop the tomatoes and other vegetables for the sauce. Then, you begin boiling the sauce while occasionally checking on the meat. Here, both tasks (grilling the meat and making the sauce) are in progress, but you are switching your attention between them. This represents concurrency.
+
+<b>Parallelism Example</b>:
+Now, let's say you have a friend to help you. While you focus on grilling the meat, your friend takes care of making the sauce. Both tasks are being done simultaneously without the need to switch attention between them. This represents parallelism.
+
+<b>What is Asynchronous Programming?</b>
+Asynchronous programming involves handling input/output (I/O) operations that occur outside your program, such as user input, printing to a terminal, reading from a socket, or writing to disk. The key characteristics of asynchronous I/O are:
+
+The time taken by the operation is not CPU-dependent. Instead, it depends on factors like disk speed, network latency, and other external conditions.
+
+The program cannot predict when the operation will end.
+
+For services with significant I/O (like web servers, databases, and deployment scripts), optimizing these operations can greatly improve performance.
+
+Let's see examples of blocking code and non-blocking code.`,
+                    code1: `// ------------ Ex : 1 ------------
+                    // Example of Blocking and Non-blocking Code
+import time
+
+def task():
+    time.sleep(2)
+    print("Hello")
+
+for _ in range(3):
+    task()
+    // In this synchronous program, each task waits for the previous one to finish, causing delays.
+    
+    // ------------ Ex : 2 ------------
+    // let's look at an asynchronous version using <b>asyncio</b>:
+    import asyncio
+
+async def task():
+    await asyncio.sleep(2)
+    print("Hello")
+
+async def main():
+    tasks = [task() for _ in range(3)]
+    await asyncio.gather(*tasks)
+
+asyncio.run(main())
+// In this asynchronous program, tasks run concurrently, reducing the total execution time. Let's explore the components of asynchronous programming.
+
+<b>Components of Asynchronous Programming</b>
+Event loops, coroutines, and futures are the essential elements of an asynchronous Python program.
+
+<b>Event Loop</b>: Manages task switching and execution flow, keeping track of tasks to be run asynchronously.
+
+<b>Coroutines</b>: Special functions that can be paused and resumed, allowing other tasks to run during the wait. A coroutine specifies where in the function the task-switching event should take place, returning control to the event loop. Coroutines are typically created by the event loop and stored internally in a task queue.
+
+<b>Futures</b>: Placeholders for results from coroutines, storing the result or exceptions. As soon as the event loop initiates a coroutine, a corresponding future is created that stores the result of the coroutine, or an exception if one was thrown during the coroutine’s execution.
+    `
+                }
+            ]
+        }, 
+        {
+            id: 1,
             title: "async / await",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `<b>async</b> and <b>await</b> in Python are used to define and run <b>non-blocking asynchronous code</b> using the <b>asyncio</b> library. This allows for better performance in I/O-bound tasks by enabling concurrent execution without using threads.
+                    
+                    <b>async</b> declares an asynchronous function
+<b>await</b> pauses the function execution until the awaited task completes
+
+<b><span style="color:red">asyncio.run()</span></b>: is used to <b>run an async function</b> from the <b>top-level</b> of your Python program.
+It starts the <b>event loop</b>, runs your coroutine, and then <b>closes the loop</b> automatically when it's done.
+Start the async engine, run this coroutine, and shut it down when finished.
+
+<b>1. “This function runs the passed coroutine…”</b>
+✔️ It means you pass an async def function to asyncio.run(), and it will run that function completely — start to finish.
+
+-> This function runs the passed coroutine, taking care of managing the asyncio event loop and finalizing asynchronous generators.
+
+-> This function cannot be called when another asyncio event loop is running in the same thread.
+
+-> If debug is <b>True</b>, the event loop will be run in debug mode.
+    You can pass debug=True to help detect bugs in your async code:
+asyncio.run(main(), debug=True)
+
+-> This function always creates a new event loop and closes it at the end. It should be used as a main entry point for asyncio programs, and should ideally only be called once.
+
+<b>Note</b>: asyncio.run() must be called only once per program — it's for top-level scripts only, not inside another running event loop (like in Jupyter notebooks).
+
+<b><span style="color:red">asyncio.sleep()</span></b>
+    <b>asyncio.sleep()</b> is a non-blocking version of <b>time.sleep()</b> used in asynchronous (async) functions.
+
+It pauses the current coroutine without blocking the entire program — allowing other async tasks to run during the wait.
+
+If result is provided, it is returned to the caller when the coroutine completes.
+sleep() always suspends the current task, allowing other tasks to run.
+Syntax :  await asyncio.sleep(seconds)
+
+    <b>Ex : 2</b>
+    -> 🔁 <b>get_running_loop()</b> returns the <b>active event loop</b> (which is auto-created by asyncio.run()).
+    -> You can use this to access precise <b>event-loop-based time</b>, which is monotonic (never goes backward).
+    print(loop)
+    end_time = loop.time() + 5.0
+    -> 🕒 <b>loop.time()</b> gives current time from event loop (in seconds).
+    -> So end_time = now + 5 seconds.
+->     Prints the current real-world time every second.
+-> Runs until ~4 seconds have passed, because it's checking:
+loop.time() + 1.0 >= end_time
+
+
+<b><span style="color:red">asyncio.gather</span></b>
+Runs multiple <b>awaitable</b> tasks concurrently and <b>waits for all of them to complete</b>.
+In the <b>Ex : 3</b>, we are trying to continue the execution of other tasks even if another one executing is sleeping (blocking). Notice the <b>async</b> keyword in front of the <b>task</b> and <b>main</b> functions.
+
+Those functions are now <b>coroutines</b>.
+Coroutines functions in Python are preceded by the keyword <b>async</b>. The <b>main()</b> function here is the task coordinator or our single event loop, as it executes all tasks using the <b>async.gather</b> method. The <b>asyncio.gather</b> function runs <b>awaitable</b> objects concurrently.
+
+
+<b><span style="color:red">asyncio.shield</span></b>
+`,
+                    code1: `// ---------- Ex : 1 ----------
+                    import asyncio
+
+async def main():
+    print("Hello from async")
+
+asyncio.run(main())
+
+
+
+//-------------  Ex : 2 -----------
+import asyncio
+import datetime
+
+async def display_date():
+    loop = asyncio.get_running_loop()
+    print(loop)
+    end_time = loop.time() + 5.0
+    while True:
+        print(datetime.datetime.now())
+        if (loop.time() + 1.0) >= end_time:
+            break
+        await asyncio.sleep(1)
+
+asyncio.run(display_date())
+
+
+//Output:
+// <_UnixSelectorEventLoop running=True closed=False debug=False>
+// 2025-06-27 23:47:00.521097
+// 2025-06-27 23:47:01.521327
+// 2025-06-27 23:47:02.522314
+// 2025-06-27 23:47:03.522953
+
+
+//-------------  Ex : 2 -----------
+import asyncio
+
+async def task():
+    await asyncio.sleep(2)
+    print("Hello")
+
+async def main():
+    tasks = [task() for _ in range(3)]
+    await asyncio.gather(*tasks)
+
+asyncio.run(main())
+
+// Output:
+// Hello
+// Hello
+// Hello
+
+//-------------  Ex : 3 -----------
+import aiohttp
+import asyncio
+
+async def fetch(session, city):
+    url = f"https://www.prevision-meteo.ch/services/json/{city}"
+    async with session.get(url) as response:
+        data = await response.json()
+        print(f"Temperature at {city}: {data['current_condition']['tmp']} C")
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        cities = ['paris', 'toulouse', 'marseille']
+        tasks = [fetch(session, city) for city in cities]
+        await asyncio.gather(*tasks)
+
+asyncio.run(main())
+`
                 }
             ]
         },
         {
             id: 1,
             title: "topic",
-            note: [
-                {
-                    text1: `What is Python?`,
-                    code1: ``
-                }
-            ]
-        },
-        {
-            id: 1,
-            section: `Synchronization`,
-            title: "What is Python?",
             note: [
                 {
                     text1: `What is Python?`,
@@ -3442,6 +3948,47 @@ thread_B.join()
             ]
         },
         {
+            id: 1,
+            section: `Python libraries`,
+            title: "math",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "random",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                {
+            id: 1,
+            title: "datetime",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                {
+            id: 1,
+            title: "What is Python?",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+                {
             id: 1,
             title: "What is Python?",
             note: [
