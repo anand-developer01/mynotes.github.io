@@ -36,5 +36,15 @@ Start building real projects:
                 }
             ]
         },
+        {
+            id: 1,
+            title: "what are problem-solving skills",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
     ]
 }
