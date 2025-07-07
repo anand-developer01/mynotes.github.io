@@ -1,6 +1,6 @@
 const Links1 = 'python-notes'
 const Links2 = 'python-ai'
-const Links3 = 'python-toolkit'
+const Links3 = 'python-framework'
 const Links4 = 'python-projects'
 
 const isHighlighted = 'python-ai'
@@ -23,13 +23,11 @@ const pythonData = {
 <b>NLTK</b> / spaCy	Natural Language Processing (text analysis =>  tokenization)
 transformers (by Hugging Face)	Pre-trained AI models like BERT =>  GPT
 
+Start that 30-day Python problem-solving plan?
 
 Start building real projects:
-
     Flask API
-
     Small AI using scikit-learn or transformers
-
     Web scraper with requests + BeautifulSoup
 `,
                     code1: ``

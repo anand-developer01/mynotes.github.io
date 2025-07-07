@@ -1,6 +1,6 @@
 const Links1 = 'python-notes'
 const Links2 = 'python-ai'
-const Links3 = 'python-toolkit'
+const Links3 = 'python-framework'
 const Links4 = 'python-projects'
 
 const isHighlighted = 'python-notes'
@@ -823,22 +823,417 @@ def get_todo(todo_id):
             title: "Arguments (*args, **kwargs)",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `In Python, *args and **kwargs are used to allow functions to accept an arbitrary number of arguments. These features provide great flexibility when designing functions that need to handle a varying number of inputs.
+                    
+                    In programming, we define a function to make a reusable code that performs similar operation. To perform that operation, we call a function with the specific value, this value is called a function argument in Python.
+                    
+                    Let's understand *args and **kwargs in Python — these are used when <b>you don't know in advance how many arguments</b> a function will receive.
+
+                    In Python, we can pass a variable number of arguments to a function using special symbols. There are two special symbols:
+
+                    We use Python *args and **kwargs when we are unsure about the number of arguments to pass. *args is used for non-keyworded arguments that we can pass to a function and perform operations, whereas **kwargs is used for a variable number of keyworded arguments passed to a function and performs dictionary operations.
+
+1) *args (Non Keyword Arguments)
+2) **kwargs (Keyword Arguments)
+
+We use <b>*args</b> and <b>**kwargs</b> as an argument when we are unsure about the number of arguments to pass in the functions.
+
+ <b>Are *args and **kwargs Python keywords?</b>
+🔸 No, args and kwargs are not reserved keywords in Python.
+🔸 But * and ** have special meaning in function definitions:
+
+    <b>*</b> unpacks positional arguments into a tuple
+    <b>**</b> unpacks keyword arguments into a dict
+     You can name them anything:
+
+def my_func(*values, **options):
+    print(values)   # tuple of args
+    print(options)  # dict of kwargs
+
+    -> Using *args and **kwargs makes your code:
+    -> Easier to read
+    -> Familiar to other developers
+
+<b>Python *args - (Ex : 1)</b>
+Python *args
+In Python, *args is used to pass a variable number of positional arguments to a function. It collects these arguments into a tuple, allowing you to handle multiple values without specifying them one by one.
+
+We use Python *args when we’re unsure how many arguments a function might receive during a call.
+
+Key Points to Remember
+-> *args collects extra positional arguments into a tuple.
+-> It must appear after standard arguments in the function definition.
+-> You can loop through args just like a tuple.
+-> The name doesn’t have to be args, but the asterisk * is required.
+
+
+<b>Python **kwargs (Ex : 2)</b>
+We use **kwargs in function definitions to pass keyworded variable-length arguments to functions. Please note that we can’t use **kwargs in Python to pass keyword arguments.
+
+We use kwargs with double ** before the parameter name because it allows us to pass any number of arguments. 
+
+Key Points to Remember
+-> The keyworded arguments are passed as a dictionary. 
+-> A keyword argument allows you to provide a variable name as we pass it into the function.
+-> Python considers a variable name with two stars (**) before it a keyword argument.
+-> kwargs is like a dictionary that maps every keyword to the value passed alongside it. Therefore, when we iterate over kwargs, there is no order in which they are printed. 
+`,
+                    code1: `//---------- Ex : 1 ---------
+                    // *args
+                    def multiply_all(*args):
+    """Function to multiply any number of arguments together."""
+    result = 1
+    for number in args:
+        result *= number
+    return result
+
+# Testing the function with different numbers of arguments
+print(multiply_all(2, 3))          
+print(multiply_all(4, 5, 6))     
+print(multiply_all(1, 2, 3, 4, 5)) 
+print(multiply_all(10))            
+print(multiply_all()) 
+
+
+//---------- Ex : 2 ---------
+def print_kwargs(**kwargs):
+    """Function to print key-value pairs passed as keyword arguments."""
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+# Testing the function with different sets of keyword arguments
+print_kwargs(name="Raman", age=30, city="New York")
+print("---")
+print_kwargs(language="Python", version=3.10)
+print("---")
+print_kwargs(course="Data Science", duration="6 months", level="Intermediate")
+
+
+//---------- Ex : 2 ---------
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# Route with dynamic parts
+@app.route("/profile/<username>/<int:year>/<month>")
+def user_profile(**kwargs):
+    # kwargs will contain: username, year, and month from the URL
+    return jsonify({
+        "username": kwargs.get("username"),
+        "year": kwargs.get("year"),
+        "month": kwargs.get("month")
+    })
+
+# Alternative using named parameters directly
+@app.route("/greet/<name>")
+def greet(name):
+    return f"Hello, {name}!"
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+//http://127.0.0.1:5000/profile/anand/2025/June
+// {
+//   "username": "anand",
+//   "year": 2025,
+//   "month": "June"
+// }
+      `
                 }
             ]
         },
-                {
+        {
             id: 1,
-            title: "Lambda, map, filter, reduce",
+            title: "Lambda",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `<b>What is a Lambda Function?</b>
+Lambda functions are similar to user-defined functions but without a name. They're commonly referred to as anonymous functions.
+
+Lambda functions are efficient whenever you want to create a function that will only contain simple expressions – that is, expressions that are usually a single line of a statement. They're also useful when you want to use the function once.
+
+You can define a lambda function like this:
+We use the <b>lambda keyword</b> instead of <b>def</b> to create a lambda function. Here's the syntax to declare the lambda function:
+<b>lambda argument(s) : expression</b>
+Here,
+<b>argument(s)</b> - any value passed to the lambda function
+<b>expression </b>- expression is executed and returned
+
+-> lambda is a keyword in Python for defining the anonymous function.
+-> argument(s) is a placeholder, that is a variable that will be used to hold the value you want to pass into the function expression. A lambda function can have multiple variables depending on what you want to achieve.
+-> expression is the code you want to execute in the lambda function.
+
+Notice that the anonymous function does not have a return keyword. This is because the anonymous function will automatically return the result of the expression in the function once it is executed.
+
+Let's look at an example of a lambda function to see how it works. We'll compare it to a regular user-defined function.
+
+Assume I want to write a function that returns twice the number I pass it. We can define a user-defined function as follows:
+
+def f(x):
+  return x * 2
+
+f(3)
+>> 6
+
+Now for a lambda function. We'll create it like this:
+lambda x: x * 3
+
+<b>When Should You Use a Lambda Function?</b>
+You should use the lambda function to create simple expressions. For example, expressions that do not include complex structures such as if-else, for-loops, and so on.
+
+<b>Common Use Cases for Lambda Functions</b>
+How to Use a Lambda Function with Iterables
+An iterable is essentially anything that consists of a series of values, such as characters, numbers, and so on.
+
+In Python, iterables include strings, lists, dictionaries, ranges, tuples, and so on. When working with iterables, you can use lambda functions in conjunction with two common functions: <b>filter()</b> and <b>map()</b>.
+
+<b>Filter()</b>
+When you want to focus on specific values in an iterable, you can use the filter function. The following is the syntax of a filter function:
+
+filter(function, iterable)
+
+Firstly I will use the lambda function to create the expression I want to derive like this:
+
+lambda x: x % 2 == 0
+Then I will insert it into the filter function like this:
+
+list1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+filter(lambda x: x % 2 == 0, list1)
+
+>> <filter at 0x1e3f212ad60> # The result is always filter object so I will need to convert it to list using list()
+
+list(filter(lambda x: x % 2 == 0, list1))
+>> [2, 4, 6, 8, 10]
+
+<b>Pandas Series - (Ex : 3)</b>
+Another place you'll use lambda functions is in data science when creating a data frame from Pandas. A series is a data frame column. You can manipulate all of the values in a series by using the lambda function.
+
+df["lower_name"] = df["name"].apply(lambda x: x.lower())
+The apply function will apply each element of the series to the lambda function. The lambda function will then return a value for each element based on the expression you passed to it. In our case, the expression was to lowercase each element.
+`,
+                    code1: `// ------------- Ex : 1 ------------
+                    s1 = 'GeeksforGeeks'
+
+s2 = lambda func: func.upper()
+print(s2(s1))
+                    
+                    
+                    // -----------   -----------
+                    // You use the \`map()\` function whenever you want to modify every value in an iterable.
+list1 = [2, 3, 4, 5]
+
+list(map(lambda x: pow(x, 2), list1))
+>> [4, 9, 16, 25]
+
+
+// ---------- Ex : 3 ---------
+//Pandas Series
+import pandas as pd
+
+df = pd.DataFrame(
+    {"name": ["IBRAHIM", "SEGUN", "YUSUF", "DARE", "BOLA", "SOKUNBI"],
+     "score": [50, 32, 45, 45, 23, 45]
+    }
+)
+    df["lower_name"] = df["name"].apply(lambda x: x.lower())`
                 }
             ]
         },
-                        {
+        {
+            id: 1,
+            title: "map",
+            note: [
+                {
+                    text1: `In Python, "map" primarily refers to the built-in map() function. This function applies a given function to each item of an iterable (like a list, tuple, or string) and returns a map object, which is an iterator.
+
+The <b>map()</b> function is used to apply a given function to every item of an iterable, such as a list or tuple, and returns a map object (which is an iterator).      
+
+The <b>map()</b> function executes a given function to each element of an iterable (such as lists, tuples, etc.).
+
+Syntax
+map(function, iterables)
+
+<b>map() Arguments</b>
+The map() function takes two arguments:
+
+<b>function</b> - a function that is applied to each element of an iterable.
+<b>iterables</b> - iterables such as lists, tuples, etc.
+Note: We can pass more than one iterable to the map() function.
+
+<b>map() Return Value</b>
+The map() function returns a map object, which can be easily converted to lists, tuples, etc.`,
+                    code1: `// ------------ Ex : 1 ---------- 
+                    numbers = [1,2,3,4]
+
+# returns the square of a number
+def square(number):
+  return number * number
+
+# apply square() to each item of the numbers list
+squared_numbers = map(square, numbers)
+
+# converting to list for printing
+result = list(squared_numbers)
+print(result) 
+
+# Output: [1,4,9,16]
+
+// ----------- Ex : 2 -----------
+
+def square(n):
+    return n*n
+
+numbers = (1, 2, 3, 4)
+result = map(square, numbers)
+print(result)
+
+# converting the map object to set
+result = set(result)
+print(result)
+
+// -----------  Ex : 3 ---------
+// In a map() function, we can also use a lambda function instead of a regular function. For example,
+
+numbers = (1, 2, 3, 4)
+result = map(lambda x: x*x, numbers)
+print(result)
+
+# convert to set and print it
+print(set(result))`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "filter",
+            note: [
+                {
+                    text1: `The <b>filter()</b> function in Python is a built-in function used to construct an iterator from elements of an iterable for which a function returns true.
+                    
+                    The filter() function selects elements from an iterable based on the result of a function.
+                    
+                     Syntax
+filter(function, iterable)
+filter() Parameters
+The function takes two parameters:
+<b>function</b> - a function that runs for each item of an iterable
+<b>iterable</b> - a sequence that needs to be filtered like sets, lists, tuples, etc
+`,
+                    code1: `// ------------ Ex : 1 -----------
+                # Filtering even numbers from a list
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+def is_even(num):
+    return num % 2 == 0
+
+even_numbers_iterator = filter(is_even, numbers)
+even_numbers = list(even_numbers_iterator)
+print(even_numbers) # Output: [2, 4, 6, 8, 10]
+
+# Using a lambda function for a more concise filter
+positive_numbers = filter(lambda x: x > 0, [-2, -1, 0, 1, 2])
+print(list(positive_numbers)) # Output: [1, 2]
+
+// ------------ Ex : 2 -----------
+# returns True if the argument passed is even
+def check_even(number):
+    if number % 2 == 0:
+          return True  
+    return False
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# if an element passed to check_even() returns True, select it
+even_numbers_iterator = filter(check_even, numbers)
+
+# converting to list
+even_numbers = list(even_numbers_iterator)
+print(even_numbers)
+
+# Output: [2, 4, 6, 8, 10]
+
+
+// -------------- Ex : 3 ----------
+letters = ['a', 'b', 'd', 'e', 'i', 'j', 'o']
+
+# a function that returns True if letter is vowel
+def filter_vowels(letter):
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    if letter in vowels:
+        return True 
+    else:
+        return False
+
+# selects only vowel elements
+filtered_vowels = filter(filter_vowels, letters)
+
+# converting to tuple
+vowels = tuple(filtered_vowels)
+print(vowels)
+
+# Output: ('a', 'e', 'i', 'o')
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "reduce",
+            note: [
+                {
+                    text1: `The <b>reduce()</b> function in Python is a functional programming tool that applies a given function cumulatively to the items of an iterable, from left to right, so as to reduce the iterable to a single value. It is part of the functools module and needs to be imported. 
+                    
+                    The <b>reduce(fun,seq)</b> function is used to apply a particular function passed in its argument to all of the list elements mentioned in the sequence passed along. This function is defined in "functools" module.
+                    
+                    <b>Syntax of reduce()</b>
+functools.reduce(function, iterable[, initializer])
+
+<b>function</b>: A function that takes two arguments and performs an operation on them.
+<b>iterable</b>: An iterable whose elements are processed by the function.
+<b>initializer (optional)</b>: A starting value for the operation. If provided, it is placed before the first element in the iterable.`,
+                    code1: `// ----------- Ex : 1----------
+                    from functools import reduce
+
+# Function to add two numbers
+def add(x, y):
+    return x + y
+
+a = [1, 2, 3, 4, 5]
+res = reduce(add, a)
+
+print(res)  # Output: 15
+
+//------------- Ex : 2 ----------
+// When paired with a lambda function, reduce() becomes a concise and powerful tool for aggregation tasks like summing, multiplying or finding the maximum value.
+
+from functools import reduce
+// # Summing numbers with reduce and lambda
+a = [1, 2, 3, 4, 5]
+res = reduce(lambda x, y: x + y, a)
+
+print(res)
+
+// ------------- Ex : 3 ----------
+from functools import reduce
+
+arr = [1, "a", 2, "b"]
+
+nums, strings = reduce(
+    lambda acc, x: (
+        (acc[0] + [x], acc[1]) if isinstance(x, (int, float)) else (acc[0], acc[1] + [x])
+    ),
+    arr,
+    ([], [])
+)
+
+print("Numbers:", nums)   # [1, 2]
+print("Strings:", strings)  # ['a', 'b']
+
+`
+                }
+            ]
+        },
+        {
             id: 1,
             title: "Decorators",
             note: [
@@ -850,7 +1245,163 @@ def get_todo(todo_id):
         },
                         {
             id: 1,
-            title: "Generators & Iterators",
+            title: "Generators",
+            note: [
+                {
+                    text1: `This is part of a <b>generator expression</b>, which is Python's compact way of writing a <b>for-loop inside a function call</b> — similar to JavaScript’s .map() or .forEach().
+                    
+                    A generator expression in Python provides a concise and memory-efficient way to create a generator object. It is syntactically similar to a list comprehension but uses parentheses () instead of square brackets [].
+                    
+                    In Python, generators are a special type of iterator created using the <b>def</b> keyword followed by the <b>yield</b> statement. Unlike regular functions that use <b>return</b> to provide a single value, generator functions use <b>yield</b> to produce a sequence of values on demand.
+                    <b>Ex : 1</b>
+->                     A generator is a <b>special kind of iterator</b>.
+-> It’s defined like a regular function using <b>def</b>, but instead of <b>return</b>, it uses <b>yield</b>.
+-> Each call to <b>next()</b> on the generator <b>resumes from where it left off</b>, not from the beginning.
+
+The state of the generator is maintained through the <b>yield</b> keyword, and its code only executes when <b>next()</b> is called on the generator object. Generators also support advanced methods like <b>.send(), .throw()</b>, and <b>.close()</b> for more complex use cases.
+
+<b>List comprehensions</b>
+They are the most common type of comprehension in Python. They allow you to create a new list by applying an expression to each element of an existing iterable. The basic syntax of a list comprehension is as follows:
+
+new_list = [expression for item in iterable if condition]
+Here's a breakdown of the components:
+
+-> <b>expression</b>: The operation or transformation applied to each element.
+-> <b>item</b>: The variable representing each element in the iterable.
+-> <b>iterable</b>: The sequence (list, tuple, string, etc.) being iterated over.
+-> <b>condition (optional)</b>: A conditional statement to filter elements.
+
+eves = [num for num in arr<b style="color:red">:</b> if num % 2 == 0] // SyntaxError: invalid syntax
+❌ Problem:
+You added a colon (<b>:</b>) after arr, which is not allowed in list comprehensions.
+In Python, colons are used in for loops or if blocks, but not in list comprehensions.
+
+
+transpose = [[row[i] for row in matrix] for i in range(len(matrix[0]))] <b>Ex : 4</b>
+This means:
+-> Outer loop: <b>for i in range(len(matrix[0]))</b> → loop over column indices (0, 1, 2)
+-> Inner loop: <b>for row in matrix</b> → for each row, get the <b>i</b>-th element
+-> So you're collecting all the i-th elements from each row → that becomes a new row in the transposed matrix
+`,
+                    code1: `// ------------ Ex : 1 ---------
+                    def count_up_to(max):
+    count = 1
+    while count <= max:
+        yield count
+        count += 1
+
+counter = count_up_to(3)
+
+print(next(counter))  # 1
+print(next(counter))  # 2
+print(next(counter))  # 3
+print(next(counter))  # Raises StopIteration
+                    //you're seeing Python's built-in StopIteration exception, which is how generators signal that they are finished.
+                    
+                    // ---------- Ex : 2 -----------
+                    numbers = [1, 2, 3, 4, 5]
+squared_numbers = [x**2 for x in numbers]
+print(squared_numbers)  # Output: [1, 4, 9, 16, 25]
+
+// ---------- Ex : 3 -----------
+// List comprehensions can also include conditional statements to filter elements. Here’s an example that creates a new list of even numbers from an existing list:
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+evens_num = [i for i in numbers if i % 2 == 0]
+print(evens_num)
+
+
+
+//---------- Ex : 4 ------------
+matrix = [[1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9]]
+transpose = [[row[i] for row in matrix] for i in range(len(matrix[0]))]
+print(transpose)  # Output: [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+
+// or
+
+matrix = [[1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9]]
+
+transpose = []
+
+for i in range(len(matrix[0])):  # column index
+    new_row = []
+    for row in matrix:
+    --->print(f"row={row}, i={i}, row[i]={row[i]}")
+    --->new_row.append(row[i])
+    transpose.append(new_row)
+
+print("Transpose:", transpose)
+
+//---------- ✅ Example 2: Flatten a 2D Matrix
+// 🧠 List Comprehension:
+
+flat = [num for row in matrix for num in row]
+
+// 🔍 Expanded Version:
+
+flat = []
+for row in matrix:
+    for num in row:
+        print(f"row={row}, num={num}")
+        flat.append(num)
+
+print("Flattened:", flat)
+
+//-------✅ Example 3: Get Even Numbers in a 2D Matrix
+// 🧠 List Comprehension:
+even = [num for row in matrix for num in row if num % 2 == 0]
+
+// 🔍 Expanded Debuggable Version:
+even = []
+for row in matrix:
+    for num in row:
+        if num % 2 == 0:
+            print(f"Even found: {num}")
+            even.append(num)
+
+print("Even numbers:", even)
+
+
+// ----------✅ Example 4: Multiply Matrix by 2
+// 🧠 List Comprehension:
+doubled = [[num * 2 for num in row] for row in matrix]
+
+// 🔍 Expanded Version:
+doubled = []
+
+for row in matrix:
+    new_row = []
+    for num in row:
+        doubled_value = num * 2
+        print(f"Original: {num}, Doubled: {doubled_value}")
+        new_row.append(doubled_value)
+    doubled.append(new_row)
+
+print("Doubled Matrix:", doubled)
+
+// ----------✅ Example 5: Diagonal Extraction (Left-to-Right)
+// 🧠 List Comprehension:
+diagonal = [matrix[i][i] for i in range(len(matrix))]
+
+// 🔍 Expanded Version:
+diagonal = []
+
+for i in range(len(matrix)):
+    value = matrix[i][i]
+    print(f"matrix[{i}][{i}] = {value}")
+    diagonal.append(value)
+
+print("Diagonal:", diagonal)
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Iterators",
             note: [
                 {
                     text1: `What is Python?`,
@@ -863,12 +1414,144 @@ def get_todo(todo_id):
             title: "Virtual Environments",
             note: [
                 {
-                    text1: `What is Python?`,
+                    text1: `When developing software with Python, a basic approach is to install Python on your machine, install all your required libraries via the terminal, write all your code in a single .py file or notebook, and run your Python program in the terminal.
+
+This is a common approach for a lot of beginners and many people transitioning from working with Python for data analytics.
+
+This works fine for simple Python scripting projects. But in complex software development projects, like building a Python library, an API, or software development kit, often you will be working with multiple files, multiple packages, and dependencies. As a result, you will need to isolate your Python development environment for that particular project.
+
+Consider this scenario: you are working on app A, using your system installed Python and you pip install packageX version 1.0 to your global Python library. Then you switch to project B on your local machine, and you install the same packageX but version 2.0, which has some breaking changes between version 1.0 and 2.0.
+
+When you go back to run your app A, you get all sorts of errors, and your app does not run. This is a scenario you can run into when building software with Python. And to get around this, we can use virtual environments.
+
+<b>What is a Virtual Environment?</b>
+Python's official documentation says:
+
+"A virtual environment is a Python environment such that the Python interpreter, libraries and scripts installed into it are isolated from those installed in other virtual environments, and (by default) any libraries installed in a “system” Python, i.e., one which is installed as part of your operating system"
+
+A Python Virtual Environment is an isolated space where you can work on your Python projects, separately from your system-installed Python. You can set up your own libraries and dependencies without affecting the system Python. We will use virtualenv to create a virtual environment in Python.
+
+A virtual environment is a tool that helps to keep dependencies required by different projects separate by creating isolated Python virtual environments for them. This is one of the most important tools that most Python developers use.     
+
+<b>Why use a virtual environment?</b>
+    -> Each project can use different versions of the same package.
+    -> Avoids polluting the global Python environment.
+    -> Makes deployment easier and cleaner.
+
+<b>🔧 How to create and use a virtual environment</b>
+<b>1. Create a virtual environment</b>
+python -m venv <span>env</span>
+    env is the name of the virtual environment folder. You can name it anything.
+    This creates a directory with Python binaries and local site-packages.
+                (OR)
+    $ /n/fs/myproject/py310/bin/python3.10 -m venv my_venv_py310
+The -m <b>venv</b> tells Python to use the “venv” module to create a virtual environment in a directory called my_venv_py310.
+
+
+<b>2. Activate the virtual environment</b>
+    => On Windows:
+<b>./\env/\Scripts/\activate</b>
+
+=> On macOS/Linux:
+    <b>source <span style="color:red">env</span>/bin/activate</b>
+<b>env</b> is just the <b>name of the virtual environment folder</b> — and yes, you can name it anything you want.
+After activation, your terminal prompt usually changes to show the environment name.
+
+<b>3. Install packages inside the environment</b>
+pip install flask
+This installs <b>flask</b> only inside your virtual environment.
+
+<b>4. Freeze dependencies</b>
+pip freeze > requirements.txt
+This saves the installed packages to a file, useful for sharing or deployment.
+Freezing dependencies means saving a list of all the Python packages (and their exact versions) that are installed in your virtual environment.
+
+<b>5. Deactivate the virtual environment</b>
+deactivate
+
+<b>🔁 Recreate environment from requirements.txt</b>
+python -m venv env
+source env/bin/activate  # or ./\env/\Scripts/\activate on Windows
+pip install -r requirements.txt
+
+<b>🧠 Tools that help manage environments</b>
+    <b>venv</b> - built-in tool (recommended for most use cases)
+    <b>virtualenv</b> - older third-party tool, used when venv is not available
+    <b>pipenv</b> - combines package + environment management
+    <b>conda</b> - for data science, handles packages + environments
+    `,
+                    code1: `//If you created your environment like this:
+python -m venv myproject_env
+
+// Then to activate it:
+source myproject_env/bin/activate
+
+// Deactivate the virtual environment
+deactivate
+
+//----- Freezing dependencies ------ 
+// Freezing dependencies means saving a list of all the Python packages (and their exact versions) that are installed in your virtual environment.
+
+pip freeze > requirements.txt
+
+// ----- Recreate environment from requirements.txt -----
+python -m venv env
+source env/bin/activate  # or ./\env/\Scripts/\activate on Windows
+pip install -r requirements.txt
+
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "pip",
+            note: [
+                {
+                    text1: `In Python, pip is a package manager. It is a tool that simplifies the process of installing, managing, and uninstalling software packages and their dependencies. Essentially, it allows you to easily add functionality to your Python projects by installing pre-built libraries and modules. 
+                    pip stands for:
+<b>📦 Pip Installs Packages</b>
+                    pip is the package installer for Python.
+It lets you <b>install, upgrade, and manage</b> third-party Python libraries from the <b>Python Package Index (PyPI)</b> — like <b>flask, django, requests, numpy</b>, and more.
+
+<table border="1" cellspacing="0" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>✅ Install a package</td>
+      <td><code>pip install flask</code></td>
+    </tr>
+    <tr>
+      <td>⬆️ Upgrade a package</td>
+      <td><code>pip install --upgrade flask</code></td>
+    </tr>
+    <tr>
+      <td>❌ Uninstall a package</td>
+      <td><code>pip uninstall flask</code></td>
+    </tr>
+    <tr>
+      <td>🔍 Check installed packages</td>
+      <td><code>pip list</code></td>
+    </tr>
+    <tr>
+      <td>❄️ Freeze dependencies</td>
+      <td><code>pip freeze &gt; requirements.txt</code></td>
+    </tr>
+    <tr>
+      <td>📦 Install from requirements</td>
+      <td><code>pip install -r requirements.txt</code></td>
+    </tr>
+`,
                     code1: ``
                 }
             ]
         },
-                                {
+        {
             id: 1,
             title: "Unit Testing (unittest, pytest)",
             note: [
@@ -2792,497 +3475,6 @@ print(dog2.get_species())     # All dogs belong to the species: Canis lupus
         },
         {
             id: 1,
-            section: `Python (FastAPI or Flask) for backend APIs`,
-            title: "Flask",
-            note: [
-                {
-                    text1: `Flask is a lightweight and powerful web framework for Python. It's often called a "micro-framework" because it provides the essentials for web development without unnecessary complexity. Unlike Django, which comes with built-in features like authentication and an admin panel, Flask keeps things minimal and lets us add only what we need.
-                    
-                    <b>Flask</b> is a <b>micro web framework</b> for Python.
-Called "micro" because it's <b>lightweight</b> and <b>simple</b>, yet very <b>powerful</b>.
-Perfect for building <b>APIs, small web apps</b>, or even <b>full-stack websites</b>.
-
-                    <b>Interesting Facts about Flask</b>
-Here are some interesting facts about Flask:
-
-<b>Microframework</b>: Flask is considered a "micro" web framework because it is lightweight and simple to use, with minimal dependencies. It doesn't come with the full set of tools that more extensive frameworks like Django provide, giving developers more control and flexibility over the application structure.
-<b>Werkzeug and Jinja2</b>: Flask is built on top of two powerful libraries:
-<b>Werkzeug</b>: A comprehensive WSGI web server library that helps manage the application's request and response cycles.
-vJinja2</b>: A templating engine that allows you to use dynamic HTML in your application, making it easy to build web pages with variables and loops.
-<b>Routing</b>: Flask's routing system is extremely simple and intuitive. You define routes with decorators that map URLs to Python functions. This makes it very easy to set up and control the flow of your application.
-<b>No ORM by Default</b>: Unlike Django, Flask does not come with a built-in Object-Relational Mapping (ORM) tool like Django's ORM. Instead, it lets developers choose their ORM, such as SQLAlchemy or simply use raw SQL.
-<b>RESTful API Support</b>: Flask is popular for building RESTful APIs. Its simplicity and flexibility make it a great choice for building APIs and many developers use it for creating microservices and backends for single-page applications.
-<b>Development Server</b>: Flask comes with a built-in development server that makes it easy to test and run the application locally. This server is lightweight and designed for use during development rather than production.
-
-
-<b>Flask()</b>	Creates the app
-<b>@app.route()</b>	Maps URL to a function
-<b>debug=True</b>	Auto reloads app and shows error messages`,
-                    code1: `// ------------- Ex : 1 ------------
-                    //Basic Flask App Example
-//📁 File: app.py
-
-from flask import Flask
-
-//# Create Flask app
-app = Flask(__name__)
-
-//# Route: Home page
-@app.route('/')
-def home():
-    return "Hello, Flask!"
-
-//------------
-    @app.route('/about')
-def about():
-    return "This is the About page"
-
-
-//# Run the app
-if __name__ == '__main__':
-    app.run(debug=True)
-    
-//     Make sure Flask is installed:
-// pip install flask
-
-// Run the app:
-// python app.py
-
-// Open browser and go to:
-// http://localhost:5000/ // Hello, Flask! -> in browser
-
-// This is just a reminder: Flask's built-in server is only for development/testing.
-// In production, you should use a WSGI server like Gunicorn, uWSGI, or Waitress behind Nginx/Apache.
-
-
-// ------------- Ex : 2 -------------
-from flask import Flask, jsonify
-app = Flask(__name__)
-
-@app.route('/products')
-def get_products():
-    return jsonify(["Mobile", "Laptop", "Headphones"])
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-Output:
-// http://localhost:5000/products
-// [
-//   "Mobile",
-//   "Laptop",
-//   "Headphones"
-// ]
-
-//------------- Ex : 3 -------------
-from flask import Flask, request, redirect, render_template_string
-
-app = Flask(__name__)
-
-# In-memory task list
-tasks = []
-
-# Jinja2 HTML Template (fixed: no enumerate)
-html_template = """
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;To-Do App&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h2&gt;📝 To-Do List&lt;/h2&gt;
-
-    &lt;form method=&quot;POST&quot; action=&quot;/add&quot;&gt;
-        &lt;input type=&quot;text&quot; name=&quot;task&quot; placeholder=&quot;Enter a task&quot; required&gt;
-        &lt;button type=&quot;submit&quot;&gt;Add Task&lt;/button&gt;
-    &lt;/form&gt;
-
-    &lt;ul&gt;
-        {% for task in tasks %}
-        &lt;li&gt;
-            {{ loop.index }}. {{ task }}
-            &lt;form method=&quot;POST&quot; action=&quot;/delete&quot; style=&quot;display:inline;&quot;&gt;
-                &lt;input type=&quot;hidden&quot; name=&quot;index&quot; value=&quot;{{ loop.index0 }}&quot;&gt;
-                &lt;button type=&quot;submit&quot;&gt;❌ Delete&lt;/button&gt;
-            &lt;/form&gt;
-        &lt;/li&gt;
-        {% else %}
-        &lt;li&gt;No tasks yet.&lt;/li&gt;
-        {% endfor %}
-    &lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-"""
-
-@app.route('/')
-def index():
-    return render_template_string(html_template, tasks=tasks)
-
-@app.route('/add', methods=['POST'])
-def add():
-    task = request.form.get('task')
-    if task:
-        tasks.append(task)
-    return redirect('/')
-
-@app.route('/delete', methods=['POST'])
-def delete():
-    index = int(request.form.get('index'))
-    if 0 <= index < len(tasks):
-        tasks.pop(index)
-    return redirect('/')
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-`
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "request.form (Flask Forms + POST)",
-            note: [
-                {
-                    text1: `<b>request.form</b> is a <b>MultiDict</b> (dictionary-like object) provided by Flask, which holds <b>form input data sent via the HTTP POST or PUT method</b> from an HTML form.
-                    
-->                     Access form fields like &lt;input&gt;, &lt;textarea&gt;, &lt;select&gt;
--> Only works with form submissions using method="POST" or method="PUT"
-
-In a Flask App, we have our own Webpage (Client) and a Server. The Server should process the data.  The Request, in Flask, is an object that contains all the data sent from the Client to Server. This data can be recovered using the GET/POST Methods. POST is used when your application expects user input to be received by command or an HTTP request, while GET gets all the information before it even has a chance for submission. Using both methods at once gives perfect freedom but still requires complex UI patterns like AJAX calls etc, with most common applications being frameworks where multiple forms are necessary such as Slack Webhooks, MailgunMailserver, and eCommerce Commerce Framework. With Flask-Request class instead, we don't have any need anymore since this API allows us flexible handling of many other situations.
-`,
-                    code1: `&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;&lt;title&gt;Flask Form&lt;/title&gt;&lt;/head&gt;
-&lt;body&gt;
-  &lt;h2&gt;User Registration&lt;/h2&gt;
-  &lt;form action=&quot;/submit&quot; method=&quot;POST&quot;&gt;
-    Name: &lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;/br&gt;
-    Email: &lt;input type=&quot;email&quot; name=&quot;email&quot;/&gt;&lt;/br&gt;
-    Age: &lt;input type=&quot;number&quot; name=&quot;age&quot;/&gt;&lt;/br&gt;
-    &lt;input type=&quot;submit&quot; value=&quot;Register&quot;/&gt;
-  &lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-
-
-                    
-                    from flask import Flask, request, render_template
-
-app = Flask(__name__)
-
-@app.route('/')
-def show_form():
-    return render_template('form.html')
-
-@app.route('/submit', methods=['POST'])
-def handle_submit():
-    # Access form data
-    username = request.form['username']  # same as input name="username"
-    email = request.form.get('email')    # safer (doesn't throw error if missing)
-    age = request.form.get('age')
-
-    return f"Hello {username}, your email is {email} and you're {age} years old."
-
-if __name__ == '__main__':
-    app.run(debug=True)
-`
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "Werkzeug (pronunciation వర్క్‌-సూక్ (Var-k-suukh))- (Backend HTTP toolkit) and Jinja2",
-            note: [
-                {
-                    text1: `<b>Werkzeug</b> (pronounced “ver-ksuukh”) is a <b>WSGI (Web Server Gateway Interface)</b> utility library in Python that powers Flask’s core request/response handling.
-                    
-                    WSGI is a specification whose job is to create a standard interface between traditional web servers (like nginx) and Python web applications.
-
-                    <b>What is Werkzeug?</b>
-Werkzeug is a collection of libraries that can be used to create a WSGI (Web Server Gateway Interface) compatible web application in Python.
-
-A WSGI (Web Server Gateway Interface) server is necessary for Python web applications since a web server cannot communicate directly with Python. WSGI is an interface between a web server and a Python-based web application.
-
-The term “object” should not be misconstrued as requiring an actual object instance: a function, method, class, or instance with a <b>__call__</b> method are all acceptable for use as an application object.
-
-                    It provides tools for:
-    Parsing HTTP requests
-    Building and returning HTTP responses
-    Managing sessions, URL routing, middleware, and exceptions
-
-    Werkzeug is a collection of libraries that you can use to build Web Server Gateway Interface (WSGI) compliant web applications in Python. It started as a simple collection of miscellaneous utilities for WSGI applications and has grown into one of the most advanced WSGI utility libraries. The choice of template engine, database adapter, and request handling is entirely up to the developer. In other words, don't enforce dependencies. This includes a debugger, request, and response objects, cache control objects, cookie handling, file uploads, and many community added add-ons. Released under the BSD license.
-Installing:
-<b>pip install -U Werkzeug</b>
-
-WSGI is the Python standard for how web servers talk to web applications (like Flask or your <b>MovieApp</b>).
-
-When the WSGI server (like Gunicorn, uWSGI, or Werkzeug’s <b>run_simple</b>) receives a request, it calls your application like this:
-
-response = application(environ, start_response)
-
-<b>render_template()</b> is a Flask function used to <b>render (display) an HTML page</b> by combining a <b>Jinja2 template</b> with data from Python. <b>Ex : 1</b>
-render_template("file.html", key=value) // Pass variables to template
-Really, an application object is just a callable that accepts two arguments — environ and start_response.
-
-The <b>environ</b> variable is a dictionary containing essential information about the request as well as the server configuration. Here is where you can find things like the request method, the query string, and the request headers.
-
-The <b>start_response</b> method is a callback that can be used to initiate an HTTP response. This is what you call when you have finished processing the request, calculated the response data, and want to return the actual response.
-
-<b>Ex : 2 </b>The <b>MovieApp</b> class implements a WSGI-compatible web application, which processes requests from different users and generates responses back to the users. Here's the flow of how this class interfaces with a WSGI server:
-
-The environment (<b>environ</b>) is automatically processed in the <b>Request</b> class to create a <b>request</b> object. The <b>request</b> is then processed in <b>dispatch_request()</b>. For this initial example, <b>dispatch_request()</b> returns a response of <b>'Hello World!'</b>. The response is then returned from <b>wsgi_app()</b>.
-
-Flask Comparison:
-<b>MovieApp</b> is an simplified version of the <b>Flask</b> class.
-
-Within the <b>Flask</b> class, the <b>wsgi_app()</b> is the actual WSGI application that interfaces with the WSGI server. Also, <b>dispatch_request()</b> and <b>full_dispatch_request()</b> are used to do the request dispatching, which matches the URL to the applicable view function and handles exceptions.
-
-<b>Request / Response Objects</b>
-Your WSGI application is always passed two arguments. The WSGI “environment” and the WSGI <b>start_response</b> function that is used to start the response phase. The <b>Request</b> class wraps the <b>environ</b> for easier access to request variables (form data, request headers etc.).
-
-<b>Request</b>	What the client/browser sends to your server
-<b>Response</b>	What your server sends back to the client
-
-<b>Ex : 3</b>
-Because this is a very common task the Request object provides a helper for that. The above code can be rewritten like this
-
-<b>@Request.application</b>	A Werkzeug decorator that converts a function into a WSGI application. It automatically parses the incoming environ and wraps it in a Request object.
-<b>request.args.get('name', 'World!')</b>	Gets the name query parameter from the URL. If it doesn't exist, defaults to "World!".
-<b>Response(...)</b>	Creates a proper HTTP response to be sent back to the browser.
-
-<table border="1" cellpadding="8" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Description</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>request.method</code></td>
-      <td>HTTP method</td>
-      <td><code>"GET"</code>, <code>"POST"</code></td>
-    </tr>
-    <tr>
-      <td><code>request.args</code></td>
-      <td>Query params (GET)</td>
-      <td><code>?q=python → request.args['q']</code></td>
-    </tr>
-    <tr>
-      <td><code>request.form</code></td>
-      <td>Form data (POST)</td>
-      <td><code>request.form['username']</code></td>
-    </tr>
-    <tr>
-      <td><code>request.json</code></td>
-      <td>JSON body</td>
-      <td><code>request.json['email']</code></td>
-    </tr>
-    <tr>
-      <td><code>request.headers</code></td>
-      <td>HTTP headers</td>
-      <td><code>request.headers['User-Agent']</code></td>
-    </tr>
-    <tr>
-      <td><code>request.cookies</code></td>
-      <td>Cookies sent by client</td>
-      <td><code>request.cookies['session_id']</code></td>
-    </tr>
-    <tr>
-      <td><code>request.path</code></td>
-      <td>URL path</td>
-      <td><code>"/home"</code></td>
-    </tr>
-    <tr>
-      <td><code>request.url</code></td>
-      <td>Full URL</td>
-      <td><code>"http://localhost:5000/home"</code></td>
-    </tr>
-  </tbody>
-</table>
-    `,
-                    code1: `// --------- Ex : 1 ----------
-                    your_project/
-├── app.py              ← your Flask app
-└── templates/
-    └────── user.html       ← put this here!
-
-
-                    &lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Hello {{ name }}!&lt;/h1&gt;
-    &lt;p&gt;You are {{ age }} years old.&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-
-
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-@app.route('/user/<name>/<int:age>')
-def user(name, age):
-    return render_template('user.html', name=name, age=age)
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-// render_template('something.html')
-// means it automatically looks in templates/ folder.  
-
-
-// ------------ Ex : 2 ---------
-from werkzeug.wrappers import Request, Response
-
-class MovieApp(object):
-    def __init__(self):
-        pass
-
-    def dispatch_request(self, request):
-        return Response('Hello World!')
-
-    def wsgi_app(self, environ, start_response):
-        request = Request(environ)
-        response = self.dispatch_request(request)
-        return response(environ, start_response)
-
-    def __call__(self, environ, start_response):
-        return self.wsgi_app(environ, start_response)
-
-def create_app():
-    return MovieApp()
-
-// # ✅ TESTING the dispatch_request directly
-if __name__ == '__main__':
-    app = create_app()
-    fake_environ = {}  # A fake WSGI environment (normally provided by a WSGI server)
-    request = Request(fake_environ)
-    response = app.dispatch_request(request)
-    print(response.get_data(as_text=True))  # → "Hello World!"
-
-
-
-    // ----------- Ex : 3 ----------
-from werkzeug.wrappers import Request, Response
-from werkzeug.serving import run_simple
-
-@Request.application
-def application(request):
-    name = request.args.get('name', 'World!')
-    return Response(f"Hello {name}!", mimetype='text/plain')
-
-if __name__ == '__main__':
-    run_simple('localhost', 5001, application)
-
-    // # http://localhost:5001/?name=Anand
-
-`,
-img: `../assets/images/python/werkzeug_flow_diagram.png`
-
-                },
-                                {
-                    text1: `<b> environ – The Request Data</b>
-    A dictionary containing all the details about the incoming HTTP request.
-&lt;table border=&quot;1&quot; cellpadding=&quot;8&quot; cellspacing=&quot;0&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Key&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&#39;REQUEST_METHOD&#39;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;HTTP method like &lt;code&gt;&quot;GET&quot;&lt;/code&gt; / &lt;code&gt;&quot;POST&quot;&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&#39;PATH_INFO&#39;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The request URL path (e.g., &lt;code&gt;/home&lt;/code&gt;, &lt;code&gt;/api&lt;/code&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&#39;QUERY_STRING&#39;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The part after &lt;code&gt;?&lt;/code&gt; in the URL (e.g., &lt;code&gt;name=anand&lt;/code&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&#39;wsgi.input&#39;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The body stream (used for form or JSON data in POST requests)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&#39;HTTP_USER_AGENT&#39;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The browser or client making the request&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&#39;SERVER_NAME&#39;&lt;/code&gt;, &lt;code&gt;&#39;SERVER_PORT&#39;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The hostname and port number of the server&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-`,
-                    code1: ``
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "Jinja2 - (Frontend templating engine)",
-            note: [
-                {
-                    text1: `What is Python?`,
-                    code1: ``
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "Build a Flask REST API",
-            note: [
-                {
-                    text1: `What is Python?`,
-                    code1: ``
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "Bonus Fact: Extensibility",
-            note: [
-                {
-                    text1: `<b>Flask-Login</b> (Authentication)
-
-<b>Flask-Mail</b> (Email)
-
-<b>Flask-Migrate<b> (Database migrations)
-
-<b>Flask-CORS</b>, Flask-JWT, etc.`,
-                    code1: ``
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "topic",
-            note: [
-                {
-                    text1: `What is Python?`,
-                    code1: ``
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "CORS Note - (flask-cors)",
-            note: [
-                {
-                    text1: `What is Python?`,
-                    code1: ``
-                }
-            ]
-        },
-        {
-            id: 1,
             section: `Errors & Exceptions`,
             title: "What is Exception Handling?",
             note: [
@@ -3602,16 +3794,6 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 `
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "What is Python?",
-            note: [
-                {
-                    text1: `What is Python?`,
-                    code1: ``
                 }
             ]
         },
