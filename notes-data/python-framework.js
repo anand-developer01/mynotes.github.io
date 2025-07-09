@@ -106,8 +106,7 @@ def home(request):
 
 <b>🔗 Step 7: Map the URL</b>
 
-Create blog/urls.py:
-
+<b>Create blog/urls.py</b>:
 from django.urls import path
 from . import views
 
@@ -115,8 +114,7 @@ urlpatterns = [
     path('', views.home),
 ]
 
-Then include it in the main mysite/urls.py:
-
+<b>Then include it in the main mysite/urls.py</b>:
 from django.contrib import admin
 from django.urls import path, include
 
@@ -131,6 +129,347 @@ Now, visiting http://127.0.0.1:8000/ will show Hello, Django!
                 }
             ]
         },
+        {
+            id: 1,
+            title: "django-admin",
+            note: [
+                {
+                    text1: `django-admin is a <b>command-line utility</b> that comes with Django. It is used to perform administrative tasks related to a Django project, such as:
+
+                    <b>Creating a new Django project</b>: Using the startproject command, like django-admin startproject my_project.
+<b>Creating a new Django app</b>: Using the startapp command, like django-admin startapp my_app.
+<b>Running management commands</b>: You can execute commands provided by Django or third-party packages.
+    Creating new projects and apps
+    Managing database migrations
+    Starting the development server
+    Creating superusers
+    Running the interactive shell
+    
+    django-admin &lt;command&gt; [options]
+    
+
+   <b> ✅ django-admin startproject myproject</b>
+Creates a new directory named <b>myproject</b> and puts your Django project files inside that folder.
+
+Resulting structure:
+
+myproject/
+├── manage.py
+└── myproject/
+--->├── __init__.py
+--->├── settings.py
+--->├── urls.py
+--->├── asgi.py
+--->└── wsgi.py
+
+Useful when you're starting from scratch and want Django to create a clean folder for your project.
+
+<b>✅ django-admin startproject myproject .</b>
+Creates the project in the current directory, without creating an extra folder.
+Resulting structure (inside current folder):
+
+manage.py
+myproject/
+├── __init__.py
+├── settings.py
+├── urls.py
+├── asgi.py
+└── wsgi.py
+
+Useful when:
+    You're already inside the folder where you want the project.
+    You're using <b>Docker, Git repos</b>, or other pre-existing folders (like <b>src/, backend/</b>, etc.)
+
+    <b>django-admin startproject myproject</b>
+is used to create a new Django project called myproject.
+
+<b>manage.py</b>	Command-line utility to manage the project (runserver, migrations, etc.)
+<b>myproject/</b>	Inner directory, same name, holds actual project code
+<b>__init__.py</b>	Marks this directory as a Python package
+<b>myproject/settings.py</b>: Contains project-wide settings like database configuration and installed apps. Main configuration file (DB, installed apps, etc.)
+<b>myproject/urls.py</b>	Root URL routing for the project
+<b>myproject/asgi.py</b>	Entry point for ASGI servers (async support)
+<b>myproject/wsgi.py</b>	Entry point for WSGI servers (production deployments)
+
+-> <b>django-admin</b>: A general utility for managing Django projects that can be run globally on your system (if Django is installed correctly).
+-> <b>manage.py</b>: A script specific to your Django project, automatically created during project setup.
+-> It does the same tasks as django-admin but also sets the DJANGO_SETTINGS_MODULE environment variable, linking it to the project's settings.py file.
+
+    <table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>startproject</td>
+      <td>Creates a new Django project</td>
+    </tr>
+    <tr>
+      <td>startapp</td>
+      <td>Creates a new Django app inside a project</td>
+    </tr>
+    <tr>
+      <td>runserver</td>
+      <td>Starts the local development server</td>
+    </tr>
+    <tr>
+      <td>makemigrations</td>
+      <td>Creates migration files for model changes</td>
+    </tr>
+    <tr>
+      <td>migrate</td>
+      <td>Applies migrations to the database</td>
+    </tr>
+    <tr>
+      <td>createsuperuser</td>
+      <td>Creates an admin user</td>
+    </tr>
+    <tr>
+      <td>collectstatic</td>
+      <td>Gathers static files for deployment</td>
+    </tr>
+    <tr>
+      <td>check</td>
+      <td>Checks the project for potential issues</td>
+    </tr>
+    <tr>
+      <td>shell</td>
+      <td>Opens a Python shell with Django context</td>
+    </tr>
+    <tr>
+      <td>help</td>
+      <td>Shows all available commands</td>
+    </tr>
+  </tbody>
+</table>
+`,
+                    code1: ``
+                }
+            ]
+        },  
+        {
+            id: 1,
+            title: "Django Rest Framework (DRF) ",
+            note: [
+                {
+                    text1: `Django Rest Framework (DRF) is a powerful tool for building robust APIs using the Django framework. In this tutorial, we’ll guide you step-by-step to set up a Django API with DRF. This tutorial assumes you have Python installed and are familiar with basic Python commands.
+                    
+                    Django REST Framework (DRF) is a third-party package that helps you build RESTful APIs using Django easily and efficiently.
+
+                    <b>Prerequisites</b>
+Before we begin, ensure:
+You have Python 3.8 or higher installed.
+You have pip (Python's package manager) installed.
+
+<b>Step 1: Install Required Packages</b>
+To start, you’ll need to install Django and DRF. Run the following commands in your terminal:
+pip install django djangorestframework
+
+Verify the installation:
+django-admin --version
+
+<b>Step 2: Create a New Django Project</b>
+Let’s create a new project. Replace myproject with your preferred project name.
+
+django-admin startproject myproject
+cd myproject
+
+<b>Step 3: Create a Django App</b>
+Django organises projects into apps. Let’s create an app for our API. Replace api with your desired app name:
+
+python manage.py startapp api
+
+
+<b>Step 4: Add the App and DRF to settings.py</b>
+Open the settings.py file in your project folder and update the INSTALLED_APPS list to include your app and DRF:
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',  # Add Django Rest Framework
+    'api',  # Add your app
+]
+    
+<b>rest_framework</b> is the name of the Python package and the Django setting you add to your INSTALLED_APPS to enable the Django REST Framework in your Django project. It's essentially the identifier for integrating this powerful API toolkit into your Django application.
+
+rest_framework refers to the Django REST Framework (DRF) — a powerful and flexible toolkit for building Web APIs in Django.
+When you see <b>rest_framework</b> in code (like in <b>INSTALLED_APPS</b>), it's usually:`,
+                    code1: ``
+                }
+            ]
+        },  
+        {
+            id: 1,
+            title: "Model",
+            note: [
+                {
+                    text1: `In Django, a model is a Python class that represents a database table. It serves as the single, definitive source of information about your data, defining its structure and behavior. 
+
+                    In Django, a Model is a Python class that defines the structure of your database tables. It’s part of Django’s <b>Object-Relational Mapping (ORM)</b> system, which lets you interact with the database using Python instead of raw SQL.
+
+
+                    Define model in <b>models.py</b>
+
+<b>Make migrations</b>:
+python manage.py makemigrations
+
+<b>Apply to DB</b>:
+python manage.py migrate
+
+<b>Use it in code</b>:
+Movie.objects.create(title="Django", genre="Action", year=2012)
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CharField</td>
+      <td>Short text</td>
+    </tr>
+    <tr>
+      <td>TextField</td>
+      <td>Long text</td>
+    </tr>
+    <tr>
+      <td>IntegerField</td>
+      <td>Whole number</td>
+    </tr>
+    <tr>
+      <td>FloatField</td>
+      <td>Decimal number</td>
+    </tr>
+    <tr>
+      <td>DateTimeField</td>
+      <td>Date and time</td>
+    </tr>
+    <tr>
+      <td>BooleanField</td>
+      <td>True/False</td>
+    </tr>
+    <tr>
+      <td>ForeignKey</td>
+      <td>Link to another model</td>
+    </tr>
+    <tr>
+      <td>ManyToManyField</td>
+      <td>Many-to-many relation</td>
+    </tr>
+  </tbody>
+</table>
+
+`,
+                    code1: `from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=100)
+    publication_date = models.DateField()
+    isbn = models.CharField(max_length=13, unique=True)
+
+    def __str__(self):
+        return self.title`
+                }
+            ]
+        },  
+        {
+            id: 1,
+            title: "Serializer",
+            note: [
+                {
+                    text1: `A serializer in Django Rest Framework (DRF) is a component that handles serialization and deserialization. It converts your database model into JSON format (serialization) or takes JSON data as input, validates it, and translates it into a Django model instance (deserialization).  
+                    `,
+                    code1: ``
+                }
+            ]
+        },  
+        {
+            id: 1,
+            title: "Migration",
+            note: [
+                {
+                    text1: `A migration in Django is a way to <b>propagate changes you make to your models (Python classes)</b> into your database schema (tables, columns, relationships).
+
+Think of it like this:
+    🧱 Model (Python code) ➡️ Migration file ➡️ Database (SQL schema)
+    
+    Run migrate command to perform database operation (if that’s the first time you run this command, it will also apply default Django migrations, for creating User tables etc.)
+    
+Let's say you created or updated a model in models.py.
+Now you decide to add a <b>description</b> field:
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.FloatField()
+    description = models.TextField(null=True)
+
+<b>Step 1: Create Migration File</b>
+python manage.py makemigrations
+Django will analyze your models and create a migration file. This file contains instructions for the database, like:
+
+“Hey database, add a new column called ‘description’ to the ‘Product’ table.”
+
+This generates a file like:
+migrations/0001_initial.py
+
+<b>Step 2: Apply Migration to Database</b>
+python manage.py migrate
+
+This creates or updates the actual tables in your database.
+
+<b>makemigrations</b>	Create migration files based on model changes
+<b>migrate</b>	Apply migration files to the database
+<b>showmigrations</b>	See which migrations are applied
+<b>sqlmigrate &lt;app&gt; &lt;migration_number&gt;</b>	See raw SQL Django will run
+<b>makemigrations app_name</b>	Make migrations for a specific app
+`,
+                    code1: `//A migration file is Python code that looks like this:
+
+class Migration(migrations.Migration):
+
+    operations = [
+        migrations.CreateModel(
+            name='Movie',
+            fields=[
+                ('id', models.AutoField(primary_key=True)),
+                ('title', models.CharField(max_length=100)),
+                ('year', models.IntegerField()),
+            ],
+        ),
+    ]`
+                }
+            ]
+        },  
+        {
+            id: 1,
+            title: "APIView",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        },  
+                {
+            id: 1,
+            title: "Ran server",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        },  
                 {
             id: 1,
             section: `Python (FastAPI or Flask) for backend APIs`,
