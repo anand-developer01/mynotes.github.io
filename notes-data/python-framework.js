@@ -17,7 +17,9 @@ const pythonData = {
     Movie App
     Task Manager
     Personal Finance Tracker
-    Blog Platform`,
+    Blog Platform
+    
+    <a href="https://priyanshuguptaofficial.medium.com/design-patterns-in-django-780c6262449b" target="_blank"> design pattern </a>`,
                     code1: ``
                 }
             ]
@@ -30,7 +32,7 @@ const pythonData = {
                 {
                     text1: `Django is a high-level, free, and open-source web framework written in Python. It is designed to facilitate rapid development and pragmatic, clean design in web applications. 
 
-                    Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source.
+                    Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It's free and open source.
 
                     <b>How does Django Work?</b>
 Django follows the MVT design pattern (Model View Template).
@@ -86,7 +88,7 @@ mysite/
 <b>🚀 Step 3: Run the Development Server</b>
 -> python manage.py runserver
 
-Visit: http://127.0.0.1:8000/ in your browser — you’ll see the Django welcome page 🎉
+Visit: http://127.0.0.1:8000/ in your browser — you'll see the Django welcome page 🎉
 🧱 Step 4: Create an App
 -> python manage.py startapp blog
 Now your project structure will include a blog directory for your app.
@@ -255,7 +257,7 @@ is used to create a new Django project called myproject.
             title: "Django Rest Framework (DRF) ",
             note: [
                 {
-                    text1: `Django Rest Framework (DRF) is a powerful tool for building robust APIs using the Django framework. In this tutorial, we’ll guide you step-by-step to set up a Django API with DRF. This tutorial assumes you have Python installed and are familiar with basic Python commands.
+                    text1: `Django Rest Framework (DRF) is a powerful tool for building robust APIs using the Django framework. In this tutorial, we'll guide you step-by-step to set up a Django API with DRF. This tutorial assumes you have Python installed and are familiar with basic Python commands.
                     
                     Django REST Framework (DRF) is a third-party package that helps you build RESTful APIs using Django easily and efficiently.
 
@@ -265,20 +267,20 @@ You have Python 3.8 or higher installed.
 You have pip (Python's package manager) installed.
 
 <b>Step 1: Install Required Packages</b>
-To start, you’ll need to install Django and DRF. Run the following commands in your terminal:
+To start, you'll need to install Django and DRF. Run the following commands in your terminal:
 pip install django djangorestframework
 
 Verify the installation:
 django-admin --version
 
 <b>Step 2: Create a New Django Project</b>
-Let’s create a new project. Replace myproject with your preferred project name.
+Let's create a new project. Replace myproject with your preferred project name.
 
 django-admin startproject myproject
 cd myproject
 
 <b>Step 3: Create a Django App</b>
-Django organises projects into apps. Let’s create an app for our API. Replace api with your desired app name:
+Django organises projects into apps. Let's create an app for our API. Replace api with your desired app name:
 
 python manage.py startapp api
 
@@ -312,8 +314,7 @@ When you see <b>rest_framework</b> in code (like in <b>INSTALLED_APPS</b>), it's
                 {
                     text1: `In Django, a model is a Python class that represents a database table. It serves as the single, definitive source of information about your data, defining its structure and behavior. 
 
-                    In Django, a Model is a Python class that defines the structure of your database tables. It’s part of Django’s <b>Object-Relational Mapping (ORM)</b> system, which lets you interact with the database using Python instead of raw SQL.
-
+                    In Django, a Model is a Python class that defines the structure of your database tables. It's part of Django's <b>Object-Relational Mapping (ORM)</b> system, which lets you interact with the database using Python instead of raw SQL.
 
                     Define model in <b>models.py</b>
 
@@ -389,8 +390,263 @@ class Book(models.Model):
             note: [
                 {
                     text1: `A serializer in Django Rest Framework (DRF) is a component that handles serialization and deserialization. It converts your database model into JSON format (serialization) or takes JSON data as input, validates it, and translates it into a Django model instance (deserialization).  
+                    <b>What is a Serializer?</b>
+Django Rest Framework (DRF), a serializer functions as a tool to transform intricate data types, like Django models or querysets, into Python data types. This conversion is instrumental in facilitating the straightforward rendering of data into JSON format. Essentially, a serializer acts as a mechanism within DRF, ensuring the smooth conversion of complex data structures into Python types, which can then be easily translated into JSON, promoting simplicity and compatibility in data representation. The process of converting complex data into a format suitable for rendering or parsing is known as serialization and deserialization, respectively.
+
+A <b>serializer</b> converts complex data types like Django models into <b>Python datatypes</b> (which can then be easily converted to <b>JSON, XML</b>, etc.).
+And vice versa: it can also convert <b>incoming JSON</b> into <b>validated Python data</b> and even <b>save it to the database</b>.
+
+<b>Creating a Serializer</b>
+To use a serializer, you first need to define one. Serializers in DRF are similar to Django forms and models. Let's create a simple serializer for a hypothetical Movie model:
+
+# movies/serializers.py
+from rest_framework import serializers
+from .models import Movie
+
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
+In this example, MovieSerializer is inheriting from serializers.ModelSerializer, which is a shortcut for creating serializers for Django models. The fields = \`__all__\` line indicates that all fields from the Movie model should be included in the serialization.
+
+<b>from rest_framework import serializers</b>	Import the DRF serializers module
+<b>from .models import Movie</b>	Import the Movie model from the same app
+<b>class MovieSerializer(serializers.ModelSerializer)</b>	Create a serializer class that maps to the Movie model
+<b>class Meta:</b>	Meta class defines configuration for the serializer
+<b>model = Movie</b>	Tells the serializer which model to use
+<b>fields = '__all__'</b>	Include all fields from the Movie model in serialization
+
+<b>What is a Class-Based View (CBV) in DRF? - (Ex : 1)</b>
+In Django REST Framework, a <b>Class-Based View</b> is a Python class that handles HTTP requests like <b>GET, POST, PUT, DELETE</b> using class methods like <b>get(), post()</b>, etc.
+
+Instead of writing all your logic inside one function (like in function-based views), you organize each HTTP method into a <b>separate method</b> inside a class.
+
+<b>What is .as_view()?</b>
+<b>.as_view()</b> is a class method provided by Django for <b>Class-Based Views</b>.
+    It <b>converts your view class into a callable view function</b> — something Django’s URL dispatcher can actually call.
+
+<b>✅ Why is .as_view() Needed?</b>
+Django expects every view in <b>urls.py</b> to be a callable function (like a function-based view).
+But a class like <b>MovieList</b> is <b>not callable</b> by itself — it’s a class, not a function.
+So .as_view():
+    -> Instantiates your class (like <b>MovieList()</b>)
+    -> Returns a function that handles the incoming HTTP request (<b>GET, POST</b>, etc.)
+
+<b>🎯 What is a Function-Based View (FBV)? - (Ex : 2)</b>
+A <b>Function-Based View (FBV)</b> in DRF is just a normal Python function that handles different types of HTTP requests like <b>GET, POST, PUT</b>, and <b>DELETE</b>.
+In DRF, you use the <b>@api_view</b> decorator to turn a regular Django view into a RESTful API view.
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Class</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>APIView</td>
+      <td>Base class, lets you define <code>get()</code>, <code>post()</code> manually</td>
+    </tr>
+    <tr>
+      <td>GenericAPIView</td>
+      <td>Adds <code>queryset</code> + <code>serializer_class</code> handling</td>
+    </tr>
+    <tr>
+      <td>ListAPIView</td>
+      <td>Handles only <strong>GET (list)</strong></td>
+    </tr>
+    <tr>
+      <td>CreateAPIView</td>
+      <td>Handles only <strong>POST</strong></td>
+    </tr>
+    <tr>
+      <td>RetrieveAPIView</td>
+      <td>Handles only <strong>GET (single item)</strong></td>
+    </tr>
+    <tr>
+      <td>UpdateAPIView</td>
+      <td>Handles <strong>PUT/PATCH</strong></td>
+    </tr>
+    <tr>
+      <td>DestroyAPIView</td>
+      <td>Handles <strong>DELETE</strong></td>
+    </tr>
+    <tr>
+      <td>ListCreateAPIView</td>
+      <td>Combines <strong>ListAPIView</strong> and <strong>CreateAPIView</strong></td>
+    </tr>
+    <tr>
+      <td>RetrieveUpdateDestroyAPIView</td>
+      <td>Combines <strong>GET</strong>, <strong>PUT</strong>, <strong>PATCH</strong>, <strong>DELETE</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<b>FBV (@api_view) (VS) CBV (APIView / Generic Views)</b>
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>FBV (<code>@api_view</code>)</th>
+      <th>CBV (<code>APIView</code> / Generic Views)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Quick for small APIs</td>
+      <td>Better for large projects</td>
+    </tr>
+    <tr>
+      <td>All logic in one function</td>
+      <td>Clean separation of request types</td>
+    </tr>
+    <tr>
+      <td>Less reusable</td>
+      <td>Highly reusable and customizable</td>
+    </tr>
+    <tr>
+      <td>Good for beginners</td>
+      <td>Good for production code</td>
+    </tr>
+  </tbody>
+</table>
+
                     `,
-                    code1: ``
+                    code1: `// -------------- Ex : 1 ------------
+# movies/serializers.py
+
+from rest_framework import serializers
+from .models import Movie
+
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
+
+        // view.py
+        // ---------- Your Class-Based View (CBV) Version ------------
+        //Basic Example — APIView Based CBV
+        from django.shortcuts import render
+
+# movies/views.py
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Movie
+from .serializers import MovieSerializer
+from rest_framework import status
+
+class MovieList(APIView):
+    def get(self, request):
+        movies = Movie.objects.all()
+        serializer = MovieSerializer(movies, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = MovieSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+// ---- 🌐 Don't Forget: URL Configuration? ---
+// Add this to \`movies/urls.py\`:
+
+from django.urls import path
+from .views import MovieList
+
+urlpatterns = [
+    path('movies/', MovieList.as_view(), name='movie-list'),
+]
+
+// And include \`movies.urls\` in your project’s \`urls.py\`:
+
+from django.urls import path, include
+
+urlpatterns = [
+    path('api/', include('movies.urls')),
+]
+        // ----- or -----
+        // That's it! No need to write get/post manually!
+        from rest_framework.generics import ListCreateAPIView
+from .models import Movie
+from .serializers import MovieSerializer
+
+class MovieList(ListCreateAPIView):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+
+
+// -------------- Ex : 2 ------------
+// Function-Based View (FBV)
+# movies/views.py
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Movie
+from .serializers import MovieSerializer
+
+@api_view(['GET', 'POST'])
+def movie_list(request):
+    if request.method == 'GET':
+        movies = Movie.objects.all()
+        serializer = MovieSerializer(movies, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = MovieSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        // ----   URL Configuration ----
+        # movies/urls.py
+
+from django.urls import path
+from .views import movie_list
+
+urlpatterns = [
+    path('movies/', movie_list),
+]
+
+
+
+//-----------  -----------
+// ✅ Function-Based View (FBV)
+// 1. In views.py
+@api_view(['GET', 'POST'])
+def movie_list(request):
+    ...
+
+// 2. In urls.py
+from .views import movie_list
+
+urlpatterns = [
+    path('movies/', movie_list),
+]
+
+// ✅ Class-Based View (CBV)
+// 1. In views.py
+class MovieList(APIView):
+    def get(self, request):
+        ...
+    def post(self, request):
+        ...
+
+// 2. In urls.py
+from .views import MovieList
+
+urlpatterns = [
+    path('movies/', MovieList.as_view()),
+]
+
+    // ✅ Important: With CBVs, you must call .as_view() when using the class in urls.py.
+            `
                 }
             ]
         },  
@@ -404,7 +660,7 @@ class Book(models.Model):
 Think of it like this:
     🧱 Model (Python code) ➡️ Migration file ➡️ Database (SQL schema)
     
-    Run migrate command to perform database operation (if that’s the first time you run this command, it will also apply default Django migrations, for creating User tables etc.)
+    Run migrate command to perform database operation (if that's the first time you run this command, it will also apply default Django migrations, for creating User tables etc.)
     
 Let's say you created or updated a model in models.py.
 Now you decide to add a <b>description</b> field:
@@ -417,7 +673,7 @@ class Product(models.Model):
 python manage.py makemigrations
 Django will analyze your models and create a migration file. This file contains instructions for the database, like:
 
-“Hey database, add a new column called ‘description’ to the ‘Product’ table.”
+“Hey database, add a new column called ‘description' to the ‘Product' table.”
 
 This generates a file like:
 migrations/0001_initial.py
@@ -455,8 +711,33 @@ class Migration(migrations.Migration):
             title: "APIView",
             note: [
                 {
-                    text1: `Dies when the main thread ends`,
-                    code1: ``
+                    text1: `<b>APIView</b> is a class provided by Django REST Framework that lets you create <b>Class-Based Views (CBVs)</b> for APIs.
+It is similar to Django's regular class-based views (View), but it:
+
+    Adds <b>request parsing</b> (e.g., JSON)   
+    Handles <b>authentication</b>
+    Handles <b>permissions</b>
+    Gives you <b>Response, status, request.data</b>, etc.
+    
+    <a href="https://testdriven.io/blog/drf-views-part-1/" target="_blank"> drf-views-part </a>
+    `,
+                    code1: `//Basic Usage Example
+
+// # views.py
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+class HelloWorld(APIView):
+    def get(self, request):
+        return Response({"message": "Hello, world!"})
+
+// # urls.py
+from django.urls import path
+from .views import HelloWorld
+
+urlpatterns = [
+    path('hello/', HelloWorld.as_view()),
+]`
                 }
             ]
         },  
@@ -675,7 +956,7 @@ if __name__ == '__main__':
             title: "Werkzeug (pronunciation వర్క్‌-సూక్ (Var-k-suukh))- (Backend HTTP toolkit) and Jinja2",
             note: [
                 {
-                    text1: `<b>Werkzeug</b> (pronounced “ver-ksuukh”) is a <b>WSGI (Web Server Gateway Interface)</b> utility library in Python that powers Flask’s core request/response handling.
+                    text1: `<b>Werkzeug</b> (pronounced “ver-ksuukh”) is a <b>WSGI (Web Server Gateway Interface)</b> utility library in Python that powers Flask's core request/response handling.
                     
                     WSGI is a specification whose job is to create a standard interface between traditional web servers (like nginx) and Python web applications.
 
@@ -697,7 +978,7 @@ Installing:
 
 WSGI is the Python standard for how web servers talk to web applications (like Flask or your <b>MovieApp</b>).
 
-When the WSGI server (like Gunicorn, uWSGI, or Werkzeug’s <b>run_simple</b>) receives a request, it calls your application like this:
+When the WSGI server (like Gunicorn, uWSGI, or Werkzeug's <b>run_simple</b>) receives a request, it calls your application like this:
 
 response = application(environ, start_response)
 
@@ -949,7 +1230,7 @@ img: `../assets/images/python/werkzeug_flow_diagram.png`
                     text1: `So, does @app.route() come from Werkzeug?
 ✅ Answer: Indirectly, yes.
     <b>@app.route()</b> is part of Flask, but <b>Flask is built on top of Werkzeug</b>.
-    Under the hood, Flask uses Werkzeug’s routing system to handle URLs, HTTP methods, and path matching.
+    Under the hood, Flask uses Werkzeug's routing system to handle URLs, HTTP methods, and path matching.
 
 <b>🧱 Structure Overview</b>
 Flask

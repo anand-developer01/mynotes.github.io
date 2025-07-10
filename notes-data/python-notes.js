@@ -47,6 +47,16 @@ EX : function name : show_my_name
         },
         {
             id: 1,
+            title: "Naming convention in Python",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
             section: 'Basic Syntax',
             title: "Python syntax and structure",
             note: [
@@ -109,8 +119,27 @@ print(f"The sum of {a} and {b} is {a + b}")
             title: "chained comparison",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `Chained comparison is a way to write multiple comparisons in one clean, readable expression — just like you do in math.
+
+                    Chained comparison, in programming, involves combining multiple comparison operations within a single expression, making the code more concise and readable. For example, instead of writing x > y and y > z, you can write x > y > z in Python. This allows you to check if multiple conditions are met in a sequence. 
+
+                    Checking multiple conditions in a single expression is common in programming. In Python, comparison operator chaining allows us to write cleaner, more readable code when evaluating multiple conditions. Instead of using multiple and conditions, Python enables chaining comparisons directly in a mathematical-style expression.
+                    `,
+                    code1: `// ----------- Ex : 1 -----------
+                    x = 5
+
+if 1 < x < 10:
+    print("x is between 1 and 10")
+
+// This is equivalent to:
+if 1 < x and x < 10:
+    print("x is between 1 and 10")
+    
+    // ---------- Ex : 2 --------
+    x, y, z = 5, 10, 20
+
+if x < y <= z:
+    print("y is greater than x and less than or equal to z")`
                 }
             ]
         },
