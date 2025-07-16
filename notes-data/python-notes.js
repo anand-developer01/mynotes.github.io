@@ -30,6 +30,123 @@ const pythonData = {
 Note: It's just convention. Python follows PEP 8, which recommends <b>snake_case</b> for function and variable names, and <b>PascalCase</b> for class names.
 
 EX : function name : show_my_name
+
+
+
+
+
+
+
+🔲 Topics You Might Still Need to Cover
+🔄 1. Django REST Framework - Advanced
+
+Topic <b>-></b>	Description
+🔲 ModelSerializer <b>-></b>    Simplifies serializer creation for models
+🔲 ViewSets & Routers <b>-></b>     Cleaner way to handle CRUD using one class
+🔲 Pagination <b>-></b>     For listing large sets of data
+🔲 Filtering & Searching <b>-></b>  With filter_backends, SearchFilter, etc.
+🔲 Permissions & Authentication <b>-></b>   JWT/Auth token, IsAuthenticated, etc.
+🔲 Throttling & Rate Limiting <b>-></b>     To avoid API overuse
+🔲 Custom API Responses <b>-></b>   Return custom error/success formats
+🔲 Error Handling <b>-></b>     Handle validation or 404 errors properly
+🛡️ 2. Security & Production Setup
+Topic <b>-></b>     Description
+🔲 CORS setup <b>-></b>     For frontend-backend communication
+🔲 JWT or Token Auth <b>-></b>  For login/logout/token refresh
+🔲 Deployment <b>-></b>     Using Heroku, Vercel, or other
+🔲 Environment variables (.env) <b>-></b>   For hiding secrets like DB keys
+🌐 3. Frontend Integration (Optional)
+
+If you're planning React/Vue frontend:
+
+    🔲 CORS
+
+    🔲 API calls using axios or fetch
+
+    🔲 Token-based login integration
+
+📦 4. Bonus Topics (Real-World Usage)
+Topic <b>-></b>     Description
+🔲 Django Signals <b>-></b>     For post-save hooks, etc.
+🔲 Background Tasks (Celery) <b>-></b>  For email, image processing, etc.
+🔲 File Upload APIs <b>-></b>   Images, PDFs, etc.
+🔲 Testing APIs <b>-></b>   With APITestCase or Postman
+🔲 Swagger / API Docs <b>-></b>     Auto-generating API documentation
+✅ Summary
+
+You’ve already learned:
+
+    Basic to intermediate DRF usage
+
+    CRUD API development
+
+    SQLite integration
+
+    Admin usage
+
+    Class-based and function-based views
+
+👉 Next Suggested Steps:
+
+If you're building an API project (like your Movie App), here's what I recommend next:
+
+    ✅ Use ModelSerializer and ViewSet
+
+    ✅ Add pagination, filtering, and search
+
+    ✅ Implement login with JWT (using djangorestframework-simplejwt)
+
+    ✅ Add Swagger API docs (drf_yasg or drf-spectacular)
+
+    ✅ Deploy your API on Render, Railway, or Heroku
+
+
+    //////////////////////////////////////////////////////////////
+    <b>The PCPP1™ certification shows that the individual is familiar with the following concepts</b>:
+
+    <b>Advanced use of classes and modelling real-life problems in the OOP categories</b>:
+        Classes
+        Instances
+        Attributes
+        Methods
+        Class and instance data
+        Shallow and deep operations
+        Inheritance and polymorphism
+        Extended function argument syntax and decorators
+        Static and class methods
+        Attribute encapsulation
+        Composition and inheritance
+        Advanced exceptions
+        Copying object data
+        Serialization
+        Metaclasses
+
+    <b>Best practices and standardization</b>:
+        PEP8
+        PEP 257
+        Code layout
+        Comments and docstrings
+        Naming conventions
+        String quotes and whitespaces
+        Programming recommendations
+
+    <b>GUI programming</b>:
+        Events
+        Widgets
+        Geometry
+        Tools and toolkits
+        Conventions
+
+    <b>The elements of network programming</b>:
+        Network sockets
+        Client-server communication
+        JSON and XML files in network communication
+        HTTP methods
+        CRUD
+        Building a simple REST client
+    <b>File processing and communicating with a program's environment</b>:
+        Processing files:<b> sqlite3, xml, csv, logging, and configparser</b>
+        Communication: <b>os, datetime, io, and time</b>
 `,
                     code1: ``
                 }
@@ -847,6 +964,341 @@ def get_todo(todo_id):
                 }
             ]
         },
+        {
+            id: 1,
+            title: "first-class citizen",
+            note: [
+                {
+                    text1: `In programming, a first-class citizen (or first-class object) is an entity that:
+
+    -> Can be <b>assigned to a variable</b>
+    -> Can be <b>passed as an argument</b> to a function
+    -> Can be <b>returned from a function</b>
+    -> Can be stored in data structures (like lists, dictionaries, etc.)`,
+                    code1: `// ------- 1. Assigned to a variable --------
+def greet():
+    print("Hello")
+
+say_hello = greet
+say_hello()  # Output: Hello
+
+
+
+//  ------- 2. Passed as an argument ---------
+def greet():
+    print("Hello")
+
+def call_func(func):
+    func()
+
+call_func(greet)  # Output: Hello
+
+
+//------- passing function with other arguments -----
+def add(x, y):
+    return x+y
+
+def sub(x, y):
+    return x-y
+
+def arithmetic(f, x, y):
+    return f(x, y)
+
+sum = arithmetic(add, 2,5)
+print(sum)
+
+
+
+// -------- 3. Returned from a function ----------
+def outer():
+    def inner():
+        print("Inner")
+    return inner
+
+fn = outer()  # Calls outer, returns inner
+fn()          # Output: Inner
+
+
+
+// -------- 4. Stored in a data structure ----------
+def add(a, b):
+    return a + b
+
+def sub(a, b):
+    return a - b
+
+ops = {"plus": add, "minus": sub}
+
+print(ops["plus"](3, 2))   # Output: 5
+print(ops["minus"](3, 2))  # Output: 1`
+                }
+            ]
+        },
+        {
+            id: 1,
+            section: `Closure function`,
+            title: "What is Python?",
+            note: [
+                {
+                    text1: `Python closure is a nested function that allows us to access variables of the outer function even after the outer function is closed.
+                    
+                    Closure =
+    An inner function(Nested Function)
+    Defined inside an outer function
+    Accesses variables from the outer function's scope
+    Returned by the outer function
+    
+    <b>What is __closure__?</b>
+    Every function object has a special attribute called __closure__
+    If the function is a <b>closure</b>, this will be a <b>tuple of "cell" objects</b>, each storing one of the <b>enclosed variables</b>
+
+    <b>How to Check If It's a Closure</b>
+    All function objects have a __closure__ attribute that returns a tuple of cell objects if it is a closure function.
+You can inspect the closure using <b>__closure__</b>:
+print(double.__closure__)  // # Tuple of cell objects
+print(double.__closure__[0].cell_contents)  // # Output: 2
+
+
+                <b>(Ex : 2)</b> This code executes the outer function <b>calculate()</b> and returns a closure to the odd number. 
+That's why we can access the <b>num</b> variable of <b>calculate()</b> even after completing the outer function.
+Again, when we call the outer function using
+<b>odd2 = calculate()</b>
+a new closure is returned. Hence, we get 3 again when we call odd2().
+
+<b>When to use closures?</b>
+Closures can be used to avoid global values and provide data hiding, and can be an elegant solution for simple cases with one or few methods.
+
+1. Data Hiding (Encapsulation)
+Closures let you hide variables from the outer world—similar to private variables in object-oriented programming.
+
+Use Case:
+
+def counter():
+    count = 0
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+    return increment
+
+inc = counter()
+print(inc())  # 1
+print(inc())  # 2
+
+You can't access count directly, but the function still "remembers" its value.
+
+
+📌 2. When You Need to Retain State Without Using a Class
+Closures are an elegant alternative to classes when you need a function with state.
+
+class Adder:
+    def __init__(self, base):
+        self.base = base
+
+    def add(self, x):
+        return self.base + x
+
+Use a closure:
+
+def make_adder(base):
+    def adder(x):
+        return base + x
+    return adder
+
+add10 = make_adder(10)
+print(add10(5))  # 15
+
+📌 3. When Writing Decorators
+Closures are the foundation of decorators in Python.
+
+def decorator(func):
+    def wrapper():
+        print("Before the function call")
+        func()
+        print("After the function call")
+    return wrapper
+
+@decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
+
+
+📌 4. Factory Functions
+Closures can be used to <b>generate multiple customized functions.</b>
+
+def power_factory(n):
+    def power(x):
+        return x ** n
+    return power
+
+square = power_factory(2)
+cube = power_factory(3)
+
+print(square(5))  # 25
+print(cube(5))    # 125
+`,
+                    code1: `// ---------- Ex : 1 ----------
+                    def outer():
+    x = 10  # Enclosed variable
+
+    def inner():
+        print(f"x is {x}")  # inner function uses x
+
+    return inner  # returning inner function
+
+closure_fn = outer()  # outer is called, inner is returned
+closure_fn()          # Output: x is 10
+
+// -------- Ex : 2 ----------
+def multiplier(factor):
+    def multiply_by(n):
+        return n * factor
+    return multiply_by
+
+double = multiplier(2)   # Returns a closure with factor = 2
+triple = multiplier(3)   # Returns a closure with factor = 3
+
+print(double(5))  # Output: 10
+print(triple(5))  # Output: 15
+
+//------
+// You can inspect the closure using __closure__:
+print(double.__closure__) //  # Tuple of cell objects
+print(double.__closure__[0].cell_contents) //  # Output: 2
+
+// ---------- Ex : 3 ---------
+def calculate():
+    num = 1
+    def inner_func():
+        nonlocal num
+        num += 2
+        return num
+    return inner_func
+
+# call the outer function
+odd = calculate()
+
+# call the inner function
+print(odd())
+print(odd())
+print(odd())
+
+# call the outer function again
+odd2 = calculate()
+print(odd2())
+
+//-------------- Ex : 4 -------
+// avoid global values and provide data hiding
+def make_multiplier_of(n):
+    def multiplier(x):
+        return x * n
+    return multiplier
+
+
+// # Multiplier of 3
+times3 = make_multiplier_of(3)
+
+// # Multiplier of 5
+times5 = make_multiplier_of(5)
+
+// # Output: 27
+print(times3(9))
+
+// # Output: 15
+print(times5(3))
+
+// # Output: 30
+print(times5(times3(2)))
+
+
+// ------- 1. Data Hiding (Encapsulation)
+
+def counter():
+    count = 0
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+    return increment
+
+inc = counter()
+print(inc())  # 1
+print(inc())  # 2
+
+// You can't access count directly, but the function still "remembers" its value.
+
+// ------- 📌 2. When You Need to Retain State Without Using a Class
+
+class Adder:
+    def __init__(self, base):
+        self.base = base
+
+    def add(self, x):
+        return self.base + x
+
+Use a closure:
+
+def make_adder(base):
+    def adder(x):
+        return base + x
+    return adder
+
+add10 = make_adder(10)
+print(add10(5))  # 15
+
+
+// ------- 📌 3. When Writing Decorators
+def decorator(func):
+    def wrapper():
+        print("Before the function call")
+        func()
+        print("After the function call")
+    return wrapper
+
+@decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
+
+// 📌 4. Factory Functions
+def power_factory(n):
+    def power(x):
+        return x ** n
+    return power
+
+square = power_factory(2)
+cube = power_factory(3)
+
+print(square(5))  # 25
+print(cube(5))    # 125
+
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Decorators",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        }, 
+                {
+            id: 1,
+            title: "new topic",
+            note: [
+                {
+                    text1: `Dies when the main thread ends`,
+                    code1: ``
+                }
+            ]
+        }, 
         {
             id: 1,
             title: "Arguments (*args, **kwargs)",
@@ -1778,6 +2230,7 @@ for fruit in fruits:
 
 list.<b>append</b>(x)
     Add an item to the end of the list. Equivalent to a[len(a):] = [x].
+    The .append() <b>method modifies the list in-place</b> and <b>returns</b> None. - <b>Ex : 2 </b>
 
 list.<b>extend</b>(iterable)
     Extend the list by appending all the items from the iterable. Equivalent to a[len(a):] = iterable.
@@ -1800,8 +2253,14 @@ list.<b>index</b>(x[, start[, end]])
 
     The optional arguments start and end are interpreted as in the slice notation and are used to limit the search to a particular subsequence of the list. The returned index is computed relative to the beginning of the full sequence rather than the start argument.
 
-list.<b>count</b>(x)
+list.<b>count</b>(x) - <b> Ex : 3 </b>
     Return the number of times x appears in the list.
+    list.count(x) is a built-in method in Python that <b>returns the number of times the specified element x appears in the list.</b>
+    <b>📚 Theoretical Explanation</b>:
+    -> It iterates through the entire list.
+    -> Compares each element with the given value x using == equality.
+    -> Increments a counter each time it finds a match.
+    -> Finally, returns the total count of matches found.
 
 list.<b>sort</b>(*, key=None, reverse=False)
     Sort the items of the list in place (the arguments can be used for sort customization, see sorted() for their explanation).
@@ -1854,6 +2313,37 @@ list1.extend(another_list)
 print("Extended list:", list1)
 //Output:
 // Extended list: [1, 2, 3, 4, 5, 6]
+
+// ----------  The .append() method modifies the list in-place and returns None.  -------------
+// ----------- Ex : 2 ---------
+vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+nums = [1, 2, 3]
+newList = vowels.append(nums)
+print(newList)
+// Output : None
+// ---------- Correct way is ---------
+vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+nums = [1, 2, 3]
+vowels.append(nums)
+print(vowels)
+Output: ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U', [1, 2, 3]]
+
+// ----------- Ex : 3 ----------
+data = [
+    {"id": 1, "name": "Alice"},
+    {"id": 2, "name": "Bob"},
+    {"id": 1, "name": "Alice"},
+]
+target = {"id": 1, "name": "Alice"}
+count = data.count(target)
+print("Count:", count)
+
+// ---- ❌ Will Not Work for Partial Match: -----
+data.count({"id": 1})  # ❌ Doesn't count partial match
+// You must compare full dictionaries for count() to work.
+// ----- For Partial Match (Alternative): -----
+// If you want to count based on part of the dictionary (like only id == 1), use this:
+count = sum(1 for d in data if d["id"] == 1)
 `
                 },                
                 {
@@ -4583,10 +5073,440 @@ First, let's create a simple TCP server that listens for incoming connections an
         },
         {
             id: 1,
-            title: "What is Python?",
+            title: "Python Built-in Methods and Functions",
             note: [
                 {
-                    text1: `What is Python?`,
+                    text1: `<h2>✅ String Methods</h2>
+                    <table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Syntax</th>
+      <th>Definition</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>capitalize()</td>
+      <td>str.capitalize()</td>
+      <td>Capitalizes first character</td>
+      <td>Returns string with first letter capitalized</td>
+      <td><code>"hello".capitalize() → "Hello"</code></td>
+    </tr>
+    <tr>
+      <td>lower()</td>
+      <td>str.lower()</td>
+      <td>Converts to lowercase</td>
+      <td>All characters to lowercase</td>
+      <td><code>"HeLLo".lower() → "hello"</code></td>
+    </tr>
+    <tr>
+      <td>upper()</td>
+      <td>str.upper()</td>
+      <td>Converts to uppercase</td>
+      <td>All characters to uppercase</td>
+      <td><code>"hi".upper() → "HI"</code></td>
+    </tr>
+    <tr>
+      <td>strip()</td>
+      <td>str.strip()</td>
+      <td>Removes whitespace</td>
+      <td>Removes leading/trailing spaces</td>
+      <td><code>" hello ".strip() → "hello"</code></td>
+    </tr>
+    <tr>
+      <td>replace()</td>
+      <td>str.replace(old, new)</td>
+      <td>Replaces substring</td>
+      <td>Replaces all occurrences</td>
+      <td><code>"abc".replace("a", "z") → "zbc"</code></td>
+    </tr>
+    <tr>
+      <td>split()</td>
+      <td>str.split([sep])</td>
+      <td>Splits string</td>
+      <td>Returns list of substrings</td>
+      <td><code>"a,b,c".split(",") → ['a','b','c']</code></td>
+    </tr>
+    <tr>
+      <td>join()</td>
+      <td>sep.join(iterable)</td>
+      <td>Joins elements with separator</td>
+      <td>Concatenates list into string</td>
+      <td><code>"-".join(['a','b']) → "a-b"</code></td>
+    </tr>
+    <tr>
+      <td>find()</td>
+      <td>str.find(sub)</td>
+      <td>Finds index of substring</td>
+      <td>Returns first occurrence or -1</td>
+      <td><code>"hello".find("e") → 1</code></td>
+    </tr>
+    <tr>
+      <td>startswith()</td>
+      <td>str.startswith(prefix)</td>
+      <td>Checks start</td>
+      <td>Returns True if string starts with prefix</td>
+      <td><code>"abc".startswith("a") → True</code></td>
+    </tr>
+    <tr>
+      <td>endswith()</td>
+      <td>str.endswith(suffix)</td>
+      <td>Checks end</td>
+      <td>Returns True if string ends with suffix</td>
+      <td><code>"abc".endswith("c") → True</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>📋 2. List Methods</h2>
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Syntax</th>
+      <th>Definition</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>append()</td>
+      <td>list.append(x)</td>
+      <td>Adds item to end</td>
+      <td>Modifies the list in place</td>
+      <td><code>[1, 2].append(3) → [1, 2, 3]</code></td>
+    </tr>
+    <tr>
+      <td>extend()</td>
+      <td>list.extend(iterable)</td>
+      <td>Adds multiple items</td>
+      <td>Concatenates lists</td>
+      <td><code>[1].extend([2,3]) → [1,2,3]</code></td>
+    </tr>
+    <tr>
+      <td>insert()</td>
+      <td>list.insert(i, x)</td>
+      <td>Inserts at position</td>
+      <td>Shifts elements right</td>
+      <td><code>[1,3].insert(1,2) → [1,2,3]</code></td>
+    </tr>
+    <tr>
+      <td>remove()</td>
+      <td>list.remove(x)</td>
+      <td>Removes first match</td>
+      <td>Raises error if not found</td>
+      <td><code>[1,2,3].remove(2) → [1,3]</code></td>
+    </tr>
+    <tr>
+      <td>pop()</td>
+      <td>list.pop([i])</td>
+      <td>Removes and returns</td>
+      <td>Default is last item</td>
+      <td><code>[1,2,3].pop() → 3</code></td>
+    </tr>
+    <tr>
+      <td>clear()</td>
+      <td>list.clear()</td>
+      <td>Removes all items</td>
+      <td>Empties the list</td>
+      <td><code>[1,2].clear() → []</code></td>
+    </tr>
+    <tr>
+      <td>index()</td>
+      <td>list.index(x)</td>
+      <td>Returns index</td>
+      <td>Of first occurrence</td>
+      <td><code>[1,2,3].index(2) → 1</code></td>
+    </tr>
+    <tr>
+      <td>count()</td>
+      <td>list.count(x)</td>
+      <td>Counts occurrences</td>
+      <td>Returns number of matches</td>
+      <td><code>[1,1,2].count(1) → 2</code></td>
+    </tr>
+    <tr>
+      <td>sort()</td>
+      <td>list.sort()</td>
+      <td>Sorts list</td>
+      <td>In ascending order by default</td>
+      <td><code>[3,1,2].sort() → [1,2,3]</code></td>
+    </tr>
+    <tr>
+      <td>reverse()</td>
+      <td>list.reverse()</td>
+      <td>Reverses list</td>
+      <td>In-place reversal</td>
+      <td><code>[1,2,3].reverse() → [3,2,1]</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>🔑 3. Dictionary Methods</h2>
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Syntax</th>
+      <th>Definition</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>get()</td>
+      <td>dict.get(key, default)</td>
+      <td>Returns value by key</td>
+      <td>Returns default if not found</td>
+      <td><code>d.get("a", 0)</code></td>
+    </tr>
+    <tr>
+      <td>keys()</td>
+      <td>dict.keys()</td>
+      <td>Returns keys</td>
+      <td>As a view object</td>
+      <td><code>dict.keys()</code></td>
+    </tr>
+    <tr>
+      <td>values()</td>
+      <td>dict.values()</td>
+      <td>Returns values</td>
+      <td>As a view object</td>
+      <td><code>dict.values()</code></td>
+    </tr>
+    <tr>
+      <td>items()</td>
+      <td>dict.items()</td>
+      <td>Returns key-value pairs</td>
+      <td>As a view object</td>
+      <td><code>dict.items()</code></td>
+    </tr>
+    <tr>
+      <td>update()</td>
+      <td>dict.update([other])</td>
+      <td>Merges dictionaries</td>
+      <td>Adds or overwrites keys</td>
+      <td><code>d.update({'b': 2})</code></td>
+    </tr>
+    <tr>
+      <td>pop()</td>
+      <td>dict.pop(key[,default])</td>
+      <td>Removes key</td>
+      <td>Returns value or default</td>
+      <td><code>d.pop("a")</code></td>
+    </tr>
+    <tr>
+      <td>popitem()</td>
+      <td>dict.popitem()</td>
+      <td>Removes last inserted</td>
+      <td>Returns key-value tuple</td>
+      <td><code>d.popitem()</code></td>
+    </tr>
+    <tr>
+      <td>clear()</td>
+      <td>dict.clear()</td>
+      <td>Removes all items</td>
+      <td>Empties dictionary</td>
+      <td><code>d.clear()</code></td>
+    </tr>
+    <tr>
+      <td>setdefault()</td>
+      <td>dict.setdefault(key[,default])</td>
+      <td>Returns key value</td>
+      <td>Inserts key with default if missing</td>
+      <td><code>d.setdefault("a", 1)</code></td>
+    </tr>
+    <tr>
+      <td>copy()</td>
+      <td>dict.copy()</td>
+      <td>Shallow copy</td>
+      <td>Returns a copy of dict</td>
+      <td><code>copy_dict = d.copy()</code></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>🔵 4. Set Methods</h2>
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Syntax</th>
+      <th>Definition</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>add()</td>
+      <td>set.add(elem)</td>
+      <td>Adds an element</td>
+      <td>Adds a unique element to the set</td>
+      <td><code>s.add(4)</code></td>
+    </tr>
+    <tr>
+      <td>update()</td>
+      <td>set.update(iterable)</td>
+      <td>Adds multiple elements</td>
+      <td>Updates set with items from iterable</td>
+      <td><code>s.update([5,6])</code></td>
+    </tr>
+    <tr>
+      <td>remove()</td>
+      <td>set.remove(elem)</td>
+      <td>Removes element</td>
+      <td>Raises error if not found</td>
+      <td><code>s.remove(3)</code></td>
+    </tr>
+    <tr>
+      <td>discard()</td>
+      <td>set.discard(elem)</td>
+      <td>Removes element safely</td>
+      <td>Does not raise error if not found</td>
+      <td><code>s.discard(10)</code></td>
+    </tr>
+    <tr>
+      <td>pop()</td>
+      <td>set.pop()</td>
+      <td>Removes random element</td>
+      <td>Returns and removes arbitrary element</td>
+      <td><code>s.pop()</code></td>
+    </tr>
+    <tr>
+      <td>clear()</td>
+      <td>set.clear()</td>
+      <td>Removes all elements</td>
+      <td>Empties the set</td>
+      <td><code>s.clear()</code></td>
+    </tr>
+    <tr>
+      <td>union()</td>
+      <td>set.union(other)</td>
+      <td>Returns union</td>
+      <td>Combines sets</td>
+      <td><code>s.union({5,6})</code></td>
+    </tr>
+    <tr>
+      <td>intersection()</td>
+      <td>set.intersection(other)</td>
+      <td>Returns intersection</td>
+      <td>Common elements</td>
+      <td><code>s1.intersection(s2)</code></td>
+    </tr>
+    <tr>
+      <td>difference()</td>
+      <td>set.difference(other)</td>
+      <td>Returns difference</td>
+      <td>Items only in first set</td>
+      <td><code>s1.difference(s2)</code></td>
+    </tr>
+    <tr>
+      <td>issubset()</td>
+      <td>set.issubset(other)</td>
+      <td>Checks if subset</td>
+      <td>Returns True if set is a subset</td>
+      <td><code>{1,2}.issubset({1,2,3})</code></td>
+    </tr>
+    <tr>
+      <td>issuperset()</td>
+      <td>set.issuperset(other)</td>
+      <td>Checks if superset</td>
+      <td>Returns True if set is a superset</td>
+      <td><code>{1,2,3}.issuperset({1,2})</code></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<h2>🔢 5. Numeric & General Functions</h2>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Syntax</th>
+      <th>Definition</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>round()</td>
+      <td>round(number[, ndigits])</td>
+      <td>Rounds a number</td>
+      <td>To nearest whole number or decimal places</td>
+      <td><code>round(3.1415, 2) → 3.14</code></td>
+    </tr>
+    <tr>
+      <td>max()</td>
+      <td>max(iterable)</td>
+      <td>Returns maximum</td>
+      <td>Largest value from items</td>
+      <td><code>max([1, 5, 2]) → 5</code></td>
+    </tr>
+    <tr>
+      <td>min()</td>
+      <td>min(iterable)</td>
+      <td>Returns minimum</td>
+      <td>Smallest value from items</td>
+      <td><code>min([1, 5, 2]) → 1</code></td>
+    </tr>
+    <tr>
+      <td>sum()</td>
+      <td>sum(iterable)</td>
+      <td>Returns sum</td>
+      <td>Of all numeric elements</td>
+      <td><code>sum([1,2,3]) → 6</code></td>
+    </tr>
+    <tr>
+      <td>pow()</td>
+      <td>pow(x, y[, z])</td>
+      <td>Power calculation</td>
+      <td>Returns x**y % z if z given</td>
+      <td><code>pow(2, 3) → 8</code></td>
+    </tr>
+    <tr>
+      <td>divmod()</td>
+      <td>divmod(a, b)</td>
+      <td>Division and modulus</td>
+      <td>Returns (a // b, a % b)</td>
+      <td><code>divmod(7, 2) → (3, 1)</code></td>
+    </tr>
+    <tr>
+      <td>type()</td>
+      <td>type(object)</td>
+      <td>Returns object type</td>
+      <td>Useful for debugging</td>
+      <td><code>type(3) → &lt;class 'int'&gt;</code></td>
+    </tr>
+    <tr>
+      <td>isinstance()</td>
+      <td>isinstance(obj, class)</td>
+      <td>Checks object type</td>
+      <td>Returns True/False</td>
+      <td><code>isinstance(5, int) → True</code></td>
+    </tr>
+    <tr>
+      <td>id()</td>
+      <td>id(obj)</td>
+      <td>Returns identity</td>
+      <td>Unique ID of object in memory</td>
+      <td><code>id(5)</code></td>
+    </tr>
+  </tbody>
+</table>
+
+`,
                     code1: ``
                 }
             ]

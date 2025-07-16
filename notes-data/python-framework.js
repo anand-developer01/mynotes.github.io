@@ -647,6 +647,222 @@ urlpatterns = [
 
     // ✅ Important: With CBVs, you must call .as_view() when using the class in urls.py.
             `
+                },
+                {
+                    text1: `<b>serializers.ModelSerializer and serializers.Serializer</b>
+                    
+                    In Django REST Framework (DRF), the choice between <b>serializers.ModelSerializer</b> and <b>serializers.Serializer</b> depends on the complexity of your data model and how much automation you want in the serialization and deserialization process.
+                    
+                    <b>serializers.ModelSerializer - (Ex : 1)</b>:
+<b>Use Case</b>:
+-> Suitable when dealing with Django models and you want a straightforward way to serialize and deserialize model instances.
+-> Best for CRUD (Create, Read, Update, Delete) operations where the structure of the input/output closely matches the structure of the model.
+<b>Benefits</b>:
+-> Automatically generates fields based on the model's fields, reducing the need for manual field definition.
+-> Provides built-in validation based on model field types and constraints.
+-> Simplifies the code by automating common serialization and deserialization tasks.
+
+ModelSerializer is a <b>shortcut</b> provided by Django REST Framework (DRF) to automatically create a serializer class for a Django model.
+-> Automatically maps model fields to serializer fields
+-> Provides default <b>.create()</b> and <b>.update()</b> methods
+-> Reduces boilerplate code when building APIs for Django models
+
+<b>serializers.Serializer - (Ex : 3)</b>:
+<b>Use Case</b>:
+-> Useful when dealing with non-model data or when you need more control over the serialization and deserialization process.
+-> Suitable for scenarios where the structure of the input/output does not directly map to a Django model.
+
+<b>Benefits</b>:
+-> Allows manual definition of fields and validation logic, providing greater flexibility.
+-> Suitable for handling complex data transformations or combining data from multiple sources.
+
+\`create()\` must be implemented.
+<span style="color: red">NotImplementedError: \`create()\` must be implemented.</span>
+If you decide to use serializers.Serializer (instead of ModelSerializer), then yes — <b>you must implement both .create() and .update() methods manually.</b>
+
+When you use <b>serializers.Serializer</b>, you must manually implement:
+      -> .create(validated_data)
+    -> .update(instance, validated_data)
+But since you're working with a Django model <b>(Movie), ModelSerializer</b> automatically provides these methods.
+
+The first part of the serializer class defines the fields that get serialized/deserialized. The <b>create()</b> and <b>update()</b> methods define how fully fledged instances are created or modified when calling <b>serializer.save()</b>
+
+<b>2️⃣ .create() Method</b>
+Defines how to create a new instance when calling <b>serializer.save()</b> with <b>serializer = MovieSerializer(data=...)</b>.
+
+def create(self, validated_data):
+    return Movie.objects.create(**validated_data)
+
+    This is required when you're manually using <b>serializers.Serializer</b> to handle model data.
+
+<b>3️⃣ .update() Method</b>
+Defines how to update an existing model instance with validated data.
+
+def update(self, instance, validated_data):
+    instance.title = validated_data.get('title', instance.title)
+    instance.description = validated_data.get('description', instance.description)
+    instance.rating = validated_data.get('rating', instance.rating)
+    instance.genre = validated_data.get('genre', instance.genre)
+    instance.save()
+    return instance
+    Called when you pass an instance like: <b>serializer = MovieSerializer(instance, data=request.data)</b> and then call <b>.save()</b>.
+
+<b>Key Differences</b>:
+<b>ModelSerializer</b>:
+-> Automatically generates fields based on the model's fields.
+-> Provides default implementations for common operations like creating and updating model instances.
+-> Generally used for CRUD operations on Django models.
+
+<b>Serializer</b>:
+-> Requires manual definition of fields and validation methods.
+-> Offers more control and flexibility over the serialization and deserialization process.
+-> Suitable for custom data structures, complex transformations, or non-model data.
+`,
+                    code1: `// ----------- Ex : 1 ------------
+      //serializers.ModelSerializer
+      class MyModelSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = MyModel
+            fields = '__all__'
+
+            //----------- or ---------
+            from rest_framework import serializers
+              from .models import Movie
+
+              class MovieSerializer(serializers.ModelSerializer):
+                  class Meta:
+                      model = Movie
+                      fields = ['title', 'rating']
+
+ // ---------- Ex : 2 --------
+// # movies/serializers.py
+
+# serializers.py
+from rest_framework import serializers
+from .models import Movie
+
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = '__all__'
+        read_only_fields = ['id']
+
+    # Custom field validation
+    def validate_rating(self, value):
+        if value < 0 or value > 10:
+            raise serializers.ValidationError("Rating must be between 0 and 10.")
+        return value
+
+    def validate_release_year(self, value):
+        if value < 1900 or value > 2100:
+            raise serializers.ValidationError("Please enter a valid release year.")
+        return value
+
+    # Custom create()
+    def create(self, validated_data):
+        print("Custom CREATE:", validated_data)
+        return Movie.objects.create(**validated_data)
+
+    # Custom update()
+    def update(self, instance, validated_data):
+        print("Custom UPDATE:", validated_data)
+        instance.title = validated_data.get('title', instance.title)
+        # instance.description = validated_data.get('description', instance.description)
+        instance.rating = validated_data.get('rating', instance.rating)
+        instance.genre = validated_data.get('genre', instance.genre)
+        instance.release_year = validated_data.get('release_year', instance.release_year)
+        instance.save()
+        return instance
+
+
+    // # movies/serializers.py
+from rest_framework import serializers
+from .models import Movie
+
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = '__all__'
+        read_only_fields = ['id']
+
+    # Custom field validation
+    def validate_rating(self, value):
+        if value < 0 or value > 10:
+            raise serializers.ValidationError("Rating must be between 0 and 10.")
+        return value
+
+    def validate_release_year(self, value):
+        if value < 1900 or value > 2100:
+            raise serializers.ValidationError("Please enter a valid release year.")
+        return value
+
+    # Custom create()
+    def create(self, validated_data):
+        print("Custom CREATE:", validated_data)
+        return Movie.objects.create(**validated_data)
+
+    # Custom update()
+    def update(self, instance, validated_data):
+        print("Custom UPDATE:", validated_data)
+        instance.title = validated_data.get('title', instance.title)
+        # instance.description = validated_data.get('description', instance.description)
+        instance.rating = validated_data.get('rating', instance.rating)
+        instance.genre = validated_data.get('genre', instance.genre)
+        instance.release_year = validated_data.get('release_year', instance.release_year)
+        instance.save()
+        return instance
+
+
+
+
+        // ---------- Ex : 3 --------
+        // serializers.Serializer:
+        class MyCustomSerializer(serializers.Serializer):
+    field1 = serializers.CharField()
+    field2 = serializers.IntegerField()
+
+    def validate_field1(self, value):
+        # Custom validation logic for field1
+        # ...
+
+    def validate(self, data):
+        # Custom validation logic for the entire data
+        # ...
+
+    def create(self, validated_data):
+        # Custom logic for creating an instance
+        # ...
+
+    def update(self, instance, validated_data):
+        # Custom logic for updating an instance
+        # ...
+
+        //--------
+from rest_framework import serializers
+from .models import Movie
+
+class MovieSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=100)
+    rating = serializers.FloatField()
+    genre = serializers.CharField()
+
+    # 🔽 Required for POST
+    def create(self, validated_data):
+        return Movie.objects.create(**validated_data)
+
+    # 🔽 Required for PUT/PATCH
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.rating = validated_data.get('rating', instance.rating)
+        instance.genre = validated_data.get('genre', instance.genre)
+        instance.save()
+        return instance
+
+        `
+                },
+                {
+                    text1: `Nested Serializers`,
+                    code1: ``
                 }
             ]
         },  
@@ -737,11 +953,284 @@ from .views import HelloWorld
 
 urlpatterns = [
     path('hello/', HelloWorld.as_view()),
-]`
+]
+    
+
+
+// ----------- Ex : 1 -------------
+from django.shortcuts import render
+
+// # movies/views.py
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Movie
+from .serializers import MovieSerializer
+
+class MovieList(APIView):
+    def get(self, request):
+        movies = Movie.objects.all()
+        serializer = MovieSerializer(movies, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = MovieSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
+class MovieDetail(APIView):
+    def get_object(self, pk):
+        try:
+            return Movie.objects.get(pk=pk)
+        except Movie.DoesNotExist:
+            return None
+
+    def put(self, request, pk):
+        movie = self.get_object(pk)
+        if not movie:
+            return Response({'error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = MovieSerializer(movie, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        movie = self.get_object(pk)
+        print(movie)
+        if not movie:
+            return Response({'error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        movie.delete()
+        return Response({'message': 'Movie deleted'}, status=status.HTTP_204_NO_CONTENT)
+
+
+        // # movies/urls.py
+        from django.urls import path
+        from .views import MovieList, MovieDetail
+
+        urlpatterns = [
+            path('movies/', MovieList.as_view()),
+            path('movies/<int:pk>/', MovieDetail.as_view()),  # ✅ Add this line
+        ]
+
+        `
                 }
             ]
-        },  
+        },
+        {
+            id: 1,
+            title: "Routers",
+            note: [
                 {
+                    text1: `Resource routing allows you to quickly declare all of the common routes for a given resourceful controller. Instead of declaring separate routes for your index... a resourceful route declares them in a single line of code.
+                    
+                    A router is a class that automatically generates URL routes for viewsets. This reduces the need to manually define URL patterns for each viewset, making it easier to manage and scale API.
+                    
+                    <b>DefaultRouter - (Ex : 2)</b>	
+                    Auto-generates URLs and includes a browsable API root (/)
+                    ‘DefaultRouter’ extends ‘SimpleRouter’ by adding some additional routes and features. It is more featuristic and provides a better developer experience by including a default API root view and support for optional format suffixes.
+
+Features:
+-> Generates standard CRUD routes
+-> Includes a default API root view
+-> Supports format suffixes
+-> Provides a navigable list of all registered viewsets at the API root
+
+Use DefaultRouter to automatically handle CRUD operations and provide a Browsable API root at /.
+
+<b>SimpleRouter - (Ex : 1)</b>
+SimpleRouter automatically creates URL routes for your ViewSet — just like DefaultRouter — <b>but it does NOT create the root API endpoint (i.e., /).</b>
+‘SimpleRouter’ is a basic router class provided by DRF. It automatically generates routes for the standard set of CRUD operations but does not include any additional routes or features.
+-> Generates standard CRUD routes
+-> Lightweight and minimalistic
+-> Does not include a default API root view
+-> Does not support format suffixes
+
+Use SimpleRouter if:
+    You don't want or need a browsable / root.
+    You want to define your own root or homepage view.
+
+<b>Differences Between SimpleRouter and DefaultRouter</b>
+<b>SimpleRouter</b>
+Lightweight: Only generates standard CRUD routes
+No API Root View: Does not provide a default API root view
+No Format suffixes: Does not support optional format suffixes
+
+<b>DefaultRouter</b>
+Feature-Rich: Generates standard CRUD routes and additional routes
+API Root View: Provides a default API root view that lists all registered viewsets
+Format Suffixes: Supports optional format suffixes for URL patterns
+
+<b>When to Use Each Router</b>
+<b>Use SimpleRouter</b>
+When you need a lightweight setup: If the API does nto require an API root view or format suffixes, ‘SimpleRouter’ is a simpler choice.
+For minimalistic APIs: Ideal for small projects or APIs with limited functionality.
+
+<b>Use Default Router</b>
+For enhanced developer experience: The default API root view and format suffixes make ‘Default Router’ a better choice for larger projects or public APIs.
+When we need API discovery: The API root view is useful for clients to discover available endpoints easily.
+`,
+                    code1: `// ---------- Ex : 1 ----------
+// movies/models.py
+from django.db import models
+
+class Movie(models.Model):
+    title = models.CharField(max_length=100)
+    # description = models.TextField()
+    rating = models.FloatField()
+    genre = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.title
+
+// movies/serializers.py
+from rest_framework import serializers
+from .models import Movie
+
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
+// movies/views.py
+from rest_framework import viewsets
+from .models import Movie
+from .serializers import MovieSerializer
+
+class MovieViewSet(viewsets.ModelViewSet):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+
+// movies/urls.py
+    from django.urls import path, include
+    from rest_framework.routers import SimpleRouter
+    from .views import MovieViewSet
+
+    // # Create router instance
+    router = SimpleRouter()
+
+    // # Register your ViewSet
+    router.register(r'movies', MovieViewSet)
+
+    // # Include router URLs in urlpatterns
+    urlpatterns = [
+        path('', include(router.urls)),
+    ]
+
+
+    // mysite/urls.py
+    from django.contrib import admin
+    from django.urls import path, include
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', include('blog.urls')),
+        path('api/', include('movies.urls')),
+    ]
+
+
+    // ---------- Ex : 2 -----------
+    # movies/urls.py
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import MovieViewSet
+
+router = DefaultRouter()
+router.register(r'movies', MovieViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
+
+    // mysite/urls.py
+    from django.contrib import admin
+    from django.urls import path, include
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', include('blog.urls')),
+        path('api/', include('movies.urls')),
+    ]
+
+    //------------- Ex : 3 ---------
+    // Single Global Router (Centralized)
+
+🧩 Structure
+    movies/views.py → MovieViewSet
+    books/views.py → BookViewSet
+    users/views.py → UserViewSet
+
+🔗 project/urls.py
+# myproject/urls.py
+from django.contrib import admin
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from movies.views import MovieViewSet
+from books.views import BookViewSet
+from users.views import UserViewSet
+
+router = DefaultRouter()
+router.register(r'movies', MovieViewSet)
+router.register(r'books', BookViewSet)
+router.register(r'users', UserViewSet)
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+]
+
+✅ API Endpoints:
+    /api/movies/
+    /api/books/
+    /api/users/
+    /api/ → Root API view showing all 3.
+
+    // ----------- Ex : 4 -----------
+    // Modular Routers per App (Scalable & Clean)
+
+    // Better for large projects or microservice-style structure.
+// 🔹 movies/urls.py
+from rest_framework.routers import DefaultRouter
+from .views import MovieViewSet
+
+router = DefaultRouter()
+router.register(r'', MovieViewSet)
+
+urlpatterns = router.urls
+
+// 🔹 books/urls.py
+from rest_framework.routers import DefaultRouter
+from .views import BookViewSet
+
+router = DefaultRouter()
+router.register(r'', BookViewSet)
+
+urlpatterns = router.urls
+
+🔗 Project-level urls.py
+// # myproject/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/movies/', include('movies.urls')),
+    path('api/books/', include('books.urls')),
+]
+
+// ✅ Endpoints:
+//     /api/movies/ → CRUD for movies
+//     /api/books/ → CRUD for books
+//     No /api/ root listing (unless you manually create it)
+        `
+                }
+            ]
+        },
+        {
             id: 1,
             title: "Ran server",
             note: [
