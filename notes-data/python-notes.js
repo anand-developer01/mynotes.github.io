@@ -740,7 +740,7 @@ else:
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "if and elif",
             note: [
@@ -1288,8 +1288,8 @@ print(cube(5))    # 125
                     code1: ``
                 }
             ]
-        }, 
-                {
+        },
+        {
             id: 1,
             title: "new topic",
             note: [
@@ -1298,7 +1298,7 @@ print(cube(5))    # 125
                     code1: ``
                 }
             ]
-        }, 
+        },
         {
             id: 1,
             title: "Arguments (*args, **kwargs)",
@@ -1724,7 +1724,7 @@ print("Strings:", strings)  # ['a', 'b']
                 }
             ]
         },
-                        {
+        {
             id: 1,
             title: "Generators",
             note: [
@@ -1890,7 +1890,7 @@ print("Diagonal:", diagonal)
                 }
             ]
         },
-                        {
+        {
             id: 1,
             title: "Virtual Environments",
             note: [
@@ -2042,7 +2042,7 @@ It lets you <b>install, upgrade, and manage</b> third-party Python libraries fro
                 }
             ]
         },
-                                {
+        {
             id: 1,
             title: "What is Python?",
             note: [
@@ -2224,7 +2224,7 @@ for fruit in fruits:
 </div>
 `,
                     code1: ``
-                },                
+                },
                 {
                     text1: `The list data type has some more methods. Here are all of the methods of list objects:
 
@@ -2345,7 +2345,7 @@ data.count({"id": 1})  # ❌ Doesn't count partial match
 // If you want to count based on part of the dictionary (like only id == 1), use this:
 count = sum(1 for d in data if d["id"] == 1)
 `
-                },                
+                },
                 {
                     text1: `<b>Using Lists as Stacks</b>
                     The list methods make it very easy to use a list as a stack, where the last element added is the first element retrieved (“last-in, first-out”). To add an item to the top of the stack, use append(). To retrieve an item from the top of the stack, use pop() without an explicit index. For example:`,
@@ -3059,7 +3059,7 @@ print(dog1.species)`
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "__init__() - Constructor",
             note: [
@@ -3150,7 +3150,7 @@ print(counter.get_count())`
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "Inheritance",
             note: [
@@ -3158,6 +3158,9 @@ print(counter.get_count())`
                     text1: `(OOP) that allows a class (called a child or derived class) to inherit attributes and methods from another class (called a parent or base class). This promotes code reuse, modularity, and a hierarchical class structure. 
                     
                     <b>super()</b> function, which is a built-in function that returns a temporary object of the superclass, so you can access its methods without explicitly naming the parent class. 
+
+                    <b>Ex : 6</b> : super() is a built-in function used to call methods from a <b>parent (superclass)</b> in a <b>child (subclass)</b>.
+super().__init__(args) specifically calls the <b>constructor of the parent class</b>.
                     
                     <b>Types of Inheritance</b>
                     <b>Single</b> :	One parent, one child	Ex : class B(A)
@@ -3253,6 +3256,28 @@ c = C()
 c.show()  # From A (left-to-right)
 
 // ------------- Ex : 6 ------------
+// ---------- parent (superclass) in a child (subclass). -----------
+class Parent:
+    def __init__(self, w, b):
+        self.w = w
+        self.b = b
+
+    def area(self):
+        return self.w * self.b
+    
+
+class Child(Parent):
+    def __init__(self, w, b, h):  # ✅ Fixed __init__ typo
+        super().__init__(w, b)    # ✅ Call parent constructor first
+        self.h = h
+
+    def area_cube(self):
+        return self.w * self.b * self.h
+
+
+chob = Child(2, 3, 5)
+print(chob.area_cube())  # Output: 30
+
 // ------------- Ex : 7 ------------
 // ------------- Ex : 8 ------------
 `
@@ -3263,7 +3288,7 @@ c.show()  # From A (left-to-right)
                 },
             ]
         },
-                {
+        {
             id: 1,
             title: "Encapsulation",
             note: [
@@ -3543,6 +3568,22 @@ To override a method in Python, you simply define a method in the subclass with 
 
 This concept is particularly useful in data science for creating flexible and adaptable functions, such as those used in data manipulation or statistical calculations.
 
+<b>NOTE</b> : last definition overrides the previous one.
+def greet():
+    print("Hello!")
+
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("Anand")
+ What happened?
+
+    -> The first greet() was <b>overwritten (shadowed)</b> by the second one.
+    -> Python only keeps the last defined function with a given name.
+    -> So calling greet() without a parameter now gives an error:
+TypeError: greet() missing 1 required positional argument: \`name\`
+
+
 <b>Implementation in Python</b>
 Unlike some other programming languages, Python does not support method overloading natively. In Python, defining multiple methods with the same name within a class will overwrite the previous definitions. However, Python's dynamic nature and support for default arguments, variable-length arguments, and keyword arguments allow for similar functionality.
 
@@ -3742,6 +3783,95 @@ for v in vehicles:
         },
         {
             id: 1,
+            title: "operator overloading",
+            note: [
+                {
+                    text1: `<b>Operator Overloading</b> means giving extended meaning to Python operators (+, -, *, ==, etc.) so they work with <b>user-defined objects.</b>
+                    Python treats operators as <b>syntactic sugar</b> for method calls (a + b → a.__add__(b)).
+                    
+                ( <b>Ex : 1</b> )Operator Overloading means giving extended meaning beyond their predefined operational meaning. For example operator + is used to add two integers as well as join two strings and merge two lists. It is achievable because '+' operator is overloaded by int class and str class. You might have noticed that the same built-in operator or function shows different behavior for objects of different classes, this is called Operator Overloading. 
+
+                    Operator overloading in Python allows the customization of behavior for built-in operators (like <b>+, -, *, /, ==, <,</b> etc.) when applied to instances of user-defined classes. This means that you can define how your custom objects interact with these operators, enhancing code readability and making your objects behave more intuitively.
+                    
+                    ( <b>Ex : 3</b> )implementing operator overloading with the <b>+</b> operator for your <b>Student</b> class using the <b>__add__</b> method.`,
+                    code1: `    def __add__(self, value: int, /) -> int: ...
+    def __sub__(self, value: int, /) -> int: ...
+    def __mul__(self, value: int, /) -> int: ...
+    def __floordiv__(self, value: int, /) -> int: ...
+    def __truediv__(self, value: int, /) -> float: ...
+    def __mod__(self, value: int, /) -> int: ...
+    def __divmod__(self, value: int, /) -> tuple[int, int]: ...
+    def __radd__(self, value: int, /) -> int: ...
+    def __rsub__(self, value: int, /) -> int: ...
+    def __rmul__(self, value: int, /) -> int: ...
+    def __rfloordiv__(self, value: int, /) -> int: ...
+    def __rtruediv__(self, value: int, /) -> float: ...
+    def __rmod__(self, value: int, /) -> int: ...
+    def __rdivmod__(self, value: int, /) -> tuple[int, int]: ...
+    // -----------  Ex : 1 -----------
+//     # Python program to show use of
+// # + operator for different purposes.
+
+print(1 + 2)
+
+// # concatenate two strings
+print("Geeks"+"For") 
+
+// # Product two numbers
+print(3 * 4)
+
+// # Repeat the String
+print("Geeks"*4)
+
+    // ------------ Ex : 2 ----------------                         
+    a = 5
+    b = 9
+    print(int.__add__(a, b))
+
+    // ------------ Ex : 3 ----------------   
+    class Student:
+    def __init__(self, m1, m2):
+        self.m1 = m1
+        self.m2 = m2
+
+    def __add__(self, o):
+        m1 = self.m1 + o.m1
+        m2 = self.m2 + o.m2
+        s3 = Student(m1,m2)
+        return s3
+
+    s1 = Student(50,51)
+    s2 = Student(40,41)
+
+    s3 = s1+s2
+
+    print(s3.m1) # 50, 40
+    print(s3.m2) # 51, 41
+
+    //------------ Ex : 4 ----------
+    # Python Program to perform addition 
+    # of two complex numbers using binary 
+    # + operator overloading.
+
+    class complex:
+        def __init__(self, a, b):
+            self.a = a
+            self.b = b
+
+        # adding two objects 
+        def __add__(self, other):
+            return self.a + other.a, self.b + other.b
+
+        Ob1 = complex(1, 2)
+        Ob2 = complex(2, 3)
+        Ob3 = Ob1 + Ob2
+        print(Ob3)
+    `
+                }
+            ]
+        },
+        {
+            id: 1,
             title: "getters and setters",
             note: [
                 {
@@ -3801,6 +3931,65 @@ print(p.name)           // # Anand
 p.name = "Kumar"
 print(p.name)           // # Kumar
 
+
+// --------- Ex : 3 -----------
+class Customer:
+    def __init__(self, name, phoneno):
+        self.name = name
+        self.phoneno = phoneno
+
+    def get_name(self):
+        return self.name 
+    
+    def get_phoneno(self):
+        return self.phoneno
+    
+    def set_phoneno(self, ph):
+        self.phoneno = ph
+
+
+
+cus = Customer("ram", 51654565)
+print(cus.get_name())
+print(cus.get_phoneno())
+print("---------------------")
+cus.set_phoneno(4454984)
+print(cus.get_name())
+print(cus.get_phoneno())
+
+
+// --------- Ex : 4 -----------
+class CurrencyConvertor:
+    def __init__(self, currency, rate):
+        self.currency = currency
+        self.rate = rate
+
+    def get_currency(self):
+        return self.currency
+    
+    def set_currency(self, cu):
+        self.currency = cu 
+
+    def get_rate(self):
+        return self.rate
+    
+    def set_rate(self, r):
+        self.rate = r 
+
+    def convert(self, amount):
+        return f"{self.currency} - {self.rate * amount}"
+
+cc = CurrencyConvertor("USD", 70)
+
+print(cc.convert(82))
+cc.set_currency("UNA")
+cc.set_rate(90)
+print(cc.convert(100))
+
+
+
+
+
 `
                 }
             ]
@@ -3835,16 +4024,16 @@ When function decorated with @staticmethod is called, we don't pass an instance 
                     `,
                     code1: `//✅ Syntax:
 
-class MyClass:
-    @staticmethod
-    def my_static_method():
-        print("I'm a static method")
+                            class MyClass:
+                                @staticmethod
+                                def my_static_method():
+                                    print("I'm a static method")
 
-You can call it using:
+                            You can call it using:
 
-MyClass.my_static_method()  # ✅ Recommended
-obj = MyClass()
-obj.my_static_method()      # ✅ Also works
+                            MyClass.my_static_method()  # ✅ Recommended
+                            obj = MyClass()
+                            obj.my_static_method()      # ✅ Also works
 
 
 //---------------- Ex: 1 -----------
@@ -3863,7 +4052,59 @@ if __name__ == "__main__":
     // # without creating instance
     res = Maths.addNum(1, 2)
     print("The result is", res)
+
+
+//---------------- Ex: 2 -----------
+class Calculator:
+    @staticmethod
+    def add(a, b):
+        return a + b
+    def sub(a, b):
+        return a - b
+    def mul(a, b):
+        return a * b
+    def div(a, b):
+        return a/b
+    
+
+print(Calculator.add(5, 2))
+print(Calculator.sub(5, 2))
+print(Calculator.mul(5, 2))
+print(Calculator.div(5, 2))
     `
+                }
+            ]
+        },    
+        {
+            id: 1,
+            title: "@classmethod",
+            note: [
+                {
+                text1: ``,
+                code1: `class Emp:
+                            emp_count = 101
+                            def __init__(self, name, salary, designation):
+                                self.name = name
+                                self.emp_id = "e" + str(Emp.emp_count)
+                                Emp.emp_count += 1
+                                self.salary = salary
+                                self.designation = designation
+
+                            
+                            def show_details(self):
+                                return f"{self.emp_id}, {self.salary}, {self.designation}"
+                            
+                            @classmethod
+                            def total_emp(cls):
+                                return cls.emp_count - 1
+                            
+                        em1 = Emp("Ram",15000,"engineer")
+                        em2 = Emp("Ram",18000,"CA")
+                        em3 = Emp("Ram",18000,"HR")
+                        print(em1.show_details())
+                        print(em2.show_details())
+                        print(em3.show_details())
+                        print(Emp.total_emp())`,
                 }
             ]
         },
@@ -3989,6 +4230,71 @@ print(dog2.get_species())     # All dogs belong to the species: Canis lupus
 // All dogs belong to the species: Canis lupus
 
 `
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "MRO (Method Resolution Order)",
+            note: [
+                {
+                text1: `<b>MRO (Method Resolution Order)</b> is the order in which Python <b>looks up methods and attributes</b> when you call them on an object — especially when <b>multiple inheritance</b> is involved.
+                
+                <b>Why is MRO important?</b>
+When a class inherits from multiple parent classes, the same method or attribute might be defined in more than one parent.
+MRO helps Python decide:
+<b>🧭 "Which class's method should be used first?"</b>
+<b>Python uses the C3 Linearization Algorithm to compute MRO.</b>
+
+<b>1. Using .mro() method</b>:
+print(D.mro())
+
+<b>✅ 2. Using built-in function super()</b>:
+    -> <b>super()</b> uses MRO under the hood.
+    -> So calling <b>super().method()</b> always follows the MRO chain.
+
+    <b>What is &lt;class &#39;object&#39;&gt; in Python?</b>
+    In Python, object is the base class for all classes.
+
+When you see &lt;class &#39;object&#39;&gt; in MRO like this:
+print(D.mro())
+[&lt;class &#39;__main__.D&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;class &#39;object&#39;&gt;]
+D → B → C → A → object <b>( Ex : 1 )</b>
+It means the class <b>D (and its parents)</b> ultimately inherit from Python's <b>built-in object</b> class.
+
+Why is <b>object</b> important?
+    It's the <b>top-most parent</b> in Python's class hierarchy.
+    All classes (even your custom classes) <b>automatically inherit from object</b>, either directly or indirectly.
+
+    class A:
+    pass
+    print(A.mro())
+✅ Output:
+[&lt;class &#39;__main__.A&#39;&gt;, &lt;class &#39;object&#39;&gt;]
+                `,
+                code1: `// ----------- Ex : 1 -----------
+        class A:
+            def show(self):
+                print("A")
+
+        class B(A):
+            def show(self):
+                print("B")
+
+        class C(A):
+            def show(self):
+                print("C")
+
+        class D(B, C):
+            pass
+
+        d = D()
+        d.show()
+        // Output: B
+        print(D.mro())
+[&lt;class &#39;__main__.D&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;class &#39;object&#39;&gt;]
+// D → B → C → A → object
+`,
                 }
             ]
         },
@@ -4598,7 +4904,7 @@ thread_B.join()
 `
                 }
             ]
-        }, 
+        },
         {
             id: 1,
             title: "Daemon Threads",
@@ -4608,7 +4914,7 @@ thread_B.join()
                     code1: ``
                 }
             ]
-        },     
+        },
         {
             id: 1,
             title: "Race Conditions",
@@ -4618,7 +4924,7 @@ thread_B.join()
                     code1: ``
                 }
             ]
-        },    
+        },
         {
             id: 1,
             title: "Locks / Synchronization",
@@ -4628,8 +4934,8 @@ thread_B.join()
                     code1: ``
                 }
             ]
-        },   
-                {
+        },
+        {
             id: 1,
             title: "Thread-safe Code",
             note: [
@@ -4638,8 +4944,8 @@ thread_B.join()
                     code1: ``
                 }
             ]
-        }, 
-                        {
+        },
+        {
             id: 1,
             title: "Timers",
             note: [
@@ -4648,8 +4954,8 @@ thread_B.join()
                     code1: ``
                 }
             ]
-        }, 
-                        {
+        },
+        {
             id: 1,
             title: "ThreadPoolExecutor",
             note: [
@@ -4658,7 +4964,7 @@ thread_B.join()
                     code1: ``
                 }
             ]
-        }, 
+        },
         {
             id: 1,
             title: "Multithreading vs Multiprocessing",
@@ -4668,8 +4974,8 @@ thread_B.join()
                     code1: ``
                 }
             ]
-        }, 
-                {
+        },
+        {
             id: 1,
             title: "Queues in Multithreading",
             note: [
@@ -4678,8 +4984,8 @@ thread_B.join()
                     code1: ``
                 }
             ]
-        }, 
-                {
+        },
+        {
             id: 1,
             title: "Deadlock & Avoidance",
             note: [
@@ -4688,7 +4994,7 @@ thread_B.join()
                     code1: ``
                 }
             ]
-        }, 
+        },
         {
             id: 1,
             section: `Synchronization`,
@@ -4758,7 +5064,7 @@ Event loops, coroutines, and futures are the essential elements of an asynchrono
     `
                 }
             ]
-        }, 
+        },
         {
             id: 1,
             title: "async / await",
@@ -5016,7 +5322,7 @@ First, let's create a simple TCP server that listens for incoming connections an
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "datetime",
             note: [
@@ -5026,7 +5332,7 @@ First, let's create a simple TCP server that listens for incoming connections an
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "What is Python?",
             note: [
@@ -5036,7 +5342,7 @@ First, let's create a simple TCP server that listens for incoming connections an
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "What is Python?",
             note: [
