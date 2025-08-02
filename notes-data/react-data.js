@@ -1169,7 +1169,7 @@ export default UncontrolledForm;
       note: [
         {
           text1: `<b>HOC, Render Props</b> and now <b>hooks</b> all serve to the same purpose: <u>Share stateful logic between components</u>. There is actually no way to tell which one is better or worst. All depends on your use case.
-          
+          <a href="https://deadsimplechat.com/blog/higher-order-componets-in-react/" target="_blank">higher-order-componets-in-react/</a>
           A higher-order component (HOC) is a function that takes a component and returns a new component. Basically, it's a pattern that is derived from React's compositional nature.
 
                   We call them pure components because they can accept any dynamically provided child component but they won't modify or copy any behavior from their input components.

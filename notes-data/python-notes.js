@@ -147,6 +147,20 @@ If you're building an API project (like your Movie App), here's what I recommend
     <b>File processing and communicating with a program's environment</b>:
         Processing files:<b> sqlite3, xml, csv, logging, and configparser</b>
         Communication: <b>os, datetime, io, and time</b>
+
+
+
+<b>
+    All developer skills, plus:
+
+    Software architecture
+
+    Design patterns
+
+    System design
+
+    Algorithms & data structures
+</b>
 `,
                     code1: ``
                 }

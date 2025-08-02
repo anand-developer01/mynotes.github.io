@@ -511,5 +511,299 @@ GSD no- 1800-572-0473
                 },
             ],
         },
+        {
+            id: 52,
+            section: 'Core Skills of a Software Engineer',
+            title: "Core Skills of a Software Engineer",
+            note: [
+                {
+                    text1: `<b>🔧 Core Skills of a Software Engineer</b>
+<b>1. Programming Proficiency</b>
+    Languages: Python, Java, C++, JavaScript, etc.
+    Depth: Writing clean, maintainable, testable code.
+    Understanding of: Data types, control flow, functions, OOP, error handling, etc.
+
+<b>2. Data Structures & Algorithms</b>
+    Arrays, Linked Lists, Stacks, Queues
+    Trees (BST, AVL), Graphs
+    Sorting/searching algorithms, Recursion, Dynamic programming
+    Time & space complexity (Big O notation)
+✅ Why it matters: Enables you to build efficient and scalable solutions.
+
+<b>3. System Design</b>
+    Designing software architecture:
+        Microservices vs Monolith
+        Load balancing, caching, databases, queues
+    Understand scalability, fault tolerance, distributed systems
+✅ Why it matters: Helps build systems that handle real-world traffic and complexity.
+
+<b>4. Version Control</b>
+    Tools: Git, GitHub/GitLab/Bitbucket
+    Concepts: Branching, merging, pull requests, resolving conflicts
+✅ Why it matters: Enables collaboration and code history tracking.
+
+<b>5. Software Development Lifecycle (SDLC)</b>
+    Phases: Requirements → Design → Implementation → Testing → Deployment → Maintenance
+    Agile/Scrum methodology
+    CI/CD pipelines
+✅ Why it matters: Teaches discipline and team collaboration.
+
+<b>6. Databases</b>
+    SQL (Structured): PostgreSQL, MySQL
+    NoSQL (Document-based): MongoDB, Firebase
+    Knowledge of indexes, joins, normalization
+✅ Why it matters: Almost every system stores and retrieves data.
+
+<b>7. Testing</b>
+    Unit tests (PyTest, JUnit)
+    Integration tests
+    Test-Driven Development (TDD)
+✅ Why it matters: Prevents bugs and ensures reliability.
+
+<b>8. Problem Solving & Analytical Thinking</b>
+    Critical thinking to break down problems
+    Logical flow of execution
+    Debugging complex issues
+✅ Why it matters: Engineers are paid to solve problems, not just write code.
+
+<b>9. Communication</b>
+    Writing clear documentation
+    Explaining complex ideas to non-tech teams
+    Code reviews and technical discussions
+✅ Why it matters: Software engineering is a team sport.
+
+<b>10. DevOps & Deployment (Optional but Valuable)</b>
+    Docker, Kubernetes, Jenkins
+    AWS / Azure / GCP
+    Monitoring tools (Grafana, Prometheus)
+✅ Why it matters: Helps engineers understand production and delivery aspects.
+
+<b>11. Security Awareness</b>
+    Understand common attacks: SQL injection, XSS, CSRF
+    Writing secure code
+    Data protection and access control
+✅ Why it matters: Security is essential for real-world software.
+
+<b>Bonus Soft Skills:</b>
+    Time management
+    Teamwork
+    Curiosity and continuous learning`,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+            ],
+        },
+
+        {
+            id: 52,
+            title: "what is Software architecture",
+            note: [
+                {
+                    text1: `Software Architecture defines fundamental organization of a system and more simply defines a structured solution. It determines how the various components of a software system are assembled, how they relate to one another, and how they communicate. Essentially, it serves as a blueprint for the application and a foundation for the development team to build upon.
+                    
+                    <b>Software architecture</b> is the <b>big-picture design</b> of how software will be <b>structured, behave, and grow over time.</b>
+                    
+                    
+                    <b>🧱 Architectural Patterns </b> :
+                    	Learn 
+                        Monolithic, 
+                        Layered, 
+                        Microservices, 
+                        Event-driven, etc.
+<b>🧩 Design Patterns</b>
+	Understand Singleton, Factory, Observer, MVC, etc.
+<b>📐 SOLID Principles</b>
+	Improve code architecture and maintainability
+<b>🎯 System Design Basics</b>
+	Concepts like scalability, load balancing, caching, etc.
+`,
+                    code1: ``
+                },
+            ],
+        },
+        {
+            id: 52,
+            title: "Design Patterns",
+            note: [
+                {
+                    text1: `<b>What is a Design Pattern?</b>
+A design pattern is a general, reusable solution to a commonly occurring problem in software design. It's not a finished piece of code, but a template or blueprint for how to solve a particular design issue in different situations.
+
+Key Points:
+    Design patterns <b>represent best practices</b> refined through experience.
+    They <b>speed up development</b> by providing proven development paradigms.
+    They <b>promote code reusability, scalability, and maintainability</b>.
+    They are <b>language-independent</b>—though their implementations may differ.
+
+     Categories of Design Patterns:
+    <b>Creational Patterns</b> – Object creation mechanisms.
+        Examples:
+            <b>Singleton</b> – Ensure a class has only one instance.
+            <b>Factory Method</b> – Delegate object creation to a subclass.
+            <b>Builder</b> – Build complex objects step-by-step.
+            <b>Prototype</b> – Clone existing objects.
+
+    <b>Structural Patterns</b> – How objects and classes are composed.
+        Examples:
+            <b>Adapter</b> – Bridge between incompatible interfaces.
+            <b>Decorator</b> – Add behavior without altering original class.
+            <b>Facade</b> – Simplified interface to a complex subsystem.
+
+    <b>Behavioral Patterns</b> – How objects interact and communicate.
+        Examples:
+            <b>Observer</b> – Notify many objects about state changes.
+            <b>Strategy</b> – Encapsulate interchangeable behaviors.
+            <b>Command</b> – Encapsulate a request as an object.
+    `,
+                    code1: `// ------------  Example (Singleton in JavaScript): ------------
+                    class Singleton {
+  constructor() {
+    if (!Singleton.instance) {
+      Singleton.instance = this;
+      this.counter = 0;
+    }
+    return Singleton.instance;
+  }
+
+  increment() {
+    this.counter++;
+    return this.counter;
+  }
+}
+
+const instance1 = new Singleton();
+const instance2 = new Singleton();
+
+console.log(instance1.increment()); // 1
+console.log(instance2.increment()); // 2 — Same instance!
+
+
+// ---------- Ex : 2 -----------
+    let counter = 0
+    const count = Object.freeze({
+      getCount: () => counter,
+      increment: () => ++counter,
+      decrement: () => --counter
+    })
+
+    count.increment(); // 1
+    count.increment(); // 2
+    count.increment(); // 3
+    console.log(count.getCount()); // 3
+`
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ],
+        },
+        {
+            id: 52,
+            title: "What is an Architectural Pattern?",
+            note: [
+                {
+                    text1: `An <b>Architectural Pattern</b> is a <b>high-level design solution</b> used to organize and structure <b>software systems</b>. It provides a reusable blueprint for how components and layers of an application should <b>interact, communicate</b>, and <b>separate concerns.</b>`,
+                    code1: ``
+                }
+            ],
+        },
+               {
+            id: 52,
+            title: "topic",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ],
+        },
+        {
+            id: 52,
+            title: "SOLID principles",
+            note: [
+                {
+                    text1: `<b>SOLID principles</b> of Software Architecture
+Each character of the word SOLID defines one principle of software architecture. The SOLID principles are key guidelines for creating well-structured, maintainable software architectures This SOLID principle is followed to avoid product strategy mistakes. A software architecture must adhere to SOLID principle to avoid any architectural or developmental failure.
+
+<b>Single Responsibility </b>- Each services or module should have only one responsibility or purpose .
+<b>Open-Closed Principle </b>- Software modules should be independent and expandable.
+<b>Liskov Substitution Principle </b>- Objects or services should be interchangeable without altering the correctness of the system.
+<b>Interface Segregation Principle </b>- Software should be divided into such microservices there should not be any redundancies.
+<b>Dependency Inversion Principle </b>- Higher-levels modules should not be depending on low-lower-level modules and changes in higher level will not affect to lower level.
+
+`,
+                    code1: ``,
+                    img: `../assets/images/software/SOLID.png`
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                },
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ],
+        },
+        {
+            id: 1,
+            title: "programs",
+            note: [
+                {
+                    text1: ``,
+                    code1: `// ---------- Ex : -------------
+                    class MinimumBalanceError(Exception):  # Correct spelling
+                        pass
+
+                    class Account:
+                        AccNum = 1001
+
+                        def __init__(self, name, account_number, balance):
+                            self.name = name
+                            self.account_number = Account.AccNum  # Use class name to access class variable
+                            self.balance = balance
+                            Account.AccNum += 1  # Increment class variable
+
+                        def deposit(self, amount):
+                            self.balance += amount
+
+                        def withdraw(self, amount):
+                            if self.balance - amount <= 1000:
+                                raise MinimumBalanceError("Minimum Balance should be at least 1000")
+                            self.balance -= amount
+
+                        def show_details(self):
+                            return f"{self.account_number}, {self.name}, {self.balance}"
+
+                    # Using try-except to handle exception
+                    cc = Account("ram", 1002, 1200)
+                    cc.deposit(1500)
+
+                    try:
+                        cc.withdraw(2000)
+                    except MinimumBalanceError as e:
+                        print("Withdrawal Error:", e)
+
+                    print(cc.show_details())
+`
+                }
+            ]
+        },
     ]
 }

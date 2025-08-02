@@ -375,6 +375,263 @@ query {
     },
     {
       id: 1,
+      title: "typeDefs",
+      note: [
+        {
+          text1: `In GraphQL, typeDefs (short for "type definitions") are a core component used to define the schema of your GraphQL API. They are written using the GraphQL <b>Schema Definition Language (SDL)</b> and describe the structure of your data, including the types, fields, and relationships between them.
+          
+          The typeDefs is a string or a schema language document that describes the data structure of your GraphQL API. It defines the available types, their fields, and the relationships between them. This includes defining object types, scalar types, input types, interfaces, unions, and enumerations.
+
+          <b>Object Types</b>: These represent the fundamental data structures in your API, such as <b>User, Product</b>, or <b>Order</b>. They contain fields that represent properties of that object.
+<b>Scalar Types</b>: These are the primitive data types like <b>String, Int, Float, Boolean</b>, and <b>ID</b>.
+<b>Input Types</b>: Used for defining the structure of arguments passed to mutations (for creating or updating data).
+<b>Enums</b>: Define a set of allowed values for a field.
+<b>Interfaces</b>: Define a set of fields that multiple object types can implement, promoting reusability and polymorphism.
+<b>Unions</b>: Allow a field to return one of several possible object types.
+
+<b>Creating a schema using typeDef</b> -
+-> Create another folder inside your root folder named "schema", then inside "schema" folder, create a file called "type-defs.js" and paste this code inside that file
+-> Here we have created the schema for User Data with the datatypes required for every field.
+-> "!", this symbol after datatype means that the value is required and cannot be null.
+-> "friends" property is assigned the User Schema, which means friends will be an Array of Users with the same properties except for the "friends" itself.
+-> Then we defined the query using "Query", which will create a schema for the handler function, there we have 3 schemas, 1 for all users, 1 for finding users by id, and the other for finding users by name, return type of these handlers functions will "User".
+-> We also have Mutation Type which is used to create a schema for Mutation handlers whose type is created using "input" type.
+-> Enum is used to provide a set of possible values for a field
+
+Each : <b>User</b> is the return type of that mutation.
+It means:
+    createUser returns a <b>User</b>
+    updateUser returns a <b>User</b>
+    deleteUser returns a <b>User</b>
+
+    -> <b>createUser(newUser: CreateUser!)</b>
+    -> newUser is the <b>input argument</b>, using a custom input type called <b>CreateUser</b>
+    -> The mutation will return a <b>User</b> object
+`,
+          code1: `const { gql } = require("apollo-server")
+
+const typeDefs = gql\`
+
+    type User {
+        id: ID! # uniquely identifies but similar to strings
+        name: String!
+        age: Int!
+        isEmployee: Boolean!
+        role: Role!
+        friends: [User] # It will have a list of Users with same data as User schema
+    }
+
+    input CreateUser {
+        name: String!
+        age: Int!
+        isEmployee: Boolean = true
+        role: Role!
+    }
+
+    input UpdateUser {
+        id: ID!
+        name: String!
+        age: Int!
+        isEmployee: Boolean = true
+        role: Role!
+    }
+
+    input DeleteUser {
+        id: ID!
+    }
+
+    type Query {
+        users: [User!]! 
+        user(id: ID!): User! 
+        userByName(name: String!): User! 
+    }
+
+    type Mutation {
+        createUser(newUser:CreateUser!):User
+        updateUser(updatedUser:UpdateUser!):User
+        deleteUser(delUser:DeleteUser!):User
+    }
+
+
+    # Enums to define some fix values for a field
+    enum Role {
+        WebDeveloper
+        Tester
+        SoftwareEngineer
+    }
+
+\`;
+
+module.exports = { typeDefs };
+
+
+//------------  React js ------------
+
+// src/graphql.js
+import { gql } from "@apollo/client";
+
+// 1. Get all users
+export const GET_USERS = gql\`
+  query {
+    users {
+      id
+      name
+      age
+      isEmployee
+      role
+    }
+  }
+\`;
+
+// 2. Create user
+export const CREATE_USER = gql\`
+  mutation CreateUser($newUser: CreateUser!) {
+    createUser(newUser: $newUser) {
+      id
+      name
+      age
+      isEmployee
+      role
+    }
+  }
+\`;
+
+// 3. Update user
+export const UPDATE_USER = gql\`
+  mutation UpdateUser($updatedUser: UpdateUser!) {
+    updateUser(updatedUser: $updatedUser) {
+      id
+      name
+      age
+      isEmployee
+      role
+    }
+  }
+\`;
+
+// 4. Delete user
+export const DELETE_USER = gql\`
+  mutation DeleteUser($delUser: DeleteUser!) {
+    deleteUser(delUser: $delUser) {
+      id
+    }
+  }
+\`;
+
+
+
+// src/components/UserList.jsx
+import React, { useState } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_USERS, CREATE_USER, UPDATE_USER, DELETE_USER } from "../graphql";
+
+const UserList = () => {
+  const { data, loading, error, refetch } = useQuery(GET_USERS);
+  const [createUser] = useMutation(CREATE_USER);
+  const [updateUser] = useMutation(UPDATE_USER);
+  const [deleteUser] = useMutation(DELETE_USER);
+
+  const [form, setForm] = useState({
+    name: "",
+    age: "",
+    role: "WebDeveloper",
+    isEmployee: true,
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await createUser({
+      variables: {
+        newUser: {
+          ...form,
+          age: parseInt(form.age),
+        },
+      },
+    });
+    refetch();
+    setForm({ name: "", age: "", role: "WebDeveloper", isEmployee: true });
+  };
+
+  const handleDelete = async (id) => {
+    await deleteUser({ variables: { delUser: { id } } });
+    refetch();
+  };
+
+  if (loading) return &lt;p&gt;Loading...&lt;/p&gt;;
+  if (error) return &lt;p&gt;Error loading users&lt;/p&gt;;
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;👥 User List&lt;/h2&gt;
+      &lt;ul&gt;
+        {data.users.map((user) =&gt; (
+          &lt;li key={user.id}&gt;
+            {user.name} ({user.age}) - {user.role}{&quot; &quot;}
+            &lt;button onClick={() =&gt; handleDelete(user.id)}&gt;Delete&lt;/button&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      &lt;h3&gt;Add New User&lt;/h3&gt;
+      &lt;form onSubmit={handleSubmit}&gt;
+        &lt;input
+          value={form.name}
+          onChange={(e) =&gt; setForm({ ...form, name: e.target.value })}
+          placeholder=&quot;Name&quot;
+          required
+        /&gt;
+        &lt;input
+          type=&quot;number&quot;
+          value={form.age}
+          onChange={(e) =&gt; setForm({ ...form, age: e.target.value })}
+          placeholder=&quot;Age&quot;
+          required
+        /&gt;
+        &lt;select
+          value={form.role}
+          onChange={(e) =&gt; setForm({ ...form, role: e.target.value })}
+        &gt;
+          &lt;option&gt;WebDeveloper&lt;/option&gt;
+          &lt;option&gt;Tester&lt;/option&gt;
+          &lt;option&gt;SoftwareEngineer&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;button type=&quot;submit&quot;&gt;Add User&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default UserList;
+
+
+// src/App.js
+import React from "react";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import UserList from "./components/UserList";
+
+const client = new ApolloClient({
+  uri: "http://localhost:8082/graphql", // your server
+  cache: new InMemoryCache(),
+});
+
+function App() {
+  return (
+    &lt;ApolloProvider client={client}&gt;
+      &lt;div style={{ padding: 20 }}&gt;
+        &lt;UserList /&gt;
+      &lt;/div&gt;
+    &lt;/ApolloProvider&gt;
+  );
+}
+
+export default App;
+
+`,
+        }
+      ]
+    },
+        {
+      id: 1,
       title: "Graphql setup",
       note: [
         {
