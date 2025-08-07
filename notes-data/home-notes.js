@@ -723,7 +723,79 @@ console.log(instance2.increment()); // 2 — Same instance!
                 }
             ],
         },
-               {
+        {
+            id: 52,
+            title: "Software Development Life Cycle (SDLC) Models.",
+            note: [
+                {
+                    text1: `<b>SDLC Models</b> are structured approaches or methodologies used to guide the development of software through a series of phases like planning, design, development, testing, and maintenance.
+                    
+                    <b>Software Development Life Cycle</b> or Systems Development Life Cycle (SDLC) is a systematic process IT teams use to design, develop, test, and deploy high-quality software.
+                    
+    <b>Common SDLC Models include</b>:
+    Waterfall Model
+    Agile Model
+    Spiral Model
+    V-Model (Verification and Validation)
+    Incremental Model
+    Iterative Model
+    Big Bang Model
+    RAD (Rapid Application Development) Model
+
+                    Software Development Life Cycle (SDLC) is a structured process that is used to design, develop, and test high-quality software. SDLC, or software development life cycle, is a methodology that defines the entire procedure of software development step-by-step. The goal of the SDLC life cycle model is to deliver high-quality, maintainable software that meets the user's requirements.
+
+SDLC in software engineering models outlines the plan for each stage so that each stage of the software development model can perform its task efficiently to deliver the software at a low cost within a given time frame that meets users requirements. In this article we will see Software Development Life Cycle (SDLC) in detail.
+
+What is the Software Development Life Cycle (SDLC)?
+SDLC is a process followed for software building within a software organization. SDLC consists of a precise plan that describes how to develop, maintain, replace, and enhance specific software. The life cycle defines a method for improving the quality of software and the all-around development process.  
+
+<b>Stages of the Software Development Life Cycle</b>
+SDLC specifies the tasks to be performed at various stages by a software engineer or developer. It ensures that the end product is able to meet the customer's expectations and fits within the overall budget. Hence, it's vital for a software developer to have prior knowledge of this software development process. SDLC is a collection of these six stages, and the stages of SDLC are as follows:
+`,
+                    code1: ``,
+                    img: `../assets/images/software/SDLC.jpg`
+                },
+                {
+                    text1: `<b>Stages of the Software Development Life Cycle</b>
+SDLC specifies the tasks to be performed at various stages by a software engineer or developer. It ensures that the end product is able to meet the customer's expectations and fits within the overall budget. Hence, it's vital for a software developer to have prior knowledge of this software development process. SDLC is a collection of these six stages, and the stages of SDLC are as follows:
+
+<b>Stage 1: Planning and Requirement Analysis</b>
+Planning is a crucial step in everything, just as in software development. In this same stage, requirement analysis is also performed by the developers of the organization. This is attained from customer inputs, and sales department/market surveys. 
+The information from this analysis forms the building blocks of a basic project. The quality of the project is a result of planning. Thus, in this stage, the basic project is designed with all the available information.
+
+<b>Stage 2: Defining Requirements</b>
+In this stage, all the requirements for the target software are specified. These requirements get approval from customers, market analysts, and stakeholders. 
+This is fulfilled by utilizing SRS (Software Requirement Specification). This is a sort of document that specifies all those things that need to be defined and created during the entire project cycle. 
+
+<b>Stage 3: Designing Architecture</b>
+SRS is a reference for software designers to come up with the best architecture for the software. Hence, with the requirements defined in SRS, multiple designs for the product architecture are present in the Design Document Specification (DDS). 
+This DDS is assessed by market analysts and stakeholders. After evaluating all the possible factors, the most practical and logical design is chosen for development.
+
+<b>Stage 4: Developing Product</b>
+At this stage, the fundamental development of the product starts. For this, developers use a specific programming code as per the design in the DDS. Hence, it is important for the coders to follow the protocols set by the association. Conventional programming tools like compilers, interpreters, debuggers, etc. are also put into use at this stage. Some popular languages like C/C++, Python, Java, etc. are put into use as per the software regulations. 
+
+<b>Stage 5: Product Testing and Integration</b>
+After the development of the product, testing of the software is necessary to ensure its smooth execution. Although, minimal testing is conducted at every stage of SDLC. Therefore, at this stage, all the probable flaws are tracked, fixed, and retested. This ensures that the product confronts the quality requirements of SRS. 
+Documentation, Training, and Support: Software documentation is an essential part of the software development life cycle. A well-written document acts as a tool and means to information repository necessary to know about software processes, functions, and maintenance. Documentation also provides information about how to use the product. Training in an attempt to improve the current or future employee performance by increasing an employee's ability to work through learning, usually by changing his attitude and developing his skills and understanding. 
+
+<b>Stage 6: Deployment and Maintenance of Products</b>
+After detailed testing, the conclusive product is released in phases as per the organization’s strategy. Then it is tested in a real industrial environment. It is important to ensure its smooth performance. If it performs well, the organization sends out the product as a whole. After retrieving beneficial feedback, the company releases it as it is or with auxiliary improvements to make it further helpful for the customers. However, this alone is not enough. Therefore, along with the deployment, the product's supervision. `,
+                    code1: ``,
+                    img: `../assets/images/software/6-Stages-of-Software-Development-Life-Cycle.jpg`
+                }
+            ],
+        },
+        {
+            id: 52,
+            title: "Waterfall & Agile Model",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ],
+        },
+        {
             id: 52,
             title: "topic",
             note: [

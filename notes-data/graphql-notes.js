@@ -630,7 +630,95 @@ export default App;
         }
       ]
     },
+    {
+      id: 1,
+      title: "GraphQL, a relation",
+      note: [
         {
+          text1: `In <b>GraphQL, a relation</b> refers to the connection between different object types — similar to <b>foreign key relationships</b> in relational databases. These relationships let you <b>nest queries</b>, so you can fetch related data in one go.
+          
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Relation Type</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>One-to-One</td>
+      <td>One object has exactly one related object</td>
+      <td>User ↔ Profile</td>
+    </tr>
+    <tr>
+      <td>One-to-Many</td>
+      <td>One object has many related objects</td>
+      <td>User → Posts</td>
+    </tr>
+    <tr>
+      <td>Many-to-One</td>
+      <td>Many objects refer to one parent</td>
+      <td>Posts → User</td>
+    </tr>
+    <tr>
+      <td>Many-to-Many</td>
+      <td>Many objects relate to many others</td>
+      <td>Students ↔ Courses</td>
+    </tr>
+  </tbody>
+</table>
+
+`,
+          code1: `//Example: One-to-Many Relation (User → Posts)
+// Suppose we have users and each user has many posts.
+// 1. GraphQL Schema
+
+type User {
+  id: ID!
+  name: String!
+  posts: [Post!]!  // 👈 One-to-many relation
+}
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  user: User!      // 👈 Many-to-one relation
+}
+  
+
+// Sample Query (Nested Relations)
+query {
+  users {
+    id
+    name
+    posts {
+      id
+      title
+    }
+  }
+}
+
+// ⚙️ Resolver Example (Node.js with Apollo Server)
+const resolvers = {
+  User: {
+    posts: (parent, args, context) => {
+      // parent is the user
+      return context.db.posts.filter(post => post.userId === parent.id);
+    },
+  },
+  Post: {
+    user: (parent, args, context) => {
+      return context.db.users.find(user => user.id === parent.userId);
+    },
+  },
+};
+`,
+        }
+      ]
+    },
+    {
       id: 1,
       title: "Graphql setup",
       note: [
@@ -692,7 +780,7 @@ Single Endpoint: All data interactions are through a single endpoint.
 
 Strongly Typed: The schema defines the types, ensuring type safety.
 
-Versionless API: With GraphQL, you don’t need to version your API as you can adjust the queries to request only the data needed.
+Versionless API: With GraphQL, you don't need to version your API as you can adjust the queries to request only the data needed.
 
 <b>What is a Fragment in GraphQL?</b>
 <b>Answer</b>: A fragment is a reusable piece of a query that allows you to share common fields between multiple queries or mutations. It helps to avoid repetition in GraphQL queries.
