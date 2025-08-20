@@ -720,6 +720,315 @@ const resolvers = {
     },
     {
       id: 1,
+      title: "What is InMemoryCache?",
+      note: [
+        {
+          text1: `InMemoryCache is <b>Apollo Client’s</b> built-in caching mechanism.
+It’s a <b>normalized, in-memory data store</b> that caches the results of GraphQL queries so your UI doesn’t always have to refetch from the server.
+
+-> It stores data returned from your GraphQL server in memory (RAM).
+-> It <b>normalizes</b> objects by their <b>id</b> (or another unique field) so the same object isn’t duplicated across queries.
+-> It automatically updates queries when cached data changes (e.g., after a mutation).
+
+Apollo’s <b>InMemoryCache</b> stores query results <b>normalized by object ID</b>.
+Each object (like <b>CartItem</b>) gets stored by its <b>id</b>.
+Queries (like <b>cart</b>) just keep references (<b>id</b>) to those objects.
+
+
+  <table class="p-4 table-auto overflow-scroll border border-primary-base dark:border-primary-dark">
+    <thead>
+      <tr class="table-auto border border-primary-base dark:border-primary-dark">
+        <th class="p-2 bg-primary-base dark:bg-primary-dark font-bold">Strategy</th>
+        <th class="p-2 bg-primary-base dark:bg-primary-dark font-bold">API</th>
+        <th class="p-2 bg-primary-base dark:bg-primary-dark font-bold">Description</th>
+      </tr>
+    </thead>
+    <tbody class="">
+      <tr class="table-auto border border-primary-base dark:border-primary-dark">
+        <td class=""><a href="https://www.apollographql.com/docs/react/caching/cache-interaction#using-graphql-queries"
+            class="hover:underline underline hover:opacity-75 font-medium" data-astro-prefetch="viewport">Using GraphQL
+            queries</a></td>
+        <td class=""><code class="font-mono bg-silver-400 dark:bg-navy-400 px-1 rounded"
+            style="overflow-wrap:normal">readQuery</code> / <code
+            class="font-mono bg-silver-400 dark:bg-navy-400 px-1 rounded" style="overflow-wrap:normal">writeQuery</code>
+          / <code class="font-mono bg-silver-400 dark:bg-navy-400 px-1 rounded"
+            style="overflow-wrap:normal">updateQuery</code></td>
+        <td class="">Use standard <!-- -->GraphQL<!-- --> queries for managing both remote and local data.</td>
+      </tr>
+      <tr class="table-auto border border-primary-base dark:border-primary-dark">
+        <td class=""><a
+            href="https://www.apollographql.com/docs/react/caching/cache-interaction#using-graphql-fragments"
+            class="hover:underline underline hover:opacity-75 font-medium" data-astro-prefetch="viewport">Using GraphQL
+            fragments</a></td>
+        <td class=""><code class="font-mono bg-silver-400 dark:bg-navy-400 px-1 rounded"
+            style="overflow-wrap:normal">readFragment</code> / <code
+            class="font-mono bg-silver-400 dark:bg-navy-400 px-1 rounded"
+            style="overflow-wrap:normal">writeFragment</code> / <code
+            class="font-mono bg-silver-400 dark:bg-navy-400 px-1 rounded"
+            style="overflow-wrap:normal">updateFragment</code> / <code
+            class="font-mono bg-silver-400 dark:bg-navy-400 px-1 rounded"
+            style="overflow-wrap:normal">useFragment</code></td>
+        <td class="">Access the <!-- -->fields<!-- --> of any cached object without composing an entire
+          <!-- -->query<!-- --> to reach that object.</td>
+      </tr>
+      <tr class="table-auto border border-primary-base dark:border-primary-dark">
+        <td class=""><a href="https://www.apollographql.com/docs/react/caching/cache-interaction#using-cachemodify"
+            class="hover:underline underline hover:opacity-75 font-medium" data-astro-prefetch="viewport">Directly
+            modifying cached fields</a></td>
+        <td class=""><code class="font-mono bg-silver-400 dark:bg-navy-400 px-1 rounded"
+            style="overflow-wrap:normal">cache.modify</code></td>
+        <td class="">Manipulate cached data without using <!-- -->GraphQL<!-- --> at all.</td>
+      </tr>
+    </tbody>
+  </table>
+`,
+          code1: `//Example Setup
+          import { ApolloClient, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql',
+  cache: new InMemoryCache(),
+});
+
+//How Normalization Works
+// Suppose you fetch users and posts:?
+query {
+  users {
+    id
+    name
+  }
+  posts {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+
+// Apollo will store this in the cache as:
+{
+  "User:1": { "id": 1, "name": "Alice" },
+  "User:2": { "id": 2, "name": "Bob" },
+  "Post:10": { "id": 10, "title": "Hello", "author": { "__ref": "User:1" } },
+  "Post:11": { "id": 11, "title": "World", "author": { "__ref": "User:2" } }
+}
+// Notice how author is stored as a reference (__ref), not duplicated.
+// 🔹 Customizing Cache IDs
+// By default, Apollo uses id or _id as the cache key.
+// You can customize it:
+const cache = new InMemoryCache({
+  typePolicies: {
+    Product: {
+      keyFields: ["sku"],  // use SKU instead of id
+    },
+  },
+});
+// 🔹 Updating Cache After Mutations
+// You can tell Apollo how to update the cache after a mutation:
+const [addTodo] = useMutation(ADD_TODO, {
+  update(cache, { data: { addTodo } }) {
+    cache.modify({
+      fields: {
+        todos(existingTodos = []) {
+          return [...existingTodos, addTodo];
+        },
+      },
+    });
+  },
+});
+
+`,
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "refetchQueries",
+      note: [
+        {
+          text1: `In GraphQL clients like Apollo Client, <b>refetchQueries</b> is an option used primarily with mutations to ensure that the client-side cache and, consequently, the UI, are updated after a data modification operation.
+<b>Purpose</b>:
+When a mutation (e.g., creating, updating, or deleting data) is performed, the data fetched by existing queries might become stale. <b>refetchQueries</b> provides a mechanism to automatically re-execute specific queries after the mutation completes, thereby refreshing the data and ensuring the UI reflects the latest state from the server.
+<b>Usage</b>:
+<b>refetchQueries</b> is typically provided as an option to the <b>mutate</b> function or <b>useMutation</b> hook. It takes an array of objects, where each object specifies a query to be refetched.
+Each object in the <b>refetchQueries</b> array can include:
+<b>query</b>:
+The GraphQL query document (<b>DocumentNode</b>) to be refetched. This is often imported from a separate file where the query is defined.
+<b>variables</b>:
+An optional object containing the variables to be used when refetching the query. If omitted, the query will be refetched with its currently active variables.
+
+
+<b>refetchQueries vs cache.modify</b>
+<b>refetchQueries</b>
+<b>Pros</b>: Simple, reliable, ensures data matches server.
+<b>Cons</b>: Makes extra network calls → more latency + bandwidth.
+
+<b>cache.modify</b>
+<b>Pros</b>: Instant UI update, no network hit, very efficient.
+<b>Cons</b>: More code, you must carefully update cache fields manually.
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>refetchQueries</th>
+      <th>cache.modify</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Mechanism</b></td>
+      <td>Re-runs specified GraphQL queries against the server, fetches <b>fresh data</b>, and updates the cache.</td>
+      <td>Directly manipulates the <b>local Apollo cache</b>, updating or removing fields without contacting the server.</td>
+    </tr>
+    <tr>
+      <td><b>Network Call</b></td>
+      <td>✅ Always makes a <b>network request</b> (unless fetchPolicy = <code>cache-only</code>).</td>
+      <td>❌ No network call. Purely <b>client-side cache update</b>.</td>
+    </tr>
+    <tr>
+      <td><b>Data Consistency</b></td>
+      <td>Always <b>consistent with the server</b>, since new data is fetched.</td>
+      <td>Relies on your manual update logic → risk of <b>stale/inconsistent data</b> if logic is incomplete.</td>
+    </tr>
+    <tr>
+      <td><b>Performance</b></td>
+      <td>⚡ Slower → network latency, more load on server, especially for large datasets.</td>
+      <td>⚡ Very fast → operates directly on <b>local cache</b>, no server roundtrip.</td>
+    </tr>
+    <tr>
+      <td><b>Complexity</b></td>
+      <td>✅ Simple to use → just tell Apollo which queries to re-run.</td>
+      <td>🔧 More complex → you must understand <b>cache structure</b> and update logic.</td>
+    </tr>
+    <tr>
+      <td><b>Use Cases</b></td>
+      <td>
+        - When you need the <b>latest state</b> from the server.<br>
+        - Mutation response is incomplete.<br>
+        - Simple list refresh.
+      </td>
+      <td>
+        - For <b>optimistic UI updates</b>.<br>
+        - Avoid network calls for performance.<br>
+        - Add, update, or delete items in cache directly.
+      </td>
+    </tr>
+    <tr>
+      <td><b>Best Practice</b></td>
+      <td>
+        - Pair with <code>awaitRefetchQueries</code> to keep UI in sync.<br>
+        - Great <b>starting point</b> for cache updates.
+      </td>
+      <td>
+        - Use when performance matters.<br>
+        - Requires careful implementation.<br>
+        - Often combined with <b>refetchQueries</b> for extra safety.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+`,
+          code1: `import { gql, useMutation } from '@apollo/client';
+
+const ADD_TODO = gql\`
+  mutation AddTodo($text: String!) {
+    addTodo(text: $text) {
+      id
+      text
+      completed
+    }
+  }
+\`;
+
+const GET_ALL_TODOS = gql\`
+  query GetAllTodos {
+    todos {
+      id
+      text
+      completed
+    }
+  }
+\`;
+
+function TodoApp() {
+  const [addTodo] = useMutation(ADD_TODO, {
+    refetchQueries: [
+      { query: GET_ALL_TODOS } // Refetch the GET_ALL_TODOS query after adding a todo
+    ],
+  });
+
+  // ... rest of the component
+}
+  
+
+// ------------- Ex : 2 -------------
+// When it runs
+// After a mutation succeeds, Apollo will re-run the queries you specify.
+// This ensures your cache (and UI) matches the server’s latest state.
+// Syntax:
+const [addCartItem] = useMutation(ADD_TO_CART, {
+  refetchQueries: [
+    { query: GET_CART, variables: { userId: "123" } }, // with variables
+    { query: GET_TOTAL } // without variables
+  ],
+});
+
+
+// ------------ Ex : 3 ------------
+const [addPost] = useMutation(ADD_POST, {
+  refetchQueries: [{ query: GET_POSTS }],
+  awaitRefetchQueries: true, // ensures UI waits for fresh data
+});
+`,
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "cache.modify",
+      note: [
+        {
+          text1: `<b>cache.modify</b> is a method available in caching mechanisms like Apollo Client's <b>InMemoryCache</b> that allows for direct manipulation of cached data. It provides a way to update, add, or remove fields within existing cached objects, offering finer-grained control over the cache compared to simply replacing entire objects.`,
+          code1: ``,
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "cache.update",
+      note: [
+        {
+          text1: `update (inside <b>useMutation</b>)
+<b>Where used</b>: Passed as an option to useMutation.
+<b>What it is</b>: A callback function that gets cache (aka proxy) and the mutation result.
+
+How it works:
+You <b>read</b> existing cache with readQuery or readFragment.
+You <b>modify</b> that data (add/remove/update).
+You <b>write</b> it back with writeQuery or writeFragment.`,
+          code1: `//Use cases:
+// When you want to update the result of a \`specific query\` after a mutation.
+// Example: after \`addPost\`, update the cached result of \`GET_POSTS\`.
+const [addPost] = useMutation(ADD_POST, {
+  update(cache, { data: { addPost } }) {
+    const existing = cache.readQuery({ query: GET_POSTS });
+    cache.writeQuery({
+      query: GET_POSTS,
+      data: { posts: [...existing.posts, addPost] },
+    });
+  }
+});
+
+`,
+        }
+      ]
+    },
+        {
+      id: 1,
       title: "Graphql setup",
       note: [
         {
@@ -1779,36 +2088,6 @@ To get started with this example server, pass the in-memory data store from earl
           text1: `A`,
           code1: ``,
         },
-      ]
-    },
-    {
-      id: 1,
-      title: "Graphql setup",
-      note: [
-        {
-          text1: `A`,
-          code1: ``,
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Graphql setup",
-      note: [
-        {
-          text1: `A`,
-          code1: ``,
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Graphql setup",
-      note: [
-        {
-          text1: `A`,
-          code1: ``,
-        }
       ]
     },
   ]

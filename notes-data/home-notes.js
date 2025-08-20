@@ -797,10 +797,32 @@ After detailed testing, the conclusive product is released in phases as per the 
         },
         {
             id: 52,
-            title: "topic",
+            title: "English",
             note: [
                 {
-                    text1: ``,
+                    text1: `<b>1. Grammar & Sentence Structure</b>
+    Sometimes you skip articles (“a”, “the”) or prepositions (“on”, “at”, “in”) in your sentences.
+    Example: You wrote "I am i good in english" → Correct: "Am I good in English?" or "Do you think I’m good at English?"
+
+    Practice forming complete questions and statements with correct word order.
+
+<b>2. Vocabulary & Expressions</b>
+    Your words are understandable, but they’re often basic or direct.
+    Expand with synonyms and natural phrases.
+    Example: Instead of "keep flowers", say "place flowers" or "offer flowers".
+
+<b>3. Tenses & Consistency</b>
+    Sometimes you mix present and past tense.
+    Example: "I came back he is not responding" → "I came back, but he wasn’t responding."
+
+<b>4. Polishing for Formal/Professional Use</b>
+    Use polite connectors and transitions, especially for work or interviews.
+    Example: Instead of "What can fill here", use "What should I fill in here?".
+
+<b>5. Listening & Speaking Practice</b>
+    Watch English shows, YouTube explainers, and TED Talks with subtitles.
+    Repeat aloud to copy pronunciation and flow.
+    Record your own voice and check clarity.`,
                     code1: ``
                 }
             ],
