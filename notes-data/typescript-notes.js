@@ -1357,7 +1357,7 @@ type PersonType = typeof person // { name: string; age: number; }
           <a href="https://prismic.io/blog/typescript-generics" target="_blank">typescript-generics</a>
             Generics are a powerful feature in TypeScript that allow for the creation of reusable code. They allow developers to create functions and classes that can work with a variety of data types.
 
-            Generics in TypeScript are a way to create reusable components and functions that work with a variety of data types while maintaining type safety. They allow you to define placeholders for types that are specified later when the generic type is used. This enables you to write more flexible and reusable code.
+            <b>Generics in TypeScript are a way to create reusable components and functions that work with a variety of data types while maintaining type safety.</b> They allow you to define placeholders for types that are specified later when the generic type is used. This enables you to write more flexible and reusable code.
 
             Generics in TypeScript enable writing code that can work with a variety of data types while maintaining type safety. They allow the creation of reusable components, functions, and data structures without sacrificing type checking.
 

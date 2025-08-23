@@ -5,14 +5,14 @@ const Links3 = 'express-js'
 const Links4 = 'javascript-projects'
 
 const mernData = {
-    mernNote: [
+  mernNote: [
 
+    {
+      id: 1,
+      title: "aff intro",
+      note: [
         {
-            id: 1,
-            title: "aff intro",
-            note: [
-                {
-                    text1: `
+          text1: `
 Senior MERN Stack Developer Interview Preparation Guide
 
 Since you're aiming for a Senior MERN Stack Developer role, your interview will likely cover React.js, Node.js, MongoDB, Express.js, system design, performance optimization, and DevOps. Below is a structured roadmap to help you prepare effectively.
@@ -154,16 +154,16 @@ Practice coding on:
 
     Stay Updated with Trends (Next.js, Serverless, AI Integration)
             `
-                }
-            ]
-        },
+        }
+      ]
+    },
+    {
+      id: 1,
+      section: "Core Node.js Concepts",
+      title: "Modules",
+      note: [
         {
-            id: 1,
-            section: "Core Node.js Concepts",
-            title: "Modules",
-            note: [
-                {
-                    text1: `<b>Modules</b>
+          text1: `<b>Modules</b>
                     A module is an encapsulated and reusable chunk of code that has its own context 
                     In node.js each file is treated as a separate module
                     In Node.js, modules are reusable blocks of code that can be included in a Node.js application. Modules help in structuring the application into smaller, manageable parts, allowing for better maintainability and code reuse.
@@ -171,20 +171,20 @@ Practice coding on:
                     2) Built-in Modules ( Core Modules )
                     3) Third party modules
                     `,
-                    code1: ``
-                },
-                {
-                    text1: `<b>1. Local Modules</b>
+          code1: ``
+        },
+        {
+          text1: `<b>1. Local Modules</b>
 Local modules are custom modules that you create within your own application to organize and separate your code. These are not part of Node.js's core library or third-party packages, but are rather created and maintained by you for specific functionalities within your project.
 
 <b>Key Points</b>:
 <b>Custom Modules</b>: You create local modules based on your application's requirements.
 <b>Modularization</b>: Helps in organizing code into smaller, reusable chunks.
 File-Based: Typically consists of one or more JavaScript files, and can export functions, objects, or data for use in other files.`,
-                    code1: ``
-                },
-                {
-                    text1: `<b>2. Built-in Modules ( Core Modules )</b>
+          code1: ``
+        },
+        {
+          text1: `<b>2. Built-in Modules ( Core Modules )</b>
 These are modules that come pre-installed with Node.js. They are part of the Node.js runtime environment and do not need to be installed separately. These modules offer a wide variety of functionalities, such as file system operations, networking, URL parsing, etc.
 
 1) http
@@ -196,28 +196,28 @@ These are modules that come pre-installed with Node.js. They are part of the Nod
 7) util
 8) stream
 `,
-                    code1: ``
-                },
-                {
-                    text1: `<b>Third party modules</b>
+          code1: ``
+        },
+        {
+          text1: `<b>Third party modules</b>
                     These are third-party modules that can be installed from npm (Node Package Manager) and used to add additional functionality to your Node.js application. Some popular external modules include
                     Third-party modules are modules created by the community that extend the functionality of Node.js. These modules are not part of Node.js, but you can install them using npm (Node Package Manager) or yarn. They can offer functionalities ranging from web frameworks to utilities for database connections, file uploads, authentication, and more.
                     express, mongoose, lodash, axios, socket.io
                     `,
-                    code1: ``
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
+          code1: ``
         },
         {
-            id: 1,
-            title: "Built-in HTTP Module",
-            note: [
-                {
-                    text1: `Node.js HTTP module is a built-in library that allows developers to create web servers, as well as communicate with other APIs using HTTP 1.1, HTTP 2, and HTTPS.
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Built-in HTTP Module",
+      note: [
+        {
+          text1: `Node.js HTTP module is a built-in library that allows developers to create web servers, as well as communicate with other APIs using HTTP 1.1, HTTP 2, and HTTPS.
                     
                     The http module in Node.js is one of the core modules that allows you to create web servers and handle HTTP requests and responses. It is essential for building APIs, web applications, or any service that needs to interact over HTTP or HTTPS.
 
@@ -247,7 +247,7 @@ Here's how you can use the <b>http</b> module to create a simple HTTP server.
 <b>res.end()</b>: Ends the response and sends the data <b>('Hello, world!')</b> to the client.
 <b>server.listen(3000)</b>: Listens for incoming connections on port <b>3000</b>.
 `,
-                    code1: `const http = require('http');
+          code1: `const http = require('http');
 
 // Create the server
 const server = http.createServer((req, res) => {
@@ -320,13 +320,13 @@ server.listen(8010, () => {
 });
 
 `
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-                {
-                    text1: `<b>For req (Request) Object</b>:
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: `<b>For req (Request) Object</b>:
 <b>req.get(headerName)</b>: Retrieve a request header by name.
 <b>req.is(type)</b>: Check if the request body is of a specific content type.
 <b>req.method</b>: HTTP method (e.g., GET, POST).
@@ -355,29 +355,29 @@ Helps in handling incoming data (e.g., chunks of the request body) and managing 
 <b>res.setHeader()</b>:
 
 `,
-                    code1: ``
-                },
-            ]
+          code1: ``
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Node.js as a File Server",
+      note: [
+        {
+          text1: ``,
+          code1: ``
         },
         {
-            id: 1,
-            title: "Node.js as a File Server",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-                {
-                    text1: `Ex : 1
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: `Ex : 1
                     <b>Use of Express</b>: This approach uses <b>Express</b> directly to handle the route <b>/file</b>. Express simplifies many aspects of routing, request handling, and error management.
 <b>File Handling</b>: The code uses <b>fs.readFile()</b> to read the file into memory and then sends the file using <b>res.send()</b>.
 <b>Content-Type</b>: The <b>Content-Type</b> header is set to <b>"PNG"</b>, which should ideally be <b>"image/png"</b>.
 <b>Error Handling</b>: If the file is not found, it responds with <b>404 Not Found.</b>`,
-                    code1: `//----------- Ex : 1 ---------
+          code1: `//----------- Ex : 1 ---------
                     // Useing Express js
                     const http = require('http');
 const express = require('express');
@@ -440,25 +440,25 @@ server.listen(8010, () => {
     console.log('API server running on http://localhost:8010');
 });
 `
-                },
-            ]
         },
+      ]
+    },
+    {
+      id: 1,
+      title: "URL Module",
+      note: [
         {
-            id: 1,
-            title: "URL Module",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "What is NPM?",
+      note: [
         {
-            id: 1,
-            title: "What is NPM?",
-            note: [
-                {
-                    text1: `NPM <b>(Node Package Manager)</b> is the default package manager for the Node.js runtime environment. It is a command-line tool that helps developers manage and share JavaScript code, libraries, and utilities that are used in a Node.js environment.
+          text1: `NPM <b>(Node Package Manager)</b> is the default package manager for the Node.js runtime environment. It is a command-line tool that helps developers manage and share JavaScript code, libraries, and utilities that are used in a Node.js environment.
 
                     <b>Packages</b>
 npm installs, updates and manages downloads of dependencies of your project. Dependencies are pre-built pieces of code, such as libraries and packages, that your Node.js application needs to work.
@@ -491,10 +491,10 @@ an online repository that hosts JavaScript packages
 => You can install packages <b>globally</b> (making them available anywhere on your system) or locally (only within a specific project).
 => Global installations are typically used for command-line tools (e.g., <b>npm install -g webpack</b>), while local installations are for project-specific dependencies (e.g., <b>npm install express</b>).
 `,
-                    code1: ``
-                },
-                {
-                    text1: `<b> package.json </b>
+          code1: ``
+        },
+        {
+          text1: `<b> package.json </b>
                     <b>package.json</b> is a <b>configuration file</b> that is essential in any Node.js project. It contains metadata about your project, including its name, version, dependencies, scripts, and more. This file is used by npm (Node Package Manager) to manage your project's dependencies and configuration, and it plays a key role in the development, testing, and deployment of a Node.js application.
                     
                     Every project in JavaScript - whether it's Node.js or a browser application - can be scoped as an npm package with its own package information and its <b>package.json</b> job to describe the project.
@@ -593,10 +593,10 @@ Behavior:
 <b>--save-optional</b> installs and adds the entry to the package.json file optionalDependencies
 <b>--no-optional</b> will prevent optional dependencies from being installed
 `,
-                    code1: ``
-                },
-                {
-                    text1: `NPX stands for <b>Node Package eXecute</b>. It is simply an NPM(Node Package Manager) package runner. It allows developers to execute any Javascript Package available on the NPM registry without even installing it. NPX is installed automatically with NPM version 5.2.0 and above.
+          code1: ``
+        },
+        {
+          text1: `NPX stands for <b>Node Package eXecute</b>. It is simply an NPM(Node Package Manager) package runner. It allows developers to execute any Javascript Package available on the NPM registry without even installing it. NPX is installed automatically with NPM version 5.2.0 and above.
 
 NPX is a utility that complements the experience of using packages from the npm registry. 
 Since npm version 5.2.0 npx is pre-bundled with npm. So it's pretty much a standard nowadays.
@@ -610,10 +610,10 @@ If it's not, you can install it like this:
 
 $ npm install -g npx
 Once you make sure you have it installed, let's see a few of the use cases that make npx extremely helpful.`,
-                    code1: ``
-                },
-                {
-                    text1: `<b> NVM</b>
+          code1: ``
+        },
+        {
+          text1: `<b> NVM</b>
                     <b>NVM</b> stands for <b>Node Version Manager</b> and is a command-line utility that allows developers to easily install, switch between, and manage multiple versions of <b>Node.js</b> on their system, which is particularly useful when working on projects with different Node.js version requirements. 
                     
                     nvm stands for <b>Node Version Manager</b>, a command-line utility that allows you to install and manage multiple versions of Node.js on the same system. It is particularly useful for developers who work on multiple projects that may require different versions of Node.js.
@@ -648,56 +648,56 @@ nvm install --lts
 <b>7) Check the Current Version of Node.js</b>: To check the current version of Node.js you're using:
 nvm current
 `,
-                    code1: ``
-                },
-            ]
+          code1: ``
         },
+      ]
+    },
+    {
+      id: 1,
+      title: "Events",
+      note: [
         {
-            id: 1,
-            title: "Events",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Callbacks",
+      note: [
         {
-            id: 1,
-            title: "Callbacks",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Formidable Module",
+      note: [
         {
-            id: 1,
-            title: "Formidable Module",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Nodemailer (Email)",
+      note: [
         {
-            id: 1,
-            title: "Nodemailer (Email)",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "CORS (Cross-Origin Resource Sharing)",
+      note: [
         {
-            id: 1,
-            title: "CORS (Cross-Origin Resource Sharing)",
-            note: [
-                {
-                    text1: `CORS stands for <b>Cross-Origin Resource Sharing</b>. It is a security mechanism that allows or restricts web applications running at one origin (domain) from making requests for resources hosted on a different origin (domain). CORS is implemented by web browsers to prevent potentially malicious behavior (like cross-site request forgery or data theft) when your website or web application makes requests to a server that is hosted on a different domain.
+          text1: `CORS stands for <b>Cross-Origin Resource Sharing</b>. It is a security mechanism that allows or restricts web applications running at one origin (domain) from making requests for resources hosted on a different origin (domain). CORS is implemented by web browsers to prevent potentially malicious behavior (like cross-site request forgery or data theft) when your website or web application makes requests to a server that is hosted on a different domain.
                     
                     CORS is a security feature created to selectively relax the SOP restrictions and enable controlled access to resources from different domains. CORS rules allow domains to specify which domains can request information from them by adding specific HTTP headers in the response.
                    
@@ -757,10 +757,10 @@ Access-Control-Allow-Credentials: false
 <b>5) Cross-Site Scripting (XSS)</b>: Attackers can use CORS vulnerabilities to perform XSS attacks by injecting malicious scripts into web pages to steal session tokens or perform unauthorized actions on behalf of the user.
 <b>Remote Code Execution</b> in some cases (StackStorm case)
                     `,
-                    code1: ``
-                },
-                {
-                    text1: `<b>Same-Origin Policy (SOP)</b>
+          code1: ``
+        },
+        {
+          text1: `<b>Same-Origin Policy (SOP)</b>
                     All web browsers implement a security model known as the <b>Same-Origin Policy (SOP)</b>. It restricts domains from accessing and retrieving data from other domains' resources.
                     The SOP policy helps protect users from malicious scripts that could access their sensitive data or perform unauthorized actions on their behalf.
                     For example, if <b>**business.com**</b> tries to make an HTTP request to <b>**metrics.com**</b>, the browser, by default, will block the request because it comes from a different domain.
@@ -768,12 +768,12 @@ Access-Control-Allow-Credentials: false
 As much as the SOP sounds like a proper protection policy, it doesn't scale well in today's technologies that depend on each other for operation. For example, it presents challenges to APIs and microservices which have legitimate use cases for accessing and sharing information between domains.
 
 Because of cases like this, there was a need for a new security mechanism that would allow for cross-domain interactions. It's known as Cross-Origin Resource Sharing (CORS).`,
-                    code1: ``
-                },
-                {
-                    text1: `CORS is an HTTP header-based system that allows a server to specify any other origins (domain, scheme, or port) from which a browser should enable resources to be loaded other than its own.
+          code1: ``
+        },
+        {
+          text1: `CORS is an HTTP header-based system that allows a server to specify any other origins (domain, scheme, or port) from which a browser should enable resources to be loaded other than its own.
                     <b>Example of CORS with Credentials and Custom Headers:</b>`,
-                    code1: `const express = require('express');
+          code1: `const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = 3000;
@@ -796,80 +796,399 @@ app.listen(port, () => {
   console.log(\`Server running on http://localhost:\${port}\`);
 });
 `
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-            ]
         },
         {
-            id: 1,
-            title: "Promises",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
+          text1: ``,
+          code1: ``
         },
+      ]
+    },
+    {
+      id: 1,
+      title: "Promises",
+      note: [
         {
-            id: 1,
-            title: "Async/Await",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Async/Await",
+      note: [
         {
-            id: 1,
-            title: "Streams & Buffer",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Streams & Buffer",
+      note: [
         {
-            id: 1,
-            title: "Cluster & Worker Threads for Performance",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Cluster & Worker Threads for Performance",
+      note: [
         {
-            id: 1,
-            section: "Express.js & API Development",
-            title: "Middleware",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      section: "Express.js & API Development",
+      title: "Express js",
+      note: [
         {
-            id: 1,
-            title: "Logging",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: `Express.js is a minimal and flexible Node.js web application framework that provides a list of features for building web and mobile applications easily. It simplifies the development of server-side applications by offering an easy-to-use API for routing, middleware, and HTTP utilities.
+                    
+->                     Built on Node.js for fast and scalable server-side development.
+-> Simplifies routing and middleware handling for web applications.
+-> Supports building REST APIs, real-time applications, and single-page applications.
+-> Provides a lightweight structure for flexible and efficient server-side development.
+
+npm install express --save
+`,
+          code1: `// Import Express
+const express = require('express');
+const app = express();
+
+// Define a route
+app.get('/', (req, res) => {
+    res.send('Welcome to the Express.js Tutorial');
+});
+
+// Start the server
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+});`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Middleware",
+      note: [
         {
-            id: 1,
-            title: "(JWT, OAuth) & bcrypt",
-            note: [
-                {
-                    text1: `<b>JWT</b>
+          text1: `<a href="https://expressjs.com/en/guide/using-middleware.html" target="_blank">using-middleware.</a>
+          In Express.js, middleware refers to functions that have access to the <b>request</b> object (<b>req</b>), the <b>response</b> object (<b>res</b>), and the <b>next</b> function in the application's request-response cycle. These functions are executed sequentially and can perform various tasks before the request reaches its final route handler or before a response is sent back to the client. 
+                    
+                    Middleware in Express refers to functions that process requests before reaching the route handlers. These functions can modify the request and response objects, end the request-response cycle, or call the next middleware function. Middleware functions are executed in the order they are defined. They can perform tasks like authentication, logging, or error handling. Middleware helps separate concerns and manage complex routes efficiently.
+                    
+                    Middleware in Express are functions that sit between the request and response cycle. They can modify <b>req</b> and <b>res</b>, execute code, end the request-response cycle, or call <b>next()</b> to pass control to the next middleware. They are executed in the order they are defined.
+                    
+->                     Middleware functions usually have 3 standard params req, res, and next. The first two are objects, the last is a function that will call the next middleware function, if there is one.
+-> Usually there is a middleware chain, meaning a chain of functions that are called one after the other, with the last function sending the response back to the browser. So we get the request from the browser, make any modifications and data additions, and then send a response back.
+-> You must call next() (unless it’s the last function in the chain) or the request will just hang and eventually timeout. In the browser this will manifest as a really long spinner before a message of “connection timed out” or similar.
+-> Any changes you make to req or res will be available in the next middleware function.
+-> req and res are unique for each request. Meaning that a user from USA result in a different req object than a user from a European country.
+
+<b>next()</b>: This function is called to pass control to the next middleware in the stack if the current one doesn't end the request-response cycle.
+`,
+          code1: `const express = require("express");
+const app = express();
+
+// Custom middleware for logging
+app.use((req, res, next) => {
+  console.log(\`\${req.method} \${req.url}\`);
+  next(); // pass control to next middleware/route
+});
+
+// Route
+app.get("/", (req, res) => {
+  res.send("Hello Middleware!");
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something went wrong!");
+});
+
+app.listen(3000, () => console.log("Server running on port 3000"));
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "next()",
+      note: [
+        {
+          text1: `<b>Middleware Chain Control</b>: The next() function is the third argument passed to Express middleware functions (after req and res). When invoked, it passes control to the next middleware function in the application's request-response cycle. This allows for a sequence of operations to be performed on a request before a response is sent.
+<b>Preventing Request Hanging</b>: If a middleware function does not end the request-response cycle (e.g., by sending a response with <b>res.send()</b> or <b>res.json())</b>, it must call <b>next()</b> to ensure the request continues to be processed by subsequent middleware or route handlers. Failure to call next() will leave the request hanging, leading to a timeout for the client. 
+<b>Error Handling</b>: next() can also be used to pass errors to Express's error-handling middleware. When <b>next(err)</b> is called with an error object, Express will bypass regular middleware and route handlers and instead invoke error-handling middleware specifically designed to manage and respond to errors.
+<b>Skipping Middleware/Routes</b>: While less common, <b>next('route')</b> can be used within a route handler to skip the remaining middleware functions in the current route and move control to the next route handler that matches the request. 
+
+<b>What is next()?</b>
+next() is a function that Express provides to <b>move control</b> from one middleware function to the <b>next middleware or route handler</b> in the stack.
+If you don’t call next() <b>and don’t send a response</b>, the request will just hang forever.
+
+<b>Think of it like a relay race</b> 🏃‍♂️🏃‍♀️
+Each <b>middleware</b> is a runner with a baton (the request).
+To continue the race, the runner must <b>pass the baton</b> → next().
+If a runner keeps the baton and doesn’t finish the race (<b>res.send()</b>), the race never ends.
+
+<b>🔹 When you DO need next()</b>
+You must call <b>next()</b> if your middleware:
+Does some work (like logging, authentication, validation, etc.)
+<b>Doesn't send a response</b> itself
+Needs to <b>pass control</b> to the next middleware or route handler
+
+app.use((req, res, next) => {
+  console.log("Logging request:", req.method, req.url);
+  next(); // ✅ continue to next route
+});
+
+
+<b>When you DON’T need next()</b>
+You don't call <b>next()</b> if:
+Your handler/middleware <b>already sent a response</b> with res.send, res.json, or res.end.
+You intentionally want to <b>end the request here</b>.
+
+app.get("/", (req, res) => {
+  res.send("Hello World!"); // ✅ no need for next()
+});
+
+<b>Middleware (app.use / extra functions)</b> → usually needs <b>next()</b>.
+<b>Final route handlers (app.get/post/etc.)</b> → usually end with <b>res.send(...)</b> → no next().
+<b>Error-handling middleware</b> uses <b>next(err)</b> (special case).
+`,
+          code1: `// ------- Example 1 – Logging middleware
+                    app.use((req, res, next) => {
+  console.log('Logging:', req.method, req.url);
+  next(); // pass to the next handler
+});
+
+app.get("/", (req, res) => {
+  res.send("Home page");
+});
+
+// Output when visiting /:
+Logging: GET /
+
+
+// ------- Example 2 – Without next()
+app.use((req, res, next) => {
+  console.log('Logging:', req.method, req.url);
+  // forgot next() and no res.send()
+});
+// Visiting /:
+// Console: Logging: GET /
+// Browser: hangs forever (because no response + no next).
+
+
+// --------- Example 3 – Conditional next()
+app.use((req, res, next) => {
+  if (req.query.admin === "true") {
+    next(); // allow request to continue
+  } else {
+    res.status(403).send("Forbidden: Not an admin");
+  }
+});
+
+app.get("/", (req, res) => {
+  res.send("Welcome, Admin!");
+});
+
+    // / → Forbidden unless you hit / ?admin=true.
+    // Shows how middleware can decide whether to pass control or stop.
+
+
+                    `
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Application-level middleware",
+      note: [
+        {
+          text1: `Application-level middleware is bound to the entire Express application using app.use() or app.METHOD(). 
+          Bind application-level middleware to an instance of the app object by using the app.use() and app.METHOD() functions, where METHOD is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
+
+This example shows a middleware function with no mount path. The function is executed every time the app receives a request.
+
+This type of middleware is commonly used for tasks like logging, body parsing, authentication checks, or setting headers for every incoming request.
+
+<b>app.use() → Middleware</b>
+app.use() is used to <b>register middleware functions.</b>
+Middleware runs <b>before your route handlers.</b>
+
+It can:
+Run for <b>all requests</b> (no path given).
+Or run only for a <b>specific path.</b>
+`,
+          code1: `// Application-level middleware 
+          // The function is executed every time the app receives a request.
+          const express = require('express')
+const app = express()
+
+app.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
+
+
+// This example shows a middleware function mounted on the /user/:id path. The function is executed for any type of HTTP request on the /user/:id path.
+
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Router-level Middleware",
+      note: [
+        {
+          text1: `Router-level middleware is applied to a specific router instance using router.use() or router.METHOD(). It only applies to routes defined within that particular router, making it perfect for modular applications where middleware is only relevant to specific groups of routes.
+
+This type of middleware is often used to group related routes (e.g., all routes related to authentication or user management) and apply middleware logic to them.
+
+Router-level middleware works in the same way as application-level middleware, except it is bound to an instance of <b>express.Router().</b>
+
+const router = express.Router()
+
+Load router-level middleware by using the <b>router.use()</b> and <b>router.METHOD()</b> functions.`,
+          code1: `//The following example code replicates the middleware system that is shown above for application-level middleware, by using router-level middleware:
+          
+          const express = require('express')
+const app = express()
+const router = express.Router()
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
+
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get('/user/:id', (req, res, next) => {
+  // if the user ID is 0, skip to the next router
+  if (req.params.id === '0') next('route')
+  // otherwise pass control to the next middleware function in this stack
+  else next()
+}, (req, res, next) => {
+  // render a regular page
+  res.render('regular')
+})
+
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id)
+  res.render('special')
+})
+
+// mount the router on the app
+app.use('/', router)
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Error-handling Middleware",
+      note: [
+        {
+          text1: `Error-handling middleware always takes four arguments. You must provide four arguments to identify it as an error-handling middleware function. Even if you don’t need to use the <b>next</b> object, you must specify it to maintain the signature. Otherwise, the <b>next</b> object will be interpreted as regular middleware and will fail to handle errors.`,
+          code1: `//Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature (err, req, res, next):
+
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Built-in Middleware",
+      note: [
+        {
+          text1: `Express provides built-in middleware to help with common tasks, like serving static files or parsing data.
+
+For example, express.static() serves files like images, and express.json() helps parse incoming JSON data.
+
+Express has the following built-in middleware functions:
+<b>express.static</b> serves static assets such as HTML files, images, and so on.
+<b>express.json</b> parses incoming requests with JSON payloads. NOTE: Available with Express 4.16.0+
+<b>express.urlencoded</b> parses incoming requests with URL-encoded payloads. NOTE: Available with Express 4.16.0+`,
+          code1: `app.use(express.static('public')); // Serves static files from the "public" folder
+app.use(express.json()); // Parses JSON payloads in incoming requests`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Third-party Middleware",
+      note: [
+        {
+          text1: `Third-party middleware is developed by external developers and packaged as npm modules. These middleware packages add additional functionality to your application, such as request logging, security features, or data validation.
+
+For example, the morgan middleware logs HTTP requests, and body-parser helps parse incoming request bodies for easier handling of form data.
+
+Use third-party middleware to add functionality to Express apps.
+
+Install the Node.js module for the required functionality, then load it in your app at the application level or at the router level.
+
+The following example illustrates installing and loading the cookie-parsing middleware function <b>cookie-parser</b>.
+
+npm install cookie-parser
+`,
+          code1: `const express = require('express')
+const app = express()
+const cookieParser = require('cookie-parser')
+
+// load the cookie-parsing middleware
+app.use(cookieParser())
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Logging",
+      note: [
+        {
+          text1: `Logging in Node.js refers to the practice of recording information about an application's runtime behavior, events, and errors. This information is typically stored in files or sent to a centralized logging system for analysis and monitoring.
+          
+          <b>Why Logging is Useful?</b>
+<b>Debugging</b> → Helps you find problems when something goes wrong.
+<b>Monitoring</b> → Know which endpoints are being used most.
+<b>Error Tracking</b> → See what errors are happening and w
+          `,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "(JWT, OAuth) & bcrypt",
+      note: [
+        {
+          text1: `<b>JWT</b>
                     A <b>JSON Web Token</b>, or JWT, is an open standard for securely creating and sending data between two parties, usually a client and a server.
                     
                     JSON Web Token (JWT) is a compact, URL-safe token used to represent claims between two parties. It works by encoding a JSON object into a string, which is then signed using a cryptographic algorithm to ensure its integrity and authenticity.
@@ -886,7 +1205,7 @@ Once you're signed in, the site's server sends back a JWT that allows you access
 
 JWTs are just bits of encoded JSON data with a cryptographic signature at the end.
 Here's an example of a JWT:
-<span style="color:red">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span> .eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlF1aW5jeSBMYXJzb24iLCJpYXQiOjE1MTYyMzkwMjJ9. <span style="color:#09ca9a">WcPGXClpKD7Bc1C0CCDA1060E2GGlTfamrd8-W0ghBE</span>
+<span style="color:red">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span> .eyJzdWIiOiIxMjM0NTY3ODkwI iwibmFtZSI6IlF1aW5jeSBMYXJzb24iLCJ pYXQiOjE1MTYyMzkwMjJ9. <span style="color:#09ca9a">WcPGXClpKD7Bc1C0CCDA1060E2GGlTfamrd8-W0ghBE</span>
 Each JWT is made up of three segments, each separated by a dot (.). These three segments are the <b>header</b>, <b>payload</b>, and <b>signature.</b>  
 If you copy and paste that JWT into the <a target="_blank" href="https://jwt.io/">JWT.io Debugger</a>, you can see the decoded versions of those three segments. 
 
@@ -938,10 +1257,10 @@ HMACSHA256(
 )
 The signature helps ensure that the data in the header and payload segments haven't been tampered with, and the JWT can be trusted.
 However, it's important to note that the cryptographic signature at the end of the JWT is just for validation. It doesn't encrypt any data in the header or payload segments of the token. So you should never send sensitive information like a user's password in a JWT – everything in the header and payload can and should be public.`,
-                    code1: ``
-                },
-                {
-                    text1: `<b>How do you create a JWT in Node.js?</b>
+          code1: ``
+        },
+        {
+          text1: `<b>How do you create a JWT in Node.js?</b>
                     To create a JWT in Node.js, you first need to install the jsonwebtoken library. Then, you can create a payload with the necessary claims and sign the token using a secret key and the sign method.
 
                     <b>1) Install Necessary Dependencies</b>
@@ -1001,7 +1320,7 @@ fetch('http://localhost:3000/protected', {
   .then(data => console.log(data))
   .catch(error => console.log('Error:', error));
                     `,
-                    code1: `const jsonServer = require('json-server');
+          code1: `const jsonServer = require('json-server');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const server = jsonServer.create();
@@ -1088,13 +1407,13 @@ server.listen(5000, () => {
   console.log('JSON Server is running on http://localhost:5000');
 });
 `
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-                {
-                    text1: `<b>bcrypt</b>
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: `<b>bcrypt</b>
                     <b>What is Hashing?</b>
 Hashing involves converting a given key or string of characters into another value. This is typically represented by a shorter, fixed-length value or key that represents the original value and facilitates the retrieval.
 
@@ -1165,7 +1484,7 @@ console.log('Hashed password:', hash);
 
 <b>How to Verify Passwords</b>
 To verify a password using bcrypt, use the <b>bcrypt.compare()</b> function. This function compares a plaintext password provided by the user during login with the hashed password stored in the database.`,
-                    code1: `// ---------- Hashing a password: -----------
+          code1: `// ---------- Hashing a password: -----------
 const bcrypt = require('bcryptjs');
 const password = 'mySuperSecretPassword';
 // Hash the password
@@ -1194,10 +1513,10 @@ bcrypt.compare(inputPassword, storedHash, (err, result) => {
     console.log('Password does not match!');
   }
 });`
-                },
-                {
-                    text1: ``,
-                    code1: `// -------------  Frontend React ------------
+        },
+        {
+          text1: ``,
+          code1: `// -------------  Frontend React ------------
                     import React, { useState } from &#39;react&#39;;
 import axios from &#39;axios&#39;;
 
@@ -1389,84 +1708,84 @@ server.listen(5000, () => {
 });
 
 `
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-            ]
         },
         {
-            id: 1,
-            title: "Authentication & Authorization",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
+          text1: ``,
+          code1: ``
         },
         {
-            id: 1,
-            title: "Error Handling",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
+          text1: ``,
+          code1: ``
         },
+      ]
+    },
+    {
+      id: 1,
+      title: "Authentication & Authorization",
+      note: [
         {
-            id: 1,
-            title: "Rate Limiting & Security Best Practices",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Error Handling",
+      note: [
         {
-            id: 1,
-            title: "WebSockets with socket.io",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Rate Limiting & Security Best Practices",
+      note: [
         {
-            id: 1,
-            title: "Error Handling",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "WebSockets with socket.io",
+      note: [
         {
-            id: 1,
-            title: "Error Handling",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ]
-        },
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Error Handling",
+      note: [
         {
-            id: 1,
-            section: "Interview",
-            title: "Interview",
-            note: [
-                {
-                    text1: `<b>Basic Node.js Questions</b>:
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Error Handling",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      section: "Interview",
+      title: "Interview",
+      note: [
+        {
+          text1: `<b>Basic Node.js Questions</b>:
 -> What is Node.js?
 <b>Answer</b>: Node.js is an open-source, cross-platform runtime environment that allows JavaScript to be executed server-side. It uses the V8 JavaScript engine (from Google Chrome) and is event-driven, non-blocking, and designed to build scalable network applications.
 
@@ -1585,9 +1904,9 @@ Arrow functions do not bind their own this; they inherit it from the surrounding
 
 const cors = require('cors');
 app.use(cors());`,
-                    code1: ``
-                }
-            ]
-        },
-    ]
+          code1: ``
+        }
+      ]
+    },
+  ]
 }
