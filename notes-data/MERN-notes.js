@@ -1,7 +1,7 @@
 const isHighlighted = 'MERN-notes'
 const Links1 = 'MERN-notes'
 const Links2 = 'mongodb-notes'
-const Links3 = 'express-js'
+const Links3 = 'expressjs-notes'
 const Links4 = 'javascript-projects'
 
 const mernData = {
@@ -1148,11 +1148,8 @@ app.use(express.json()); // Parses JSON payloads in incoming requests`
           text1: `Third-party middleware is developed by external developers and packaged as npm modules. These middleware packages add additional functionality to your application, such as request logging, security features, or data validation.
 
 For example, the morgan middleware logs HTTP requests, and body-parser helps parse incoming request bodies for easier handling of form data.
-
 Use third-party middleware to add functionality to Express apps.
-
 Install the Node.js module for the required functionality, then load it in your app at the application level or at the router level.
-
 The following example illustrates installing and loading the cookie-parsing middleware function <b>cookie-parser</b>.
 
 npm install cookie-parser
@@ -1178,6 +1175,9 @@ app.use(cookieParser())
 <b>Debugging</b> → Helps you find problems when something goes wrong.
 <b>Monitoring</b> → Know which endpoints are being used most.
 <b>Error Tracking</b> → See what errors are happening and w
+
+<b>Without logger</b> → you get the response, but you don’t know what’s happening in between.
+<b>With logger</b> → every request path is logged, so you can monitor activity, debug issues, or track usage.
           `,
           code1: ``
         }
@@ -1406,10 +1406,110 @@ server.use(router);
 server.listen(5000, () => {
   console.log('JSON Server is running on http://localhost:5000');
 });
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////
+// ----------- Express ------------
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const cors = require("cors");
+
+const app = express();
+app.use(express.json()); // for parsing JSON body
+app.use(cors());
+
+// In real apps → use DB (Mongo, PostgreSQL, etc.)
+const users = [
+  {
+    id: 1,
+    username: "anand",
+    password: bcrypt.hashSync("password123", 8) // store hashed password
+  }
+];
+
+// Secret key for JWT
+const SECRET_KEY = "your_secret_key_here"; // keep secure in .env file
+
+// 🔹 Login route
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  // Find user
+  const user = users.find(u => u.username === username);
+  if (!user) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  // Compare password with hashed version
+  const isPasswordValid = bcrypt.compareSync(password, user.password);
+  if (!isPasswordValid) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  // Generate JWT token
+  const token = jwt.sign(
+    { id: user.id, username: user.username },
+    SECRET_KEY,
+    { expiresIn: "1h" }
+  );
+
+  res.json({ token });
+});
+
+// 🔹 Middleware to verify JWT
+function authenticateJWT(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1]; // Expecting 'Bearer <token>'
+
+  if (!token) {
+    return res.status(403).json({ message: "Token missing" });
+  }
+
+  jwt.verify(token, SECRET_KEY, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: "Invalid token" });
+    }
+    req.user = user; // attach decoded user info to request
+    next();
+  });
+}
+
+// 🔹 Protected route
+app.get("/protected", authenticateJWT, (req, res) => {
+  res.json({
+    message: "This is protected data",
+    user: req.user
+  });
+});
+
+// Start server
+app.listen(5000, () => {
+  console.log("Server running on http://localhost:5000");
+});
+
 `
         },
         {
-          text1: ``,
+          text1: `What is <b>Bearer</b> in <b>Authorization</b> header?
+
+When we send a JWT token to the server, we usually put it in the <b>HTTP Authorization header</b> like this:
+
+Authorization: Bearer &lt;token&gt;
+
+-> <b>Bearer</b> is a token type.
+-> It tells the server: <i>"Hey, the value I’m sending after this keyword is a Bearer token (JWT)."</i>
+-> This is part of the OAuth 2.0 standard
+`,
           code1: ``
         },
         {

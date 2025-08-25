@@ -613,7 +613,7 @@ While we will separate the production and development specific bits out, note th
         {
           text1: ``,
           code1: ``
-        },        
+        },
         {
           text1: ``,
           code1: ``
@@ -11661,15 +11661,355 @@ module.exports = {
     },
     {
       id: 52,
-      title: "Login Redirect or Post-login Redirect",
+      section: "Login Redirect or Post-login Redirect",
+      title: "&lt;Outlet /&gt;;",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `In React, the <b>&lt;Outlet /&gt;;</b> component is provided by React Router to act as a placeholder for rendering the content of nested (or "child") routes. It is a powerful tool for creating and managing layouts, like the ProtectedRoute component you just saw. 
+<b>How &lt;Outlet /&gt;; works</b>
+When you define a nested routing structure using <Route> components, the parent route's element acts as a wrapper or a layout for its children. The &lt;Outlet /&gt;; component inside that parent element determines exactly where the child component will be rendered. 
+
+Think of &lt;Outlet /&gt;like a placeholder.
+It says:
+➡️ "If this parent route matches, show the child route component here."
+
+How this works (WithAuthHOC.jsx )
+<b>When you visit <u>/dashboard</u> </b>
+1) React Router first checks Route element={&lt;WithAuthHOC /&gt;}
+2) Inside <b>WithAuthHOC</b>:
+-> If token exists → it returns <b>&lt;Outlet /&gt;</b>
+-> <b>&lt;Outlet /&gt;</b> gets replaced by <b>&lt;Dashboard /&gt;</b>
+
+<b>When you visit <u>/profile</u></b>
+-> Same wrapper logic runs
+-> If logged in → <b>&lt;Outlet /&gt;</b> replaced by <b>&lt;Profile /&gt;</b>
+-> If not → Navigate sends you to <b>/login</b>
+`,
+          code1: `using &lt;Outlet /&gt;;
+          // ---------- App.js ----------
+          import MainRoute from &#39;./MainRoute&#39;
+import { BrowserRouter } from &quot;react-router-dom&quot;;
+
+function App() {
+  return (
+    &lt;BrowserRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    &gt;
+      &lt;MainRoute /&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}
+
+export default App;
+
+
+
+
+// --------- MainRoute.jsx --------
+import { Routes, Route } from &quot;react-router-dom&quot;;
+import ProtectedRoute from &quot;./components/protected-route/ProtectedRoute&quot;;
+import PublicRoute from &quot;./components/public-route/PublicRoute&quot;
+
+import Login from &quot;./components/login/Login&quot;;
+import Dashboard from &quot;./components/dashboard/Dashboard&quot;;
+import Header from &quot;./components/header/Header&quot;;
+import Home from &quot;./components/home/Home&quot;;
+
+function MainRoute() {
+  return (
+    &lt;&gt;
+      &lt;Header /&gt;
+      &lt;Routes&gt;
+        {/* PublicRoute */}
+        &lt;Route path=&quot;/login&quot; element={&lt;PublicRoute&gt;&lt;Login /&gt;&lt;/PublicRoute&gt;} /&gt;
+
+        {/* Protected Page */}
+        &lt;Route element={&lt;ProtectedRoute /&gt;}&gt;
+          &lt;Route path=&quot;/dashboard&quot; element={ &lt;Dashboard /&gt;}/&gt;
+          &lt;Route path=&quot;/&quot; element={ &lt;Home /&gt;}/&gt;
+        &lt;/Route&gt;
+      &lt;/Routes&gt;
+    &lt;/&gt;
+  );
+}
+
+export default MainRoute;
+
+
+// --------- PublicRoute.jsx --------
+import { Navigate } from &quot;react-router-dom&quot;;
+
+function PublicRoute({ children }) {
+  const token = localStorage.getItem(&quot;token&quot;);
+
+  if (token) {
+    // If already logged in → redirect away from login
+    return &lt;Navigate to=&quot;/dashboard&quot; replace /&gt;;
+  }
+
+  return children;
+}
+export default PublicRoute;
+
+
+// --------- PublicRoute.jsx --------
+import React from &#39;react&#39;;
+import { Navigate, Outlet } from &#39;react-router-dom&#39;;
+
+const ProtectedRoute = ({ children }) =&gt; {
+    const isAuthenticated = localStorage.getItem(&#39;token&#39;); // Or check your state management
+
+    if (!isAuthenticated) {
+        return &lt;Navigate to=&quot;/login&quot; replace /&gt;;
+    }
+
+    return &lt;Outlet /&gt;;
+};
+export default ProtectedRoute;
+
+
+//////////// OR ////////////////
+// --------- WithAuthHOC.jsx --------
+import React from &#39;react&#39;;
+import { Navigate, Outlet } from &#39;react-router-dom&#39;;
+
+const WithAuthHOC: React.FC = () =&gt; {
+    const sessionUserData = localStorage.getItem(&#39;user&#39;);
+    
+    if (sessionUserData?.length) {
+        return &lt;Outlet /&gt;;
+    }
+    return &lt;Navigate to=&#39;/login&#39; /&gt;;
+};
+
+export default WithAuthHOC;
+
+
+
+
+
+// --------- Home.jsx --------
+import React from &quot;react&quot;;
+import { useNavigate } from &quot;react-router-dom&quot;;
+
+function Home() {
+  const navigate = useNavigate();
+
+  const handleLogout = () =&gt; {
+    localStorage.removeItem(&quot;token&quot;); // clear login
+    navigate(&quot;/login&quot;); // back to login
+  };
+
+  return (
+    &lt;div style={{ padding: &quot;40px&quot;, textAlign: &quot;center&quot; }}&gt;
+      &lt;h1&gt;Welcome to Home 🎉&lt;/h1&gt;
+      &lt;p&gt;You are successfully logged in.&lt;/p&gt;
+      &lt;button onClick={handleLogout}&gt;Logout&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Home;
+
+
+// --------- Dashboard.jsx --------
+import React from &quot;react&quot;;
+import { useNavigate } from &quot;react-router-dom&quot;;
+
+function Dashboard() {
+  const navigate = useNavigate();
+
+  const handleLogout = () =&gt; {
+    localStorage.removeItem(&quot;token&quot;); // clear login
+    navigate(&quot;/login&quot;); // back to login
+  };
+
+  return (
+    &lt;div style={{ padding: &quot;40px&quot;, textAlign: &quot;center&quot; }}&gt;
+      &lt;h1&gt;Welcome to Dashboard 🎉&lt;/h1&gt;
+      &lt;p&gt;You are successfully logged in.&lt;/p&gt;
+      &lt;button onClick={handleLogout}&gt;Logout&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+export default Dashboard;
+
+
+// --------- Login.jsx --------
+import React, { useState } from &quot;react&quot;;
+import { useNavigate } from &quot;react-router-dom&quot;;
+import &quot;./login.css&quot;;
+
+function Login() {
+    const [loginData, setLoginData] = useState({
+        username: &quot;&quot;,
+        password: &quot;&quot;
+    });
+    const [loginError, setLoginError] = useState(&#39;&#39;)
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) =&gt; {
+        // console.log(loginData)
+        e.preventDefault();
+        try {
+            const apiRes = await fetch(&#39;http://localhost:5000/login&#39;, {
+                method: &#39;POST&#39;,
+                headers: {
+                    &quot;Content-type&quot;: &quot;application/json&quot;
+                },
+                body: JSON.stringify(loginData)
+            })
+
+            if (!apiRes.ok) {
+                const errorData = await apiRes.json()
+                setLoginError(errorData.message )
+                // throw new Error(errorData.message || &quot;somthing went wrong&quot;)
+            }
+
+            const data = await apiRes.json()
+
+            if (!data.token) {
+                throw new Error(&quot;somthing went wrong&quot;)
+            }
+
+            localStorage.setItem(&quot;token&quot;, data.token)
+            navigate(&#39;/&#39;)
+
+        } catch (err) {
+            console.log(err)
+        }
+
+    };
+
+    const loginOnChangeHandler = (e) =&gt; {
+        const { name, value } = e.target
+        setLoginData({ ...loginData, [name]: value })
+    }
+
+    return (
+        &lt;div className=&quot;login-container&quot;&gt;
+            &lt;form className=&quot;login-form&quot; onSubmit={handleSubmit}&gt;
+                &lt;h2&gt;Login&lt;/h2&gt;
+                &lt;p&gt;{ loginError &amp;&amp; loginError }&lt;/p&gt;
+                &lt;div className=&quot;form-group&quot;&gt;
+                    &lt;label&gt;username:&lt;/label&gt;
+                    &lt;input
+                        type=&quot;text&quot;
+                        name=&quot;username&quot;
+                        value={loginData.username}
+                        onChange={loginOnChangeHandler}
+                        required
+                    /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;form-group&quot;&gt;
+                    &lt;label&gt;Password:&lt;/label&gt;
+                    &lt;input
+                        type=&quot;password&quot;
+                        name=&quot;password&quot;
+                        value={loginData.password}
+                        onChange={loginOnChangeHandler}
+                        required
+                    /&gt;
+                &lt;/div&gt;
+                &lt;button type=&quot;submit&quot;&gt;Login&lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    );
+}
+
+export default Login;
+
+
+          `
         }
       ],
     },
+    {
+      id: 1,
+      title: "Protected Routes without &lt;Outlet /&gt;",
+      note: [
         {
+          text1: ` Wrapper per route 
+          
+          &lt;Route path=&quot;/dashboard&quot; element={&lt;ProtectedRoute&gt;&lt;Dashboard /&gt;&lt;/ProtectedRoute&gt;} /&gt;
+&lt;Route path=&quot;/profile&quot; element={&lt;ProtectedRoute&gt;&lt;Profile /&gt;&lt;/ProtectedRoute&gt;} /&gt;
+`,
+          code1: `// ---------------- ProtectedRoute.jsx ----------
+          import { Navigate } from &quot;react-router-dom&quot;;
+
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem(&quot;token&quot;);
+
+  if (!token) {
+    // If no token, redirect to login
+    return &lt;Navigate to=&quot;/login&quot; replace /&gt;;
+  }
+
+  // If logged in, show the page
+  return children;
+}
+
+export default ProtectedRoute;
+
+
+// ------------ MainRouts.js -------------
+import { BrowserRouter, Routes, Route } from &quot;react-router-dom&quot;;
+import ProtectedRoute from &quot;./ProtectedRoute&quot;;
+import Login from &quot;./Login&quot;;
+import Dashboard from &quot;./Dashboard&quot;;
+import Profile from &quot;./Profile&quot;;
+import Settings from &quot;./Settings&quot;;
+import Home from &quot;./Home&quot;;
+
+function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Routes&gt;
+        {/* Public routes */}
+        &lt;Route path=&quot;/&quot; element={&lt;Home /&gt;} /&gt;
+        &lt;Route path=&quot;/login&quot; element={&lt;Login /&gt;} /&gt;
+
+        {/* Protected routes */}
+        &lt;Route
+          path=&quot;/dashboard&quot;
+          element={
+            &lt;ProtectedRoute&gt;
+              &lt;Dashboard /&gt;
+            &lt;/ProtectedRoute&gt;
+          }
+        /&gt;
+        &lt;Route
+          path=&quot;/profile&quot;
+          element={
+            &lt;ProtectedRoute&gt;
+              &lt;Profile /&gt;
+            &lt;/ProtectedRoute&gt;
+          }
+        /&gt;
+        &lt;Route
+          path=&quot;/settings&quot;
+          element={
+            &lt;ProtectedRoute&gt;
+              &lt;Settings /&gt;
+            &lt;/ProtectedRoute&gt;
+          }
+        /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}
+
+export default App;
+
+          
+          `
+        }
+      ]
+    },
+    {
       id: 52,
       title: "Checking performance",
       note: [
