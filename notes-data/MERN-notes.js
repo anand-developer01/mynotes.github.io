@@ -195,6 +195,18 @@ These are modules that come pre-installed with Node.js. They are part of the Nod
 6) url
 7) util
 8) stream
+9) crypto
+10) buffer
+11) 10. querystring (legacy, replaced by URLSearchParams)
+
+Other Useful Core Modules
+timers – setTimeout, setInterval
+zlib – compression (gzip, deflate)
+dns – DNS lookup and resolution
+net – TCP servers/clients
+tls/https – secure communication
+child_process – run system commands or spawn processes
+readline – read user input line by line
 `,
           code1: ``
         },

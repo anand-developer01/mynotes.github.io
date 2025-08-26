@@ -7081,17 +7081,25 @@ export default ListComponent;
         {
           text1: ``,
           code1: ``
-        },
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Difference between useCallback and useMemo. ",
+      note: [
         {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
+          text1: `<b>useCallback</b>: Returns a memoized function.
+          const memoizedFn = useCallback(() => doSomething(a, b), [a, b]);
+
+<b>useMemo</b>: Returns a memoized value (result of computation).
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+
+<b>In which case will use useCallback and useMemo.</b>
+<b>useCallback</b> → When passing functions as props to child components (to prevent re-renders).
+<b>useMemo</b> → When heavy calculations are involved and you don’t want to recalculate unnecessarily.
+
+`,
           code1: ``
         },
       ],
@@ -8893,7 +8901,7 @@ export default PureComponent;
     },
     {
       id: 52,
-      section: `Code Splitting`,
+      section: `Code Splitting & Code Splitting`,
       title: "Code splitting",
       note: [
         {
@@ -9053,7 +9061,15 @@ A normal import in JavaScript (using the <b>import</b> statement) does not retur
 ✔️ import() loads the module asynchronously.
 ✔️ setDynamicComponent() updates state only when the module is loaded.
 ✔️ React rerenders the component once it's available.`,
-          code1: `//---------------- Ex : 1 -----------
+          code1: `// --------- Basic example ----------
+          async function loadMath() {
+  const math = await import('./math.js');
+  console.log(math.add(2, 3)); // 5
+}
+loadMath();
+
+
+          //---------------- Ex : 1 -----------
           //App.jsx
           import React, { useState } from &#39;react&#39;;
 const App = () =&gt; {
@@ -9887,6 +9903,63 @@ Server-side rendering (SSR) is the technique where the HTML of a web page is gen
       ],
     },
     {
+      id: 1,
+      title: "Virtualization - (react-window)",
+      note: [
+        {
+          text1: `In React.js, <b>virtualization</b> (also called <b>windowing</b>) is a <b>performance optimization technique</b> used when rendering large lists or tables.
+
+Instead of rendering <b>all items in a list</b> into the DOM (which is slow and memory-heavy), virtualization renders <b>only the visible portion</b> of the list (plus a small buffer). As the user scrolls, React dynamically reuses and recycles DOM nodes for visible items, instead of creating thousands of DOM elements at once.
+
+&lt;ul&gt;
+  {Array.from({ length: 10000 }).map((_, index) =&gt; (
+    &lt;li key={index}&gt;Row {index}&lt;/li&gt;
+  ))}
+&lt;/ul&gt;
+
+
+React creates 10,000 &lt;li&gt; elements in the DOM, which causes:
+Slow rendering
+High memory usage
+Janky scrolling
+
+Virtualization in React means rendering only what the user sees, instead of rendering the entire list at once.
+
+<b>Solution With Virtualization</b>
+Using virtualization, only the rows that are visible in the viewport (say 20 at a time) are rendered.
+Popular libraries:
+<b>react-window</b> (lightweight, recommended)
+<b>react-virtualized</b> (older, more features)
+
+<b>Benefits of Virtualization</b>
+🚀 Performance boost (fast rendering & scrolling)
+📉 Reduced DOM nodes (only render visible items)
+🧠 Less memory usage
+⚡ Better user experience (smooth scrolling)
+`,
+          code1: `// Example with react-window:
+          import { FixedSizeList as List } from &quot;react-window&quot;;
+
+const MyList = () =&gt; (
+  &lt;List
+    height={400}        // container height
+    itemCount={10000}   // total items
+    itemSize={35}       // row height
+    width={300}         // container width
+  &gt;
+    {({ index, style }) =&gt; (
+      &lt;div style={style}&gt;Row {index}&lt;/div&gt;
+    )}
+  &lt;/List&gt;
+);
+
+// Even though there are 10,000 rows, only about 11–15 rows exist in the DOM at any moment. The rest are rendered on-demand as you scroll.
+          
+          `
+        },
+      ]
+    },
+    {
       id: 13,
       section: `Class components`,
       title: "What are the different phases of component lifecycle?",
@@ -10455,16 +10528,6 @@ const MyComponent = ({ num }) => {
 <b>useMemo()</b> is used to avoid re-calculating a value or performing expensive operations on every render.`,
           code1: ``
         },
-      ],
-    },
-    {
-      id: 52,
-      title: "aff intro",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
       ],
     },
     {
@@ -11521,6 +11584,61 @@ export default App;
     },
     {
       id: 52,
+      section: "HTTP request modules",
+      title: "fetch (Built-in)",
+      note: [
+        {
+          text1: `Native JavaScript API (no need to install).
+Returns a Promise.
+
+b>Pros</b>:
+Built-in (no extra library).
+Modern and widely supported.
+
+<b>Cons</b>:
+No automatic JSON parsing (must call .json()).
+Limited older browser support (needs polyfills).
+Error handling is tricky (fetch only rejects on network error, not on 404/500).`,
+          code1: `// ----------
+           fetch("https://jsonplaceholder.typicode.com/posts")
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "axios (Popular Library)",
+      note: [
+        {
+          text1: `External library (npm install axios).
+Returns a Promise.
+
+<b>Pros</b>:
+Auto JSON parsing (no need .json()).
+Better error handling (rejects on 404/500).
+Can set baseURL, headers, interceptors.
+Supports cancel requests easily.
+Works in both browser + Node.js.
+
+<b>Cons</b>:
+Extra dependency (must install).
+`,
+          code1: `// ---------- Ex : 1 ---------
+          import axios from "axios";
+
+axios.get("https://jsonplaceholder.typicode.com/posts")
+  .then(res => console.log(res.data))
+  .catch(err => console.error(err));
+
+  `
+        }
+      ],
+    },
+    {
+      id: 52,
       section: "Micro Frontend Architecture",
       title: "Micro Frontend Architecture in React JS",
       note: [
@@ -12042,6 +12160,398 @@ Yes, multiple renders are expected and normal because:
         },
         {
           text1: ``,
+          code1: ``
+        },
+      ],
+    },
+        {
+      id: 1,
+      section: "Assignment",
+      title: "create todo (add and delete) list with undo feature.",
+      note: [
+        {
+          text1: `create todo (add and delete) list with undo feature.`,
+          code1: `import React, { useState } from &quot;react&quot;;
+
+function TodoApp() {
+  const [todos, setTodos] = useState([]);
+  const [history, setHistory] = useState([]);
+
+  const addTodo = (todo) =&gt; {
+    setHistory([...history, todos]); // save previous state
+    setTodos([...todos, todo]);
+  };
+
+  const deleteTodo = (index) =&gt; {
+    setHistory([...history, todos]);
+    setTodos(todos.filter((_, i) =&gt; i !== index));
+  };
+
+  const undo = () =&gt; {
+    if (history.length &gt; 0) {
+      const prev = history.pop();
+      setTodos(prev);
+      setHistory([...history]);
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={() =&gt; addTodo(&quot;New Task&quot;)}&gt;Add&lt;/button&gt;
+      &lt;ul&gt;
+        {todos.map((t, i) =&gt; (
+          &lt;li key={i}&gt;
+            {t} &lt;button onClick={() =&gt; deleteTodo(i)}&gt;Delete&lt;/button&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+      &lt;button onClick={undo}&gt;Undo&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default TodoApp;
+`
+        }
+      ]
+    },
+            {
+      id: 1,
+      title: "Callbacks",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 52,
+      title: "react frontend interview",
+      note: [
+        {
+          text1: `1. What type of component is react.
+2. Difference between controlled and uncontrolled component.
+3. Optimization technique in react.
+4. Difference between useCallback and useMemo.
+5. In which case will use useCallback and useMemo( explain with example code)
+6. useEffect with dependency and without dependency.
+7. How to stop infinite loop in useEffect.
+8. What can be cause of data not showing in the browser?
+9. Assignment- create todo(add and delete) list with undo feature.
+ 
+Create button to replicate a button using Javascript
+Implement the above in react (Dynamic button/form on click) -> https://stackoverflow.com/questions/52237531/reactjs-how-to-add-append-a-component-on-click-of-button
+Apply, bind, call – Explain and find output for example given
+variable scope – Explain and find output for example given
+Create a react component to update live cricket score every 5 seconds
+How to memoize the component
+What is react.memo and usememo
+When do we use callback()
+what other hooks have u used.
+If u have worked on connect components what kind of components have u used and what have u built using them
+ 
+
+Questions from a internal Mock interview
+explain function.prototype.bind
+explain diff between object.freeze() vs const
+provide examples of non-bulean value coercion to a boolean one
+diff between es6 class and es5 function constructors
+what is IIFEs
+what is generator in js
+how should we use arrow functions in es6
+how to use generators in es6
+explain prototype design pattern
+what is hoisting in javascrpt
+compare async await and generators
+ 
+ 
+other questions
+ 
+What is the difference between null and undefined?
+How will you explain a closure?
+What is a Promise? Why we have such concept? How to handle promises in javascript?
+What is the difference in using async await while handling promises when compared to using then method with callbacks?
+Angular vs React? Which one you prefer? Justify with reasons.
+Function component & Class component? Why would you use one over the other?
+How will you do state management in react apps? Context Providers or Redux? Justify your decision with examples.
+Give an example comparing a lifecycle method with a react hook.
+How will you optimize the performance in your react application?
+Explain the high level architecture of redux.
+I want 2 buttons to show the increment and decrement counter values when it is clicked. How will you implement?
+HashMap
+Set and Weakset
+Temporal dead zone
+How to create a new find method for Array using prototype? – custom logic for finding an element in Array
+What is callstack?
+Write a Constructor function.
+How will you implement the constructor function in ES6?
+What is prototype in JS?
+What is a generator function?
+Question on async await generator function combined.
+Custom logic to combine odd and even number arrays without using spread operator and sort it.
+Function for removing the duplicate in an array.
+main goal of HTML5 specification?
+Manifest file purpose
+How to make an image responsive?
+How to make an image fixed from scrolling?
+How will you re-render a component when you resize the browser?
+Can react hooks be used for achieving all things that can be done using life cycle methods?
+Can we replace redux with react context?
+use of @extend in sass
+varible interpolation in sass
+Time complexity and space complexity
+ 
+1. What type of component is react. 
+2. Difference between controlled and uncontrolled component.
+3. Optimization technique in react.
+4. Difference between useCallback and useMemo.
+5. In which case will use useCallback and useMemo( explain with example code)
+6. useEffect with dependency and without dependency.
+7. How to stop infinite loop in useEffect.
+8. What can be cause of data not showing in the browser?
+9. Assignment- create todo(add and delete) list with undo feature.
+ 
+1. Core React Questions
+What is the Virtual DOM, and how does React use it to render UI efficiently?
+Explain the difference between functional and class components.
+What are React Hooks? Name a few commonly used ones.
+How does useEffect work? What are its dependencies?
+What is JSX and how does it differ from HTML?
+What is the difference between useState and useReducer?
+How is React different from other frameworks like Angular or Vue?
+What is the significance of keys in lists?
+Explain controlled vs uncontrolled components.
+How does React handle component re-rendering?
+What is prop drilling, and how can it be avoided?
+Explain the Context API in React.
+What are Higher Order Components (HOCs)?
+What are Render Props?
+Explain lazy loading and React's Suspense.
+What are portals in React?
+How does reconciliation work in React?
+What are fragments in React?
+What’s the role of React.memo and useMemo?
+Difference between useCallback and useMemo.
+2. Micro Frontend Questions
+What are Micro Frontends?
+When should you use Micro Frontends?
+What are the benefits and drawbacks of Micro Frontends?
+How do you share state across Micro Frontends?
+How do you handle routing in a Micro Frontend architecture?
+Explain ways to integrate Micro Frontends (iframe, module federation, build-time composition).
+What is Module Federation in Webpack 5?
+How do you deploy and version Micro Frontends independently?
+How do you ensure performance is not affected by Micro Frontends?
+How do you handle authentication and authorization in a Micro Frontend setup?
+Explain isolation in Micro Frontends.
+How do you handle CSS and style conflicts between Micro Frontends?
+What testing strategies do you use for Micro Frontends?
+Can Micro Frontends use different versions of React?
+How do you communicate between Micro Frontends?
+What are some tools or frameworks for Micro Frontends (e.g., Single-SPA, Module Federation)?
+3. React Testing Questions
+What are the main tools used for testing React apps (e.g., Jest, Testing Library)?
+Difference between unit tests, integration tests, and E2E tests?
+How do you test React components with react-testing-library?
+How do you mock APIs in your tests?
+How do you test asynchronous code (like fetching data)?
+How do you test user events in React (e.g., click, change)?
+What is a test ID and why use it?
+How do you write tests for hooks?
+How do you test context and providers?
+How do you test components with Redux or Zustand?
+What’s snapshot testing in Jest?
+What’s code coverage and how do you generate reports?
+How do you test components using portals or modals?
+What are common pitfalls when testing React apps?
+ 
+1.usestate advantages ,what is use state will return 
+2.faced challenges in previous project
+ 3.useffect 
+4.depoyment process 
+5.responsive scenario based 
+6. how you will send  token(data) with standalone  react application to backend 7.microfrontend  process  and how  react application deployed separately  
+8.jules pipelines process
+ 9.material ui
+ 10.styled component.
+11 unit testing react
+ 12.storybook 
+13.lazyloading in routing
+14.Graphql(based on my resume)
+15.performance with graphql and RestApi
+ 
+1-Local storage session storage
+2- usememo
+3- display student data from json in the form of table with different different subjects and their score 
+4- performance points in an application 
+5- security points in an application 
+6- react bundle steps
+7- redux flow
+8- custom hooks
+9- pagination using scroll event
+10- debounce and throttling
+11- which one is efficient for performance pov weather using ternary operator aur direct child componentcall on the basis of flags
+12- process of deployment 
+13- deployment tools
+14- how u can implement cache on server
+15- server side vs client side rende
+ 
+ 
+ 
+React :
+ 
+ 
+1) How redux-saga works and working principle of redux?
+2) What is pure/impure functions? (Live coding)
+3) Why can't we update redux state directly?
+4) What is useReducer() hooks?, how it works? (Live coding)
+5) How can we write custom hooks?
+6) Write a custom hook, which takes one argument "url" and it will return the data after fetching from url. (Live coding).
+7) What is debouncing?
+8) How will you manage multiple api calls at same time and render a component?
+9) How bootstrap classes are created?
+10) Difference between position relative and position absolute.
+11) what is wv, wh in css?
+12) Flex box in css
+ 
+ 
+1) Explain the data flow of your recent react project.
+2) Why are hooks introduced in react?
+3) Difference between class based component and functional component.
+4) Life cycle methods in react.
+5) How can we achieve those life cycle methods in functional components?
+6) How can we improve react application’s performance?
+7) Explain useMemo hooks?
+8) How can we create re-usable components in react?
+9) what are the guidelines we need to take to create re-usable components?
+10) Lazy loading in react
+11) What are the challenges you faced on your recent project? how you approached that?
+ 
+ 
+How does react work?
+what is differnce bw anchor tag and react router link tag
+ 
+what usestate will return
+what is the use exact in react router
+use of switch in react router/
+What are refs used for in React?
+How would you prevent a component from rendering?
+Why would you eject from create-react-app?
+diff depenecies and  devdepencies
+What are the rules with React Hooks?
+How to use previous state in useState.
+advantage/disadvantage of arrow function
+how redux will work behind the screen
+is redux sync or aysnc
+diff bw call bind apply
+ 
+is javascript is sync or aync?-sync(single thread language)
+hoisting in javscript
+aync and await,
+promises
+-
+1.how to access the last element in javascript:
+var array = [1, 2, 3, 4, 5, 6]; 
+console.log(array.slice(-1)); // [6]
+ 
+2.Remove duplicates from an array and object.
+ 
+3.diff between dependenies and devdependencies
+ 
+4.virtual dom workflow in react app
+ 
+5.what is redux and workflow
+ 
+6.how to add multiple middleware in redux?
+apply middleware(thunk,logger)(createstore)
+ 
+7.diff b/w context and redux
+ 
+8.hooks functions
+ 
+9why react uses classname over class attribute.
+10.prop drilling in react
+11.diff between element and component
+12.switch in react router
+ 
+13.how to do you tell react in production mode and what  will  that do?
+14.webpack in react app & when it will run
+ 
+15.reduxtoolkit
+ 
+16.arrow functions advantage and disavantage
+17.what is middleware,why middleware is used
+18.is redux sync or aysnc
+redux is sysnc without middleware
+19.es6 methods
+20.how does react work
+21.what is children in react?
+22.in which version of react hooks introduced?
+ 
+23.What is the new way to initialize state in React without constructor function?
+old way:constructor() {
+    super();
+    this.state = {
+      count: 0
+    }
+  }
+new way: state = { count: 0}
+24.ref in react?
+ 
+25.what is the use of middleware Redux thunk?
+ 
+26.What is the difference between display: block, inline-block and inline?
+ 
+27.Is it possible to have width and height in display:inline-block and display:inline?
+ 
+28. What is specificity in CSS?
+ 
+29.grid and flex in css
+ 
+30.how to centrally align a block element inside another element in using plain CSS?
+31pseudo elements in CSS?
+ 
+32.What is z-index?
+ 
+33.(function(){
+  var a = b = 3;
+})();
+console.log("b is " + b);
+console.log("a is " + a); what is the output of this
+34.What is the output of the below code and why?
+console.log(typeof undefined == typeof NULL);
+Answer- The output logged will be: true
+The reason is that NULL is different from primitive data type null. The variable NULL is just any other undefined variable. If we console log these three, we can see that typeof null and typeof NULL are different.
+console.log(typeof undefined); //undefined
+console.log(typeof null);  //object
+console.log(typeof NULL);  //undefined
+ 
+35.console.log([] + []);
+ 
+36.use of optional chaining in javscript
+ 
+37.interceptor in axios
+38.Can we use await only with promises?
+No, we can use await with promise as well as any object that implements a then function.
+39..diff b/w promise and async await
+40.. What’s the difference between event.preventDefault() and event.stopPropagation() methods?
+Answer: The event.preventDefault() the method prevents the default behavior of an element. If used in an form element it prevents it from submitting. While the event.stopPropagation() method stops the propagation of an event or stops the event from occurring in the bubbling or capturing phase.
+41. Why meta tags are used in HTML?
+Ans: Meta tags in HTML are used by the developer to tell the browser about the page description, author of the template, character set, keywords, and many more. Meta tags are used to tell the search engine about the page content for search engine optimization.
+What would happen if the HTML document does not contain <!DOCTYPE>?
+Ans: It instructs the Web Browser about the version of HTML used for creating the Web page. If the developer misses 
+declaring the DOCTYPE information in the code, then new features and tags provided by HTML5 will not be supported.
+Additionally, the Browser may automatically go into Quirks or Strict Mode.
+42.reduce method
+43.when to use maxwidth and minwidth
+
+
+
+
+
+
+-> Previous project related questions -> React Hooks explanation -> Performance optimisation techniques -> Difference between useMemo and useCallback ->  -> Coding Program -> To consume API and display first 5 post and each post will have dynamic like and heart button so on click of expression need to show the count`,
           code1: ``
         },
       ],

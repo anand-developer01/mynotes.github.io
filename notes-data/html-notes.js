@@ -58,9 +58,9 @@ Doctype syntax for frameset HTML 4.01:
 The browser enters <b>Quirks mode</b> and tries to deal with your code as if it was written in the late 90’s. This means they will imitate many bugs that existed in the old browsers. It is not consistent on how to do this (so you will get significantly different results, for example, from Firefox to Internet Explorer).
 
 The purpose of DOCTYPE is to tell the browser what type of HTML you are writing. It is not valid to omit the DOCTYPE. There is no “Standard” format. The browser will just try to parse HTML as best it can. But not all elements will be displayed correctly. DOCTYPE is a required part of all HTML documents.
-In HTML5 the tag used is: &lt;!DOCTYPE html&gt;
+<b>In HTML5 the tag used is: &lt;!DOCTYPE html&gt;</b>
 
-If you don't include the <b>DOCTYPE</b> declaration or use &lt;!DOCTYPE html&gt;, the browser may switch to quirks mode. <b>Quirks mode</b> is a compatibility mode where the browser tries to render the webpage in a way that mimics older, non-standard behavior (from when web standards were not fully defined). This can lead to several issues, such as:
+If the page has a missing <b>&lt;!DOCTYPE html&gt;</b> or old DOCTYPE, the browser goes into Quirks Mode, where it mimics the behavior of older browsers (like IE 5), which causes <b>non-standard rendering (non-standard behavior)</b> (from when web standards were not fully defined). This can lead to several issues, such as:
 
 <b>Inconsistent Layouts</b>: The page may not be displayed as intended, and layout issues might occur. For example, margins, paddings, and text alignment might be rendered differently across browsers.
 
@@ -107,11 +107,12 @@ One of the most well-known issues in quirks mode involves the CSS box model. In 
       title: "What is the difference between &lt;div&gt; and &lt;span&gt; in HTML?",
       note: [
         {
-          text1: `&lt;div&gt; is a block-level element used for grouping and styling larger chunks of content. &lt;span&gt; is an inline element used to style small portions of text or elements within a block.`,
-          code1: ``
-        },
-        {
-          text1: ``,
+          text1: `&lt;div&gt; is a block-level element used for grouping and styling larger chunks of content.
+          Use &lt;div&gt; when you want to structure sections/containers of a webpage.
+
+Use &lt;span&gt; when you want to style or manipulate a piece of text or inline element without
+&lt;span&gt; is an inline element used to style small portions of text or elements within a block.
+`,
           code1: ``
         },
       ],
@@ -124,10 +125,6 @@ One of the most well-known issues in quirks mode involves the CSS box model. In 
           text1: `HTML5 introduced new elements, APIs, and attributes for modern web development. Key differences include new structural elements (&lt;article&gt;, &lt;section&gt;, &lt;nav&gt;), multimedia support (&lt;audio&gt;, &lt;video&gt;), and the &lt;!DOCTYPE html&gt; declaration (HTML5 uses a simpler DOCTYPE).`,
           code1: ``
         },
-        {
-          text1: ``,
-          code1: ``
-        },
       ],
     },
     {
@@ -137,6 +134,11 @@ One of the most well-known issues in quirks mode involves the CSS box model. In 
         {
           text1: `A semantic element clearly describes its meaning to both the browser and the developer.
           Semantic elements are those that clearly describe their meaning in a human- and machine-readable way. Examples include &lt;article&gt;, &lt;footer&gt;, &lt;header&gt;, &lt;section&gt;, and &lt;nav&gt;. They help with accessibility and SEO.
+
+          They help with:
+<b>Readability</b> (developers understand the structure).
+<b>Accessibility</b> (screen readers know how to announce them).
+<b>SEO</b> (search engines understand page structure better).
           
           Semantic elements in HTML are HTML tags that carry meaning about the content within them. These elements help both developers and browsers understand the structure and purpose of a webpage, leading to better accessibility, SEO (search engine optimization), and maintainability. Instead of using generic tags like &lt;div&gt; or &lt;span&gt;, semantic elements describe the type of content contained within them.
           
@@ -180,10 +182,126 @@ One of the most well-known issues in quirks mode involves the CSS box model. In 
     },
     {
         id: 1,
+        title: "Benefits of HTML5",
+        note: [
+            {
+                text1: `<b>Semantic Tags</b>
+Introduced &lt;header&gt;, &lt;footer&gt;, &lt;article&gt;, &lt;section&gt;, &lt;nav&gt; → makes code more readable and improves SEO.
+
+<b>Better Multimedia Support</b>
+&lt;audio&gt; and &lt;video&gt; tags → no need for Flash plugins.
+Easy embedding of media with controls.
+
+<b>Canvas & SVG Support</b>
+&lt;canvas&gt; → draw graphics, charts, and games directly in the browser.
+SVG support for scalable vector graphics.
+
+<b>Form Enhancements</b>
+New input types: email, url, date, range, number.
+Built-in validation (e.g., type="email" validates format automatically).
+
+<b>Local Storage & Session Storage</b>
+Store data in the browser without cookies.
+localStorage (persistent) and sessionStorage (temporary).
+
+<b>Local Storage</b>
+<b>Lifetime</b>: Data persists even after browser is closed.
+<b>Scope</b>: Data is stored per domain (each website has its own storage).
+<b>Capacity</b>: ~5–10 MB (much larger than cookies).
+<b>Use case</b>: Save user preferences, theme, tokens, cart items.
+
+// Save data
+localStorage.setItem("username", "Anand");
+// Get data
+let name = localStorage.getItem("username");
+console.log(name); // Anand
+// Remove data
+localStorage.removeItem("username");
+// Clear everything
+localStorage.clear();
+
+<b>Session Storage</b>
+<b>Lifetime</b>: Data is cleared when the tab/window is closed.
+<b>Scope</b>: Works only in the current tab.
+<b>Capacity</b>: ~5 MB.
+<b>Use case</b>: Temporary data, like form values while user is on the page.
+// Save data
+sessionStorage.setItem("sessionId", "12345");
+// Get data
+console.log(sessionStorage.getItem("sessionId")); // 12345
+// Remove data
+sessionStorage.removeItem("sessionId");
+// Clear everything
+sessionStorage.clear();
+
+
+
+<b>Offline Support</b>
+Application Cache (AppCache) and later Service Workers → let apps work offline.
+
+<b>Geolocation API</b>
+Allows web apps to get user’s location (with permission).
+
+<b>Responsive Design with Media Queries</b>
+Works with CSS3 to create mobile-friendly layouts.
+&lt;meta name=&quot;viewport&quot;&gt; helps pages fit different devices.
+
+<b>Performance Improvements</b>
+Faster parsing by browsers.
+Reduced need for external plugins.
+Supports asynchronous script loading (async/defer).
+
+<b>Cross-Platform Compatibility</b>
+Designed for mobile + desktop.
+Apps can run inside browsers on multiple devices.`,
+                code1: ``
+            }
+        ]
+    },
+        {
+        id: 1,
+        title: "Local Storage and Session Storage",
+        note: [
+            {
+                text1: `<b>Local Storage</b> and <b>Session Storage</b> are both part of the Web Storage API in HTML5. Local Storage keeps data permanently (even after closing the browser), while Session Storage keeps data only for the current session (cleared when tab closes). Both are bigger and faster than cookies.`,
+                code1: `// -------- Local Storage --------
+                // Save data
+localStorage.setItem("username", "Anand");
+
+// Get data
+let name = localStorage.getItem("username");
+console.log(name); // Anand
+
+// Remove data
+localStorage.removeItem("username");
+
+// Clear everything
+localStorage.clear();
+
+
+// ------------ Session Storage -------
+// Save data
+sessionStorage.setItem("sessionId", "12345");
+
+// Get data
+console.log(sessionStorage.getItem("sessionId")); // 12345
+
+// Remove data
+sessionStorage.removeItem("sessionId");
+
+// Clear everything
+sessionStorage.clear();
+`
+            }
+        ]
+    },
+            {
+        id: 1,
         title: "What are attributes in HTML",
         note: [
             {
-                text1: `Attributes provide additional information about HTML elements. They are always written in the opening tag and are in the form of name-value pairs (e.g., src, href, alt, id).`,
+                text1: `Attributes provide additional information about HTML elements. They are always written in the opening tag and are in the form of name-value pairs (e.g., src, href, alt, id).
+                `,
                 code1: ``
             }
         ]
@@ -193,7 +311,8 @@ One of the most well-known issues in quirks mode involves the CSS box model. In 
         title: "What is the difference between an HTML element and an HTML tag?",
         note: [
             {
-                text1: `An <b>HTML element</b> includes both the opening and closing tags, and the content between them. A <b>HTML tag</b> is just the markup that denotes the start or end of an element (e.g., &lt;div&gt; is a tag, and &lt;div&gt;&lt;/div&gt; is an element).`,
+                text1: `An <b>HTML element</b> includes both the opening and closing tags, and the content between them. A <b>HTML tag</b> is just the markup that denotes the start or end of an element (e.g., &lt;div&gt; is a tag, and &lt;div&gt;&lt;/div&gt; is an element).
+                `,
                 code1: ``
             }
         ]
