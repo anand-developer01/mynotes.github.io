@@ -11637,6 +11637,98 @@ axios.get("https://jsonplaceholder.typicode.com/posts")
         }
       ],
     },
+        {
+      id: 52,
+      title: "fetch vs axios",
+      note: [
+        {
+          text1: `<b>Fetch API</b>:
+<b>Native Browser API</b>
+Fetch is built directly into modern web browsers, requiring no external libraries. This makes it lightweight and ideal for simple requests.
+<b>Promise-based</b>
+It uses Promises for asynchronous operations, providing a cleaner way to handle responses than older XMLHttpRequest.
+<b>Manual JSON Parsing</b>
+When receiving JSON data, you need to explicitly call response.json() to parse the response body.
+<b>Error Handling</b>
+Fetch only rejects a Promise on network errors (e.g., no internet connection). It does not reject on HTTP error status codes (like 404 or 500), requiring manual checks of response.ok or response.status.
+<b>Limited Built-in Features</b>
+Features like request cancellation, progress tracking, and interceptors require manual implementation using AbortController or other custom logic.
+
+<b>Axios</b></b>
+<b>Third-Party Library</b>
+Axios is a popular JavaScript library that needs to be installed as a dependency.
+<b>Feature-Rich</b>
+It offers a more comprehensive set of features out-of-the-box, including
+<b>Automatic JSON Transformation</b> Automatically parses JSON data in responses.
+<b>Built-in Interceptors</b> Allows you to intercept requests and responses for global error handling, authentication, or logging.
+<b>Request Cancellation</b> Provides a straightforward way to cancel ongoing requests.
+<b>Built-in Timeout Functionality</b> Easily set timeouts for requests.
+<b>Better Error Handling</b> Rejects promises for both network errors and HTTP error status codes, simplifying error management.
+
+<table>
+  <thead>
+    <tr>
+      <th>Axios</th>
+      <th>Fetch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Third-party library that needs installation.</td>
+      <td>Built-in browser API, no installation needed.</td>
+    </tr>
+    <tr>
+      <td>Request URL is included in the request/response object.</td>
+      <td>You manually define and track the URL.</td>
+    </tr>
+    <tr>
+      <td>Has built-in XSRF protection.</td>
+      <td>No built-in XSRF protection.</td>
+    </tr>
+    <tr>
+      <td>Uses <code>data</code> to send and receive content.</td>
+      <td>Uses <code>body</code> for sending data.</td>
+    </tr>
+    <tr>
+      <td>Sends JavaScript objects directly.</td>
+      <td>Data must be stringified using <code>JSON.stringify()</code>.</td>
+    </tr>
+    <tr>
+      <td>Automatically parses JSON responses.</td>
+      <td>You must call <code>.json()</code> to parse the response.</td>
+    </tr>
+    <tr>
+      <td>Returns error only when status is not in the 200 range.</td>
+      <td>Requires manual check of <code>response.ok</code> for errors.</td>
+    </tr>
+    <tr>
+      <td>Supports request timeout and cancellation.</td>
+      <td>Supports cancellation via <code>AbortController</code>, but no built-in timeout.</td>
+    </tr>
+    <tr>
+      <td>Can intercept requests/responses easily.</td>
+      <td>No native intercept support.</td>
+    </tr>
+    <tr>
+      <td>Built-in support for download/upload progress.</td>
+      <td>No built-in progress support.</td>
+    </tr>
+    <tr>
+      <td>Widely supported in all browsers.</td>
+      <td>Supported in modern browsers only (Chrome 42+, Firefox 39+, Edge 14+, Safari 10.1+).</td>
+    </tr>
+    <tr>
+      <td>Ignores body in a GET request.</td>
+      <td>Allows body in GET request (though not recommended).</td>
+    </tr>
+  </tbody>
+</table>
+`,
+          code1: `// ---------- Ex : 1 ---------
+  `
+        }
+      ],
+    },
     {
       id: 52,
       section: "Micro Frontend Architecture",

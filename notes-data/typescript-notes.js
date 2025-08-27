@@ -23,7 +23,7 @@ In contrast, dynamic typing allows variables to be bound to data types at runtim
           code1: ``,
         },
       ]
-    },      
+    },
     {
       id: 1,
       title: "Compile Time vs Runtime:",
@@ -701,6 +701,217 @@ console.log(uname(1,"ram"))
         {
           text1: ``,
           code1: ``,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Type Aliases",
+      note: [
+        {
+          text1: `Type aliases in TypeScript offer a streamlined approach to defining custom names for existing types, thereby bolstering code clarity and maintainability
+          
+          In TypeScript, a type alias allows you to assign a custom name to an existing type, enhancing code readability and reusability.
+-> Provide a shorthand for complex types like unions or objects.
+-> Allow naming of primitive types, object types, or functions for clarity.
+-> Simplify repetitive type definitions and improve maintainability.
+`,
+          code1: `type Point = {
+    x: number;
+    y: number;
+};
+
+type Shape = "circle" | "square" | "rectangle";
+
+function drawShape(shape: Shape, position: Point): void {
+    console.log(\`Drawing a \shape} at (\position.x}, \position.y})\`);
+}
+
+drawShape("circle", { x: 10, y: 20 });
+
+// ---------- Ex : 2 -----------
+// Alias for User ID
+type UserID = number;
+
+// Usage
+function getUserByID(id: UserID): User {
+    // Implementation to fetch user by ID
+    console.log("Fetching user with ID:", id);
+    return {} as User; // Dummy return for demonstration
+}
+
+// Test
+const user = getUserByID(123);
+console.log("Fetched user:", user);
+
+// How to use the Math Operation Alias
+// Alias for MathOperation
+type MathOperation = (x: number, y: number) => number;
+
+// Usage
+const add: MathOperation = (x, y) => x + y;
+const subtract: MathOperation = (x, y) => x - y;
+
+// Test
+console.log("Addition result:", add(5, 3));
+console.log("Subtraction result:", subtract(8, 3));
+
+Defining a User Profile with Type Aliases
+
+type UserProfile = {
+    username: string;
+    email: string;
+    age: number;
+};
+
+const user: UserProfile = {
+    username: "Akshit Saxena",
+    email: "akshit.saxena@geeksforgeeks.com",
+    age: 24,
+};
+
+function greetUser(profile: UserProfile): string {
+    return \`Hello, \${profile.username}! 
+    You are \${profile.age} years old. 
+    Your email is \${profile.email}.\`;
+}
+
+console.log(greetUser(user));
+
+// ------------  Example with Objects ------
+type User = {
+  id: number;
+  name: string;
+  email?: string;
+};
+
+const u1: User = { id: 1, name: "Anand" };
+const u2: User = { id: 2, name: "Rahul", email: "rahul@mail.com" };
+
+//----------Type Alias for Tuples
+type Point = [number, number];
+const p1: Point = [10, 20];
+
+// --------- Union Types
+type Status = "success" | "error" | "loading";
+
+let current: Status;
+current = "success"; // ✅
+// current = "pending"; ❌ Error
+
+
+//------------- Intersection Types
+type Person = { name: string };
+type Employee = { id: number };
+
+type Staff = Person & Employee;
+
+const emp: Staff = { name: "Anand", id: 101 };
+
+
+
+//----------- Utility with Generics
+type ApiResponse&lt;T&gt; = {
+  data: T;
+  error?: string;
+};
+
+const res: ApiResponse&lt;string[]&gt; = {
+  data: [&quot;post1&quot;, &quot;post2&quot;]
+};
+
+
+//------------ Real-World Example
+
+type ID = number | string;
+
+type User = {
+  id: ID;
+  name: string;
+  email?: string;
+};
+
+type ApiResponse&lt;T&gt; = {
+  status: &quot;success&quot; | &quot;error&quot;;
+  data?: T;
+  error?: string;
+};
+
+const response: ApiResponse&lt;User[]&gt; = {
+  status: &quot;success&quot;,
+  data: [{ id: 1, name: &quot;Anand&quot; }]
+};
+
+
+`,
+        },
+      ]
+    },
+        {
+      id: 1,
+      title: "interface and type",
+      note: [
+        {
+          text1: `<b>Extension / Inheritance</b>
+Interface → extendable via <b>extends</b> (declaration merging possible).
+Type → extendable via intersection <b>&</b>, but no declaration merging.
+Both achieve inheritance, but <b>interfaces are better for OOP-like hierarchies.</b>
+
+
+<b>Declaration Merging</b>
+<b>Interface</b> → can be declared multiple times, TypeScript merges them.
+<b>Type</b> → cannot be redeclared.
+
+<b>Union & Advanced Types</b>
+Type can do unions, intersections, primitives, tuples, etc.
+Interface cannot.
+
+<b>Performance & Readability</b>
+<b>Interface</b> is preferred for defining objects and class contracts.
+<b>Type</b> is preferred for complex compositions like unions, mapped types, tuples, etc.
+
+<b>When to Use What</b>
+✅ Use <b>interface</b> when designing object shapes, especially for <b>OOP / class-based patterns</b>.
+✅ Use <b>type</b> when working with <b>unions, intersections, primitives, or complex compositions</b>.
+`,
+          code1: ` //----------- Extension / Inheritance
+          // Interface extends
+interface Animal {
+  name: string;
+}
+interface Dog extends Animal {
+  bark(): void;
+}
+
+// Type intersection
+type AnimalType = { name: string };
+type DogType = AnimalType & { bark(): void };
+
+// ------------ Declaration Merging
+// - interface -
+interface User {
+  name: string;
+}
+interface User {
+  age: number;
+}
+const u: User = { name: "Anand", age: 30 }; // ✅ Works
+
+// - type -
+// ❌ Error with type
+type UserType = { name: string };
+// type UserType = { age: number }; // Cannot redeclare
+
+// ---------- Union & Advanced Types
+// Using type
+type ID = string | number;
+type Point = [number, number];
+
+// Interface ❌ can't define union or tuple
+// Interfaces cannot directly define unions like this:
+interface Status = "success" | "error" | "loading"; // ❌ ERROR
+
+`
         },
       ]
     },
@@ -1428,7 +1639,7 @@ console.log(box1.getValue()); // Output: "Hello"
 let box2 = new Box(42);
 console.log(box2.getValue()); // Output: 42
           `,
-        },        
+        },
         {
           text1: `<b style="color:#754629;">Capital Letters in Generics</b>
           In TypeScript, capital letters in generic types typically represent type parameters or type variables. These are placeholders that you use to define the types of parameters, return types, or properties in a more flexible and reusable way. The capital letter convention is simply a naming convention, where developers often use uppercase letters like T, U, V, etc., to represent these generic type parameters.
@@ -1442,7 +1653,7 @@ console.log(box2.getValue()); // Output: 42
 
 By convention, the symbol used for a generic variable is one of the uppercase characters: T, V, K, S or E</b>. (You can use any alphabetic character you like, but an uppercase character makes your code easier to understand.) These characters are placed between opening and closing "angle brackets, <like so>." Then, to use the generic, the programmer supplies the actual type name for each generic variable declared.
 `,
-          code1 : `function createPair<S, T>(v1: S, v2: T): [S, T] {
+          code1: `function createPair<S, T>(v1: S, v2: T): [S, T] {
   return [v1, v2];
 }
 
@@ -1457,7 +1668,7 @@ We can use generics with interfaces to define custom types for the properties of
 In Ex : 2 snippet, <u> &lt;string, number&gt; </u> are passed to the interface <u>UserData</u>. In this way, <u>UserData</u> becomes a reusable interface in which any data type can be assigned depending upon the use case.
 Here in this example, <u>name</u> and <u>rollNo</u> will always be <u>string</u> and <u>number</u>, respectively.
 `,
-          code1 : `// When using generics in interfaces, you define a placeholder for the type inside the angle brackets <>. Here's a simple example:
+          code1: `// When using generics in interfaces, you define a placeholder for the type inside the angle brackets <>. Here's a simple example:
 
           //-------------- Ex : 1 -------------
 interface Box&lt;T&gt; {
@@ -1580,7 +1791,7 @@ In real-world applications, you often deal with APIs where the structure of the 
 
 <b>Use Case</b>: This generic function can be used to fetch different types of data from an API. By passing different expected types (like <u>User</u> or <u>Post</u>), TypeScript ensures the correct data structure is returned based on the API response.
     `,
-          code1 : `// A generic function that works with any data type
+          code1: `// A generic function that works with any data type
 function identity&lt;T&gt;(arg: T): T {
     return arg;
 }
@@ -1723,7 +1934,7 @@ printAnimal(dog); // Works because dog has at least { name: string, species: str
 
 Here, the <u>U</u> type parameter <b>extends</b> <u>Animal</u>, so it must at least have the <u>name</u> and <u>species</u> properties, but it can have additional properties like <u>age</u>.
           `,
-          code1 : `//------------- Ex : 1 ------------
+          code1: `//------------- Ex : 1 ------------
           type Person&lt;T, K, V&gt; = {
   name: T,
   age: K,
@@ -1924,7 +2135,7 @@ So in this case, the printArrayLength function expects to receive any kind of ar
 But since generic type T accepts any type values which are not limited to the array, a type error appears (some arguments whose types are number, boolean, and so on don't have length property in it.
 
 `,
-          code1 : `function printArrayLength&lt;T&gt;(array: T){
+          code1: `function printArrayLength&lt;T&gt;(array: T){
     return array.length // error: Property 'length' does not exist on type 'T'.
 }
     
@@ -1937,7 +2148,7 @@ console.log(printArrayLength(['a','b','c'])) // OK, Output: 3
 console.log(printArrayLength([1,2,3,4,5])) // OK, Output: 5
 
 `
-        },        
+        },
         {
           text1: `<b>Using generics with classes</b>
           TypeScript supports generic classes. The generic type parameter is specified in angle brackets after the name of the class. A generic class can have generic fields (member variables) or methods.
@@ -1955,7 +2166,7 @@ To define a generic class, you use the <u>class</u> keyword followed by the gene
     => Default types can be provided for generics.
     => You can have <b>static methods</b> in generic classes, though they don't take the class's generic type into account.
           `,
-          code1 : `//-------------- Ex : 1 -------------
+          code1: `//-------------- Ex : 1 -------------
           class MyClass&lt;T&gt; {
   value: T;
 
@@ -2111,14 +2322,14 @@ console.log(values); // [24, 42]
 // In this example, we define a new class that takes in a generic and uses that generic to type the property and methods that exist on it. We then initialize a new instance of that class with the type of number and successfully use the methods on it by passing in number values. However, if we were to pass in a string (or another non-number type) to this instance of the class, it would error as we've already told the class that the generic is a number.
 
 `
-        },        
+        },
         {
           text1: `<b>Generic Interfaces with A Function</b>
           In TypeScript, you can define <b>generic interfaces</b> to describe the shape of objects, including functions, that can work with different types. This is useful when you want to ensure that a function adheres to a specific type structure while remaining flexible with the types it operates on.
 <b>Generic Interfaces with Functions</b>
 When creating a generic interface for a function, you define a <b>generic type parameter</b> in the interface, which will be applied to the function's parameters and return type.
 `,
-          code1 : `
+          code1: `
           interface MyFunction&lt;T&gt; {
   (arg: T): T;
 }
@@ -2280,7 +2491,7 @@ In this scenario(Ex : 1), what we would like to implement with the combineTwoObj
 
 However, it also works when not passing exactly two objects (one of them is just a number in this case). So this means limiting the type of generic type is needed to get the ideal result of combineTwoObj function.
 `,
-          code1 : `//----------------- Ex : 1 ------------
+          code1: `//----------------- Ex : 1 ------------
           function combineTwoObj&lt;T,U&gt;(firstObj:T,secondObj:U) {
     return {
         ...firstObj,
@@ -2307,7 +2518,7 @@ console.log(combineTwoObj({name:'Tom',age:22},{hobby: 'running', isAdult: true})
           text1: `Generic Constraints with keyof
           
           `,
-          code1 : `//--------------- Ex : 1 ---------------
+          code1: `//--------------- Ex : 1 ---------------
           function getProperty&lt;T, K extends keyof T&gt;(obj: T, key: K): T[K] {
     return obj[key];
 }
@@ -2364,7 +2575,7 @@ console.log(personAddress); // Output: '123 Main St'
         },
         {
           text1: ``,
-          code1 : ``
+          code1: ``
         },
       ]
     },
