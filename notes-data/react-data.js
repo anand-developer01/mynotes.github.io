@@ -1822,6 +1822,86 @@ const OnHover = ({ count, incrementCount }) =&gt; {
     );
   };
 export default OnHover 
+
+
+
+
+
+//------------- Ex : 3 -------
+// MainApp.jsx
+import React from "react";
+import TempComp from "./TempComp";
+import Feet from './Feet';
+import Inches from "./Inches";
+
+function MainApp() {
+  return (
+    &lt;&gt;
+      &lt;TempComp render={value =&gt; (
+        &lt;&gt;
+          &lt;h1&gt;In meters: {value || 0}&lt;/h1&gt;
+          &lt;Feet value={value} /&gt;
+          &lt;br /&gt;
+          &lt;Inches value={value} /&gt;
+        &lt;/&gt;
+      )} /&gt;
+    &lt;/&gt;
+  );
+}
+
+export default MainApp;
+
+
+// ----------- TempComp.jsx ----------
+import React, { useState } from &#39;react&#39;;
+
+function TempComp({ render }) {
+  const [value, setValue] = useState(&#39;&#39;);
+
+  return (
+    &lt;&gt;
+      &lt;input
+        type=&#39;number&#39;
+        value={value}
+        placeholder=&quot;Enter meters&quot;
+        onChange={e =&gt; setValue(e.target.value)}
+      /&gt;
+      {render(Number(value) || 0)} {/* convert to number */}
+    &lt;/&gt;
+  );
+}
+
+export default TempComp;
+
+
+//------------ Feet.jsx ----------
+import React, { useMemo } from &#39;react&#39;;
+
+function Feet({ value }) {
+  const feet = useMemo(() =&gt; {
+    return (value * 3.28084).toFixed(2);
+  }, [value]);
+
+  return &lt;div&gt;Feet: {feet}&lt;/div&gt;;
+}
+
+export default Feet;
+
+
+
+//------------ Inches.jsx ----------
+import React, { useMemo } from &#39;react&#39;;
+
+function Inches({ value }) {
+  const inches = useMemo(() =&gt; {
+    return (value * 39.3701).toFixed(2);
+  }, [value]);
+
+  return &lt;div&gt;Inches: {inches}&lt;/div&gt;;
+}
+
+export default Inches;
+
 `
         },
         {
@@ -7508,7 +7588,115 @@ export default React.memo(newComponent);`
                         &lt;button onClick={counter2.decrement}&gt;Decrement&lt;/button&gt;
                     &lt;/div&gt;
                     );
-          };`
+          };
+          
+          
+          // ------------ Ex :  ---------
+          // useDebounce.js
+import { useState, useEffect } from &quot;react&quot;;
+
+/**
+ * Debounce hook
+ * @param value - value to debounce
+ * @param delay - delay in ms
+ */
+export default function useDebounce(value, delay = 500) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() =&gt; {
+    const handler = setTimeout(() =&gt; {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () =&gt; clearTimeout(handler);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+
+// useAxiosFetch.js
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+/**
+ * Custom hook for fetching with Axios + AbortController
+ * @param url - request URL
+ * @param options - axios config
+ * @param trigger - dependency to refetch (e.g., debounced search term)
+ */
+export default function useAxiosFetch(url, options = {}, trigger) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!url) return;
+
+    const controller = new AbortController();
+    setLoading(true);
+    setError("");
+
+    axios
+      .get(url, { ...options, signal: controller.signal })
+      .then((res) => setData(res.data))
+      .catch((err) => {
+        if (err.name === "CanceledError") {
+          setError("Request was canceled!");
+        } else {
+          setError(err.message);
+        }
+      })
+      .finally(() => setLoading(false));
+
+    return () => {
+      controller.abort(); // cancel on cleanup or trigger change
+    };
+  }, [url, trigger]); // re-run when trigger changes (debounced value)
+
+  return { data, loading, error };
+}
+
+// MainApp.js
+import React, { useState } from &quot;react&quot;;
+import useDebounce from &quot;./useDebounce&quot;;
+import useAxiosFetch from &quot;./useAxiosFetch&quot;;
+
+export default function SearchUsers() {
+  const [query, setQuery] = useState(&quot;&quot;);
+  const debouncedQuery = useDebounce(query, 800); // wait 800ms before firing
+
+  const { data, loading, error } = useAxiosFetch(
+    debouncedQuery ? \`https://api.github.com/search/users?q=\${debouncedQuery}\` : null,
+    {},
+    debouncedQuery
+  );
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;🔍 GitHub User Search&lt;/h2&gt;
+      &lt;input
+        type=&quot;text&quot;
+        value={query}
+        placeholder=&quot;Search GitHub users...&quot;
+        onChange={(e) =&gt; setQuery(e.target.value)}
+        style={{ padding: &quot;8px&quot;, width: &quot;250px&quot;, marginBottom: &quot;10px&quot; }}
+      /&gt;
+
+      {loading &amp;&amp; &lt;p&gt;Loading...&lt;/p&gt;}
+      {error &amp;&amp; &lt;p style={{ color: &quot;red&quot; }}&gt;{error}&lt;/p&gt;}
+
+      &lt;ul&gt;
+        {data?.items?.map((user) =&gt; (
+          &lt;li key={user.id}&gt;{user.login}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+
+          `
         }
 
       ],
@@ -11725,6 +11913,93 @@ It offers a more comprehensive set of features out-of-the-box, including
 </table>
 `,
           code1: `// ---------- Ex : 1 ---------
+          // ----------- built-in timeout  ** AXIOS ** ------------
+import React, { useEffect, useState } from &quot;react&quot;;
+import axios from &quot;axios&quot;;
+
+export default function AxiosExample() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(&quot;&quot;);
+
+  useEffect(() =&gt; {
+    const fetchData = async () =&gt; {
+      try {
+        const response = await axios.get(&quot;https://httpbin.org/delay/10&quot;, {
+          timeout: 5000, // 5 seconds timeout
+        });
+        setData(response.data);
+      } catch (err) {
+        if (err.code === &quot;ECONNABORTED&quot;) {
+          setError(&quot;⏳ Axios request timed out!&quot;);
+        } else if (err.name === &quot;CanceledError&quot;) {
+          setError(&quot;❌ Axios request was canceled!&quot;);
+        } else {
+          setError(\`Axios error: \${err.message}\`);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Axios Example&lt;/h2&gt;
+      {data &amp;&amp; &lt;pre&gt;{JSON.stringify(data, null, 2)}&lt;/pre&gt;}
+      {error &amp;&amp; &lt;p style={{ color: &quot;red&quot; }}&gt;{error}&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+
+// ----------- no built-in timeout.  ** FETCh ** ------------
+import React, { useEffect, useState } from &quot;react&quot;;
+
+export default function FetchExample() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(&quot;&quot;);
+
+  useEffect(() =&gt; {
+    const controller = new AbortController();
+    const timeout = setTimeout(() =&gt; {
+      controller.abort(); // abort after 5 seconds
+    }, 5000);
+
+    const fetchData = async () =&gt; {
+      try {
+        const response = await fetch(&quot;https://httpbin.org/delay/10&quot;, {
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(\`HTTP error! status: \${response.status}\`);
+        }
+
+        const json = await response.json();
+        setData(json);
+      } catch (err) {
+        if (err.name === &quot;AbortError&quot;) {
+          setError(&quot;⏳ Fetch request timed out!&quot;);
+        } else {
+          setError(\`Fetch error: \${err.message}\`);
+        }
+      } finally {
+        clearTimeout(timeout); // cleanup
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Fetch Example&lt;/h2&gt;
+      {data &amp;&amp; &lt;pre&gt;{JSON.stringify(data, null, 2)}&lt;/pre&gt;}
+      {error &amp;&amp; &lt;p style={{ color: &quot;red&quot; }}&gt;{error}&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+
+
   `
         }
       ],

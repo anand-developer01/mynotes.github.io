@@ -877,6 +877,12 @@ const SubjectList = {
                     tel: 'అంతా మన మంచికే',
                     tense: 'Present tense'
                 },
+                {
+                    id: 1,
+                    eng: "I quit alcohol for my health. (OR) I don’t drink alcohol anymore.",
+                    tel: 'నేను నా ఆరోగ్యం కోసం మద్యం తాగడం మానేశాను.',
+                    tense: 'Simple Present tense.'
+                },
             ],
         },
     ],
@@ -914,28 +920,135 @@ const SubjectList = {
         {
             id: 3,
             topic: "Present Perfect Tense",
-            explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain: 'ఒక action గతంలో జరిగినా దాని ప్రభావం ఇప్పటికీ కొనసాగుతున్నప్పుడు లేదా మనం time చెప్పకుండా అనుభవం చెప్పాలనుకున్నప్పుడు వాడతాం. (గతంలో జరిగి, ఇప్పుడు ప్రభావం ఉన్నప్పుడు)',
+            formation: 'Subject + has/have + Past Participle (V3)',
             content: [
                 {
                     id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense: 'Present tense'
+                    eng: "<b>గతంలో జరిగి, ఇప్పుడు ప్రభావం ఉన్నప్పుడు</b>",
+                    tel: '',
+                },
+                {
+                    id: 1,
+                    eng: "I have lost my keys.",
+                    tel: 'నేను తాళాలు పోగొట్టుకున్నాను (ఇప్పటికీ దొరకలేదు).',
+                },
+                {
+                    id: 1,
+                    eng: "She has broken her leg.",
+                    tel: 'ఆమె కాలు విరిగింది (ఇప్పటికీ problem ఉంది).',
+                },
+                {
+                    id: 1,
+                    eng: "<b>అనుభవం చెప్పడానికి (experience)</b>",
+                    tel: '',
+                },
+                {
+                    id: 1,
+                    eng: "I have been to Goa.",
+                    tel: 'నేను గోవాకు వెళ్లి వచ్చాను.',
+                },
+                {
+                    id: 1,
+                    eng: "He has seen the Taj Mahal.",
+                    tel: 'అతను తాజ్ మహల్ చూసాడు.',
+                },
+                {
+                    id: 1,
+                    eng: "<b>Just, Already, Yet లాంటి words తో</b>",
+                    tel: '',
+                },
+                {
+                    id: 1,
+                    eng: "I have just finished my homework.",
+                    tel: 'నేను ఇప్పుడే నా homework పూర్తి చేశాను.',
+                },
+                {
+                    id: 1,
+                    eng: "She has already eaten lunch.",
+                    tel: 'ఆమె ఇప్పటికే భోజనం చేసింది.',
+                },
+                {
+                    id: 1,
+                    eng: "Have you finished your work yet?",
+                    tel: 'నువ్వు నీ పని పూర్తి చేశావా?',
+                },
+                {
+                    id: 1,
+                    eng: "<b>Repeated actions (గతం నుంచి ఇప్పటివరకు చాలాసార్లు జరిగినవి)</b>",
+                    tel: '',
+                },
+                {
+                    id: 1,
+                    eng: "I have watched this movie three times.",
+                    tel: 'నేను ఈ సినిమా మూడుసార్లు చూశాను.',
+                },
+                {
+                    id: 1,
+                    eng: "They have visited us many times.",
+                    tel: 'వాళ్లు మమ్మల్ని ఎన్నో సార్లు కలిశారు.',
                 },
             ],
         },
         {
             id: 4,
             topic: "Present perfect Continuous Tense",
-            explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain: 'గతంలో ఏదో ఒక action మొదలై ఇప్పటికీ కొనసాగుతూనే ఉందని చెప్పడానికి వాడతాం.',
+            formation: 'Subject + has/have been + verb(+ing)',
             content: [
                 {
                     id: 1,
-                    eng: "I have been sick for 2 days",
-                    tel: 'నాకు 2 రోజులుగా ఒంట్లో బాలేదు.',
-                    tense: 'Present tense'
+                    eng: "I have been studying for 2 hours.",
+                    tel: 'నేను రెండు గంటలుగా చదువుతున్నాను.',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    eng: "She has been working here since 2019.",
+                    tel: 'ఆమె 2019 నుంచి ఇక్కడ పని చేస్తోంది.',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    eng: "ఎంతకాలంగా (duration / since - for తో)",
+                    tel: '',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    eng: "They have been playing since morning.",
+                    tel: 'వాళ్లు ఉదయం నుంచి ఆడుతున్నారు.',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    eng: "I have been studying for two hours.",
+                    tel: 'నేను రెండు గంటలుగా చదువుతున్నాను.',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    eng: "He has been watching TV for two hours.",
+                    tel: 'అతను TV చూస్తున్నాడు రెండు గంటలుగా',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    eng: "We have been learning Telugu since last week.",
+                    tel: 'మేము తెలుగు నేర్చుకుంటున్నాము గత వారం నుండి',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    eng: "You have been studying for a long time.",
+                    tel: 'నువ్వు చాలా సేపు చదువుతున్నావు',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    eng: "I have been waiting for you.",
+                    tel: 'నేను నీకోసం వేచి ఉన్నాను',
+                    tense: ''
                 },
             ],
         },
@@ -1535,6 +1648,20 @@ const SubjectList = {
                     id: 1,
                     eng: "If it had rained, you would have gotten wet",
                     tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
+                    tense: 'Present tense'
+                },
+            ],
+        },
+        {
+            id: 11,
+            topic: "comes across",
+            explain: 'come across = కనిపించడం / అనిపించడం (impression) దీనికి అర్థం → ఎలా కనిపిస్తున్నావో, ఎలా అనిపిస్తున్నావో.',
+            formation: 'Subject + come(s) across + as + adjective/noun',
+            content: [
+                {
+                    id: 1,
+                    eng: "He comes across as confident.",
+                    tel: 'అతను ఆత్మవిశ్వాసంగా కనిపిస్తాడు.',
                     tense: 'Present tense'
                 },
             ],
