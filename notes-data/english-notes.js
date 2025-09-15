@@ -331,6 +331,48 @@ const SubjectList = {
                     id: 1,
                     eng: "I will ask whether he will speack or not",
                     tel: 'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
+                },
+                {
+                    id: 1,
+                    eng: "<b>want + to see + object + V3 (past participle)</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 1,
+                    eng: "I want to see the cube solved.",
+                    tel: "నేను క్యూబ్ సాల్వ్ చేయబడినది చూడాలనుకుంటున్నాను",
+                    tense: "Present Simple (with infinitive phrase in passive form)"
+                },
+                {
+                    id: 2,
+                    eng: "I want to see the work finished.",
+                    tel: "నేను పని పూర్తయినది చూడాలనుకుంటున్నాను",
+                    tense: "Present Simple (with infinitive phrase in passive form)"
+                },
+                {
+                    id: 3,
+                    eng: "She wants to see the room cleaned.",
+                    tel: "ఆమె గది శుభ్రం చేయబడినది చూడాలనుకుంటుంది",
+                    tense: "Present Simple (with infinitive phrase in passive form)"
+                },
+                {
+                    id: 4,
+                    eng: "We want to see the report prepared.",
+                    tel: "మేము నివేదిక సిద్ధం చేయబడినది చూడాలని కోరుకుంటున్నాము",
+                    tense: "Present Simple (with infinitive phrase in passive form)"
+                },
+                {
+                    id: 5,
+                    eng: "They want to see the house painted.",
+                    tel: "వారు ఇల్లు రంగు చేయబడినది చూడాలని కోరుకుంటున్నారు",
+                    tense: "Present Simple (with infinitive phrase in passive form)"
+                },
+                {
+                    id: 6,
+                    eng: "He wants to see the problem solved.",
+                    tel: "అతను సమస్య పరిష్కరించబడినది చూడాలని కోరుకుంటున్నాడు",
+                    tense: "Present Simple (with infinitive phrase in passive form)"
                 }
             ],
         },
@@ -456,6 +498,131 @@ const SubjectList = {
                     id: 1,
                     eng: "I will ask whether he will speack or not",
                     tel: 'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
+                }, {
+                    id: 1,
+                    eng: "I used to watch cartoons every morning.",
+                    tel: "నేను ప్రతి ఉదయం కార్టూన్లు చూసేవాడిని.",
+                    tense: "Past Simple (used to = past habitual action)"
+                },
+                {
+                    id: 2,
+                    eng: "She used to drink coffee before work, but now she drinks tea.",
+                    tel: "ఆమె పని మొదలయ్యే ముందు కాఫీ తాగేదాని, ఇప్పుడు టీ తాగుతుంది.",
+                    tense: "Past Simple (used to = past habitual action, contrast with present)"
+                },
+                {
+                    id: 3,
+                    eng: "We used to travel by bus to college.",
+                    tel: "మేము కాలేజీకి బస్సులో వెళ్ళేవాళ్లం.",
+                    tense: "Past Simple (used to = past repeated action)"
+                },
+                {
+                    id: 4,
+                    eng: "He used to live in Hyderabad, now he lives in Bangalore.",
+                    tel: "అతను హైదరాబాద్లో ఉండేవాడు, ఇప్పుడు బెంగళూరులో ఉంటున్నాడు.",
+                    tense: "Past Simple (used to = past state)"
+                },
+                {
+                    id: 5,
+                    eng: "They used to work late nights, but now they finish early.",
+                    tel: "వారు రాత్రి ఆలస్యంగా పని చేసేవారు, ఇప్పుడు తొందరగా పూర్తి చేస్తున్నారు.",
+                    tense: "Past Simple (used to = past repeated action, contrast with present)"
+                },
+                {
+                    id: 6,
+                    eng: "I used to have long hair, but I cut it short.",
+                    tel: "నాకు పొడవాటి జుట్టు ఉండేది, ఇప్పుడు చిన్నగా కత్తిరించుకున్నాను.",
+                    tense: "Past Simple (used to = past state, contrast with present)"
+                },
+                {
+                    id: 7,
+                    eng: "She used to love dancing, but now she prefers singing.",
+                    tel: "ఆమెకు డాన్స్ చేయడం అంటే చాలా ఇష్టం ఉండేది, ఇప్పుడు పాటలు పాడటం ఇష్టం.",
+                    tense: "Past Simple (used to = past state, contrast with present)"
+                },
+                {
+                    id: 8,
+                    eng: "I used to be shy in school.",
+                    tel: "నేను స్కూల్లో సిగ్గు పడేవాడిని.",
+                    tense: "Past Simple (used to = past state)"
+                },
+                {
+                    id: 9,
+                    eng: "I used to write code in Java, but now I work with Python.",
+                    tel: "నేను జావాలో కోడ్ రాసేవాడిని, కానీ ఇప్పుడు పైథాన్‌లో పని చేస్తున్నాను.",
+                    tense: "Past Simple (used to = past habit, contrast with present)"
+                },
+                {
+                    id: 10,
+                    eng: "We used to deploy applications manually, but now we use CI/CD pipelines.",
+                    tel: "మేము అప్లికేషన్లు మాన్యువల్‌గా డిప్లాయ్ చేసేవాళ్లం, కానీ ఇప్పుడు CI/CD పైప్‌లైన్లు వాడుతున్నాము.",
+                    tense: "Past Simple (used to = past repeated action, contrast with present)"
+                },
+                {
+                    id: 11,
+                    eng: "He used to test software with Selenium, now he uses Playwright.",
+                    tel: "అతను ముందు సెలీనియంతో సాఫ్ట్‌వేర్ టెస్ట్ చేసేవాడు, ఇప్పుడు ప్లేఇరైట్ వాడుతున్నాడు.",
+                    tense: "Past Simple (used to = past habit, contrast with present)"
+                },
+                {
+                    id: 12,
+                    eng: "They used to store data in MySQL, but now they use PostgreSQL.",
+                    tel: "వారు డేటాను మైఎస్క్యూఎల్లో నిల్వ చేసేవారు, కానీ ఇప్పుడు పోస్ట్‌గ్రెస్‌క్యూఎల్ వాడుతున్నారు.",
+                    tense: "Past Simple (used to = past state, contrast with present)"
+                },
+                {
+                    id: 13,
+                    eng: "We used to host projects on on-premise servers, now we use cloud services.",
+                    tel: "మేము ప్రాజెక్టులను సొంత సర్వర్లలో హోస్ట్ చేసేవాళ్లం, ఇప్పుడు క్లౌడ్ సర్వీసులు వాడుతున్నాము.",
+                    tense: "Past Simple (used to = past repeated action, contrast with present)"
+                },
+                {
+                    id: 14,
+                    eng: "I used to debug issues with console logs, but now I use proper debuggers.",
+                    tel: "నేను ముందు కాన్సోల్ లాగ్స్‌తో బగ్‌లు ఫిక్స్ చేసేవాడిని, కానీ ఇప్పుడు సరైన డీబగ్గర్స్ వాడుతున్నాను.",
+                    tense: "Past Simple (used to = past habit, contrast with present)"
+                },
+                {
+                    id: 14,
+                    eng: "<b>“used to” examples connected to specific times in the past (school days, college days, last year, etc.)</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 15,
+                    eng: "I used to work night shifts two years ago.",
+                    tel: "రెండు సంవత్సరాల క్రితం నేను నైట్ షిఫ్ట్‌లు చేసేవాడిని.",
+                    tense: "Past Simple (used to = past repeated action, with time reference)"
+                },
+                {
+                    id: 16,
+                    eng: "During college, we used to spend hours in the computer lab.",
+                    tel: "కాలేజీలో ఉన్నప్పుడు మేము గంటల తరబడి కంప్యూటర్ ల్యాబ్‌లో గడిపేవాళ్లం.",
+                    tense: "Past Simple (used to = past habitual action, with time period)"
+                },
+                {
+                    id: 17,
+                    eng: "Last year, he used to travel to office every day, but now he works from home.",
+                    tel: "గత సంవత్సరం అతను ప్రతి రోజు ఆఫీసుకు వెళ్ళేవాడు, కానీ ఇప్పుడు ఇంటి నుండి పని చేస్తున్నాడు.",
+                    tense: "Past Simple (used to = past habit, with specific past time)"
+                },
+                {
+                    id: 18,
+                    eng: "When I was a fresher, I used to ask my seniors for help frequently.",
+                    tel: "నేను ఫ్రెషర్‌గా ఉన్నప్పుడు తరచూ సీనియర్లను సహాయం అడిగేవాడిని.",
+                    tense: "Past Simple (used to = past repeated action, with time condition)"
+                },
+                {
+                    id: 19,
+                    eng: "In school days, I used to participate in coding competitions.",
+                    tel: "స్కూల్ రోజుల్లో నేను కోడింగ్ పోటీల్లో పాల్గొనేవాడిని.",
+                    tense: "Past Simple (used to = past habitual action, with time reference)"
+                },
+                {
+                    id: 20,
+                    eng: "Before the pandemic, we used to work from the office every day.",
+                    tel: "పాండమిక్ కి ముందు మేము ప్రతి రోజు ఆఫీసు నుండి పని చేసేవాళ్లం.",
+                    tense: "Past Simple (used to = past state, with time marker)"
                 }
             ],
         },
@@ -794,95 +961,197 @@ const SubjectList = {
             content: [
                 {
                     id: 1,
-                    eng: "A piece of cake",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "Break the ice",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "On cloud nine",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "Spill the beans",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "Once in a blue moon",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "See you later",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "Just a moment",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "I really appreciate it",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "That's very nice of you",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "I'm sorry to hear that",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "Thank you kindly",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
-                    eng: "Thank you kindly",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-
-                {
-                    id: 1,
-                    eng: "Thank you kindly",
-                    tel: '',
-                    tense: 'Present tense'
-                },
-                {
-                    id: 1,
                     eng: "Everything happens for our good or It's all for our own good",
                     tel: 'అంతా మన మంచికే',
                     tense: 'Present tense'
                 },
                 {
                     id: 1,
-                    eng: "I quit alcohol for my health. (OR) I don’t drink alcohol anymore.",
+                    eng: "I quit alcohol for my health. (OR) I don't drink alcohol anymore.",
                     tel: 'నేను నా ఆరోగ్యం కోసం మద్యం తాగడం మానేశాను.',
                     tense: 'Simple Present tense.'
                 },
+                {
+                    id: 1,
+                    eng: "<b>belched - త్రేన్పులు (బెల్చ్డ్ (belchd) / బెల్చ్‌డ్ (belch-ed))</b>",
+                    tel: '',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    eng: "He belched loudly after drinking soda.",
+                    tel: "అతను సోడా తాగిన తర్వాత గట్టిగా త్రేన్పులు పెట్టాడు.",
+                    tense: "Past Simple"
+                },
+                {
+                    id: 2,
+                    eng: "The baby belched after feeding.",
+                    tel: "పాప పాలు తాగిన తర్వాత త్రేన్పులు పెట్టింది.",
+                    tense: "Past Simple"
+                },
+                {
+                    id: 3,
+                    eng: "She belched quietly in the meeting.",
+                    tel: "ఆమె మీటింగ్‌లో నిశ్శబ్దంగా త్రేన్పులు పెట్టింది.",
+                    tense: "Past Simple"
+                },
+                {
+                    id: 4,
+                    eng: "He has belched three times since lunch.",
+                    tel: "భోజనం చేసిన తర్వాత అతను మూడు సార్లు త్రేన్పులు పెట్టాడు.",
+                    tense: "Present Perfect"
+                },
+                {
+                    id: 5,
+                    eng: "They belched continuously after the spicy food.",
+                    tel: "కారం ఎక్కువగా తిన్న తర్వాత వారు వరుసగా త్రేన్పులు పెట్టారు.",
+                    tense: "Past Simple"
+                },
+                {
+                    id: 6,
+                    eng: "The boy belched when he drank water too fast.",
+                    tel: "అబ్బాయి నీళ్లు వేగంగా తాగినప్పుడు త్రేన్పులు పెట్టాడు.",
+                    tense: "Past Simple"
+                },
+                {
+                    id: 7,
+                    eng: "She belched as soon as she finished her meal.",
+                    tel: "ఆమె భోజనం ముగిసిన వెంటనే త్రేన్పులు పెట్టింది.",
+                    tense: "Past Simple"
+                },
+                {
+                    id: 8,
+                    eng: "I belched because of the soft drink.",
+                    tel: "సాఫ్ట్ డ్రింక్ వల్ల నేను త్రేన్పులు పెట్టాను.",
+                    tense: "Past Simple"
+                },
+                {
+                    id: 9,
+                    eng: "He suddenly belched during the presentation.",
+                    tel: "ప్రెజెంటేషన్ సమయంలో అతను అకస్మాత్తుగా త్రేన్పులు పెట్టాడు.",
+                    tense: "Past Simple"
+                },
+                {
+                    id: 10,
+                    eng: "The baby has belched already.",
+                    tel: "పాప ఇప్పటికే త్రేన్పులు పెట్టింది.",
+                    tense: "Present Perfect"
+                },
+                {
+                    id: 1,
+                    eng: "<b>(ఎక్సటింక్ట్(extinct) - అంతరించిపోయింది / ఎండేంజర్డ్(Endangered) - అంతరించిపోతున్నాయి - (are disappearing)</b>",
+                    tel: '<b>extinct (అంతరించిపోయిన)</b> - The species does not exist anymore. /---/ <b>Endangered (అంతరించిపోవడానికే సిద్ధంగా ఉన్న)</b> - The species still exists, but may disappear soon if not protected.',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    eng: "Dinosaurs are extinct species.",
+                    tel: "డైనోసార్లు అంతరించిపోయిన జాతులు.",
+                    tense: "Simple Present"
+                },
+                {
+                    id: 2,
+                    eng: "The dodo bird became extinct hundreds of years ago.",
+                    tel: "డోడో పక్షి వందల ఏళ్ల క్రితం అంతరించిపోయింది.",
+                    tense: "Past Simple"
+                },
+                {
+                    id: 3,
+                    eng: "Many species are in danger of becoming extinct.",
+                    tel: "చాలా జాతులు అంతరించే ప్రమాదంలో ఉన్నాయి.",
+                    tense: "Present Continuous"
+                },
+                {
+                    id: 4,
+                    eng: "The tiger is an endangered species.",
+                    tel: "పులి ఒక సంకటములో ఉన్న జాతి.",
+                    tense: "Simple Present"
+                },
+                {
+                    id: 5,
+                    eng: "Several marine species are endangered due to pollution.",
+                    tel: "కాలుష్యం వల్ల అనేక సముద్ర జాతులు ప్రమాదంలో ఉన్నాయి.",
+                    tense: "Present Simple"
+                },
+                {
+                    id: 6,
+                    eng: "The cheetah has become an endangered species.",
+                    tel: "చిరుతపులి ఒక ప్రమాదంలో ఉన్న జాతిగా మారింది.",
+                    tense: "Present Perfect"
+                },
+                {
+                    id: 7,
+                    eng: "We must protect endangered species.",
+                    tel: "మనము సంకటములో ఉన్న జాతులను రక్షించాలి.",
+                    tense: "Modal (must)"
+                },
+                {
+                    id: 8,
+                    eng: "Some bird species are nearly extinct.",
+                    tel: "కొన్ని పక్షి జాతులు దాదాపు అంతరించిపోయాయి.",
+                    tense: "Present Simple"
+                },
+                {
+                    id: 9,
+                    eng: "Polar bears are becoming endangered due to climate change.",
+                    tel: "వాతావరణ మార్పుల కారణంగా ధ్రువభాలులు ప్రమాదంలోకి వెళ్తున్నాయి.",
+                    tense: "Present Continuous"
+                },
+                {
+                    id: 10,
+                    eng: "Woolly mammoths went extinct thousands of years ago.",
+                    tel: "వూల్లీ మామోతులు వేల ఏళ్ల క్రితం అంతరించిపోయాయి.",
+                    tense: "Past Simple"
+                },
+                {
+                    id: 1,
+                    eng: "<b>express your 4-year bonding/tenure in English professionally during an all-hands or team meeting</b>",
+                    tel: '',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    tel: "<b>Simple & professional</b>",
+                    eng: "I’m proud to share that I have completed 4 years with the company. It has been an incredible journey of learning and growth.",
+                    tense: "Present Perfect",
+                    usage: "Expressing tenure and personal growth professionally"
+                },
+                {
+                    id: 2,
+                    tel: "<b>Emphasizing experience & contributions</b>",
+                    eng: "Today marks 4 years since I joined this company. Over these years, I’ve had the opportunity to work on multiple projects, learn from talented colleagues, and contribute to our shared goals.",
+                    tense: "Present Perfect",
+                    usage: "Highlighting experience, contributions, and achievements"
+                },
+                {
+                    id: 3,
+                    tel: "<b>Highlighting team bonding / gratitude</b>",
+                    eng: "I have been part of this amazing organization for 4 years. I’m grateful for the support of my team and mentors who have made this journey fulfilling and enriching.",
+                    tense: "Present Perfect Continuous / Present Perfect",
+                    usage: "Showing gratitude and team bonding"
+                },
+                {
+                    id: 4,
+                    tel: "<b>Emphasizing commitment & vision</b>",
+                    eng: "Having completed 4 years here, I remain committed to contributing my best, collaborating with everyone, and driving impactful results for our organization.",
+                    tense: "Perfect Participle / Present Simple",
+                    usage: "Expressing commitment and forward-looking vision"
+                },
+                {
+                    id: 5,
+                    tel: "<b>Casual / friendly tone</b>",
+                    eng: "Wow, it’s already been 4 years since I joined! Time really flies when you’re learning and growing with such a fantastic team.",
+                    tense: "Present Perfect",
+                    usage: "Casual, friendly reflection for a lighter team meeting"
+                },
+                {
+                    id: 1,
+                    tel: "<b>Elaborated professional speech</b>",
+                    eng: "Good [morning/afternoon] everyone, I’m really happy to share that as of today, I have completed 4 fulfilling years with this company. Over this period, I’ve had the privilege to work on a variety of projects that challenged me, helped me grow, and allowed me to contribute meaningfully to our goals. These 4 years have not just been about projects or deadlines—they have been about learning, collaboration, and building lasting relationships with some truly talented colleagues. I’ve learned so much from my mentors, my teammates, and the cross-functional interactions that shaped my perspective and strengthened my skills. I’m grateful for the opportunities I’ve been given, the support I’ve received, and the culture that encourages innovation and growth. Looking ahead, I remain committed to giving my best, continuing to learn, and contributing to the success of our organization. Thank you all for being a part of this journey with me—it has been an incredible experience so far, and I’m excited for what lies ahead.",
+                    tense: "Present Perfect / Present Perfect Continuous",
+                    usage: "Elaborated professional speech highlighting tenure, experience, learning, gratitude, collaboration, and forward-looking commitment"
+                }
+
             ],
         },
     ],

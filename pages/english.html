@@ -270,6 +270,7 @@
                                 ${top.eng}
                             </p>
                             <span>${top.tel}</span>
+                        ${top.tense ? `<p>${top.tense}</p>` : ''}
                         </div>
                     </div>`
                 }).join('')
@@ -318,6 +319,7 @@
                                 ${top.eng}
                             </p>
                             <span>${top.tel}</span>
+                            ${top.tense ? `<p>${top.tense}</p>` : ''}
                         </div>
                     </div>`
                 }).join('')
