@@ -973,7 +973,70 @@ const SubjectList = {
                 },
                 {
                     id: 1,
-                    eng: "<b>belched - త్రేన్పులు (బెల్చ్డ్ (belchd) / బెల్చ్‌డ్ (belch-ed))</b>",
+                    eng: "<b>express your 4-year bonding/tenure in English professionally during an all-hands or team meeting</b>",
+                    tel: '',
+                    tense: ''
+                },
+                {
+                    id: 1,
+                    tel: "<b>Simple & professional</b>",
+                    eng: "I’m proud to share that I have completed 4 years with the company. It has been an incredible journey of learning and growth.",
+                    tense: "Present Perfect",
+                    usage: "Expressing tenure and personal growth professionally"
+                },
+                {
+                    id: 2,
+                    tel: "<b>Emphasizing experience & contributions</b>",
+                    eng: "Today marks 4 years since I joined this company. Over these years, I’ve had the opportunity to work on multiple projects, learn from talented colleagues, and contribute to our shared goals.",
+                    tense: "Present Perfect",
+                    usage: "Highlighting experience, contributions, and achievements"
+                },
+                {
+                    id: 3,
+                    tel: "<b>Highlighting team bonding / gratitude</b>",
+                    eng: "I have been part of this amazing organization for 4 years. I’m grateful for the support of my team and mentors who have made this journey fulfilling and enriching.",
+                    tense: "Present Perfect Continuous / Present Perfect",
+                    usage: "Showing gratitude and team bonding"
+                },
+                {
+                    id: 4,
+                    tel: "<b>Emphasizing commitment & vision</b>",
+                    eng: "Having completed 4 years here, I remain committed to contributing my best, collaborating with everyone, and driving impactful results for our organization.",
+                    tense: "Perfect Participle / Present Simple",
+                    usage: "Expressing commitment and forward-looking vision"
+                },
+                {
+                    id: 5,
+                    tel: "<b>Casual / friendly tone</b>",
+                    eng: "Wow, it’s already been 4 years since I joined! Time really flies when you’re learning and growing with such a fantastic team.",
+                    tense: "Present Perfect",
+                    usage: "Casual, friendly reflection for a lighter team meeting"
+                },
+                {
+                    id: 1,
+                    tel: "<b>Elaborated professional speech</b>",
+                    eng: "Good [morning/afternoon] everyone, I’m really happy to share that as of today, I have completed 4 fulfilling years with this company. Over this period, I’ve had the privilege to work on a variety of projects that challenged me, helped me grow, and allowed me to contribute meaningfully to our goals. These 4 years have not just been about projects or deadlines—they have been about learning, collaboration, and building lasting relationships with some truly talented colleagues. I’ve learned so much from my mentors, my teammates, and the cross-functional interactions that shaped my perspective and strengthened my skills. I’m grateful for the opportunities I’ve been given, the support I’ve received, and the culture that encourages innovation and growth. Looking ahead, I remain committed to giving my best, continuing to learn, and contributing to the success of our organization. Thank you all for being a part of this journey with me—it has been an incredible experience so far, and I’m excited for what lies ahead.",
+                    tense: "Present Perfect / Present Perfect Continuous",
+                    usage: "Elaborated professional speech highlighting tenure, experience, learning, gratitude, collaboration, and forward-looking commitment"
+                },
+                {
+                    id: 1,
+                    tel: "<b>Elaborated professional speech</b>",
+                    eng: "I’d like to take a moment to acknowledge the incredible work my team has done over the past quarter. Despite tight deadlines and complex requirements, we not only delivered successfully but also maintained the quality and collaboration that make us strong as a team.This achievement is proof that when we come together with focus and dedication, we can accomplish anything. Thank you to each one of you—it’s a privilege to work alongside such talented people.",
+                    tense: "Present Perfect / Present Perfect Continuous",
+                    usage: "Elaborated professional speech highlighting tenure, experience, learning, gratitude, collaboration, and forward-looking commitment"
+                },
+            ],
+        },
+        {
+            id: 2,
+            topic: "belched - త్రేన్పులు (బెల్చ్డ్ (belchd) / బెల్చ్‌డ్ (belch-ed))",
+            explain: '',
+            formation: '',
+            content: [
+                {
+                    id: 1,
+                    eng: "<b></b>",
                     tel: '',
                     tense: ''
                 },
@@ -1037,10 +1100,18 @@ const SubjectList = {
                     tel: "పాప ఇప్పటికే త్రేన్పులు పెట్టింది.",
                     tense: "Present Perfect"
                 },
+            ],
+        },
+        {
+            id: 2,
+            topic: "(ఎక్సటింక్ట్(extinct) - అంతరించిపోయింది / ఎండేంజర్డ్(Endangered) - అంతరించిపోతున్నాయి - (are disappearing)",
+            explain: '<span>extinct (అంతరించిపోయిన)</span> - The species does not exist anymore. /---/ <span>Endangered (అంతరించిపోవడానికే సిద్ధంగా ఉన్న)</span> - The species still exists, but may disappear soon if not protected.',
+            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            content: [
                 {
                     id: 1,
-                    eng: "<b>(ఎక్సటింక్ట్(extinct) - అంతరించిపోయింది / ఎండేంజర్డ్(Endangered) - అంతరించిపోతున్నాయి - (are disappearing)</b>",
-                    tel: '<b>extinct (అంతరించిపోయిన)</b> - The species does not exist anymore. /---/ <b>Endangered (అంతరించిపోవడానికే సిద్ధంగా ఉన్న)</b> - The species still exists, but may disappear soon if not protected.',
+                    eng: "<b></b>",
+                    tel: '',
                     tense: ''
                 },
                 {
@@ -1103,58 +1174,326 @@ const SubjectList = {
                     tel: "వూల్లీ మామోతులు వేల ఏళ్ల క్రితం అంతరించిపోయాయి.",
                     tense: "Past Simple"
                 },
+            ],
+        },
+        {
+            id: 2,
+            topic: "Habitual Sentences",
+            explain: '',
+            formation: '',
+            content: [
                 {
-                    id: 1,
-                    eng: "<b>express your 4-year bonding/tenure in English professionally during an all-hands or team meeting</b>",
-                    tel: '',
-                    tense: ''
+                    id: 5,
+                    eng: "<b></b>",
+                    tel: "",
+                    tense: "",
                 },
                 {
                     id: 1,
-                    tel: "<b>Simple & professional</b>",
-                    eng: "I’m proud to share that I have completed 4 years with the company. It has been an incredible journey of learning and growth.",
-                    tense: "Present Perfect",
-                    usage: "Expressing tenure and personal growth professionally"
+                    eng: "You always eat what you shouldn’t.",
+                    tel: "నువ్వు ఎప్పుడూ తినకూడనివి తింటావు.",
+                    type: "habit / warning"
                 },
                 {
                     id: 2,
-                    tel: "<b>Emphasizing experience & contributions</b>",
-                    eng: "Today marks 4 years since I joined this company. Over these years, I’ve had the opportunity to work on multiple projects, learn from talented colleagues, and contribute to our shared goals.",
-                    tense: "Present Perfect",
-                    usage: "Highlighting experience, contributions, and achievements"
+                    eng: "You always say what you shouldn’t.",
+                    tel: "నువ్వు ఎప్పుడూ చెప్పకూడనివి చెబుతావు.",
+                    type: "habit / warning"
                 },
                 {
                     id: 3,
-                    tel: "<b>Highlighting team bonding / gratitude</b>",
-                    eng: "I have been part of this amazing organization for 4 years. I’m grateful for the support of my team and mentors who have made this journey fulfilling and enriching.",
-                    tense: "Present Perfect Continuous / Present Perfect",
-                    usage: "Showing gratitude and team bonding"
+                    eng: "You always spend money where you shouldn’t.",
+                    tel: "నువ్వు ఎప్పుడూ డబ్బు ఖర్చు చేయకూడని చోట ఖర్చు చేస్తావు.",
+                    type: "habit / warning"
                 },
                 {
                     id: 4,
-                    tel: "<b>Emphasizing commitment & vision</b>",
-                    eng: "Having completed 4 years here, I remain committed to contributing my best, collaborating with everyone, and driving impactful results for our organization.",
-                    tense: "Perfect Participle / Present Simple",
-                    usage: "Expressing commitment and forward-looking vision"
+                    eng: "You always trust people you shouldn’t.",
+                    tel: "నువ్వు ఎప్పుడూ నమ్మకూడని వారిని నమ్ముతావు.",
+                    type: "habit / warning"
                 },
                 {
                     id: 5,
-                    tel: "<b>Casual / friendly tone</b>",
-                    eng: "Wow, it’s already been 4 years since I joined! Time really flies when you’re learning and growing with such a fantastic team.",
-                    tense: "Present Perfect",
-                    usage: "Casual, friendly reflection for a lighter team meeting"
+                    eng: "You always go where you shouldn’t.",
+                    tel: "నువ్వు ఎప్పుడూ వెళ్లకూడని చోట్లకి వెళ్తావు.",
+                    type: "habit / warning"
+                },
+                {
+                    id: 6,
+                    eng: "You always share things you shouldn’t.",
+                    tel: "నువ్వు ఎప్పుడూ పంచకూడనివి పంచుకుంటావు.",
+                    type: "habit / warning"
+                },
+                {
+                    id: 7,
+                    eng: "You always touch what you shouldn’t.",
+                    tel: "నువ్వు ఎప్పుడూ తాకకూడనివి తాకుతావు.",
+                    type: "habit / warning"
+                },
+                {
+                    id: 8,
+                    eng: "You always ask questions you shouldn’t.",
+                    tel: "నువ్వు ఎప్పుడూ అడగకూడని ప్రశ్నలు అడుగుతావు.",
+                    type: "habit / warning"
+                },
+                {
+                    id: 9,
+                    eng: "You always believe what you shouldn’t.",
+                    tel: "నువ్వు ఎప్పుడూ నమ్మకూడనివి నమ్ముతావు.",
+                    type: "habit / warning"
+                },
+                {
+                    id: 10,
+                    eng: "You always do what you shouldn’t.",
+                    tel: "నువ్వు ఎప్పుడూ చేయకూడనివి చేస్తావు.",
+                    type: "habit / warning"
+                }
+            ],
+        },
+        {
+            id: 9,
+            topic: "I remain",
+            explain: '“I remain” ఎక్కువగా formal Englishలో వాడతారు → అంటే నేను అలాగే కొనసాగుతాను / నేను అలాగే ఉంటాను.',
+            formation: '',
+            note: '',
+            content: [
+                {
+                    id: 1,
+                    tel: "నేను ఇక్కడే ఉంటాను.",
+                    eng: "I will stay here.",
+                    note: "సాధారణ future tense"
+                },
+                {
+                    id: 2,
+                    tel: "నేను నీకు తోడుగా ఉంటాను.",
+                    eng: "I will be with you.",
+                    note: "casual promise"
+                },
+                {
+                    id: 3,
+                    tel: "ఎంత కష్టం వచ్చినా నేను ఆశావహంగా ఉంటాను.",
+                    eng: "I remain hopeful no matter the difficulties.",
+                    note: "formal, motivational"
+                },
+                {
+                    id: 4,
+                    tel: "ఈ ప్రాజెక్ట్‌కి నేను అంకితభావంతో ఉంటాను.",
+                    eng: "I remain dedicated to this project.",
+                    note: "formal, professional"
+                },
+                {
+                    id: 5,
+                    tel: "లేఖ చివర ఇలా రాస్తారు: నేను, మీ స్నేహపూర్వకంగా ఉంటాను.",
+                    eng: "In a letter ending: I remain, yours sincerely.",
+                    note: "formal closing"
+                },
+                {
+                    id: 2,
+                    eng: "I remain confident about our success.",
+                    tel: "మన విజయంపై నేను ఇంకా నమ్మకంగా ఉన్నాను.",
+                    type: "confidence"
+                },
+                {
+                    id: 3,
+                    eng: "Even after many challenges, I remain hopeful.",
+                    tel: "చాలా సవాళ్ల తర్వాత కూడా నేను ఆశతోనే ఉన్నాను.",
+                    type: "hope"
+                },
+                {
+                    id: 4,
+                    eng: "After 4 years here, I remain grateful to my mentors.",
+                    tel: "ఇక్కడ 4 సంవత్సరాల తర్వాత కూడా నేను నా మెంటర్లకు కృతజ్ఞతగా ఉన్నాను.",
+                    type: "gratitude"
+                },
+                {
+                    id: 5,
+                    eng: "I remain focused on learning new technologies.",
+                    tel: "కొత్త టెక్నాలజీలు నేర్చుకోవడంపై నేను దృష్టి సారించి ఉన్నాను.",
+                    type: "focus"
+                },
+                {
+                    id: 6,
+                    eng: "I remain, yours sincerely.",
+                    tel: "నేను, మీ స్నేహపూర్వకంగా ఉంటున్నాను.",
+                    type: "formal closing"
                 },
                 {
                     id: 1,
-                    tel: "<b>Elaborated professional speech</b>",
-                    eng: "Good [morning/afternoon] everyone, I’m really happy to share that as of today, I have completed 4 fulfilling years with this company. Over this period, I’ve had the privilege to work on a variety of projects that challenged me, helped me grow, and allowed me to contribute meaningfully to our goals. These 4 years have not just been about projects or deadlines—they have been about learning, collaboration, and building lasting relationships with some truly talented colleagues. I’ve learned so much from my mentors, my teammates, and the cross-functional interactions that shaped my perspective and strengthened my skills. I’m grateful for the opportunities I’ve been given, the support I’ve received, and the culture that encourages innovation and growth. Looking ahead, I remain committed to giving my best, continuing to learn, and contributing to the success of our organization. Thank you all for being a part of this journey with me—it has been an incredible experience so far, and I’m excited for what lies ahead.",
-                    tense: "Present Perfect / Present Perfect Continuous",
-                    usage: "Elaborated professional speech highlighting tenure, experience, learning, gratitude, collaboration, and forward-looking commitment"
+                    eng: "I remain committed to supporting this project.",
+                    tel: "ఈ ప్రాజెక్ట్‌కి మద్దతు ఇవ్వడంలో నేను కట్టుబడి ఉంటాను.",
+                    type: "commitment"
+                },
+                {
+                    id: 2,
+                    eng: "I remain confident in our team’s success.",
+                    tel: "మా జట్టు విజయంపై నాకు నమ్మకం ఉంటుంది.",
+                    type: "confidence"
+                },
+                {
+                    id: 3,
+                    eng: "I remain, yours sincerely,",
+                    tel: "నేను ఉంటాను, మీవాడిని విశ్వాసపూర్వకంగా,",
+                    type: "formal_closing"
+                },
+                {
+                    id: 4,
+                    eng: "I remain, faithfully yours,",
+                    tel: "నేను ఉంటాను, మీవాడిని విధేయతతో,",
+                    type: "formal_closing"
+                },
+                {
+                    id: 5,
+                    eng: "Despite the challenges, I remain positive about the outcome.",
+                    tel: "సవాళ్లు ఉన్నప్పటికీ, ఫలితంపై నేను సానుకూలంగా ఉంటాను.",
+                    type: "consistency"
+                },
+                {
+                    id: 6,
+                    eng: "Even after 4 years here, I remain grateful for the opportunities.",
+                    tel: "ఇక్కడ 4 సంవత్సరాలు గడిచినా, అవకాశాల కోసం నేను కృతజ్ఞతతో ఉంటాను.",
+                    type: "gratitude"
                 }
-
+            ],
+        },
+        {
+            id: 9,
+            topic: "Meaning of Not Entertained",
+            explain: '“not entertained” usually means “not considered / not accepted” (formal usage).',
+            formation: 'Not accepted, not considered, not approved, or not paid attention to.',
+            note: 'Future Tense',
+            content: [
+                {
+                    id: 1,
+                    eng: "Repeated calls will not be entertained.",
+                    tel: "మళ్లీ మళ్లీ చేసే కాల్స్ పరిగణించబడవు.",
+                    type: "communication"
+                },
+                {
+                    id: 2,
+                    eng: "Late submissions will not be entertained.",
+                    tel: "ఆలస్యంగా సమర్పించినవి పరిగణించబడవు.",
+                    type: "rules"
+                },
+                {
+                    id: 3,
+                    eng: "Unauthorized access attempts will not be entertained.",
+                    tel: "అనుమతి లేని యాక్సెస్ ప్రయత్నాలు పరిగణించబడవు.",
+                    type: "security"
+                },
+                {
+                    id: 4,
+                    eng: "Change requests after deployment will not be entertained.",
+                    tel: "డిప్లాయ్‌మెంట్ తర్వాత మార్పు అభ్యర్థనలు పరిగణించబడవు.",
+                    type: "IT_process"
+                },
+                {
+                    id: 5,
+                    eng: "Queries without proper details will not be entertained.",
+                    tel: "సరైన వివరాలు లేని ప్రశ్నలు పరిగణించబడవు.",
+                    type: "support"
+                },
+                {
+                    id: 6,
+                    eng: "Excuses will not be entertained.",
+                    tel: "క్షమాపణలు పరిగణించబడవు.",
+                    type: "general"
+                },
+                {
+                    id: 7,
+                    eng: "Complaints without proof will not be entertained.",
+                    tel: "సాక్ష్యం లేని ఫిర్యాదులు పరిగణించబడవు.",
+                    type: "complaint"
+                },
+                {
+                    id: 8,
+                    eng: "Unscheduled leave requests will not be entertained.",
+                    tel: "ముందస్తు సమాచారం లేకుండా ఇచ్చిన సెలవు అభ్యర్థనలు పరిగణించబడవు.",
+                    type: "HR_policy"
+                },
+                {
+                    id: 9,
+                    eng: "Incomplete forms will not be entertained.",
+                    tel: "అసంపూర్ణమైన ఫారాలు పరిగణించబడవు.",
+                    type: "documentation"
+                },
+                {
+                    id: 10,
+                    eng: "Suggestions without justification will not be entertained.",
+                    tel: "సరైన కారణం లేకుండా ఇచ్చిన సూచనలు పరిగణించబడవు.",
+                    type: "feedback"
+                }
+            ],
+        },
+        {
+            id: 10,
+            topic: "Make sense //--// Doesn’t make sense",
+            explain: 'Make sense → something is clear, logical, understandable. (అర్థమవుతుంది / సరైనదిగా ఉంది) /---/ Doesn’t make sense → something is not clear, illogical, confusing. (అర్థం కావడం లేదు / సరికాదు)',
+            formation: '',
+            content: [
+                {
+                    id: 1,
+                    eng: "Your explanation makes sense.",
+                    tel: "నీ వివరణ అర్థమవుతోంది.",
+                    type: "understanding"
+                },
+                {
+                    id: 2,
+                    eng: "Now it makes sense.",
+                    tel: "ఇప్పుడు అర్థమవుతోంది.",
+                    type: "clarity"
+                },
+                {
+                    id: 3,
+                    eng: "This code doesn’t make sense.",
+                    tel: "ఈ కోడ్ అర్థం కావడం లేదు.",
+                    type: "IT_confusion"
+                },
+                {
+                    id: 4,
+                    eng: "That doesn’t make sense to me.",
+                    tel: "నాకు అది అర్థం కావడం లేదు.",
+                    type: "disagreement"
+                },
+                {
+                    id: 5,
+                    eng: "The document doesn’t make sense without examples.",
+                    tel: "ఉదాహరణలు లేకుండా డాక్యుమెంట్ అర్థం కావడం లేదు.",
+                    type: "documentation"
+                },
+                {
+                    id: 6,
+                    eng: "It doesn’t make sense to deploy without testing.",
+                    tel: "టెస్టింగ్ లేకుండా డిప్లాయ్ చేయడం సరికాదు.",
+                    type: "IT_best_practice"
+                },
+                {
+                    id: 7,
+                    eng: "Your idea makes sense, let’s try it in the next sprint.",
+                    tel: "నీ ఆలోచన అర్థమవుతోంది, దాన్ని వచ్చే స్ప్రింట్‌లో ప్రయత్నిద్దాం.",
+                    type: "teamwork"
+                },
+                {
+                    id: 8,
+                    eng: "The architecture diagram makes sense after the walkthrough.",
+                    tel: "వాక్‌థ్రూ తర్వాత ఆ ఆర్కిటెక్చర్ డయాగ్రామ్ అర్థమైంది.",
+                    type: "IT_design"
+                },
+                {
+                    id: 9,
+                    eng: "It makes sense to start with small tasks first.",
+                    tel: "మొదట చిన్న పనులతో మొదలు పెట్టడం సరిగానే ఉంటుంది.",
+                    type: "planning"
+                },
+                {
+                    id: 10,
+                    eng: "His argument doesn’t make sense at all.",
+                    tel: "అతని వాదన అసలు అర్థం కావడం లేదు.",
+                    type: "discussion"
+                }
             ],
         },
     ],
+
     Tense: [
         {
             id: 1,
@@ -1904,7 +2243,176 @@ const SubjectList = {
                     eng: "<b>The</b> stars are shining in <b>the</b> night sky.",
                     tel: "నక్షత్రాలు రాత్రి ఆకాశంలో ప్రకాశిస్తున్నాయి.",
                     tense: "Present continuous tense"
-                }
+                },
+                {
+                    eng: "<b>in → a specific field / industry </b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 1,
+                    eng: "I work in IT.",
+                    tel: "నేను ఐటీ రంగంలో పని చేస్తున్నాను.",
+                    type: "in → field / industry"
+                },
+                {
+                    id: 2,
+                    eng: "She works in healthcare.",
+                    tel: "ఆమె ఆరోగ్య రంగంలో పని చేస్తోంది.",
+                    type: "in → field / industry"
+                },
+                {
+                    id: 3,
+                    eng: "They work in finance.",
+                    tel: "వాళ్లు ఫైనాన్స్ రంగంలో పని చేస్తున్నారు.",
+                    type: "in → field / industry"
+                },
+                {
+                    eng: "<b>for → a company / employer</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 4,
+                    eng: "I work for Google.",
+                    tel: "నేను గూగుల్ కోసం పని చేస్తున్నాను.",
+                    type: "for → company / employer"
+                },
+                {
+                    id: 5,
+                    eng: "He works for TCS.",
+                    tel: "అతను టీసీఎస్ కోసం పని చేస్తున్నాడు.",
+                    type: "for → company / employer"
+                },
+                {
+                    id: 6,
+                    eng: "She works for a startup.",
+                    tel: "ఆమె ఒక స్టార్టప్ కోసం పని చేస్తోంది.",
+                    type: "for → company / employer"
+                },
+                {
+                    eng: "<b>as → a job title / role</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 7,
+                    eng: "I work as a software engineer.",
+                    tel: "నేను సాఫ్ట్‌వేర్ ఇంజనీర్‌గా పని చేస్తున్నాను.",
+                    type: "as → job title / role"
+                },
+                {
+                    id: 8,
+                    eng: "She works as a project manager.",
+                    tel: "ఆమె ప్రాజెక్ట్ మేనేజర్‌గా పని చేస్తోంది.",
+                    type: "as → job title / role"
+                },
+                {
+                    id: 9,
+                    eng: "He works as a tester.",
+                    tel: "అతను టెస్టర్‌గా పని చేస్తున్నాడు.",
+                    type: "as → job title / role"
+                },
+                {
+                    eng: "<b>place usage rule - In</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 1,
+                    eng: "I live in Hyderabad.",
+                    tel: "నేను హైదరాబాద్‌లో ఉంటున్నాను.",
+                    type: "in → city"
+                },
+                {
+                    id: 2,
+                    eng: "He works in India.",
+                    tel: "అతను భారతదేశంలో పని చేస్తున్నాడు.",
+                    type: "in → country"
+                },
+                {
+                    id: 3,
+                    eng: "She studies in America.",
+                    tel: "ఆమె అమెరికాలో చదువుతోంది.",
+                    type: "in → country"
+                },
+                {
+                    id: 8,
+                    eng: "They arrived in Europe.",
+                    tel: "వాళ్లు యూరప్‌కు చేరుకున్నారు.",
+                    type: "in → continent"
+                },
+                {
+                    id: 9,
+                    eng: "My friend is in Bangalore.",
+                    tel: "నా స్నేహితుడు బెంగళూరులో ఉన్నాడు.",
+                    type: "in → city"
+                },
+                {
+                    id: 7,
+                    eng: "The server is located in our data center.",
+                    tel: "సర్వర్ మా డేటా సెంటర్‌లో ఉంది.",
+                    type: "in → big facility"
+                },
+                {
+                    id: 2,
+                    eng: "Our company has an office in Bangalore.",
+                    tel: "మా కంపెనీకి బెంగళూరులో ఆఫీస్ ఉంది.",
+                    type: "in → city"
+                },
+                {
+                    eng: "<b>place usage rule - At</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 4,
+                    eng: "I am at the bus stop.",
+                    tel: "నేను బస్ స్టాప్ వద్ద ఉన్నాను.",
+                    type: "at → specific place"
+                },
+                {
+                    id: 5,
+                    eng: "He is waiting at the railway station.",
+                    tel: "అతను రైల్వే స్టేషన్ వద్ద వేచి ఉన్నాడు.",
+                    type: "at → specific place"
+                },
+                {
+                    id: 6,
+                    eng: "She is at the office.",
+                    tel: "ఆమె ఆఫీస్‌లో ఉంది.",
+                    type: "at → specific place"
+                },
+                {
+                    id: 7,
+                    eng: "We met at his house.",
+                    tel: "మేము అతని ఇంట్లో కలిశాము.",
+                    type: "at → specific location"
+                },
+                {
+                    id: 10,
+                    eng: "I’m at the airport.",
+                    tel: "నేను విమానాశ్రయం వద్ద ఉన్నాను.",
+                    type: "at → exact location"
+                },
+                {
+                    id: 4,
+                    eng: "I am at my desk right now.",
+                    tel: "నేను ఇప్పుడు నా డెస్క్ వద్ద ఉన్నాను.",
+                    type: "at → specific location"
+                },
+                {
+                    id: 5,
+                    eng: "He is at the meeting room.",
+                    tel: "అతను మీటింగ్ రూమ్‌లో ఉన్నాడు.",
+                    type: "at → specific location"
+                },
+                {
+                    id: 8,
+                    eng: "The technician is at the server rack.",
+                    tel: "టెక్నీషియన్ సర్వర్ రాక్ వద్ద ఉన్నాడు.",
+                    type: "at → exact point"
+                },
             ],
         },
         {
