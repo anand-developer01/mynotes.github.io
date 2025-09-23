@@ -83,6 +83,14 @@ const uniqueArray = arrayWithDuplicates.map((item, index, self) => {
 }).filter(item => item !== null);  // Remove the null values
 
 console.log(uniqueArray);  // Output: [1, 2, 3, 4, 5]
+
+
+// smiple way
+//------
+const rem = nums.filter((e, index) => nums.indexOf(e) === index)
+console.log(rem)
+// ------
+console.log([...new Set(rem)])
 `
         },
         {
@@ -131,6 +139,11 @@ const uniqueArray = arrayWithDuplicates.reduce((accumulator, currentValue) => {
 }, []);
 
 console.log(uniqueArray); 
+// Output: [ { id: 1, name: 'John' }, { id: 2, name: 'Jane' }, { id: 3, name: 'Joe' } ]
+
+// -------- second method -----
+const remDups = arrayWithDuplicates.filter((e, index) => arrayWithDuplicates.findIndex(r => r.name === e.name) === index )
+console.log(remDups)
 // Output: [ { id: 1, name: 'John' }, { id: 2, name: 'Jane' }, { id: 3, name: 'Joe' } ]
 `
         },
@@ -214,16 +227,6 @@ console.log(uniqueArray);
     },
     {
       id: 1,
-      title: "JavaScript Event Loop",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
       title: "Write a function to replace smiley faces ':)' with sad faces ':('.",
       note: [
         {
@@ -247,7 +250,19 @@ console.log(replaceSmiley(input))
       title: "Write a function to check if a number is a Disarium number.",
       note: [
         {
-          text1: `A <b>disarium</b> number is a number in which the sum of the digits to the power of their respective position is equal to the number itself.`,
+          text1: `A <b>disarium - డైసేరియమ్</b> number is a number in which the sum of the digits to the power of their respective position is equal to the number itself.
+          
+          A Disarium number is one where:
+
+Sum of (digitposition)=number itself
+Sum of (digit position)=number itself
+
+          
+          Example 1: 89
+Digits = 8 and 9
+Positions = 1 and 2
+8(square of 1)+9(square of 2) = 8+81=89
+`,
           code1: `        function checkDisariumFor(num) {
             const newD = num.toString().split('')
             let arrSum = 0
@@ -635,27 +650,7 @@ console.log(getType(function () {}));
     },
     {
       id: 1,
-      title: "JavaScript Event Loop",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "JavaScript Event Loop",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "JavaScript Event Loop",
+      title: "topic",
       note: [
         {
           text1: ``,

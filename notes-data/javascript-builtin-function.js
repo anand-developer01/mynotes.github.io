@@ -537,13 +537,13 @@ console.log(result); // Outputs: "Hello, JavaScript! Welcome to the JavaScript!"
 // Example 3: Using a Function as the newValue
 // You can also pass a function as the newValue parameter. This function is called for each match and can return a custom replacement string.
 let str = "I have 1 apple and 2 bananas.";
-let result = str.replace(/\d+/g, function(match) {
+let result = str.replace(/\\d+/g, function(match) {
     return parseInt(match) * 2;  // Doubles the number
 });
 console.log(result); // Outputs: "I have 2 apple and 4 bananas."
 
 //----------------
-    Example : 3.1
+    // Example : 3.1
     const cities = "Seattle, NV - No : 2, AZ - No : 4";
     const newRes = cities.replace(/NV/, "New York").replace(/AZ/,"Arizona").replace(/\d+/g, function(match){
         return parseInt(match) * 2;
@@ -591,12 +591,23 @@ The <u>search()</u> method takes a single parameter:
 => Returns the index of the first match between the regular expression and the given string
 => Returns <u>-1</u> if no match was found.
 
-
 <b>search() with an Array</b>:
 If you want to search through an array, you cannot directly use <u>search()</u> because it's a method for strings. But you can use methods like <u>find(), indexOf()</u>, or <u>some()</u> in combination with <u>search()</u> to search for a string inside each array element.
 
 <b>Example 1: Using <u>search()</u> on Each Element of an Array</b>
 You can use <u>Array.prototype.map()</u> to apply <u>search()</u> on each element of the array.
+
+
+<b> indexOf() vs search() </b>
+<b>indexOf()</b>
+Works only with strings (substrings), <b>not regex.</b>
+Returns the first index where the substring is found.
+Returns -1 if not found.
+
+<b>search()</b>
+Works with a <b>regular expression</b> (regex).
+Returns the index of the first match.
+Returns -1 if not found.
                     `,
           code1: `// Ex : 1
                     let sentence= "I love JavaScript.";
@@ -610,7 +621,7 @@ console.log(indexReg);
 
 
 //-----------------
-Example 1.1: Using search() on a String
+// Example 1.1: Using search() on a String
 let str = "Hello, world!";
 let result = str.search("world");
 console.log(result);  // Output: 7 (index of "world")

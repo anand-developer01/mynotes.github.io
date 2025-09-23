@@ -1669,10 +1669,6 @@ export const ReturnHOCInputCom = withAuth(showApiData, httpComp);
 
 `
         },
-        {
-          text1: ``,
-          code1: ``
-        },
       ],
     },
     {
@@ -1682,6 +1678,48 @@ export const ReturnHOCInputCom = withAuth(showApiData, httpComp);
         {
           text1: ``,
           code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "higher-order function pattern - (closure)",
+      note: [
+        {
+          text1: `const handleIt = (v) => {
+  return (e) => console.log(e.target.value, v);
+};
+
+    <b>handleIt</b> takes a parameter <b>v</b>.
+    It <b>returns another function</b> that takes the event <b>e</b>.
+    This is a <b>closure</b>: the inner function “remembers” the <b>v</b> passed from the outer call.
+    
+    &lt;input type=&#39;text&#39; onChange={handleIt(5)} /&gt;
+
+    When React renders, it calls handleIt(5).
+    That returns a function like:
+    (e) => console.log(e.target.value, 5)
+
+    React sets this function as the onChange handler.
+So whenever the user types into the input:
+➡️ e.target.value (typed text) and 5 are both logged.
+
+<b>When is this useful?</b>
+This pattern is great when you need to pass extra arguments to an event handler.
+`,
+          code1: `const Parent = () => {
+  const handleChange = (id) => (e) => {
+    console.log("Input ID:", id, "Value:", e.target.value);
+  };
+
+  return (
+    &lt;&gt;
+      &lt;input type=&quot;text&quot; onChange={handleChange(&quot;username&quot;)} placeholder=&quot;Username&quot; /&gt;
+      &lt;input type=&quot;text&quot; onChange={handleChange(&quot;email&quot;)} placeholder=&quot;Email&quot; /&gt;
+    &lt;/&gt;
+  );
+};
+`
         }
       ],
     },
@@ -3782,26 +3820,6 @@ const Page: React.FC&lt;Props&gt; = ({
     {
       id: 52,
       title: "key",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ],
-    },
-    {
-      id: 52,
-      title: "aff intro",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ],
-    },
-    {
-      id: 52,
-      title: "aff intro",
       note: [
         {
           text1: ``,
@@ -6765,7 +6783,56 @@ You've noticed that toggling the <b>theme</b> prop freezes the app for a moment,
 
 <b>With this change, "ShippingForm" will skip re-rendering if all of its props are the same as on the last render.</b> This is when caching a function becomes important! Let's say you defined <b>handleSubmit</b> without <b>useCallback</b>:
                     `,
-          code1: `function ProductPage({ productId, referrer, theme }) {
+          code1: ` // ------------ Ex : 1 ----------
+          import React, { useState, useEffect, useCallback } from &quot;react&quot;;
+
+export default function UsersList() {
+    const [page, setPage] = useState(1);
+    const [users, setUsers] = useState([]);
+
+    // ✅ Function depends on \`page\`, so it will be recreated whenever \`page\` changes
+    const fetchUsers = useCallback(async () =&gt; {
+        console.log(&quot;Fetching users for page:&quot;, page);
+
+        // Example API - replace with your backend
+        const res = await fetch(
+            \`https://jsonplaceholder.typicode.com/users?_page=\${page}&amp;_limit=3\`
+        );
+        const data = await res.json();
+        setUsers(data);
+    }, [page]);
+
+    // Call fetchUsers whenever \`page\` changes
+    useEffect(() =&gt; {
+        fetchUsers();
+    }, [fetchUsers]);
+
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;Users (Page {page})&lt;/h2&gt;
+            &lt;ul&gt;
+                {users.map((u) =&gt; (
+                    &lt;li key={u.id}&gt;{u.name}&lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+
+            &lt;button
+                onClick={() =&gt; setPage((p) =&gt; Math.max(p - 1, 1))}
+                disabled={page === 1}
+            &gt;
+                Prev
+            &lt;/button&gt;
+            &lt;button onClick={() =&gt; setPage((p) =&gt; p + 1)}&gt;Next&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+
+
+
+
+//--------------------------------------------
+          
+          function ProductPage({ productId, referrer, theme }) {
   // ...
   return (
     &lt;div className={theme}&gt;
@@ -7487,30 +7554,81 @@ export default DataComponent;
                     In React, we implement memoization via <b>React.memo()</b>, which is a higher-order component. The React.memo serves as a wrapper for a component and returns a memoized output of that component, which prevents the component or sub-components from unnecessary re-rendering.
 
 There are two ways by which we can use <b>React.memo</b> in our component. We can either use it to wrap the entire component or add it to the part where we export the component.
+In the <b>example : 1 </b> below you will find the first way of using it:
 
-In the example below you will find the first way of using it:`,
-          code1: `const newComponent = React.memo((props) => {
+In the syntax above, the <b>newComponent</b> component is wrapped with <b>React.memo()</b>, which creates a memoized version of the component. This memoized version of the component will only re-render if the props passed to it have changed.
+And <b>example : 2 </b>  is the second way you can use <b>React.memo</b>:
+
+The syntax above denotes that we can memoize a component by simply passing it as an argument to React.memo and exporting the result.
+<b>Note</b>: React.memo has nothing to do with React hooks. It is an in-built method in React used to aid the optimization of our React applications. If you prefer using a hook to memoize your component, you can use memo in place of React.memo.
+
+<b>Real Example:3 - Without vs With useCallback</b>
+➡️ React reuses the same function reference until dependencies change.
+➡️ When passed to a React.memo child, the child can truly skip re-rendering. ✅
+
+📌 That’s why they often go together
+<b>React.memo</b> prevents child re-renders if props are the same.
+<b>useCallback</b> ensures function props actually stay the same.
+`,
+          code1: ` // ---------- Ex : 1 --------
+          const newComponent = React.memo((props) => {
     return (
       //render with props
     );
 });
+export default newComponent;
 
-export default newComponent;`
-        },
-        {
-          text1: `In the syntax above, the <b>newComponent</b> component is wrapped with <b>React.memo()</b>, which creates a memoized version of the component. This memoized version of the component will only re-render if the props passed to it have changed.
-
-And here is the second way you can use <b>React.memo</b>:`,
-          code1: `const newComponent = (props) => {
+// ----------- Ex : 2 ----------
+const newComponent = (props) => {
   //render with props
 }
+export default React.memo(newComponent);
 
-export default React.memo(newComponent);`
+
+// ------------- Ex : 3 -------------
+// ❌ Without useCallback (child always re-renders)
+const Parent = () => {
+  const [count, setCount] = useState(0);
+
+  const handleClick = () => console.log("clicked");
+
+  return (
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;+1&lt;/button&gt;
+      &lt;Child onClick={handleClick} /&gt;
+    &lt;/&gt;
+  );
+};
+
+const Child = React.memo(({ onClick }) => {
+  console.log("Child rendered");
+  return &lt;button onClick={onClick}&gt;Click Me&lt;/button&gt;;
+});
+// Every time parent renders, \`handleClick\` is new, so \`Child\` re-renders.
+
+// --------------
+// ✅ With useCallback (child won’t re-render unnecessarily)
+const Parent = () => {
+  const [count, setCount] = useState(0);
+
+  const handleClick = useCallback(() => console.log("clicked"), []);
+
+  return (
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;+1&lt;/button&gt;
+      &lt;Child onClick={handleClick} /&gt;
+    &lt;/&gt;
+  );
+};
+// Now \`Child\` does not re-render when only \`count\` changes.
+`
         },
         {
-          text1: `The syntax above denotes that we can memoize a component by simply passing it as an argument to React.memo and exporting the result.
-
-<b>Note</b>: React.memo has nothing to do with React hooks. It is an in-built method in React used to aid the optimization of our React applications. If you prefer using a hook to memoize your component, you can use memo in place of React.memo.`,
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
           code1: ``
         },
         {
@@ -11825,7 +11943,7 @@ axios.get("https://jsonplaceholder.typicode.com/posts")
         }
       ],
     },
-        {
+    {
       id: 52,
       title: "fetch vs axios",
       note: [
@@ -12531,7 +12649,7 @@ Yes, multiple renders are expected and normal because:
         },
       ],
     },
-        {
+    {
       id: 1,
       section: "Assignment",
       title: "create todo (add and delete) list with undo feature.",
@@ -12582,7 +12700,7 @@ export default TodoApp;
         }
       ]
     },
-            {
+    {
       id: 1,
       title: "Callbacks",
       note: [

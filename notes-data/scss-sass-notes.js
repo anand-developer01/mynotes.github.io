@@ -11,7 +11,7 @@ const scssData = {
       title: "what is SCSS",
       note: [
         {
-          text1: `SCSS, short for "Sassy Cascading Style Sheets," is a CSS preprocessor that extends CSS with features like variables, nesting, and mixins, making it easier and more efficient to write and maintain stylesheets. 
+          text1: `SCSS, short for "Sassy Cascading Style Sheets," is a <b>CSS preprocessor</b> that extends CSS with features like variables, nesting, and mixins, making it easier and more efficient to write and maintain stylesheets. 
 
           <b>What it is</b>: SCSS is a language that compiles into CSS, allowing developers to use features not directly available in standard CSS. 
 Key Features:
