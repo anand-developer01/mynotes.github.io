@@ -899,5 +899,70 @@ Each character of the word SOLID defines one principle of software architecture.
                 }
             ]
         },
+                {
+            id: 52,
+            title: "Hospitals",
+            note: [
+                {
+                    text1: `<table border="1" cellspacing="0" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Speciality & What They Handle</th>
+      <th>Location & Contact Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Dr. Spandana Pasam</b></td>
+      <td>Marriage issues, family counselling, sexual issues, psychiatric treatments</td>
+      <td>
+        Karla Mind Center, MIG 241, Remedy Hospital Lane, Road No. 4, Kukatpally<br>
+        Phone: 96400 60000<br>
+        <a href="https://drspandana.com" target="_blank">drspandana.com</a>
+      </td>
+    </tr>
+    <tr>
+      <td><b>Dr. A. Sunil Reddy</b></td>
+      <td>Neuropsychiatrist & sexologist, handles family counselling</td>
+      <td>
+        Treatment Range Hospital, MIG 331, Road No. 4, KPHB, Kukatpally<br>
+        <a href="https://treatmentrangehospitals.com/dr-a-sunil-reddy/" target="_blank">treatmentrangehospitals.com</a>
+      </td>
+    </tr>
+    <tr>
+      <td><b>Dr. Kavya Koneru</b></td>
+      <td>Psychiatrist & Psychotherapist, helps with anxiety, depression, and marital/family stress</td>
+      <td>
+        Sri Sri Holistic, Phase I, Kukatpally Housing Board Colony<br>
+        Contact: +91 8328111796<br>
+        <a href="https://www.elitewell.in/best-psychiatrist-in-kukatpally/" target="_blank">elitewell.in</a>
+      </td>
+    </tr>
+    <tr>
+      <td><b>Marriage & Family Counselling Centres</b></td>
+      <td>Specialists like Dr. Sudha Rani K, Dr. Chowdary, Dr. K. Siva Prasad for couples/family counselling</td>
+      <td>
+        Various clinics in Kukatpally<br>
+        <a href="https://www.365doctor.in/hyderabad/marriage-counselling-in-kukatpally" target="_blank">365doctor.in</a>
+      </td>
+    </tr>
+    <tr>
+      <td><b>Men’s Clinic – Psychosexual & Couples Counselling</b></td>
+      <td>Couples counselling, relationship wellness, intimacy & sexual health issues</td>
+      <td>
+        Metro Pillar No A-707, Lucid Diagnostics Building, 3rd Floor,<br>
+        Opposite More Mega Stores, Near JNTU, Kukatpally<br>
+        Contact: +91-8897855855 / +91-9347855855<br>
+        <a href="https://mensclinicgroup.com/specialservice/couples-counselling/" target="_blank">mensclinicgroup.com</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`,
+                    code1: ``
+                }
+            ],
+        },
     ]
 }

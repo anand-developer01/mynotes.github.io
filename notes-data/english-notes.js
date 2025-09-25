@@ -952,6 +952,245 @@ const SubjectList = {
             ],
         },
         {
+            id: 11,
+            topic: "Was మరియు Were",
+            explain: 'అర్థం: ఉన్నాను / ఉన్నాడు / ఉంది (గత కాలంలో). 1. Was – singular subjects (I, He, She, It, singular noun) తో వాడతారు.',
+            formation: 'Subject + come(s) across + as + adjective/noun',
+            content: [
+                {
+                    id: 1,
+                    eng: "<b>Past Simple with was/were</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 1,
+                    eng: "I was at the park yesterday.",
+                    tel: "నేను నిన్న పార్క్‌లో ఉన్నాను.",
+                    tense: "Past simple (was)"
+                },
+                {
+                    id: 2,
+                    eng: "She was very tired after work.",
+                    tel: "ఆమె పని తర్వాత చాలా అలసిపోయింది.",
+                    tense: "Past simple (was)"
+                },
+                {
+                    id: 3,
+                    eng: "We were happy with the results.",
+                    tel: "మేము ఫలితాలతో సంతోషంగా ఉన్నాం.",
+                    tense: "Past simple (were)"
+                },
+                {
+                    id: 4,
+                    eng: "They were in Delhi last week.",
+                    tel: "వారు గత వారం ఢిల్లీలో ఉన్నారు.",
+                    tense: "Past simple (were)"
+                },
+                {
+                    id: 5,
+                    eng: "<b>Past Continuous with was/were</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 5,
+                    eng: "I was reading a book when he called.",
+                    tel: "అతను కాల్ చేసినప్పుడు నేను పుస్తకం చదువుతున్నాను.",
+                    tense: "Past continuous (was + ing)"
+                },
+                {
+                    id: 6,
+                    eng: "She was cooking dinner in the kitchen.",
+                    tel: "ఆమె వంటగదిలో విందు వండుతోంది.",
+                    tense: "Past continuous (was + ing)"
+                },
+                {
+                    id: 7,
+                    eng: "We were playing cricket in the morning.",
+                    tel: "మేము ఉదయం క్రికెట్ ఆడుతున్నాము.",
+                    tense: "Past continuous (were + ing)"
+                },
+                {
+                    id: 8,
+                    eng: "They were watching TV last night.",
+                    tel: "వారు నిన్న రాత్రి టీవీ చూస్తున్నారు.",
+                    tense: "Past continuous (were + ing)"
+                },
+
+            ],
+        },
+        {
+            id: 11,
+            topic: "Was మరియు Were (Positive)",
+            explain: 'Affirmative (Positive) Sentences – పాజిటివ్ వాక్యాలు',
+            formation: 'Subject + was/were + Complement/Adjective/Place/Verb-ing + .',
+            content: [
+                {
+                    id: 1,
+                    eng: "I was tired yesterday.",
+                    tel: "నేను నిన్న అలసిపోయాను.",
+                    tense: "Past tense"
+                },
+                {
+                    id: 2,
+                    eng: "She was at school.",
+                    tel: "ఆమె స్కూల్‌లో ఉంది.",
+                    tense: "Past tense"
+                },
+                {
+                    id: 3,
+                    eng: "We were happy.",
+                    tel: "మేము సంతోషంగా ఉన్నాం.",
+                    tense: "Past tense"
+                },
+                {
+                    id: 4,
+                    eng: "They were playing football.",
+                    tel: "వారు ఫుట్‌బాల్ ఆడుతున్నారు.",
+                    tense: "Past continuous tense"
+                }
+            ],
+        },
+        {
+            id: 11,
+            topic: "Was మరియు Were Negative",
+            explain: 'Negative Sentences – నెగటివ్ వాక్యాలు',
+            formation: 'Subject + was/were + not + Complement + .',
+            content: [
+                {
+                    id: 1,
+                    eng: "I was not at home.",
+                    tel: "నేను ఇంట్లో లేదు.",
+                    tense: "Past negative"
+                },
+                {
+                    id: 2,
+                    eng: "He was not late.",
+                    tel: "అతను ఆలస్యంగా రాలేదు.",
+                    tense: "Past negative"
+                },
+                {
+                    id: 3,
+                    eng: "We were not hungry.",
+                    tel: "మేము ఆకలిగా లేము.",
+                    tense: "Past negative"
+                },
+                {
+                    id: 4,
+                    eng: "They were not at the park.",
+                    tel: "వారు పార్క్‌లో లేరు.",
+                    tense: "Past negative"
+                }
+            ],
+        },
+        {
+            id: 11,
+            topic: "Was మరియు Were (Interrogative)",
+            explain: 'Interrogative Sentences – ప్రశ్న వాక్యాలు',
+            formation: 'Was/Were + Subject + Complement + ?',
+            content: [
+                {
+                    id: 1,
+                    eng: "Was she at school yesterday?",
+                    tel: "ఆమె నిన్న స్కూల్‌లో ఉందా?",
+                    tense: "Past interrogative"
+                },
+                {
+                    id: 2,
+                    eng: "Were you busy yesterday?",
+                    tel: "నీవు నిన్న బిజీగా ఉన్నావా?",
+                    tense: "Past interrogative"
+                },
+                {
+                    id: 3,
+                    eng: "Were they at the party?",
+                    tel: "వారు పార్టీకి వచ్చారా?",
+                    tense: "Past interrogative"
+                }
+            ],
+        },
+        {
+            id: 11,
+            topic: 'was/were + V3 → Past Simple Passive Tense',
+            explain: "Use → ఎవరు చేశారు అనే దానికన్నా, ఏ పని జరిగింది అనే విషయాన్ని highlight చేయడానికి.",
+            formation: 'Was/Were + Subject + Complement + ?',
+            content: [
+                {
+                    id: 1,
+                    eng: "<b>Passive structure: Object + was/were + V3 + (by Subject)</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 1,
+                    eng: "The letter was written by her yesterday.",
+                    tel: "లేఖ నిన్న ఆమె చేత రాయబడింది.",
+                    tense: "Past simple passive"
+                },
+                {
+                    id: 2,
+                    eng: "The books were given to the students.",
+                    tel: "పుస్తకాలు విద్యార్థులకు ఇవ్వబడ్డాయి.",
+                    tense: "Past simple passive"
+                },
+                {
+                    id: 3,
+                    eng: "The room was cleaned in the morning.",
+                    tel: "గది ఉదయం శుభ్రం చేయబడింది.",
+                    tense: "Past simple passive"
+                },
+                {
+                    id: 4,
+                    eng: "The project was completed last week.",
+                    tel: "ప్రాజెక్ట్ గత వారం పూర్తయింది.",
+                    tense: "Past simple passive"
+                },
+                {
+                    id: 5,
+                    eng: "The thief was arrested by the police.",
+                    tel: "దొంగ పోలీసులచే పట్టుబడ్డాడు.",
+                    tense: "Past simple passive"
+                },
+                {
+                    id: 1,
+                    eng: "Active structure: Subject + Verb (V2) + Object",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 1,
+                    eng: "She wrote the letter yesterday.",
+                    tel: "ఆమె నిన్న లేఖ రాసింది.",
+                    tense: "Past simple"
+                },
+                {
+                    id: 2,
+                    eng: "They gave books to the students.",
+                    tel: "వారు విద్యార్థులకు పుస్తకాలు ఇచ్చారు.",
+                    tense: "Past simple"
+                },
+                {
+                    id: 3,
+                    eng: "He cleaned the room in the morning.",
+                    tel: "అతను ఉదయం గదిని శుభ్రం చేశాడు.",
+                    tense: "Past simple"
+                },
+                {
+                    id: 4,
+                    eng: "We completed the project last week.",
+                    tel: "మేము గత వారం ప్రాజెక్ట్ పూర్తి చేశాము.",
+                    tense: "Past simple"
+                },
+                {
+                    id: 5,
+                    eng: "The police arrested the thief.",
+                    tel: "పోలీసులు దొంగను పట్టుకున్నారు.",
+                    tense: "Past simple"
+                }
+            ],
+        },
+        {
             id: 1,
             section: "Common Phrases",
             topic: "Phrases",
@@ -1489,6 +1728,679 @@ const SubjectList = {
                     eng: "His argument doesn’t make sense at all.",
                     tel: "అతని వాదన అసలు అర్థం కావడం లేదు.",
                     type: "discussion"
+                }
+            ],
+        },
+        {
+            id: 10,
+            topic: "words and examples",
+            explain: '',
+            formation: '',
+            content: [
+                {
+                    id: 1,
+                    eng: "<b>burned vessels</b>",
+                    tel: "<b>దగ్ధమైన వాసెల్స్</b>",
+                },
+                {
+                    eng: "The chef accidentally used burned vessels for cooking.",
+                    tel: "షెఫ్ తప్పుగా దగ్ధమైన వాసెల్స్ లో వంట చేశాడు."
+                },
+                {
+                    eng: "We need to discard the burned vessels from the kitchen.",
+                    tel: "వంటగదిలోని దగ్ధమైన వాసెల్స్ ని త్రోసేయాలి."
+                },
+
+                {
+                    id: 2,
+                    eng: "<b>Subsequent</b>",
+                    tel: "<b>తదుపరి</b>",
+                },
+                {
+                    eng: "The subsequent chapters of the book are more interesting.",
+                    tel: "పుస్తకంలోని తదుపరి అధ్యాయాలు మరింత ఆసక్తికరంగా ఉన్నాయి."
+                },
+                {
+                    eng: "Subsequent meetings will focus on project deadlines.",
+                    tel: "తదుపరి సమావేశాలు ప్రాజెక్ట్ గడువులపై దృష్టి పెట్టతాయి."
+                },
+
+                {
+                    id: 3,
+                    eng: "<b>ancestor</b>",
+                    tel: "<b>పూర్వీకుడు</b>",
+                },
+                {
+                    eng: "I learned about my ancestors through family records.",
+                    tel: "నేను నా పూర్వీకుల గురించి కుటుంబ రికార్డ్స్ ద్వారా తెలుసుకున్నాను."
+                },
+                {
+                    eng: "Our ancestors built this ancient temple.",
+                    tel: "మన పూర్వీకులు ఈ పురాతన దేవాలయాన్ని నిర్మించారు."
+                },
+
+                {
+                    id: 4,
+                    eng: "<b>rather than string</b>",
+                    tel: "<b>స్ట్రింగ్ కాకుండా</b>",
+                },
+                {
+                    eng: "Use an array rather than string for storing multiple values.",
+                    tel: "చాలా విలువలను నిల్వ చేయడానికి స్ట్రింగ్ కాకుండా array ఉపయోగించండి."
+                },
+                {
+                    eng: "It is better to pass objects rather than string in this function.",
+                    tel: "ఈ ఫంక్షన్ లో స్ట్రింగ్ కాకుండా objects ఇవ్వడం మంచిది."
+                },
+
+                {
+                    id: 5,
+                    eng: "<b>syntatic</b>",
+                    tel: "<b>వాక్యనిర్మాణం</b>",
+                },
+                {
+                    eng: "Syntactic errors in code can cause compilation failures.",
+                    tel: "కోడ్ లో వాక్యనిర్మాణ తప్పిదాలు కంపైల్ విఫలమయ్యే కారణం అవుతాయి."
+                },
+                {
+                    eng: "Learning syntactic rules improves sentence formation.",
+                    tel: "వాక్యనిర్మాణ నియమాలను నేర్చుకోవడం వాక్య నిర్మాణాన్ని మెరుగుపరుస్తుంది."
+                },
+
+                {
+                    id: 6,
+                    eng: "<b>hierarchy</b>",
+                    tel: "<b>సోపానక్రమం</b>",
+                },
+                {
+                    eng: "The company has a strict management hierarchy.",
+                    tel: "కంపెనీకి కఠినమైన మేనేజ్‌మెంట్ సోపానక్రమం ఉంది."
+                },
+                {
+                    eng: "Understanding the hierarchy helps in resolving issues quickly.",
+                    tel: "సోపానక్రమాన్ని అర్థం చేసుకోవడం సమస్యలను త్వరగా పరిష్కరించడంలో సహాయపడుతుంది."
+                },
+
+                {
+                    id: 7,
+                    eng: "<b>gentle</b>",
+                    tel: "<b>సౌమ్యుడు, సాధుస్వభావము, సున్నితమైన</b>",
+                },
+                {
+                    eng: "She has a gentle way of speaking that everyone likes.",
+                    tel: "ఆమె మాట్లాడే సౌమ్యమైన శైలి అందరికి నచ్చుతుంది."
+                },
+                {
+                    eng: "The gentle breeze cooled the hot afternoon.",
+                    tel: "సున్నితమైన గాలి వేడైన మధ్యాహ్నం ను చల్లగా చేసింది."
+                },
+
+                {
+                    id: 8,
+                    eng: "<b>Descendants</b>",
+                    tel: "<b>వంశజులు</b>",
+                },
+                {
+                    eng: "The descendants of the king still live in the palace.",
+                    tel: "రాజు వంశజులు ఇంకా మహలనగరంలో ఉంటారు."
+                },
+                {
+                    eng: "Descendants should learn about their family traditions.",
+                    tel: "వంశజులు తమ కుటుంబ సంప్రదాయాలను నేర్చుకోవాలి."
+                },
+
+                {
+                    id: 9,
+                    eng: "<b>phlegm</b>",
+                    tel: "<b>కఫం</b>",
+                },
+                {
+                    eng: "Hot soup can help reduce phlegm in the throat.",
+                    tel: "గర్మ సూప్ గొంతులో కఫాన్ని తగ్గించడంలో సహాయపడుతుంది."
+                },
+                {
+                    eng: "Phlegm tends to accumulate during cold weather.",
+                    tel: "చల్లటి వాతావరణంలో కఫం ఎక్కువగా చేరుతుంది."
+                },
+
+                {
+                    id: 10,
+                    eng: "<b>belched</b>",
+                    tel: "<b>తేపు వచ్చిన</b>",
+                },
+                {
+                    eng: "He belched loudly after drinking the soda.",
+                    tel: "సోడా తాగిన తర్వాత అతను బలంగా తేపు వచ్చింది."
+                },
+                {
+                    eng: "The baby belched after finishing the milk.",
+                    tel: "పాలు తిన్న తర్వాత శిశువు తేపు వచ్చింది."
+                },
+                {
+                    id: 11,
+                    eng: "<b>procession</b>",
+                    tel: "<b>ఊరేగింపు</b>",
+                },
+                {
+                    eng: "The festival ended with a grand procession through the town.",
+                    tel: "పండుగ పట్టణం లో ఒక భव्यమైన ఊరేగింపు తో ముగిసింది."
+                },
+                {
+                    eng: "Police ensured the procession was orderly and safe.",
+                    tel: "పోలీస్ ఊరేగింపు సజావుగా, సురక్షితంగా జరగేలా చూసుకున్నారు."
+                },
+
+                {
+                    id: 12,
+                    eng: "<b>deficiencies</b>",
+                    tel: "<b>లోపాలు</b>",
+                },
+                {
+                    eng: "Vitamin deficiencies can lead to serious health problems.",
+                    tel: "విటమిన్ లోపాలు తీవ్రమైన ఆరోగ్య సమస్యలకు దారితీస్తాయి."
+                },
+                {
+                    eng: "The report highlighted deficiencies in the current system.",
+                    tel: "ప్రస్తుత వ్యవస్థలో లోపాలను నివేదిక ఉద్ఘాటించింది."
+                },
+
+                {
+                    id: 13,
+                    eng: "<b>stubborn</b>",
+                    tel: "<b>మొండి, పట్టుదలగల</b>",
+                },
+                {
+                    eng: "He is stubborn and refuses to admit his mistake.",
+                    tel: "అతను మొండి, తన తప్పును ఒప్పుకోవడానికి సిద్ధంగా లేదు."
+                },
+                {
+                    eng: "The stubborn stain did not come off despite scrubbing.",
+                    tel: "పట్టుదలగల మచ్చ తుడిచినా తొలగలేదు."
+                },
+
+                {
+                    id: 14,
+                    eng: "<b>premises</b>",
+                    tel: "<b>ప్రాంగణంలో</b>",
+                },
+                {
+                    eng: "Smoking is not allowed on the school premises.",
+                    tel: "పాఠశాల ప్రాంగణంలో పొగ త్రాగకూడదు."
+                },
+                {
+                    eng: "The company secured the premises with CCTV cameras.",
+                    tel: "కంపెనీ ప్రాంగణాన్ని సీసీటీవీ కెమెరాలతో రక్షించింది."
+                },
+
+                {
+                    id: 15,
+                    eng: "<b>predictable</b>",
+                    tel: "<b>ఊహించదగినది</b>",
+                },
+                {
+                    eng: "The plot of the movie was predictable.",
+                    tel: "సినిమా కథ ఊహించదగినది."
+                },
+                {
+                    eng: "His reactions are always predictable in stressful situations.",
+                    tel: "మరొక ఒత్తిడివంతమైన సందర్భాల్లో అతని ప్రతిక్రియలు ఎల్లప్పుడూ ఊహించదగినవి."
+                },
+
+                {
+                    id: 16,
+                    eng: "<b>priest</b>",
+                    tel: "<b>పూజారి</b>",
+                },
+                {
+                    eng: "The priest performed the wedding rituals.",
+                    tel: "పూజారి వివాహ కర్మకాండాలు నిర్వహించాడు."
+                },
+                {
+                    eng: "Every morning, the priest lights the temple lamps.",
+                    tel: "ప్రతి ఉదయం పూజారి దేవాలయ దీపాలు వెలిగిస్తాడు."
+                },
+
+                {
+                    id: 17,
+                    eng: "<b>arrogant</b>",
+                    tel: "<b>గర్విష్ఠుడు, అహంభావి, దురాహంకారముగల</b>",
+                },
+                {
+                    eng: "He is too arrogant to listen to anyone's advice.",
+                    tel: "ఎవరి సలహా వినకపోవడం అతను చాలా గర్విష్ఠుడు."
+                },
+                {
+                    eng: "The arrogant student refused to follow the rules.",
+                    tel: "దురాహంకారముగల విద్యార్థి నియమాలను పాటించకపోయాడు."
+                },
+
+                {
+                    id: 18,
+                    eng: "<b>adherence</b>",
+                    tel: "<b>కట్టుబడి, నిబధ్ధత</b>",
+                },
+                {
+                    eng: "Adherence to deadlines is crucial for project success.",
+                    tel: "ప్రాజెక్ట్ విజయానికి గడువులకు కట్టుబడి ఉండటం ముఖ్యము."
+                },
+                {
+                    eng: "The team showed strict adherence to company policies.",
+                    tel: "బృందం కంపెనీ విధానాలకు కఠినంగా కట్టుబడి ఉంది."
+                },
+
+                {
+                    id: 19,
+                    eng: "<b>surveillance</b>",
+                    tel: "<b>నిఘా</b>",
+                },
+                {
+                    eng: "The bank installed cameras for continuous surveillance.",
+                    tel: "బ్యాంక్ నిరంతర నిఘాకు కెమెరాలను ఏర్పాటు చేసింది."
+                },
+                {
+                    eng: "Police kept the suspect under close surveillance.",
+                    tel: "పోలీస్ నిందితుడిని కాస్త దగ్గరగా నిఘా చేసుకున్నారు."
+                },
+
+                {
+                    id: 20,
+                    eng: "<b>persist</b>",
+                    tel: "<b>అంటిపెట్టుకుని ఉంటారు</b>",
+                },
+                {
+                    eng: "Despite failures, she continues to persist with her studies.",
+                    tel: "విఫలాల ఉన్నప్పటికీ, ఆమె తన చదువులో అంటిపెట్టుకుని ఉంది."
+                },
+                {
+                    eng: "We must persist in our efforts to achieve the goal.",
+                    tel: "లక్ష్యం సాధించడానికి మన ప్రయత్నాల్లో అంటిపెట్టుకుని ఉండాలి."
+                },
+
+                {
+                    id: 21,
+                    eng: "<b>The species is becoming extinct</b>",
+                    tel: "<b>ఆ జాతి అంతరించిపోతున్నాయి</b>",
+                },
+                {
+                    eng: "The species is becoming extinct due to habitat loss.",
+                    tel: "ఆ జాతి వాస స్థల నష్టంవల్ల అంతరించిపోతున్నాయి."
+                },
+                {
+                    eng: "Conservation efforts are critical as the species is becoming extinct.",
+                    tel: "ఆ జాతి అంతరించిపోతున్నందున సంరక్షణ ప్రయత్నాలు అత్యంత అవసరం."
+                },
+
+                {
+                    id: 22,
+                    eng: "<b>The olive ridley turtle species is endangered</b>",
+                    tel: "<b>ఆలివ్ రిడ్లె తాబేలు జాతి అంతరించిపోతుంది</b>",
+                },
+                {
+                    eng: "The olive ridley turtle species is endangered due to poaching.",
+                    tel: "తాబేలు వేట కారణంగా ఆలివ్ రిడ్లె తాబేలు జాతి అంతరించిపోతుంది."
+                },
+                {
+                    eng: "Conservation programs help protect the olive ridley turtle species.",
+                    tel: "సంరక్షణ కార్యక్రమాలు ఆలివ్ రిడ్లె తాబేలు జాతిని రక్షించడంలో సహాయపడతాయి."
+                },
+
+                {
+                    id: 23,
+                    eng: "<b>species</b>",
+                    tel: "<b>జాతులు</b>",
+                },
+                {
+                    eng: "Many species are found only in the Amazon rainforest.",
+                    tel: "అమెజాన్ అడవిలో మాత్రమే అనేక జాతులు లభిస్తాయి."
+                },
+                {
+                    eng: "Endangered species require immediate protection.",
+                    tel: "అంతరించబోయే జాతులు తక్షణ రక్షణ అవసరం."
+                },
+
+                {
+                    id: 24,
+                    eng: "<b>eventual</b>",
+                    tel: "<b>చివరికి</b>",
+                },
+                {
+                    eng: "The eventual outcome of the negotiations was positive.",
+                    tel: "చివరికి చర్చల ఫలితం సానుకూలంగా వచ్చింది."
+                },
+                {
+                    eng: "Hard work leads to eventual success.",
+                    tel: "కష్టపడి పనిచేయడం చివరికి విజయానికి దారితీస్తుంది."
+                },
+
+                {
+                    id: 25,
+                    eng: "<b>afford</b>",
+                    tel: "<b>భరించు</b>",
+                },
+                {
+                    eng: "I cannot afford to buy a new car this year.",
+                    tel: "నేను ఈ సంవత్సరం కొత్త కారు కొనడానికి భరించలేను."
+                },
+                {
+                    eng: "They can afford luxury vacations once a year.",
+                    tel: "వారికి ప్రతి సంవత్సరం ఒకసారి విలాసవంతమైన సెలవులు భరించవచ్చు."
+                },
+
+                {
+                    id: 26,
+                    eng: "<b>perhaps</b>",
+                    tel: "<b>బహుశా</b>",
+                },
+                {
+                    eng: "Perhaps we should leave early to avoid traffic.",
+                    tel: "ట్రాఫిక్ నివారించడానికి బహుశా మనం ముందే వెళ్లాలి."
+                },
+                {
+                    eng: "Perhaps he will join us for dinner tonight.",
+                    tel: "బహుశా అతను ఈ రాత్రి మనతో భోజనానికి చేరుతాడు."
+                },
+
+                {
+                    id: 27,
+                    eng: "<b>insurgent</b>",
+                    tel: "<b>తిరుగుబాటుదారుడు</b>",
+                },
+                {
+                    eng: "The insurgent group attacked the military base.",
+                    tel: "తిరుగుబాటుదారుడు బృందం సైన్య స్థావరంపై దాడి చేసింది."
+                },
+                {
+                    eng: "Authorities are tracking the insurgent movements.",
+                    tel: "సాధికారులు తిరుగుబాటుదారుల కదలికలను గమనిస్తున్నారు."
+                },
+
+                {
+                    id: 28,
+                    eng: "<b>allegiant</b>",
+                    tel: "<b>విధేయుడు</b>",
+                },
+                {
+                    eng: "He is allegiant to his country.",
+                    tel: "అతను తన దేశానికి విధేయుడు."
+                },
+                {
+                    eng: "The soldier remained allegiant to his commander.",
+                    tel: "సైనికుడు తన ఆజ్ఞాదారునికి విధేయుడుగా ఉన్నాడు."
+                },
+
+                {
+                    id: 29,
+                    eng: "<b>divergent</b>",
+                    tel: "<b>భిన్నమైన</b>",
+                },
+                {
+                    eng: "They have divergent opinions on the topic.",
+                    tel: "వారి ఆలోచనలు ఆ అంశంపై భిన్నంగా ఉన్నాయి."
+                },
+                {
+                    eng: "Divergent paths can lead to new opportunities.",
+                    tel: "భిన్నమైన మార్గాలు కొత్త అవకాశాలకు దారితీస్తాయి."
+                },
+
+                {
+                    id: 30,
+                    eng: "<b>retaliation</b>",
+                    tel: "<b>ప్రతీకారం</b>",
+                },
+                {
+                    eng: "The country launched attacks in retaliation for the bombing.",
+                    tel: "విమాన దాడికి ప్రతీకారంగా ఆ దేశం దాడులు ప్రారంభించింది."
+                },
+                {
+                    id: 31,
+                    eng: "<b>discrimination</b>",
+                    tel: "<b>వివక్ష, పక్షపాతము</b>",
+                },
+                {
+                    eng: "Discrimination based on gender is illegal.",
+                    tel: "లింగంపై ఆధారపడి వివక్ష చేయడం చట్టవిరుద్ధం."
+                },
+                {
+                    eng: "The company has strict rules against discrimination.",
+                    tel: "కంపెనీకి వివక్షకు కఠినమైన నియమాలు ఉన్నాయి."
+                },
+
+                {
+                    id: 32,
+                    eng: "<b>obscene</b>",
+                    tel: "<b>అసభ్యకరమైన, అసహ్యకరమైన</b>",
+                },
+                {
+                    eng: "The movie contained obscene scenes not suitable for children.",
+                    tel: "చిత్రం అసభ్యకరమైన దృశ్యాలను కలిగి ఉంది, పిల్లలకు అనుకూలం కాదు."
+                },
+                {
+                    eng: "He was fined for using obscene language in public.",
+                    tel: "అతను ప్రజల ముందు అసభ్యకరమైన భాష వాడటానికి జరిమానా చెల్లించాడు."
+                },
+
+                {
+                    id: 33,
+                    eng: "<b>gestures</b>",
+                    tel: "<b>సంజ్ఞలు</b>",
+                },
+                {
+                    eng: "He communicates his ideas using gestures.",
+                    tel: "అతను తన ఆలోచనలను సంజ్ఞల ద్వారా వ్యక్తపరుస్తాడు."
+                },
+                {
+                    eng: "Friendly gestures make people feel welcome.",
+                    tel: "స్నేహపూర్వక సంజ్ఞలు ప్రజలకు ఆహ్వానంగా అనిపిస్తాయి."
+                },
+
+                {
+                    id: 34,
+                    eng: "<b>racist</b>",
+                    tel: "<b>జాతివివక్ష</b>",
+                },
+                {
+                    eng: "He was fired for making racist remarks.",
+                    tel: "జాతివివక్ష వ్యాఖ్యలు చేసినందుకు అతను ఉద్యోగం కోల్పోయాడు."
+                },
+                {
+                    eng: "Racist behavior is condemned worldwide.",
+                    tel: "జాతివివక్ష ప్రవర్తనను ప్రపంచవ్యాప్తంగా నిందిస్తారు."
+                },
+
+                {
+                    id: 35,
+                    eng: "<b>headgear</b>",
+                    tel: "<b>తలపాగా</b>",
+                },
+                {
+                    eng: "Construction workers must wear headgear for safety.",
+                    tel: "కonstruk్షన్ కార్మికులు భద్రత కోసం తలపాగా ధరించాలి."
+                },
+                {
+                    eng: "The soldiers wore ceremonial headgear during the parade.",
+                    tel: "సైనికులు ఊరేగింపులో రివాజు తలపాగా ధరించారు."
+                },
+
+                {
+                    id: 36,
+                    eng: "<b>teases</b>",
+                    tel: "<b>ఆటపట్టిస్తుంది</b>",
+                },
+                {
+                    eng: "He always teases his little brother playfully.",
+                    tel: "అతను ఎల్లప్పుడూ తన చిన్న అన్నను ఆటపట్టిస్తుంది."
+                },
+                {
+                    eng: "The teacher scolded the student who teases others.",
+                    tel: "ఇతరులను ఆటపట్టించే విద్యార్థిని ఉపాధ్యాయుడు తొలగించాడు."
+                },
+
+                {
+                    id: 37,
+                    eng: "<b>victim</b>",
+                    tel: "<b>బాధితుడు</b>",
+                },
+                {
+                    eng: "The victim of the accident was taken to the hospital.",
+                    tel: "దుర్ఘటన బాధితుడు ఆసుపత్రికి తరలించబడ్డాడు."
+                },
+                {
+                    eng: "Support groups help victims of natural disasters.",
+                    tel: "సహాయ సమూహాలు సహజ విపత్తుల బాధితులను సహాయపడతాయి."
+                },
+
+                {
+                    id: 38,
+                    eng: "<b>determined</b>",
+                    tel: "<b>నిర్ణయించారు</b>",
+                },
+                {
+                    eng: "She is determined to finish the marathon.",
+                    tel: "ఆమె మారథాన్ పూర్తి చేయాలని నిర్ణయించుకుంది."
+                },
+                {
+                    eng: "He remained determined despite all the obstacles.",
+                    tel: "అన్ని అవరోధాల ఉన్నప్పటికీ అతను నిర్ణయానికి నిలిచాడు."
+                },
+
+                {
+                    id: 39,
+                    eng: "<b>predominantly</b>",
+                    tel: "<b>ప్రధానంగా</b>",
+                },
+                {
+                    eng: "The population of the city is predominantly young.",
+                    tel: "నగరం జనాభా ప్రధానంగా యువత."
+                },
+                {
+                    eng: "This area is predominantly agricultural.",
+                    tel: "ఈ ప్రాంతం ప్రధానంగా వ్యవసాయ భూభాగం."
+                },
+
+                {
+                    id: 40,
+                    eng: "<b>Graveyard</b>",
+                    tel: "<b>శ్మశానం</b>",
+                },
+                {
+                    eng: "They visited the graveyard to pay respects to their ancestors.",
+                    tel: "వారు తమ పూర్వీకులకు గౌరవం చేకూర్చడానికి శ్మశానాన్ని సందర్శించారు."
+                },
+                {
+                    eng: "The old graveyard is surrounded by tall trees.",
+                    tel: "పాత శ్మశానం ఎత్తైన చెట్లచుట్టూ ఉంది."
+                },
+
+                {
+                    id: 41,
+                    eng: "<b>please do leverage</b>",
+                    tel: "<b>దయచేసి వినియోగించండి / ప్రయోజనం పొందండి</b>",
+                },
+                {
+                    eng: "Please do leverage your network to find a job.",
+                    tel: "జాబ్ కనుగొనడానికి దయచేసి మీ నెట్‌వర్క్‌ను వినియోగించండి."
+                },
+                {
+                    eng: "You should leverage your experience to get better opportunities.",
+                    tel: "మంచి అవకాశాలు పొందడానికి మీ అనుభవాన్ని ఉపయోగించాలి."
+                },
+
+                {
+                    id: 42,
+                    eng: "<b>stumble</b>",
+                    tel: "<b>పొరపాట్లు</b>",
+                },
+                {
+                    eng: "She stumbled while walking on the uneven path.",
+                    tel: "వెనకబడిన మార్గంలో నడుస్తూ ఆమె పొరపాట్లు చేసింది."
+                },
+                {
+                    eng: "He stumbled over a few words during the presentation.",
+                    tel: "ప్రసంగంలో కొన్ని పదాలపై అతను పొరపాట్లు చేశాడు."
+                },
+
+                {
+                    id: 43,
+                    eng: "<b>jeopardize</b>",
+                    tel: "<b>ప్రమాదంలో పడతాయి</b>",
+                },
+                {
+                    eng: "Revealing confidential information may jeopardize the company.",
+                    tel: "గోప్యమైన సమాచారం వెలికి రావడం కంపెనీకి ప్రమాదంలో పడతాయి."
+                },
+                {
+                    eng: "Careless driving can jeopardize your life.",
+                    tel: "అసావధానమైన డ్రైవింగ్ మీ జీవితాన్ని ప్రమాదంలో పడతాయి."
+                },
+
+                {
+                    id: 44,
+                    eng: "<b>procurement team</b>",
+                    tel: "<b>సేకరణ బృందం</b>",
+                },
+                {
+                    eng: "The procurement team is responsible for sourcing raw materials.",
+                    tel: "సేకరణ బృందం కాచా పదార్థాలను పొందడానికి బాధ్యత వహిస్తుంది."
+                },
+                {
+                    eng: "The procurement team negotiated better prices for the equipment.",
+                    tel: "సేకరణ బృందం పరికరాల కొరకు మెరుగైన ధరలను చర్చించింది."
+                },
+
+                {
+                    id: 45,
+                    eng: "<b>mimics</b>",
+                    tel: "<b>అనుకరిస్తుంది</b>",
+                },
+                {
+                    eng: "The parrot mimics human speech perfectly.",
+                    tel: "సరిపోలేని పక్షి మానవ ప్రసంగాన్ని అనుకరిస్తుంది."
+                },
+                {
+                    eng: "Children often mimic the actions of their parents.",
+                    tel: "పిల్లలు తరచుగా తమ తల్లిదండ్రుల చర్యలను అనుకరిస్తారు."
+                },
+
+                {
+                    id: 46,
+                    eng: "<b>significantly</b>",
+                    tel: "<b>గణనీయంగా</b>",
+                },
+                {
+                    eng: "Sales have increased significantly this quarter.",
+                    tel: "ఈ త్రైమాసికంలో అమ్మకాలు గణనీయంగా పెరిగాయి."
+                },
+                {
+                    eng: "Her performance improved significantly after training.",
+                    tel: "ప్రశిక్షణ తరువాత ఆమె ప్రదర్శన గణనీయంగా మెరుగైంది."
+                },
+
+                {
+                    id: 47,
+                    eng: "<b>adulteration</b>",
+                    tel: "<b>కల్తీ</b>",
+                },
+                {
+                    eng: "The food was tested for adulteration before selling.",
+                    tel: "అన్నం అమ్మే ముందు కల్తీ కోసం పరీక్షించబడింది."
+                },
+                {
+                    eng: "Authorities cracked down on milk adulteration in the city.",
+                    tel: "నగరంలో పాల కల్తీపై అధికారులు సడలింపులు పెట్టారు."
+                },
+
+                {
+                    id: 48,
+                    eng: "<b>Rely</b>",
+                    tel: "<b>నమ్మకంగా ఆధారపడు</b>",
+                },
+                {
+                    eng: "I rely on my team to finish the project on time.",
+                    tel: "ప్రాజెక్ట్‌ను సమయానికి పూర్తి చేయడానికి నేను నా బృందంపై ఆధారపడుతున్నాను."
+                },
+                {
+                    eng: "She relies on public transport to reach her office every day.",
+                    tel: "ప్రతి రోజు తన ఆఫీసుకి చేరడానికి ఆమె పబ్లిక్ ట్రాన్స్‌పోర్ట్‌పై ఆధారపడుతుంది."
                 }
             ],
         },

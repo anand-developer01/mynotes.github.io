@@ -144,7 +144,7 @@ Used for events like transitionstart, transitionend, transitionrun.
 const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
   console.log('Transition ended!');
 };`,
-        code1: ``
+          code1: ``
         },
         {
           text1: `        <table>
@@ -1840,6 +1840,407 @@ export const ReturnHOCInputCom = withAuth(PrivateComponent, yourRole);
         {
           text1: ``,
           code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      section: "Jest + React Testing Library (RTL)",
+      title: "jest",
+      note: [
+        {
+          text1: `Jest is a tool for testing JavaScript code, making it perfect for checking if your React apps are working right. Let's look at some basic things you need to know to start testing your React components with Jest.`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "setup",
+      note: [
+        {
+          text1: `<b>React + Jest Setup Notes</b>
+1️⃣ <b>Install required dependencies</b>
+For testing React components with Jest and React Testing Library:
+
+npm install --save-dev jest babel-jest @babel/core @babel/preset-env @babel/preset-react jest-environment-jsdom @testing-library/react @testing-library/jest-dom
+
+<b>2️⃣ Project configuration</b>
+<b>2.1 Babel config</b>
+Create <b>babel.config.cjs</b>:
+module.exports = {
+  presets: [
+    ['@babel/preset-react', { runtime: 'automatic' }], // JSX transform
+    '@babel/preset-env'
+  ],
+};
+<b>runtime: 'automatic'</b> → no need to import React in components for JSX.
+
+
+<b>2.2 Jest config</b>(optional)
+Create <b>jest.config.cjs</b>:
+module.exports = {
+  testEnvironment: 'jest-environment-jsdom', // simulates browser
+  transform: {
+    '^.+\\.[tj]sx?$': 'babel-jest', // use Babel for JSX/modern JS
+  },
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'], // optional, see below
+};
+
+
+<b>2.3 Setup Jest DOM (optional but recommended)</b>
+Create <b>src/setupTests.js</b>:
+import '@testing-library/jest-dom'; // enables matchers like toBeInTheDocument
+With <b>setupFilesAfterEnv</b>, you don’t need to import <b>jest-dom</b> in every test file.
+
+
+<b>3️⃣ Folder structure (recommended)</b>
+src/
+ ├── components/
+ │    └── Button.js
+ ├── __tests__/
+ │    └── button/
+ │         └── Button.test.js
+ └── setupTests.js
+babel.config.cjs
+jest.config.cjs
+package.json
+Keep tests close to components for easier maintenance.
+
+
+<b>Example Button Component & Test</b>
+// Button.js
+const Button = ({ label, onClick }) => {
+  return &lt;button onClick={onClick}&gt;{label}&lt;/button&gt;;
+};
+export default Button;
+
+
+//Button.test.js
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import Button from '../../components/Button';
+
+test('renders button with label', () => {
+  render(&lt;Button label=&quot;Click me&quot; /&gt;);
+  const btn = screen.getByText(/click me/i);
+  expect(btn).toBeInTheDocument(); // Jest DOM matcher
+});
+
+
+<b>Run tests</b>
+npm test
+Options:
+npm test → runs all tests in watch mode (if CRA)
+npm test -- Button.test.js → run a specific test file
+
+<b>Tips for the future</b>
+Always name test files: <b>*.test.js</b> or <b>*.spec.js</b>
+Keep test folders organized (<b>__tests__/componentName/</b>)
+Use </b>setupTests.js</b> for global Jest DOM imports
+Write one test at a time to avoid confusion
+Check Babel & Jest versions — setup differs slightly for Jest 28+
+
+
+
+<b>Prerequisites</b>: Familiarity with React, Node.js, and basic JavaScript testing principles.
+<b>Setting Up</b>: Use Create React App for easy setup or configure Jest manually in your project.
+<b>Jest Basics</b>: Learn about <b>describe</b> and <b>it</b> blocks for organizing tests, and <b>expect</b> matchers for making assertions.
+<b>React Testing Library</b>: Utilize tools like <b>render</b>, <b>screen</b>, and <b>userEvent</b> for interacting with your components in tests.
+<b>Writing Tests</b>: Start with simple tests checking if components render correctly, then move on to simulating user interactions and testing state changes.
+<b>Mocking</b>: Use mocking to isolate components and replace complex dependencies with simpler versions for testing.
+<b>Advanced Techniques</b>: Explore snapshot testing, testing props and state, and more sophisticated mocking strategies.
+<b>Best Practices</b>: Keep tests independent, use clear naming, simplify tests, and employ helper functions for repeated actions.
+<b>Common Challenges</b>: Learn how to tackle issues like mocking complex dependencies, finding DOM elements, and testing asynchronous logic.
+
+
+<table border="1" cellspacing="0" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Package</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>jest</code></td>
+      <td>Test runner</td>
+    </tr>
+    <tr>
+      <td><code>babel-jest</code></td>
+      <td>Transforms JS/JSX for Jest</td>
+    </tr>
+    <tr>
+      <td><code>@babel/core</code></td>
+      <td>Core Babel compiler</td>
+    </tr>
+    <tr>
+      <td><code>@babel/preset-env</code></td>
+      <td>Transpiles modern JS</td>
+    </tr>
+    <tr>
+      <td><code>@babel/preset-react</code></td>
+      <td>Transpiles JSX</td>
+    </tr>
+    <tr>
+      <td><code>jest-environment-jsdom</code></td>
+      <td>Browser-like environment for tests</td>
+    </tr>
+    <tr>
+      <td><code>@testing-library/react</code></td>
+      <td>Render React components in tests</td>
+    </tr>
+    <tr>
+      <td><code>@testing-library/jest-dom</code></td>
+      <td>Extra matchers like <code>toBeInTheDocument()</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Error</th>
+      <th>Cause</th>
+      <th>Fix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>SyntaxError: Support for jsx isn’t enabled</code></td>
+      <td>Babel not configured for JSX</td>
+      <td>Install <code>babel-jest</code> + <code>@babel/preset-react</code> and create <code>babel.config.cjs</code></td>
+    </tr>
+    <tr>
+      <td><code>React is not defined</code></td>
+      <td>JSX used without React import</td>
+      <td>Add <code>import React from 'react'</code> OR set <code>runtime: 'automatic'</code> in Babel preset</td>
+    </tr>
+    <tr>
+      <td><code>document is not defined</code></td>
+      <td>Jest running in Node environment</td>
+      <td>Set <code>testEnvironment: 'jest-environment-jsdom'</code></td>
+    </tr>
+    <tr>
+      <td><code>Unknown option: .testEnvironment</code></td>
+      <td>Added Jest config in Babel</td>
+      <td>Move <code>testEnvironment</code> to <code>jest.config.cjs</code></td>
+    </tr>
+    <tr>
+      <td><code>toBeInTheDocument is not a function</code></td>
+      <td><code>@testing-library/jest-dom</code> not imported</td>
+      <td>Import it in test or in <code>setupTests.js</code></td>
+    </tr>
+  </tbody>
+</table>
+
+`,
+          code1: `// ----------- Ex : 1 -----------
+          // Button.js
+export default function Button({ label }) {
+    return &lt;button&gt;{label}&lt;/button&gt;;
+}
+
+
+// Button.test.js
+import React from 'react'; // add this
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom'; // ← add this
+import Button from '../../components/dashboard/Button';
+
+test('renders button with label', () => {
+    render(&lt;Button label=&quot;Click me&quot; /&gt;);
+    const btn = screen.getByText(/click me/i);
+    expect(btn).toBeInTheDocument();
+});
+
+          
+
+// ------------ Ex : 2 ----------
+//Sum.js
+export default function sum(a, b){
+    return a+b
+}
+
+// Button.test.js
+import React from 'react'; // add this
+import '@testing-library/jest-dom'; // ← add this
+import sum from '../../components/dashboard/Sum';
+
+test("2 values sum results", () => {
+    expect(sum(10, 10)).toBe(20)
+})
+          `
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "describe & it",
+      note: [
+        {
+          text1: `<b>describe</b> blocks group tests that are related. You can think of it like a folder that holds all tests for a specific component. For instance:
+describe('MyComponent', () => {
+
+  // Tests for MyComponent go here
+
+});
+
+<b>it</b> blocks are for individual tests. It's like saying, "It should do this or that." For example:
+it('renders correctly', () => {
+
+  // Here's where you write what the test should do
+
+});
+So, <b>describe</b> blocks are for grouping tests, and <b>it</b> blocks are for single tests.
+`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Common matchers - (expect Matchers)",
+      note: [
+        {
+          text1: `toContain, toBeTruthy, toBeFalsy
+          
+          toBe() - checks basic values or if two things are the same
+toEqual() - checks if objects have the same content
+toContain()
+toBeTruthy()
+toBeFalsy()
+toBeInTheDocument() - makes sure an element is actually on the page
+toHaveTextContent() - checks if an element has certain text
+toHaveLength() - checks how long something is, like an array or string
+
+Ex : 
+expect(result).toBe(3); 
+expect(array).toHaveLength(3);
+`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "React Testing Library",
+      note: [
+        {
+          text1: `<b>render()</b>	Test utility / Renderer - Puts a React component into a virtual DOM so you can test it.
+          puts a component on the page
+          It “renders” your React component into a virtual DOM (not the real browser DOM).
+This lets Jest + RTL interact with the component in a test environment.
+
+<b>screen</b>	Query API / Locator - Provides functions to find elements in the rendered virtual DOM.
+helps you find elements
+-> screen is an object that holds all the querying functions to find elements in the rendered virtual DOM.
+-> Examples of queries: <b>getByText, getByRole, getByPlaceholderText</b>, etc.
+
+<b>userEvent</b>	Event Simulation / Interaction Utility - Lets you simulate real user actions (click, type, hover, etc.).
+lets you pretend to do things like clicking
+-> Simulates <b>user actions</b> like clicking, typing, hovering, etc.
+-> More realistic than <b>fireEvent</b>, because it behaves like a real user would.
+
+render(&lt;MyComponent /&gt;);
+
+userEvent.click(screen.getByRole('button')); 
+
+expect(screen.getByText(/Clicked/i)).toBeInTheDocument();
+`,
+          code1: `// ------------ Ex : 1 -----------
+          // Button.js
+import React from "react";
+const Button = ({ label }) => {
+    return &lt;button&gt;{label}&lt;/button&gt;;
+};
+export default Button;
+
+
+// Button.test.js
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import Button from '../../components/dashboard/Button';
+
+test("renders button with correct label", () => {
+  // Step 1: Render the component
+  render(&lt;Button label=&quot;Click me&quot; /&gt;);
+
+  // Step 2: Find the element
+  const buttonElement = screen.getByText("Click me");
+
+  // Step 3: Assert it is in the document
+  expect(buttonElement).toBeInTheDocument();
+});
+
+
+// ------------ Ex : 2 -----------
+// Login.js
+import React, { useState } from "react";
+
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;form onSubmit={handleSubmit}&gt;
+        &lt;input
+          type=&quot;text&quot;
+          placeholder=&quot;Username&quot;
+          value={username}
+          onChange={(e) =&gt; setUsername(e.target.value)}
+        /&gt;
+        &lt;button type=&quot;submit&quot;&gt;Login&lt;/button&gt;
+        {/* &lt;p&gt;Login&lt;/p&gt; */}
+      &lt;/form&gt;
+
+      {submitted &amp;&amp; &lt;p&gt;Welcome, {username}!&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+};
+
+export default Login;
+
+
+// Button.test.js
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import "@testing-library/jest-dom";
+import Login from '../../components/dashboard/Button';
+
+test("user can type username and submit form", async () => {
+    render(&lt;Login /&gt;);
+
+    // Step 1: Find the input and button
+    const input = screen.getByPlaceholderText("Username");
+    const button = screen.getByText("Login");
+
+    // If there are multiple elements with the same text
+    //Instead of just \`getByText\`, you can include the element type with a function:
+    //   const button = screen.getByText((content, element) => {
+    //     return element.tagName.toLowerCase() === "button" && content === "Login";
+    // });
+
+    // Step 2: Simulate typing in the input
+    await userEvent.type(input, "Anand");
+
+    // Step 3: Simulate clicking the button
+    await userEvent.click(button);
+
+    // Step 4: Check if welcome message appears
+    const welcomeMessage = screen.getByText("Welcome, Anand!");
+    expect(welcomeMessage).toBeInTheDocument();
+});
+
+          `
         }
       ],
     },

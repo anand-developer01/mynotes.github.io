@@ -3164,6 +3164,20 @@ The property takes three different values:
         },
       ],
     },
+        {
+      id: 52,
+      title: "box-sizing",
+      note: [
+        {
+          text1: `The CSS <b>box-sizing</b> property allows us to include the padding and border in an element's total width and height.
+          
+          The CSS box-sizing property controls how the total width and height of an element are calculated, specifically determining whether padding and borders are included within the specified dimensions.
+          
+          The box-sizing property controls <b>how the width and height of an element are calculated</b> — whether padding and border are included or not.`,
+          code1: ``
+        },
+      ],
+    },
     {
       id: 52,
       title: "CSS Colors",
