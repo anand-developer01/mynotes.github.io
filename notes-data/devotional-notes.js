@@ -225,7 +225,9 @@ const devotionalData = {
             title: "శ్రీ వేంకటేశ్వర అష్టోత్తర శత నామావళి",
             note: [
                 {
-                    text1: `ఓం శ్రీ వేంకటేశాయ నమః
+                    text1: ` <a href="https://www.youtube.com/watch?v=AdGj880iv4U" target="_blank" rel="noopener"> శ్రీ వేంకటేశ్వర అష్టోత్తర శత నామావళి </a>
+                    
+                    ఓం శ్రీ వేంకటేశాయ నమః
 ఓం శ్రీనివాసాయ నమః
 ఓం లక్ష్మీపతయే నమః
 ఓం అనామయాయ నమః

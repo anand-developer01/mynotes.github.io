@@ -6,13 +6,13 @@ const Links4 = 'react-projects'
 const isHighlighted = 'redux-notes'
 
 const reduxData = {
-    reduxNote: [
+  reduxNote: [
+    {
+      id: 2,
+      title: "What is Redux?",
+      note: [
         {
-            id: 2,
-            title: "What is Redux?",
-            note: [
-                {
-                    text1: `<a href="https://github.com/reduxjs/redux-toolkit" target="_blank"> redux-toolkit </a>
+          text1: `<a href="https://github.com/reduxjs/redux-toolkit" target="_blank"> redux-toolkit </a>
                     <a href="https://webcodingcenter.com/redux" target="_blank"> redux </a>
                     Redux is a state management library that allows you to manage the state of your JavaScript applications more efficiently and predictably.
                     
@@ -71,7 +71,7 @@ In Redux, dispatch is a function provided by the store that allows you to send a
 In Redux, a reducer is a function that takes in the current state of an application and an action as arguments, and returns a new state based on the action.
 
                     `,
-                    code1: `//Here is an example of an action creator that takes in a task's text and returns an action object to add the task to the Redux store:
+          code1: `//Here is an example of an action creator that takes in a task's text and returns an action object to add the task to the Redux store:
 
                 function addTask(taskText) {
                 return {
@@ -101,9 +101,9 @@ function counterReducer(state = initialState, action) {
   }
 }
                 `
-                },
-                {
-                    text1: `<b>create store</b>
+        },
+        {
+          text1: `<b>create store</b>
 Install Redux Toolkit
 Make sure you have Redux Toolkit and React-Redux installed:
 <span style="color:red">npm install @reduxjs/toolkit react-redux</span>
@@ -111,7 +111,7 @@ Make sure you have Redux Toolkit and React-Redux installed:
                     <span style="color:red">configureStore.ts:98 Uncaught Error: \`reducer\` is a required argument, and must be a function or an object of functions that can be passed to combineReducers</span>
                     When using configureStore from Redux Toolkit, the reducer should be passed as an object under the reducer key, or directly as a function if there's only one reducer.
                     `,
-                    code1: `//basic setup of store
+          code1: `//basic setup of store
                     //store.js
                     import { configureStore } from '@reduxjs/toolkit';
 import { CounterReducer } from './reducer/RootReducer'
@@ -177,19 +177,19 @@ export default store;
 
 
     `
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-            ],
         },
         {
-            id: 52,
-            title: "configureStore",
-            note: [
-                {
-                    text1: ` A standard Redux store setup typically requires multiple pieces of configuration:
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "configureStore",
+      note: [
+        {
+          text1: ` A standard Redux store setup typically requires multiple pieces of configuration:
 
 => Combining the slice reducers into the root reducer
 => Creating the middleware enhancer, usually with the thunk middleware or other side effects middleware, as well as middleware that might be used for development checks
@@ -247,7 +247,7 @@ If not provided, <b>configureStore</b> will call <b>getDefaultMiddleware</b> and
 
     <a href="https://redux-toolkit.js.org/api/configureStore" target="_blank">configureStore</a>
 `,
-                    code1: `//Parameters of configureStore
+          code1: `//Parameters of configureStore
     //-------- ** reducer ** ---------:
     const store = configureStore({
       reducer: {
@@ -341,9 +341,9 @@ const store = configureStore({
 // Export the configured store
 export default store;
 `
-                },
-                {
-                    text1: `<span style="color:red">ChangeCounter.js:7 Selector unknown returned the root state when called. This can lead to unnecessary rerenders.
+        },
+        {
+          text1: `<span style="color:red">ChangeCounter.js:7 Selector unknown returned the root state when called. This can lead to unnecessary rerenders.
 Selectors that return the entire state are almost certainly a mistake, as they will cause a rerender whenever *anything* in state changes.</span>
 
 The warning you're seeing indicates that your selector is returning the entire state object instead of a specific part of the state. This can lead to unnecessary re-renders because any change in the state will trigger a re-render of the components that use that selector.
@@ -358,15 +358,15 @@ const MyComponent = () => {
     return &lt;div&gt;Current coin value: {coin}&lt;/div&gt;;
 }
                     `
-                }
-            ],
-        },
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "combineReducers",
+      note: [
         {
-            id: 52,
-            title: "combineReducers",
-            note: [
-                {
-                    text1: `<b>combineReducers</b> is a utility function provided by Redux that allows you to combine multiple reducer functions into a single reducer function. This is especially useful when your application's state is complex and needs to be managed in a modular way.
+          text1: `<b>combineReducers</b> is a utility function provided by Redux that allows you to combine multiple reducer functions into a single reducer function. This is especially useful when your application's state is complex and needs to be managed in a modular way.
                     
                     The combineReducers helper function turns an object whose values are different <b>slice reducer</b> functions into a single combined reducer function you can pass to Redux Toolkit's <b>configureStore</b> (or the legacy <b>createStore</b> method)
 
@@ -402,7 +402,7 @@ This helper is just a convenience! You can write your own <b>combineReducers</b>
 
 You may call <b>combineReducers</b> at any level of the reducer hierarchy. It doesn't have to happen at the top. In fact you may use it again to split the child reducers that get too complicated into independent grandchildren, and so on.
                     `,
-                    code1: `//"tip"
+          code1: `//"tip"
 // This should be rarely needed - Redux Toolkit's "configureStore" method will automatically call "combineReducers" for you if you pass in an object of slice reducers:
 
 const store = configureStore({
@@ -413,19 +413,19 @@ const store = configureStore({
 })
 
 // You can still call "combineReducers()" yourself if you need to construct the root reducer manually first.`
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-            ],
         },
         {
-            id: 52,
-            title: "createSlice",
-            note: [
-                {
-                    text1: `A function that accepts an initial state, an object of reducer functions, and a "slice name", and automatically generates action creators and action types that correspond to the reducers and state.
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "createSlice",
+      note: [
+        {
+          text1: `A function that accepts an initial state, an object of reducer functions, and a "slice name", and automatically generates action creators and action types that correspond to the reducers and state.
 
 This API is the standard approach for writing Redux logic.
 
@@ -455,7 +455,7 @@ Alternatively, the <b>reducers</b> field can be a callback which receives a "cre
 
 The main benefit of this is that you can create async thunks as part of your slice (though for bundle size reasons, you need a bit of setup for this). Types are also slightly simplified for prepared reducers.
 `,
-                    code1: `//Parameters
+          code1: `//Parameters
 // createSlice accepts a single configuration object parameter, with the following options:
 
 function createSlice({
@@ -657,18 +657,18 @@ export const RootReducer = combineReducers({
 })
 
 `
-                },
-            ],
         },
+      ],
+    },
+    {
+      id: 52,
+      title: "createReducer",
+      note: [
         {
-            id: 52,
-            title: "createReducer",
-            note: [
-                {
-                    text1: `A utility that simplifies creating Redux reducer functions. It uses Immer internally to drastically simplify immutable update logic by writing "mutative" code in your reducers, and supports directly mapping specific action types to case reducer functions that will update the state when that action is dispatched.
+          text1: `A utility that simplifies creating Redux reducer functions. It uses Immer internally to drastically simplify immutable update logic by writing "mutative" code in your reducers, and supports directly mapping specific action types to case reducer functions that will update the state when that action is dispatched.
 
 Redux reducers are often implemented using a <b>switch</b> statement, with one <b>case</b> for every handled action type.`,
-                    code1: `const initialState = { value: 0 }
+          code1: `const initialState = { value: 0 }
 
 function counterReducer(state = initialState, action) {
   switch (action.type) {
@@ -682,9 +682,9 @@ function counterReducer(state = initialState, action) {
       return state
   }
 }`
-                },                
-                {
-                    text1: `This approach works well, but is a bit boilerplate-y and error-prone. For instance, it is easy to forget the <b>default</b> case or setting the initial state.
+        },
+        {
+          text1: `This approach works well, but is a bit boilerplate-y and error-prone. For instance, it is easy to forget the <b>default</b> case or setting the initial state.
 
 The <b>createReducer</b> helper streamlines the implementation of such reducers. It uses a "builder callback" notation to define handlers for specific action types, matching against a range of actions, or handling a default case. This is conceptually similar to a switch statement, but with better TS support.
 
@@ -696,7 +696,7 @@ The <b>createReducer</b> helper streamlines the implementation of such reducers.
     <b>Ease of Use</b>: It reduces boilerplate code and improves readability, making it easier to manage state changes.
 
 With <b>createReducer</b>, your reducers instead look like:`,
-                    code1: `import { createAction, createReducer } from '@reduxjs/toolkit'
+          code1: `import { createAction, createReducer } from '@reduxjs/toolkit'
 
 const increment = createAction('counter/increment')
 const decrement = createAction('counter/decrement')
@@ -716,9 +716,9 @@ const counterReducer = createReducer(initialState, (builder) => {
       state.value += action.payload
     })
 })`
-                },                
-                {
-                    text1: `<b>Usage with the "Builder Callback" Notation</b>
+        },
+        {
+          text1: `<b>Usage with the "Builder Callback" Notation</b>
                     This function accepts a callback that receives a <b>builder</b> object as its argument. That builder provides <b>addCase, addMatcher</b> and <b>addDefaultCase</b> functions that may be called to define what actions this reducer will handle.
 
    <b>Parameters</b>
@@ -755,7 +755,7 @@ This is a function that takes an action as an argument and returns <u>true</u> i
 <u>reducer</u> The actual case reducer function.
 This function updates the state based on the matched action.
 `,
-                    code1: `import { createAction, createReducer } from '@reduxjs/toolkit'
+          code1: `import { createAction, createReducer } from '@reduxjs/toolkit'
 
 const increment = createAction('increment')
 const decrement = createAction('decrement')
@@ -965,22 +965,22 @@ const UserList = () => {
 
 export default UserList;
 `
-                },                             
-                {
-                    text1: `<b>createSlice vs createReducer </b>
+        },
+        {
+          text1: `<b>createSlice vs createReducer </b>
                     createSlice: A function that accepts an initial state, an object full of reducer functions, and a "slice name", and automatically generates action creators and action types that correspond to the reducers and state.
 
 createReducer: A utility that simplifies creating Redux reducer functions. It uses Immer internally to drastically simplify immutable update logic by writing "mutative" code in your reducers, and supports directly mapping specific action types to case reducer functions that will update the state when that action is dispatched.`,
-                    code1: ``
-                },
-            ],
+          code1: ``
         },
+      ],
+    },
+    {
+      id: 52,
+      title: "CreateAction",
+      note: [
         {
-            id: 52,
-            title: "CreateAction",
-            note: [
-                {
-                    text1: `A helper function for defining a Redux action type and creator.
+          text1: `A helper function for defining a Redux action type and creator.
 <span style="color:red"> function createAction(type, prepareAction?) </span>
 The usual way to define an action in Redux is to separately declare an action type constant and an action creator function for constructing actions of that type.
 
@@ -995,7 +995,7 @@ In Redux Toolkit, createAction is a utility function used to create action creat
     <b>Payload Handling</b>: The payload is automatically included in the action object, making it easy to pass data with actions.
     <b>Consistent Action Types</b>: Using createAction helps avoid common mistakes like typos in action type strings
     `,
-                    code1: `const INCREMENT = 'counter/increment'
+          code1: `const INCREMENT = 'counter/increment'
 
 function increment(amount) {
   return {
@@ -1039,9 +1039,9 @@ function counterReducer(state, action) {
     }
 }
 `
-                },
-                {
-                    text1: `<b>Using Prepare Callbacks to Customize Action Contents</b>
+        },
+        {
+          text1: `<b>Using Prepare Callbacks to Customize Action Contents</b>
                     
                     By default, the generated action creators accept a single argument, which becomes <b>action.payload</b>. This requires the caller to construct the entire payload correctly and pass it in.
 
@@ -1049,7 +1049,7 @@ In many cases, you may want to write additional logic to customize the creation 
 
 If provided, all arguments from the action creator will be passed to the prepare callback, and it should return an object with the <b>payload</b> field (otherwise the payload of created actions will be <b>undefined</b>). Additionally, the object can have a <b>meta</b> and/or an <b>error</b> field that will also be added to created actions. <b>meta</b> may contain extra information about the action, <b>error</b> may contain details about the action failure. These three fields (<b>payload, meta</b> and <b>error</b>) adhere to the specification of Flux Standard Actions.
                     `,
-                    code1: `import { createAction, nanoid } from '@reduxjs/toolkit'
+          code1: `import { createAction, nanoid } from '@reduxjs/toolkit'
 
 const addTodo = createAction('todos/add', function prepare(text) {
   return {
@@ -1072,11 +1072,11 @@ console.log(addTodo('Write more docs'))
  *   }
  * }
  **/`
-                },
-                {
-                    text1: `<b>Usage with createReducer()</b>
+        },
+        {
+          text1: `<b>Usage with createReducer()</b>
 Action creators can be passed directly to <b>addCase</b> in a createReducer() build callback.`,
-                    code1: `import { createAction, createReducer } from '@reduxjs/toolkit'
+          code1: `import { createAction, createReducer } from '@reduxjs/toolkit'
 
 const increment = createAction('counter/increment')
 const decrement = createAction('counter/decrement')
@@ -1085,9 +1085,9 @@ const counterReducer = createReducer(0, (builder) => {
   builder.addCase(increment, (state, action) => state + action.payload)
   builder.addCase(decrement, (state, action) => state - action.payload)
 })`
-                },
-                {
-                    text1: `<b>actionCreator.match</b>
+        },
+        {
+          text1: `<b>actionCreator.match</b>
 Every generated actionCreator has a <b>.match(action)</b> method that can be used to determine if the passed action is of the same type as an action that would be created by the action creator.
 
 In Redux Toolkit, each action creator created using <b>createAction</b> or <b>createSlice</b> automatically generates a <b>match</b> method. This method is useful for type-safe checking of action objects against the action creator. Here's a breakdown of how <b>actionCreator.match</b> works and its use cases.
@@ -1099,7 +1099,7 @@ The match method is a function that allows you to verify if a given action objec
     <u>1) Creating an Action Creator</u>: When you create an action using createAction or in a slice using createSlice, you can use the match method to validate actions
     <u>2) Using match in a Reducer or Middleware</u>: You can use match in a reducer, middleware, or anywhere you want to check if an action is of a specific type.
 `,
-                    code1: `const counterReducer = (state = { value: 0 }, action) => {
+          code1: `const counterReducer = (state = { value: 0 }, action) => {
   if (increment.match(action)) {
     return { ...state, value: state.value + 1 };
   }
@@ -1190,15 +1190,15 @@ const Counter = () => {
 export default Counter;
 
 `
-                },
-            ],
         },
+      ],
+    },
+    {
+      id: 52,
+      title: "matching utilities",
+      note: [
         {
-            id: 52,
-            title: "matching utilities",
-            note: [
-                {
-                    text1: `<b>matching utilities</b>
+          text1: `<b>matching utilities</b>
                     Redux Toolkit exports several other matching utilities that you can leverage to check for specific kinds of actions. These are primarily useful for writing the builder.addMatcher() cases in createSlice and createReducer, as well as custom middleware.:
 
 <b>isAllOf</b> - returns true when all conditions are met
@@ -1208,10 +1208,10 @@ export default Counter;
 <b>isFulfilled</b> - accepts one or more action creators and returns true when all match
 <b>isRejected</b> - accepts one or more action creators and returns true when all match
 <b>isRejectedWithValue</b> - accepts one or more action creators and returns true when all match`,
-                    code1: ``
-                },   
-                {
-                    text1: `<b>isAllOf in Redux Toolkit</b>
+          code1: ``
+        },
+        {
+          text1: `<b>isAllOf in Redux Toolkit</b>
 
 <b>Description</b>:isAllOf is a utility function provided by Redux Toolkit to simplify the process of matching multiple action types in your Redux reducers or middleware. It is particularly useful in scenarios where you want to perform a specific action only when all of a set of actions have been dispatched.
 Use Cases
@@ -1232,7 +1232,7 @@ isAllOf(...actionCreators)
 
     It returns a function that can be used to test an action. This function takes an action as an argument and returns true if the action matches all of the provided action creators, or false otherwise.
     `,
-                    code1: `// formSlice.js
+          code1: `// formSlice.js
 import { createSlice, createAction, isAllOf } from '@reduxjs/toolkit';
 
 // Define action creators
@@ -1332,31 +1332,31 @@ export default FormComponent;
 Ex : 2
 
 `
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-            ],
         },
         {
-            id: 52,
-            title: "Extra Reducers",
-            note: [
-                {
-                    text1: `<b>extraReducers</b>
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "Extra Reducers",
+      note: [
+        {
+          text1: `<b>extraReducers</b>
                     Conceptually, each slice reducer "owns" its slice of state. There's also a natural correspondence between the update logic defined inside <b>reducers</b>, and the action types that are generated based on those.
 
 However, there are many times that a Redux slice may also need to update its own state in response to action types that were defined elsewhere in the application (such as clearing many different kinds of data when a "user logged out" action is dispatched). This can include action types defined by another <b>createSlice</b> call, actions generated by a <b>createAsyncThunk</b>, RTK Query endpoint matchers, or any other action. In addition, one of the key concepts of Redux is that many slice reducers can independently respond to the same action type.
@@ -1373,7 +1373,7 @@ If two fields from <b>reducers</b> and <b>extraReducers</b> happen to end up wit
 Similar to <b>createReducer</b>, the <b>extraReducers</b> field uses a "builder callback" notation to define handlers for specific action types, matching against a range of actions, or handling a default case. This is conceptually similar to a switch statement, but with better TS support as it can infer the action type from the provided action creator. It's particularly useful for working with actions produced by <b>createAction</b> and <b>createAsyncThunk</b>.
 
 `,
-                    code1: `import { createAction, createSlice } from '@reduxjs/toolkit'
+          code1: `import { createAction, createSlice } from '@reduxjs/toolkit'
 const incrementBy = createAction('incrementBy')
 const decrement = createAction('decrement')
 
@@ -1402,9 +1402,9 @@ createSlice({
       .addDefaultCase((state, action) => {})
   },
 })`
-                },                
-                {
-                    text1: `In Redux Toolkit, <b>extraReducers</b> is an optional configuration object that allows you to define additional reducers that respond to actions generated by other parts of your application, such as thunks or other slices.
+        },
+        {
+          text1: `In Redux Toolkit, <b>extraReducers</b> is an optional configuration object that allows you to define additional reducers that respond to actions generated by other parts of your application, such as thunks or other slices.
 
 The keys in <b>extraReducers</b> are action types, and the values are reducer functions that should be executed in response to those actions. The syntax for defining an extra reducer is as follows:
 
@@ -1437,7 +1437,7 @@ const counterReducer = createReducer(initialState, <b><span style="color:orange"
 if you get above 
 The object syntax for createSlice.extraReducers has been <a href="https://github.com/reduxjs/redux-toolkit/issues/2301" target="_blank"> deprecated since version 1.9.0</a> and then removed in v2.0.0. It's explained both in <a href="https://github.com/reduxjs/redux-toolkit/releases/tag/v2.0.0" target="_blank">v2.0.0 changelogs</a> and in the <a href="https://redux.js.org/usage/migrations/migrating-rtk-2#object-syntax-for-createsliceextrareducers-and-createreducer-removed" target="_blank">migration guide to RTK 2.0 and Redux 5.0</a> how to fix it. As the error says, you have to convert the object into the <b>builder callback</b> syntax:
 `,
-                    code1: `//Syntex:
+          code1: `//Syntex:
                     extraReducers: {
                         [actionType]: (state, action) => {
                             // reducer logic goes here
@@ -1483,9 +1483,9 @@ export const themeSlice = createSlice({
 
 // createSlice.ts:414 Uncaught Error: The object notation for \`createSlice.extraReducers\` has been removed. Please use the 'builder callback' notation instead:
                     `
-                },
-                {
-                    text1: `In this example, <b>fetchUserData</b> is the name of the thunk that we're defining. The <b>payloadCreator</b> function takes a <b>userId</b> argument and an <b>extra</b> argument that contains an API client. It uses the API client to fetch the user data, and returns the data property of the response as the payload of the <b>fulfilled</b> action.
+        },
+        {
+          text1: `In this example, <b>fetchUserData</b> is the name of the thunk that we're defining. The <b>payloadCreator</b> function takes a <b>userId</b> argument and an <b>extra</b> argument that contains an API client. It uses the API client to fetch the user data, and returns the data property of the response as the payload of the <b>fulfilled</b> action.
 
                     <b><u>builder callback</u>:</b>
 
@@ -1501,7 +1501,7 @@ In the <b>pending</b> case, we're setting the <b>status</b> property of the <b>s
 
 When the <b>fetchUserData</b> thunk is dispatched, it will trigger the <b>pending</b> case first, then either the <b>fulfilled</b> or <b>rejected</b> case, depending on whether the promise is resolved or rejected.
                     `,
-                    code1: `//Here's an example of how you might use createAsyncThunk to define a thunk that fetches some data from an API:
+          code1: `//Here's an example of how you might use createAsyncThunk to define a thunk that fetches some data from an API:
 // Ex : 1
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -1551,13 +1551,13 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 `
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-                {
-                    text1: `reducer vs extrareducers
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: `reducer vs extrareducers
                     <div class='table-res'>
                     <table>
                         <thead>
@@ -1592,16 +1592,16 @@ export default userSlice.reducer;
                     </table>
                     </div>
                     `,
-                    code1: ``
-                },
-            ],
+          code1: ``
         },
+      ],
+    },
+    {
+      id: 52,
+      title: "createAsyncThunk",
+      note: [
         {
-            id: 52,
-            title: "createAsyncThunk",
-            note: [
-                {
-                    text1: `In Redux, middleware has always been used to perform asynchronous tasks. Asynchronous tasks means things you have to wait for, such as fetching data from an API. A middleware is designed to enable developers to write logic that has side effects. An example is a package called redux-thunk.
+          text1: `In Redux, middleware has always been used to perform asynchronous tasks. Asynchronous tasks means things you have to wait for, such as fetching data from an API. A middleware is designed to enable developers to write logic that has side effects. An example is a package called redux-thunk.
                     
                     Redux toolkit comes with built-in dependencies such as <u>redux-thunk</u>, because Redux toolkit includes <u>redux-thunk</u> by default, we can use <u>createAsyncThunk</u> to make asynchronous requests.
 
@@ -1637,7 +1637,7 @@ When you handle asynchronous operations like fetching data, you often need to di
     <b>Async Function</b>: The second argument is a function that performs the async operation. It can return a promise, and Redux Toolkit will automatically handle resolving the promise.
     <b>Action Payloads</b>: The function should return the data you want to pass as the payload when the async operation is successful. If the operation fails, you can throw an error, and the error will be passed to the rejected action.
 `,
-                    code1: `import { createAsyncThunk } from '@reduxjs/toolkit';
+          code1: `import { createAsyncThunk } from '@reduxjs/toolkit';
 
 // Define an async thunk action
 const fetchData = createAsyncThunk(
@@ -1826,15 +1826,15 @@ export default () => {
   );
 };
 `
-                }
-            ],
-        },
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "useSelect",
+      note: [
         {
-            id: 52,
-            title: "useSelect",
-            note: [
-                {
-                    text1: `The <b>useSelector</b> hooks allow you to extract data or the state from the Redux store using a selector function. It is equivalent to the mapStateToProps argument used in the connect() function conceptually.
+          text1: `The <b>useSelector</b> hooks allow you to extract data or the state from the Redux store using a selector function. It is equivalent to the mapStateToProps argument used in the connect() function conceptually.
 
 -> when an action is performed, the <b>useSelector()</b> hook will compare the results of the previous and current selector values and if they are different then the component is bound to re-render otherwise it stays the same.
 -> the main difference between the two is that the mapStateToProps pass down multiple values as props whereas the <b>useSelector</b> will take the current state as the argument and returns a single variable as a result.
@@ -1854,16 +1854,16 @@ When an action is <b>dispatched, useSelector()</b> will do a reference compariso
 
 => useSelector and useDispatch served as an alternative to the connect() function. The useSelector hook is equivalent to the mapStateToProps and takes an argument that returns the part of the state that the component needs whereas the hook useDispatch acts just like mapDispatchToProps.
 `,
-                    code1: ``
-                }
-            ],
-        },
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "createSelector",
+      note: [
         {
-            id: 52,
-            title: "createSelector",
-            note: [
-                {
-                    text1: `A "selector" is any function that accepts the Redux state tree as an argument, and returns some extracted or derived data. That includes plain functions like you showed.
+          text1: `A "selector" is any function that accepts the Redux state tree as an argument, and returns some extracted or derived data. That includes plain functions like you showed.
 
 In many cases, you want to memoize the calculation of the results, such as mapping over an array of items, so that it's not re-calculated unless the inputs have changed. Reselect's <b>createSelector</b> creates memoized selector functions that only recalculate the output if the inputs change.
 
@@ -1872,7 +1872,7 @@ In many cases, you want to memoize the calculation of the results, such as mappi
 -> Selectors are composable. They can be used as input to other selectors.
 
 Reselect exports a createSelector API, which generates memoized selector functions. createSelector accepts one or more "input" selectors, which extract values from arguments, and an "output" selector that receives the extracted values and should return a derived value. If the generated selector is called multiple times, the output will only be recalculated when the extracted values have changed.`,
-                    code1: `//When you call a selector (eg. selectSum), Reselect will run ALL your input selectors (eg. selectX) with all of the arguments you gave, and looks at the returned values. If any of the results are === different than before, it will re-run the output selector, and pass in those results as the arguments. If all of the results of the input selectors are the same as the last time, it will skip re-running the output selector, and just return the cached final result from before.
+          code1: `//When you call a selector (eg. selectSum), Reselect will run ALL your input selectors (eg. selectX) with all of the arguments you gave, and looks at the returned values. If any of the results are === different than before, it will re-run the output selector, and pass in those results as the arguments. If all of the results of the input selectors are the same as the last time, it will skip re-running the output selector, and just return the cached final result from before.
 
 // ----------------
 // reducer.js
@@ -1963,15 +1963,15 @@ export default () => {
     &lt;/div&gt;
   );
 };`
-                }
-            ],
-        },
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "persistent storage:",
+      note: [
         {
-            id: 52,
-            title: "persistent storage:",
-            note: [
-                {
-                    text1: `Redux persist takes your Redux state object and save it to Persistence storage.
+          text1: `Redux persist takes your Redux state object and save it to Persistence storage.
 
 When we refresh page in a web-app, the state always resets back to the initial values which in not a good thing when you try to build some large web-app like e-commerce.
 
@@ -1981,19 +1981,19 @@ To use a different storage engine, we just need to modify the value of the stora
 
 import { persistStore, persistReducer } from 'redux-persist';
 For persistReducer is wrap your app's root reducers and pass it to the persistStore function it ensures your redux state is stored to persisted storage whenever it changes.`,
-                    code1: `import storageSession from 'reduxjs-toolkit-persist/lib/storage/session'
+          code1: `import storageSession from 'reduxjs-toolkit-persist/lib/storage/session'
 // Then, modify persistConfig to look like the following code:
 
 const persistConfig = {
   key: 'root',f
   storageSession,
 }`
-                },
-                {
-                    text1: `<b>Customize what's persisted</b>:
+        },
+        {
+          text1: `<b>Customize what's persisted</b>:
 We can customize a part of our state to persist by using the blacklist and whitelist properties of the config object passed to persistReducer. With the blacklist property, we can specify which part of state not to persist, while the whitelist property does the opposite, specifying which part of the state to persist.
 If we want to prevent notes from persisting, the config object should look like the following:`,
-                    code1: `const rootPersistConfig = {
+          code1: `const rootPersistConfig = {
   key: 'root',
   storage,
   blacklist: ['notes']
@@ -2005,11 +2005,11 @@ const rootPersistConfig = {
   storage,
   whitelist: ['users']
 }`
-                },
-                {
-                    text1: `The blacklist and whitelist properties take an array of strings. Each string must match a part of the state that is managed by the reducer we pass to persistReducer. When using blacklist and whitelist, we can only target one level deep. But, if we want to target a property in one of our states above, we can take advantage of nested persist.
+        },
+        {
+          text1: `The blacklist and whitelist properties take an array of strings. Each string must match a part of the state that is managed by the reducer we pass to persistReducer. When using blacklist and whitelist, we can only target one level deep. But, if we want to target a property in one of our states above, we can take advantage of nested persist.
 `,
-                    code1: `
+          code1: `
                     // For example, let's say the userReducer initial state looks like the following:
                     const initialState = {
   user: {},
@@ -2036,36 +2036,590 @@ const rootReducer = combineReducers({
 
 // const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 // Now, the isLoggedIn property won't be persisted.`
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-                {
-                    text1: ``,
-                    code1: ``
-                },
-            ],
         },
         {
-            id: 52,
-            title: "Writing Reducers with Immer",
-            note: [
-                {
-                    text1: `<a href="https://redux-toolkit.js.org/usage/immer-reducers" target="_blank"> Writing Reducers with Immer </a>`,
-                    code1: ``
-                }
-            ],
+          text1: ``,
+          code1: ``
         },
         {
-            id: 52,
-            title: "persistent storage:",
-            note: [
-                {
-                    text1: ``,
-                    code1: ``
-                }
-            ],
+          text1: ``,
+          code1: ``
         },
-    ]
+      ],
+    },
+    {
+      id: 52,
+      title: "Writing Reducers with Immer",
+      note: [
+        {
+          text1: `<a href="https://redux-toolkit.js.org/usage/immer-reducers" target="_blank"> Writing Reducers with Immer </a>`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "persistent storage:",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      section: "redux saga",
+      title: "Redux-Saga",
+      note: [
+        {
+          text1: `Redux-Saga is a Redux middleware library designed to manage side effects in Redux applications, such as asynchronous operations like API calls, data manipulation, and other input/output services. It leverages ES6 Generators to allow writing asynchronous code that appears synchronous, which enhances readability and testability.
+          
+          <b>🧠 Think of it like this:</b>
+          <b>Redux</b> = Manages <b>state</b> and <b>actions</b> → <b>reducers → new state</b>.
+(Pure, synchronous, predictable)
+<b>Redux Middleware</b> = A place to intercept actions between dispatch and reducer, useful for async logic.
+<b>Redux-Saga</b> = One of the <b>middlewares</b> you can plug into Redux, to handle side effects (API calls, background tasks, etc.) using generator functions.
+
+<b>Key Concepts of Redux-Saga</b>:
+<b>Middleware</b>: Redux-Saga acts as a middleware between dispatched actions and the Redux store. When an action is dispatched, Redux-Saga can intercept it and trigger corresponding "saga" functions.
+<b>Generators</b>: The core of Redux-Saga lies in JavaScript Generators. These special functions can be paused and resumed, making them ideal for managing complex asynchronous flows in a non-blocking and declarative manner. 
+<b>Effects</b>: Sagas use "Effects" to interact with the outside world and the Redux store. Common Effects include:
+<b>call</b>: For calling functions, often used for making API requests.
+<b>put</b>: For dispatching actions to the Redux store.
+<b>take</b>: For pausing saga execution until a specific action is dispatched.
+<b>fork</b>: For creating detached tasks that run concurrently.
+takeEvery/takeLatest</b>: High-level APIs for handling sequences of actions.
+<b>Sagas</b>: Sagas are essentially generator functions that contain the logic for handling side effects. They "watch" for specific actions and execute the defined asynchronous flow in response.
+
+<b>redux-thunk</b>	The simplest way to handle async — actions return functions instead of plain objects. Ideal for small apps.
+<b>redux-saga</b>	Uses generators to handle complex async workflows (e.g., polling, cancellation, sequencing, parallel tasks).
+<b>redux-observable</b>	Uses RxJS (streams) for complex event handling. Less common, more functional/reactive.`,
+          code1: `// install saga
+          npm install redux-saga
+
+          //store.js
+import createSagaMiddleware from 'redux-saga';
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefault) =>
+    getDefault({ thunk: false }).concat(sagaMiddleware),
+});
+
+sagaMiddleware.run(rootSaga);
+          `
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Redux-Saga Full Discussion",
+      note: [
+        {
+          text1: `Redux-Saga Full Discussion Plan
+✅ Introduction & Motivation
+🧠 How Sagas Work (Concept + Flow)
+⚡ Effects API (takeLatest, call, put, etc.)
+🏗️ Watcher & Worker Pattern
+🧪 Connecting Saga to Store
+🌐 API Calls with Saga (call/put)
+⏸️ Delay, Debounce, Throttle
+🥇 Error Handling & Retry Logic
+⏯️ Task Cancellation & takeLatest vs takeEvery
+⚔️ Parallel & Race Effects
+📡 Long-running tasks (polling, websockets)
+🧰 Channels & Advanced Patterns
+🧪 Testing Sagas
+📝 Best Practices & Real Project Examples
+
+<b>What is Redux-Saga & Why Use It</b>
+Redux by itself is <b>synchronous</b>. But real apps need to:
+Fetch data from APIs
+Handle authentication tokens
+Coordinate multiple API calls
+Handle errors, retries, and timeouts
+Cancel long tasks if the user navigates away
+
+👉 If you do this inside components → you get <b>messy UI code</b>
+👉 If you do this in reducers → ❌ reducers must be pure functions
+👉 If you use <b>redux-thunk</b> → fine for small apps, but <b>complicated flows</b> get hard to manage.
+
+<b>Redux-Saga solves this by providing</b>:
+<b>Generator functions (function*)</b> to write async code in a synchronous style
+A set of <b>Effects APIs (take, call, put</b>, etc.) to express async workflows declaratively
+Ability to <b>cancel, delay, parallelize</b>, or <b>race</b> effects easily
+🦸 <b>Think of sagas as background workers</b> listening to Redux actions, performing side effects, and dispatching new actions back.
+
+<b>How Sagas Work (Concept + Flow)</b>
+Let's see the big picture 👇
+UI  →  dispatch(ACTION)  
+    →  Saga Middleware intercepts
+        →  Watcher Saga catches ACTION
+            →  Worker Saga runs (async stuff)
+                →  Saga dispatches SUCCESS/FAIL actions
+                    →  Reducer updates store
+                        →  UI re-renders
+`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "Generator",
+      note: [
+        {
+          text1: `A generator is a special type of function in JavaScript that can pause its execution and be resumed later. Unlike a regular function, which runs to completion and returns only one value, a generator can yield a sequence of multiple values over time. This behavior is managed through an iterable Generator object that is returned when the generator function is called.
+          
+          <b>The key features and syntax of generators include</b>:
+<b>Generator function declaration</b>: A generator function is defined using <b>function*</b> syntax.
+<b>The yield keyword</b>: The <b>yield</b> keyword pauses the execution of the generator and returns a value to the caller. When the generator is resumed, it continues execution from the point of the last <b>yield</b>.
+<b>The next() method</b>: When a generator function is called, it returns a generator object. To start or resume the function's execution, you must call its <b>.next()</b> method.
+<b>Iterator result object</b>: The <b>.next()</b> method returns an object with two properties: <b>value</b>, which holds the yielded value, and <b>done</b>, a boolean indicating whether the generator has finished. 
+
+<b>Key Takeaways for Generators</b>
+<b>function*</b> = defines a generator
+Execution is <b>lazy</b> → only runs when .next() is called internally by the saga middleware
+Enables <b>stepwise async flows</b>
+
+<b>Why Redux-Saga uses Generators - (Ex : 2)</b>
+-> Sagas run in the background.
+-> Generators let you write <b>async code that looks synchronous</b>.
+-> Each <b>yield</b> tells Redux-Saga “👉 handle this effect, then resume here.”
+`,
+          code1: `    function* myGenerator() {
+  console.log('Start');
+  yield 1;
+  console.log('Middle');
+  yield 2;
+  console.log('End');
+}
+
+const gen = myGenerator();
+
+console.log(gen.next());  // { value: 1, done: false }
+console.log(gen.next());  // { value: 2, done: false }
+console.log(gen.next());  // { value: undefined, done: true }
+
+// ---------- Ex : 2 -----------
+function* fetchDataSaga() {
+  const data = yield call(fetch, '/api/data');
+  yield put({ type: 'FETCH_SUCCESS', payload: data });
+}
+
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "yield",
+      note: [
+        {
+          text1: `<b>yield</b> is the <b>heart</b> of a generator function — and therefore, of a saga.
+It <b>pauses the function</b> and returns a value to the caller (Redux-Saga middleware).
+Later, the middleware can resume the generator with <b>.next()</b>.
+
+Here(Ex ; 1):
+First <b>next()</b> runs until it hits <b>yield 100</b>.
+It pauses and returns <b>{ value: 100, done: false }</b>.
+Second <b>next('OK')</b> resumes the generator, and <b>'OK'</b> becomes the value of <b>result.</b>
+
+
+<b>In Redux-Saga</b>
+When you use <b>yield</b> with <b>effect creators</b> like <b>call(), put()</b>, etc., you’re not calling the function directly — you're <b>telling Redux-Saga middleware</b>:
+“Please do this effect, wait for it to finish, and then give me the result.”
+
+
+<b>The saga middleware</b>:
+Sees the <b>yield call(...)</b>
+Runs the API request behind the scenes
+Resumes the generator with the result once the promise resolves
+
+✅ <b>Key Points about yield in Sagas</b>
+<b>yield</b> pauses the generator and gives the saga middleware control.
+Middleware executes the effect, waits for its result, and resumes the saga.
+You can think of <b>yield</b> as <b>await</b> + more power (because it can do cancellation, parallel, sequencing, etc.).`,
+          code1: `// --------- Ex : 1 ---------
+          function* example() {
+  console.log('Before yield');
+  const result = yield 100;
+  console.log('After yield', result);
+}
+
+const gen = example();
+console.log(gen.next());       // Before yield → { value: 100, done: false }
+console.log(gen.next('OK'));   // After yield OK → { value: undefined, done: true }
+
+// --------- Ex : 2 ---------
+function* fetchUserSaga() {
+  const response = yield call(fetch, '/api/user');   // ⏸️ pause until fetch completes
+  const data = yield response.json();
+  yield put({ type: 'USER_SUCCESS', payload: data });
+}
+
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "put",
+      note: [
+        {
+          text1: `In Redux-Saga, <b>put</b> is used to <b>dispatch an action</b> to the Redux store — similar to how you’d normally use <b>dispatch</b> in a React component.
+          
+          <b>👉 Here:</b>
+<b>put({ type: 'USER_FETCH_SUCCESS', payload: data })</b> dispatches the action to the store.
+Reducers listening to <b>USER_FETCH_SUCCESS</b> will update the state accordingly.
+
+<b>💡 Why use put instead of dispatch directly?</b>
+Because sagas run outside React components. You don't have access to <b>dispatch</b> by default inside a saga, so Redux-Saga gives you the <b>put</b> effect to interact with the store.
+
+<b>✅ Key Points about put</b>
+Dispatches Redux actions from inside a saga.
+Triggers reducers or other sagas listening for that action.
+Typically used after API calls (<b>call</b>) to update the state with success or failure actions.
+`,
+          code1: `// --------------------
+          import { put } from 'redux-saga/effects';
+yield put({ type: 'ACTION_TYPE', payload: someData });
+
+// 👉 Think of \`put\` as the saga equivalent of:
+dispatch({ type: 'ACTION_TYPE', payload: someData });
+
+// ----------- Ex : 1 -------------
+function* fetchUserSaga() {
+  try {
+    const response = yield call(fetch, '/api/user');
+    const data = yield response.json();
+
+    // Dispatch success action with user data
+    yield put({ type: 'USER_FETCH_SUCCESS', payload: data });
+  } catch (error) {
+    // Dispatch failure action if something goes wrong
+    yield put({ type: 'USER_FETCH_FAILURE', error });
+  }
+}
+
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "call",
+      note: [
+        {
+          text1: `<b>call</b> is one of the most important effects in Redux-Saga. It is used to <b>call functions (usually async)</b> in a way that the saga middleware can <b>pause, resume, or cancel</b> them.
+          
+          <b>fn</b> → The function to be executed (can be async or sync)
+<b>arg1, arg2, …</b> → Arguments to pass to <b>fn</b>
+Returns → The value that <b>fn</b> returns (or resolves if it’s a promise)
+
+</b>Here’s what happens</b>:
+Saga <b>pauses</b> at <b>yield call(...)</b>.
+Saga middleware executes <b>fetchUserApi(action.payload)</b>.
+Waits for it to resolve <b>(Promise)</b>.
+The resolved value is stored in <b>user</b>.
+Then the next <b>yield put(...)</b> executes.
+
+<b>Why Not Call the Function Directly?</b>
+const user = yield fetchUserApi(action.payload); // ❌ works but not ideal
+
+<b>Problems</b>:
+Saga cannot control this effect.
+Cannot cancel the call if needed.
+Harder to <b>mock in unit tests</b>.
+Cannot chain retries or handle errors declaratively.
+<b>call</b> solves all this and keeps your sagas declarative.
+`,
+          code1: `//  --------- Syntax ---------
+          import { call } from "redux-saga/effects";
+const result = yield call(fn, arg1, arg2, ...);
+
+
+// ----------- Ex : 1 -----------
+import { call, put } from "redux-saga/effects";
+
+function fetchUserApi(userId: number) {
+  return fetch(\`https://jsonplaceholder.typicode.com/users/\${userId}\`)
+    .then(res => res.json());
+}
+
+function* fetchUserSaga(action: { type: string; payload: number }) {
+  try {
+    const user = yield call(fetchUserApi, action.payload);
+    yield put({ type: "USER_SUCCESS", payload: user });
+  } catch (error: any) {
+    yield put({ type: "USER_ERROR", payload: error.message });
+  }
+}
+
+// -------------
+//If you want to call a method of an object, you can pass the object as context:
+const api = {
+  getUser: (id: number) => fetch(\`/users/\${id}\`).then(res => res.json()),
+};
+
+const user = yield call([api, api.getUser], 1); // call(api.getUser, 1) with context \`api\`
+// First argument [context, function] binds this correctly.
+
+
+// -------- Calling Promise Functions ---------
+// call works with any Promise-returning function:
+function fetchData() {
+  return new Promise(resolve => setTimeout(() => resolve("data"), 1000));
+}
+const data = yield call(fetchData);
+
+// Saga waits 1 second, then stores "data" in data.
+// No \`await\` needed; \`call\` handles the async.
+
+
+// --------- Example — Retry with Call -----------
+import { call, put, delay } from "redux-saga/effects";
+
+function fetchData() {
+  return fetch("https://api.example.com/data").then(res => res.json());
+}
+
+function* fetchWithRetrySaga() {
+  let attempts = 0;
+  while (attempts < 3) {
+    try {
+      const data = yield call(fetchData);
+      yield put({ type: "SUCCESS", payload: data });
+      return; // exit on success
+    } catch (err) {
+      attempts++;
+      yield delay(1000); // wait 1s before retry
+    }
+  }
+  yield put({ type: "FAILURE", payload: "Failed after 3 attempts" });
+}
+// call makes it easy to control async calls, retries, delays, and cancellation.
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "takeEvery",
+      note: [
+        {
+          text1: `Listens for <b>every dispatched action</b> of a specific type.
+Runs a <b>new saga for each action, even if previous ones are still running.</b>
+`,
+          code1: `// --------------
+          import { takeEvery } from "redux-saga/effects";
+
+function* workerSaga(action) {
+  console.log("Handling action:", action);
+}
+
+export function* watchSaga() {
+  yield takeEvery("ACTION_TYPE", workerSaga);
+}
+
+
+// -------- Imagine a search input that dispatches SEARCH_QUERY every keystroke: -------
+function* searchSaga(action) {
+  const results = yield call(apiSearch, action.payload.query);
+  yield put({ type: "SEARCH_SUCCESS", payload: results });
+}
+
+function* watchSearch() {
+  yield takeEvery("SEARCH_QUERY", searchSaga);
+}
+// If the user types quickly, all searchSaga instances run concurrently.
+// Each API call completes independently.
+// ✅ Use case: When every action matters, e.g., logging, analytics, notifications.
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "takeLatest",
+      note: [
+        {
+          text1: `Listens for actions like <b>takeEvery</b>.
+But <b>if a previous saga is still running</b>, it <b>cancels</b> it and only runs the <b>latest</b> action.`,
+          code1: `// --------------
+          import { takeLatest } from "redux-saga/effects";
+
+function* workerSaga(action) {
+  console.log("Handling latest action:", action);
+}
+
+export function* watchSaga() {
+  yield takeLatest("ACTION_TYPE", workerSaga);
+}
+
+
+// ---------- Ex : 1 ------------
+function* searchSaga(action) {
+  const results = yield call(apiSearch, action.payload.query);
+  yield put({ type: "SEARCH_SUCCESS", payload: results });
+}
+
+function* watchSearch() {
+  yield takeLatest("SEARCH_QUERY", searchSaga);
+}
+
+If the user types fast, previous API calls are canceled.
+Only the latest input triggers the saga to completion.
+✅ Use case: When only the latest action matters, e.g., live search, form submissions, token validation.
+`
+        },
+        {
+          text1: `<b>takeEvery</b> → run all actions concurrently
+<b>takeLatest</b> → only care about the latest action, cancel previous
+Both <b>listen for Redux actions</b> and call a worker saga`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "all()",
+      note: [
+        {
+          text1: `In Redux-Saga, <b>all()</b> is an effect creator used to run multiple effects in parallel and wait for all of them to complete. It is conceptually similar to <b>Promise.all()</b> in JavaScript.
+          
+          Runs <b>multiple effects (sagas) in parallel</b>.
+Waits for <b>all of them to complete</b> before moving on (if used in a generator).
+Useful for <b>starting multiple watchers or parallel tasks</b> at once.
+
+          Each saga inside all() runs concurrently.
+The root saga waits until all listed sagas are ready.
+
+<b>Key Points About all</b>
+Runs <b>effects in parallel<b> instead of sequentially.
+Commonly used in <b>rootSaga</b> to combine all watchers.
+Can include <b>saga calls, takeEvery, takeLatest</b>, or other effects inside <b>all()</b>.`,
+          code1: `import { all } from 'redux-saga/effects';
+
+export default function* rootSaga() {
+  yield all([
+    saga1(),
+    saga2(),
+    saga3(),
+  ]);
+}
+
+// -------- Suppose your app has user and product data to fetch: ---------
+function* fetchUserSaga() {
+  console.log("Fetching user...");
+}
+
+function* fetchProductsSaga() {
+  console.log("Fetching products...");
+}
+
+export default function* rootSaga() {
+  yield all([
+    fetchUserSaga(),
+    fetchProductsSaga(),
+  ]);
+}
+
+`
+        }
+      ],
+    },
+        {
+      id: 52,
+      title: "delay",
+      note: [
+        {
+          text1: `What it does
+Pauses a saga for a <b>specified number of milliseconds</b>.
+
+Useful for:
+Retrying failed requests
+Debouncing user input
+Adding artificial delays for animations or testing`,
+          code1: `import { delay, put } from 'redux-saga/effects';
+
+function* exampleSaga() {
+  console.log("Start waiting...");
+  yield delay(1000); // pause for 1 second
+  console.log("1 second passed");
+  yield put({ type: "DELAY_DONE" });
+}
+// yield delay(ms) pauses the generator for ms milliseconds.
+// Saga middleware resumes the saga after the delay.
+
+
+// --------- Retry API Call with Delay --------
+import { call, put, delay } from "redux-saga/effects";
+
+function fetchData() {
+  return fetch("/api/data").then(res => res.json());
+}
+
+function* fetchWithRetry() {
+  let attempts = 0;
+  const maxAttempts = 3;
+
+  while (attempts < maxAttempts) {
+    try {
+      const data = yield call(fetchData);
+      yield put({ type: "FETCH_SUCCESS", payload: data });
+      return; // exit on success
+    } catch (error) {
+      attempts++;
+      yield delay(1000); // wait 1 second before retry
+    }
+  }
+
+  yield put({ type: "FETCH_FAILURE", payload: "Failed after 3 attempts" });
+}
+// After a failed attempt, the saga waits 1 second before retrying.
+// Clean, declarative, and testable way to implement retries.
+
+// -------- Debounce User Input ------------
+import { takeLatest, call, put, delay } from "redux-saga/effects";
+
+function* searchSaga(action) {
+  yield delay(500); // wait 500ms after user stops typing
+  const results = yield call(apiSearch, action.payload.query);
+  yield put({ type: "SEARCH_SUCCESS", payload: results });
+}
+
+export function* watchSearch() {
+  yield takeLatest("SEARCH_QUERY", searchSaga);
+}
+Prevents firing <b>too many API calls</b> while the user is typing.
+Combines <b>takeLatest + delay</b> for debouncing.
+`
+        }
+      ],
+    },
+        {
+      id: 52,
+      title: "persistent storage:",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+        {
+      id: 52,
+      title: "persistent storage:",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+  ]
 }        

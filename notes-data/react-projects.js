@@ -10,40 +10,40 @@ const reactProjectsData = {
             id: 1,
             title: "frontend-interview-questions/tree/master",
             note: [
-              {
-                text1: `<a href="https://github.com/piyush-eon/frontend-interview-questions/tree/master" target="_blank"
+                {
+                    text1: `<a href="https://github.com/piyush-eon/frontend-interview-questions/tree/master" target="_blank"
                     rel="noopener">frontend-interview-questions/tree/master</a>`,
-                code1: ``
-              }
+                    code1: ``
+                }
             ]
-          },
-          {
-            id: 1,
-            title: "JavaScript Event Loop",
-            note: [
-              {
-                text1: ``,
-                code1: ``
-              }
-            ]
-          },
-          {
-            id: 1,
-            title: "JavaScript Event Loop",
-            note: [
-              {
-                text1: ``,
-                code1: ``
-              }
-            ]
-          },
-          {
-      id: 1,
-      title: "useContext login App",
-      note: [
+        },
         {
-          text1: ``,
-          code1: `// App.jsx
+            id: 1,
+            title: "JavaScript Event Loop",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "JavaScript Event Loop",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "useContext login App",
+            note: [
+                {
+                    text1: ``,
+                    code1: `// App.jsx
           import { HashRouter, Route, Routes } from &quot;react-router-dom&quot;;
 import Dashboard from &quot;./Dashboard&quot;;
 import LoginContext from './LoginContext'
@@ -230,16 +230,16 @@ const Dashboard = () =&gt; {
 
 export default Dashboard;
 `
-        }
-      ]
-    },
-    {
-        id: 1,
-        title: "This prevents an API call on every keystroke and only triggers the call after the user stops typing for 300 milliseconds.",
-        note: [
-          {
-            text1: ``,
-            code1: `// App.tsx
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "This prevents an API call on every keystroke and only triggers the call after the user stops typing for 300 milliseconds.",
+            note: [
+                {
+                    text1: ``,
+                    code1: `// App.tsx
 import React, { useState } from 'react';
 import { ReturnHOCInputCom } from './withAuth';
 function AppHoc() {
@@ -327,26 +327,26 @@ const showApiData = ({ apiData }) =&gt; {
 export const ReturnHOCInputCom = withAuth(showApiData, httpComp);
 
 `
-          }
-        ]
-      },
-      {
-        id: 1,
-        title: "JavaScript Event Loop",
-        note: [
-          {
-            text1: ``,
-            code1: ``
-          }
-        ]
-      },
-      {
-        id: 1,
-        title: "React category wise product filter using check box",
-        note: [
-          {
-            text1: ``,
-            code1: `//---------- using new Set --------------
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "JavaScript Event Loop",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "React category wise product filter using check box",
+            note: [
+                {
+                    text1: ``,
+                    code1: `//---------- using new Set --------------
             import * as React from 'react';
 import { useState } from 'react';
 
@@ -569,9 +569,160 @@ export default function App() {
 }
 
 `
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Observer Pattern (also called Publish–Subscribe pattern)",
+            note: [
+                {
+                    text1: `<b>Why it’s called Observer Pattern</b>
+
+You have a <b>subject</b> → <b>NotificationService</b>
+
+And <b>observers</b> (subscribers) → in this case, the <b>NotificationProvider</b> (and potentially others) subscribe to notification events.
+
+When something happens (e.g., <b>showBanner</b> is called), the service notifies all subscribers, and they react accordingly (showing a banner)
+.`,
+                    code1: `// NotificationService.ts
+class NotificationService {
+  private static listeners: ((props: any) => void)[] = [];
+
+  static subscribe(listener: (props: any) => void) {
+    NotificationService.listeners.push(listener);
+  }
+
+  static unsubscribe(listener: (props: any) => void) {
+    NotificationService.listeners = NotificationService.listeners.filter(
+      (l) => l !== listener
+    );
+  }
+
+  static showBanner(props: any) {
+    NotificationService.listeners.forEach((listener) => listener(props));
+  }
+}
+
+export default NotificationService;
+
+
+// NotificationProvider.tsx
+import React, { useEffect, useRef, useState } from "react";
+import NotificationService from "./NotificationService";
+
+// Optional: Create a context if you want to call showBanner from children
+export const NotificationContext = React.createContext({
+  showBanner: (props: any, duration?: number) => {},
+});
+
+const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [banner, setBanner] = useState<{
+    bannerTitle: string;
+    bannerMessage: string;
+    variant: "soft" | "critical" | "informational";
+  } | null>(null);
+
+  const [isVisible, setIsVisible] = useState(false);
+  const timeRef = useRef<NodeJS.Timeout | null>(null);
+
+  const showBanner = (
+    props: {
+      bannerTitle: string;
+      bannerMessage: string;
+      variant: "soft" | "critical" | "informational";
+    },
+    duration = 3000
+  ) => {
+    setBanner(props);
+    setIsVisible(true);
+
+    if (timeRef.current) clearTimeout(timeRef.current);
+    timeRef.current = setTimeout(() => {
+      setBanner(null);
+      setIsVisible(false);
+    }, duration);
+  };
+
+  useEffect(() => {
+    const listener = (props: any) => {
+      showBanner(props);
+    };
+
+    NotificationService.subscribe(listener);
+    return () => {
+      NotificationService.unsubscribe(listener);
+      if (timeRef.current) clearTimeout(timeRef.current);
+    };
+  }, []);
+
+  return (
+    &lt;NotificationContext.Provider value={{ showBanner }}&gt;
+      {isVisible &amp;&amp; banner &amp;&amp; (
+        &lt;div
+          className={\`notification- banner \${ banner.variant }\`}
+          style={{
+            position: &quot;fixed&quot;,
+            top: 10,
+            right: 10,
+            padding: &quot;10px 15px&quot;,
+            background: &quot;#333&quot;,
+            color: &quot;#fff&quot;,
+            borderRadius: &quot;8px&quot;,
+          }}
+        &gt;
+          &lt;strong&gt;{banner.bannerTitle}&lt;/strong&gt;
+          &lt;div&gt;{banner.bannerMessage}&lt;/div&gt;
+        &lt;/div&gt;
+      )}
+      {children}
+    &lt;/NotificationContext.Provider&gt;
+  );
+};
+
+export default NotificationProvider;
+
+
+// NotificationProvider.tsx
+import NotificationService from "./NotificationService";
+
+const NotificationProvider = () => {
+  const handleClick = () => {
+    NotificationService.showBanner({
+      bannerTitle: "Success",
+      bannerMessage: "Your changes have been saved!",
+      variant: "soft",
+    });
+  };
+
+  return &lt;button onClick={handleClick}&gt;Show Banner&lt;/button&gt;;
+};
+
+export default NotificationProvider
+
+//App.tsx
+import { } from 'react'
+import NotificationProvider from "./components/notification/NotificationProvider";
+import UtilizeNotification from './components/notification/UtilizeNotification'
+
+function App() {
+
+  return (
+    &lt;&gt;
+      &lt;NotificationProvider&gt;
+        &lt;UtilizeNotification /&gt;
+      &lt;/NotificationProvider&gt;
+    &lt;/&gt;
+  )
+}
+
+export default App
+`
           }
-        ]
-      },
+    ]
+},
   ]
 }
 

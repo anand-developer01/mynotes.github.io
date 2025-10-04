@@ -2388,7 +2388,6 @@ const SubjectList = {
                     eng: "Authorities cracked down on milk adulteration in the city.",
                     tel: "నగరంలో పాల కల్తీపై అధికారులు సడలింపులు పెట్టారు."
                 },
-
                 {
                     id: 48,
                     eng: "<b>Rely</b>",
@@ -2401,7 +2400,17 @@ const SubjectList = {
                 {
                     eng: "She relies on public transport to reach her office every day.",
                     tel: "ప్రతి రోజు తన ఆఫీసుకి చేరడానికి ఆమె పబ్లిక్ ట్రాన్స్‌పోర్ట్‌పై ఆధారపడుతుంది."
-                }
+                },
+                {
+                    id: 48,
+                    eng: "<b>matrimonial house</b>",
+                    tel: "<b></b>",
+                },
+                {
+                    eng: "Judge orders wife to remove her parents from her matrimonial house",
+                    tel: ""
+                },
+
             ],
         },
     ],

@@ -1843,6 +1843,27 @@ export const ReturnHOCInputCom = withAuth(PrivateComponent, yourRole);
         }
       ],
     },
+        {
+      id: 52,
+      title: "What a .d.ts file does:",
+      note: [
+        {
+          text1: `What a <b>.d.ts</b> file does:
+<b>Declares types</b>: It describes the "shape" of a JavaScript module, including its functions, classes, and variables, but without any executable code. 
+<b>Enhances development experience</b>: By providing type information, it allows for better IntelliSense (autocompletion) and improved type safety in projects that use JavaScript libraries. 
+<b>Aids in migration</b>: It facilitates transitioning from JavaScript to TypeScript by providing the necessary type definitions for existing code. 
+
+How <b>.d.ts</b> files are used:
+-> They are often bundled with JavaScript libraries, auto-generated from TypeScript code, to allow both JavaScript and TypeScript applications to consume them. 
+-> For JavaScript libraries that lack built-in support, developers create declaration files, which can then be installed via package managers like npm and are hosted in a repository like DefinitelyTyped. 
+
+✅ <b>index</b> — just the file name
+✅ <b>.cjs</b> — CommonJS module format
+✅ <b>.d.ts</b> — TypeScript declaration file extension`,
+          code1: ``
+        }
+      ],
+    },
     {
       id: 52,
       section: "Jest + React Testing Library (RTL)",
@@ -2100,24 +2121,430 @@ So, <b>describe</b> blocks are for grouping tests, and <b>it</b> blocks are for 
     },
     {
       id: 52,
-      title: "Common matchers - (expect Matchers)",
+      title: "Common matchers - (to* functions)",
       note: [
         {
-          text1: `toContain, toBeTruthy, toBeFalsy
-          
-          toBe() - checks basic values or if two things are the same
-toEqual() - checks if objects have the same content
-toContain()
-toBeTruthy()
-toBeFalsy()
-toBeInTheDocument() - makes sure an element is actually on the page
-toHaveTextContent() - checks if an element has certain text
-toHaveLength() - checks how long something is, like an array or string
+          text1: `          to* → functions to <b>assert conditions</b> in tests.
+          <b>toBe()</b> - checks basic values or if two things are the same. strict equality (===)
+<b>toEqual()</b> - checks if objects have the same content. deep equality (for objects/arrays)
+<b>toContain()</b> - substring or array contains element
+<b>toBeTruthy()</b>
+<b>toBeFalsy()</b>
+<b>toHaveLength()</b> - checks how long something is, like an array or string. check array/string length
+<b>toThrow</b> → expect a function to throw an error
+<b>toBeGreaterThan</b>
+<b>toBeLessThan</b>
+
+🔹 <b>RTL / DOM-specific Matchers (to*)</b>
+Added by <b>@testing-library/jest-dom</b>, these are super useful for UI testing:
+<b>toBeInTheDocument()</b> - makes sure an element is actually on the page. element exists in the DOM
+<b>toHaveTextContent()</b> - checks if an element has certain text
+<b>toBeVisible()</b> → element is visible (not hidden)
+<b>toBeDisabled()</b> 
+<b>toBeEnabled()</b>
+<b>toHaveAttribute(name, value?)</b>
+<b>toHaveClass(className)</b>
+<b>toHaveStyle(cssRule)</b>
+<b>toHaveValue(value)</b> (for input fields)
+<b>toBeChecked()</b> (for checkboxes/radio buttons)
+
+
 
 Ex : 
 expect(result).toBe(3); 
 expect(array).toHaveLength(3);
 `,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "get* methods",
+      note: [
+        {
+          text1: `<b>getByText</b>
+Finds an element by its text content. Accepts string or regex. Throws an error if no match is found.
+
+<b>getByRole</b>
+Finds an element by its <b>ARIA role</b> (e.g., button, textbox). You can also filter by accessible name or level.
+
+<b>getByLabelText</b>
+Finds a form control (input, textarea, select) associated with a <label> element matching the provided text.
+
+<b>getByPlaceholderText</b>
+Finds an input element by its placeholder attribute.
+
+<b>getByAltText</b>
+Finds an element (usually an <img>) by its alt attribute text.
+
+<b>getByTitle</b>
+Finds an element by its title attribute.
+
+<b>getByDisplayValue</b>
+Finds a form element (input, textarea, select) by its current value.
+
+<b>getByTestId</b>
+Finds an element by the data-testid attribute, useful for testing elements without accessible roles or labels.
+
+<b>getAllBy*</b>
+Any of the above methods can be used as getAllBy* to return all matching elements as an array instead of a single element. Throws if no elements are found.`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "query* Methods",
+      note: [
+        {
+          text1: `<b>queryByText</b>
+Finds an element by its text content (string or regex). Returns <b>null</b> if no element is found instead of throwing an error.
+
+<b>queryByRole</b>
+Finds an element by its <b>ARIA role</b> (e.g., <b>button</b>, <b>textbox</b>). You can filter by accessible name or level. Returns <b>null</b> if not found.
+
+<b>queryByLabelText</b>
+Finds a form control (<b>input</b>, <b>textarea</b>, <b>select</b>) associated with a <b><label></b> element matching the provided text. Returns <b>null</b> if not found.
+
+<b>queryByPlaceholderText</b>
+Finds an <b>input</b> element by its placeholder attribute. Returns <b>null</b> if not found.
+
+<b>queryByAltText</b>
+Finds an element (usually <b><img></b>) by its alt attribute text. Returns <b>null</b> if not found.
+
+<b>queryByTitle</b>
+Finds an element by its title attribute. Returns <b>null</b> if not found.
+
+<b>queryByDisplayValue</b>
+Finds a form element (<b>input</b>, <b>textarea</b>, <b>select</b>) by its current value. Returns <b>null</b> if not found.
+
+<b>queryByTestId</b>
+Finds an element by the <b>data-testid</b> attribute. Useful for testing elements without accessible roles or labels. Returns <b>null</b> if not found.
+
+<b>queryAllBy*</b>
+Any of the above methods can be used as <b>queryAllBy*</b> to return all matching elements as an array. Returns an empty array if no elements are found.`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "find* methods",
+      note: [
+        {
+          text1: `<b>findByText</b>
+Finds an element by its <b>text content</b>. Returns a <b>Promise</b> that resolves to the element. Rejects if no element is found after a timeout.
+
+<b>findByRole</b>
+Finds an element by its <b>ARIA role</b> (e.g., <b>button</b>, <b>textbox</b>). Returns a <b>Promise</b>.
+
+<b>findAllByRole</b>
+Finds <b>all elements</b> matching a specific <b>ARIA role</b> (e.g., <b>button</b>, <b>textbox</b>). Returns a <b>Promise</b> that resolves to an array of elements. Rejects if no elements are found after a timeout.
+
+<b>findByLabelText</b>
+Finds a form control (<b>input</b>, <b>textarea</b>, <b>select</b>) associated with a <b><label></b> element. Returns a <b>Promise</b>.
+
+<b>findAllByLabelText</b>
+Finds <b>all form controls</b> matching a label text. Returns a <b>Promise</b> resolving to an array of elements.
+
+<b>findByPlaceholderText</b>
+Finds an <b>input</b> element by its <b>placeholder attribute</b>. Returns a <b>Promise</b>.
+
+<b>findAllByPlaceholderText</b>
+Finds <b>all input elements</b> matching a placeholder text. Returns a <b>Promise</b> resolving to an array of elements.
+
+<b>findByAltText</b>
+Finds an element (usually <b><img></b>) by its <b>alt attribute</b> text. Returns a <b>Promise</b>.
+
+<b>findAllByAltText</b>
+Finds <b>all matching images</b> by alt text. Returns a <b>Promise</b> resolving to an array of elements.
+
+<b>findByTitle</b>
+Finds an element by its title attribute. Returns a <b>Promise</b>.
+
+<b>findAllByTitle</b>
+Finds <b>all elements</b> with a matching title. Returns a <b>Promise</b> resolving to an array of elements.
+
+<b>findByDisplayValue</b>
+Finds a form element (<b>input</b>, <b>textarea</b>, <b>select</b>) by its current value. Returns a <b>Promise</b>.
+
+<b>findAllByDisplayValue</b>
+Finds all form elements matching a display value. Returns a <b>Promise</b> resolving to an array of elements.
+
+<b>findByTestId</b>
+Finds an element by the <b>data-testid</b> attribute. Returns a <b>Promise</b>.
+
+<b>findAllByTestId</b>
+Finds <b>all elements</b> with a specific <b>data-testid</b>. Returns a <b>Promise</b> resolving to an array of elements.`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "describe, it, act",
+      note: [
+        {
+          text1: `<b> ==> describe</b> groups all tests for Counter Component.
+->           <b>describe</b> is a Jest function used to group related tests together into a test suite.
+-> It takes two arguments: a string describing the test suite, and a callback function containing the tests.
+-> <b>describe</b> blocks provide organization and readability to your test files, making it easier to understand the purpose of a group of tests.
+-> You can nest <b>describe</b> blocks to create a hierarchical structure for your tests.
+
+<b> ==> it</b> defines each individual test case.
+<b>it (or test)</b>:
+-> <b>it</b> (which is an alias for <b>test</b>) is a Jest function used to define an individual test case within a <b>describe</b> block.
+-> It takes two arguments: a string describing the specific behavior being tested, and a callback function containing the test logic and assertions.
+-> Each <b>it</b> block should ideally focus on testing a single, isolated aspect of the component or function.
+<b>act</b> ensures state updates are processed before assertions.
+
+Ex:- 
+describe('MyComponent', () => {
+  it('should render correctly', () => {
+    // Test logic and assertions for rendering
+  });
+
+  it('should update state on button click', () => {
+    // Test logic and assertions for state updates
+  });
+});
+
+<b> ==> act</b>:
+-> <b>act</b> is a utility function from React (and often implicitly used by libraries like React Testing Library) that ensures all updates related to user interface interactions are processed and applied to the DOM before assertions are made.
+-> React's rendering and state updates can be asynchronous. Without <b>act</b>, your test assertions might run before the DOM has fully updated, leading to flaky or incorrect test results.
+-> <b>act</b> effectively "flushes" pending React updates, making your tests more reliable and representative of how React works in a real browser environment.
+-> You wrap code that causes state changes, user events, or asynchronous operations (like data fetching) inside an <b>act</b> call.
+`,
+          code1: `// ----------- Ex : 1 -----------
+          //AddUser.tsx
+          import { useState, type ChangeEvent } from &#39;react&#39;;
+
+interface User {
+    name: string;
+    area: string;
+}
+
+const AddUser: React.FC = () =&gt; {
+    const [userList, setUserList] = useState&lt;User[]&gt;([])
+    const [formUserData, setFormUserData] = useState&lt;User&gt;({
+        name: &#39;&#39;,
+        area: &#39;&#39;
+    })
+
+    const handleChange = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+        const { name, value } = e.target
+        setFormUserData({ ...formUserData, [name]: value })
+    }
+
+    const submitForm = (e: React.FormEvent&lt;HTMLFormElement&gt;) =&gt; {
+        e.preventDefault()
+        setUserList([...userList, formUserData])
+        setFormUserData({
+            name: &#39;&#39;,
+            area: &#39;&#39;
+        })
+    }
+
+    return (
+        &lt;div style={{ maxWidth: &#39;400px&#39;, margin: &#39;20px auto&#39; }}&gt;
+            &lt;h2&gt;Simple React Form&lt;/h2&gt;
+            &lt;form onSubmit={submitForm}&gt;
+                &lt;div style={{ marginBottom: &#39;10px&#39; }}&gt;
+                    &lt;label htmlFor=&quot;name&quot;&gt;Name:&lt;/label&gt;
+                    &lt;input
+                        type=&quot;text&quot;
+                        id=&quot;name&quot;
+                        name=&quot;name&quot;
+                        value={formUserData.name}
+                        onChange={handleChange}
+                        required
+                        placeholder=&#39;Name&#39;
+                        style={{ width: &#39;100%&#39;, padding: &#39;8px&#39; }}
+                    /&gt;
+                &lt;/div&gt;
+
+                &lt;div style={{ marginBottom: &#39;10px&#39; }}&gt;
+                    &lt;label htmlFor=&quot;area&quot;&gt;Area:&lt;/label&gt;
+                    &lt;input
+                        type=&quot;text&quot;
+                        id=&quot;area&quot;
+                        name=&quot;area&quot;
+                        value={formUserData.area}
+                        onChange={handleChange}
+                        required
+                        placeholder=&#39;Area&#39;
+                        style={{ width: &#39;100%&#39;, padding: &#39;8px&#39; }}
+                    /&gt;
+                &lt;/div&gt;
+
+                &lt;button type=&quot;submit&quot; style={{ padding: &#39;10px 20px&#39; }}&gt;
+                    Submit
+                &lt;/button&gt;
+            &lt;/form&gt;
+
+            &lt;div style={{ marginTop: &#39;20px&#39; }}&gt;
+                &lt;h3&gt;User List:&lt;/h3&gt;
+                &lt;ul&gt;
+                    {userList.map((user, index) =&gt; (
+                        &lt;li key={index}&gt;
+                            {user.name} - {user.area}
+                        &lt;/li&gt;
+                    ))}
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default AddUser;
+
+
+// AddUser.test.tsx
+import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom'; // important for matchers like toBeInTheDocument
+import AddUser from '../components/user/AddUser'; // adjust path if needed
+
+describe('AddUser Component', () => {
+  it('renders inputs and submit button', () => {
+    render(&lt;AddUser /&gt;);
+    
+    // Check if inputs and button exist
+    expect(screen.getByPlaceholderText('Name')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Area')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
+  });
+
+  it('adds a new user to the list on form submit', () => {
+    render(&lt;AddUser /&gt;);
+
+    const nameInput = screen.getByPlaceholderText('Name') as HTMLInputElement;
+    const areaInput = screen.getByPlaceholderText('Area') as HTMLInputElement;
+    const submitButton = screen.getByRole('button', { name: /submit/i });
+
+    // Simulate user typing
+    fireEvent.change(nameInput, { target: { value: 'Anand' } });
+    fireEvent.change(areaInput, { target: { value: 'Hyderabad' } });
+
+    // Submit form
+    fireEvent.click(submitButton);
+
+    // Check if the new user is added
+    expect(screen.getByText('Anand - Hyderabad')).toBeInTheDocument();
+
+    // Check if form is cleared
+    expect(nameInput.value).toBe('');
+    expect(areaInput.value).toBe('');
+  });
+
+  it('can add multiple users', () => {
+    render(&lt;AddUser /&gt;);
+
+    const nameInput = screen.getByPlaceholderText('Name') as HTMLInputElement;
+    const areaInput = screen.getByPlaceholderText('Area') as HTMLInputElement;
+    const submitButton = screen.getByRole('button', { name: /submit/i });
+
+    // Add first user
+    fireEvent.change(nameInput, { target: { value: 'Anand' } });
+    fireEvent.change(areaInput, { target: { value: 'Hyderabad' } });
+    fireEvent.click(submitButton);
+
+    // Add second user
+    fireEvent.change(nameInput, { target: { value: 'Ravi' } });
+    fireEvent.change(areaInput, { target: { value: 'Bangalore' } });
+    fireEvent.click(submitButton);
+
+    // Verify both users appear
+    expect(screen.getByText('Anand - Hyderabad')).toBeInTheDocument();
+    expect(screen.getByText('Ravi - Bangalore')).toBeInTheDocument();
+  });
+});
+
+`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "fireEvent",
+      note: [
+        {
+          text1: ``,
+          code1: `// ---------- Ex : 1 ----------
+          // Counter
+          import React,{ useState } from 'react';
+type Count = number
+
+const Counter:React.FC = () => {
+
+    const [count, setCount] = useState<Count>(0)
+
+    return (
+        &lt;&gt;
+            Counter : {count}
+            &lt;button onClick={() =&gt; setCount(prev =&gt; prev + 1)}&gt;Inc&lt;/button&gt;
+            &lt;button onClick={() =&gt; setCount(prev =&gt; prev - 1)}&gt;Dec&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+
+export default Counter
+
+
+//Counter.test.tsx
+import { fireEvent, render, screen } from "@testing-library/react";
+import Counter from "../components/counter/Counter";
+import '@testing-library/jest-dom';
+
+describe("Checking couter", () => {
+    it("Checking counter initial value", () => {
+        render(&lt;Counter /&gt;)
+        const counterElement: HTMLElement = screen.getByText(/Counter : 0/i)
+        expect(counterElement).toBeInTheDocument()
+    })
+
+    it("Checking Increment", () => {
+        render(&lt;Counter /&gt;)
+        const incButton: HTMLElement = screen.getByRole('button', { name: /Inc/i })
+        expect(incButton).toBeInTheDocument()
+        fireEvent.click(incButton)
+        const counterElement: HTMLElement = screen.getByText(/Counter : 1/i)
+        expect(counterElement).toBeInTheDocument()
+    })
+
+    it("Checking Descrement", () => {
+        render(&lt;Counter /&gt;)
+        const incButton: HTMLElement = screen.getByRole('button', { name: /Dec/i })
+        expect(incButton).toBeInTheDocument()
+        fireEvent.click(incButton)
+        const counterElement: HTMLElement = screen.getByText(/Counter : -1/i)
+        expect(counterElement).toBeInTheDocument()
+    })
+})`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "data-testid",
+      note: [
+        {
+          text1: `<b>data-testid<b> is a <b>custom HTML attribute</b> that you add to an element to make it easier to select in tests — especially when the element doesn’t have a unique role, text, or label.
+          
+          <b>getByTestId</b> is a query method or locator used in testing frameworks like React Testing Library and Playwright to locate elements within the Document Object Model (DOM) based on a custom <b>data-testid</b> attribute.
+          getByTestId
+Selects elements using <b>data-testid</b> attribute
+Useful as a <b>last resort</b> when no accessible role/text is available`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
           code1: ``
         }
       ],
@@ -2246,10 +2673,223 @@ test("user can type username and submit form", async () => {
     },
     {
       id: 52,
-      title: "aff intro",
+      title: "jest.mock",
       note: [
         {
-          text1: ``,
+          text1: `In the context of testing React components with Jest and React Testing Library (RTL), <b>"mocking"</b> refers to the practice of replacing real implementations of functions, modules, or components with controlled, simplified versions during testing. This allows for isolated and predictable testing of individual units of code.
+          
+          In Jest + React Testing Library (RTL), the term “mock” refers to <b>creating fake versions of functions, modules, or components</b> so that you can <b>control their behavior during tests</b> — without calling the real implementations.
+
+          <b>Purpose of Mocking</b>:
+-> <b>Isolate Code</b>: By replacing real dependencies with mock implementations, you can test a specific unit of code without worrying about the complexities or side effects of its external dependencies (e.g., API calls, database interactions, file system access).
+-> <b>Control Behavior</b>: Mocks allow you to define the exact return values or behavior of a function or module, enabling you to test various scenarios, including error conditions, without actually triggering those conditions in the real system.
+-> <b>Capture Interactions</b>: Mock functions can record how they are called, including the arguments passed and the number of times they were invoked, allowing you to assert on these interactions.
+
+<b>Why We Use Mocks</b>
+✅ Avoid real API calls during tests
+✅ Control return values and test different scenarios (e.g., success, error)
+✅ Track if a function was called, how many times, and with what arguments
+✅ Replace complex dependencies (e.g., hooks, libraries, context) with simple fake ones
+`,
+          code1: `// ---------- 1. Function Mocking – jest.fn() ------------
+          // utils.js
+export function add(a, b) {
+  return a + b;
+}
+
+
+// Component.js
+import React from "react";
+import { add } from "./utils";
+
+export default function Component() {
+  const result = add(2, 3);
+  return &lt;div&gt;Result: {result}&lt;/div&gt;;
+}
+
+
+// Component.test.js
+import { render, screen } from "@testing-library/react";
+import Component from "./Component";
+import * as utils from "./utils";
+
+test("mocks add function", () => {
+  // Create a mock for add
+  utils.add = jest.fn().mockReturnValue(10);
+
+  render(&lt;Component /&gt;);
+
+  expect(screen.getByText(/Result: 10/)).toBeInTheDocument();
+  expect(utils.add).toHaveBeenCalledWith(2, 3);
+});
+// Here, jest.fn() creates a mock function, and mockReturnValue(10) forces it to return 10 instead of doing real addition.
+
+
+
+// -------- 2. Mocking Modules – jest.mock() --------
+//If you want to mock an entire module, use jest.mock('moduleName').
+// api.js
+export async function fetchUser() {
+  const res = await fetch("/api/user");
+  return res.json();
+}
+
+
+// User.js
+import React, { useEffect, useState } from "react";
+import { fetchUser } from "./api";
+
+export default function User() {
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    fetchUser().then(data => setName(data.name));
+  }, []);
+
+  return &lt;div&gt;{name ? \`Hello, \${name}\` : &quot;Loading...&quot;}&lt;/div&gt;;
+}
+
+
+// User.test.js
+import { render, screen } from "@testing-library/react";
+import User from "./User";
+import { fetchUser } from "./api";
+
+jest.mock("./api");  // 👈 This tells Jest to mock the entire module
+
+test("renders user name from mock", async () => {
+  fetchUser.mockResolvedValue({ name: "Anand" }); // mock API response
+
+  render(&lt;User /&gt;);
+
+  expect(await screen.findByText(/Hello, Anand/)).toBeInTheDocument();
+  expect(fetchUser).toHaveBeenCalledTimes(1);
+});
+// No real network request happens — the fetchUser function is replaced with a fake one that resolves immediately with { name: 'Anand' }.
+
+// ---------- 3. Mocking Components Ex : 3:1-------------
+//Sometimes, you don’t want to render a child component fully — just confirm it was used.
+jest.mock("./Child", () => () => &lt;div&gt;Mocked Child&lt;/div&gt;);
+
+
+// ----------- Ex : 3:2 ----------------------------
+// ------- Child Component (Original) ----------
+// Child.js
+import React from "react";
+
+export default function Child({ onGreet }) {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Child Component&lt;/p&gt;
+      &lt;button onClick={() =&gt; onGreet(&quot;Hello from Child!&quot;)}&gt;Greet&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+// ---------- Parent Component ----------
+// Parent.js
+import React, { useState } from "react";
+import Child from "./Child";
+
+export default function Parent() {
+  const [message, setMessage] = useState("");
+
+  const handleGreet = (msg) => {
+    setMessage(msg);
+  };
+
+  return (
+      &lt;div&gt;
+        &lt;h1&gt;Parent Component&lt;/h1&gt;
+        &lt;Child onGreet={handleGreet} /&gt;
+        {message &amp;&amp; &lt;p data-testid=&quot;message&quot;&gt;{message}&lt;/p&gt;}
+      &lt;/div&gt;
+  );
+}
+
+// ------- Parent Test Without Mocking -------
+// Parent.test.js
+import { render, screen, fireEvent } from "@testing-library/react";
+import Parent from "./Parent";
+
+test("shows message when Child button is clicked", () => {
+  render(&lt;Parent /&gt;);
+
+  fireEvent.click(screen.getByText("Greet"));
+  expect(screen.getByTestId("message")).toHaveTextContent("Hello from Child!");
+});
+// ✅ This works, but here the <b>test depends on Child's implementation.</b>
+// If Child gets complex (API calls, context, etc.), this test can become <b>slow or brittle.</b>
+
+//  ----------- Mocking the Child Component ---------
+// We’ll replace the real Child component with a simple dummy component for the test.
+// Parent.test.js
+import { render, screen, fireEvent } from "@testing-library/react";
+import Parent from "./Parent";
+
+// 👇 This replaces the entire ./Child module with a mock implementation
+jest.mock("./Child", () => {
+  return function MockChild(props) {
+    return (
+      &lt;div data-testid=&quot;mock-child&quot;&gt;
+        &lt;button onClick={() =&gt; props.onGreet(&quot;Mocked Greet!&quot;)}&gt;
+          Mocked Child Button
+        &lt;/button&gt;
+      &lt;/div&gt;
+    );
+  };
+});
+
+test("renders Parent and uses mocked Child component", () => {
+  render(&lt;Parent /&gt;);
+
+  // ✅ The real Child text won't appear
+  expect(screen.getByTestId("mock-child")).toBeInTheDocument();
+
+  fireEvent.click(screen.getByText("Mocked Child Button"));
+  expect(screen.getByTestId("message")).toHaveTextContent("Mocked Greet!");
+});
+// jest.mock("./Child") intercepts the import of Child inside Parent.js.
+`
+        },
+                {
+          text1: `<table border="1" cellspacing="0" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>What it Does</th>
+      <th>Common Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>jest.fn()</code></td>
+      <td>Creates a mock function</td>
+      <td>Unit testing callbacks, props, utils</td>
+    </tr>
+    <tr>
+      <td><code>jest.mock('module')</code></td>
+      <td>Mocks entire module</td>
+      <td>Mock APIs, hooks, libraries</td>
+    </tr>
+    <tr>
+      <td><code>mockReturnValue</code>, <code>mockResolvedValue</code></td>
+      <td>Control what mock returns</td>
+      <td>Fake API responses</td>
+    </tr>
+    <tr>
+      <td><code>toHaveBeenCalledWith</code></td>
+      <td>Assert mock call details</td>
+      <td>Verify function usage</td>
+    </tr>
+    <tr>
+      <td>Component mocking</td>
+      <td>Replace child components</td>
+      <td>Simplify rendering for parent tests</td>
+    </tr>
+  </tbody>
+</table>
+`,
           code1: ``
         }
       ],

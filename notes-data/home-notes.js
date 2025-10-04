@@ -1,3 +1,9 @@
+const isHighlighted = 'index'
+const Links1 = 'index'
+const Links2 = 'home-notes-cognizant'
+const Links3 = 'javascript-builtin-function'
+const Links4 = 'javascript-projects'
+
 const commonData = {
     commonNote: [
 
