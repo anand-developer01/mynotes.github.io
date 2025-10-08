@@ -329,11 +329,6 @@ const SubjectList = {
             content: [
                 {
                     id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel: 'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                },
-                {
-                    id: 1,
                     eng: "<b>want + to see + object + V3 (past participle)</b>",
                     tel: "",
                     tense: ""
@@ -1081,7 +1076,13 @@ const SubjectList = {
                     eng: "They were not at the park.",
                     tel: "వారు పార్క్‌లో లేరు.",
                     tense: "Past negative"
-                }
+                },
+                {
+                    id: 4,
+                    eng: "You were not sleeping at 7 PM yesterday",
+                    tel: "నువ్వు నిన్న సాయంత్రం 7 గంటలకు నిద్రపోవడం లేదు.",
+                    tense: "Past Continuous Tense (Negative)."
+                },
             ],
         },
         {
@@ -2410,7 +2411,62 @@ const SubjectList = {
                     eng: "Judge orders wife to remove her parents from her matrimonial house",
                     tel: ""
                 },
+                {
+                    id: 48,
+                    eng: "<b>adopt</b>",
+                    tel: "<b></b>",
+                },
 
+            ],
+        },
+        {
+            id: 1,
+            topic: "My apologies",
+            explain: '',
+            formation: '',
+            content: [
+                {
+                    id: 1,
+                    eng: "My apologies for being late to the meeting.",
+                    tel: "మీటింగ్‌కి ఆలస్యంగా వచ్చినందుకు నా క్షమాపణలు.",
+                    tense: "Present tense"
+                },
+                {
+                    id: 2,
+                    eng: "My apologies, I didn’t see your message earlier.",
+                    tel: "నా క్షమాపణలు, నేను మీ మెసేజ్‌ను ముందుగా చూడలేదు.",
+                    tense: "Past tense"
+                },
+                {
+                    id: 3,
+                    eng: "My apologies for the confusion caused.",
+                    tel: "జరిగిన గందరగోళానికి నా క్షమాపణలు.",
+                    tense: "Present perfect tense"
+                },
+                {
+                    id: 4,
+                    eng: "My apologies, it won’t happen again.",
+                    tel: "నా క్షమాపణలు, ఇది మళ్లీ జరగదు.",
+                    tense: "Future tense"
+                },
+                {
+                    id: 5,
+                    eng: "My apologies if I hurt your feelings.",
+                    tel: "మీ భావాలను నొప్పించినట్లయితే నా క్షమాపణలు.",
+                    tense: "Past tense (conditional)"
+                },
+                {
+                    id: 6,
+                    eng: "My apologies for not informing you earlier.",
+                    tel: "ముందుగా మీకు తెలియజేయకపోవడంలో నా క్షమాపణలు.",
+                    tense: "Present perfect tense"
+                },
+                {
+                    id: 7,
+                    eng: "My apologies, I misunderstood your point.",
+                    tel: "నా క్షమాపణలు, నేను మీ పాయింట్‌ను తప్పుగా అర్థం చేసుకున్నాను.",
+                    tense: "Past tense"
+                }
             ],
         },
     ],
@@ -2738,14 +2794,284 @@ const SubjectList = {
         {
             id: 10,
             topic: "Future Continuous Tense",
-            explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain: 'Future Continuous Tense లో Subject + will + be + క్రియా వచనం (-ing) ఉపయోగించి భవిష్యత్తులో జరుగుతున్న చర్యను వ్యక్తపరిస్తాము.',
+            formation: 'Subject + will + be + <b>base verb + -ing</b> + rest of the sentence',
             content: [
                 {
-                    id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense: 'Present tense'
+                    "id": 1,
+                    "eng": "I will be discussing the new project.",
+                    "tel": "నేను కొత్త ప్రాజెక్ట్ గురించి చర్చించబోతున్నాను।",
+                    "tense": "Future Continuous"
+                },
+                {
+                    "id": 2,
+                    "eng": "In today’s meeting, I will be discussing our team goals.",
+                    "tel": "ఈరోజు మీటింగ్‌లో మా టీమ్ లక్ష్యాల గురించి చర్చించబోతున్నాను।",
+                    "tense": "Future Continuous"
+                },
+                {
+                    "id": 3,
+                    "eng": "Today, I will be discussing three main topics.",
+                    "tel": "ఈరోజు నేను మూడు ముఖ్యమైన విషయాలను చర్చించబోతున్నాను।",
+                    "tense": "Future Continuous"
+                },
+                {
+                    "id": 3,
+                    "eng": "I will be discussing this in detail during the presentation.",
+                    "tel": "నేను ప్రెజెంటేషన్ సమయంలో దీని గురించి విపులంగా చర్చించబోతున్నాను।",
+                    "tense": "Future Continuous"
+                },
+                {
+                    "id": 3,
+                    "eng": "I have started the 145 story, and I will be working on it.",
+                    "tel": "నేను 145 స్టోరీను ప్రారంభించాను, దానిపై పని చేయబోతున్నాను।",
+                    "tense": "Future Continuous"
+                },
+                {
+                    "id": 3,
+                    "eng": "I have started working on Story 145 and will continue working on",
+                    "tel": "నేను స్టోరీ 145 పై పని ప్రారంభించాను మరియు దానిపై కొనసాగిస్తాను।",
+                    "tense": "Future Continuous"
+                },
+                {
+                    "id": 1,
+                    "eng": "I have started working on Story 145, and I will be working on it.",
+                    "tel": "నేను స్టోరీ 145 పై పని ప్రారంభించాను మరియు దానిపై పని చేస్తాను.",
+                    "tense": "Positive",
+                },
+                {
+                    "id": 2,
+                    "eng": "I have not started working on Story 145, and I will not be working on it.",
+                    "tel": "నేను స్టోరీ 145 పై పని ప్రారంభించలేదు మరియు దానిపై పని చేయను.",
+                    "tense": "Negative"
+                },
+                {
+                    "id": 3,
+                    "eng": "Have I started working on Story 145, and will I be working on it?",
+                    "tel": "నేను స్టోరీ 145 పై పని ప్రారంభించానా, మరియు దానిపై పని చేస్తానా?",
+                    "tense": "Interrogative"
+                },
+                {
+                    "id": 4,
+                    "eng": "Haven't I started working on Story 145, and won't I be working on it?",
+                    "tel": "నేను స్టోరీ 145 పై పని ప్రారంభించలేదు కదా, మరియు దానిపై పని చేయను కదా?",
+                    "tense": "Negative Interrogative"
+                },
+                {
+                    "id": 1,
+                    "eng": "<b>Positive</b>",
+                    "tel": ""
+                },
+                {
+                    "id": 1,
+                    "tense": "Positive",
+                    "eng": "I will be attending the meeting tomorrow.",
+                    "tel": "నేను రేపు మీటింగ్‌లో హాజరవుతాను."
+                },
+                {
+                    "id": 2,
+                    "tense": "Positive",
+                    "eng": "She will be presenting the report in the meeting.",
+                    "tel": "ఆమె మీటింగ్‌లో నివేదికను ప్రదర్శించబోతుంది."
+                },
+                {
+                    "id": 3,
+                    "tense": "Positive",
+                    "eng": "We will be starting the new project next week.",
+                    "tel": "మేము వచ్చే వారం కొత్త ప్రాజెక్ట్‌ను ప్రారంభించబోతున్నాము."
+                },
+                {
+                    "id": 4,
+                    "tense": "Positive",
+                    "eng": "He will be working on the new feature all day tomorrow.",
+                    "tel": "అతను రేపు మొత్తం రోజు కొత్త ఫీచర్‌పై పని చేయబోతున్నాడు."
+                },
+                {
+                    "id": 5,
+                    "tense": "Positive",
+                    "eng": "They will be discussing the plan during the meeting.",
+                    "tel": "వారు మీటింగ్ సమయంలో ప్లాన్ గురించి చర్చించబోతున్నారు."
+                }, {
+                    "id": 1,
+                    "tense": "Positive",
+                    "eng": "I will be writing the letter tomorrow.",
+                    "tel": "నేను రేపు లేఖ రాయబోతున్నాను."
+                },
+                {
+                    "id": 2,
+                    "tense": "Positive",
+                    "eng": "The baby will be playing the whole night.",
+                    "tel": "బేబీ రాత్రంతా ఆడుకుంటూ ఉంటుంది."
+                },
+                {
+                    "id": 3,
+                    "tense": "Positive",
+                    "eng": "I will be helping my mother to make breakfast.",
+                    "tel": "నేను నా తల్లికి బ్రేక్‌ఫాస్ట్ తయారు చేయడంలో సహాయం చేస్తూ ఉంటాను."
+                },
+                {
+                    "id": 4,
+                    "tense": "Positive",
+                    "eng": "Sheldon will be eating the cake later.",
+                    "tel": "షెల్డన్ తర్వాత కేక్ తింటూ ఉంటాడు."
+                },
+                {
+                    "id": 5,
+                    "tense": "Positive",
+                    "eng": "Penny will be running in the marathon tomorrow.",
+                    "tel": "పెన్నీ రేపు మరాథాన్‌లో పరుగు పెడతారు."
+                },
+                {
+                    "id": 6,
+                    "tense": "Positive",
+                    "eng": "She will be taking her dog for a walk.",
+                    "tel": "ఆమె తన కుక్కను నడకకి తీసుకెళ్ళుతుంది."
+                },
+                {
+                    "id": 7,
+                    "tense": "Positive",
+                    "eng": "Ritz will be coming to our place soon.",
+                    "tel": "రిట్జ్ త్వరలో మన ఇంటికి వస్తారు."
+                },
+                {
+                    "id": 8,
+                    "tense": "Negative",
+                    "eng": "My mother won’t be working tomorrow.",
+                    "tel": "నా తల్లి రేపు పని చేయడం లేదు."
+                },
+                {
+                    "id": 9,
+                    "tense": "Negative",
+                    "eng": "The series won’t be releasing this month.",
+                    "tel": "సిరీస్ ఈ నెలలో విడుదలవ్వదు."
+                },
+                {
+                    "id": 10,
+                    "tense": "Interrogative",
+                    "eng": "Who will be waiting for John at the railway station?",
+                    "tel": "రైల్వే స్టేషన్ వద్ద జాన్ కోసం ఎవరు ఎదురుచూస్తున్నారు?"
+                },
+                {
+                    "id": 11,
+                    "tense": "Interrogative",
+                    "eng": "Will I be sleeping here?",
+                    "tel": "నేను ఇక్కడ నిద్రపోతానా?"
+                },
+                {
+                    "id": 12,
+                    "tense": "Positive",
+                    "eng": "I will be arriving at the station by 5:00 P.M.",
+                    "tel": "నేను సాయంత్రం 5 గంటలకు స్టేషన్‌కు చేరుతాను."
+                },
+                {
+                    "id": 13,
+                    "tense": "Positive",
+                    "eng": "My friends will be coming over for lunch tomorrow.",
+                    "tel": "నా స్నేహితులు రేపు లంచ్ కోసం వస్తారు."
+                },
+                {
+                    "id": 14,
+                    "tense": "Interrogative",
+                    "eng": "Will you be doing laundry tonight?",
+                    "tel": "నీవు ఈ రాత్రి లాండ్రీ చేస్తావా?"
+                },
+                {
+                    "id": 15,
+                    "tense": "Positive",
+                    "eng": "I will be watering the plants tomorrow morning.",
+                    "tel": "నేను రేపు ఉదయం పువ్వులకి నీరు పోస్తాను."
+                },
+                {
+                    "id": 16,
+                    "tense": "Positive",
+                    "eng": "Shyam will be visiting his aunt tomorrow.",
+                    "tel": "శ్యామ్ రేపు తన మామగారిని సందర్శిస్తాడు."
+                },
+                {
+                    "id": 17,
+                    "tense": "Positive",
+                    "eng": "I will be joining the new office from next week.",
+                    "tel": "నేను వచ్చే వారం నుండి కొత్త ఆఫీస్‌లో చేరబోతున్నాను."
+                },
+                {
+                    "id": 18,
+                    "tense": "Positive",
+                    "eng": "My parents will be flying to Delhi tomorrow.",
+                    "tel": "నా తల్లితల్లి రేపు ఢిల్లీకి ఎయిర్ ఫ్లైట్ ద్వారా వెళ్తారు."
+                },
+                {
+                    "id": 19,
+                    "tense": "Negative",
+                    "eng": "I will not be working tomorrow.",
+                    "tel": "నేను రేపు పని చేయను."
+                },
+                {
+                    "id": 20,
+                    "tense": "Positive",
+                    "eng": "Rajesh will be staying at the hotel on Friday.",
+                    "tel": "రాజేష్ శుక్రవారం హోటల్లో ఉండబోతున్నాడు."
+                },
+                {
+                    "id": 1,
+                    "eng": "<b>Negative</b>",
+                    "tel": ""
+                }, {
+                    "id": 1,
+                    "tense": "Negative",
+                    "eng": "I will not be attending the meeting tomorrow.",
+                    "tel": "నేను రేపు మీటింగ్‌లో హాజరవ్వను."
+                },
+                {
+                    "id": 2,
+                    "tense": "Negative",
+                    "eng": "She will not be presenting the report in the meeting.",
+                    "tel": "ఆమె మీటింగ్‌లో నివేదికను ప్రదర్శించకపోతోంది."
+                },
+                {
+                    "id": 3,
+                    "tense": "Negative",
+                    "eng": "We will not be starting the new project next week.",
+                    "tel": "మేము వచ్చే వారం కొత్త ప్రాజెక్ట్‌ను ప్రారంభించబోమేము."
+                },
+                {
+                    "id": 4,
+                    "tense": "Negative",
+                    "eng": "He will not be working on the new feature all day tomorrow.",
+                    "tel": "అతను రేపు మొత్తం రోజు కొత్త ఫీచర్‌పై పని చేయడంలేదు."
+                },
+                {
+                    "id": 5,
+                    "tense": "Negative",
+                    "eng": "They will not be discussing the plan during the meeting.",
+                    "tel": "వారు మీటింగ్ సమయంలో ప్లాన్ గురించి చర్చించకపోవడం జరుగదు."
+                },
+                {
+                    "id": 1,
+                    "eng": "<b>Interrogative</b>",
+                    "tel": "<b>Interrogative form of Future Continuous</b> is <b>less common - People usually ask <a href='file:///home/srihas/project/mynotes.github.io/pages/english.html#Simple%20Future%20Tense'>simple Future questions</a> instead: --- (Will you attend the meeting tomorrow?)</b>"
+                },
+                {
+                    "id": 2,
+                    "tense": "Interrogative",
+                    "eng": "Will she be presenting the report in the meeting?",
+                    "tel": "ఆమె మీటింగ్‌లో నివేదికను ప్రదర్శించబోతుందా?"
+                },
+                {
+                    "id": 3,
+                    "tense": "Interrogative",
+                    "eng": "Will we be starting the new project next week?",
+                    "tel": "మేము వచ్చే వారం కొత్త ప్రాజెక్ట్‌ను ప్రారంభించబోతున్నామా?"
+                },
+                {
+                    "id": 5,
+                    "tense": "Interrogative",
+                    "eng": "Will they be discussing the plan during the meeting?",
+                    "tel": "వారు మీటింగ్ సమయంలో ప్లాన్ గురించి చర్చించబోతున్నారా?"
+                },
+                {
+                    "id": 1,
+                    "eng": "<b>Negative Interrogative</b>",
+                    "tel": ""
                 },
             ],
         },

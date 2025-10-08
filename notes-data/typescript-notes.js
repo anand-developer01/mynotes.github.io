@@ -847,7 +847,7 @@ const response: ApiResponse&lt;User[]&gt; = {
         },
       ]
     },
-        {
+    {
       id: 1,
       title: "interface and type",
       note: [
@@ -3200,6 +3200,44 @@ console.log(typeof obj1 == typeof obj2); // true
             `,
           code1: ``,
         }
+      ]
+    },
+    {
+      id: 1,
+      title: "ReturnType",
+      note: [
+        {
+          text1: `type ReturnType<T extends (...args: any) => any>
+It extracts the <b>return type</b> of a function T.
+This is useful when you want to type something based on the return value of a function — without manually repeating the structure.
+          `,
+          code1: `// ---------------
+          function getUser() {
+  return {
+    name: 'Anand',
+    age: 30,
+  }
+}
+
+type UserReturn = ReturnType<typeof getUser>
+
+// 👆 This becomes:
+// type UserReturn = {
+//   name: string
+//   age: number
+// }
+`,
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Utility Types",
+      note: [
+        {
+          text1: ``,
+          code1: ``,
+        },
       ]
     },
     {
