@@ -2896,6 +2896,41 @@ test("renders Parent and uses mocked Child component", () => {
     },
     {
       id: 52,
+      title: "redux-mock-store",
+      note: [
+        {
+          text1: `redux-mock-store is a library that creates a mock (or fake) Redux store for unit testing. It tracks dispatched actions in an array and allows you to set an initial state. This isolation is useful for testing action creators, especially asynchronous ones like thunks, without the overhead of a full Redux store. 
+
+However, the Redux team no longer recommends this library for testing, as it can lead to confusing behavior and inconsistent tests. Since it doesn't update the state via reducers, tests can be less reliable than those using a real store. 
+
+A mock store is a <b>fake Redux store</b> used only for testing.
+It allows you to:
+Simulate dispatching actions.
+Inspect the actions that were dispatched.
+Verify reducers, action creators, or async thunks without needing a real Redux setup.
+It doesn’t use reducers or middleware by default (unless you specify them).
+
+npm install --save-dev redux-mock-store`,
+          code1: `
+          import configureMockStore from 'redux-mock-store';
+
+import configureMockStore from 'redux-mock-store';
+
+const mockStore = configureMockStore();
+const store = mockStore({ count: 0 }); // initial state
+
+store.dispatch({ type: 'INCREMENT' });
+
+const actions = store.getActions();
+
+console.log(actions);
+// Output: [ { type: 'INCREMENT' } ]
+          `
+        }
+      ],
+    },
+    {
+      id: 52,
       title: "aff intro",
       note: [
         {
@@ -2904,7 +2939,17 @@ test("renders Parent and uses mocked Child component", () => {
         }
       ],
     },
-    {
+        {
+      id: 52,
+      title: "aff intro",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+        {
       id: 52,
       title: "aff intro",
       note: [

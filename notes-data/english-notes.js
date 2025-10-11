@@ -2476,37 +2476,670 @@ const SubjectList = {
             id: 1,
             section: "Tenses",
             topic: "Simple Present Tense",
-            explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain: 'ఎప్పుడూ జరిగే పనులు, అలవాట్లు, సత్యాలు (facts), లేదా రోజువారీ చర్యలు చెప్పడానికి ఉపయోగిస్తారు.',
+            formation: 'Subject + base verb (+ s/es for he/she/it)',
             note: 'Present Tense',
             content: [
                 {
                     id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense: 'Present tense'
+                    eng: "I write code every day.",
+                    tel: "నేను ప్రతి రోజూ కోడ్ రాస్తాను.",
+                    tense: "Simple Present Tense"
                 },
+                {
+                    id: 2,
+                    eng: "She works on React projects.",
+                    tel: "ఆమె React ప్రాజెక్టులపై పని చేస్తుంది.",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 3,
+                    eng: "The sun rises in the east.",
+                    tel: "సూర్యుడు తూర్పున ఉదయిస్తాడు.",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 4,
+                    eng: "We deploy updates every Friday.",
+                    tel: "మేము ప్రతి శుక్రవారం అప్‌డేట్స్ విడుదల చేస్తాము.",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 5,
+                    eng: "He checks GitHub every morning.",
+                    tel: "అతను ప్రతి ఉదయం GitHub చూస్తాడు.",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 6,
+                    eng: "Do you use TypeScript?",
+                    tel: "నువ్వు TypeScript వాడుతావా?",
+                    tense: "Simple Present Tense (Question)"
+                },
+                {
+                    id: 7,
+                    eng: "I don’t push code without testing.",
+                    tel: "టెస్టింగ్ లేకుండా నేను కోడ్ పుష్ చేయను.",
+                    tense: "Simple Present Tense (Negative)"
+                },
+                {
+                    id: 8,
+                    eng: "He doesn’t like bugs.",
+                    tel: "అతనికి బగ్స్ నచ్చవు.",
+                    tense: "Simple Present Tense (Negative)"
+                },
+                {
+                    id: 9,
+                    eng: "The meeting starts at 10 a.m.",
+                    tel: "మీటింగ్ ఉదయం 10 గంటలకు మొదలవుతుంది.",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 10,
+                    eng: "They learn new technologies every week.",
+                    tel: "వారు ప్రతి వారం కొత్త టెక్నాలజీలు నేర్చుకుంటారు.",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Negative</b>",
+                    tel: "",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 1,
+                    eng: "I do not play cricket.",
+                    tel: "నేను క్రికెట్ ఆడను.",
+                    tense: "Negative"
+                },
+                {
+                    id: 2,
+                    eng: "She does not like coffee.",
+                    tel: "ఆమె కాఫీ ఇష్టపడదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 3,
+                    eng: "They do not go to school on Sundays.",
+                    tel: "వారు ఆదివారాల్లో పాఠశాలకు వెళ్ళరు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 4,
+                    eng: "He does not watch TV in the morning.",
+                    tel: "అతను ఉదయం టీవీ చూడడు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 5,
+                    eng: "We do not eat junk food.",
+                    tel: "మేము జంక్ ఫుడ్ తినము.",
+                    tense: "Negative"
+                },
+                {
+                    id: 6,
+                    eng: "You do not study at night.",
+                    tel: "నీవు రాత్రి చదవవు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 7,
+                    eng: "It does not rain much here.",
+                    tel: "ఇక్కడ ఎక్కువగా వర్షం పడదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 8,
+                    eng: "Ravi does not work on weekends.",
+                    tel: "రవీ వీకెండ్లలో పని చేయడు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 9,
+                    eng: "The shop does not open early.",
+                    tel: "ఆ దుకాణం తొందరగా తెరుచుకోదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 10,
+                    eng: "I do not drink tea.",
+                    tel: "నేను టీ తాగను.",
+                    tense: "Negative"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Interrogative</b>",
+                    tel: "",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 1,
+                    eng: "Do you play cricket?",
+                    tel: "నీవు క్రికెట్ ఆడుతావా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 2,
+                    eng: "Does she like coffee?",
+                    tel: "ఆమె కాఫీ ఇష్టపడుతుందా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 3,
+                    eng: "Do they go to school every day?",
+                    tel: "వారు ప్రతిరోజూ పాఠశాలకు వెళ్తారా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 4,
+                    eng: "Does he watch TV in the morning?",
+                    tel: "అతను ఉదయం టీవీ చూస్తాడా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 5,
+                    eng: "Do we eat junk food?",
+                    tel: "మనం జంక్ ఫుడ్ తింటామా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 6,
+                    eng: "Do I study at night?",
+                    tel: "నేను రాత్రి చదువుతానా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 7,
+                    eng: "Does it rain here often?",
+                    tel: "ఇక్కడ తరచుగా వర్షం పడుతుందా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 8,
+                    eng: "Does Ravi work on weekends?",
+                    tel: "రవీ వీకెండ్లలో పని చేస్తాడా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 9,
+                    eng: "Does the shop open early?",
+                    tel: "ఆ దుకాణం తొందరగా తెరుచుకుంటుందా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 10,
+                    eng: "Do you drink tea?",
+                    tel: "నీవు టీ తాగుతావా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 1,
+                    eng: "Do you play cricket?",
+                    tel: "నీవు క్రికెట్ ఆడుతావా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 2,
+                    eng: "Does she like coffee?",
+                    tel: "ఆమె కాఫీ ఇష్టపడుతుందా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 3,
+                    eng: "Do they go to school every day?",
+                    tel: "వారు ప్రతిరోజూ పాఠశాలకు వెళ్తారా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 4,
+                    eng: "Does he watch TV in the morning?",
+                    tel: "అతను ఉదయం టీవీ చూస్తాడా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 5,
+                    eng: "Do we eat junk food?",
+                    tel: "మనం జంక్ ఫుడ్ తింటామా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 6,
+                    eng: "Do I study at night?",
+                    tel: "నేను రాత్రి చదువుతానా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 7,
+                    eng: "Does it rain here often?",
+                    tel: "ఇక్కడ తరచుగా వర్షం పడుతుందా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 8,
+                    eng: "Does Ravi work on weekends?",
+                    tel: "రవీ వీకెండ్లలో పని చేస్తాడా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 9,
+                    eng: "Does the shop open early?",
+                    tel: "ఆ దుకాణం తొందరగా తెరుచుకుంటుందా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 10,
+                    eng: "Do you drink tea?",
+                    tel: "నీవు టీ తాగుతావా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Negative Interrogative</b>",
+                    tel: "",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 1,
+                    eng: "Don't you play cricket?",
+                    tel: "నీవు క్రికెట్ ఆడవా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 2,
+                    eng: "Doesn't she like coffee?",
+                    tel: "ఆమెకి కాఫీ నచ్చదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 3,
+                    eng: "Don't they go to school every day?",
+                    tel: "వారు ప్రతిరోజూ పాఠశాలకు వెళ్లరా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 4,
+                    eng: "Doesn't he watch TV in the morning?",
+                    tel: "అతను ఉదయం టీవీ చూడడా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 5,
+                    eng: "Don't we eat junk food?",
+                    tel: "మనం జంక్ ఫుడ్ తినమా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 6,
+                    eng: "Don't I study at night?",
+                    tel: "నేను రాత్రి చదవనా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 7,
+                    eng: "Doesn't it rain here often?",
+                    tel: "ఇక్కడ తరచుగా వర్షం పడదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 8,
+                    eng: "Doesn't Ravi work on weekends?",
+                    tel: "రవీ వీకెండ్లలో పని చేయడా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 9,
+                    eng: "Doesn't the shop open early?",
+                    tel: "ఆ దుకాణం తొందరగా తెరుచుకోదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 10,
+                    eng: "Don't you drink tea?",
+                    tel: "నీవు టీ తాగవా?",
+                    tense: "Negative Interrogative"
+                }
+
+
             ],
         },
         {
             id: 2,
             topic: "Present Continuous Tense",
-            explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain: 'ఇప్పుడు చూద్దాం Present Continuous Tense — ఇది ఇప్పుడు జరుగుతున్న క్రియలను లేదా ఇప్పటికి సమీపంగా జరుగుతున్న పనులను సూచిస్తుంది.',
+            formation: 'Subject + am/is/are + verb(+ing) + rest of the sentence.',
             content: [
                 {
-                    id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense: 'Present tense'
+                    id: 10,
+                    eng: "<b>Positive</b>",
+                    tel: "",
+                    tense: "Simple Present Tense"
                 },
+                {
+                    id: 1,
+                    eng: "I am reading a book.",
+                    tel: "నేను పుస్తకం చదువుతున్నాను.",
+                    tense: "Positive"
+                },
+                {
+                    id: 2,
+                    eng: "She is cooking dinner.",
+                    tel: "ఆమె భోజనం వండుతోంది.",
+                    tense: "Positive"
+                },
+                {
+                    id: 3,
+                    eng: "They are playing cricket.",
+                    tel: "వారు క్రికెట్ ఆడుతున్నారు.",
+                    tense: "Positive"
+                },
+                {
+                    id: 4,
+                    eng: "He is watching TV.",
+                    tel: "అతను టీవీ చూస్తున్నాడు.",
+                    tense: "Positive"
+                },
+                {
+                    id: 5,
+                    eng: "We are going to school.",
+                    tel: "మేము పాఠశాలకు వెళ్తున్నాము.",
+                    tense: "Positive"
+                },
+                {
+                    id: 6,
+                    eng: "You are learning English.",
+                    tel: "నువ్వు ఇంగ్లీష్ నేర్చుకుంటున్నావు.",
+                    tense: "Positive"
+                },
+                {
+                    id: 7,
+                    eng: "It is raining heavily.",
+                    tel: "బాగా వర్షం పడుతోంది.",
+                    tense: "Positive"
+                },
+                {
+                    id: 8,
+                    eng: "My brother is driving the car.",
+                    tel: "నా అన్నయ్య కారు నడుపుతున్నాడు.",
+                    tense: "Positive"
+                },
+                {
+                    id: 9,
+                    eng: "The children are playing in the park.",
+                    tel: "పిల్లలు పార్కులో ఆడుతున్నారు.",
+                    tense: "Positive"
+                },
+                {
+                    id: 10,
+                    eng: "Ravi is writing a letter.",
+                    tel: "రవీ ఒక లేఖ రాస్తున్నాడు.",
+                    tense: "Positive"
+                },
+                {
+                    id: 1,
+                    eng: "I am working on an important React project that needs to be completed before the client meeting tomorrow morning.",
+                    tel: "నేను ఒక ముఖ్యమైన React ప్రాజెక్ట్‌పై పని చేస్తున్నాను, ఇది రేపు ఉదయం కస్టమర్ మీటింగ్‌కు ముందు పూర్తి చేయాలి.",
+                    tense: "Present Continuous Tense"
+                },
+                {
+                    id: 2,
+                    eng: "She is preparing a detailed presentation about our company’s new product launch while also attending multiple client calls.",
+                    tel: "ఆమె మా కంపెనీ కొత్త ఉత్పత్తి ప్రారంభంపై వివరమైన ప్రెజెంటేషన్ సిద్ధం చేస్తోంది, అలాగే అనేక కస్టమర్ కాల్స్‌కు హాజరవుతోంది.",
+                    tense: "Present Continuous Tense"
+                },
+                {
+                    id: 3,
+                    eng: "We are discussing different approaches to optimize the website performance without affecting the user experience.",
+                    tel: "మేము యూజర్ అనుభవాన్ని ప్రభావితం చేయకుండా వెబ్‌సైట్ పనితీరును మెరుగుపరచడానికి వివిధ విధానాలను చర్చిస్తున్నాము.",
+                    tense: "Present Continuous Tense"
+                },
+                {
+                    id: 4,
+                    eng: "The developers are fixing multiple bugs in the code that were reported during the recent QA testing phase.",
+                    tel: "డెవలపర్లు ఇటీవల QA టెస్టింగ్ సమయంలో నివేదించిన అనేక బగ్స్‌ను కోడ్‌లో సరిచేస్తున్నారు.",
+                    tense: "Present Continuous Tense"
+                },
+                {
+                    id: 5,
+                    eng: "My manager is reviewing the progress of each team member to ensure that everyone is meeting the project deadlines.",
+                    tel: "ప్రతి టీమ్ సభ్యుడి పురోగతిని పరిశీలిస్తూ, అందరూ ప్రాజెక్ట్ డెడ్‌లైన్స్‌ను పాటిస్తున్నారో లేదో నా మేనేజర్ చూసుకుంటున్నారు.",
+                    tense: "Present Continuous Tense"
+                },
+                {
+                    id: 6,
+                    eng: "They are updating the database schema while migrating the old records to maintain compatibility with the new system.",
+                    tel: "కొత్త సిస్టమ్‌తో అనుకూలత కోసం పాత రికార్డులను మార్చుతూ వారు డేటాబేస్ స్కీమాను నవీకరిస్తున్నారు.",
+                    tense: "Present Continuous Tense"
+                },
+                {
+                    id: 7,
+                    eng: "Our team is collaborating with the design department to create a more user-friendly and visually appealing dashboard layout.",
+                    tel: "మా టీమ్, డిజైన్ విభాగంతో కలిసి మరింత యూజర్ ఫ్రెండ్లీ మరియు ఆకర్షణీయమైన డాష్‌బోర్డ్ లేఅవుట్ సృష్టించడానికి పనిచేస్తోంది.",
+                    tense: "Present Continuous Tense"
+                },
+                {
+                    id: 8,
+                    eng: "I am learning advanced TypeScript concepts while simultaneously implementing them in our live project.",
+                    tel: "నేను అధునాతన TypeScript కాన్సెప్ట్‌లను నేర్చుకుంటూ వాటిని మా లైవ్ ప్రాజెక్ట్‌లో అమలు చేస్తున్నాను.",
+                    tense: "Present Continuous Tense"
+                },
+                {
+                    id: 9,
+                    eng: "The HR team is conducting interviews to fill the new frontend developer positions by the end of this week.",
+                    tel: "ఈ వారం చివరినాటికి కొత్త ఫ్రంట్‌ఎండ్ డెవలపర్ పోస్టులను భర్తీ చేయడానికి HR టీమ్ ఇంటర్వ్యూలు నిర్వహిస్తోంది.",
+                    tense: "Present Continuous Tense"
+                },
+                {
+                    id: 10,
+                    eng: "I am attending a virtual training session that focuses on improving our project management and communication skills.",
+                    tel: "మా ప్రాజెక్ట్ మేనేజ్‌మెంట్ మరియు కమ్యూనికేషన్ నైపుణ్యాలను మెరుగుపరచడంపై దృష్టి పెట్టిన వర్చువల్ ట్రైనింగ్ సెషన్‌లో నేను పాల్గొంటున్నాను.",
+                    tense: "Present Continuous Tense"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Negative</b>",
+                    tel: "",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 1,
+                    eng: "I am not working on the new module today because I need to review the previous sprint tasks first.",
+                    tel: "నేను ఈ రోజు కొత్త మాడ్యూల్‌పై పని చేయడం లేదు, ఎందుకంటే ముందు స్ప్రింట్ పనులను సమీక్షించాలి.",
+                    tense: "Present Continuous Negative"
+                },
+                {
+                    id: 2,
+                    eng: "She is not attending the client meeting since she is handling a critical production issue right now.",
+                    tel: "ఆమె ప్రస్తుతం ఒక ముఖ్యమైన ప్రొడక్షన్ ఇష్యూను పరిష్కరిస్తోంది కాబట్టి క్లయింట్ మీటింగ్‌కు హాజరుకావడం లేదు.",
+                    tense: "Present Continuous Negative"
+                },
+                {
+                    id: 3,
+                    eng: "We are not deploying the latest build until all the test cases pass successfully.",
+                    tel: "అన్ని టెస్ట్ కేసులు విజయవంతంగా పూర్తయ్యే వరకు మేము తాజా బిల్డ్‌ను డిప్లాయ్ చేయడం లేదు.",
+                    tense: "Present Continuous Negative"
+                },
+                {
+                    id: 4,
+                    eng: "The developers are not using the old API anymore because it has several security vulnerabilities.",
+                    tel: "డెవలపర్లు ఇప్పుడు పాత APIని వాడడం లేదు, ఎందుకంటే అందులో అనేక భద్రతా లోపాలు ఉన్నాయి.",
+                    tense: "Present Continuous Negative"
+                },
+                {
+                    id: 5,
+                    eng: "I am not taking any new tasks this week as I am focusing on completing the pending ones.",
+                    tel: "నేను ఈ వారం కొత్త పనులను తీసుకోవడం లేదు, ఎందుకంటే పెండింగ్‌లో ఉన్న పనులను పూర్తి చేయడంపై దృష్టి పెట్టుతున్నాను.",
+                    tense: "Present Continuous Negative"
+                },
+                {
+                    id: 6,
+                    eng: "They are not releasing the update today because the QA team found some unexpected bugs.",
+                    tel: "QA టీమ్ కొన్ని అనూహ్యమైన బగ్స్ కనుగొన్నందున వారు ఈ రోజు అప్‌డేట్ విడుదల చేయడం లేదు.",
+                    tense: "Present Continuous Negative"
+                },
+                {
+                    id: 7,
+                    eng: "My team is not participating in the hackathon this month due to workload from other projects.",
+                    tel: "ఇతర ప్రాజెక్టుల పని భారంతో ఈ నెల హ్యాకథాన్‌లో నా టీమ్ పాల్గొనడం లేదు.",
+                    tense: "Present Continuous Negative"
+                },
+                {
+                    id: 8,
+                    eng: "The designer is not creating new layouts until the product manager finalizes the requirements.",
+                    tel: "ప్రొడక్ట్ మేనేజర్ అవసరాలను ఖరారు చేసే వరకు డిజైనర్ కొత్త లేఅవుట్లు రూపొందించడం లేదు.",
+                    tense: "Present Continuous Negative"
+                },
+                {
+                    id: 9,
+                    eng: "We are not using the staging environment today because the server is under maintenance.",
+                    tel: "సర్వర్ మెయింటెనెన్స్‌లో ఉండటంతో మేము ఈ రోజు స్టేజింగ్ ఎన్విరాన్‌మెంట్ వాడడం లేదు.",
+                    tense: "Present Continuous Negative"
+                },
+                {
+                    id: 10,
+                    eng: "I am not joining the meeting right now since I am waiting for the updated presentation slides.",
+                    tel: "నేను ఇప్పుడే మీటింగ్‌లో చేరడం లేదు, ఎందుకంటే అప్‌డేట్ చేసిన ప్రెజెంటేషన్ స్లైడ్స్ కోసం ఎదురు చూస్తున్నాను.",
+                    tense: "Present Continuous Negative"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Interrogative</b>",
+                    tel: "",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 1,
+                    eng: "Am I eating breakfast?",
+                    tel: "నేను అల్పాహారం తింటున్నానా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 2,
+                    eng: "Is she watching TV?",
+                    tel: "ఆమె టీవీ చూస్తుందా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 3,
+                    eng: "Is he reading a book?",
+                    tel: "అతను పుస్తకం చదువుతున్నాడా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 4,
+                    eng: "Are they playing football?",
+                    tel: "వారు ఫుట్‌బాల్ ఆడుతున్నారా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 5,
+                    eng: "Are we learning English?",
+                    tel: "మేము ఇంగ్లీష్ నేర్చుకుంటున్నామా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 6,
+                    eng: "Are you talking too loudly?",
+                    tel: "నీవు చాలా గట్టిగా మాట్లాడుతున్నావా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 7,
+                    eng: "Is it raining outside?",
+                    tel: "బయట వర్షం పడుతుందా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 8,
+                    eng: "Is my father working in the garden?",
+                    tel: "నా తండ్రి తోటలో పని చేస్తున్నాడా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 9,
+                    eng: "Are the children drawing pictures?",
+                    tel: "పిల్లలు చిత్రాలు గీయుతున్నారా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 10,
+                    eng: "Is Ravi preparing for the exam?",
+                    tel: "రవీ పరీక్షకు సిద్ధం అవుతున్నాడా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Negative Interrogative</b>",
+                    tel: "",
+                    tense: "Simple Present Tense"
+                },
+                {
+                    id: 1,
+                    eng: "Am I not eating breakfast?",
+                    tel: "నేను అల్పాహారం తినట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 2,
+                    eng: "Is she not watching TV?",
+                    tel: "ఆమె టీవీ చూడట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 3,
+                    eng: "Is he not reading a book?",
+                    tel: "అతను పుస్తకం చదువుతున్నట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 4,
+                    eng: "Are they not playing football?",
+                    tel: "వారు ఫుట్‌బాల్ ఆడట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 5,
+                    eng: "Are we not learning English?",
+                    tel: "మేము ఇంగ్లీష్ నేర్చుకుంటున్నట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 6,
+                    eng: "Are you not talking too loudly?",
+                    tel: "నీవు చాలా గట్టిగా మాట్లాడట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 7,
+                    eng: "Is it not raining outside?",
+                    tel: "బయట వర్షం పడట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 8,
+                    eng: "Is my father not working in the garden?",
+                    tel: "నా తండ్రి తోటలో పని చేస్తున్నట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 9,
+                    eng: "Are the children not drawing pictures?",
+                    tel: "పిల్లలు చిత్రాలు గీయట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 10,
+                    eng: "Is Ravi not preparing for the exam?",
+                    tel: "రవీ పరీక్షకు సిద్ధం అవుతున్నట్లేదా?",
+                    tense: "Negative Interrogative"
+                }
+
             ],
         },
         {
             id: 3,
             topic: "Present Perfect Tense",
             explain: 'ఒక action గతంలో జరిగినా దాని ప్రభావం ఇప్పటికీ కొనసాగుతున్నప్పుడు లేదా మనం time చెప్పకుండా అనుభవం చెప్పాలనుకున్నప్పుడు వాడతాం. (గతంలో జరిగి, ఇప్పుడు ప్రభావం ఉన్నప్పుడు)',
-            formation: 'Subject + has/have + Past Participle (V3)',
+            formation: 'Subject + has/have + past participle (verb 3rd form) + rest',
             content: [
                 {
                     id: 1,
@@ -2640,30 +3273,314 @@ const SubjectList = {
         {
             id: 5,
             topic: "Simple Past Tense",
-            explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain: 'Simple Past Tense అంటే గతంలో పూర్తయిన చర్యలు, పరిస్థితులు, విషయాలు చూపడానికి ఉపయోగించే క్రియ రకం. ఇప్పుడు వాటికి ప్రభావం ఉండకపోవచ్చు, కేవలం భूतకాలంలో జరిగిందనే విషయం మాత్రమే సూచిస్తుంది.',
+            formation: '=> Positive: Subject + past form of verb + rest => Negative: Subject + did not + base verb + rest => Interrogative: Did + subject + base verb + rest? => Negative Interrogative: Did + subject + not + base verb + rest?',
             note: 'Past Tense',
             content: [
                 {
-                    id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense: 'Present tense'
+                    id: 10,
+                    eng: "<b>Positive</b>",
+                    tel: "",
+                    tense: ""
                 },
+                {
+                    id: 1,
+                    eng: "He declined the job offer. → He refused it.",
+                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
+                    tense: 'Simple Past tense'
+                },
+                {
+                    id: 1,
+                    eng: "I visited my grandmother last weekend.",
+                    tel: "నేను గత వారం నా అమ్మమ్మని చూశాను.",
+                    tense: "Positive"
+                },
+                {
+                    id: 2,
+                    eng: "She watched a movie yesterday evening.",
+                    tel: "ఆమె నిన్న సాయంత్రం సినిమా చూశింది.",
+                    tense: "Positive"
+                },
+                {
+                    id: 3,
+                    eng: "They played football in the park last Sunday.",
+                    tel: "వారు గత ఆదివారం పార్క్‌లో ఫుట్‌బాల్ ఆడారు.",
+                    tense: "Positive"
+                },
+                {
+                    id: 4,
+                    eng: "We completed the project two days ago.",
+                    tel: "మేము రెండు రోజుల క్రితం ప్రాజెక్ట్ పూర్తి చేసాము.",
+                    tense: "Positive"
+                },
+                {
+                    id: 5,
+                    eng: "He went to Delhi last month for a conference.",
+                    tel: "అతను గత నెల డెలీకి ఒక కాన్ఫరెన్స్ కోసం వెళ్లాడు.",
+                    tense: "Positive"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Negative</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 6,
+                    eng: "I did not visit my friend yesterday.",
+                    tel: "నేను నిన్న నా స్నేహితుడిని చూడలేదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 7,
+                    eng: "She did not attend the meeting last week.",
+                    tel: "ఆమె గత వారం మీటింగ్‌కు హాజరుకాలేదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 8,
+                    eng: "They did not play cricket yesterday.",
+                    tel: "వారు నిన్న క్రికెట్ ఆడలేదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 9,
+                    eng: "We did not complete the assignment on time.",
+                    tel: "మేము అసైన్‌మెంట్ ను సమయానికి పూర్తి చేయలేకపోయాం.",
+                    tense: "Negative"
+                },
+                {
+                    id: 10,
+                    eng: "He did not go to the party last night.",
+                    tel: "అతను నిన్న రాత్రి పార్టీకి వెళ్లలేడు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Interrogative</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 11,
+                    eng: "Did you visit the museum last weekend?",
+                    tel: "నీవు గత వారం మ్యూజియం కు వెళ్లాయా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 12,
+                    eng: "Did she watch the movie yesterday?",
+                    tel: "ఆమె నిన్న సినిమా చూశిందా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 13,
+                    eng: "Did they play football last Sunday?",
+                    tel: "వారు గత ఆదివారం ఫుట్‌బాల్ ఆడారా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 14,
+                    eng: "Did we complete the project on time?",
+                    tel: "మేము ప్రాజెక్ట్‌ను సమయానికి పూర్తి చేసామా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 15,
+                    eng: "Did he go to Delhi last month?",
+                    tel: "అతను గత నెల డెలీకి వెళ్లాడా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Negative Interrogativ</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 16,
+                    eng: "Didn’t you visit your friend yesterday?",
+                    tel: "నీవు నిన్న నీ స్నేహితుడిని చూడలేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 17,
+                    eng: "Didn’t she attend the meeting last week?",
+                    tel: "ఆమె గత వారం మీటింగ్ కు హాజరుకాలేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 18,
+                    eng: "Didn’t they play cricket yesterday?",
+                    tel: "వారు నిన్న క్రికెట్ ఆడలేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 19,
+                    eng: "Didn’t we complete the assignment on time?",
+                    tel: "మేము అసైన్‌మెంట్ సమయానికి పూర్తి చేయలేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 20,
+                    eng: "Didn’t he go to the party last night?",
+                    tel: "అతను నిన్న రాత్రి పార్టీకి వెళ్లలేదా?",
+                    tense: "Negative Interrogative"
+                }
+
             ],
         },
         {
             id: 6,
             topic: "Past Continuous Tense",
-            explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain: 'Past Continuous Tense అంటే గతంలో ఒక నిర్దిష్ట సమయం లేదా సందర్భంలో కొనసాగుతున్న పనిను సూచిస్తుంది. English లో ఇది was / were + verb-ing రూపంలో ఉంటుంది.',
+            formation: '=> Positive: Subject + was/were + verb-ing + rest => Negative: Subject + was/were + not + verb-ing + rest => Interrogative: Was/Were + subject + verb-ing + rest? => Negative Interrogative: Was/Were + subject + not + verb-ing + rest?',
             content: [
                 {
-                    id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense: 'Present tense'
+                    id: 10,
+                    eng: "<b>Positive</b>",
+                    tel: "",
+                    tense: ""
                 },
+                {
+                    id: 1,
+                    eng: "I was reading a book at 8 pm yesterday.",
+                    tel: "నేను నిన్న రాత్రి 8 గంటలకు పుస్తకం చదువుతున్నాను.",
+                    tense: "Positive"
+                },
+                {
+                    id: 2,
+                    eng: "She was cooking dinner when I called her.",
+                    tel: "నేను ఆమెకు కాల్ చేసినప్పుడు ఆమె డిన్నర్ వండుతున్‍ది.",
+                    tense: "Positive"
+                },
+                {
+                    id: 3,
+                    eng: "They were playing football in the park last evening.",
+                    tel: "వారు నిన్న సాయంత్రం పార్క్‌లో ఫుట్‌బాల్ ఆడుతున్నారు.",
+                    tense: "Positive"
+                },
+                {
+                    id: 4,
+                    eng: "We were discussing the project plan when the manager arrived.",
+                    tel: "మేనేజర్ వచ్చినప్పుడు మేము ప్రాజెక్ట్ ప్లాన్ చర్చిస్తున్నాము.",
+                    tense: "Positive"
+                },
+                {
+                    id: 5,
+                    eng: "He was studying for the exam all night.",
+                    tel: "అతను రాత్రంతా పరీక్ష కోసం చదువుతున్నాడు.",
+                    tense: "Positive"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Negative</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 6,
+                    eng: "I was not watching TV at 9 pm yesterday.",
+                    tel: "నేను నిన్న రాత్రి 9 గంటలకు టీవీ చూడట్లేదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 7,
+                    eng: "She was not listening to music when I entered the room.",
+                    tel: "నేను రూమ్‌లోకి వెళ్లినప్పుడు ఆమె సంగీతం వింటట్లేదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 8,
+                    eng: "They were not playing cricket in the morning.",
+                    tel: "వారు ఉదయం క్రికెట్ ఆడట్లేదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 9,
+                    eng: "We were not using the computer when the power went off.",
+                    tel: "విద్యుత్ చెల్లని సమయంలో మేము కంప్యూటర్ వాడట్లేదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 10,
+                    eng: "He was not working on the assignment last night.",
+                    tel: "అతను నిన్న రాత్రి అసైన్‌మెంట్‌పై పని చేయట్లేదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Interrogative</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 11,
+                    eng: "Was I reading the book at 8 pm yesterday?",
+                    tel: "నేను నిన్న రాత్రి 8 గంటలకు పుస్తకం చదువుతున్నానా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 12,
+                    eng: "Was she cooking dinner when you called her?",
+                    tel: "నీవు ఆమెకు కాల్ చేసినప్పుడు ఆమె డిన్నర్ వండుతున్నాడా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 13,
+                    eng: "Were they playing football last evening?",
+                    tel: "వారు నిన్న సాయంత్రం ఫుట్‌బాల్ ఆడుతున్నారా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 14,
+                    eng: "Were we discussing the project plan when the manager arrived?",
+                    tel: "మేనేజర్ వచ్చినప్పుడు మేము ప్రాజెక్ట్ ప్లాన్ చర్చిస్తున్నామా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 15,
+                    eng: "Was he studying for the exam all night?",
+                    tel: "అతను రాత్రంతా పరీక్ష కోసం చదువుతున్నాడా?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 10,
+                    eng: "<b>Negative Interrogative</b>",
+                    tel: "",
+                    tense: ""
+                },
+                {
+                    id: 16,
+                    eng: "Wasn’t I reading the book at 8 pm yesterday?",
+                    tel: "నేను నిన్న రాత్రి 8 గంటలకు పుస్తకం చదువుతున్నట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 17,
+                    eng: "Wasn’t she cooking dinner when you called her?",
+                    tel: "నీవు ఆమెకు కాల్ చేసినప్పుడు ఆమె డిన్నర్ వండుతున్నట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 18,
+                    eng: "Weren’t they playing football last evening?",
+                    tel: "వారు నిన్న సాయంత్రం ఫుట్‌బాల్ ఆడట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 19,
+                    eng: "Weren’t we discussing the project plan when the manager arrived?",
+                    tel: "మేనేజర్ వచ్చినప్పుడు మేము ప్రాజెక్ట్ ప్లాన్ చర్చిస్తున్నట్లేదా?",
+                    tense: "Negative Interrogative"
+                },
+                {
+                    id: 20,
+                    eng: "Wasn’t he studying for the exam all night?",
+                    tel: "అతను రాత్రంతా పరీక్ష కోసం చదువుతున్నట్లేదా?",
+                    tense: "Negative Interrogative"
+                }
+
             ],
         },
         {
