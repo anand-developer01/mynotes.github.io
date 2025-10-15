@@ -1843,7 +1843,7 @@ export const ReturnHOCInputCom = withAuth(PrivateComponent, yourRole);
         }
       ],
     },
-        {
+    {
       id: 52,
       title: "What a .d.ts file does:",
       note: [
@@ -2852,7 +2852,7 @@ test("renders Parent and uses mocked Child component", () => {
 // jest.mock("./Child") intercepts the import of Child inside Parent.js.
 `
         },
-                {
+        {
           text1: `<table border="1" cellspacing="0" cellpadding="8">
   <thead>
     <tr>
@@ -2896,6 +2896,101 @@ test("renders Parent and uses mocked Child component", () => {
     },
     {
       id: 52,
+      title: "jest.Mock (type) vs jest.mock() (function)",
+      note: [
+        {
+          text1: `1️⃣ jest.mock() — <b>Function</b> Ex : 1
+👉 What it is
+<b>jest.mock()</b> is a <b>Jest function</b> used to <b>mock an entire module</b> (like a file, library, or dependency).
+It replaces the actual implementation with a <b>mocked version</b> — so you can control and test behavior.
+
+2️⃣ jest.Mock — <b>Type</b>
+👉 What it is
+<b>jest.Mock</b> is <b>only a TypeScript type</b> that represents a mocked function.
+You use it for <b>type casting or defining custom mock variables</b> — it doesn’t actually mock anything by itself.
+
+<b>jest.fn()</b> creates a mock function.
+jest.mock() Function : Mocks a module or dependency
+jest.mock('./api')
+
+<b>jest.Mock</b> is used to type the variable (for intellisense & type safety).
+jest.Mock Type : TypeScript type for a mock function
+const mockFn: jest.Mock = jest.fn()
+
+<b>jest.fn()</b> Function Creates a mock function manually
+const mockFn = jest.fn()
+`,
+          code1: `//-------- Ex : 1 -----------
+          //jest.mock()
+          //fetchData.ts
+          export const getUser = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users/1");
+  return res.json();
+};
+
+
+
+// src/components/UserProfile.tsx
+import React, { useEffect, useState } from "react";
+import { getUser } from "./fetchData";
+
+const UserProfile: React.FC = () => {
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    getUser().then((data) => setName(data.name));
+  }, []);
+
+  return &lt;h1&gt;{name ? \`Welcome, \${name}\` : &quot;Loading...&quot;}&lt;/h1&gt;;
+};
+export default UserProfile;
+
+
+
+// src/__tests__/UserProfile.test.tsx
+import { render, screen, waitFor } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import UserProfile from "../components/pages/UserProfile";
+
+// 👉 Mock the entire module
+jest.mock("../components/pages/fetchData");
+
+// Import the mocked function AFTER the mock call
+import { getUser } from "../components/pages/fetchData";
+
+// TypeScript hint: tell Jest this is a mocked function
+const mockedGetUser = getUser as jest.Mock;
+
+describe("UserProfile Component", () => {
+  it("should display the user name after API resolves", async () => {
+    // Arrange: mock return value
+    mockedGetUser.mockResolvedValueOnce({ name: "Anand" });
+
+    // Act: render component
+    render(&lt;UserProfile /&gt;);
+
+    // Assert: first shows Loading
+    expect(screen.getByText(/Loading/i)).toBeInTheDocument();
+
+    // Wait until name appears
+    await waitFor(() =>
+      expect(screen.getByText(/Welcome, Anand/i)).toBeInTheDocument()
+    );
+  });
+});
+
+
+// ---------- Ex : 2 -----------
+const mockFn: jest.Mock = jest.fn();
+
+mockFn.mockReturnValue('Hi Anand');
+expect(mockFn()).toBe('Hi Anand');
+          `
+        }
+      ],
+    },
+    {
+      id: 52,
       title: "redux-mock-store",
       note: [
         {
@@ -2931,7 +3026,7 @@ console.log(actions);
     },
     {
       id: 52,
-      title: "aff intro",
+      title: "mockResolvedValue",
       note: [
         {
           text1: ``,
@@ -2939,9 +3034,160 @@ console.log(actions);
         }
       ],
     },
-        {
+    {
       id: 52,
-      title: "aff intro",
+      title: "mockImplementation   ---------------  global.fetch",
+      note: [
+        {
+          text1: `<b>mockImplementation</b> is a testing method used with mock functions to provide a custom, temporary function body for a mocked dependency. This allows you to define specific behavior, control return values, or simulate side effects for a test case without running the original code. It is available in popular JavaScript testing frameworks like Jest and Vitest. 
+          
+          In Jest, the mockImplementation method is used on a mock function created with <b>jest.fn()</b> or <b>jest.spyOn().</b> 
+          
+          <b>mockImplementation()</b> lets you define a custom implementation (behavior) for a mock function created using <b>jest.fn()</b> or automatically by <b>jest.mock()</b>.
+          
+          mockImplementation() is a <b>Jest function</b> used to <b>replace the real behavior of a mocked function</b> with your own custom logic <b>during a test</b>.
+
+          When testing React or JS code, you often don’t want:
+-> Real API calls
+-> Real database queries
+-> Real time delays
+So, you “mock” those functions — and control their behavior with <b>mockImplementation()</b>.
+
+
+<b>What is global.fetch?</b>
+<b>global.fetch</b> refers to the <b>fetch()</b> function that exists in the <b>global scope</b> of browsers (and in Node if using a polyfill).
+In a browser:
+fetch is automatically available.
+It’s part of the <b>Web API</b>, used to make HTTP requests.
+
+<b>🧪 In Jest (Node environment)</b>
+When Jest runs tests, it doesn’t use a browser — it runs in Node.js, where fetch() does not exist by default.
+That’s why, in a test, this will fail:
+await fetch("https://example.com") // ❌ ReferenceError: fetch is not defined
+So we create a mock version:
+global.fetch = jest.fn(); 
+This line adds a <b>fake (mocked)</b> version of fetch to the Node global object, so that your tests can run as if you were in a browser.
+
+<b>🧰 What happens when we mock it?</b>
+We make <b>fetch</b> behave the way we want:
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ name: "Anand" })
+  })
+);
+✅ This makes any call to <b>fetch()</b> in your code return a <b>fake successful response</b> containing <b>{ name: "Anand" }</b>.
+So when your code runs:
+
+const res = await fetch("https://jsonplaceholder.typicode.com/users/1");
+const data = await res.json();
+
+It doesn’t go to the internet. Instead, it instantly returns your mocked data.
+
+          `,
+          code1: `// Syntax
+          jest.fn().mockImplementation(fn)
+          
+          // OR, if you already mocked a module:
+          mockedFunction.mockImplementation(fn)
+
+          //--------------
+          const fetchData = jest.fn();
+
+fetchData.mockImplementation(() => {
+  return "Mocked Data";
+});
+
+console.log(fetchData()); // 👉 "Mocked Data"
+
+
+// -------------- Ex : 1 -------------
+// userApi.ts
+export const fetchQuote = async (): Promise<{ name: string }> => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users/1");
+  const data = await res.json();
+  return data;
+};
+
+
+// src/components/UserFetcher.tsx
+import React, { useState } from "react";
+import { fetchQuote } from "./userApi";
+
+const UserFetcher: React.FC = () => {
+  const [quote, setQuote] = useState<string>("");
+
+  const handleClick = async () => {
+    const result = await fetchQuote();
+    setQuote(result.name);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={handleClick}&gt;Get Quote&lt;/button&gt;
+      {quote &amp;&amp; &lt;p data-testid=&quot;quote&quot;&gt;{quote}&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+};
+
+export default UserFetcher;
+
+
+// UserFetcher.test.tsx
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import UserFetcher from '../components/pages/user-mock-component3/UserFetcher';
+
+jest.mock("../components/pages/user-mock-component3/userApi")
+import { fetchQuote } from "../components/pages/user-mock-component3/userApi"
+const asyncMock = fetchQuote as jest.Mock
+
+describe("check user", () => {
+    it("mock user checking", async () => {
+        render(&lt;UserFetcher /&gt;)
+        asyncMock.mockImplementation(() => Promise.resolve({ name: "Anand" }))
+        asyncMock.mockImplementation(async () => { name: "Anand" })
+
+        const eveBtn = screen.getByRole('button', { name: "Get Quote" })
+        fireEvent.click(eveBtn)
+        await waitFor(() => expect(screen.getByTestId("quote")).toHaveTextContent("Anand"))
+    })
+})
+
+
+
+//userApi.test.ts
+import { fetchQuote } from "../components/pages/user-mock-component3/userApi"
+
+// Mock the global fetch API properly
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ name: "Anand" }),
+  })
+) as jest.Mock;
+
+describe("fetchQuote", () => {
+  beforeEach(() => {
+    jest.clearAllMocks(); // Clear mocks before each test
+  });
+
+  it("should fetch and return user data", async () => {
+    const data = await fetchQuote();
+
+    // ✅ Verify fetch called with correct URL
+    expect(global.fetch).toHaveBeenCalledWith(
+      "https://jsonplaceholder.typicode.com/users/1"
+    );
+
+    // ✅ Verify correct return value
+    expect(data).toEqual({ name: "Anand" });
+  });
+});
+          `
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "mockImplementationOnce()",
       note: [
         {
           text1: ``,
@@ -2949,7 +3195,27 @@ console.log(actions);
         }
       ],
     },
+    {
+      id: 52,
+      title: "mockReturnValue()",
+      note: [
         {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "mockRejectedValue()",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ],
+    },
+    {
       id: 52,
       title: "aff intro",
       note: [

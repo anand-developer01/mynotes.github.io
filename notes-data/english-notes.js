@@ -116,7 +116,8 @@ const SubjectList = {
         {
             id: 4,
             topic: "Whether Or",
-
+            explain: 'Rules and Regulations (బాధ్యత) తెలిపే సందర్భం లో ఉపయోగిస్తారు',
+            formation: 'Whether is used when we have two possibilities or uncertain situations.',
             content: [
                 {
                     id: 1,
@@ -154,6 +155,76 @@ const SubjectList = {
                     eng: "I will ask him whether they will come or not",
                     tel: 'వారు వస్తారా లేదా అని నేను అతనిని అడుగుతాను',
                     tense: 'simple Feature'
+                },
+                {
+                    id: 1,
+                    eng: "I don’t know whether to go by bus or train.",
+                    type: "Interrogative Sentence",
+                    tense: "Simple Present / Infinitive",
+                    tel: "నేను బస్సు ద్వారా వెళ్ళాలా లేదా ట్రైన్ ద్వారా వెళ్ళాలా తెలియదు."
+                },
+                {
+                    id: 2,
+                    eng: "She can choose whether to study science or arts.",
+                    type: "Interrogative Sentence",
+                    tense: "Simple Present",
+                    tel: "ఆమె సైన్స్ చదువుకోవాలా లేదా ఆర్ట్స్ చదువుకోవాలా ఎంచుకోవచ్చు."
+                },
+                {
+                    id: 3,
+                    eng: "We are not sure whether he will attend the party or not.",
+                    type: "Interrogative Sentence",
+                    tense: "Simple Future / Present Continuous",
+                    tel: "ఆతను పార్టీకి హాజరుకానో లేదో మనకు నిర్ధారితం కాదు."
+                },
+                {
+                    id: 4,
+                    eng: "Decide whether you want tea or coffee.",
+                    type: "Imperative Sentence",
+                    tense: "Present",
+                    tel: "నువ్వు టీ తాగాలా లేదా కాఫీ తాగాలా నిర్ణయించు."
+                },
+                {
+                    id: 5,
+                    eng: "He asked me whether I would join the meeting or not.",
+                    type: "Interrogative Sentence",
+                    tense: "Past / Future in reported speech",
+                    tel: "అతను నన్ను అడిగాడు నేను సమావేశంలో చేరతానా లేకపోతే కాదు."
+                },
+                {
+                    id: 1,
+                    eng: "I am not sure whether to use React or Angular for this project.",
+                    type: "Interrogative Sentence",
+                    tense: "Present Continuous",
+                    tel: "ఈ ప్రాజెక్ట్ కోసం React ఉపయోగించాలా లేదా Angular ఉపయోగించాలా నాకు ఖచ్చితంగా తెలియదు."
+                },
+                {
+                    id: 2,
+                    eng: "She needs to decide whether to deploy the app on AWS or Azure.",
+                    type: "Interrogative Sentence",
+                    tense: "Simple Present",
+                    tel: "ఆమెకు ఈ యాప్ ను AWS పై డిప్లాయ్ చేయాలా లేదా Azure పై చేయాలా నిర్ణయించాలి."
+                },
+                {
+                    id: 3,
+                    eng: "We are evaluating whether to use REST API or GraphQL for the backend.",
+                    type: "Interrogative Sentence",
+                    tense: "Present Continuous",
+                    tel: "బ్యాక్‌ఎండ్ కోసం REST API ఉపయోగించాలా లేదా GraphQL ఉపయోగించాలా మనం అంచనా వేస్తున్నాము."
+                },
+                {
+                    id: 4,
+                    eng: "The manager asked whether the code was tested or not before deployment.",
+                    type: "Interrogative Sentence",
+                    tense: "Past / Reported Speech",
+                    tel: "మెనేజర్ అడిగాడు కోడ్ డిప్లాయ్ చేయడానికి ముందే టెస్ట్ చేయబడిందా లేదా అన్నది."
+                },
+                {
+                    id: 5,
+                    eng: "Decide whether to store user data in SQL or NoSQL database.",
+                    type: "Imperative Sentence",
+                    tense: "Present",
+                    tel: "యూజర్ డేటా SQL డేటాబేస్‌లో నిల్వ చేయాలా లేదా NoSQL లో నిల్వ చేయాలా నిర్ణయించు."
                 }
             ],
         },
@@ -490,10 +561,6 @@ const SubjectList = {
 
             content: [
                 {
-                    id: 1,
-                    eng: "I will ask whether he will speack or not",
-                    tel: 'అతను మాట్లాడతాడా లేదా అని నేను అడుగుతాను'
-                }, {
                     id: 1,
                     eng: "I used to watch cartoons every morning.",
                     tel: "నేను ప్రతి ఉదయం కార్టూన్లు చూసేవాడిని.",
@@ -2416,7 +2483,31 @@ const SubjectList = {
                     eng: "<b>adopt</b>",
                     tel: "<b></b>",
                 },
-
+                {
+                    id: 48,
+                    eng: "<b>My wife started from surat</b>",
+                    tel: "<b></b>",
+                },
+                {
+                    id: 1,
+                    eng: "My wife and son started from Surat by train yesterday, but in the train app it’s showing a delay. The train will arrive late here. Let me spend some time with you.",
+                    type: "Compound Sentence",
+                    tense: "Simple Past + Present Continuous + Simple Future + Imperative",
+                    tel: "నా భార్య మరియు కుమారుడు నిన్న సూరత్ నుండి రైలు ద్వారా బయలుదేరారు, కానీ రైలు యాప్‌లో ఆలస్యం చూపిస్తోంది. రైలు ఇక్కడ ఆలస్యంగా చేరుతుంది. ఇంతలో నేను నీతో కొంత సమయం గడుపుతాను."
+                },
+                {
+                    id: 48,
+                    eng: "<b>awful (ఆఫుల్)- (Terrible)</b>",
+                    tel: "<b>భయంకరం</b>",
+                },
+                {
+                    eng: "I rely on my team to finish the project on time.",
+                    tel: "ప్రాజెక్ట్‌ను సమయానికి పూర్తి చేయడానికి నేను నా బృందంపై ఆధారపడుతున్నాను."
+                },
+                {
+                    eng: "She relies on public transport to reach her office every day.",
+                    tel: "ప్రతి రోజు తన ఆఫీసుకి చేరడానికి ఆమె పబ్లిక్ ట్రాన్స్‌పోర్ట్‌పై ఆధారపడుతుంది."
+                },
             ],
         },
         {
@@ -2467,6 +2558,180 @@ const SubjectList = {
                     tel: "నా క్షమాపణలు, నేను మీ పాయింట్‌ను తప్పుగా అర్థం చేసుకున్నాను.",
                     tense: "Past tense"
                 }
+            ],
+        },
+        {
+            id: 11,
+            topic: "son went to his grandmother’s house",
+            explain: '',
+            formation: '',
+            content: [
+                {
+                    id: 1,
+                    eng: "My two-year-old son went to his grandmother’s house for the festival. He started back home yesterday, and before he left, he asked us to have a banana ready for him.",
+                    tel: 'నా రెండేళ్ల కుమారుడు పండగ కోసం తన అమ్మమ్మ ఇంటికి వెళ్లాడు. నిన్న ఇంటికి తిరిగి బయలుదేరాడు, బయలుదేరే ముందు ఆయన మాకు “నా కోసం ఒక అరటిపండు సిద్ధం పెట్టండి” అని చెప్పాడు.',
+                    tense: ''
+                },
+                {
+                    id: 6,
+                    eng: "✅ Correct sentence: 👉 He started back home yesterday.",
+                    tel: "అతను నిన్న ఇంటికి తిరిగి బయలుదేరాడు.",
+                    tense: "Present perfect tense"
+                },
+                {
+                    id: 6,
+                    eng: "❌ Incorrect: ✗ He started back to home yesterday.",
+                    tel: "In English, “<b>home</b>” is a special word — it usually <b>does not take the preposition “to”</b> when it means your own house.",
+                    tense: "Present perfect tense"
+                },
+                {
+                    id: 6,
+                    eng: "✅ He went home. ❌ He went to home. ✅ He came back home. ❌ He came back to home.",
+                    tel: "If you mention someone else’s house, you must use “to”: ✅ He went to his grandmother’s house. ✅ She came to my home."
+                },
+            ],
+        },
+        {
+            id: 11,
+            topic: "In terms of",
+            explain: 'In terms of” is used to focus on a particular aspect, category, or perspective of something.',
+            formation: 'In terms of అనేది ఏదో ఒక ప్రత్యేక అంశం, కోణం, లేదా పరంగా దృష్టి పెట్టడానికి వాడతారు. అంటే, మీరు పెద్ద విషయం లో ఒక specific aspect ను చెప్పేటప్పుడు వాడతారు. సాధారణంగా compare, describe, or evaluate లేదా విలువ measurement కోసం వాడుతారు.',
+            content: [
+                {
+                    id: 1,
+                    eng: "In terms of performance, this laptop is better than the previous one.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present",
+                    tel: "పనితనాన్ని దృష్టిలో ఉంచితే, ఈ ల్యాప్‌టాప్ మునుపటి కంటే మెరుగ్గా ఉంది."
+                },
+                {
+                    id: 2,
+                    eng: "The project was successful in terms of cost and time management.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Past",
+                    tel: "ఖర్చు మరియు సమయ నిర్వహణ పరంగా ప్రాజెక్ట్ విజయవంతమైంది."
+                },
+                {
+                    id: 3,
+                    eng: "In terms of security, we need to upgrade our software.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present",
+                    tel: "భద్రత పరంగా, మనం మన సాఫ్ట్‌వేర్‌ను అప్‌డేట్ చేయాలి."
+                },
+                {
+                    id: 4,
+                    eng: "This city is good in terms of job opportunities.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present",
+                    tel: "ఉద్యోగావకాశాల పరంగా ఈ నగరం మంచి స్థానం."
+                },
+                {
+                    id: 5,
+                    eng: "In terms of user experience, our app needs improvement.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present",
+                    tel: "యూజర్ అనుభవం పరంగా, మన యాప్ మెరుగుదల అవసరం."
+                }
+            ],
+        }, {
+            id: 11,
+            topic: "stay consistent",
+            explain: 'To maintain a regular pattern or effort without getting distracted or stopping. Often used in work, study, habits, or routines.',
+            formation: '“Stay consistent” అంటే స్థిరంగా, నిరంతరం ఒక పని లేదా అలవాటును కొనసాగించటం. ఇది ప్రధానంగా పని, చదువు, వ్యాయామం, అలవాట్లు లేదా ప్రాజెక్ట్ రూటీన్స్ కోసం వాడతారు.',
+            content: [
+                {
+                    id: 1,
+                    eng: "If you stay consistent, you will see results.",
+                    type: "Conditional Sentence",
+                    tense: "Simple Present + Simple Future",
+                    tel: "మీరు స్థిరంగా ఉంటే, ఫలితాలు కనిపిస్తాయి."
+                },
+                {
+                    id: 2,
+                    eng: "Stay consistent with your exercise routine.",
+                    type: "Imperative Sentence",
+                    tense: "Present",
+                    tel: "మీ వ్యాయామపు రోజువారీ ప్రణాళికలో స్థిరంగా ఉండండి."
+                },
+                {
+                    id: 3,
+                    eng: "He stayed consistent in submitting his assignments on time.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Past",
+                    tel: "అతను తన అసైన్‌మెంట్‌లను సమయానికి సమర్పించడంలో స్థిరంగా ఉండాడు."
+                },
+                {
+                    id: 4,
+                    eng: "Stay consistent in practicing English every day.",
+                    type: "Imperative Sentence",
+                    tense: "Present",
+                    tel: "ప్రతిరోజూ ఇంగ్లీష్ సాధనలో స్థిరంగా ఉండండి."
+                },
+                {
+                    id: 5,
+                    eng: "They stayed consistent in following the project deadlines.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Past",
+                    tel: "వారు ప్రాజెక్ట్ డెడ్‌లైన్‌లను పాటించడంలో స్థిరంగా ఉండారు."
+                }
+            ],
+        },
+        {
+            id: 11,
+            topic: "“On” – Basic Meaning",
+            explain: 'Refers to surface/contact: something is physically on top of something else. <br/>Refers to specific days/dates. <br/>Refers to about/related to a topic. <br/>Refers to devices or machines.',
+            formation: '=> Physical Surface / Contact => Days / Dates => Devices / Machines => Common Mistakes',
+            content: [
+                {
+                    id: 1,
+                    eng: "The book is on the table.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present",
+                    tel: "పుస్తకం mejauపై ఉంది."
+                },
+                {
+                    id: 2,
+                    eng: "The meeting is on Monday.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present",
+                    tel: "సమావేశం సోమవారం ఉంది."
+                },
+                {
+                    id: 3,
+                    eng: "I read a book on Python programming.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Past",
+                    tel: "నేను Python ప్రోగ్రామింగ్ గురించి ఒక పుస్తకం చదివాను."
+                },
+                {
+                    id: 4,
+                    eng: "I am on my phone right now.",
+                    type: "Affirmative Sentence",
+                    tense: "Present Continuous",
+                    tel: "నేను ఇప్పుడు నా ఫోన్ లో ఉన్నాను."
+                },
+                {
+                    id: 5,
+                    eng: "He gave a lecture on web development.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Past",
+                    tel: "అతను web development పై ఒక లెక్చర్ ఇచ్చాడు."
+                }
+            ],
+        },
+        {
+            id: 11,
+            topic: "accent - (యాస)",
+            explain: '',
+            formation: '',
+            content: [
+                {
+                    id: 1,
+                    eng: "The book is on the table.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present",
+                    tel: "పుస్తకం mejauపై ఉంది."
+                },
             ],
         },
     ],
@@ -2539,6 +2804,41 @@ const SubjectList = {
                     eng: "They learn new technologies every week.",
                     tel: "వారు ప్రతి వారం కొత్త టెక్నాలజీలు నేర్చుకుంటారు.",
                     tense: "Simple Present Tense"
+                },
+                {
+                    id: 1,
+                    eng: "I want you to come with me.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present Tense",
+                    tel: "నువ్వు నాతో రావాలని నేను కోరుకుంటున్నాను."
+                },
+                {
+                    id: 2,
+                    eng: "I want you to eat biryani.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present Tense",
+                    tel: "నువ్వు బిర్యానీ తినాలని నేను కోరుకుంటున్నాను."
+                },
+                {
+                    id: 1,
+                    eng: "I want you to help me.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present Tense",
+                    tel: "నువ్వు నాకు సహాయం చేయాలని నేను కోరుకుంటున్నాను."
+                },
+                {
+                    id: 2,
+                    eng: "She wants him to study well.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present Tense",
+                    tel: "ఆమె అతను బాగా చదవాలని కోరుకుంటోంది."
+                },
+                {
+                    id: 3,
+                    eng: "They want us to stay here.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Present Tense",
+                    tel: "వారు మేము ఇక్కడ ఉండాలని కోరుకుంటున్నారు."
                 },
                 {
                     id: 10,
@@ -2733,6 +3033,41 @@ const SubjectList = {
                     tense: "Interrogative"
                 },
                 {
+                    id: 1,
+                    eng: "Which way do you want me to choose?",
+                    type: "Interrogative Sentence",
+                    tense: "Simple Present Tense",
+                    tel: "నువ్వు నాకు ఏ దారిని ఎంచుకోవాలని అనుకుంటున్నావు?"
+                },
+                {
+                    id: 2,
+                    eng: "What do you want me to do?",
+                    type: "Interrogative Sentence",
+                    tense: "Simple Present Tense",
+                    tel: "నువ్వు నాకు ఏమి చేయమని కోరుకుంటున్నావు?"
+                },
+                {
+                    id: 3,
+                    eng: "Which book do you want me to read?",
+                    type: "Interrogative Sentence",
+                    tense: "Simple Present Tense",
+                    tel: "నువ్వు నాకు ఏ పుస్తకాన్ని చదవమని కోరుకుంటున్నావు?"
+                },
+                {
+                    id: 4,
+                    eng: "Where do you want me to go?",
+                    type: "Interrogative Sentence",
+                    tense: "Simple Present Tense",
+                    tel: "నువ్వు నాకు ఎక్కడికి వెళ్లమని కోరుకుంటున్నావు?"
+                },
+                {
+                    id: 5,
+                    eng: "When do you want me to come?",
+                    type: "Interrogative Sentence",
+                    tense: "Simple Present Tense",
+                    tel: "నువ్వు నాకు ఎప్పుడు రావమని కోరుకుంటున్నావు?"
+                },
+                {
                     id: 10,
                     eng: "<b>Negative Interrogative</b>",
                     tel: "",
@@ -2873,6 +3208,13 @@ const SubjectList = {
                     eng: "Ravi is writing a letter.",
                     tel: "రవీ ఒక లేఖ రాస్తున్నాడు.",
                     tense: "Positive"
+                },
+                {
+                    id: 1,
+                    eng: "How long are you going to be here?",
+                    type: "Interrogative Sentence",
+                    tense: "Future / Present Continuous for future plan",
+                    tel: "నీవు ఇక్కడ ఎంతసేపు ఉండబోతున్నావు?"
                 },
                 {
                     id: 1,
@@ -3392,6 +3734,18 @@ const SubjectList = {
                     tense: "Interrogative"
                 },
                 {
+                    id: 15,
+                    eng: "What did you pack in this?",
+                    tel: "నువ్వు దీంట్లో ఏమి పెట్టావు?",
+                    tense: "Interrogative"
+                },
+                {
+                    id: 15,
+                    eng: "What is packed in this?",
+                    tel: "దీంట్లో ఏమి ప్యాక్ అయింది?",
+                    tense: "Interrogative"
+                },
+                {
                     id: 10,
                     eng: "<b>Negative Interrogativ</b>",
                     tel: "",
@@ -3506,6 +3860,18 @@ const SubjectList = {
                     id: 10,
                     eng: "He was not working on the assignment last night.",
                     tel: "అతను నిన్న రాత్రి అసైన్‌మెంట్‌పై పని చేయట్లేదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 10,
+                    eng: "She was hungry because she was not eating a banana",
+                    tel: "ఆమె ఆకలిగా ఉంది ఎందుకంటే ఆమె అరటిపండు తినడం లేదు.",
+                    tense: "Negative"
+                },
+                {
+                    id: 10,
+                    eng: "Because she was not eating a banana, she was feeling weak.",
+                    tel: "ఆమె అరటిపండు తినడం లేదు కాబట్టి ఆమె బలహీనంగా అనిపించింది.",
                     tense: "Negative"
                 },
                 {
@@ -3696,16 +4062,45 @@ const SubjectList = {
         {
             id: 9,
             topic: "Simple Future Tense",
-            explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain: 'భవిష్యత్తులో ఏదో పని జరగబోతుందన్నది తెలిపే వాక్య కాలం.',
+            formation: 'Subject + will + base verb + object/complement',
             note: 'Future Tense',
             content: [
                 {
                     id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense: 'Present tense'
+                    eng: "I will go to the market tomorrow.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Future Tense",
+                    tel: "నేను రేపు మార్కెట్‌కి వెళ్తాను."
                 },
+                {
+                    id: 2,
+                    eng: "She will study for the exam next week.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Future Tense",
+                    tel: "ఆమె వచ్చే వారం పరీక్ష కోసం చదువుతుంది."
+                },
+                {
+                    id: 3,
+                    eng: "They will visit their grandparents during the festival.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Future Tense",
+                    tel: "పండగ సమయంలో వారు తమ తాతమ్మ/తాతయ్యలను కలుస్తారు."
+                },
+                {
+                    id: 4,
+                    eng: "We will help you with your project.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Future Tense",
+                    tel: "మేము మీ ప్రాజెక్ట్‌లో మీకు సహాయం చేస్తాము."
+                },
+                {
+                    id: 5,
+                    eng: "He will come to the party tonight.",
+                    type: "Affirmative Sentence",
+                    tense: "Simple Future Tense",
+                    tel: "అతను ఈ రాత్రి పార్టీకి వస్తాడు."
+                }
             ],
         },
         {
@@ -3995,28 +4390,156 @@ const SubjectList = {
         {
             id: 11,
             topic: "Future Perfect Tense",
-            explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain: 'భవిష్యత్తులో ఒక పని ముగింపు అయినప్పుడు లేదా మరొక భవిష్యత్తు చర్యకు ముందు పూర్తవుతుందని చూపించడానికి వాడతారు.',
+            formation: 'Subject + will have + past participle (verb3) + object/complement',
             content: [
                 {
                     id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense: 'Present tense'
+                    eng: "I will have finished my homework by 8 PM.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "నేను రాత్రి 8 గంటలకు నా హోంవర్క్ పూర్తి చేసుకుంటాను."
                 },
+                {
+                    id: 2,
+                    eng: "She will have left before you arrive.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "నువ్వు చేరడానికి ముందే ఆమె బయలుదేరి ఉంటుంది."
+                },
+                {
+                    id: 3,
+                    eng: "They will have completed the project by next month.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "వారు వచ్చే నెలలో ప్రాజెక్ట్ పూర్తి చేసి ఉంటారు."
+                },
+                {
+                    id: 4,
+                    eng: "We will have cooked dinner by the time guests come.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "అతిథులు వచ్చే సమయానికి మేము విందు వంట చేస్తూ ఉంటాము."
+                },
+                {
+                    id: 5,
+                    eng: "He will have finished reading the book by tomorrow.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "అతను రేపు వరకు ఆ పుస్తకం చదివి పూర్తి చేసుకుంటాడు."
+                },
+                {
+                    id: 6,
+                    eng: "By next year, I will have learned Spanish.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "తరువాత వచ్చే సంవత్సరం వరకు, నేను స్పానిష్ నేర్చుకుంటాను."
+                },
+                {
+                    id: 7,
+                    eng: "She will have reached the airport by 5 PM.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "ఆమె సాయంత్రం 5 గంటలకు విమానాశ్రయానికి చేరుకుంటుంది."
+                },
+                {
+                    id: 8,
+                    eng: "They will have built the house by December.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "వారు డిసెంబర్ వరకు ఇల్లు నిర్మించి పూర్తి చేస్తారు."
+                },
+                {
+                    id: 9,
+                    eng: "We will have submitted the report before the meeting.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "మనం సమావేశానికి ముందు రిపోర్ట్ సమర్పించి పూర్తి చేస్తాము."
+                },
+                {
+                    id: 10,
+                    eng: "He will have completed the course by the end of this month.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "ఈ నెల ముగింపుకు అతను కోర్స్ పూర్తి చేసి ఉంటాడు."
+                },
+                {
+                    id: 1,
+                    eng: "I will have finished my homework by 8 PM.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "నేను రాత్రి 8 గంటలకు నా హోంవర్క్ పూర్తి చేసుకుంటాను."
+                },
+                {
+                    id: 2,
+                    eng: "She will have left before you arrive.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "నువ్వు చేరడానికి ముందే ఆమె బయలుదేరి ఉంటుంది."
+                },
+                {
+                    id: 3,
+                    eng: "They will have completed the project by next month.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "వారు వచ్చే నెలలో ప్రాజెక్ట్ పూర్తి చేసి ఉంటారు."
+                },
+                {
+                    id: 4,
+                    eng: "We will have cooked dinner by the time guests come.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "అతిథులు వచ్చే సమయానికి మేము విందు వంట చేస్తూ ఉంటాము."
+                },
+                {
+                    id: 5,
+                    eng: "He will have finished reading the book by tomorrow.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Tense",
+                    tel: "అతను రేపు వరకు ఆ పుస్తకం చదివి పూర్తి చేసుకుంటాడు."
+                }
             ],
         },
         {
             id: 12,
             topic: "Future Perfect Continuous Tense",
-            explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
-            formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
+            explain: 'భవిష్యత్తులో ఒక పని ఒక నిర్దిష్ట సమయం వరకు కొనసాగుతూనే ఉంటుంది అని చూపించడానికి వాడతారు. ఇది పనికి అయిన కాలవ్యవధిని (duration) పైన ఫోకస్ చేస్తుంది.అంటే, ఒక పని భవిష్యత్తులో ప్రారంభమై, ఒక సమయం వరకు అపరాధం లేకుండా కొనసాగుతుందని చెప్పే కాలం.',
+            formation: 'Subject + will have been + verb(-ing) + object/complement',
             content: [
                 {
                     id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense: 'Present tense'
+                    eng: "I will have been studying for 3 hours by 8 PM.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Continuous Tense",
+                    tel: "రాత్రి 8 గంటలకు నేను మూడు గంటలుగా చదువుతున్నాను."
+                },
+                {
+                    id: 2,
+                    eng: "She will have been working at the company for 5 years by next month.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Continuous Tense",
+                    tel: "వచ్చే నెల వరకు ఆమె ఐదు సంవత్సరాలుగా ఆ కంపెనీలో పనిచేస్తోంది."
+                },
+                {
+                    id: 3,
+                    eng: "They will have been playing football for 2 hours by the time you arrive.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Continuous Tense",
+                    tel: "నువ్వు చేరే సమయానికి వారు రెండు గంటలుగా ఫుట్‌బాల్ ఆడుతున్నారు."
+                },
+                {
+                    id: 4,
+                    eng: "We will have been waiting for the bus for 30 minutes by 9 AM.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Continuous Tense",
+                    tel: "ఉదయం 9 గంటలకు మేము 30 నిమిషాలుగా బస్సు కోసం వేచి చూస్తూ ఉంటాము."
+                },
+                {
+                    id: 5,
+                    eng: "He will have been living in Delhi for 10 years by 2026.",
+                    type: "Affirmative Sentence",
+                    tense: "Future Perfect Continuous Tense",
+                    tel: "2026 వరకు అతను 10 సంవత్సరాలుగా ఢిల్లీ లో నివసిస్తున్నాడు."
                 },
                 {
                     id: 1,
