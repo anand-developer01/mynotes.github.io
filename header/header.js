@@ -27,4 +27,5 @@ const navHeader = `
     <li><a href="./python-notes.html">Python</a></li>
     <li><a href="./english.html">English</a></li>
     <li><a href="./MERN-notes.html">MERN</a></li>
+    <li><a href="./java-notes.html">Java</a></li>
 </ul>`
