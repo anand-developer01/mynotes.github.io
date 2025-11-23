@@ -254,7 +254,7 @@ In a Spring Boot application, DTOs are commonly used to encapsulate data transfe
           
            <b>Entity Class Definition</b>:
 An entity class is a regular Java class annotated with <b>@Entity</b> from <b>javax.persistence</b>. This annotation tells Spring Data JPA that this class should be mapped to a database table.
-Each entity must have a primary key, identified by the <b>@Id</b> annotation. You can optionally use <b>@GeneratedValue to specify how the primary key's value is generated (e.g., auto-incrementing).
+Each entity must have a primary key, identified by the <b>@Id</b> annotation. You can optionally use <b>@GeneratedValue</b> to specify how the primary key's value is generated (e.g., auto-incrementing).
 Fields within the entity class represent columns in the database table. You can use <b>@Column</b> to customize column names or properties if they differ from the field names.
 Getter and setter methods are typically provided for all fields to allow access and modification of the entity's properties.`,
           code1: `import javax.persistence.Column;
@@ -290,8 +290,48 @@ public class Product {
       title: "DAO (Data Access Object)",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `DAO stands for <b>Data Access Object</b>.
+It is a design pattern used to <b>separate database logic</b> from business logic.
+
+<b>Why DAO Layer?</b>
+Keeps your code clean and modular
+Easy to switch between databases
+Central place for CRUD operations
+Helps with unit testing (DAO can be mocked)
+
+In Spring Boot, a DAO (Data Access Object) is a design pattern used to abstract and encapsulate all access to a data source, typically a database. It serves as a layer between the business logic of your application and the persistence mechanism, providing a common interface for performing database operations like creating, reading, updating, and deleting (CRUD) data.
+
+<b>DAO</b> is a classic design pattern that abstracts and encapsulates all access to the data source. It’s typically implemented manually using <b>JDBC, Hibernate</b>, or <b>JPA</b>. Each entity may have its own <b>DAO</b> class, especially when more control over queries or transactions is needed beyond standard <b>CRUD</b> operations.`,
+          code1: `// ---------------  ------------
+          @Repository
+public class UserDao {
+    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public User getUserById(int id) {
+        String sql = "SELECT * FROM users WHERE id=?";
+        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
+    }
+}
+
+//@Repository is used. This is important for \`exception translation\`
+//----------------
+@Repository
+public class UserDAO {
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public void save(User user) {
+        entityManager.persist(user);
+    }
+
+    public User findById(Long id) {
+        return entityManager.find(User.class, id);
+    }
+}
+
+`
         }
       ]
     },
@@ -301,6 +341,9 @@ public class Product {
       note: [
         {
           text1: `In Spring Boot, a repository is a component that acts as an abstraction layer for data persistence and retrieval, primarily interacting with a database. It simplifies the process of performing common data operations, allowing developers to focus on business logic rather than low-level database interactions.
+
+          <b>Repository</b>:
+Repository is a modern abstraction, especially popularized by Spring Data JPA. It provides ready-to-use CRUD methods and often eliminates the need to write boilerplate code. You simply define an interface, and Spring automatically generates the implementation for you.
           
           Here are the key aspects of a repository in Spring Boot:
 <b>Data Access Layer</b>: Repositories form the data access layer of an application, responsible for managing the storage, retrieval, update, and deletion of data (CRUD operations) for specific entities.
@@ -309,25 +352,245 @@ public class Product {
 <b>@Repository Annotation</b>: The @Repository annotation is a specialization of @Component used to mark a class as a repository. This annotation also enables Spring's exception translation mechanism, converting technology-specific data access exceptions into a consistent hierarchy of Spring's DataAccessException.
 <b>Dependency Injection</b>: Repository instances are managed by the Spring container and can be easily injected into other components, such as service classes, using dependency injection.
 
-In this example(Ex: 1), UserRepository extends JpaRepository, providing ready-to-use methods for User entities, such as save(), findById(), findAll(), and delete(). A custom method findByEmail() is also defined, which Spring Data JPA will automatically implement based on the method name.`,
+In this example(Ex: 1), UserRepository extends JpaRepository, providing ready-to-use methods for User entities, such as save(), findById(), findAll(), and delete(). A custom method findByEmail() is also defined, which Spring Data JPA will automatically implement based on the method name.
+
+<b>JpaRepository</b> is used in the Repository (DAO) layer of a Spring Boot application to perform database operations. It provides built-in CRUD, pagination, sorting, and query methods. The service layer depends on these repositories to access the database.
+`,
           code1: `// ---------- Ex: 1 ----------
           import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository&lt;User, Long&gt;{
     // Custom query methods can be added here
     User findByEmail(String email);
+}
+    
+// ------------- 
+public interface UserRepository extends JpaRepository&lt;User, Long&gt;{
+    Optional&lt;User&gt; findByEmail(String email);
 }`
         }
       ]
     },
     {
       id: 1,
+      title: "Meaning of CascadeType.ALL",
+      note: [
+        {
+          text1: `CascadeType.ALL is a <b>JPA/Hibernate cascade option</b> that tells JPA to apply <b>all persistence operations</b> on a child entity whenever they are applied to the parent entity.
+          
+          Example Use Case
+Parent: Order
+Child: OrderItem
+@Entity
+public class Order {
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> items;
+}
+
+✔ If you save Order, all OrderItems will also be saved
+orderRepository.save(order);
+
+✔ If you delete Order, all OrderItems will also be deleted
+orderRepository.delete(order);
+
+<b>🚨 Important: CascadeType.ALL can be dangerous</b>
+Because it includes REMOVE, it can delete child data unintentionally.
+Example:
+Deleting a customer may delete all orders → not always desired.
+
+<b>What is CascadeType.ALL?</b>
+<b>CascadeType.ALL</b> allows all entity operations (save, update, delete, etc.) performed on the parent to be automatically applied to the child. It includes PERSIST, MERGE, REMOVE, REFRESH, and DETACH.
+
+<table border="1" cellspacing="0" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Cascade Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>PERSIST</b></td>
+      <td>When parent is saved → child is saved</td>
+    </tr>
+    <tr>
+      <td><b>MERGE</b></td>
+      <td>When parent is updated → child is updated</td>
+    </tr>
+    <tr>
+      <td><b>REMOVE</b></td>
+      <td>When parent is deleted → child is deleted</td>
+    </tr>
+    <tr>
+      <td><b>REFRESH</b></td>
+      <td>When parent is refreshed → child is refreshed</td>
+    </tr>
+    <tr>
+      <td><b>DETACH</b></td>
+      <td>When parent is detached → child is detached</td>
+    </tr>
+  </tbody>
+</table>
+`,
+          code1: ``
+        }
+      ]
+    },
+        {
+      id: 1,
       title: "getters & setters",
       note: [
         {
           text1: ``,
+          code1: ``
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "@ keywords (annotations) in Spring Boot",
+      note: [
+        {
+          text1: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Spring Boot Annotations</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        h2 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Spring Boot @Annotations - Category Wise</h1>
+
+<!-- 1. Application Level -->
+<h2>1. Application Level</h2>
+<table>
+    <tr><th>Annotation</th><th>Description</th></tr>
+    <tr><td>@SpringBootApplication</td><td>Main entry point; Combines @Configuration, @EnableAutoConfiguration, @ComponentScan</td></tr>
+    <tr><td>@EnableAutoConfiguration</td><td>Automatically configures beans based on dependencies</td></tr>
+    <tr><td>@ComponentScan</td><td>Scans packages for components</td></tr>
+    <tr><td>@Configuration</td><td>Marks a class as a configuration source</td></tr>
+</table>
+
+<!-- 2. Bean & Component Level -->
+<h2>2. Bean & Component Annotations</h2>
+<table>
+    <tr><th>Annotation</th><th>Description</th></tr>
+    <tr><td>@Component</td><td>Generic Spring bean</td></tr>
+    <tr><td>@Service</td><td>Business logic component</td></tr>
+    <tr><td>@Repository</td><td>DAO layer component (exception translation)</td></tr>
+    <tr><td>@Controller</td><td>MVC Controller</td></tr>
+    <tr><td>@RestController</td><td>Returns JSON; @Controller + @ResponseBody</td></tr>
+    <tr><td>@Bean</td><td>Manually defines a bean in configuration</td></tr>
+</table>
+
+<!-- 3. Dependency Injection -->
+<h2>3. Dependency Injection</h2>
+<table>
+    <tr><th>Annotation</th><th>Description</th></tr>
+    <tr><td>@Autowired</td><td>Injects a bean automatically</td></tr>
+    <tr><td>@Qualifier</td><td>Selects a specific bean when multiple exist</td></tr>
+    <tr><td>@Value</td><td>Injects values from properties file</td></tr>
+    <tr><td>@Lazy</td><td>Lazy initialization</td></tr>
+    <tr><td>@Primary</td><td>Marks default bean when duplicates exist</td></tr>
+</table>
+
+<!-- 4. Spring Web / REST -->
+<h2>4. Spring Web / REST API</h2>
+<table>
+    <tr><th>Annotation</th><th>Description</th></tr>
+    <tr><td>@GetMapping</td><td>Handles HTTP GET</td></tr>
+    <tr><td>@PostMapping</td><td>Handles HTTP POST</td></tr>
+    <tr><td>@PutMapping</td><td>Handles HTTP PUT</td></tr>
+    <tr><td>@DeleteMapping</td><td>Handles HTTP DELETE</td></tr>
+    <tr><td>@PatchMapping</td><td>Handles HTTP PATCH</td></tr>
+    <tr><td>@RequestMapping</td><td>Maps any request type</td></tr>
+    <tr><td>@PathVariable</td><td>Extracts value from URL</td></tr>
+    <tr><td>@RequestParam</td><td>Extracts query parameter</td></tr>
+    <tr><td>@RequestBody</td><td>Binds JSON body to object</td></tr>
+    <tr><td>@ResponseBody</td><td>Returns JSON response</td></tr>
+    <tr><td>@CrossOrigin</td><td>Enables CORS</td></tr>
+</table>
+
+<!-- 5. JPA / Hibernate -->
+<h2>5. JPA / Hibernate</h2>
+<table>
+    <tr><th>Annotation</th><th>Description</th></tr>
+    <tr><td>@Entity</td><td>Marks a JPA entity</td></tr>
+    <tr><td>@Table</td><td>Custom table mapping</td></tr>
+    <tr><td>@Id</td><td>Primary key</td></tr>
+    <tr><td>@GeneratedValue</td><td>Auto-generated primary key</td></tr>
+    <tr><td>@Column</td><td>Column configuration</td></tr>
+    <tr><td>@OneToOne</td><td>One-to-one relation</td></tr>
+    <tr><td>@OneToMany</td><td>One-to-many relation</td></tr>
+    <tr><td>@ManyToOne</td><td>Many-to-one relation</td></tr>
+    <tr><td>@ManyToMany</td><td>Many-to-many relation</td></tr>
+    <tr><td>@JoinColumn</td><td>Defines foreign key</td></tr>
+    <tr><td>@Transactional</td><td>Transaction management</td></tr>
+</table>
+
+<!-- 6. Validation -->
+<h2>6. Validation</h2>
+<table>
+    <tr><th>Annotation</th><th>Description</th></tr>
+    <tr><td>@Valid</td><td>Validates request body</td></tr>
+    <tr><td>@NotNull</td><td>Value must not be null</td></tr>
+    <tr><td>@NotBlank</td><td>String must not be blank</td></tr>
+    <tr><td>@NotEmpty</td><td>Must not be empty</td></tr>
+    <tr><td>@Size</td><td>Min/max size</td></tr>
+    <tr><td>@Email</td><td>Valid email format</td></tr>
+    <tr><td>@Min</td><td>Minimum numeric value</td></tr>
+    <tr><td>@Max</td><td>Maximum numeric value</td></tr>
+</table>
+
+<!-- 7. Security -->
+<h2>7. Security</h2>
+<table>
+    <tr><th>Annotation</th><th>Description</th></tr>
+    <tr><td>@EnableWebSecurity</td><td>Enables Spring Security</td></tr>
+    <tr><td>@PreAuthorize</td><td>Method-level role check</td></tr>
+    <tr><td>@Secured</td><td>Role-based access control</td></tr>
+</table>
+
+<!-- 8. Scheduling -->
+<h2>8. Scheduling</h2>
+<table>
+    <tr><th>Annotation</th><th>Description</th></tr>
+    <tr><td>@EnableScheduling</td><td>Enables scheduled tasks</td></tr>
+    <tr><td>@Scheduled</td><td>Run method on schedule</td></tr>
+</table>
+
+<!-- 9. Asynchronous -->
+<h2>9. Asynchronous</h2>
+<table>
+    <tr><th>Annotation</th><th>Description</th></tr>
+    <tr><td>@EnableAsync</td><td>Enables async execution</td></tr>
+    <tr><td>@Async</td><td>Runs method in another thread</td></tr>
+</table>
+
+</body>
+</html>
+`,
           code1: ``
         }
       ]
