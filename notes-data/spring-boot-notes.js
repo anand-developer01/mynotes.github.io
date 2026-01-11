@@ -335,6 +335,98 @@ public class UserDAO {
         }
       ]
     },
+      {
+      id: 1,
+      title: "Lombok",
+      note: [
+        {
+          text1: `Lombok is a Java library that helps you write less boilerplate code by automatically generating common code at compile time.
+         
+ <b>@Getter</b>
+Definition:
+Generates <b>getter methods</b> for all fields (or specific fields) of a class at compile time.
+<i>Purpose</i>: Generates getter methods.
+@Getter
+public class CarDto {
+    private String brand;
+}
+    ➡ Generates:
+public String getBrand() { return brand; }
+
+ <b>@Setter</b>
+Definition:
+Generates <b>setter methods</b> for all fields (or specific fields) of a class at compile time.
+<i>Purpose</i>: Generates setter methods.
+@Setter
+public class CarDto {
+    private String brand;
+}
+ ➡ Generates:   
+public void setBrand(String brand) { this.brand = brand; }
+
+
+ <b>@Data</b>
+Definition:
+A shortcut Lombok annotation that generates:
+Getters
+Setters
+toString()
+equals()
+hashCode()
+ @RequiredArgsConstructor
+Used mainly for <b>DTOs.</b>
+ @Data
+public class CarDto {
+    private String brand;
+}
+
+
+<b>@NoArgsConstructor</b>
+Definition:
+Generates a <b>no-argument constructor</b>, required by frameworks like <b>Spring, JPA, and Jackson.</b>
+<i>Purpose</i>: Generates no-argument constructor.
+@NoArgsConstructor
+public class CarDto {}
+
+
+ <b>@AllArgsConstructor</b>
+Definition:
+Generates a constructor that accepts <b>all class fields as parameters</b>.
+<i>Purpose</i>: Generates constructor with all fields.
+@AllArgsConstructor
+public class CarDto {
+    private String brand;
+}
+
+
+ <b>@Builder</b>
+Definition:
+Implements the <b>Builder design pattern</b>, allowing object creation using a readable, step-by-step approach.
+<i>Purpose</i>: Builder pattern.
+@Builder
+public class CarDto {
+    private String brand;
+}
+Usage:
+CarDto car = CarDto.builder().brand("Tesla").build();
+
+
+ <b>@SuperBuilder</b>
+Definition:
+An enhanced version of  <b>@Builder</b> that supports <b>inheritance</b>, enabling builders to work correctly with parent and child classes.
+
+ <b>@Slf4j</b>
+Definition:
+Automatically creates an <b>SLF4J</b> logger instance named <b>log</b>, used for logging messages like <b>log.info()</b> and <b>log.error()</b>.
+
+
+⚠️ <b>Important</b>: For <b>entities</b>, some people avoid @Data because equals() and hashCode() may break Hibernate proxy behavior in some cases.
+Recommended for DTOs, but <b>@Getter + @Setter</b> is safest for JPA entities.
+`,
+          code1: ``
+        }
+      ]
+    },
     {
       id: 1,
       title: "Repository",
