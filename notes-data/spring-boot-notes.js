@@ -533,6 +533,253 @@ Deleting a customer may delete all orders → not always desired.
     },
         {
       id: 1,
+      title: "MapStruct",
+      note: [
+        {
+          text1: `<b>MapStruct</b> is a <b>code generator for Java</b> that automates the process of mapping one object to another — typically between:
+
+DTOs (Data Transfer Objects)
+Domain models / entity classes
+
+Instead of writing lots of repetitive code to copy fields from one class to another, <b>MapStruct generates that code automatically at compile time</b> based on simple annotations and configuration.
+
+MapStruct is a Java annotation-based code generator used to map one Java object to another automatically.
+
+It is mainly used to convert:
+Entity → DTO
+DTO → Entity
+Model → Response Object
+
+MapStruct is a Java annotation-based code generator that automatically maps objects like Entity and DTO at compile time, producing fast and type-safe mapping code.
+
+Mapper Annotations:
+<b>@Mapper</b>	Marks interface as mapper
+<b>@Mapping</b>	Maps different field names
+<b>componentModel="spring"</b>	Enables Spring injection
+<b>@Mappings</b>	Multiple mappings`,
+          code1: `//Without MapStruct:
+          userDto.setId(user.getId());
+userDto.setName(user.getName());
+userDto.setEmail(user.getEmail());
+
+// With MapStruct:
+UserDto dto = userMapper.toDto(user);
+
+//------------- Ex : 1 --------------
+// Entity(modal) Car.java
+package com.srihas.demo.CarController;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Entity
+@Table(name = "cars", schema = "public")
+@Getter        // generates getters for all fields
+@Setter        // generates setters for all fields
+@NoArgsConstructor   // no-args constructor (required by JPA)
+@AllArgsConstructor  // all-args constructor (optional)
+public class Car {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String brand;
+    private String model;
+    private Double price;
+}
+
+
+
+// CarDto.java
+package com.srihas.demo.CarController;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+@Data
+@Getter
+@Setter
+@SuperBuilder
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)  //When converting a Java object to JSON, do NOT include fields whose value is null.
+public class CarDto {
+    private Long id;
+
+    private String brand;
+    private String model;
+    private Double price;
+}
+
+
+
+// CarController.java
+package com.srihas.demo.CarController;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/cars")
+public class CarController {
+
+    @Autowired
+    private CarService carService;
+
+    @GetMapping
+    public List<CarDto> getCustomCars() {
+        return carService.getCustomCars(); // returns only id + brand
+    }
+
+    @GetMapping("/allCars")
+    public List<CarDto> getAllCars(){
+        return carService.getAllCars();
+    }
+
+    @GetMapping("/{id}")
+    public CarDto getCarById(@PathVariable Long id) {
+        return carService.getCarById(id); 
+    }
+
+    // Create new car
+    @PostMapping
+    public CarDto createCar(@RequestBody CarDto carDto) {
+        return carService.saveCar(carDto); // returns CarDto
+    }
+
+    // Update car
+    @PutMapping("/{id}")
+    public CarDto updateCar(@PathVariable Long id, @RequestBody CarDto carDto) {
+        return carService.updateCar(id, carDto); // returns CarDto
+    }
+
+    // Delete
+    @DeleteMapping("/{id}")
+    public void deleteCar(@PathVariable Long id) {
+        carService.deleteCar(id);
+    }
+}
+
+
+
+// CarMapper.java
+package com.srihas.demo.CarController;
+
+import org.mapstruct.IterableMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+
+import java.util.List;
+
+@Mapper(componentModel = "spring")
+public interface CarMapper {
+    @Named("full")
+    CarDto toDto(Car car);           // full mapping
+    Car toEntity(CarDto dto);        // full mapping
+
+    @IterableMapping(qualifiedByName = "full")
+    List<CarDto> toDtoList(List<Car> cars);
+
+    @Named("summery")
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "brand", source = "brand")
+    @Mapping(target = "model", ignore = true)
+    @Mapping(target = "price", ignore = true)
+    @IterableMapping(qualifiedByName = "summery")
+    CarDto toDtoSummary(Car car);    // summary mapping (id + brand)
+}
+
+
+
+
+// CarService.java
+package com.srihas.demo.CarController;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class CarService {
+
+    private final CarRepository carRepository;
+    private final CarMapper carMapper;
+
+    @Autowired
+    public CarService(CarRepository carRepository, CarMapper carMapper) {
+        this.carRepository = carRepository;
+        this.carMapper = carMapper;
+    }
+
+    public List<CarDto> getCustomCars() {
+        System.out.println(carRepository.findAll());
+        return carRepository.findAll()
+                .stream()
+                .map(carMapper::toDtoSummary) // call only the summary method
+                .collect(Collectors.toList());
+    }
+
+    public List<CarDto> getAllCars(){
+        return carMapper.toDtoList(carRepository.findAll());
+    }
+
+    public CarDto getCarById(Long id) {
+        return carRepository.findById(id)
+                .map(carMapper::toDtoSummary)
+                .orElse(null);
+    }
+
+    // Full DTO used for create/update
+    public CarDto saveCar(CarDto dto) {
+        Car car = carMapper.toEntity(dto);
+        Car saved = carRepository.save(car);
+        return carMapper.toDto(saved);
+    }
+
+    public CarDto updateCar(Long id, CarDto dto) {
+        Car existing = carRepository.findById(id).orElse(null);
+        if (existing == null)
+            return null;
+
+        existing.setBrand(dto.getBrand());
+        existing.setModel(dto.getModel());
+        existing.setPrice(dto.getPrice());
+
+        return carMapper.toDto(carRepository.save(existing));
+    }
+
+    public void deleteCar(Long id) {
+        carRepository.deleteById(id);
+    }
+}
+
+
+
+// CarRepository.java
+package com.srihas.demo.CarController;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CarRepository extends JpaRepository<Car, Long> {
+}
+
+          `
+        }
+      ]
+    },
+        {
+      id: 1,
       title: "getters & setters",
       note: [
         {
