@@ -13041,5 +13041,205 @@ Additionally, the Browser may automatically go into Quirks or Strict Mode.
         },
       ],
     },
+        {
+      id: 1,
+      title: "HTMLCORE REACT INTERVIEW QUESTIONS",
+      note: [
+        {
+          text1: `<b>What type of component is React?</b>
+React is a JavaScript library used to build user interfaces, especially single-page applications. It follows a component-based architecture where UI is broken into reusable components. React components can be functional or class-based, but modern React prefers functional components with hooks.
+
+<b>Difference between controlled and uncontrolled components?</b>
+Controlled components are form elements whose value is managed by React state. Every change is handled via state updates using onChange events. Uncontrolled components store their own state in the DOM and are accessed using refs. Controlled components provide better control and validation, while uncontrolled components are simpler but less flexible.
+
+<b>Optimization techniques in React?</b>
+React optimization techniques include using React.memo to prevent unnecessary re-renders, useMemo for memoizing expensive calculations, and useCallback for memoizing functions. Other techniques include lazy loading components, code splitting, avoiding inline functions in JSX, and using virtualization for large lists.
+
+<b>Difference between useCallback and useMemo?</b>
+useCallback memoizes a function so that it does not get recreated on every render unless dependencies change. useMemo memoizes the result of a computation and returns the cached value. useCallback is used for functions, while useMemo is used for computed values.
+
+<b>When to use useCallback and useMemo (with example)?</b>
+useCallback is used when passing functions to child components to prevent unnecessary re-renders.
+Example: const handleClick = useCallback(() => setCount(count + 1), [count]);
+
+useMemo is used when performing expensive calculations.
+Example: const total = useMemo(() => expensiveCalculation(data), [data]);
+
+<b>useEffect with dependency and without dependency?</b>
+useEffect without dependency array runs after every render. useEffect with an empty array runs only once on component mount. useEffect with dependencies runs whenever specified values change.
+
+<b>How to stop infinite loop in useEffect?</b>
+Infinite loops happen when state updates inside useEffect trigger re-renders continuously. To prevent this, ensure correct dependency arrays, avoid updating state unnecessarily, and use conditions inside useEffect.
+
+<b>Why data is not showing in React UI?</b>
+Common reasons include incorrect state updates, missing setState usage, asynchronous API not handled properly, missing dependency array in useEffect, or rendering before data is available.
+
+<b>What is React.memo?</b>
+React.memo is a higher-order component that prevents unnecessary re-rendering of functional components by memoizing the rendered output based on props comparison.
+
+<b>How to memoize a component?</b>
+We use React.memo for components, useMemo for values, and useCallback for functions to avoid unnecessary re-renders and improve performance.
+
+<b>What other hooks have you used?</b>
+Common React hooks include useState, useEffect, useRef, useMemo, useCallback, useReducer, and custom hooks for reusable logic.
+
+<b>How does React re-render work?</b>
+React re-renders a component when its state or props change. It uses a virtual DOM to compare previous and new UI and updates only the changed parts in the real DOM.`,
+          code1: ``
+        }
+      ]
+    },
+            {
+      id: 1,
+      title: "JAVASCRIPT CORE INTERVIEW QUESTIONS",
+      note: [
+        {
+          text1: `<b>Difference between null and undefined?</b>
+undefined means a variable is declared but not assigned a value. null is an intentional assignment representing "no value". undefined is default, null is explicit.
+
+<b>What is closure?</b>
+A closure is a function that remembers variables from its outer scope even after the outer function has finished execution. It allows data encapsulation and persistent state.
+
+<b>What is a Promise?</b>
+A Promise is an object representing the eventual completion or failure of an asynchronous operation. It has three states: pending, fulfilled, and rejected.
+
+<b>async/await vs promises?</b>
+Promises use .then() chaining while async/await provides a cleaner synchronous-like structure. async/await improves readability and error handling using try/catch.
+
+<b>What is hoisting?</b>
+Hoisting is JavaScript behavior where variable and function declarations are moved to the top of their scope during compilation.
+
+<b>What is IIFE?</b>
+Immediately Invoked Function Expression is a function that runs immediately after it is defined.
+
+<b>What is call, apply, bind?</b>
+call and apply invoke functions with a given this context. apply takes arguments as an array. bind returns a new function with fixed this context.
+
+<b>What is prototype in JavaScript?</b>
+Prototype is an object from which other objects inherit properties and methods in JavaScript.
+
+<b>What is generator function?</b>
+A generator function can pause execution using yield and resume later, allowing iterative execution control.
+
+<b>What is event loop?</b>
+Event loop handles asynchronous operations by moving callbacks from the callback queue to the call stack when it is empty.
+
+<b>Temporal Dead Zone?</b>
+TDZ is the time between variable declaration (let/const) and initialization where accessing the variable causes an error.`,
+          code1: ``
+        }
+      ]
+    },
+            {
+      id: 1,
+      title: "REDUX & STATE MANAGEMENT",
+      note: [
+        {
+          text1: `<b>How does Redux work?</b>
+Redux is a state management library that uses a single global store. Actions are dispatched to reducers, which update the state immutably, and the UI subscribes to store changes.
+
+<b>Why can't we update Redux state directly?</b>
+Redux enforces immutability. Direct mutation prevents predictable state updates and breaks time-travel debugging and change detection.
+
+<b>Redux flow explanation?</b>
+UI dispatches action → action goes to reducer → reducer returns new state → store updates → UI re-renders.
+
+<b>Difference between Context API and Redux?</b>
+Context API is best for simple state sharing. Redux is better for complex, large-scale applications with middleware support and debugging tools.
+
+<b>What is middleware in Redux?</b>
+Middleware is a layer between dispatch and reducer used for logging, async operations, and API handling (e.g., redux-thunk, redux-saga).`,
+          code1: ``
+        }
+      ]
+    },
+            {
+      id: 1,
+      title: "REACT PERFORMANCE & ARCHITECTURE",
+      note: [
+        {
+          text1: `<b>How does React work?</b>
+React works by creating a virtual representation of the UI called the Virtual DOM and efficiently updating the real DOM when state or props change.
+
+<b>Step-by-step working of React:</b>
+<b>1. Component rendering</b>
+React applications are built using components. Each component returns JSX, which describes the UI structure.
+<b>2. Virtual DOM creation</b>
+When a component renders, React creates a Virtual DOM (a lightweight copy of the actual DOM).
+<b>3. Initial render</b>
+React takes the Virtual DOM and converts it into the real DOM, which is displayed in the browser.
+<b>4. State or props change</b>
+When state or props of a component change (using useState, props update, etc.), React re-renders the component and creates a new Virtual DOM.
+<b>5. Diffing (Reconciliation)</b>
+React compares the new Virtual DOM with the previous one using a process called "diffing algorithm".
+<b>6. Efficient update</b>
+React identifies only the changed parts and updates only those parts in the real DOM instead of reloading the entire page.
+<b>Example:</b>
+If only a button text changes, React updates only that button, not the whole page.
+<b>Key interview points:</b>
+- React uses Virtual DOM for performance optimization
+- Only changed UI parts are updated (not full page reload)
+- Reconciliation is the process of comparing old and new Virtual DOM
+- State/props changes trigger re-render
+- Makes UI fast and efficient
+
+
+
+<b>How to improve React performance?</b>
+Use React.memo, useCallback, useMemo, lazy loading, code splitting, avoiding unnecessary state updates, and optimizing rendering of large lists using virtualization.
+
+<b>What is prop drilling?</b>
+Prop drilling is passing data through multiple nested components unnecessarily. It can be avoided using Context API or Redux.
+
+<b>What is reconciliation in React?</b>
+Reconciliation is the process where React compares virtual DOM with previous version and updates only changed elements in real DOM.
+
+<b>What is lazy loading in React?</b>
+Lazy loading loads components only when needed using React.lazy and Suspense, improving initial load performance.`,
+          code1: ``
+        }
+      ]
+    },
+            {
+      id: 1,
+      title: "CSS / HTML / GENERAL WEB",
+      note: [
+        {
+          text1: `<b>Difference between display: block, inline, inline-block?</b>
+Block elements take full width. Inline elements take only content width. Inline-block behaves like inline but allows width and height.
+
+<b>What is z-index in CSS?</b>
+z-index is a CSS property used to control the stacking order of overlapping elements on a webpage. It determines which element appears in front and which appears behind when elements are positioned on top of each other.
+Important point:
+z-index only works on elements that have a position value other than static (i.e., position: relative, absolute, fixed, or sticky).
+Higher z-index value means the element will appear on top of elements with lower z-index.
+<b>Example:</b>
+In the below example, we have two overlapping boxes. The box with higher z-index will appear on top.
+
+
+<b>What is specificity in CSS?</b>
+Specificity determines which CSS rule applies when multiple rules target the same element.
+
+<b>How to make image responsive?</b>
+Use max-width: 100% and height: auto.`,
+          code1: ``
+        }
+      ]
+    },
+                {
+      id: 1,
+      title: "REAL-TIME & CODING TASKS",
+      note: [
+        {
+          text1: `<b>Create a counter using React (increment/decrement)?</b>
+A counter can be created using useState hook. Two buttons update state using setCount(count + 1) and setCount(count - 1).
+
+<b>Todo app with add/delete/undo?</b>
+Use useState to store list. Add pushes item, delete filters item, undo restores previous state stored in a stack.`,
+          code1: ``
+        }
+      ]
+    },
+        
   ]
 }
