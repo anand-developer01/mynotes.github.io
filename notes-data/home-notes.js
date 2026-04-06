@@ -6,7 +6,20 @@ const Links4 = 'javascript-projects'
 
 const commonData = {
     commonNote: [
-
+        {
+            id: 1,
+            title: "aff intro",
+            note: [
+                {
+                    text1: `
+“Hi, I’m Anand. I have around 5 years of relevant experience in ReactJS development.
+In the initial phase of my career, I worked on Core PHP, which helped me understand backend fundamentals and web application flow.
+For the past 5 years, I’ve been working primarily on React-based frontend development, including building reusable components, integrating REST APIs, and working with Redux for state management.
+Currently, I’ve been working with the JPMC client on a CMS portal and case management system, where I handle UI development, API integration, and feature enhancements for a business-critical application. I’m now looking for similar frontend opportunities where I can contribute to scalable product development.”
+            `
+                }
+            ]
+        },
         {
             id: 1,
             title: "aff intro",

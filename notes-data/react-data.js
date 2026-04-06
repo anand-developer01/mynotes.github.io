@@ -3822,7 +3822,73 @@ const Page: React.FC&lt;Props&gt; = ({
       title: "key",
       note: [
         {
-          text1: ``,
+          text1: `
+          
+          Yes, index is unique in that render, but the problem is:
+👉 it is NOT stable across renders
+
+🧠 Why index as key is risky
+React uses key to:
+👉 identify which item changed
+👉 reuse DOM efficiently
+👉 avoid unnecessary re-render or wrong updates
+
+❌ Problem with index as key
+1. ⚠️ Keys change when list changes
+
+Example:
+items = ["A", "B", "C"]
+
+Keys:
+A → 0  
+B → 1  
+C → 2
+
+Now you insert “X” at top:
+items = ["X", "A", "B", "C"]
+Keys become:
+
+X → 0  
+A → 1  
+B → 2  
+C → 3
+
+👉 Everything shifted ❌
+🚨 React gets confused
+React thinks:
+
+“A” at index 1 is NEW element
+so it may:
+re-render wrongly
+lose input state
+reset component state
+❌ 2. State bugs in UI
+
+Imagine input list:
+items.map((item, index) => (
+  &lt;input key={index} value={item.value} /&gt;
+))
+
+👉 If you insert/delete item:
+inputs shift position
+values appear in wrong rows 😨
+❌ 3. Breaks component identity
+
+React relies on key to preserve:
+component state
+DOM state
+focus position
+
+Using index:
+👉 destroys identity when list order changes
+
+✅ Correct Approach
+
+👉 Always use unique stable ID
+
+items.map(item => (
+  &lt;div key={item.id}&gt;{item.name}&lt;/div&gt;
+))`,
           code1: ``
         }
       ],
@@ -4163,6 +4229,8 @@ export default App
         {
           text1: `Hooks allow functional components to have local component state, access context, perform side effects, and more.
 
+  React Hooks are functions that allow functional components to use state, lifecycle features, and other React capabilities without using class components.
+
                     <b>1) useState</b>
                     Manages state in functional components.
                     const [state, setState] = useState(initialState);
@@ -4284,6 +4352,68 @@ export default App
           text1: ``,
           code1: ``
         },
+      ],
+    },
+        {
+      id: 52,
+      title: "custom hook",
+      note: [
+        {
+          text1: `A custom hook in React is a JavaScript function that starts with the word use and is used to <b>reuse stateful logic across multiple components</b>.
+
+It allows you to extract component logic (like API calls, form handling, timers, etc.) into a reusable function so that multiple components can use it without repeating code.`,
+          code1: `// ---------- Ex : 1 ------------
+          import { useState, useEffect } from "react";
+
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(url);
+        const result = await response.json();
+
+        setData(result);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [url]);
+
+  return { data, loading, error };
+}
+
+export default useFetch;
+
+
+//----------
+
+
+import useFetch from "./useFetch";
+
+function Users() {
+  const { data, loading, error } = useFetch("https://jsonplaceholder.typicode.com/users");
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  return (
+    &lt;ul&gt;
+      {data.map(user =&gt; (
+        &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}`
+        }
       ],
     },
     {
@@ -11591,6 +11721,126 @@ export default App;`
     },
     {
       id: 52,
+      title: "What is batching in React?",
+      note: [
+        {
+          text1: `Batching in React means grouping multiple state updates into a single re-render for better performance.
+“Batching in React groups multiple state updates into a single re-render to improve performance."
+
+Instead of re-rendering the component after every state update, React combines multiple updates and renders once.
+
+<b>Example:</b>
+setCount(count + 1);
+setName("Anand");
+
+In React, these updates are batched, so the component re-renders only once instead of twice.
+
+<b>Important points:</b>
+- Improves performance by reducing unnecessary renders
+- Automatic in React 18 (even in async operations)
+- Before React 18, batching worked only inside event handlers
+`,
+          code1: `//🔥 Real-time example of batching in React
+💡 //Scenario: Form update or button click
+//Imagine you have a button that updates multiple states at once:
+
+const [count, setCount] = useState(0);
+const [name, setName] = useState("");
+
+const handleClick = () => {
+  setCount(count + 1);
+  setName("Anand");
+};
+
+// 👉 What you might expect:
+// First setCount → re-render
+// Then setName → another re-render
+// 👉 What actually happens (Batching):
+
+// React groups both updates and does:
+// 👉 only ONE re-render
+
+// 🧠 Real-world use case
+// Example: Login / API response
+const handleLogin = async () => {
+  const user = await loginAPI();
+
+  setUser(user);
+  setIsLoggedIn(true);
+  setLoading(false);
+};
+// Without batching:
+// 3 re-renders ❌
+// With batching:
+// 1 re-render ✅
+// 👉 This improves performance a lot in real apps
+
+//-------------
+// ⚡ React 18 Advanced Behavior
+// Before React 18:
+// Batching worked only in event handlers
+
+// After React 18:
+// Batching works everywhere (even async)
+setTimeout(() => {
+  setCount(c => c + 1);
+  setName("React");
+}, 1000);
+
+// 👉 Now this also triggers only one re-render
+
+
+//---------------
+// 🚨 Important Interview Point
+// Problem batching solves:
+
+// 👉 “Too many unnecessary re-renders”
+
+// Best practice:
+// Use functional updates when multiple updates depend on previous state:
+
+setCount(prev => prev + 1);`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "What are component patterns in React?",
+      note: [
+        {
+          text1: `
+<b>What are component patterns in React?</b>
+Component patterns are design approaches used to structure and reuse components efficiently.
+
+<b>Common component patterns:</b>
+
+1. Presentational and Container Pattern  
+Presentational components handle UI  
+Container components handle logic and data
+
+2. Higher Order Components (HOC)  
+A function that takes a component and returns a new enhanced component
+
+3. Render Props  
+A component that shares logic via a function prop
+
+4. Custom Hooks  
+Reusable logic extracted into functions
+
+<b>Example:</b>
+Custom hook:
+function useFetch(url) {
+  // reusable API logic
+}
+
+<b>Key point:</b>
+Component patterns improve reusability, readability, and maintainability.`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
       title: "aff intro",
       note: [
         {
@@ -13041,7 +13291,7 @@ Additionally, the Browser may automatically go into Quirks or Strict Mode.
         },
       ],
     },
-        {
+    {
       id: 1,
       title: "HTMLCORE REACT INTERVIEW QUESTIONS",
       note: [
@@ -13083,13 +13333,12 @@ We use React.memo for components, useMemo for values, and useCallback for functi
 <b>What other hooks have you used?</b>
 Common React hooks include useState, useEffect, useRef, useMemo, useCallback, useReducer, and custom hooks for reusable logic.
 
-<b>How does React re-render work?</b>
-React re-renders a component when its state or props change. It uses a virtual DOM to compare previous and new UI and updates only the changed parts in the real DOM.`,
+`,
           code1: ``
         }
       ]
     },
-            {
+    {
       id: 1,
       title: "JAVASCRIPT CORE INTERVIEW QUESTIONS",
       note: [
@@ -13130,7 +13379,7 @@ TDZ is the time between variable declaration (let/const) and initialization wher
         }
       ]
     },
-            {
+    {
       id: 1,
       title: "REDUX & STATE MANAGEMENT",
       note: [
@@ -13153,7 +13402,7 @@ Middleware is a layer between dispatch and reducer used for logging, async opera
         }
       ]
     },
-            {
+    {
       id: 1,
       title: "REACT PERFORMANCE & ARCHITECTURE",
       note: [
@@ -13200,7 +13449,7 @@ Lazy loading loads components only when needed using React.lazy and Suspense, im
         }
       ]
     },
-            {
+    {
       id: 1,
       title: "CSS / HTML / GENERAL WEB",
       note: [
@@ -13226,7 +13475,7 @@ Use max-width: 100% and height: auto.`,
         }
       ]
     },
-                {
+    {
       id: 1,
       title: "REAL-TIME & CODING TASKS",
       note: [
@@ -13240,6 +13489,6 @@ Use useState to store list. Add pushes item, delete filters item, undo restores 
         }
       ]
     },
-        
+
   ]
 }
