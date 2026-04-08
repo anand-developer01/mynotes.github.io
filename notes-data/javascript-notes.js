@@ -8500,6 +8500,114 @@ try {
 
         `
         },
+      ]
+    },
+    {
+      id: 1,
+      title: "Promise.allSettled()",
+      note: [
+        {
+          text1: `The <b>Promise.allSettled()</b> static method takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises settle (including when an empty iterable is passed), with an array of objects that describe the outcome of each promise.
+          
+          <b>Promise.allSettled()</b> waits for all promises you give it to settle, meaning either resolve or reject. It then returns an array of objects with the status and value or reason for each promise.
+
+This is useful when you have multiple asynchronous tasks that you want to ensure have completed, but don't necessarily care if some fail.
+This will run all three API calls, and the .then() callback will be called once they have all settled. The results array will have three objects: one for each promise, with either a status of <b>fulfilled</b> and the data, or <b>rejected</b> and the error.
+
+The <b>Promise.allSettled()</b> method in JavaScript is a promise combinator that waits for all promises passed to it to either resolve or reject. It returns a promise that resolves after all of the input promises have settled (each may resolve or reject). The returned promise is fulfilled with an array of objects that each describe the outcome of each promise.
+
+
+Promise.allSettled(iterable);
+<b>iterable</b>: An iterable (such as an array) of promises or values to settle.
+
+Returned Value
+-> A single promise that resolves after all the promises in the iterable have settled.
+-> The promise's value is an array of objects, each describing the outcome of each promise.
+
+Each object in the array has the following format:
+<b>status</b>: This will be either <u>fulfilled</u> or <u>rejected</u>.
+<b>value</b>: If the promise was fulfilled, this will be the fulfilled value.
+<b>reason</b>: If the promise was rejected, this will be the reason for the rejection.
+
+          `,
+          code1: `// Syntax : 
+          Promise.allSettled([apiCall1(), apiCall2(), apiCall3()]).then((results) => {});
+          
+                  const promise1 = Promise.resolve(42);
+        const promise2 = Promise.reject('An error occurred');
+        const promise3 = new Promise((resolve) => setTimeout(resolve, 100, 'foo'));
+
+        Promise.allSettled([promise1, promise2, promise3])
+            .then((results) => results.forEach((result) => console.log(result)));
+
+
+
+          //---------------
+                  function fetchUserPosts(userId) {
+            return new Promise((resolve, reject) => {
+                fetch(\`https://jsonplaceholder.typicode.com/posts/1\`)
+                    .then(res =>  {
+                        if(res.ok){
+                            resolve(res.json())
+                        } else {
+                            reject(new Error("Api not found 404"))
+                        }
+                })
+            });
+        }
+
+        function fetchUserProfile(userId) {
+            return new Promise((resolve, reject) => {
+                fetch(\`https://jsonplaceholder.typicode.com/users/2\`)
+                    .then(res => {
+                        if(res.ok){
+                            resolve(res.json())
+                        } else {
+                            reject(new Error("Api not found 404"))
+                        }
+                    })
+            });
+        }
+
+        function fetchUserProfile2(userId) {
+            return new Promise((resolve, reject) => {
+                fetch(\`https://jsonplaceholder.typicode.com/user/1\`)
+                    .then(res => {
+                        // console.log(res)
+                        if(res.ok){
+                            resolve(res.json())
+                        } else {
+                            reject(new Error("Api not found 404"))
+                        }
+                    })
+            });
+        }
+
+
+        async function time(label, fn) {
+            const start = new Date();
+            await fn();
+            console.log(
+                (new Date() - start) / 1000, \`seconds to load \${label}\`
+            );
+        }
+
+        time("parallel", async () => {
+            await Promise.all([fetchUserProfile(), fetchUserPosts()]);
+        });
+        const mainCall = Promise.allSettled([fetchUserProfile(), fetchUserPosts(), fetchUserProfile2()]);
+
+        mainCall.then(res => console.log(res))
+        .catch(err => console.log(err))
+
+          `
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "parallel or sequential",
+      note: [
         {
           text1: `<b>Does JavaScript Promise.all() run in parallel or sequential?</b>
           <a href="https://www.leohuynh.dev/blog/does-promise-all-run-in-parallel-or-sequential" target="_blank">does-promise-all-run-in-parallel-or-sequential</a>
@@ -8575,6 +8683,12 @@ That's the major difference between concurrent and parallel, with concurrent exe
 `,
           code1: ``
         },
+      ]
+    },
+    {
+      id: 1,
+      title: "parallel or sequential examples",
+      note: [
         {
           text1: `Asynchronous JavaScript was introduced to help implement non-blocking code execution. Async-await took it up a notch by making it easier to work with promises and avoid the infamous callback hell.
           
@@ -8672,8 +8786,6 @@ OUTPUT:
 4 seconds
 5 seconds
 */
-
-
 
 //-------------------- 
 //------------Ex : 3
@@ -8816,13 +8928,26 @@ function loadImages(...sources) {
             .then(() => console.log('All done!'));`
         },
         {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
+          text1: `<span style="font-size:25px"><b>The Real-World Scenario: A Dashboard</b></span>
+            Imagine you are building a <b>User Dashboard</b>. To display it, you need data from three different places:
+
+    User Profile (Name, Bio)
+    Recent Orders (Transaction history)
+    Notifications (Unread messages)
+
+<b>The "Slow" Way (Sequential)</b>
+If you use await for each one individually, you create a bottleneck.
+    Get Profile (takes 2 seconds)
+    Then Get Orders (takes 2 seconds)
+    Then Get Notifications (takes 1 second)
+    Total time: 5 seconds.
+
+<b>The "Promise.all" Way (Parallel)</b>
+With Promise.all, you kick off all three requests at the same time.
+    Get Profile, Orders, and Notifications (all start at 0s)
+    Total time: 2 seconds (the time of the slowest request).`,
+          code1: ``,
+        }
       ]
     },
     {
@@ -9008,108 +9133,6 @@ For Example, the following code snippet will resolve the QuickyDone promise firs
 
         // expected output: "AggregateError: No Promise in Promise.any was resolved or AggregateError: All promises were rejected"
         `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Promise.allSettled()",
-      note: [
-        {
-          text1: `The <b>Promise.allSettled()</b> static method takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises settle (including when an empty iterable is passed), with an array of objects that describe the outcome of each promise.
-          
-          <b>Promise.allSettled()</b> waits for all promises you give it to settle, meaning either resolve or reject. It then returns an array of objects with the status and value or reason for each promise.
-
-This is useful when you have multiple asynchronous tasks that you want to ensure have completed, but don't necessarily care if some fail.
-This will run all three API calls, and the .then() callback will be called once they have all settled. The results array will have three objects: one for each promise, with either a status of <b>fulfilled</b> and the data, or <b>rejected</b> and the error.
-
-The <b>Promise.allSettled()</b> method in JavaScript is a promise combinator that waits for all promises passed to it to either resolve or reject. It returns a promise that resolves after all of the input promises have settled (each may resolve or reject). The returned promise is fulfilled with an array of objects that each describe the outcome of each promise.
-
-
-Promise.allSettled(iterable);
-<b>iterable</b>: An iterable (such as an array) of promises or values to settle.
-
-Returned Value
--> A single promise that resolves after all the promises in the iterable have settled.
--> The promise's value is an array of objects, each describing the outcome of each promise.
-
-Each object in the array has the following format:
-<b>status</b>: This will be either <u>fulfilled</u> or <u>rejected</u>.
-<b>value</b>: If the promise was fulfilled, this will be the fulfilled value.
-<b>reason</b>: If the promise was rejected, this will be the reason for the rejection.
-
-          `,
-          code1: `// Syntax : 
-          Promise.allSettled([apiCall1(), apiCall2(), apiCall3()]).then((results) => {});
-          
-                  const promise1 = Promise.resolve(42);
-        const promise2 = Promise.reject('An error occurred');
-        const promise3 = new Promise((resolve) => setTimeout(resolve, 100, 'foo'));
-
-        Promise.allSettled([promise1, promise2, promise3])
-            .then((results) => results.forEach((result) => console.log(result)));
-
-
-
-          //---------------
-                  function fetchUserPosts(userId) {
-            return new Promise((resolve, reject) => {
-                fetch(\`https://jsonplaceholder.typicode.com/posts/1\`)
-                    .then(res =>  {
-                        if(res.ok){
-                            resolve(res.json())
-                        } else {
-                            reject(new Error("Api not found 404"))
-                        }
-                })
-            });
-        }
-
-        function fetchUserProfile(userId) {
-            return new Promise((resolve, reject) => {
-                fetch(\`https://jsonplaceholder.typicode.com/users/2\`)
-                    .then(res => {
-                        if(res.ok){
-                            resolve(res.json())
-                        } else {
-                            reject(new Error("Api not found 404"))
-                        }
-                    })
-            });
-        }
-
-        function fetchUserProfile2(userId) {
-            return new Promise((resolve, reject) => {
-                fetch(\`https://jsonplaceholder.typicode.com/user/1\`)
-                    .then(res => {
-                        // console.log(res)
-                        if(res.ok){
-                            resolve(res.json())
-                        } else {
-                            reject(new Error("Api not found 404"))
-                        }
-                    })
-            });
-        }
-
-
-        async function time(label, fn) {
-            const start = new Date();
-            await fn();
-            console.log(
-                (new Date() - start) / 1000, \`seconds to load \${label}\`
-            );
-        }
-
-        time("parallel", async () => {
-            await Promise.all([fetchUserProfile(), fetchUserPosts()]);
-        });
-        const mainCall = Promise.allSettled([fetchUserProfile(), fetchUserPosts(), fetchUserProfile2()]);
-
-        mainCall.then(res => console.log(res))
-        .catch(err => console.log(err))
-
-          `
         }
       ]
     },
@@ -9364,10 +9387,12 @@ new Promise(function() {
           text1: ``,
           code1: ``
         },
-        {
-          text1: ``,
-          code1: ``
-        },
+      ]
+    },
+    {
+      id: 1,
+      title: "Async Await vs Fetch.Then()",
+      note: [
         {
           text1: `<b>Async Await vs Fetch.Then()</b>
           There is three key differences between async <b>await</b> and <b>then()</b>. They boil down to syntax, error handling, and general code organization.
