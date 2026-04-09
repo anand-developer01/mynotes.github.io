@@ -6958,9 +6958,217 @@ export default function UsersList() {
 }
 
 
+//-------------------   Ex : 2 ----------------------
+// React.memo does shallow comparison → function reference changes → re-render happens
+import React, { useState, useCallback } from "react";
+
+/* ----------- Child Component ----------- */
+const UserInput = React.memo(({ label, name, userHandler }) => {
+  console.log("🔁 Rendering:", label);
+
+  return (
+    &lt;div style={{ marginBottom: &quot;10px&quot; }}&gt;
+      &lt;label&gt;{label}: &lt;/label&gt;
+      &lt;input
+        value={name}
+        onChange={(e) =&gt; userHandler(e.target.value)}
+      /&gt;
+    &lt;/div&gt;
+  );
+});
+
+/* ----------- Parent Component ----------- */
+export default function App() {
+  const [user1, setUser1] = useState("");
+  const [user2, setUser2] = useState("");
+  const [counter, setCounter] = useState(0);
+
+  // ✅ Memoized handlers (IMPORTANT)
+  const userHandler1 = useCallback((val) => {
+    setUser1(val);
+  }, []);
+
+  const userHandler2 = useCallback((val) => {
+    setUser2(val);
+  }, []);
+
+  // const userHandler1 = (val) => { setUser1(val) } 
+  // const userHandler2 = (val) => { setUser2(val) }
+  In this code, \`userHandler1\` and \`userHandler2\` are normal functions used to update \`user1\` and \`user2\` state. The issue is that whenever the \`App\` component re-renders, both functions are created again as new functions. So even though the logic is the same, \`userHandler1\` and \`userHandler2\` get new references every time. Because these functions are passed as props to \`UserInput\`, \`React.memo\` thinks the props have changed and re-renders the child components unnecessarily. This is why both inputs may re-render even when only one state is changing.
+
+  // 🥇 Step 1: Initial Render
+// React runs your component:
+// const App = () => { ... }
+
+// 👉 Creates:
+// userHandler1 (Function A)
+// userHandler2 (Function B)
+
+// 👉 Passes to children:
+// &lt;UserInput userHandler={userHandler1} /&gt;
+// &lt;UserInput userHandler={userHandler2} /&gt;
 
 
-//--------------------------------------------
+// 🥈 Step 2: You type in user1 input
+// setUser1(val)
+// 👉 React updates state
+// 👉 App component re-renders
+
+
+// 🥉 Step 3: Re-render happens
+// Now React runs App AGAIN:
+// const App = () => { ... }
+
+// 👉 NEW functions are created:
+// userHandler1 → Function C ❗
+// userHandler2 → Function D ❗
+
+// 🚨 IMPORTANT POINT
+// Even though logic is same:
+// (val) => setUser1(val)
+
+// 👉 But function reference is DIFFERENT:
+// Function A !== Function C ❌
+// Function B !== Function D ❌
+
+
+// 🏁 Step 4: React.memo check
+// React compares props:
+// OLD userHandler !== NEW userHandler
+
+// 👉 React thinks:
+// “Props changed → I must re-render”
+
+
+
+  return (
+    &lt;div style={{ padding: 30 }}&gt;
+      &lt;h2&gt;👤 Multi User Form (useCallback Example)&lt;/h2&gt;
+
+      {/* unrelated state */}
+      &lt;button onClick={() =&gt; setCounter(counter + 1)}&gt;
+        Increase Counter ({counter})
+      &lt;/button&gt;
+
+      &lt;p&gt;
+        👉 Counter change should NOT re-render inputs
+      &lt;/p&gt;
+
+      &lt;UserInput
+        label=&quot;User 1&quot;
+        name={user1}
+        userHandler={userHandler1}
+      /&gt;
+
+      &lt;UserInput
+        label=&quot;User 2&quot;
+        name={user2}
+        userHandler={userHandler2}
+      /&gt;
+    &lt;/div&gt;
+  );
+}
+
+
+
+
+//---------------------   Ex : 3 -----------------------
+import React, { useState, useCallback } from "react";
+
+/* ---------------- Child: Todo Input ---------------- */
+const TodoInput = React.memo(({ onAdd }) => {
+  console.log("🔁 TodoInput re-rendered");
+
+  const [text, setText] = useState("");
+
+  return (
+    &lt;div style={{ marginBottom: &quot;10px&quot; }}&gt;
+      &lt;input
+        value={text}
+        placeholder=&quot;Enter todo&quot;
+        onChange={(e) =&gt; setText(e.target.value)}
+      /&gt;
+
+      &lt;button
+        onClick={() =&gt; {
+          onAdd(text);
+          setText(&quot;&quot;);
+        }}
+      &gt;
+        Add Todo
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+});
+
+/* ---------------- Child: Todo List ---------------- */
+const TodoList = React.memo(({ todos, onDelete }) => {
+  console.log("🔁 TodoList re-rendered");
+
+  return (
+    &lt;div&gt;
+      {todos.map((todo) =&gt; (
+        &lt;div
+          key={todo.id}
+          style={{
+            display: &quot;flex&quot;,
+            justifyContent: &quot;space-between&quot;,
+            margin: &quot;5px 0&quot;,
+            padding: &quot;5px&quot;,
+            border: &quot;1px solid #ccc&quot;,
+          }}
+        &gt;
+          &lt;span&gt;{todo.text}&lt;/span&gt;
+
+          &lt;button onClick={() =&gt; onDelete(todo.id)}&gt;Delete&lt;/button&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+});
+
+/* ---------------- Parent Component ---------------- */
+export default function TodoApp() {
+  const [todos, setTodos] = useState([]);
+  const [count, setCount] = useState(0);
+
+  // ✅ useCallback: stable function reference
+  const addTodo = useCallback((text) => {
+    if (!text) return;
+
+    setTodos((prev) => [
+      ...prev,
+      { id: Date.now(), text }
+    ]);
+  }, []);
+
+  // ✅ useCallback: stable delete function
+  const deleteTodo = useCallback((id) => {
+    setTodos((prev) => prev.filter((t) => t.id !== id));
+  }, []);
+
+  return (
+    &lt;div style={{ padding: &quot;20px&quot; }}&gt;
+      &lt;h2&gt;📝 Todo App (useCallback Real Example)&lt;/h2&gt;
+
+      {/* unrelated state change */}
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Increase Counter ({count})
+      &lt;/button&gt;
+
+      &lt;p&gt;
+        👉 Counter update should NOT re-render TodoInput / TodoList
+      &lt;/p&gt;
+
+      &lt;TodoInput onAdd={addTodo} /&gt;
+      &lt;TodoList todos={todos} onDelete={deleteTodo} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+
+
+//  ---------------------- Ex : 4 ---------------
           
           function ProductPage({ productId, referrer, theme }) {
   // ...
