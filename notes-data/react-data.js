@@ -1174,7 +1174,7 @@ export default UncontrolledForm;
 
                   We call them pure components because they can accept any dynamically provided child component but they won't modify or copy any behavior from their input components.
 
-                  Benefits of Using Higher-Order Components in React
+                  <b>Benefits of Using Higher-Order Components in React</b>
                   <b>Reusability</b>: HOCs allow you to reuse component logic across multiple components, which can save time and reduce code duplication.
                   <b>Flexibility</b>: HOCs can take additional arguments, which allows you to customize the behavior of the HOC. This makes them a flexible way to add functionality to your components.
                   <b>Separation of concerns</b>: HOCs can help separate concerns in your code by encapsulating certain functionality in a separate component. This can make the code easier to read and maintain.
@@ -6470,6 +6470,86 @@ function Task({ task }) {
         },
       ],
     },
+        {
+      id: 52,
+      title: "useContext vs Redux",
+      note: [
+        {
+          text1: `<b>Context API</b> → For simple/global state sharing
+          ✅ <b>Context API</b>
+Built into React
+Avoids prop drilling
+Best for low-frequency updates
+
+👉 Example:
+Theme (dark/light)
+Logged-in user info
+Language (i18n)
+
+<b>Redux</b> → For complex, scalable state management
+<b>Redux</b>
+External library
+Centralized global store
+Predictable state management using actions & reducers
+
+👉 Example:
+E-commerce cart
+Complex dashboards
+Multiple APIs + shared state
+
+Context API is good for simple global state, but Redux is better for managing complex, frequently changing state with better performance and scalability.
+
+
+🥇 <b>1. Scalability Answer (MOST IMPORTANT)</b>
+<b>Context API</b> : In a large app, putting everything in one Context provider creates a "God Object" that is hard to maintain. Creating 20 different Context providers leads to a "Provider Wrapper Hell" in your App.js.
+Context API is suitable for small and simple state, but it becomes hard to manage and scale when the app grows.
+<b>The Redux Edge</b> : Redux allows you to split logic into slices. This keeps the code for "Loan Processing" entirely separate from "User Profile," even though they live in the same central store.
+Redux provides a centralized store and predictable state management, which made our application more scalable and maintainable.
+
+🥈 <b>2. Performance Answer (VERY STRONG)</b>
+👉 Answer:
+<b>Context API:</b> Context API triggers re-render for all consuming components whenever the value changes.
+In our application, state updates were frequent, so this would have caused performance issues.
+When a Context value changes, every component using useContext(MyContext) re-renders, even if it only uses a tiny piece of the data that didn't change.
+
+<b>Redux</b>: optimizes re-renders by updating only the components that actually depend on the changed state, which improves performance.
+Uses a <b>"Selector" pattern</b> (via useSelector). Redux performs a shallow comparison; if the specific piece of data you extracted hasn't changed, the component <b>will not re-render</b>.
+
+🥉 <b>3. Debugging & DevTools Answer</b>
+👉 Answer:
+<b>Context API</b>: State changes are "silent." You have to manually add console.log inside your functions to see what happened.
+<b>Redux</b>: Every single change is dispatched as a formal Action. The Redux DevTools act like a "Black Box" flight recorder for your app. You can literally see the exact millisecond a transaction failed and what the state looked like right before it happened.
+
+🏅 <b>4. Complex Logic & Middleware Answer</b>
+👉 Answer:
+<b>Redux</b>: Our project involved multiple API calls, async operations, and complex business logic.
+Redux supports middleware like thunk or saga, which helps handle async operations cleanly.
+<b>Redux Middleware (Thunk/Saga)</b>: These allow you to intercept actions. For example, when a user clicks "Submit Loan," a middleware can:
+    Trigger a loading spinner.
+    Validate the local state.
+    Make an API call.
+    Log the result to an analytics service.
+    Handle errors globally.
+<b>Context API</b>: Context API does not provide a structured way to manage such complex logic.
+Requires you to write this logic inside your components or custom hooks, which quickly becomes messy and repetitive.
+
+🎖️ <b>5. Real-Time Project Justification (Financial Domain Based)</b>
+Yes, I worked in a financial domain application where we handled customer data, loan details, and transaction-related information.
+
+The application had multiple modules like customer onboarding, case management, and payment tracking, where the same data was shared across different components and pages.
+
+The state was frequently updated and required consistency across the application.
+
+In such cases, Context API was not suitable because it can cause unnecessary re-renders and becomes difficult to manage as the application grows.
+
+We used Redux because it provides a centralized store, predictable state updates, and better debugging support.
+
+This was especially important in financial applications where data accuracy and traceability are critical.
+`,
+          code1: ``
+        },
+      ],
+    },
     {
       id: 52,
       title: "useReducer",
@@ -6875,45 +6955,132 @@ const initialTasks = [
                     <span style="color:red"> useCallback(fn, dependencies) </span>
 Call <b>useCallback</b> at the top level of your component to cache a function definition between re-renders:
 
+<b>useCallback</b>: A Hook that "memoizes" a function definition. It ensures the function's memory address remains the same between renders unless its dependencies change.
+
+<b>What is useCallback?</b>
+The useCallback hook is a performance optimization mechanism in React that helps prevent unnecessary re-renders of child components when their parent component re-renders. It achieves this by memoizing (caching) callback functions based on their dependencies. If the dependencies haven't changed, the same function reference is returned, avoiding the creation of a new function object on every render.
+
 <b>Parameters</b> 
 <b>fn</b> : The function value that you want to cache. It can take any arguments and return any values. React will return (not call!) your function back to you during the initial render. On next renders, React will give you the same function again if the <b>dependencies</b> have not changed since the last render. Otherwise, it will give you the function that you have passed during the current render, and store it in case it can be reused later. React will not call your function. The function is returned to you so you can decide when and whether to call it.
 <b>dependencies</b> : The list of all reactive values referenced inside of the <b>fn</b> code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is configured for React, it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like <b>[dep1, dep2, dep3]</b>. React will compare each dependency with its previous value using the Object.is comparison algorithm.
-
-<b>Returns</b> 
-On the initial render, <b>useCallback</b> returns the <b>fn</b> function you have passed.
-
-During subsequent renders, it will either return an already stored fn  function from the last render (if the dependencies haven't changed), or return the fn function you have passed during this render.
-
-<b>Caveats</b> 
-=> <b>useCallback</b> is a Hook, so you can only call it <u>at the top level of your component</u> or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
-=> React <u>will not throw away the cached function unless there is a specific reason to do that</u>. For example, in development, React throws away the cache when you edit the file of your component. Both in development and in production, React will throw away the cache if your component suspends during the initial mount. In the future, React may add more features that take advantage of throwing away the cache—for example, if React adds built-in support for virtualized lists in the future, it would make sense to throw away the cache for items that scroll out of the virtualized table viewport. This should match your expectations if you rely on useCallback as a performance optimization. Otherwise, a <b>state variable</b> or a <b>ref</b> may be more appropriate.
 
 <b>You need to pass two things to useCallback</b>:
 1) A function definition that you want to cache between re-renders.
 2) A <b>list of dependencies</b> including every value within your component that's used inside your function.
 On the initial render, the <b>returned function</b> you'll get from <b>useCallback</b> will be the function you passed.
 
+<b>Returns</b> 
+On the initial render, <b>useCallback</b> returns the <b>fn</b> function you have passed.
+During subsequent renders, it will either return an already stored fn  function from the last render (if the dependencies haven't changed), or return the fn function you have passed during this render.
+
+<b>Caveats</b> 
+=> <b>useCallback</b> is a Hook, so you can only call it <u>at the top level of your component</u> or your own Hooks. 
+You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+
 On the following renders, React will compare the <b>dependencies</b> with the dependencies you passed during the previous render. If none of the dependencies have changed (compared with <b>Object.is</b>), <b>useCallback</b> will return the same function as before. Otherwise, <b>useCallback</b> will return the function you passed on this render.
 In other words, <b>useCallback</b> caches a function between re-renders until its dependencies change.
-
-
-<b>What is useCallback?</b>
-The useCallback hook is a performance optimization mechanism in React that helps prevent unnecessary re-renders of child components when their parent component re-renders. It achieves this by memoizing (caching) callback functions based on their dependencies. If the dependencies haven't changed, the same function reference is returned, avoiding the creation of a new function object on every render.
 
 <b>When to Use useCallback</b>:
 <b>Passing callbacks as props to child components</b>: When a parent component passes a callback function as a prop to a child component, and the child component relies on the same callback reference across renders (e.g., for event handlers), useCallback can prevent the child from re-rendering unnecessarily due to a change in the parent's state or props.
 <b>Callbacks that are expensive to create</b>: If creating the callback function involves complex calculations or fetching data, using useCallback can improve performance by ensuring it's only created when its dependencies change.
 
-<b>Let's walk through an example to see when this is useful.</b>
-Say you're passing a <b>handleSubmit</b> function down from the <b>ProductPage</b> to the <b>ShippingForm</b> component:
+<b>When Not to Use useCallback</b>:
+<b>Simple callbacks without dependencies</b>: If a callback function is simple and doesn't have any dependencies that change frequently, using useCallback might not be necessary. The overhead of memoization could outweigh the potential performance benefit.
+<b>Callbacks used within the same component</b>: If a callback is only used within the same component where it's created, there's no need for useCallback as React already handles component re-renders efficiently.
 
-You've noticed that toggling the <b>theme</b> prop freezes the app for a moment, but if you remove <b> <ShippingForm /> </b>from your JSX, it feels fast. This tells you that it's worth trying to optimize the <b> ShippingForm </b> component.
 
-<b>By default, when a component re-renders, React re-renders all of its children recursively</b>. This is why, when <b>ProductPage</b> re-renders with a different <b>theme</b>, the <b>ShippingForm</b> component also re-renders. This is fine for components that don't require much calculation to re-render. But if you verified a re-render is slow, you can tell <b>ShippingForm</b> to skip re-rendering when its props are the same as on last render by wrapping it in  <a href="https://react.dev/reference/react/memo" target="_block"> memo </a>:
+You are storing every version of <b>countHandler</b> in:<b>(Ex : 1 )</b>
+const refCount = []
+<b>1. The Dependency Logic</b>
+The core of the experiment is this line:
+[count < 2 ? 0 : count]
 
-<b>With this change, "ShippingForm" will skip re-rendering if all of its props are the same as on the last render.</b> This is when caching a function becomes important! Let's say you defined <b>handleSubmit</b> without <b>useCallback</b>:
+This creates a "dynamic" dependency. Let's look at how that dependency value changes across renders:
+    Render 1 (count = 0): The dependency is 0.
+    Render 2 (count = 1): The dependency is still 0 (because 1 < 2 is true).
+    Render 3 (count = 2): The dependency becomes 2 (because 2 < 2 is false).
+
+<b>2. The refCount Comparison</b>
+By pushing the countHandler into a global array (refCount), you are keeping a record of the function's "identity" across renders. In JavaScript, two functions are only equal (===) if they are the exact same object in memory.
+
+Initial	->(Count : 0)	 (Dependency Value : 0)   Function A (created)
+1st Click	-> (Count : 1)	(Dependency Value : 0)	Function A (reused!)
+2nd Click	-> (Count : 2)	(Dependency Value : 2)	Function B (created)
+
+🥇 First Render (count = 0)
+[count < 2 ? 0 : count] → [0]
+👉 useCallback creates function → call it F1
+refCount = [F1]
+
+🥈 Click button → count = 1
+Re-render happens
+[count < 2 ? 0 : count] → [0]
+👉 Dependency SAME as before ([0])
+👉 So useCallback returns SAME function
+F2 === F1 ✅
+refCount = [F1, F1]
+
+🥉 Click again → count = 2
+Re-render again
+[count < 2 ? 0 : count] → [2]
+👉 Dependency changed (0 → 2)
+👉 So useCallback creates NEW function → call it F3
+
+refCount = [F1, F1, F3]
+🔍 Your console checks
+refCount[0] === refCount[1]  // true ✅
+refCount[0] === refCount[2]  // false ❌
+
+// <b>Let's walk through an example to see when this is useful.</b>
+// Say you're passing a <b>handleSubmit</b> function down from the <b>ProductPage</b> to the <b>ShippingForm</b> component:
+
+// You've noticed that toggling the <b>theme</b> prop freezes the app for a moment, but if you remove <b> <ShippingForm /> </b>from your JSX, it feels fast. This tells you that it's worth trying to optimize the <b> ShippingForm </b> component.
+
+// <b>By default, when a component re-renders, React re-renders all of its children recursively</b>. This is why, when <b>ProductPage</b> re-renders with a different <b>theme</b>, the <b>ShippingForm</b> component also re-renders. This is fine for components that don't require much calculation to re-render. But if you verified a re-render is slow, you can tell <b>ShippingForm</b> to skip re-rendering when its props are the same as on last render by wrapping it in  <a href="https://react.dev/reference/react/memo" target="_block"> memo </a>:
+
+// <b>With this change, "ShippingForm" will skip re-rendering if all of its props are the same as on the last render.</b> This is when caching a function becomes important! Let's say you defined <b>handleSubmit</b> without <b>useCallback</b>:
+
+
                     `,
           code1: ` // ------------ Ex : 1 ----------
+
+import React, { useState, useCallback, useRef } from "react";
+
+const refCount = []
+// 1st render (count = 0), deps = [0], increment #500
+// 1st render (count = 1), deps = [0], increment #500
+// 1st render (count = 2), deps = [2], increment #600 
+
+export default function TodoApp() {
+  const [count, setCount] = useState(0);
+
+  const countHandler = useCallback(() => {
+    setCount((count) => count + 1)
+    // setCount(count + 1) // This uses current closure value
+  }, [count < 2 ? 0 : count])
+
+  refCount.push(countHandler)
+  console.log(refCount.length)
+
+  if (refCount.length === 3) {
+    console.log(refCount[0] === refCount[1])
+    console.log(refCount[0] === refCount[2])
+  }
+
+  // for (let i = 0; i < refCount.length; i++) {
+  //   console.log(refCount[i] === refCount[i+1])
+  // }
+
+  return (
+    &lt;div style={{ padding: &quot;20px&quot; }}&gt;
+      &lt;button onClick={countHandler}&gt;
+        Increase Counter ({count})
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+          // ---------------- Ex : 1 --------------
           import React, { useState, useEffect, useCallback } from &quot;react&quot;;
 
 export default function UsersList() {
@@ -6958,7 +7125,295 @@ export default function UsersList() {
 }
 
 
-//-------------------   Ex : 2 ----------------------
+
+
+
+//  ---------------------- Ex : 4 ---------------
+          
+          function ProductPage({ productId, referrer, theme }) {
+  // ...
+  return (
+    &lt;div className={theme}&gt;
+      &lt;ShippingForm onSubmit={handleSubmit} /&gt;
+    &lt;/div&gt;
+  );
+  
+  //----------
+  import { memo } from 'react';
+
+const ShippingForm = memo(function ShippingForm({ onSubmit }) {
+  // ...
+});
+
+//---------
+
+function ProductPage({ productId, referrer, theme }) {
+  // Every time the theme changes, this will be a different function...
+  function handleSubmit(orderDetails) {
+    post('/product/' + productId + '/buy', {
+      referrer,
+      orderDetails,
+    });
+  }
+  
+  return (
+    &lt;div className={theme}&gt;
+    // {/* ... so ShippingForm's props will never be the same, and it will re-render every time */}
+      &lt;ShippingForm onSubmit={handleSubmit} /&gt;
+    &lt;/div&gt;
+  );
+}
+  `
+        },
+//         {
+//           text1: `<b>In JavaScript, a function () {} or () => {} always creates a different function</b>, similar to how the {} object literal always creates a new object. Normally, this wouldn't be a problem, but it means that <b>ShippingForm</b> props will never be the same, and your memo optimization won't work. This is where <b>useCallback</b> comes in handy:
+
+//                     As <b>{}</b> notation creates a new Object, the function notation like <b> function () {} or () => {} </b> creates a new function
+
+// Normally this isn't an issue but creating new function on every re render defeats the purpose of caching
+                    
+//                     <b>By wrapping "handleSubmit" in "useCallback", you ensure that it's the same function between the re-renders</b> (until dependencies change). You don't have to wrap a function in <b>useCallback</b> unless you do it for some specific reason. In this example, the reason is that you pass it to a component wrapped in memo, and this lets it skip re-rendering. There are other reasons you might need <b>useCallback</b> which are described further on this page.
+// Note:-
+// <b>You should only rely on <u>useCallback</u> as a performance optimization</b>. If your code doesn't work without it, find the underlying problem and fix it first. Then you may add useCallback back.
+
+// <b>useCallback caches the function itself</b>. Unlike <b>useMemo</b>, it does not call the function you provide. Instead, it caches the function you provided so that <b>handleSubmit</b> itself doesn't change unless <b>productId</b> or <b>referrer</b> has changed. This lets you pass the <b>handleSubmit</b> function down without unnecessarily re-rendering <b>ShippingForm</b>. Your code won't run until the user submits the form.
+//                     `,
+//           code1: `function ProductPage({ productId, referrer, theme }) {
+//   // Tell React to cache your function between re-renders...
+//   const handleSubmit = useCallback((orderDetails) => {
+//     post('/product/' + productId + '/buy', {
+//       referrer,
+//       orderDetails,
+//     });
+//   }, [productId, referrer]); // ...so as long as these dependencies don't change...
+
+//   return (
+//     &lt;div className={theme}&gt;
+//       {/* ...ShippingForm will receive the same props and can skip re-rendering */}
+//       &lt;ShippingForm onSubmit={handleSubmit} /&gt;
+//     &lt;/div&gt;
+//   );
+// }`
+//         },
+
+//         {
+//           text1: `To prevent unnecessary expensive list re-renderings, you wrap it into <b>React.memo()</b>.
+// The parent component <b> &lt;ParentComponent&gt; </b> provides a handler function to the child component <b>&lt;MyList&gt;</b>:`,
+//           code1: `// MyList.js
+//                     import React,{ useEffect } from 'react';
+
+// function MyList({ handler, changeDep }) {
+//     const items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+//     useEffect(() => {
+//       console.log("Child Component redered");
+//     }, []);
+//     console.log("Child render----");
+//     return (
+//         &lt;&gt;
+//         {items.map((item, index) =&gt; {
+//           return (
+//             &lt;div key={index} onClick={handler}&gt;
+//               {item}
+//             &lt;/div&gt;
+//           );
+//         })}
+//       &lt;/&gt;
+//     );
+//   }
+  
+//   export default React.memo(MyList);
+
+//   //---------
+// // ParentComponent.js
+
+//   import React, { useState, useCallback, useEffect } from 'react';
+// import MyList from './MyList';
+
+// export default function ParentComponent() {
+//     const [state, setState] = useState(false);
+//     const [dep, setDep] = useState(0);
+//     // console.log("Parent Component redered");
+
+//     const increment = () => {
+//         setDep(e => e + 1)
+//     }
+
+//     // const handler = (event) => {
+//     //     console.log("You clicked ", event.currentTarget);
+//     // }
+//     const handler = useCallback(
+//         (event) => {
+//             console.log("You clicked ", event.currentTarget);
+//         },
+//         // eslint-disable-next-line react-hooks/exhaustive-deps
+//         [dep]);
+
+//     const statehanddler = () => {
+//         setState(!state);
+//     };
+
+//     return (
+//         &lt;&gt;
+//             &lt;button onClick={statehanddler}&gt;Change State Of Parent Component&lt;/button&gt;
+//             &lt;button onClick={increment}&gt;increment&lt;/button&gt;
+//             {dep}
+//             &lt;MyList handler={handler} /&gt;
+//         &lt;/&gt;
+//     );
+// } 
+    
+
+// //------------
+
+
+// import React, { useState, useCallback } from 'react';
+
+// // Main Task Manager Component
+// const TaskManager = () => {
+//   const [tasks, setTasks] = useState([]);
+//   const [taskInput, setTaskInput] = useState('');
+//   const [filter, setFilter] = useState('all'); // 'all', 'active', 'completed'
+
+//   // Add a new task
+//   const addTask = useCallback(() => {
+//     if (taskInput.trim()) {
+//       setTasks(prevTasks => [...prevTasks, { text: taskInput, completed: false }]);
+//       setTaskInput('');
+//     }
+//   }, [taskInput]);
+
+//   // Toggle task completion
+//   const toggleTaskCompletion = useCallback((index) => {
+//     setTasks(prevTasks =>
+//       prevTasks.map((task, i) =>
+//         i === index ? { ...task, completed: !task.completed } : task
+//       )
+//     );
+//   }, []);
+
+//   // Filter tasks based on the selected filter
+//   const filteredTasks = useCallback(() => {
+//     switch (filter) {
+//       case 'completed':
+//         return tasks.filter(task => task.completed);
+//       case 'active':
+//         return tasks.filter(task => !task.completed);
+//       default:
+//         return tasks;
+//     }
+//   }, [tasks, filter]);
+
+//   return (
+//     &lt;div&gt;
+//       &lt;h1&gt;Task Manager&lt;/h1&gt;
+//       &lt;input
+//         type=&quot;text&quot;
+//         value={taskInput}
+//         onChange={(e) =&gt; setTaskInput(e.target.value)}
+//         placeholder=&quot;Add a new task...&quot;
+//       /&gt;
+//       &lt;button onClick={addTask}&gt;Add Task&lt;/button&gt;
+
+//       &lt;div&gt;
+//         &lt;button onClick={() =&gt; setFilter(&#39;all&#39;)}&gt;All&lt;/button&gt;
+//         &lt;button onClick={() =&gt; setFilter(&#39;active&#39;)}&gt;Active&lt;/button&gt;
+//         &lt;button onClick={() =&gt; setFilter(&#39;completed&#39;)}&gt;Completed&lt;/button&gt;
+//       &lt;/div&gt;
+
+//       &lt;ul&gt;
+//         {filteredTasks().map((task, index) =&gt; (
+//           &lt;TaskItem
+//             key={index}
+//             task={task}
+//             onToggle={() =&gt; toggleTaskCompletion(index)}
+//           /&gt;
+//         ))}
+//       &lt;/ul&gt;
+//     &lt;/div&gt;
+//   );
+// };
+
+// // Task Item Component
+// const TaskItem = React.memo(({ task, onToggle }) => {
+//   console.log(\`Rendering: \${task.text}\`);
+//   return (
+//     &lt;li onClick={onToggle} style={{ textDecoration: task.completed ? &#39;line-through&#39; : &#39;none&#39; }}&gt;
+//       {task.text}
+//     &lt;/li&gt;
+//   );
+// });
+
+// export default TaskManager;
+
+// `
+//         },
+        {
+          text1: `<a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/" target="_blank">usecallback-guide-use-cases-and-examples</a>`,
+          code1: ``
+        },
+      ],
+    },
+        {
+      id: 52,
+      title: "React.memo() with useCallback",
+      note: [
+        {
+          text1: `<b>React.memo</b>: A Higher Order Component (HOC) that wraps a functional component. It prevents a re-render if the props haven't changed (using a shallow comparison).
+<b>useCallback</b>: A Hook that "memoizes" a function definition. It ensures the function's memory address remains the same between renders unless its dependencies change.
+
+<b>Why use them together?</b>
+In JavaScript, functions are objects. Every time a parent component re-renders, any function defined inside it is <b>re-created.</b>
+1) If you pass that function to a child wrapped in React.memo, the child sees a "new" prop.
+2) React.memo does a shallow comparison, sees the new reference, and <b>re-renders anyway</b>.
+3) <b>useCallback fixes</b> this by keeping the function reference stable.
+
+
+🔥 <b>The Core Problem</b>
+Every time a parent re-renders:
+const handleClick = () => {
+  console.log("clicked");
+};
+👉 This function is re-created (new reference) on every render.
+
+🚨 What happens with React.memo?
+const Child = React.memo(({ onClick }) => {
+  console.log("Child rendered");
+  return <button onClick={onClick}>Click</button>;
+});
+👉 React.memo does shallow comparison of props.
+So it checks:
+prevProps.onClick === nextProps.onClick  // ❌ false (new function each time)
+👉 Result: Child re-renders anyway
+👉 ❌ Optimization failed
+
+
+✅ <b>Solution</b>: useCallback
+const handleClick = useCallback(() => {
+  console.log("clicked");
+}, []);
+👉 Now React remembers the same function reference
+prevProps.onClick === nextProps.onClick  // ✅ true
+👉 Result: Child does NOT re-render unnecessarily
+
+💡<b> Why use them together?</b>
+Concept	Role
+React.memo :	Prevents re-render if props are same
+useCallback	: Keeps function reference stable
+
+<b> interview </b>
+We use useCallback with React.memo to prevent unnecessary child re-renders by maintaining a stable function reference, since React.memo does shallow comparison and would otherwise detect a new function on every render.
+
+<b>2. Real-Time Example: The "Task List" (Ex :3 )</b>
+Imagine an app where you have a list of tasks and a counter. Without optimization, incrementing the counter would cause every single task item to re-render, even if the task text didn't change.
+
+<b>The Optimized Solution</b>
+By wrapping the handler in useCallback, the TaskItem (wrapped in memo) can finally do its job.
+
+const deleteTask = useCallback((id) => {
+console.log("Deleted", id);
+}, []); // Empty deps mean this reference NEVER changes
+`,
+          code1: `//-------------------   Ex : 1 ----------------------
 // React.memo does shallow comparison → function reference changes → re-render happens
 import React, { useState, useCallback } from "react";
 
@@ -7072,10 +7527,10 @@ export default function App() {
 
 
 
-//---------------------   Ex : 3 -----------------------
+//---------------------   Ex : 2   -----------------------
 import React, { useState, useCallback } from "react";
 
-/* ---------------- Child: Todo Input ---------------- */
+/* --- Child: Todo Input --- */
 const TodoInput = React.memo(({ onAdd }) => {
   console.log("🔁 TodoInput re-rendered");
 
@@ -7168,258 +7623,210 @@ export default function TodoApp() {
 
 
 
-//  ---------------------- Ex : 4 ---------------
-          
-          function ProductPage({ productId, referrer, theme }) {
-  // ...
-  return (
-    &lt;div className={theme}&gt;
-      &lt;ShippingForm onSubmit={handleSubmit} /&gt;
-    &lt;/div&gt;
-  );
-  
-  //----------
-  import { memo } from 'react';
-
-const ShippingForm = memo(function ShippingForm({ onSubmit }) {
-  // ...
-});
-
-//---------
-
-function ProductPage({ productId, referrer, theme }) {
-  // Every time the theme changes, this will be a different function...
-  function handleSubmit(orderDetails) {
-    post('/product/' + productId + '/buy', {
-      referrer,
-      orderDetails,
-    });
-  }
-  
-  return (
-    &lt;div className={theme}&gt;
-    // {/* ... so ShippingForm's props will never be the same, and it will re-render every time */}
-      &lt;ShippingForm onSubmit={handleSubmit} /&gt;
-    &lt;/div&gt;
-  );
-}
-  `
-        },
-        {
-          text1: `<b>In JavaScript, a function () {} or () => {} always creates a different function</b>, similar to how the {} object literal always creates a new object. Normally, this wouldn't be a problem, but it means that <b>ShippingForm</b> props will never be the same, and your memo optimization won't work. This is where <b>useCallback</b> comes in handy:
-
-                    As <b>{}</b> notation creates a new Object, the function notation like <b> function () {} or () => {} </b> creates a new function
-
-Normally this isn't an issue but creating new function on every re render defeats the purpose of caching
-                    
-                    <b>By wrapping "handleSubmit" in "useCallback", you ensure that it's the same function between the re-renders</b> (until dependencies change). You don't have to wrap a function in <b>useCallback</b> unless you do it for some specific reason. In this example, the reason is that you pass it to a component wrapped in memo, and this lets it skip re-rendering. There are other reasons you might need <b>useCallback</b> which are described further on this page.
-Note:-
-<b>You should only rely on <u>useCallback</u> as a performance optimization</b>. If your code doesn't work without it, find the underlying problem and fix it first. Then you may add useCallback back.
-
-<b>useCallback caches the function itself</b>. Unlike <b>useMemo</b>, it does not call the function you provide. Instead, it caches the function you provided so that <b>handleSubmit</b> itself doesn't change unless <b>productId</b> or <b>referrer</b> has changed. This lets you pass the <b>handleSubmit</b> function down without unnecessarily re-rendering <b>ShippingForm</b>. Your code won't run until the user submits the form.
-                    `,
-          code1: `function ProductPage({ productId, referrer, theme }) {
-  // Tell React to cache your function between re-renders...
-  const handleSubmit = useCallback((orderDetails) => {
-    post('/product/' + productId + '/buy', {
-      referrer,
-      orderDetails,
-    });
-  }, [productId, referrer]); // ...so as long as these dependencies don't change...
-
-  return (
-    &lt;div className={theme}&gt;
-      {/* ...ShippingForm will receive the same props and can skip re-rendering */}
-      &lt;ShippingForm onSubmit={handleSubmit} /&gt;
-    &lt;/div&gt;
-  );
-}`
-        },
-        {
-          text1: `<b>When Not to Use useCallback</b>:
-<b>Simple callbacks without dependencies</b>: If a callback function is simple and doesn't have any dependencies that change frequently, using useCallback might not be necessary. The overhead of memoization could outweigh the potential performance benefit.
-<b>Callbacks used within the same component</b>: If a callback is only used within the same component where it's created, there's no need for useCallback as React already handles component re-renders efficiently.`,
-          code1: ``
-        },
-        {
-          text1: `Let's implement a function called <b>sumFunctionFactory()</b>, which returns another function that sums numbers. Then let's use that function to create two functions <b>function1</b> and <b>function2</b>.
-                    
-                    The functions <b>function1</b> and <b>function2</b> share the same code source, but they are distinct separate function objects, meaning they refer to different instances, thus Comparing them evaluates to false and that's just how JavaScript works.
-
-                    <b>The useCallback() hook</b>
-                    Going back to React, when a component re-renders, every function inside of the component is recreated and therefore these function's references change between renders.
-
-<b>useCallback(callback, dependencies)</b> will return a memoized instance of the callback that only changes if one of the dependencies has changed. This means that instead of recreating the function object on every re-render, we can use the same function object between renders.
-                    `,
-          code1: `// factory function
-function sumFunctionFactory() {
-  return (a, b) => a + b;
-}
-
-const function1 = sumFunctionFactory();
-const function2 = sumFunctionFactory();
-
-function1(2, 3);
-// expected output: 5
-function2(2, 3);
-// expected output: 5
-
-console.log(function1 === function2);
-// expected output: false`
-        },
-        {
-          text1: `To prevent unnecessary expensive list re-renderings, you wrap it into <b>React.memo()</b>.
-The parent component <b> &lt;ParentComponent&gt; </b> provides a handler function to the child component <b>&lt;MyList&gt;</b>:`,
-          code1: `// MyList.js
-                    import React,{ useEffect } from 'react';
-
-function MyList({ handler, changeDep }) {
-    const items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    useEffect(() => {
-      console.log("Child Component redered");
-    }, []);
-    console.log("Child render----");
-    return (
-        &lt;&gt;
-        {items.map((item, index) =&gt; {
-          return (
-            &lt;div key={index} onClick={handler}&gt;
-              {item}
-            &lt;/div&gt;
-          );
-        })}
-      &lt;/&gt;
-    );
-  }
-  
-  export default React.memo(MyList);
-
-  //---------
-// ParentComponent.js
-
-  import React, { useState, useCallback, useEffect } from 'react';
-import MyList from './MyList';
-
-export default function ParentComponent() {
-    const [state, setState] = useState(false);
-    const [dep, setDep] = useState(0);
-    // console.log("Parent Component redered");
-
-    const increment = () => {
-        setDep(e => e + 1)
-    }
-
-    // const handler = (event) => {
-    //     console.log("You clicked ", event.currentTarget);
-    // }
-    const handler = useCallback(
-        (event) => {
-            console.log("You clicked ", event.currentTarget);
-        },
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [dep]);
-
-    const statehanddler = () => {
-        setState(!state);
-    };
-
-    return (
-        &lt;&gt;
-            &lt;button onClick={statehanddler}&gt;Change State Of Parent Component&lt;/button&gt;
-            &lt;button onClick={increment}&gt;increment&lt;/button&gt;
-            {dep}
-            &lt;MyList handler={handler} /&gt;
-        &lt;/&gt;
-    );
-} 
-    
-
-//------------
-
-
+//---------------------   Ex : 3  -----------------------
 import React, { useState, useCallback } from 'react';
-
-// Main Task Manager Component
-const TaskManager = () => {
-  const [tasks, setTasks] = useState([]);
-  const [taskInput, setTaskInput] = useState('');
-  const [filter, setFilter] = useState('all'); // 'all', 'active', 'completed'
-
-  // Add a new task
-  const addTask = useCallback(() => {
-    if (taskInput.trim()) {
-      setTasks(prevTasks => [...prevTasks, { text: taskInput, completed: false }]);
-      setTaskInput('');
-    }
-  }, [taskInput]);
-
-  // Toggle task completion
-  const toggleTaskCompletion = useCallback((index) => {
-    setTasks(prevTasks =>
-      prevTasks.map((task, i) =>
-        i === index ? { ...task, completed: !task.completed } : task
-      )
-    );
-  }, []);
-
-  // Filter tasks based on the selected filter
-  const filteredTasks = useCallback(() => {
-    switch (filter) {
-      case 'completed':
-        return tasks.filter(task => task.completed);
-      case 'active':
-        return tasks.filter(task => !task.completed);
-      default:
-        return tasks;
-    }
-  }, [tasks, filter]);
-
+ 
+// --- CHILD COMPONENT: TASK ITEM ---
+// Wrapped in memo: Only re-renders if task object or onDelete changes.
+const TaskItem = React.memo(({ task, onDelete }) => {
+  console.log(\`[Render] TaskItem: \${task.name}\`);
   return (
-    &lt;div&gt;
-      &lt;h1&gt;Task Manager&lt;/h1&gt;
-      &lt;input
-        type=&quot;text&quot;
-        value={taskInput}
-        onChange={(e) =&gt; setTaskInput(e.target.value)}
-        placeholder=&quot;Add a new task...&quot;
-      /&gt;
-      &lt;button onClick={addTask}&gt;Add Task&lt;/button&gt;
-
-      &lt;div&gt;
-        &lt;button onClick={() =&gt; setFilter(&#39;all&#39;)}&gt;All&lt;/button&gt;
-        &lt;button onClick={() =&gt; setFilter(&#39;active&#39;)}&gt;Active&lt;/button&gt;
-        &lt;button onClick={() =&gt; setFilter(&#39;completed&#39;)}&gt;Completed&lt;/button&gt;
-      &lt;/div&gt;
-
-      &lt;ul&gt;
-        {filteredTasks().map((task, index) =&gt; (
-          &lt;TaskItem
-            key={index}
-            task={task}
-            onToggle={() =&gt; toggleTaskCompletion(index)}
-          /&gt;
-        ))}
-      &lt;/ul&gt;
-    &lt;/div&gt;
-  );
-};
-
-// Task Item Component
-const TaskItem = React.memo(({ task, onToggle }) => {
-  console.log(\`Rendering: \${task.text}\`);
-  return (
-    &lt;li onClick={onToggle} style={{ textDecoration: task.completed ? &#39;line-through&#39; : &#39;none&#39; }}&gt;
-      {task.text}
+    &lt;li style={{ marginBottom: &#39;8px&#39;, borderBottom: &#39;1px solid #eee&#39;, padding: &#39;5px&#39; }}&gt;
+      &lt;span&gt;{task.name}&lt;/span&gt;
+      &lt;button
+        onClick={() =&gt; onDelete(task.id)}
+        style={{ marginLeft: &#39;15px&#39;, color: &#39;red&#39; }}
+      &gt;
+        Delete
+      &lt;/button&gt;
     &lt;/li&gt;
   );
 });
-
-export default TaskManager;
-
+ 
+// --- CHILD COMPONENT: TASK FORM ---
+// Wrapped in memo: Only re-renders if 'taskName' or handlers change.
+const TaskForm = React.memo(({ taskName, oneTaskHandler, submitTask }) => {
+  console.log("[Render] TaskForm");
+  return (
+    &lt;div style={{ marginTop: &#39;20px&#39;, padding: &#39;15px&#39;, border: &#39;1px solid #ccc&#39; }}&gt;
+      &lt;h3&gt;Add New Task&lt;/h3&gt;
+      &lt;form onSubmit={submitTask}&gt;
+        &lt;div&gt;
+          &lt;label&gt;Task Name: &lt;/label&gt;
+          &lt;input
+            type=&quot;text&quot;
+            value={taskName}
+            onChange={oneTaskHandler}
+            placeholder=&quot;What needs to be done?&quot;
+          /&gt;
+        &lt;/div&gt;
+        &lt;button type=&quot;submit&quot; style={{ marginTop: &#39;10px&#39; }}&gt;Add Task&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  );
+});
+ 
+// --- MAIN PARENT COMPONENT ---
+function TaskApp() {
+  const [count, setCount] = useState(0);
+  const [taskName, setTaskName] = useState(""); // Simplified to a string
+  const [tasks, setTasks] = useState([
+    { id: 1, name: "Buy Milk" },
+    { id: 2, name: "Clean Room" }
+  ]);
+ 
+  // 1. Stable Delete Handler
+  // Uses functional update (prev => ...) so 'tasks' is NOT a dependency.
+  // Uses functional update → no dependency needed
+  const deleteTask = useCallback((id) => {
+    setTasks((prevTasks) => prevTasks.filter(t => t.id !== id));
+  }, []);
+ 
+  // 2. Stable Change Handler
+  // Purely updates local text state; no dependencies needed.
+  const oneTaskHandler = useCallback((e) => {
+    setTaskName(e.target.value);
+  }, []);
+ 
+  // 3. Stable Submit Handler
+  // Must depend on 'taskName' because it reads the input value.
+  const submitTask = useCallback((e) => {
+    e.preventDefault();
+    if (!taskName.trim()) return;
+ 
+    setTasks((prevTasks) => [
+      ...prevTasks,
+      { id: Date.now(), name: taskName } // Use Date.now() for unique IDs
+    ]);
+   
+    setTaskName(""); // Clear input
+  }, [taskName]); // Re-creates only when user types
+ 
+  return (
+    &lt;div style={{ family: &#39;sans-serif&#39;, maxWidth: &#39;400px&#39;, margin: &#39;40px auto&#39; }}&gt;
+      &lt;h2&gt;Performance Tracker&lt;/h2&gt;
+      &lt;div style={{ background: &#39;#f4f4f4&#39;, padding: &#39;10px&#39;, borderRadius: &#39;8px&#39; }}&gt;
+        &lt;p&gt;Counter: &lt;strong&gt;{count}&lt;/strong&gt;&lt;/p&gt;
+        &lt;button onClick={() =&gt; setCount(prev =&gt; prev + 1)}&gt;
+          Increment (Watch Console)
+        &lt;/button&gt;
+      &lt;/div&gt;
+ 
+      &lt;hr /&gt;
+ 
+      &lt;h3&gt;Your Tasks&lt;/h3&gt;
+      &lt;ul style={{ listStyle: &#39;none&#39;, padding: 0 }}&gt;
+        {tasks.map(t =&gt; (
+          &lt;TaskItem key={t.id} task={t} onDelete={deleteTask} /&gt;
+        ))}
+      &lt;/ul&gt;
+ 
+      &lt;TaskForm
+        taskName={taskName}
+        oneTaskHandler={oneTaskHandler}
+        submitTask={submitTask}
+      /&gt;
+    &lt;/div&gt;
+  );
+}
+ 
+export default TaskApp;
 `
         },
         {
-          text1: `<a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/" target="_blank">usecallback-guide-use-cases-and-examples</a>`,
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+        {
+      id: 52,
+      title: "React.memo()",
+      note: [
+        {
+          text1: `<b>How to Memoize a React Component</b>
+                    In React, we implement memoization via <b>React.memo()</b>, which is a higher-order component. The React.memo serves as a wrapper for a component and returns a memoized output of that component, which prevents the component or sub-components from unnecessary re-rendering.
+
+There are two ways by which we can use <b>React.memo</b> in our component. We can either use it to wrap the entire component or add it to the part where we export the component.
+In the <b>example : 1 </b> below you will find the first way of using it:
+
+In the syntax above, the <b>newComponent</b> component is wrapped with <b>React.memo()</b>, which creates a memoized version of the component. This memoized version of the component will only re-render if the props passed to it have changed.
+And <b>example : 2 </b>  is the second way you can use <b>React.memo</b>:
+
+The syntax above denotes that we can memoize a component by simply passing it as an argument to React.memo and exporting the result.
+<b>Note</b>: React.memo has nothing to do with React hooks. It is an in-built method in React used to aid the optimization of our React applications. If you prefer using a hook to memoize your component, you can use memo in place of React.memo.
+
+<b>Real Example:3 - Without vs With useCallback</b>
+➡️ React reuses the same function reference until dependencies change.
+➡️ When passed to a React.memo child, the child can truly skip re-rendering. ✅
+
+📌 That’s why they often go together
+<b>React.memo</b> prevents child re-renders if props are the same.
+<b>useCallback</b> ensures function props actually stay the same.
+`,
+          code1: ` // ---------- Ex : 1 --------
+          const newComponent = React.memo((props) => {
+    return (
+      //render with props
+    );
+});
+export default newComponent;
+
+// ----------- Ex : 2 ----------
+const newComponent = (props) => {
+  //render with props
+}
+export default React.memo(newComponent);
+
+
+// ------------- Ex : 3 -------------
+// ❌ Without useCallback (child always re-renders)
+const Parent = () => {
+  const [count, setCount] = useState(0);
+
+  const handleClick = () => console.log("clicked");
+
+  return (
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;+1&lt;/button&gt;
+      &lt;Child onClick={handleClick} /&gt;
+    &lt;/&gt;
+  );
+};
+
+const Child = React.memo(({ onClick }) => {
+  console.log("Child rendered");
+  return &lt;button onClick={onClick}&gt;Click Me&lt;/button&gt;;
+});
+// Every time parent renders, \`handleClick\` is new, so \`Child\` re-renders.
+
+// --------------
+// ✅ With useCallback (child won’t re-render unnecessarily)
+const Parent = () => {
+  const [count, setCount] = useState(0);
+
+  const handleClick = useCallback(() => console.log("clicked"), []);
+
+  return (
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;+1&lt;/button&gt;
+      &lt;Child onClick={handleClick} /&gt;
+    &lt;/&gt;
+  );
+};
+// Now \`Child\` does not re-render when only \`count\` changes.
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+        {
+          text1: ``,
           code1: ``
         },
       ],
@@ -7830,6 +8237,41 @@ const Component = () => {
         },
       ],
     },
+        {
+      id: 52,
+      title: "useEffect vs useLayoutEffect",
+      note: [
+        {
+          text1: `<b>1. useEffect (Async,(non-blocking),  after paint)</b>
+          useEffect runs after the browser has painted the UI.
+          After the <b>browser paints (UI visible to user)</b>
+          <b>When it runs</b>: After the render is committed to the screen.
+<b>Behavior</b>: It is non-blocking. The browser paints the update, and then the effect runs.
+<b>Use Case</b>: 99% of the time. Use this for API calls, event listeners, and state updates that don't affect the visual layout immediately.
+          
+          <b>useLayoutEffect is synchronous (blocking), before paint </b>
+          useLayoutEffect runs BEFORE the browser paints the UI
+          <b>When it runs</b>: After React performs DOM mutations, but before the browser paints the screen.
+<b>Behavior</b>: It is blocking. The browser will wait for this code to finish before it actually shows the user the updated UI.
+<b>Use Case</b>: Use this when you need to measure the DOM (like getting the height of an element) and change the UI based on that measurement before the user sees it.
+
+<b>Preventing "Visual Flickering"</b>
+<b>The Scenario</b>: You have a tooltip that needs to be positioned exactly above a button.
+    <b>With useEffect</b>: 1. React renders the tooltip at a default position (e.g., top: 0).
+    2. The browser paints the tooltip at the top.
+    3. useEffect fires, measures the button's position, and updates the tooltip state.
+    4. React re-renders; the browser paints the tooltip in the correct spot.
+    5. <b>Result</b>: The user sees the tooltip "jump" or "flicker" from the top to the button.
+
+    <b>With useLayoutEffect:</b>
+        React renders the tooltip.
+        <b>useLayoutEffect</b> fires immediately. It measures the button and updates the tooltip position.
+        The browser paints only the final result.
+        <b>Result</b>: A smooth, flicker-free experience.`,
+          code1: ``
+        },
+      ],
+    },
     {
       id: 52,
       title: "useDebugValue",
@@ -7883,98 +8325,7 @@ export default DataComponent;
         }
       ],
     },
-    {
-      id: 52,
-      title: "React.memo()",
-      note: [
-        {
-          text1: `<b>How to Memoize a React Component</b>
-                    In React, we implement memoization via <b>React.memo()</b>, which is a higher-order component. The React.memo serves as a wrapper for a component and returns a memoized output of that component, which prevents the component or sub-components from unnecessary re-rendering.
 
-There are two ways by which we can use <b>React.memo</b> in our component. We can either use it to wrap the entire component or add it to the part where we export the component.
-In the <b>example : 1 </b> below you will find the first way of using it:
-
-In the syntax above, the <b>newComponent</b> component is wrapped with <b>React.memo()</b>, which creates a memoized version of the component. This memoized version of the component will only re-render if the props passed to it have changed.
-And <b>example : 2 </b>  is the second way you can use <b>React.memo</b>:
-
-The syntax above denotes that we can memoize a component by simply passing it as an argument to React.memo and exporting the result.
-<b>Note</b>: React.memo has nothing to do with React hooks. It is an in-built method in React used to aid the optimization of our React applications. If you prefer using a hook to memoize your component, you can use memo in place of React.memo.
-
-<b>Real Example:3 - Without vs With useCallback</b>
-➡️ React reuses the same function reference until dependencies change.
-➡️ When passed to a React.memo child, the child can truly skip re-rendering. ✅
-
-📌 That’s why they often go together
-<b>React.memo</b> prevents child re-renders if props are the same.
-<b>useCallback</b> ensures function props actually stay the same.
-`,
-          code1: ` // ---------- Ex : 1 --------
-          const newComponent = React.memo((props) => {
-    return (
-      //render with props
-    );
-});
-export default newComponent;
-
-// ----------- Ex : 2 ----------
-const newComponent = (props) => {
-  //render with props
-}
-export default React.memo(newComponent);
-
-
-// ------------- Ex : 3 -------------
-// ❌ Without useCallback (child always re-renders)
-const Parent = () => {
-  const [count, setCount] = useState(0);
-
-  const handleClick = () => console.log("clicked");
-
-  return (
-    &lt;&gt;
-      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;+1&lt;/button&gt;
-      &lt;Child onClick={handleClick} /&gt;
-    &lt;/&gt;
-  );
-};
-
-const Child = React.memo(({ onClick }) => {
-  console.log("Child rendered");
-  return &lt;button onClick={onClick}&gt;Click Me&lt;/button&gt;;
-});
-// Every time parent renders, \`handleClick\` is new, so \`Child\` re-renders.
-
-// --------------
-// ✅ With useCallback (child won’t re-render unnecessarily)
-const Parent = () => {
-  const [count, setCount] = useState(0);
-
-  const handleClick = useCallback(() => console.log("clicked"), []);
-
-  return (
-    &lt;&gt;
-      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;+1&lt;/button&gt;
-      &lt;Child onClick={handleClick} /&gt;
-    &lt;/&gt;
-  );
-};
-// Now \`Child\` does not re-render when only \`count\` changes.
-`
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-      ],
-    },
     {
       id: 26,
       title: "What are Custom Hooks?",
