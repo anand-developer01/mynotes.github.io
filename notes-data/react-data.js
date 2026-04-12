@@ -1172,22 +1172,24 @@ export default UncontrolledForm;
           <a href="https://deadsimplechat.com/blog/higher-order-componets-in-react/" target="_blank">higher-order-componets-in-react/</a>
           A higher-order component (HOC) is a function that takes a component and returns a new component. Basically, it's a pattern that is derived from React's compositional nature.
 
-                  We call them pure components because they can accept any dynamically provided child component but they won't modify or copy any behavior from their input components.
+          A Higher-Order Component is a function that takes a component and returns a new component with additional functionality. It is mainly used for reusing component logic like authentication, logging, or loading handling.
 
-                  <b>Benefits of Using Higher-Order Components in React</b>
-                  <b>Reusability</b>: HOCs allow you to reuse component logic across multiple components, which can save time and reduce code duplication.
-                  <b>Flexibility</b>: HOCs can take additional arguments, which allows you to customize the behavior of the HOC. This makes them a flexible way to add functionality to your components.
-                  <b>Separation of concerns</b>: HOCs can help separate concerns in your code by encapsulating certain functionality in a separate component. This can make the code easier to read and maintain.
-                  <b>Composition</b>: HOCs can be composed together to create more complex functionality. This allows you to build up functionality from smaller, reusable pieces.
-                  Higher-order components can be used to implement cross-cutting concerns in your application such as authentication, error handling, logging, performance tracking, and many other features.
+          We call them pure components because they can accept any dynamically provided child component but they won't modify or copy any behavior from their input components.
 
-                  <span style="color:red">const EnhancedComponent = higherOrderComponent (WrappedComponent);</span>
+          <b>Benefits of Using Higher-Order Components in React</b>
+          <b>Reusability</b>: HOCs allow you to reuse component logic across multiple components, which can save time and reduce code duplication.
+          <b>Flexibility</b>: HOCs can take additional arguments, which allows you to customize the behavior of the HOC. This makes them a flexible way to add functionality to your components.
+          <b>Separation of concerns</b>: HOCs can help separate concerns in your code by encapsulating certain functionality in a separate component. This can make the code easier to read and maintain.
+          <b>Composition</b>: HOCs can be composed together to create more complex functionality. This allows you to build up functionality from smaller, reusable pieces.
+          Higher-order components can be used to implement cross-cutting concerns in your application such as authentication, error handling, logging, performance tracking, and many other features.
 
-                  <b>HOC can be used for many use cases</b>:
-                  Code reuse, logic and bootstrap abstraction.
-                  Render hijacking.
-                  State abstraction and manipulation.
-                  Props manipulation.
+          <span style="color:red">const EnhancedComponent = higherOrderComponent (WrappedComponent);</span>
+
+          <b>HOC can be used for many use cases</b>:
+          Code reuse, logic and bootstrap abstraction.
+          Render hijacking.
+          State abstraction and manipulation.
+          Props manipulation.
                   
                   Key Points About HOCs in React:
 HOCs are functions that take a component and return a new component with additional props or behavior. They were commonly used to add cross-cutting concerns like:
@@ -1203,7 +1205,6 @@ HOCs are functions that take a component and return a new component with additio
 <b>Composability</b>: You can combine various HOCs to compose complex functionalities into your components.
 `,
           code1: `//class Component HOC
-          // HOC.js
           // HOC.js
 
 import React, {Component} from 'react';
@@ -1378,78 +1379,82 @@ class UserList extends Component {
 }
 export default UserList;
 
-//-----------------------
-// Ex : 2
-// withCounter.js
-import React from 'react'
-const withCounter = OriginalComponent => {
-	class NewComponent extends React.Component {
-			constructor(props){
-				super(props)
-				this.state = {
-					count : 0
-				}
-			}
-			incrementCount = () => {
-				this.setState(prevState => {return {count : prevState.count + 1}})
-			}
-		render() {
-			return &lt;OriginalComponent count = {this.state.count} incrementCount = {this.incrementCount}/&gt;
-		}
-	}
-	return NewComponent
-}
-export default withCounter
-
-// ClickCounter.js
-import React, { Component } from 'react'
-import withCounter from './withCounter'
-class ClickCounter extends Component {
-
-	render() {
-		const { count, incrementCount } = this.props
-		return (
-			&lt;div&gt;
-				&lt;button onClick={incrementCount}&gt; click - {count}&lt;/button&gt;
-			&lt;/div&gt;
-		)
-	}
-
-}
-export default withCounter(ClickCounter)
-
-// HoverCounter.js
-import React, { Component } from 'react'
-import withCounter from './withCounter'
-class HoverCounter extends Component{
-	constructor(props){
-		super(props)
-		this.state = {
-			count : 0
-		}
-	}
-
-	incrementCount = () => {
-		this.setState(prevState => {return {count : prevState.count + 1}})
-	}
-
-	render(){
-		const { count, incrementCount } = this.props
-		return(
-			&lt;div&gt;
-			&lt;h3 onMouseOver = { incrementCount }&gt; click - { count }&lt;/h3&gt;
-		&lt;/div&gt;
-			)
-	}
-
-}
-export default withCounter(HoverCounter)
-
 
 
 //===============================
 //Functional HOC
 //================================
+//------------------- Ex : 2 --------------
+//HOC.jsx
+import React, { useState } from 'react';
+const HOC = (HocComp) => {
+
+    return function EnhancedComponent() {
+        const [count, setCount] = useState(1)
+        const incrementCount = () => {
+            setCount(prev => prev + 1)
+        }
+
+        return (
+            <>
+                &lt;HocComp incrementCount={incrementCount} count={count} /&gt;
+            </>
+        )
+    }
+}
+
+export default HOC
+
+
+// --------- ButtonCounter.jsx ------
+import React from 'react';
+import HOC from './HOC'
+const ButtonCounter = ({incrementCount, count}) => {
+    return (
+        <>
+            &lt;button onClick={() =&gt; incrementCount()}&gt;{count}&lt;/button&gt;
+        </>
+    )
+}
+export default HOC(ButtonCounter)
+
+
+// --------- HoverCounter.jsx ------
+import React from 'react';
+import HOC from './HOC'
+const HoverCounter = ({incrementCount, count}) => {
+    return (
+        <>
+            &lt;button onMouseOver={() =&gt; incrementCount()}&gt;{count} Hover &lt;/button&gt;
+        </>
+    )
+}
+export default HOC(HoverCounter)
+
+// --------- HocApp.jsx ------
+import React from 'react';
+import ButtonCounter from './ButtonCounter.jsx'
+import HoverCounter from './HoverCounter.jsx'
+
+const HocApp = ({incrementCount, count}) => {
+
+    return (
+        <>
+            &lt;ButtonCounter /&gt;
+            &lt;HoverCounter/&gt;
+        </>
+    )
+}
+
+export default HocApp
+
+
+
+
+
+
+
+
 //FuncrionalHoc.js
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios'
@@ -1592,80 +1597,119 @@ export default App;
 
 
 //------------ Ex : 2 ------------
-//--------- Fetch API search input --------
-import React, { useState, useEffect, useRef, useCallback } from &#39;react&#39;;
+import React, { useState, useEffect } from "react";
 
-// Custom hook to debounce search input
-const useDebounce = (value, delay) =&gt; {
+
+// --------------------
+// Debounce Hook
+// --------------------
+const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
-  useEffect(() =&gt; {
-    const handler = setTimeout(() =&gt; {
+  useEffect(() => {
+    const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
 
-    return () =&gt; clearTimeout(handler);
+    return () => clearTimeout(handler);
   }, [value, delay]);
 
   return debouncedValue;
 };
 
-const withAuth = (WrappedComponent, httpComp) =&gt; {
-  return function (props) {
+
+// --------------------
+// HOC
+// --------------------
+const withApiData = (WrappedComponent, httpComp) => {
+  return function EnhancedComponent() {
+    const [searchInput, setSearchInput] = useState("");
+    const [allData, setAllData] = useState([]);
     const [apiData, setApiData] = useState([]);
-    const prevSearchRef = useRef(); // Track previous search input value
-    const debouncedSearchInput = useDebounce(props.searchInput, 300); // Debounced search input
 
-    const callApi = useCallback(async () =&gt; {
-      try {
-        const apiD = await httpComp();
-        let filteredData = apiD;
+    const debouncedSearchInput = useDebounce(searchInput, 300);
 
-        if (debouncedSearchInput) {
-          filteredData = apiD.filter(f =&gt;
-            f.title.toLowerCase().includes(debouncedSearchInput.toLowerCase())
-          );
+    // API call once
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const data = await httpComp();
+          setAllData(data);
+          setApiData(data);
+        } catch (err) {
+          console.log(err);
         }
-        setApiData(filteredData);
-      } catch (err) {
-        console.log(err);
-      }
-    }, [debouncedSearchInput, httpComp]);
+      };
 
-    useEffect(() =&gt; {
-      if (debouncedSearchInput !== prevSearchRef.current) {
-        // Only call the API if the search input has actually changed
-        callApi();
-        prevSearchRef.current = debouncedSearchInput; // Update the previous search value
-      }
-    }, [debouncedSearchInput, callApi]);
+      fetchData();
+    }, []);
 
-    return &lt;WrappedComponent {...props} apiData={apiData} /&gt;;
+    // Filter data
+    useEffect(() => {
+      if (debouncedSearchInput) {
+        const filtered = allData.filter(item =>
+          item.title.toLowerCase().includes(debouncedSearchInput.toLowerCase())
+        );
+        setApiData(filtered);
+      } else {
+        setApiData(allData);
+      }
+    }, [debouncedSearchInput, allData]);
+
+    return (
+      <>
+        {/* 🔥 SEARCH INPUT ADDED HERE */}
+        <input
+          type="text"
+          placeholder="Search posts..."
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          style={{ padding: "8px", marginBottom: "10px", width: "300px" }}
+        />
+
+        <WrappedComponent apiData={apiData} />
+      </>
+    );
   };
 };
 
-// Sample API fetch function
-const httpComp = async () =&gt; {
-  const apiRes = await fetch(&#39;https://jsonplaceholder.typicode.com/posts&#39;);
-  return await apiRes.json();
+
+// --------------------
+// API CALL
+// --------------------
+const httpComp = async () => {
+  console.log("API Called");
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  return await res.json();
 };
 
-// Component to display API data
-const showApiData = ({ apiData }) =&gt; {
+
+// --------------------
+// UI Component
+// --------------------
+const ShowApiData = ({ apiData }) => {
   return (
-    &lt;div&gt;
-      {apiData.length ? (
-        apiData.map((item) =&gt; &lt;div key={item.id}&gt;{item.title}&lt;/div&gt;)
+    <div>
+      {apiData.length > 0 ? (
+        apiData.map((item) => (
+          <div key={item.id} style={{ padding: "5px", borderBottom: "1px solid #ccc" }}>
+            {item.title}
+          </div>
+        ))
       ) : (
-        &lt;p&gt;No data available&lt;/p&gt;
+        <p>No data found</p>
       )}
-    &lt;/div&gt;
+    </div>
   );
 };
 
-// Export the HOC with the showApiData component
-export const ReturnHOCInputCom = withAuth(showApiData, httpComp);
 
+// --------------------
+// Export
+// --------------------
+const ReturnHOCInputCom = withApiData(ShowApiData, httpComp);
+
+export default ReturnHOCInputCom;
 
 `
         },
