@@ -24,6 +24,26 @@ const reactData = {
     //   ]
     // },
     {
+      id: 5,
+      title: "new topic",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: "new topic",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
       id: 2,
       title: "intro",
       note: [
@@ -44,6 +64,64 @@ react-scripts start sets up the development environment and starts a server, as 
           text1: `Data binding is a concept in web development that establishes a connection between the data in an application and the user interface (UI) elements that display that data. The purpose of data binding is to ensure that changes in one part of the application are automatically reflected in another part, creating synchronization between the data and the UI.
           
           react-scripts is a library that is automatically installed when you create a new React application using the create-react-app tool. It contains the configuration and scripts necessary to build, test, and run a React app. This library abstracts away the complexity of setting up a React development environment, so developers can focus on writing code without worrying about configuration for tools like Webpack, Babel, ESLint, Jest, and others.`,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: "React's execution flow",
+      note: [
+        {
+          text1: `<b>1. The Trigger Phase</b>
+The process starts when a component needs to update. This is triggered in two scenarios:
+    <b>Initial Render</b>: When the application starts (e.g., <b>root.render()</b>).
+      -> Browser loads your app (index.html)
+      -> React entry point runs:
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+      -> React starts rendering the root component (App)
+      -> Component Function Executes
+function App() {
+  return &lt;h1&gt;Hello&lt;/h1&gt;
+}
+React calls the function
+This is called the Render Phase (calculation phase)
+
+---> <b>JSX → JavaScript (createElement)</b>
+&lt;h1&gt;Hello&lt;/h1&gt
+becomes:
+React.createElement("h1", null, "Hello");
+👉 React creates Virtual DOM objects
+--- > <b>Virtual DOM Created</b>
+React builds a tree like:
+App
+ └── h1
+      └── "Hello"
+
+    <b>State Updates</b>: When <b>useState</b> or <b>useReducer</b> is called, React schedules a re-render.
+
+    <b>2. The Render Phase (Internal Logic)</b>
+This is where React does the "heavy lifting" without actually touching the screen yet.
+    <b>Component Execution</b>: React calls your function component. It generates a tree of JavaScript objects known as the <b>Virtual DOM</b>.
+    <b>Diffing (Reconciliation)</b>: * React compares the new Virtual DOM tree with the previous one.
+        It uses a sophisticated algorithm (Fiber) to identify exactly what changed (e.g., a text string updated or a new list item was added).
+        ---> Diffing (Reconciliation)
+        If it's first render → no comparison
+        If update → React compares:
+        Old Virtual DOM
+        New Virtual DOM
+        👉 Finds what changed
+    <b>Result</b>: React produces a list of "effects" or changes that need to be made to the UI.
+
+    <b>3. The Commit Phase (Updating the DOM)</b>
+Once React knows exactly what changed, it applies those changes to the browser's DOM.
+    Initial Render: React uses the <b>appendChild()</b> DOM API to put all nodes on the screen.
+    Updates: React applies the minimum necessary operations (like <b>setAttribute()</b> or <b>textContent = "new"</b>) to make the browser DOM match the latest Virtual DOM.
+    React updates only changed elements in real DOM
+
+    <b>4. The Browser Painting</b>
+After the Commit phase is finished and the browser DOM has been updated, the browser re-paints the screen. Only at this point does the user see the change.
+`,
           code1: ``
         }
       ]
@@ -614,30 +692,6 @@ While we will separate the production and development specific bits out, note th
           text1: ``,
           code1: ``
         },
-        {
-          text1: ``,
-          code1: ``
-        },
-      ]
-    },
-    {
-      id: 5,
-      title: "new topic",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 5,
-      title: "new topic",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
       ]
     },
     {
@@ -1172,7 +1226,7 @@ export default UncontrolledForm;
           <a href="https://deadsimplechat.com/blog/higher-order-componets-in-react/" target="_blank">higher-order-componets-in-react/</a>
           A higher-order component (HOC) is a function that takes a component and returns a new component. Basically, it's a pattern that is derived from React's compositional nature.
 
-          A Higher-Order Component is a function that takes a component and returns a new component with additional functionality. It is mainly used for reusing component logic like authentication, logging, or loading handling.
+          A Higher-Order Component is a function that takes a component and returns a new component with additional functionality(enhanced behavior). It is mainly used for reusing component logic like authentication, logging, or loading handling.
 
           We call them pure components because they can accept any dynamically provided child component but they won't modify or copy any behavior from their input components.
 
@@ -1203,6 +1257,12 @@ HOCs are functions that take a component and return a new component with additio
 <b>Separation of Concerns</b>: HOCs help maintain separate responsibilities, enabling your components to focus on their specific tasks.
 <b>Code Abstraction</b>: HOCs abstract common logic from components, making them more concise and easier to understand.
 <b>Composability</b>: You can combine various HOCs to compose complex functionalities into your components.
+
+
+<b> Example programs </b>
+<a href="https://github.com/anand-developer01/react-js-programs/blob/main/HOC/HOC-props-to-newComponent.md" target="_blank"> React HOC Props Enhancement Example </a>
+<a href="https://github.com/anand-developer01/react-js-programs/blob/main/HOC/HOC-Debounced-Searchable-Data-Fetching.jsx" target="_blank"> HOC-Debounced-Searchable-Data-Fetching </a>
+
 `,
           code1: `//class Component HOC
           // HOC.js
@@ -1599,7 +1659,6 @@ export default App;
 //------------ Ex : 2 ------------
 import React, { useState, useEffect } from "react";
 
-
 // --------------------
 // Debounce Hook
 // --------------------
@@ -1659,16 +1718,16 @@ const withApiData = (WrappedComponent, httpComp) => {
     return (
       <>
         {/* 🔥 SEARCH INPUT ADDED HERE */}
-        <input
-          type="text"
-          placeholder="Search posts..."
+        &lt;input
+          type=&quot;text&quot;
+          placeholder=&quot;Search posts...&quot;
           value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          style={{ padding: "8px", marginBottom: "10px", width: "300px" }}
-        />
+          onChange={(e) =&gt; setSearchInput(e.target.value)}
+          style={{ padding: &quot;8px&quot;, marginBottom: &quot;10px&quot;, width: &quot;300px&quot; }}
+        /&gt;
 
-        <WrappedComponent apiData={apiData} />
-      </>
+        &lt;WrappedComponent apiData={apiData} /&gt;
+      &lt;/&gt;
     );
   };
 };
@@ -1689,17 +1748,17 @@ const httpComp = async () => {
 // --------------------
 const ShowApiData = ({ apiData }) => {
   return (
-    <div>
-      {apiData.length > 0 ? (
-        apiData.map((item) => (
-          <div key={item.id} style={{ padding: "5px", borderBottom: "1px solid #ccc" }}>
+    &lt;div&gt;
+      {apiData.length &gt; 0 ? (
+        apiData.map((item) =&gt; (
+          &lt;div key={item.id} style={{ padding: &quot;5px&quot;, borderBottom: &quot;1px solid #ccc&quot; }}&gt;
             {item.title}
-          </div>
+          &lt;/div&gt;
         ))
       ) : (
-        <p>No data found</p>
+        &lt;p&gt;No data found&lt;/p&gt;
       )}
-    </div>
+    &lt;/div&gt;
   );
 };
 
@@ -4398,7 +4457,7 @@ export default App
         },
       ],
     },
-        {
+    {
       id: 52,
       title: "custom hook",
       note: [
@@ -6514,7 +6573,7 @@ function Task({ task }) {
         },
       ],
     },
-        {
+    {
       id: 52,
       title: "useContext vs Redux",
       note: [
@@ -7209,195 +7268,195 @@ function ProductPage({ productId, referrer, theme }) {
 }
   `
         },
-//         {
-//           text1: `<b>In JavaScript, a function () {} or () => {} always creates a different function</b>, similar to how the {} object literal always creates a new object. Normally, this wouldn't be a problem, but it means that <b>ShippingForm</b> props will never be the same, and your memo optimization won't work. This is where <b>useCallback</b> comes in handy:
+        //         {
+        //           text1: `<b>In JavaScript, a function () {} or () => {} always creates a different function</b>, similar to how the {} object literal always creates a new object. Normally, this wouldn't be a problem, but it means that <b>ShippingForm</b> props will never be the same, and your memo optimization won't work. This is where <b>useCallback</b> comes in handy:
 
-//                     As <b>{}</b> notation creates a new Object, the function notation like <b> function () {} or () => {} </b> creates a new function
+        //                     As <b>{}</b> notation creates a new Object, the function notation like <b> function () {} or () => {} </b> creates a new function
 
-// Normally this isn't an issue but creating new function on every re render defeats the purpose of caching
-                    
-//                     <b>By wrapping "handleSubmit" in "useCallback", you ensure that it's the same function between the re-renders</b> (until dependencies change). You don't have to wrap a function in <b>useCallback</b> unless you do it for some specific reason. In this example, the reason is that you pass it to a component wrapped in memo, and this lets it skip re-rendering. There are other reasons you might need <b>useCallback</b> which are described further on this page.
-// Note:-
-// <b>You should only rely on <u>useCallback</u> as a performance optimization</b>. If your code doesn't work without it, find the underlying problem and fix it first. Then you may add useCallback back.
+        // Normally this isn't an issue but creating new function on every re render defeats the purpose of caching
 
-// <b>useCallback caches the function itself</b>. Unlike <b>useMemo</b>, it does not call the function you provide. Instead, it caches the function you provided so that <b>handleSubmit</b> itself doesn't change unless <b>productId</b> or <b>referrer</b> has changed. This lets you pass the <b>handleSubmit</b> function down without unnecessarily re-rendering <b>ShippingForm</b>. Your code won't run until the user submits the form.
-//                     `,
-//           code1: `function ProductPage({ productId, referrer, theme }) {
-//   // Tell React to cache your function between re-renders...
-//   const handleSubmit = useCallback((orderDetails) => {
-//     post('/product/' + productId + '/buy', {
-//       referrer,
-//       orderDetails,
-//     });
-//   }, [productId, referrer]); // ...so as long as these dependencies don't change...
+        //                     <b>By wrapping "handleSubmit" in "useCallback", you ensure that it's the same function between the re-renders</b> (until dependencies change). You don't have to wrap a function in <b>useCallback</b> unless you do it for some specific reason. In this example, the reason is that you pass it to a component wrapped in memo, and this lets it skip re-rendering. There are other reasons you might need <b>useCallback</b> which are described further on this page.
+        // Note:-
+        // <b>You should only rely on <u>useCallback</u> as a performance optimization</b>. If your code doesn't work without it, find the underlying problem and fix it first. Then you may add useCallback back.
 
-//   return (
-//     &lt;div className={theme}&gt;
-//       {/* ...ShippingForm will receive the same props and can skip re-rendering */}
-//       &lt;ShippingForm onSubmit={handleSubmit} /&gt;
-//     &lt;/div&gt;
-//   );
-// }`
-//         },
+        // <b>useCallback caches the function itself</b>. Unlike <b>useMemo</b>, it does not call the function you provide. Instead, it caches the function you provided so that <b>handleSubmit</b> itself doesn't change unless <b>productId</b> or <b>referrer</b> has changed. This lets you pass the <b>handleSubmit</b> function down without unnecessarily re-rendering <b>ShippingForm</b>. Your code won't run until the user submits the form.
+        //                     `,
+        //           code1: `function ProductPage({ productId, referrer, theme }) {
+        //   // Tell React to cache your function between re-renders...
+        //   const handleSubmit = useCallback((orderDetails) => {
+        //     post('/product/' + productId + '/buy', {
+        //       referrer,
+        //       orderDetails,
+        //     });
+        //   }, [productId, referrer]); // ...so as long as these dependencies don't change...
 
-//         {
-//           text1: `To prevent unnecessary expensive list re-renderings, you wrap it into <b>React.memo()</b>.
-// The parent component <b> &lt;ParentComponent&gt; </b> provides a handler function to the child component <b>&lt;MyList&gt;</b>:`,
-//           code1: `// MyList.js
-//                     import React,{ useEffect } from 'react';
+        //   return (
+        //     &lt;div className={theme}&gt;
+        //       {/* ...ShippingForm will receive the same props and can skip re-rendering */}
+        //       &lt;ShippingForm onSubmit={handleSubmit} /&gt;
+        //     &lt;/div&gt;
+        //   );
+        // }`
+        //         },
 
-// function MyList({ handler, changeDep }) {
-//     const items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-//     useEffect(() => {
-//       console.log("Child Component redered");
-//     }, []);
-//     console.log("Child render----");
-//     return (
-//         &lt;&gt;
-//         {items.map((item, index) =&gt; {
-//           return (
-//             &lt;div key={index} onClick={handler}&gt;
-//               {item}
-//             &lt;/div&gt;
-//           );
-//         })}
-//       &lt;/&gt;
-//     );
-//   }
-  
-//   export default React.memo(MyList);
+        //         {
+        //           text1: `To prevent unnecessary expensive list re-renderings, you wrap it into <b>React.memo()</b>.
+        // The parent component <b> &lt;ParentComponent&gt; </b> provides a handler function to the child component <b>&lt;MyList&gt;</b>:`,
+        //           code1: `// MyList.js
+        //                     import React,{ useEffect } from 'react';
 
-//   //---------
-// // ParentComponent.js
+        // function MyList({ handler, changeDep }) {
+        //     const items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        //     useEffect(() => {
+        //       console.log("Child Component redered");
+        //     }, []);
+        //     console.log("Child render----");
+        //     return (
+        //         &lt;&gt;
+        //         {items.map((item, index) =&gt; {
+        //           return (
+        //             &lt;div key={index} onClick={handler}&gt;
+        //               {item}
+        //             &lt;/div&gt;
+        //           );
+        //         })}
+        //       &lt;/&gt;
+        //     );
+        //   }
 
-//   import React, { useState, useCallback, useEffect } from 'react';
-// import MyList from './MyList';
+        //   export default React.memo(MyList);
 
-// export default function ParentComponent() {
-//     const [state, setState] = useState(false);
-//     const [dep, setDep] = useState(0);
-//     // console.log("Parent Component redered");
+        //   //---------
+        // // ParentComponent.js
 
-//     const increment = () => {
-//         setDep(e => e + 1)
-//     }
+        //   import React, { useState, useCallback, useEffect } from 'react';
+        // import MyList from './MyList';
 
-//     // const handler = (event) => {
-//     //     console.log("You clicked ", event.currentTarget);
-//     // }
-//     const handler = useCallback(
-//         (event) => {
-//             console.log("You clicked ", event.currentTarget);
-//         },
-//         // eslint-disable-next-line react-hooks/exhaustive-deps
-//         [dep]);
+        // export default function ParentComponent() {
+        //     const [state, setState] = useState(false);
+        //     const [dep, setDep] = useState(0);
+        //     // console.log("Parent Component redered");
 
-//     const statehanddler = () => {
-//         setState(!state);
-//     };
+        //     const increment = () => {
+        //         setDep(e => e + 1)
+        //     }
 
-//     return (
-//         &lt;&gt;
-//             &lt;button onClick={statehanddler}&gt;Change State Of Parent Component&lt;/button&gt;
-//             &lt;button onClick={increment}&gt;increment&lt;/button&gt;
-//             {dep}
-//             &lt;MyList handler={handler} /&gt;
-//         &lt;/&gt;
-//     );
-// } 
-    
+        //     // const handler = (event) => {
+        //     //     console.log("You clicked ", event.currentTarget);
+        //     // }
+        //     const handler = useCallback(
+        //         (event) => {
+        //             console.log("You clicked ", event.currentTarget);
+        //         },
+        //         // eslint-disable-next-line react-hooks/exhaustive-deps
+        //         [dep]);
 
-// //------------
+        //     const statehanddler = () => {
+        //         setState(!state);
+        //     };
+
+        //     return (
+        //         &lt;&gt;
+        //             &lt;button onClick={statehanddler}&gt;Change State Of Parent Component&lt;/button&gt;
+        //             &lt;button onClick={increment}&gt;increment&lt;/button&gt;
+        //             {dep}
+        //             &lt;MyList handler={handler} /&gt;
+        //         &lt;/&gt;
+        //     );
+        // } 
 
 
-// import React, { useState, useCallback } from 'react';
+        // //------------
 
-// // Main Task Manager Component
-// const TaskManager = () => {
-//   const [tasks, setTasks] = useState([]);
-//   const [taskInput, setTaskInput] = useState('');
-//   const [filter, setFilter] = useState('all'); // 'all', 'active', 'completed'
 
-//   // Add a new task
-//   const addTask = useCallback(() => {
-//     if (taskInput.trim()) {
-//       setTasks(prevTasks => [...prevTasks, { text: taskInput, completed: false }]);
-//       setTaskInput('');
-//     }
-//   }, [taskInput]);
+        // import React, { useState, useCallback } from 'react';
 
-//   // Toggle task completion
-//   const toggleTaskCompletion = useCallback((index) => {
-//     setTasks(prevTasks =>
-//       prevTasks.map((task, i) =>
-//         i === index ? { ...task, completed: !task.completed } : task
-//       )
-//     );
-//   }, []);
+        // // Main Task Manager Component
+        // const TaskManager = () => {
+        //   const [tasks, setTasks] = useState([]);
+        //   const [taskInput, setTaskInput] = useState('');
+        //   const [filter, setFilter] = useState('all'); // 'all', 'active', 'completed'
 
-//   // Filter tasks based on the selected filter
-//   const filteredTasks = useCallback(() => {
-//     switch (filter) {
-//       case 'completed':
-//         return tasks.filter(task => task.completed);
-//       case 'active':
-//         return tasks.filter(task => !task.completed);
-//       default:
-//         return tasks;
-//     }
-//   }, [tasks, filter]);
+        //   // Add a new task
+        //   const addTask = useCallback(() => {
+        //     if (taskInput.trim()) {
+        //       setTasks(prevTasks => [...prevTasks, { text: taskInput, completed: false }]);
+        //       setTaskInput('');
+        //     }
+        //   }, [taskInput]);
 
-//   return (
-//     &lt;div&gt;
-//       &lt;h1&gt;Task Manager&lt;/h1&gt;
-//       &lt;input
-//         type=&quot;text&quot;
-//         value={taskInput}
-//         onChange={(e) =&gt; setTaskInput(e.target.value)}
-//         placeholder=&quot;Add a new task...&quot;
-//       /&gt;
-//       &lt;button onClick={addTask}&gt;Add Task&lt;/button&gt;
+        //   // Toggle task completion
+        //   const toggleTaskCompletion = useCallback((index) => {
+        //     setTasks(prevTasks =>
+        //       prevTasks.map((task, i) =>
+        //         i === index ? { ...task, completed: !task.completed } : task
+        //       )
+        //     );
+        //   }, []);
 
-//       &lt;div&gt;
-//         &lt;button onClick={() =&gt; setFilter(&#39;all&#39;)}&gt;All&lt;/button&gt;
-//         &lt;button onClick={() =&gt; setFilter(&#39;active&#39;)}&gt;Active&lt;/button&gt;
-//         &lt;button onClick={() =&gt; setFilter(&#39;completed&#39;)}&gt;Completed&lt;/button&gt;
-//       &lt;/div&gt;
+        //   // Filter tasks based on the selected filter
+        //   const filteredTasks = useCallback(() => {
+        //     switch (filter) {
+        //       case 'completed':
+        //         return tasks.filter(task => task.completed);
+        //       case 'active':
+        //         return tasks.filter(task => !task.completed);
+        //       default:
+        //         return tasks;
+        //     }
+        //   }, [tasks, filter]);
 
-//       &lt;ul&gt;
-//         {filteredTasks().map((task, index) =&gt; (
-//           &lt;TaskItem
-//             key={index}
-//             task={task}
-//             onToggle={() =&gt; toggleTaskCompletion(index)}
-//           /&gt;
-//         ))}
-//       &lt;/ul&gt;
-//     &lt;/div&gt;
-//   );
-// };
+        //   return (
+        //     &lt;div&gt;
+        //       &lt;h1&gt;Task Manager&lt;/h1&gt;
+        //       &lt;input
+        //         type=&quot;text&quot;
+        //         value={taskInput}
+        //         onChange={(e) =&gt; setTaskInput(e.target.value)}
+        //         placeholder=&quot;Add a new task...&quot;
+        //       /&gt;
+        //       &lt;button onClick={addTask}&gt;Add Task&lt;/button&gt;
 
-// // Task Item Component
-// const TaskItem = React.memo(({ task, onToggle }) => {
-//   console.log(\`Rendering: \${task.text}\`);
-//   return (
-//     &lt;li onClick={onToggle} style={{ textDecoration: task.completed ? &#39;line-through&#39; : &#39;none&#39; }}&gt;
-//       {task.text}
-//     &lt;/li&gt;
-//   );
-// });
+        //       &lt;div&gt;
+        //         &lt;button onClick={() =&gt; setFilter(&#39;all&#39;)}&gt;All&lt;/button&gt;
+        //         &lt;button onClick={() =&gt; setFilter(&#39;active&#39;)}&gt;Active&lt;/button&gt;
+        //         &lt;button onClick={() =&gt; setFilter(&#39;completed&#39;)}&gt;Completed&lt;/button&gt;
+        //       &lt;/div&gt;
 
-// export default TaskManager;
+        //       &lt;ul&gt;
+        //         {filteredTasks().map((task, index) =&gt; (
+        //           &lt;TaskItem
+        //             key={index}
+        //             task={task}
+        //             onToggle={() =&gt; toggleTaskCompletion(index)}
+        //           /&gt;
+        //         ))}
+        //       &lt;/ul&gt;
+        //     &lt;/div&gt;
+        //   );
+        // };
 
-// `
-//         },
+        // // Task Item Component
+        // const TaskItem = React.memo(({ task, onToggle }) => {
+        //   console.log(\`Rendering: \${task.text}\`);
+        //   return (
+        //     &lt;li onClick={onToggle} style={{ textDecoration: task.completed ? &#39;line-through&#39; : &#39;none&#39; }}&gt;
+        //       {task.text}
+        //     &lt;/li&gt;
+        //   );
+        // });
+
+        // export default TaskManager;
+
+        // `
+        //         },
         {
           text1: `<a href="https://deadsimplechat.com/blog/usecallback-guide-use-cases-and-examples/" target="_blank">usecallback-guide-use-cases-and-examples</a>`,
           code1: ``
         },
       ],
     },
-        {
+    {
       id: 52,
       title: "React.memo() with useCallback",
       note: [
@@ -7783,7 +7842,7 @@ export default TaskApp;
         },
       ],
     },
-        {
+    {
       id: 52,
       title: "React.memo()",
       note: [
@@ -8281,7 +8340,7 @@ const Component = () => {
         },
       ],
     },
-        {
+    {
       id: 52,
       title: "useEffect vs useLayoutEffect",
       note: [
