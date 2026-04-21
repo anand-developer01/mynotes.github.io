@@ -8271,6 +8271,8 @@ You buy grocery from the store <b>→ then</b> prepare pasta <b>→ then</b> ser
           The Promise.all() static method takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises fulfill (including when an empty iterable is passed), with an array of the fulfillment values. It rejects when any of the input's promises rejects, with this first rejection reason.
           
           One of the most amazing things about working with Javascript is its concurrency. Meaning it can run your code in parallel instead of waiting for each Promise to finish before moving starting the next. Commonly referred to as "forking".
+
+          <b>Promise.all is a method used to execute multiple promises in parallel and wait until all of them are completed. It returns a single promise that resolves with an array of results, or rejects immediately if any one promise fails.</b>
           
           <b>Promise.all() Method</b>
 👉 The <u>Promise.all()</u> method accepts an iterable Object, such as an Array of promises as an input and returns a single promise that resolves to a result array of the input promises.

@@ -236,13 +236,33 @@ console.log(remDups)
                     Reason:</strong> Replacing <code>:)</code> with <code>:(</code> in <code>":) :) :) All smiles here :)"</code> results <code>":( :( :( All smiles here :("</code>.`,
           code1: `input = ":) :) :) All smiles here :)"
 function replaceSmiley(input) {
-    return input.replace(/:\)/g, ":(" );
+    return input.replace(/:\\)/g, ":(" );
 }
 console.log(replaceSmiley(input))
 // Output : :( :( :( All smiles here :(
 `
         }
       ]
+    },
+    {
+      id: 52,
+      title: "Every 3rd index (0-based or 1-based?) you want to replace with 'All'",
+      note: [
+        {
+          text1: ``,
+          code1: `const ar = [12, 3, 5, 45, 3, 45, 8, 9, 5];
+
+for (let i = 0; i < ar.length; i++) {
+    if ((i + 1) % 3 === 0) {
+        ar[i] = "All";
+    }
+}
+
+console.log(ar);
+// [12, 3, "All", 45, 3, "All", 8, 9, "All"]
+`
+        }
+      ],
     },
     {
       id: 1,
@@ -350,6 +370,102 @@ console.log(moveZerosToEnd(arr));  // Output: [10, 5, 20, 12, 0, 0, 0]
 `
         }
       ]
+    },
+    {
+      id: 52,
+      title: "Write a function to move all zeros in an array to the first.",
+      note: [
+        {
+          text1: ``,
+          code1: `const ar = [6,8,0,7,4,0,6,4,0,6];
+
+                  function moveZerosToEnd(arr) {
+                      let indexPos = ar.length - 1
+                      for(let i = ar.length - 1; i >= 0; i--){
+                          if(arr[i] !== 0){
+                              arr[indexPos] = arr[i]
+                              if(indexPos !== i){
+                                  arr[i] = 0
+                              }
+                              indexPos--
+                          }
+                      }
+                      return arr
+                  }
+                  console.log(moveZerosToEnd(ar))
+`
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "move all even numbers to the front",
+      note: [
+        {
+          text1: ``,
+          code1: `const arr = [2,6,9,8,3,6,1,5,4,7,8,9,6,52,51,95,91];
+
+let newInd = 0;
+
+for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
+        // swap
+        [arr[newInd], arr[i]] = [arr[i], arr[newInd]];
+        newInd++;
+    }
+}
+
+console.log(arr);
+
+Output:
+// Output (evens first, order not guaranteed)
+// [2, 6, 8, 6, 4, 8, 6, 52, ...rest odds]
+
+// ------------------------------------------
+
+// Maintain order (stable)
+//Use shifting instead of swap:
+const arr = [2,6,9,8,3,6,1,5,4,7,8,9,6,52,51,95,91];
+
+let newInd = 0;
+
+for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
+        let temp = arr[i];
+
+        for (let j = i; j > newInd; j--) {
+            arr[j] = arr[j - 1];
+        }
+
+        arr[newInd] = temp;
+        newInd++;
+    }
+}
+
+console.log(arr);
+`
+        },
+      ],
+    },
+        {
+      id: 52,
+      title: "Move all negative numbers to the left and positive numbers to the right",
+      note: [
+        {
+          text1: ``,
+          code1: `// ---------------- partition (two-pointer) approach - (in-place swapping) ---------
+          const arr = [-2,6,-9,8,3,6,-1,5,-4,7,-8,9,6,-52,51,-95,91]
+let newInd = 0
+for(let i = 0; i < arr.length; i++){
+    if(arr[i] < 0){
+        [arr[newInd], arr[i]] = [arr[i], arr[newInd]]
+        newInd++;
+    } 
+}
+
+console.log(arr)`
+        },
+      ],
     },
     {
       id: 1,
@@ -2137,46 +2253,6 @@ console.log(map(arr3, fn3)); // Output: [42, 42, 42]
     },
     {
       id: 1,
-      title: "JavaScript Event Loop",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "JavaScript Event Loop",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "JavaScript Event Loop",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "JavaScript Event Loop",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
       section: "Promises and Time",
       title: "Add Two Promises",
       note: [
@@ -2510,16 +2586,6 @@ Cancelled at 180ms
     },
     {
       id: 1,
-      title: "JavaScript Event Loop",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
       title: "Promise Time Limit",
       note: [
         {
@@ -2822,26 +2888,6 @@ TestPromise().then(e => console.log(e));
 ssss().then(e => console.log(e));
 `
         },
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "JavaScript Event Loop",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "JavaScript Event Loop",
-      note: [
         {
           text1: ``,
           code1: ``
@@ -3303,16 +3349,6 @@ fnName is one of "sum", "factorial" and "fib"`,
           text1: ``,
           code1: ``
         },
-      ]
-    },
-    {
-      id: 1,
-      title: "JavaScript Event Loop",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
       ]
     },
   ]

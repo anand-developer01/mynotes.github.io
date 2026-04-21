@@ -2020,5 +2020,47 @@ app.use(cors());`,
         }
       ]
     },
+        {
+      id: 1,
+      section: 'Event Loop',
+      title: "Event Loop",
+      note: [
+        {
+          text1: `The Event Loop is a fundamental mechanism in Node.js that enables <b>non-blocking, asynchronous I/O operations</b>. Despite JavaScript being single-threaded, the Event Loop allows Node to offload tasks to the system kernel or a thread pool, allowing it to handle thousands of concurrent connections efficiently without waiting for any single task to finish
+          
+          
+          <b>1. The Single-Threaded Nature</b>
+Explain that while the Event Loop itself runs on a single thread (the Main Thread), Node.js uses the Libuv library to handle expensive tasks (like file system access or networking) in the background.
+
+<b>2. Phase-Based Execution</b>
+Mention that the loop operates in specific phases. A great "senior-level" detail is knowing the difference between setImmediate() and setTimeout():
+    <b>setImmediate()</b>: Designed to execute once the current Poll phase completes (in the Check phase).
+    <b>setTimeout()</b>: Executes after a minimum threshold of time has passed (in the Timers phase).
+
+<b>3. Microtasks vs. Macrotasks</b>
+This is often where candidates get tripped up. Explain that Microtasks (like <b>process.nextTick()</b> and <b>Promises</b>) are executed immediately after the current operation, before the loop moves to the next phase. Macrotasks (like <b>setTimeout</b> or I/O) are handled within their specific phases.
+
+Essentially, the Event Loop's job is to look at the Call Stack and the Task Queue. If the Call Stack is empty, it takes the first thing on the queue and pushes it onto the stack to be executed.`,
+          code1: ``
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "The Phases of the Event Loop",
+      note: [
+        {
+          text1: `The loop consists of several distinct phases, each maintaining a queue of callbacks to execute. When the loop enters a phase, it executes any operations specific to that phase and then runs callbacks in that phase's queue until the queue is exhausted or the maximum number of callbacks has been reached.
+          
+          <b>Timers</b>	Executes callbacks scheduled by setTimeout() and setInterval().
+<b>Pending Callbacks</b>	Executes I/O callbacks deferred to the next loop iteration (e.g., certain TCP errors).
+<b>Idle, Prepare</b>	Used only internally by Node.js.
+<b>Poll</b>	Retrieves new I/O events; Node will block here if appropriate.
+<b>Check</b>	Executes setImmediate() callbacks.
+<b>Close Callbacks</b>	Handles "close" events, like socket.on('close', ...).`,
+          code1: ``
+        }
+      ]
+    },
   ]
 }

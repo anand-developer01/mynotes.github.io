@@ -1798,7 +1798,7 @@ console.log(people.some(person => isThereMale(person))) // true
                     The sort() method sorts the items of an array in a specific order (ascending or descending).
                     works on arrays,
                     <b>Array sort() Method Works</b>
-The sort() method can be used to sort elements of an array in ascending order based on Unicode character code values by default.
+The sort() method can be used to sort elements of an array in ascending order based on <b>Unicode character</b> code values by default.
 
                    <b> How To Sort Numbers Accurately in JavaScript </b>
 The sort() method of JavaScript compares the elements of the array by converting them into strings and then comparing their Unicode code points.
