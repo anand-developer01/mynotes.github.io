@@ -159,6 +159,16 @@ Practice coding on:
     },
     {
       id: 1,
+      title: "how does work nodejs",
+      note: [
+        {
+          text1: `we don't preffer for CPU intensive work, we prefer for I/O intensive work`,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
       section: "Core Node.js Concepts",
       title: "Modules",
       note: [
@@ -1873,26 +1883,6 @@ server.listen(5000, () => {
     },
     {
       id: 1,
-      title: "Error Handling",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Error Handling",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
       section: "Interview",
       title: "Interview",
       note: [
@@ -2020,7 +2010,7 @@ app.use(cors());`,
         }
       ]
     },
-        {
+    {
       id: 1,
       section: 'Event Loop',
       title: "Event Loop",
@@ -2045,7 +2035,7 @@ Essentially, the Event Loop's job is to look at the Call Stack and the Task Queu
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "The Phases of the Event Loop",
       note: [
@@ -2059,6 +2049,127 @@ Essentially, the Event Loop's job is to look at the Call Stack and the Task Queu
 <b>Check</b>	Executes setImmediate() callbacks.
 <b>Close Callbacks</b>	Handles "close" events, like socket.on('close', ...).`,
           code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "What is Libuv?",
+      note: [
+        {
+          text1: `In short, Libuv is a multi-platform C library that provides support for asynchronous I/O based on event loops. It was originally developed specifically for Node.js to handle non-blocking operations, though it's now used by other languages like Julia and Luvit.
+
+          -> Built in C lang -> uses (system kernel) -> has multiple threads
+
+          Libuv is a C library that handles the Event Loop and Asynchronous I/O in Node.js. While the V8 engine executes JavaScript, Libuv is responsible for offloading system tasks (like networking or file system access) to the operating system or its internal thread pool, ensuring Node remains non-blocking.
+
+          While the Event Loop runs on a single thread, Libuv maintains a Thread Pool (by default, 4 threads).
+
+          <b>🔧 What exactly is libuv?</b>
+libuv is a C library used by Node.js to handle:
+-> Event loop
+-> Asynchronous I/O (file, network, etc.)
+-> Thread pool
+-> System-level operations
+
+🧠 <b>Why Node.js needs libuv?</b>
+JavaScript alone cannot:
+-> Read files asynchronously
+-> Handle network requests efficiently
+-> Manage OS-level tasks
+👉 So Node.js delegates these tasks to libuv
+
+⚙️ <b>How libuv works (simple flow)</b>
+1) Your JS code runs (main thread)
+2) When async task comes (like file read / API call):
+    &nbsp; &nbsp; &nbsp; -> It is sent to libuv
+3) libuv:
+&nbsp; &nbsp; &nbsp; -> Uses <b>OS APIs</b> OR
+&nbsp; &nbsp; &nbsp; -> Uses <b>thread pool</b>
+4) Once task is done:
+Callback is pushed to <b>event loop queue</b>
+5) Event loop executes callback
+
+🔁 <b>Example</b>
+const fs = require('fs');
+console.log("Start");
+fs.readFile('file.txt', 'utf-8', (err, data) => {
+  console.log("File Read Done");
+});
+console.log("End");
+<b>Output</b>:
+Start
+End
+File Read Done
+
+👉 <b>Why?</b>
+-> readFile is handled by libuv
+-> It runs in background
+-> Main thread continues execution
+
+🧵 <b>Thread Pool in libuv</b>
+libuv has a thread pool (default 4 threads) for:
+-> File system operations
+-> DNS lookup
+-> Some crypto operations
+
+🔑 <b>Key Features of libuv</b>
+-> Event Loop implementation
+-> Non-blocking I/O
+-> Cross-platform (Windows, Linux, Mac)
+-> Thread pool handling
+-> Timers (setTimeout, setInterval)
+          `,
+          code1: `const fs = require('fs');
+
+console.log("Start");
+
+fs.readFile('file.txt', 'utf-8', (err, data) => {
+  console.log("File Read Done");
+});
+
+console.log("End");
+// Output:
+// Start
+// End
+// File Read Done
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Microtasks (The \`Skip the Line\` Tasks)",
+      note: [
+        {
+          text1: `Microtasks have the highest priority. They are executed <b>immediately after the current operation</b> and before the Event Loop moves on to the next phase or even renders the UI.
+
+          <b>Definition</b>:
+Microtasks are high-priority asynchronous callbacks that are executed immediately after the currently executing script completes, and before the event loop proceeds to the next phase of macrotasks. They are managed by the microtask queue, which is drained completely before the event loop continues.
+
+    Examples: <b>Promise.then(), Promise.catch(), queueMicrotask()</b>, and in Node.js, <b>process.nextTick()</b> (though <b>nextTick</b> technically sits in its own special "super-priority" queue).
+    
+<b>1) Position in event loop</b>: Microtasks run between macrotask phases. After any callback finishes, Node.js empties the entire microtask queue before moving to the next event loop phase.
+<b>Two types of microtasks in Node.js</b>:
+    -> <b>process.nextTick() queue</b> - highest priority, runs before other microtasks
+    -> <b>Promise microtask queue</b> - .then(), .catch(), .finally(), await continuations
+
+    <b>Execution order</b>:
+Code Current script → process.nextTick() callbacks → Promise callbacks → Next event loop phase
+`,
+          code1: `// ---------------- Ex : 1 -------------
+             setTimeout(() => console.log('timeout'), 0);
+   Promise.resolve().then(() => console.log('promise'));
+   process.nextTick(() => console.log('nextTick'));
+   console.log('sync');
+   // Output: sync → nextTick → promise → timeout
+   
+   // ---------------- Ex : 2 -------------
+   console.log(1)
+setTimeout(() => console.log(2),0)
+Promise.resolve().then(() => console.log(3))
+console.log(4)
+   `
         }
       ]
     },
