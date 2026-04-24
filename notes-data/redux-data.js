@@ -363,65 +363,6 @@ const MyComponent = () => {
     },
     {
       id: 52,
-      title: "combineReducers",
-      note: [
-        {
-          text1: `<b>combineReducers</b> is a utility function provided by Redux that allows you to combine multiple reducer functions into a single reducer function. This is especially useful when your application's state is complex and needs to be managed in a modular way.
-                    
-                    The combineReducers helper function turns an object whose values are different <b>slice reducer</b> functions into a single combined reducer function you can pass to Redux Toolkit's <b>configureStore</b> (or the legacy <b>createStore</b> method)
-
-The resulting combined reducer calls every slice reducer any time an action is dispatched, and gathers their results into a single state object. This enables splitting up reducer logic into separate functions, each managing their own slice of the state independently.
-
-You can control state key names by using different keys for the reducers in the passed object. For example, you may call <b>combineReducers({ todos: myTodosReducer, counter: myCounterReducer })</b> for the state shape to be <b>{ todos, counter }</b>.
-
-<b>Arguments</b>
-<b>reducers (Object)</b>: An object whose values correspond to different reducer functions that need to be combined into one.
-<span style="color:red">
-combineReducers({
-  posts: postsReducer,
-  comments: commentsReducer
-})</span>
-
-See the notes below for some rules every passed reducer must follow.
-<b>Returns</b>
-(Function): A reducer that invokes every reducer inside the reducers object, and constructs a state object with the same shape.
-
-<b>Notes</b>
-This function is mildly opinionated and is skewed towards helping beginners avoid common pitfalls. This is why it attempts to enforce some rules that you don't have to follow if you write the root reducer manually.
-
-Any reducer passed to <b>combineReducers</b> must satisfy these rules:
-
-=> For any action that is not recognized, it must return the <b>state</b> given to it as the first argument.
-=> It must never return <b>undefined</b>. It is too easy to do this by mistake via an early <b>return</b> statement, so <b>combineReducers</b> throws if you do that instead of letting the error manifest itself somewhere else.
-=> If the <b>state</b> given to it is <b>undefined</b>, it must return the initial state for this specific reducer. According to the previous rule, the initial state must not be <b>undefined</b> either. It is handy to specify it with optional arguments syntax, but you can also explicitly check the first argument for being <b>undefined</b>.
-
-While <b>combineReducers</b> attempts to check that your reducers conform to some of these rules, you should remember them, and do your best to follow them. <b>combineReducers</b> will check your reducers by passing <b>undefined</b> to them; this is done even if you specify initial state to <b>Redux.createStore(combineReducers(...), initialState).</b> Therefore, you <b>must</b> ensure your reducers work properly when receiving <b>undefined</b> as state, even if you never intend for them to actually receive <b>undefined</b> in your own code.
-
-<b>Tips</b>
-This helper is just a convenience! You can write your own <b>combineReducers</b> that works differently, or even assemble the state object from the child reducers manually and write a root reducer function explicitly, like you would write any other function.
-
-You may call <b>combineReducers</b> at any level of the reducer hierarchy. It doesn't have to happen at the top. In fact you may use it again to split the child reducers that get too complicated into independent grandchildren, and so on.
-                    `,
-          code1: `//"tip"
-// This should be rarely needed - Redux Toolkit's "configureStore" method will automatically call "combineReducers" for you if you pass in an object of slice reducers:
-
-const store = configureStore({
-  reducer: {
-    posts: postsReducer,
-    comments: commentsReducer
-  }
-})
-
-// You can still call "combineReducers()" yourself if you need to construct the root reducer manually first.`
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-      ],
-    },
-    {
-      id: 52,
       title: "createSlice",
       note: [
         {
@@ -662,6 +603,460 @@ export const RootReducer = combineReducers({
     },
     {
       id: 52,
+      title: "createAsyncThunk",
+      note: [
+        {
+          text1: `In Redux, middleware has always been used to perform asynchronous tasks. Asynchronous tasks means things you have to wait for, such as fetching data from an API. A middleware is designed to enable developers to write logic that has side effects. An example is a package called redux-thunk.
+                    
+                    Redux toolkit comes with built-in dependencies such as <u>redux-thunk</u>, because Redux toolkit includes <u>redux-thunk</u> by default, we can use <u>createAsyncThunk</u> to make asynchronous requests.
+
+<b>createAsyncThunk</b>
+createAsyncThunk is where we perform asychronous tasks in our slice. It receives two parameters
+
+=> name of the action, the standard convention is <b>[slice name]/[action name]</b> such as <u>posts/fetchPosts</u>
+=> The callback function that performs the API call and returns the result when it is finished. Our API call returns a promise (which is an object that represents the status of an asynchronous operation, in our case an API call).
+
+For each action that is created using <u>createAsyncThunk</u>, there are three probable state for the promise returned. <u>pending, fulfilled, rejected</u>.
+
+You decide what Redux should do in the three (3) different stages of the API call. Inside our slice we will add a property called <u>extraReducers</u> that holds a couple functions to handle the return of the API: <u>pending, fulfilled and rejected</u>.
+
+<b>extraReducers</b>
+You use extraReducers to handle actions that are created by <u>createAsyncThunk</u>. Based on the status of the promise, we will update our state.
+
+createAsyncThunk is a utility function provided by <b>Redux Toolkit</b> that simplifies the process of handling <b>asynchronous logic</b> (like making API requests) within Redux. It allows you to define a "thunk" action that automatically handles the <b>dispatching of pending, fulfilled, and rejected action types</b> based on the lifecycle of the asynchronous operation.
+
+<b>Why Use createAsyncThunk?</b>
+When you handle asynchronous operations like fetching data, you often need to dispatch multiple actions:
+
+    <b>Request started</b> (e.g., to set loading state)
+    <b>Request succeeded</b> (to store the result)
+    <b>Request failed</b> (to store the error)
+
+<u>createAsyncThunk</u> automates this process, generating these actions for you, and helping you manage the state transitions without needing to manually write reducers for each case.
+
+<u>How It Works</u>
+    <b>Action Types</b>: createAsyncThunk automatically generates three action types based on the provided string prefix</b>:
+        data/fetch/pending (when the async operation starts)
+        data/fetch/fulfilled (when the async operation completes successfully)
+        data/fetch/rejected (when the async operation fails)
+    <b>Async Function</b>: The second argument is a function that performs the async operation. It can return a promise, and Redux Toolkit will automatically handle resolving the promise.
+    <b>Action Payloads</b>: The function should return the data you want to pass as the payload when the async operation is successful. If the operation fails, you can throw an error, and the error will be passed to the rejected action.
+`,
+          code1: `import { createAsyncThunk } from '@reduxjs/toolkit';
+
+// Define an async thunk action
+const fetchData = createAsyncThunk(
+  'data/fetch',       // Action type prefix
+  async (arg, thunkAPI) => {  // The payload creator function
+    const response = await fetch('https://api.example.com/data');
+    return response.json();  // Return the result (which will be the payload of the fulfilled action)
+  }
+);
+
+// Ex: 1
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
+export const fetchData = createAsyncThunk(
+  'data/fetchData',  // Action type prefix
+  async (endpoint) => {
+    const response = await fetch(endpoint);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    return response.json();  // Data returned from the async function
+  }
+);
+
+
+
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchData } from './path-to-thunk';
+
+const dataSlice = createSlice({
+  name: 'data',
+  initialState: {
+    items: [],
+    loading: false,
+    error: null
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchData.pending, (state) => {
+        state.loading = true;  // Start loading
+        state.error = null;    // Clear any previous errors
+      })
+      .addCase(fetchData.fulfilled, (state, action) => {
+        state.items = action.payload;  // Store the fetched data
+        state.loading = false;  // Stop loading
+      })
+      .addCase(fetchData.rejected, (state, action) => {
+        state.loading = false;  // Stop loading
+        state.error = action.error.message;  // Store the error message
+      });
+  }
+});
+
+export default dataSlice.reducer;
+
+//--
+import { useDispatch } from 'react-redux';
+import { fetchData } from './path-to-thunk';
+
+const MyComponent = () => {
+  const dispatch = useDispatch();
+
+  const loadData = () => {
+    dispatch(fetchData('https://api.example.com/data'));
+  };
+
+  return &lt;button onClick={loadData}&gt;Load Data&lt;/button&gt;;
+};
+
+
+// Ex : 2
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+var tid;
+function fetchMyData(i) {
+  // simulating data fetching from server
+  return new Promise((resolve, reject) => {
+    tid = setTimeout(() => resolve(Math.random()), i * 1000);
+    setTimeout(reject, 5000);
+  });
+}
+
+const fetchData = createAsyncThunk(
+  "data/fetchStatus",
+  async (i, thunkAPI) => {
+    //const state = thunkAPI.getState();
+    //const extra = thunkAPI.extra;
+    //const requestId = thunkAPI.requestId;
+    //const signal = thunkAPI.signal;
+    //console.log(state, extra, requestId, signal);
+    //thunkAPI.dispatch({ type: "data/cancel" });
+    //thunkAPI.rejectWithValue("rejected", { a: 0 });
+    //thunkAPI.fulfillWithValue("fulfilled", { a: 0 });
+    try {
+      return await fetchMyData(i);
+    } catch (err) {
+      return thunkAPI.rejectWithValue("time out!");
+    }
+  },
+  {
+    // condition: (arg, { getState, extra }) => true, // 'false' to prevent running payload creator
+    // dispatchConditionRejection: true, // 'true' to dispatch 'rejected' action when condition() returns 'false'
+    // idGenerator: ()=>Math.random(),    // function generating 'requestId', defaults to nanoid()
+    // serializeError: console.error,    // replaces the internal miniSerializeError method
+    // getPendingMeta: ({ arg, requestId }, { getState, extra })=>({})   // creates an object that will be merged into the pendingAction.meta field.
+  }
+);
+
+const initialState = 0;
+
+const dataSlice = createSlice({
+  name: "data",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchData.pending, (state, action) => {
+        console.log(action);
+        clearTimeout(tid);
+        return "fetching data...";
+      })
+      .addCase(fetchData.fulfilled, (state, action) => {
+        console.log(action);
+        return action.payload;
+      })
+      .addCase(fetchData.rejected, (state, action) => {
+        console.log(action);
+        if (action.meta.aborted) return "cancelled!";
+        return action.payload;
+      });
+  }
+});
+
+export { fetchData };
+export const { cancel } = dataSlice.actions;
+export default dataSlice.reducer;
+
+
+//--
+
+// Counter.js
+import React,{useEffect, useRef} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from '../../../redux/reducer/matching utility/isAllOf_Reducer';
+import { unwrapResult } from "@reduxjs/toolkit";
+
+export default () => {
+  const v = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const abort = useRef();
+  return (
+    &lt;div&gt;
+      &lt;span&gt;{v}&lt;/span&gt;
+      &lt;button
+        onClick={() =&gt; {
+          const d = dispatch(fetchData(3));
+          abort.current = d.abort;
+          d.then(() =&gt; console.log(&quot;resolved&quot;));
+        }}
+      &gt;
+        Fetch Data
+      &lt;/button&gt;
+      
+      &lt;button
+        onClick={() =&gt; {
+          const d = dispatch(fetchData(6));
+          abort.current = d.abort;
+          d.unwrap() //  to extract the payload of a fulfilled action or to throw either the error or, if available, payload created by rejectWithValue from a rejected action
+            // .then(unwrapResult)     // alternative to .unwrap()
+            .then((originalPromiseResult) =&gt; {
+              console.log(&quot;originalPromiseResult&quot;, originalPromiseResult);
+            })
+            .catch((rejectedValueOrSerializedError) =&gt; {
+              console.log(
+                &quot;rejectedValueOrSerializedError&quot;,
+                rejectedValueOrSerializedError
+              );
+            });
+        }}
+      &gt;
+        Fetch Data Slowly
+      &lt;/button&gt;
+      &lt;button onClick={() =&gt; abort.current()}&gt;Cancel&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+`
+        }
+      ],
+    },
+    {
+      id: 1,
+      title: "createApi - (RTK Query)",
+      note: [
+        {
+          text1: `createApi is the <b>core function of RTK Query</b>, used to define an API layer in Redux.
+          
+          In the world of Redux, managing asynchronous data fetching used to involve a lot of "boilerplate"—writing actions, reducers, and middleware for every single API call. RTK Query changed that by introducing createApi.
+          
+<b>1. reducerPath</b>
+This is a unique key that defines where the data will be stored in your Redux store. It’s like naming the folder where all your cached API responses live.
+
+<b>2. baseQuery</b>
+This handles how to fetch the data. Most people use fetchBaseQuery, which is a lightweight wrapper around the standard fetch API. It handles headers and JSON parsing automatically.
+
+<b>3. endpoints</b>
+This is where the magic happens. You define two types of operations:
+    Queries: Used for fetching data (e.g., GET requests).
+    Mutations: Used for changing data (e.g., POST, PUT, DELETE requests).
+
+<b>Why Use It? </b>
+<b>createApi</b> isn't just a fetcher; it’s a powerful caching engine. Here is what it does for you behind the scenes:
+    <b> Auto-Caching</b>: If two components call the same endpoint with the same arguments, RTK Query only makes one request and shares the data.
+    <b> Loading States</b>: It gives you <b>isLoading, isError</b>, and <b>data</b> flags out of the box. No more manual const <b>[loading, setLoading] = useState(true)</b>.
+    <b> Polling</b>: You can tell an endpoint to re-fetch every X seconds just by passing a number.
+    <b> Prefetching</b>: You can trigger a data fetch before a user even clicks a link.
+    <b> Invalidation (Tags)</b>: You can tell RTK Query that "Mutation A" (adding a post) should automatically trigger a re-fetch of "Query B" (the post list).
+
+    <b>How to Register It</b>
+Once defined, you need to add it to your Redux store. It acts as both a reducer and a specialized middleware that handles the caching logic.
+
+          <b>It replaces</b>:
+useEffect + fetch/axios
+manual loading/error state
+reducers for API data
+caching logic
+
+-> <b>Auto-Hooks</b>	Generates hooks like useGetUsersQuery automatically.
+-> <b>Caching	Keeps</b> data in memory and clears it when no longer used.
+-> <b>Optimistic Updates</b>	Allows the UI to feel instant by updating before the server responds.
+-> <b>Type Safety</b>	Works seamlessly with TypeScript to type your API responses.
+    `,
+          code1: `// ----------- How to Register It -------------
+          export const store = configureStore({
+  reducer: {
+    [pokemonApi.reducerPath]: pokemonApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(pokemonApi.middleware),
+})
+`
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "endpoints and builder",
+      note: [
+        {
+          text1: `
+          
+          In RTK Query, the builder object is a toolset used to define how your API endpoints behave. It distinguishes between reading data and changing data.
+
+Think of them like the "GET" vs. "POST/PUT/DELETE" of the Redux world.
+<b>1. builder.query (Reading Data)</b>
+Use this for fetching data from the server. It is meant for "idempotent" requests—requests that simply retrieve information without changing anything on the backend.
+
+    -><b> HTTP Method</b>: Usually GET.
+    -><b> Behavior</b>: RTK Query automatically caches the result. If two components use the same query, it only fetches once.
+    -><b> Hooks</b>: Generates hooks that start with <b>use...Query</b> (e.g., <b>useGetBalanceQuery</b>). These hooks run automatically when a component mounts.
+
+<b>Example</b>:
+getAccountBalance: builder.query({
+  query: () => 'account/balance',
+})
+
+<b>2. builder.mutation (Changing Data)</b>
+Use this when you want to send data to the server to create, update, or delete something. Mutations are intended to have "side effects" (like changing a balance in a database).
+
+    -><b> HTTP Methods</b>: POST, PUT, PATCH, or DELETE.
+    -><b> Behavior</b>: These are not cached like queries. Instead, they are used to "invalidate" existing cache tags so that your data stays fresh.
+    -><b> Hooks</b>: Generates hooks that start with <b>use...Mutation</b> (e.g., <b>useLoginMutation</b>). These hooks return a <b>trigger function</b> that you call manually (like in an onSubmit handler).
+
+<b>Example</b>:
+depositMoney: builder.mutation({
+  query: (amount) => ({
+    url: 'account/deposit',
+    method: 'POST',
+    body: { amount },
+  }),
+})
+`,
+          code1: `// --------------- builder.query -----------------
+          getAccountBalance: builder.query({
+  query: () => 'account/balance',
+})
+          
+          
+          // --------------- builder.mutation -----------------
+          depositMoney: builder.mutation({
+  query: (amount) => ({
+    url: 'account/deposit',
+    method: 'POST',
+    body: { amount },
+  }),
+})
+  `
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "fetchBaseQuery",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "createEntityAdapter",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 52,
+      title: "combineReducers",
+      note: [
+        {
+          text1: `<b>combineReducers</b> is a utility function provided by Redux that allows you to combine multiple reducer functions into a single reducer function. This is especially useful when your application's state is complex and needs to be managed in a modular way.
+                    
+                    The combineReducers helper function turns an object whose values are different <b>slice reducer</b> functions into a single combined reducer function you can pass to Redux Toolkit's <b>configureStore</b> (or the legacy <b>createStore</b> method)
+
+The resulting combined reducer calls every slice reducer any time an action is dispatched, and gathers their results into a single state object. This enables splitting up reducer logic into separate functions, each managing their own slice of the state independently.
+
+You can control state key names by using different keys for the reducers in the passed object. For example, you may call <b>combineReducers({ todos: myTodosReducer, counter: myCounterReducer })</b> for the state shape to be <b>{ todos, counter }</b>.
+
+<b>Arguments</b>
+<b>reducers (Object)</b>: An object whose values correspond to different reducer functions that need to be combined into one.
+<span style="color:red">
+combineReducers({
+  posts: postsReducer,
+  comments: commentsReducer
+})</span>
+
+See the notes below for some rules every passed reducer must follow.
+<b>Returns</b>
+(Function): A reducer that invokes every reducer inside the reducers object, and constructs a state object with the same shape.
+
+<b>Notes</b>
+This function is mildly opinionated and is skewed towards helping beginners avoid common pitfalls. This is why it attempts to enforce some rules that you don't have to follow if you write the root reducer manually.
+
+Any reducer passed to <b>combineReducers</b> must satisfy these rules:
+
+=> For any action that is not recognized, it must return the <b>state</b> given to it as the first argument.
+=> It must never return <b>undefined</b>. It is too easy to do this by mistake via an early <b>return</b> statement, so <b>combineReducers</b> throws if you do that instead of letting the error manifest itself somewhere else.
+=> If the <b>state</b> given to it is <b>undefined</b>, it must return the initial state for this specific reducer. According to the previous rule, the initial state must not be <b>undefined</b> either. It is handy to specify it with optional arguments syntax, but you can also explicitly check the first argument for being <b>undefined</b>.
+
+While <b>combineReducers</b> attempts to check that your reducers conform to some of these rules, you should remember them, and do your best to follow them. <b>combineReducers</b> will check your reducers by passing <b>undefined</b> to them; this is done even if you specify initial state to <b>Redux.createStore(combineReducers(...), initialState).</b> Therefore, you <b>must</b> ensure your reducers work properly when receiving <b>undefined</b> as state, even if you never intend for them to actually receive <b>undefined</b> in your own code.
+
+<b>Tips</b>
+This helper is just a convenience! You can write your own <b>combineReducers</b> that works differently, or even assemble the state object from the child reducers manually and write a root reducer function explicitly, like you would write any other function.
+
+You may call <b>combineReducers</b> at any level of the reducer hierarchy. It doesn't have to happen at the top. In fact you may use it again to split the child reducers that get too complicated into independent grandchildren, and so on.
+                    `,
+          code1: `//"tip"
+// This should be rarely needed - Redux Toolkit's "configureStore" method will automatically call "combineReducers" for you if you pass in an object of slice reducers:
+
+const store = configureStore({
+  reducer: {
+    posts: postsReducer,
+    comments: commentsReducer
+  }
+})
+
+// You can still call "combineReducers()" yourself if you need to construct the root reducer manually first.`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 1,
+      title: "createListenerMiddleware",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      section: 'Immer helpers (inside RTK)',
+      title: "current",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "original",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 52,
+      section: 'other RTK',
       title: "createReducer",
       note: [
         {
@@ -1596,239 +1991,7 @@ export default userSlice.reducer;
         },
       ],
     },
-    {
-      id: 52,
-      title: "createAsyncThunk",
-      note: [
-        {
-          text1: `In Redux, middleware has always been used to perform asynchronous tasks. Asynchronous tasks means things you have to wait for, such as fetching data from an API. A middleware is designed to enable developers to write logic that has side effects. An example is a package called redux-thunk.
-                    
-                    Redux toolkit comes with built-in dependencies such as <u>redux-thunk</u>, because Redux toolkit includes <u>redux-thunk</u> by default, we can use <u>createAsyncThunk</u> to make asynchronous requests.
 
-<b>createAsyncThunk</b>
-createAsyncThunk is where we perform asychronous tasks in our slice. It receives two parameters
-
-=> name of the action, the standard convention is <b>[slice name]/[action name]</b> such as <u>posts/fetchPosts</u>
-=> The callback function that performs the API call and returns the result when it is finished. Our API call returns a promise (which is an object that represents the status of an asynchronous operation, in our case an API call).
-
-For each action that is created using <u>createAsyncThunk</u>, there are three probable state for the promise returned. <u>pending, fulfilled, rejected</u>.
-
-You decide what Redux should do in the three (3) different stages of the API call. Inside our slice we will add a property called <u>extraReducers</u> that holds a couple functions to handle the return of the API: <u>pending, fulfilled and rejected</u>.
-
-<b>extraReducers</b>
-You use extraReducers to handle actions that are created by <u>createAsyncThunk</u>. Based on the status of the promise, we will update our state.
-
-createAsyncThunk is a utility function provided by <b>Redux Toolkit</b> that simplifies the process of handling <b>asynchronous logic</b> (like making API requests) within Redux. It allows you to define a "thunk" action that automatically handles the <b>dispatching of pending, fulfilled, and rejected action types</b> based on the lifecycle of the asynchronous operation.
-
-<b>Why Use createAsyncThunk?</b>
-When you handle asynchronous operations like fetching data, you often need to dispatch multiple actions:
-
-    <b>Request started</b> (e.g., to set loading state)
-    <b>Request succeeded</b> (to store the result)
-    <b>Request failed</b> (to store the error)
-
-<u>createAsyncThunk</u> automates this process, generating these actions for you, and helping you manage the state transitions without needing to manually write reducers for each case.
-
-<u>How It Works</u>
-    <b>Action Types</b>: createAsyncThunk automatically generates three action types based on the provided string prefix</b>:
-        data/fetch/pending (when the async operation starts)
-        data/fetch/fulfilled (when the async operation completes successfully)
-        data/fetch/rejected (when the async operation fails)
-    <b>Async Function</b>: The second argument is a function that performs the async operation. It can return a promise, and Redux Toolkit will automatically handle resolving the promise.
-    <b>Action Payloads</b>: The function should return the data you want to pass as the payload when the async operation is successful. If the operation fails, you can throw an error, and the error will be passed to the rejected action.
-`,
-          code1: `import { createAsyncThunk } from '@reduxjs/toolkit';
-
-// Define an async thunk action
-const fetchData = createAsyncThunk(
-  'data/fetch',       // Action type prefix
-  async (arg, thunkAPI) => {  // The payload creator function
-    const response = await fetch('https://api.example.com/data');
-    return response.json();  // Return the result (which will be the payload of the fulfilled action)
-  }
-);
-
-// Ex: 1
-import { createAsyncThunk } from '@reduxjs/toolkit';
-
-export const fetchData = createAsyncThunk(
-  'data/fetchData',  // Action type prefix
-  async (endpoint) => {
-    const response = await fetch(endpoint);
-    if (!response.ok) {
-      throw new Error('Failed to fetch data');
-    }
-    return response.json();  // Data returned from the async function
-  }
-);
-
-
-
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchData } from './path-to-thunk';
-
-const dataSlice = createSlice({
-  name: 'data',
-  initialState: {
-    items: [],
-    loading: false,
-    error: null
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchData.pending, (state) => {
-        state.loading = true;  // Start loading
-        state.error = null;    // Clear any previous errors
-      })
-      .addCase(fetchData.fulfilled, (state, action) => {
-        state.items = action.payload;  // Store the fetched data
-        state.loading = false;  // Stop loading
-      })
-      .addCase(fetchData.rejected, (state, action) => {
-        state.loading = false;  // Stop loading
-        state.error = action.error.message;  // Store the error message
-      });
-  }
-});
-
-export default dataSlice.reducer;
-
-//--
-import { useDispatch } from 'react-redux';
-import { fetchData } from './path-to-thunk';
-
-const MyComponent = () => {
-  const dispatch = useDispatch();
-
-  const loadData = () => {
-    dispatch(fetchData('https://api.example.com/data'));
-  };
-
-  return &lt;button onClick={loadData}&gt;Load Data&lt;/button&gt;;
-};
-
-
-// Ex : 2
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-var tid;
-function fetchMyData(i) {
-  // simulating data fetching from server
-  return new Promise((resolve, reject) => {
-    tid = setTimeout(() => resolve(Math.random()), i * 1000);
-    setTimeout(reject, 5000);
-  });
-}
-
-const fetchData = createAsyncThunk(
-  "data/fetchStatus",
-  async (i, thunkAPI) => {
-    //const state = thunkAPI.getState();
-    //const extra = thunkAPI.extra;
-    //const requestId = thunkAPI.requestId;
-    //const signal = thunkAPI.signal;
-    //console.log(state, extra, requestId, signal);
-    //thunkAPI.dispatch({ type: "data/cancel" });
-    //thunkAPI.rejectWithValue("rejected", { a: 0 });
-    //thunkAPI.fulfillWithValue("fulfilled", { a: 0 });
-    try {
-      return await fetchMyData(i);
-    } catch (err) {
-      return thunkAPI.rejectWithValue("time out!");
-    }
-  },
-  {
-    // condition: (arg, { getState, extra }) => true, // 'false' to prevent running payload creator
-    // dispatchConditionRejection: true, // 'true' to dispatch 'rejected' action when condition() returns 'false'
-    // idGenerator: ()=>Math.random(),    // function generating 'requestId', defaults to nanoid()
-    // serializeError: console.error,    // replaces the internal miniSerializeError method
-    // getPendingMeta: ({ arg, requestId }, { getState, extra })=>({})   // creates an object that will be merged into the pendingAction.meta field.
-  }
-);
-
-const initialState = 0;
-
-const dataSlice = createSlice({
-  name: "data",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchData.pending, (state, action) => {
-        console.log(action);
-        clearTimeout(tid);
-        return "fetching data...";
-      })
-      .addCase(fetchData.fulfilled, (state, action) => {
-        console.log(action);
-        return action.payload;
-      })
-      .addCase(fetchData.rejected, (state, action) => {
-        console.log(action);
-        if (action.meta.aborted) return "cancelled!";
-        return action.payload;
-      });
-  }
-});
-
-export { fetchData };
-export const { cancel } = dataSlice.actions;
-export default dataSlice.reducer;
-
-
-//--
-
-// Counter.js
-import React,{useEffect, useRef} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from '../../../redux/reducer/matching utility/isAllOf_Reducer';
-import { unwrapResult } from "@reduxjs/toolkit";
-
-export default () => {
-  const v = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const abort = useRef();
-  return (
-    &lt;div&gt;
-      &lt;span&gt;{v}&lt;/span&gt;
-      &lt;button
-        onClick={() =&gt; {
-          const d = dispatch(fetchData(3));
-          abort.current = d.abort;
-          d.then(() =&gt; console.log(&quot;resolved&quot;));
-        }}
-      &gt;
-        Fetch Data
-      &lt;/button&gt;
-      
-      &lt;button
-        onClick={() =&gt; {
-          const d = dispatch(fetchData(6));
-          abort.current = d.abort;
-          d.unwrap() //  to extract the payload of a fulfilled action or to throw either the error or, if available, payload created by rejectWithValue from a rejected action
-            // .then(unwrapResult)     // alternative to .unwrap()
-            .then((originalPromiseResult) =&gt; {
-              console.log(&quot;originalPromiseResult&quot;, originalPromiseResult);
-            })
-            .catch((rejectedValueOrSerializedError) =&gt; {
-              console.log(
-                &quot;rejectedValueOrSerializedError&quot;,
-                rejectedValueOrSerializedError
-              );
-            });
-        }}
-      &gt;
-        Fetch Data Slowly
-      &lt;/button&gt;
-      &lt;button onClick={() =&gt; abort.current()}&gt;Cancel&lt;/button&gt;
-    &lt;/div&gt;
-  );
-};
-`
-        }
-      ],
-    },
     {
       id: 52,
       title: "useSelect",
@@ -2532,7 +2695,7 @@ export default function* rootSaga() {
         }
       ],
     },
-        {
+    {
       id: 52,
       title: "delay",
       note: [
@@ -2601,7 +2764,7 @@ Combines <b>takeLatest + delay</b> for debouncing.
         }
       ],
     },
-            {
+    {
       id: 52,
       title: "fork",
       note: [
@@ -2611,7 +2774,7 @@ Combines <b>takeLatest + delay</b> for debouncing.
         }
       ],
     },
-        {
+    {
       id: 52,
       title: "sample project - call, put, takeLatest, delay, all",
       note: [
@@ -2872,7 +3035,7 @@ export default userSlice.reducer;
         }
       ],
     },
-        {
+    {
       id: 52,
       title: "persistent storage:",
       note: [

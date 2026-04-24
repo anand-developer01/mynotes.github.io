@@ -2173,5 +2173,128 @@ console.log(4)
         }
       ]
     },
+    {
+      id: 1,
+      title: "What is thread pool",
+      note: [
+        {
+          text1: `A thread pool is a group of worker threads that run tasks in the background instead of blocking the main thread.
+          The thread pool is a pool of worker threads managed by libuv that Node.js uses to execute expensive, blocking operations off the main JavaScript thread, so the event loop doesn’t get blocked.
+          
+          
+
+    1) <b>Why it exists</b>: Node.js is single-threaded for JS execution. But operations like file I/O, DNS lookup, crypto, and zlib are blocking. The thread pool handles these in parallel without blocking the main thread.
+
+    2) <b>Default size</b>: 4 threads. You can change it with UV_THREADPOOL_SIZE environment variable. Max is 1024.
+    
+    <b>Changing the Size</b>
+You can increase the capacity of your application by changing the UV_THREADPOOL_SIZE environment variable before the process starts. The maximum size is typically 1024.
+Bash
+
+# Example: Setting the pool to 8 threads
+export UV_THREADPOOL_SIZE=8
+node app.js
+
+<b>How it Fits in the Architecture</b>
+Node.js isn't purely single-threaded. It uses the Event Loop for most tasks, but delegates specific "blocking" operations to the libuv thread pool.
+    <b>The Event Loop</b>: Handles non-blocking I/O (like network requests) using the OS kernel.
+    <b>The Thread Pool</b>: Handles expensive or blocking tasks that the kernel doesn't provide an asynchronous interface for.
+
+<b>What Tasks Go to the Thread Pool?</b>
+Not everything uses the pool. Libuv specifically delegates these four main areas to it:
+    <b>File System (fs)</b>: Most file operations (reading, writing, renaming) are synchronous at the OS level, so Node uses the pool to keep them from blocking the Event Loop.
+    <b>Cryptography (crypto)</b>: Functions like <b>pbkdf2, scrypt</b>, or <b>randomBytes</b> are CPU-intensive and are offloaded to avoid freezing the app.
+    <b>Zlib</b>: Compression and decompression tasks (like <b>gzip</b>) are CPU-heavy and handled here.
+    <b>DNS</b>: Specifically <b>dns.lookup()</b>, because it is a synchronous call depending on OS configurations.
+
+    👉 “Thread pool executes blocking tasks in the background <b>asynchronously from JavaScript’s point of view</b>”
+    <b>Main thread:</b>
+Hey libuv, I need to read file contents but that is a time consuming task. I don't want to block further code from being executed during this time. Can I offload this task to you?
+
+🧠 <b>Conversation (What actually happens)</b>
+<b>Main Thread (JavaScript)</b>:
+“Hey libuv, I need to read file contents. It’s slow. I don’t want to block execution. Can you handle it?”
+
+<b>libuv</b>:
+“Sure 👍 I’ll take this task and send it to my thread pool. You continue executing your code.”
+
+⚙️ <b>Behind the scenes</b>
+1) You call:
+fs.readFile('file.txt', (err, data) => {
+  console.log(data);
+});
+
+2) Node.js does:
+&nbsp; &nbsp; &nbsp; -> Sends request to libuv
+&nbsp; &nbsp; &nbsp; -> libuv assigns it to a worker thread (thread pool)
+3) Meanwhile:
+&nbsp; &nbsp; &nbsp; -> Main thread keeps running other code (non-blocking ✅)
+4) Once file reading is done:
+&nbsp; &nbsp; &nbsp; -> libuv → pushes callback into callback queue
+5) Event Loop checks:
+&nbsp; &nbsp; &nbsp; -> “Is call stack empty?”
+&nbsp; &nbsp; &nbsp; -> If yes → executes your callback
+
+🔥 <b>So your dialogue becomes:</b>
+Main Thread → “Offload this task?”
+libuv → “Done. I’ll notify you when finished.”
+Event Loop → “Callback ready? Let me execute it.”
+
+💡 <b>Key Concepts in your example</b>
+-> <b>libuv</b> → handles async operations (I/O, file, network)
+-> <b>Thread Pool</b> → does heavy tasks (like file reading)
+-> <b>Event Loop</b> → brings result back to main thread
+-> <b>Non-blocking</b> → main thread never waits
+
+
+
+🔐 <b>What are Crypto Operations?</b>
+Crypto operations are tasks related to:
+-> Securing data
+-> Encrypting / decrypting
+-> Hashing passwords
+-> Generating secure keys
+👉 In simple words:
+“Anything that makes data secure or unreadable without a key”
+
+🔥 <b>Common Crypto Operations in Node.js</b>
+<b>1. Hashing (Most common 🔥)</b>
+const crypto = require('crypto');
+
+crypto.createHash('sha256')
+  .update('password123')
+  .digest('hex');
+
+👉 Converts data → fixed-length string
+👉 Used for:
+-> Password storage
+-> Data integrity
+
+<b>2. Password Hashing (Heavy task ⚡)</b>
+crypto.pbkdf2('password', 'salt', 100000, 64, 'sha512', callback);
+
+👉 Used for:
+Secure password storage
+👉 This is CPU-intensive → goes to Thread Pool
+
+
+
+<b>So where is Thread Pool NOT involved?</b>
+Thread pool is NOT used for:
+Database queries
+HTTP/API calls
+Network requests
+
+Because these are:
+👉 Already asynchronous at OS level
+
+⚠️ Simple analogy
+Thread pool worker = person doing task step-by-step (synchronous)
+Main thread = doesn’t wait → continues work (asynchronous)
+`,
+          code1: ``
+        }
+      ]
+    },
   ]
 }
