@@ -1207,7 +1207,7 @@ app.use(cookieParser())
     },
     {
       id: 1,
-      title: "(JWT, OAuth) & bcrypt",
+      title: "JWT & bcrypt",
       note: [
         {
           text1: `<b>JWT</b>
@@ -1839,6 +1839,87 @@ server.listen(5000, () => {
           text1: ``,
           code1: ``
         },
+      ]
+    },
+        {
+      id: 1,
+      title: "What is OAuth",
+      note: [
+        {
+          text1: `OAuth (Open Authorization) is an <b>authorization framework</b> that allows one application to access another application’s data <b>on behalf of a user, without sharing the user’s password.</b>
+
+          At its core, OAuth 2.0 is an open-standard authorization framework. It is the industry standard for allowing a website or application to access resources (like your profile data, photos, or contacts) hosted by another service, without the user having to share their password.
+
+          OAuth is an open-standard authorization protocol. It allows servers and services, which are not directly integrated, to provide authenticated access to their assets. OAuth uses tokens to share authorization data, without requiring applications to share actual logon credentials. This is known as secure, third-party, delegated authorization.
+
+OAuth allows users to authorize one application to interact with another on their behalf, without giving away their password. Users can also specify exactly which permissions the application should have, which creates transparency and enhances security.
+
+The OAuth framework gives application owners the ability to grant cross-domain access control. It manages authentication and authorization separately, which enables easier interoperability. It supports multiple use-cases, including server-to-server and application-to-server, and can be used in combination with other protocols for more complex user cases.
+          
+          When you click:
+👉 “Login with Google”
+Flow:
+You don’t give your Google password to the app
+You give permission to Google
+Google sends a token to the app
+The app uses that token to access your data (like email)
+
+🎯 Key Idea
+❌ No password sharing
+✅ Uses tokens + permissions
+
+
+<b>1. The 4 Main Roles</b>
+To understand the flow, you must know the four "players" involved:
+    <b>Resource Owner</b>: You (the user). You own the data.
+    <b>Client</b>: The application wanting access (e.g., your Node.js app / React app).
+    <b>Resource Server</b>: The API holding the data (e.g., Google Photos or a banking API).
+    <b>Authorization Server</b>: The server that verifies your identity and issues the token. The system that authenticates user (Example: Google)
+
+<b>2. The Logical Flow (Abstract)</b>
+    <b>Authorization Request</b>: The Client asks the User for permission.
+    <b>Authorization Grant</b>: The User says "Yes" (usually by clicking a "Grant Access" button).
+    <b>Token Request</b>: The Client shows that "Yes" (the grant) to the Authorization Server.
+    <b>Access Token</b>: The Authorization Server gives the Client an Access Token (often a JWT).
+    <b>Resource Access</b>: The Client uses that token to talk to the Resource Server and get data.
+    <b>Refresh Token</b> : An OAuth Refresh Token is a string that the OAuth client can use to get a new access token without the user's interaction.
+
+<b>3. Why Use OAuth? (Interview Selling Points)</b>
+    <b>Security (No Shared Passwords)</b>: The third-party app never sees the user's Google/Facebook password.
+    <b>Granular Access (Scopes)</b>: You can grant access to "read-only" email without letting the app "send" emails.
+    <b>Revocation</b>: If you lose trust in an app, you can revoke its specific token without having to change your main password.
+    <b>Federated Identity</b>: It allows for "Single Sign-On" (SSO), reducing "password fatigue" for users.
+
+
+    🔄 <b>OAuth Flow (Step-by-step)</b>
+<b>Step 1: User clicks login</b>
+App → Redirects to Google
+
+<b>Step 2: User gives permission</b>
+Google asks:
+"Allow this app to access your email?"
+
+<b>Step 3: Google sends authorization code</b>
+Google → sends "code" to your backend
+
+<b>Step 4: Backend exchanges code for token</b>
+Node.js server → sends code to Google
+Google → returns access_token
+
+<b>Step 5: Access user data</b>
+App → uses token → fetch user profile
+📊 Flow Diagram
+User → App → Google Login
+     &nbsp; &nbsp; &nbsp; ← Authorization Code
+App → Google (exchange code)
+    &nbsp; &nbsp; &nbsp; ← Access Token
+App → Fetch User Data
+
+<a href="https://frontegg.com/blog/oauth#How_OAuth_works" target="_blank">How_OAuth_works</a>,
+`,
+          code1: ``,
+          img: `../assets/images/node/oauth-overview.png.webp`
+        }
       ]
     },
     {

@@ -890,6 +890,16 @@ caching logic
     },
         {
       id: 1,
+      title: "fetchBaseQuery",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+        {
+      id: 1,
       title: "endpoints and builder",
       note: [
         {
@@ -946,15 +956,218 @@ depositMoney: builder.mutation({
     },
     {
       id: 1,
-      title: "fetchBaseQuery",
+      title: "Explain RTK Query lifecycle (request → cache → refetch flow)",
       note: [
         {
-          text1: ``,
+          text1: `<b> RTK Query Lifecycle </b>
+          1. Component mounts
+2. Hook runs (useGetPostsQuery)
+3. Cache check
+   &nbsp; &nbsp; &nbsp; → if exists → return cached data
+   &nbsp; &nbsp; &nbsp; → else → API call
+4. API response stored in cache
+5. UI updates automatically
+6. Refetch triggered by:
+   &nbsp; &nbsp; &nbsp; - manual
+   &nbsp; &nbsp; &nbsp; - focus / reconnect
+   &nbsp; &nbsp; &nbsp; - polling
+   &nbsp; &nbsp; &nbsp; - cache invalidation (tags)
+   
+   🧩 <b>Step 1: Component triggers query</b>
+const { data, isLoading } = useGetPostsQuery();
+👉 The moment this hook runs:
+RTK Query identifies the endpoint (<b>getPosts</b>)
+Generates a cache key (based on endpoint + params)
+
+🔍 <b>Step 2: Cache check (VERY IMPORTANT)</b>
+RTK Query first checks:
+👉 “Do I already have this data in cache?”
+<b>Case A</b>: ✅ Cache exists
+Returns cached data instantly
+No API call (performance boost 🚀)
+<b>Case B</b>: ❌ Cache missing
+Proceeds to API request
+
+🌐 <b>Step 3: API request (via fetchBaseQuery)</b>
+RTK Query sends request
+Internally dispatches:
+<b>pending → fulfilled / rejected</b>
+
+📦 <b>Step 4: Store the response in cache</b>
+Once API succeeds:
+-> Data is stored in Redux store
+-> Indexed by cache key
+{
+  api: {
+    queries: {
+      "getPosts(undefined)": {
+        data: [...],
+        status: "fulfilled"
+      }
+    }
+  }
+}
+
+🎨 <b>Step 5: UI updates automatically</b>
+Your component re-renders:
+const { data, isLoading, error } = useGetPostsQuery();
+-> isLoading → false
+-> data → available
+👉 No manual <b>setState</b>, no reducers needed
+
+🔁 <b>Step 6: Refetch triggers</b>
+RTK Query decides when to refetch data.
+🔹 1. Manual refetch
+refetch();
+🔹 2. Automatic refetch (powerful feature)
+a) On component mount
+refetchOnMountOrArgChange: true
+b) On window focus
+refetchOnFocus: true
+👉 Example: user switches tabs and comes back → data refreshes
+c) On reconnect (internet back)
+refetchOnReconnect: true
+d) Polling (real-time feel)
+pollingInterval: 5000
+👉 API called every 5 seconds
+
+🔥 <b>Step 7: Cache invalidation (MOST IMPORTANT)</b>
+This is where RTK Query becomes powerful.
+
+<b>Tags system</b>
+providesTags: ['Posts']
+invalidatesTags: ['Posts']
+<b>Flow</b>:
+getPosts → provides tag Posts
+addPost → invalidates tag Posts
+<b>RTK Query automatically</b>:
+👉 refetches getPosts
+Example
+getPosts: builder.query({
+  query: () => '/posts',
+  providesTags: ['Posts'],
+})
+
+addPost: builder.mutation({
+  query: (post) => ({
+    url: '/posts',
+    method: 'POST',
+    body: post,
+  }),
+  invalidatesTags: ['Posts'],
+})
+   `
+   ,
           code1: ``
         }
       ]
     },
     {
+      id: 1,
+      title: "RTK Query Tags (automatic refetching)",
+      note: [
+        {
+          text1: `👉 Tags are labels attached to cached data.
+          Tags = Smart linking system between Queries & Mutations
+          
+          Tags in RTK Query are used for cache invalidation. Queries provide tags, mutations invalidate them, and RTK Query automatically refetches affected data.
+          
+          
+          <b>1. tagTypes (The Registry)</b>
+          Defines a centralized registry of unique string identifiers that the API slice uses to categorize and track specific groups of cached data.
+->           Declares which tag types exist
+-> Enables RTK Query to manage cache relationships safely
+tagTypes → defines allowed tags
+
+A list of all tag names your API can use.
+tagTypes: ['Posts', 'Users']
+“These are the allowed labels in my system”
+
+🧠 <b>Why </b>
+RTK Query needs to <b>know all possible tag types upfront</b>
+Helps with validation and internal tracking
+
+⚠️ Important
+If you forget to define a tag here:
+❌ providesTags / invalidatesTags won’t work properly
+
+<b>2. providesTags (The Label)</b>
+Attached to queries to "label" specific cached results, establishing a link between the retrieved data and the defined tag types for future reference.
+-> Labels cached data
+-> Tells RTK Query: “this data belongs to these tags”
+providesTags → attaches labels to query data
+
+Used in queries to say:
+“This data belongs to these tags”
+getPosts: builder.query({
+  query: () => '/posts',
+  providesTags: ['Posts'], // 2️⃣ label
+})
+This query result is labeled as "Posts"
+🏷️ Putting a <b>tag label on cached data</b>
+🔥 Advanced (with IDs)
+providesTags: (result) =>
+  result
+    ? [
+        ...result.map(post => ({ type: 'Posts', id: post.id })),
+        { type: 'Posts', id: 'LIST' },
+      ]
+    : [{ type: 'Posts', id: 'LIST' }]
+
+<b>3. invalidatesTags (The Trigger)</b>
+Attached to mutations to trigger the automatic disposal and re-fetching of any cached data labeled with matching tags whenever a state-changing operation succeeds.
+-> Marks data as stale
+-> Triggers <b>automatic refetch</b>
+invalidatesTags → triggers refetch for matching labels
+
+✅ What it does
+Used in <b>mutations</b> to say:
+“These tags are outdated now”
+addPost: builder.mutation({
+  query: (post) => ({
+    url: '/posts',
+    method: 'POST',
+    body: post,
+  }),
+  invalidatesTags: ['Posts'], // 3️⃣ trigger
+})
+👉 Meaning:
+“Posts data is stale — refetch it”
+
+
+🔁 What happens internally
+1. getPosts runs → cache stored with tag "Posts"
+2. addPost runs → invalidates "Posts"
+3. RTK Query finds:
+   "Who provided 'Posts'?"
+4. It refetches getPosts automatically ✅
+`,
+          code1: `const api = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+
+  tagTypes: ['Posts'], // 1️⃣ registry
+
+  endpoints: (builder) => ({
+    getPosts: builder.query({
+      query: () => '/posts',
+      providesTags: ['Posts'], // 2️⃣ label
+    }),
+
+    addPost: builder.mutation({
+      query: (post) => ({
+        url: '/posts',
+        method: 'POST',
+        body: post,
+      }),
+      invalidatesTags: ['Posts'], // 3️⃣ trigger
+    }),
+  }),
+});`
+        }
+      ]
+    },
+        {
       id: 1,
       title: "createEntityAdapter",
       note: [
