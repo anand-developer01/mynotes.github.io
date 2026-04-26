@@ -1841,12 +1841,13 @@ server.listen(5000, () => {
         },
       ]
     },
-        {
+    {
       id: 1,
       title: "What is OAuth",
       note: [
         {
-          text1: `OAuth (Open Authorization) is an <b>authorization framework</b> that allows one application to access another application’s data <b>on behalf of a user, without sharing the user’s password.</b>
+          text1: `<a href="../assets/pdfs/Oauth 2.0 Full Setup Guide (react + Node.pdf" target="_blank">Oauth 2.0 Full Setup Guide</a>
+          OAuth (Open Authorization) is an <b>authorization framework</b> that allows one application to access another application’s data <b>on behalf of a user, without sharing the user’s password.</b>
 
           At its core, OAuth 2.0 is an open-standard authorization framework. It is the industry standard for allowing a website or application to access resources (like your profile data, photos, or contacts) hosted by another service, without the user having to share their password.
 
@@ -1919,6 +1920,11 @@ App → Fetch User Data
 `,
           code1: ``,
           img: `../assets/images/node/oauth-overview.png.webp`
+        },
+        {
+          text1: `<b>Node.js + Passport</b>
+          Install: npm install passport-google-oauth20 jsonwebtoken`,
+          code1: ``
         }
       ]
     },
