@@ -490,7 +490,7 @@ const devotionalData = {
             title: "శ్రీ వేంకటేశ్వర స్వవమి దీపారాధన తేలికగా చేసే విధానేం",
             note: [
                 {
-                    text1: `<a href="file:///home/srihas/project/mynotes.github.io/assets/pdfs/106.%20Saturday%20-%20Balaji%20Puja%20Telugu,%20English%20Lyrics.pdf" target="_blank">Balaji Puja pdf</a>
+                    text1: `<a href="../assets/pdfs/106-saturday-balaji.pdf" target="_blank">Balaji Puja pdf</a>
                     <b>మార్జనము/పరిశుద్ధి మంత్రం --- ఈ శ్లోకం ఆచమనం లేదా ఆచమనీయం మంత్రం లో భాగం.
 ఇది సాధారణంగా పూజ ప్రారంభం ముందు, శరీరం మరియు మనస్సు పవిత్రం చేసుకోవడానికి పఠిస్తారు.</b>
 ఓం అపవిత్రః పవిత్రో వా సర్వావస్థాం గతోऽపివా
