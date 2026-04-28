@@ -60,6 +60,130 @@ Chaining Methods (Method Chaining): Some methods return objects or values that a
         },
       ]
     },
+        {
+      id: 52,
+      title: "Regular Expressions (RegEx)",
+      note: [
+        {
+          text1: `ealing with symbols in JavaScript Regular Expressions (RegEx) can be a bit of a "meta" experience because so many symbols already have special meanings within the engine.
+
+To help you navigate this, here is a breakdown of how to handle symbols, whether you're using them as functional operators or trying to match them as <b>literal text.</b>
+
+The RegExp object is used for matching text with a pattern.
+
+<b>1. The "Escaping" Rule </b>
+If you want to search for a symbol that RegEx uses for logic (like <b>*, +, or ?</b>), you must "escape" it with a backslash (<b>\\</b>).
+    To match a period: Use <b>\\.</b> (otherwise, <b>.</b> matches any character).
+    To match a dollar sign: Use <b>\\$</b> (otherwise, <b>$</b> matches the end of a line).
+
+    Common Symbols Requiring Escaping:
+<b> [ ] { } ( ) \ ^ $ . | ? * + </b>
+
+<b>^</b>	 &nbsp; &nbsp; - Matches the beginning of a string.	<b>/^Hello/</b>
+👉 Start of string
+
+<b>$</b>	 &nbsp; &nbsp; - Matches the end of a string.	<b>/world$/</b>
+👉 End of string
+
+<b>.</b>	 &nbsp; &nbsp; - Matches any single character (except line breaks).	<b>/h.t/ (matches "hat", "hot")</b>
+👉 Matches any single character except newline
+
+<b>*</b>	 &nbsp; &nbsp; - Matches 0 or more of the preceding character.	<b>/ab*/ (matches "a", "ab", "abb")</b>
+👉 0 or more occurrences
+Matches:
+ac ✅
+abc ✅
+abbbc ✅
+
+<b>+</b>	 &nbsp; &nbsp; - Matches 1 or more of the preceding character.	<b>/ab+/ (matches "ab", "abb")</b>
+👉 1 or more occurrences
+/ab+c/
+Matches:
+ac ❌
+abc ✅
+abbc ✅
+
+<b>?</b>	 &nbsp; &nbsp; - Matches 0 or 1 (makes the character optional).	<b>/colors?/ (matches "color", "colors")</b>
+👉 0 or 1 occurrence
+/colou?r/
+Matches:
+color ✅
+colour ✅
+
+<b>\d</b>	 &nbsp; &nbsp; - Matches any digit (0-9).	<b>/\d+/</b>
+<b>\w</b>	 &nbsp; &nbsp; - Matches any word character (alphanumeric + underscore).	<b>/\w+/</b>
+<b>\s</b>	 &nbsp; &nbsp; - Matches whitespace (spaces, tabs, line breaks).	<b>/\s/</b>
+
+<b>{ }</b>  &nbsp; &nbsp; - (Quantifier)
+👉 Exact or range match
+/a{3}/
+Matches:
+aaa ✅
+aa ❌
+---------
+/a{2,4}/
+Matches:
+aa, aaa, aaaa
+
+<b>[ ]</b> &nbsp; &nbsp; - (Character set)
+👉 One of the characters inside
+/[abc]/
+Matches:
+<b>a</b> or <b>b</b> or <b>c</b>
+-----------
+/[0-9]/
+Matches any digit
+
+
+<b>[^ ]</b> &nbsp; &nbsp; - (Negation)
+👉 NOT inside set
+/[^0-9]/
+Matches:
+letters, symbols
+not digits
+
+🔹 <b>|</b> &nbsp; &nbsp; - (OR)
+👉 Either left or right
+/cat|dog/
+Matches:
+cat
+dog
+
+🔹 <b>()</b> &nbsp; &nbsp; - (Grouping)
+👉 Group expressions
+/(ab)+/
+Matches:
+ab
+abab
+ababab
+
+🔹 <b>\\</b> &nbsp; &nbsp; - (Escape character)
+👉 Used to escape special symbols
+/<b>\\.</b>/   // matches "."
+
+<b>Predefined Character Classes</b>
+<b>\\d</b>	&nbsp; &nbsp; - digit (0–9)
+<b>\\D</b>	&nbsp; &nbsp; - not digit
+<b>\\w</b>	&nbsp; &nbsp; - word (a-z, A-Z, 0-9, _)
+<b>\\W</b>	&nbsp; &nbsp; - not word
+<b>\\s</b>	&nbsp; &nbsp; - space
+<b>\\S</b>	&nbsp; &nbsp; - not space
+
+<b>Flags (Very Important in JS)</b>
+/hello/i   // case insensitive
+<b>i</b>	&nbsp; &nbsp; - ignore case
+<b>g</b>	&nbsp; &nbsp; - global search
+<b>m</b>	&nbsp; &nbsp; - multiline
+
+`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
     {
       id: 1,
       title: "charAt()",

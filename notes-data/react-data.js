@@ -13042,7 +13042,26 @@ export default function FetchExample() {
         {
           text1: `<b>Micro Frontend Architecture in React JS</b> is a way of structuring a large React application by splitting it into smaller, independently developed, and deployed micro-frontends. These micro-frontends can be built using React or other frameworks, but in this case, we'll focus on React. Each part of the UI (or feature) is developed as a separate React app, which can be independently updated, deployed, and integrated into a larger, cohesive UI.
           
-          
+          <b>✅ Improved Version (Use this in interview)</b>
+Micro Frontend is an architecture where a large frontend application is split into smaller, independently developed and deployed applications.
+Each micro frontend represents a feature or domain, like cart, product listing, or payments, and is owned by a separate team.
+These micro frontends are then integrated into a single UI either at build time or runtime using techniques like <b>Webpack Module Federation</b>, <b>Web Components</b>, or <b>iframes</b>.
+This approach improves scalability, allows teams to work independently, and enables faster deployments without affecting the entire application.
+
+<b>Got it — they’re specifically asking “Have you used Micro Frontend in React?</b>
+In React, micro frontends are usually implemented using Webpack Module Federation, where each micro frontend is a separate React application.
+Components are exposed from one app and consumed by another at runtime, enabling independent deployment and scalability.
+In my previous project, while we didn’t use full micro frontends, we followed a modular architecture that aligns with these principles, and I’m confident in implementing it when required.
+
+From a React perspective, I understand that micro frontends can be implemented using <b>Webpack 5 Module Federation</b>, where one React app exposes components and another consumes them at runtime.
+
+<b>👉 How it works in React</b>
+In React, each micro frontend is typically a separate React app. Using Module Federation, we can expose components from one app and dynamically import them into another app at runtime.
+
+<b>💻 Small Code-Level Hint (very powerful in interviews)</b>
+You don’t need full code, just say:
+For example, in Module Federation, we define exposes in one app and remotes in another, and then load components using dynamic imports.
+
           <b>Key Concepts of Micro Frontend Architecture in React</b>:
 <b>Componentization</b>:
 In a typical React app, components are already modular. In a micro frontend setup, you take this concept further by breaking the app down into larger pieces, with each piece having its own separate React app or module.
@@ -13055,12 +13074,6 @@ The micro frontends need to be integrated at runtime to appear as one cohesive a
 
 <b>Shared State Management</b>:
 Micro frontends need to communicate with each other and share states (like user authentication or shopping cart data). There are different ways to handle this, such as through <b>global stores</b> (e.g., using Redux or Context API) or <b> custom events.</b>
-
-
-
-
-
-
 
 <b>How Micro Frontends Work in React</b>:
 <b>1. Designing the Micro Frontends</b>:

@@ -847,10 +847,159 @@ app.listen(port, () => {
     },
     {
       id: 1,
-      title: "Streams & Buffer",
+      title: "What is a Buffer",
       note: [
         {
-          text1: ``,
+          text1: `Think of a Buffer as a <b>temporary physical memory space</b> (usually a small chunk of RAM) used to hold data while it’s being moved from one place to another.
+
+          A Buffer is a temporary storage area used to hold <b>binary data</b> (not strings, not JSON).
+          Buffer is a raw memory allocation used to handle binary data in Node.js, especially in streams and I/O operations.
+
+          Buffer is a way to store and manipulate binary data in Node.js. Binary data refers to data that consists of binary values, as opposed to text data, which consists of characters and symbols. 
+
+          Buffers provide a flexible and efficient way to store and manipulate binary data in Node.js. Whether you’re working with images, audio, video, or raw data, you’ll find that Buffers are a powerful tool that can help you build high-performance and scalable applications.
+
+          Buffers are similar to arrays of integers but are fixed-length and correspond to raw memory allocations outside the V8 JavaScript engine.
+
+          Buffer in Node.js is a built-in object used to handle and <b>manipulate raw binary data</b>, especially when working with streams, files, or network operations.
+• Represents raw memory allocation for binary data
+• Used in low-level operations like file systems and networking
+• Provides methods for reading and writing binary data
+
+        <b>Key Characteristics</b>
+    <b>Fixed Size</b>: Once you create a buffer, you cannot change its length.
+    <b>Raw Memory</b>: It stores data outside the V8 JavaScript engine's heap, making it very efficient for heavy I/O tasks.
+    <b>Binary-First</b>: It represents data as a sequence of integers, where each integer represents a byte (0–255).
+    
+    <b>Buffer.alloc(size)</b>	Creates a "clean" buffer filled with zeros. Safe but slightly slower.
+<b>Buffer.allocUnsafe(size)</b>	Fast, but contains "old" data from memory. Must be overwritten immediately.
+<b>Buffer.from(data)</b>	Converts an existing string, array, or object into a buffer.
+
+🏃 <b>Why do we need them?</b>
+In a typical web application, data doesn't arrive all at once. It arrives in chunks (streams).
+    <b>The Bucket Analogy</b>: Imagine you are filling a pool with a garden hose. You can't teleport the water instantly. The "bucket" you use to carry water from the hose to the pool is the Buffer. It holds the data until there's enough to process or move to its final destination.
+
+    <b>Why Buffer is needed?</b>
+Imagine reading a large file:
+You cannot load entire file into memory (bad performance ❌)
+Instead, Node reads chunks of data
+Each chunk is stored in a Buffer
+    
+    <b>Common Scenarios</b>:
+    <b>Reading Files</b>: When you use fs.readFile, the data returned is often a Buffer.
+    <b>Network Requests</b>: Data coming over a socket arrives in pieces that need to be "buffered."
+    <b>Image Processing</b>: Manipulating pixels requires direct access to binary bits.
+    
+    Node.js uses buffers when working with:
+->     Files (read/write)
+-> Network data (HTTP, TCP)
+-> Streams
+
+Where Buffers are used
+-> File system (fs)
+-> Streams (readable, writable)
+-> HTTP requests/responses
+-> Image/video processing
+-> Crypto operations
+
+Because JavaScript (in browsers) works mainly with strings, Node.js introduced Buffer to handle low-level binary data efficiently.
+<b>🔹 1. How JavaScript (in browsers) works</b>
+In the browser, JavaScript mainly deals with:
+Strings
+Objects (JSON)
+DOM elements
+
+Example:
+let text = "Hello World";
+👉 Even if you load data (like from an API), it’s usually:
+JSON → converted to object
+Text → string
+So browser JS is high-level:
+You don’t directly deal with raw memory or binary bytes.
+
+<b>🔹 2. What is “binary data”?</b>
+Binary data = raw bytes (0s and 1s)
+
+Examples:
+Image (JPG, PNG)
+Video
+Audio
+File content
+Network packets
+
+Example of binary:
+01001000 01100101 01101100 01101100 01101111
+👉 This is NOT a string yet.
+
+<b>Browser JavaScript mainly works with strings and high-level data, but Node.js deals with low-level operations like files and network data, which are binary. So Node.js introduced Buffer to efficiently handle raw binary data without converting it into strings.</b>
+`,
+          code1: `// Create a buffer from a string
+const buf = Buffer.from('Hello');
+
+console.log(buf); 
+// Output: <Buffer 48 65 6c 6c 6f> (These are Hexadecimal values)
+
+console.log(buf.toString()); 
+// Output: 'Hello'
+
+console.log(buf[0]); 
+// Output: 72 (The character 'H' in decimal/ASCII)
+// 
+
+
+
+// -------- 🔹 How to create a Buffer? ------------
+// 1. Allocate buffer with size
+const buf1 = Buffer.alloc(10);
+
+// 2. From string
+const buf2 = Buffer.from("Hello");
+
+// 3. From array
+const buf3 = Buffer.from([65, 66, 67]);
+
+// ----------- 🔹 Example ------------
+const buffer = Buffer.from("Anand");
+
+console.log(buffer); 
+// <Buffer 41 6e 61 6e 64>
+
+console.log(buffer.toString()); 
+// Anand
+👉 Internally stored as hex values (binary representation)
+
+// ---------- 🔹 Important Buffer Methods ----------
+1. Convert to string
+buffer.toString();
+
+2. Write data
+buffer.write("Hi");
+
+3. Length
+buffer.length;
+
+4. Copy buffer
+buffer.copy(targetBuffer);
+
+
+// ---------🔹 Real-time Example (File Read) ---------
+const fs = require('fs');
+
+fs.readFile('test.txt', (err, data) => {
+  console.log(data);          // Buffer
+  console.log(data.toString()); // Actual content
+});
+
+👉 data is always a Buffer, not string.`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Streams",
+      note: [
+        {
+          text1: `Streams read/write data in chunks, libuv performs the actual I/O (via thread pool or OS async), and the event loop processes the callbacks and emits stream events to JavaScript.`,
           code1: ``
         }
       ]
@@ -1847,6 +1996,7 @@ server.listen(5000, () => {
       note: [
         {
           text1: `<a href="../assets/pdfs/Oauth 2.0 Full Setup Guide (react + Node.pdf" target="_blank">Oauth 2.0 Full Setup Guide</a>
+          <a href="https://github.com/anand-developer01/nodejs-programs/tree/main/Oauth" target="_blank">Github code</a>
           OAuth (Open Authorization) is an <b>authorization framework</b> that allows one application to access another application’s data <b>on behalf of a user, without sharing the user’s password.</b>
 
           At its core, OAuth 2.0 is an open-standard authorization framework. It is the industry standard for allowing a website or application to access resources (like your profile data, photos, or contacts) hosted by another service, without the user having to share their password.

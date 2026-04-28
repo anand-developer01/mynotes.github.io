@@ -447,7 +447,7 @@ console.log(arr);
         },
       ],
     },
-        {
+    {
       id: 52,
       title: "Move all negative numbers to the left and positive numbers to the right",
       note: [
@@ -464,6 +464,40 @@ for(let i = 0; i < arr.length; i++){
 }
 
 console.log(arr)`
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "string compression problem ( 'aaabbcddddee' -> 'a3b2c1d4e2' )",
+      note: [
+        {
+          text1: `"aaabbcddddee" -> "a3b2c1d4e2"
+          
+          👉 Count consecutive repeating characters
+👉 When character changes, store char + count
+I iterate through the string and count consecutive characters. When the next character is different, I append the current character and its count to the result and reset the counter.
+`,
+          code1: `const str = "aaabbcddddee";
+
+function compressString(s) {
+    let result = "";
+    let count = 1;
+
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === s[i + 1]) {
+            count++;
+        } else {
+            result += s[i] + count;
+            count = 1;
+        }
+    }
+
+    return result;
+}
+
+console.log(compressString(str));
+// a3b2c1d4e2`
         },
       ],
     },

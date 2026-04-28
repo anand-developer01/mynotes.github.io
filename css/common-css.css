@@ -233,7 +233,7 @@
      height: 65px;
  }
 
- #example-absolute {
+ /* #example-absolute {
      background-color: #ff0;
      border: 3px solid red;
      color: #000;
@@ -244,8 +244,21 @@
      position: absolute;
      top: 159em;
      left: 131px;
- }
+ } */
 
+ .parent-absolute {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background: lightblue;
+}
+
+.child-absolute {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: red;
+}
 
 
  /* Css Box model */

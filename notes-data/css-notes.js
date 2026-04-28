@@ -37,12 +37,6 @@ There are five different position values:
 => <b>relative</b>: an element's original position remains in the flow of the document, just like the static value. But now left/right/top/bottom/z-index will work. The positional properties “nudge” the element from the original position in that direction.
 => <b>absolute</b>: the element is removed from the flow of the document and other elements will behave as if it's not even there whilst all the other positional properties will work on it.
 
-The element is <b>removed from normal document flow</b> and positioned <b>relative to the nearest positioned ancestor</b> (not static).
-Key Idea
-Element is taken out of layout flow
-Other elements behave like it doesn’t exist
-You can place it anywhere using top/left/right/bottom
-
 => <b>fixed</b>: the element is removed from the flow of the document like absolutely positioned elements. In fact they behave almost the same, only fixed positioned elements are always relative to the document, not any particular parent, and are unaffected by scrolling.
 => <b>sticky</b>: the element is treated like a relative value until the scroll location of the viewport reaches a specified threshold, at which point the element takes a fixed position where it is told to stick.
 => <b>inherit</b>: the position value doesn't cascade, so this can be used to specifically force it to, and inherit the positioning value from its parent.
@@ -93,12 +87,22 @@ This has no special property, it is positioned according to the normal flow of t
           An element with <u>position: absolute;</u> is positioned relative to the nearest positioned ancestor (instead of positioned relative to the viewport, like fixed).
 
 However; if an absolute positioned element has no positioned ancestors, it uses the document body, and moves along with page scrolling.
-
 <b>Note</b>: Absolute positioned elements are removed from the normal flow, and can overlap elements.
-
           Absolute positioning allows you to <b>place your element precisely where you want it</b>.
 
 Absolute positioning is done <b>relative to the first relatively (or absolutely) positioned parent element</b>. In the case when there is no positioned parent element, the element that has position set to absolute will be positioned related <b>directly to the HTML element (the page itself).</b>
+
+👉 The element is <b>removed from the normal document flow</b>
+👉 And it is <b>positioned relative to its nearest positioned ancestor</b>(not static).
+
+🧠 Key idea (very important)
+“Nearest positioned ancestor” = the closest parent element that has <b>position</b> other than <b>static</b> (like <b>relative, absolute, fixed</b>, or <b>sticky</b>)
+If no such parent exists 👉 it will position relative to the <b>entire page (body/html)</b>
+
+Key Idea
+Element is taken out of layout flow
+Other elements behave like it doesn’t exist
+You can place it anywhere using top/left/right/bottom
 
 An important thing to keep in mind while using absolute positioning is to make sure it is <b>not overused</b>, otherwise, it can lead to a maintenance nightmare.
 
@@ -106,42 +110,26 @@ The next thing, yet again, is to show an example of absolute positioning.
 
 In the example, the parent element has the position set to relative. Now, when you set the position of the child element to absolute, <b>any additional positioning will be done relative to the parent element</b>. The child element moves relatively to the top of the parent element by 100px and right of the parent element by 40px.
 
-                          <div class='abs-box'>
-                    <div class="box"></div>
-                    <div class="box position-absolute-set" id="example-absolute">position-absolute-set</div>
-                    <div class="box"></div>
-                </div>
-          
-          
+<div class="parent-absolute">
+  <div class="child-absolute">I am absolute</div>
+</div>  
           `,
-          code1: `                &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;
-                &lt;div class=&quot;box position-absolute-set&quot; id=&quot;example-element&quot;&gt;position-absolute-set&lt;/div&gt;
-                &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;
-
-.abs-box {
-    padding: 15px;
-    background-color: #ff0;
-  }
+          code1: `   &lt;div class=&quot;parent-absolute&quot;&gt;
+  &lt;div class=&quot;child-absolute&quot;&gt;I am absolute&lt;/div&gt;
+&lt;/div&gt; 
   
-.box {
-    background-color: rgba(0, 0, 255, .2);
-    border: 3px solid #00f;
-    /* float: left; */
-    width: 65px;
-    height: 65px;
+ .parent-absolute {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background: lightblue;
 }
 
-#example-absolute {
-    background-color: #ff0;
-    border: 3px solid red;
-    color: #000;
-    z-index: 1;
-}
-
-.position-absolute-set {
-    position: absolute;
-    top: 115em;
-    left: 131px;
+.child-absolute {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: red;
 }`,
         },
         {
