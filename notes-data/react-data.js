@@ -4815,98 +4815,6 @@ export default function Countdown() {
 `
         },
         {
-          text1: `<b>Canceling a fetch request</b>
-                    By using a <b>useEffect cleanup</b> function, you can cancel the ongoing API request when the component is unmounted, like so:
-                    
-                    <b>AbortError</b> error Handling:
-
-                    The <u>AbortError: signal is aborted without reason</u> typically occurs in JavaScript when using the Fetch API or other asynchronous operations that support aborting via an AbortController. This error indicates that an operation (like a fetch request) was aborted, but the reason for the abort was not specified or is not explicitly clear.
-
-<b>Understanding the Error</b>
-    <b>AbortController</b>: The <u>AbortController</u> API allows you to abort ongoing fetch requests or other asynchronous operations. You create an <u>AbortController</u> instance, pass its <u>signal</u> to the fetch request, and then call <u>abort()</u> on the controller when you want to cancel the request.
-    <b>AbortError</b>: When an operation is aborted, the JavaScript runtime throws an <u>AbortError</u>. This is a standard error used to indicate that the operation was canceled.
-
-<b>Common Causes</b>
-    <b>Manual Abort Without Reason</b>: If you manually call <u>abort()</u> on an <u>AbortController</u> instance without providing a reason or message, you might see this error. While <u>AbortError</u> itself doesn't require a reason, it's helpful for debugging to understand why the abort occurred.
-    <b>Fetch Requests Aborted</b>: If a fetch request is aborted (e.g., due to a component unmounting), the error may occur. This is especially common in React applications when using <u>useEffect</u> to manage data fetching and cleanup.
-
-    <b>Key Points</b>
-    <b>Handling AbortError</b>: When catching errors, check if the error is an <u>AbortError</u> to handle it specifically and distinguish it from other types of errors.
-    <b>Clean-Up</b>: Always ensure you abort ongoing requests in the cleanup function of <u>useEffect</u> or similar lifecycle methods to avoid memory leaks and unwanted operations.
-    <b>Debugging</b>: If you encounter this error frequently, ensure that abort operations are done intentionally and investigate why the abort might be happening unexpectedly.
-                    `,
-          code1: `// child component
-                    import React, { useState, useEffect } from 'react';
-
-function UserProfile({userId}) {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-
-    fetch(\`https://jsonplaceholder.typicode.com/users/\${userId}\`, { signal })
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(err => {
-        if (err.name === 'AbortError') {
-          console.log('Fetch request was aborted');
-        } else {
-          setError(err);
-        }
-      });
-
-    // Cleanup function to abort the fetch request if the component unmounts
-    return () => {
-      controller.abort();
-    };
-  }, [userId]); // Empty dependency array means this runs once after the initial render
-
-  if (error) {
-    return &lt;div&gt;Error: {error.message}&lt;/div&gt;;
-  }
-
-  return &lt;div&gt;Data: {data ? JSON.stringify(data) : &#39;Loading...&#39;}&lt;/div&gt;;
-}
-export default UserProfile;
-
-
-// parent component
-import { useState, useEffect } from 'react';
-import './App.css';
-import CircleComponent from './components/circle game/CircleComponent';
-function App() {
-
-  const [user, setUsername] = useState('ram')
-  const [userId, setUserId] = useState(1)
-  
-  useEffect(() => {
-    let mounted = true;
-    setTimeout(() => {
-      if (mounted) {
-        setUsername('hello world');
-      }
-    }, 4000);
-  
-    return () => mounted = false;
-  }, []);
-
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;input type=&#39;text&#39; value={userId} name=&#39;userId&#39; onChange={e =&gt; {setUserId(e.target.value)}}/&gt;
-      &lt;CircleComponent userId = {userId}/&gt;
-      { user }
-    &lt;/div&gt;
-  );
-}
-
-export default App;
-
-// In this version of the "UserProfile" component, the "useEffect" cleanup function cancels the ongoing API request by calling the "abort" method on the "AbortController" instance. This ensures that the request is stopped when the component is unmounted, helping to prevent unnecessary network traffic and data inconsistencies.
-`
-        },
-        {
           text1: `When you begin writing code in React to fetch data from an API, you may encounter an issue where your application enters into an infinite rendering loop. This occurs because updating the state triggers a re-render, leading to the execution of the same code again.
                     
                     The below code will lead to an infinite rendering of our application. So what I am trying to achieve here is, I tried to fetching data from an API and once I will the get the data I am updating the state and once a state is updated in the a component a re-render will happen. When the component will re-render same code will execute again which will lead my application to infinite re-render. Now let's discuss how to handle these kind of scenarios in React.
@@ -5255,6 +5163,123 @@ useEffect(() => {
 const result = computeSomething();  // Just use it directly in the component body`,
         },
       ],
+    },
+    {
+      id: 1,
+      title: "AbortController",
+      note: [
+        {
+          text1: `<b>Canceling a fetch request</b>
+                    By using a <b>useEffect cleanup</b> function, you can cancel the ongoing API request when the component is unmounted, like so:
+                    
+                    <b>AbortError</b> error Handling:
+
+                    The <u>AbortError: signal is aborted without reason</u> typically occurs in JavaScript when using the Fetch API or other asynchronous operations that support aborting via an AbortController. This error indicates that an operation (like a fetch request) was aborted, but the reason for the abort was not specified or is not explicitly clear.
+
+<b>Understanding the Error</b>
+    <b>AbortController</b>: The <u>AbortController</u> API allows you to abort ongoing fetch requests or other asynchronous operations. You create an <u>AbortController</u> instance, pass its <u>signal</u> to the fetch request, and then call <u>abort()</u> on the controller when you want to cancel the request.
+    <b>AbortError</b>: When an operation is aborted, the JavaScript runtime throws an <u>AbortError</u>. This is a standard error used to indicate that the operation was canceled.
+
+<b>Common Causes</b>
+    <b>Manual Abort Without Reason</b>: If you manually call <u>abort()</u> on an <u>AbortController</u> instance without providing a reason or message, you might see this error. While <u>AbortError</u> itself doesn't require a reason, it's helpful for debugging to understand why the abort occurred.
+    <b>Fetch Requests Aborted</b>: If a fetch request is aborted (e.g., due to a component unmounting), the error may occur. This is especially common in React applications when using <u>useEffect</u> to manage data fetching and cleanup.
+
+    <b>Key Points</b>
+    <b>Handling AbortError</b>: When catching errors, check if the error is an <u>AbortError</u> to handle it specifically and distinguish it from other types of errors.
+    <b>Clean-Up</b>: Always ensure you abort ongoing requests in the cleanup function of <u>useEffect</u> or similar lifecycle methods to avoid memory leaks and unwanted operations.
+    <b>Debugging</b>: If you encounter this error frequently, ensure that abort operations are done intentionally and investigate why the abort might be happening unexpectedly.
+
+    <b>🔥 Even stronger version (senior-level answer)
+“AbortController is used to handle race conditions in fast-changing inputs like search. When a user types quickly, multiple API requests are fired. Since network responses are asynchronous, older requests may resolve after newer ones and cause incorrect UI updates. By aborting previous requests, we ensure only the latest request is active, improving both performance and UI correctness.”</b>
+
+<b>🧠 What is a Race Condition?</b>
+A race condition happens when multiple asynchronous operations run at the same time, and the final result depends on which one finishes first (not which one was started last).
+
+🧠 Real example (very useful in interviews)
+You can explain like this:
+“For example, if a user types 'a → ap → app', without AbortController, responses may arrive out of order. The response for 'a' might overwrite 'app'. AbortController prevents this by canceling previous requests.”
+
+<b>⚡ One-line memory version</b>
+“AbortController prevents race conditions by cancelling outdated API requests in real-time user interactions like search.”
+
+⚡ What AbortController actually does
+It:
+❌ cancels in-flight requests
+❌ prevents outdated responses from updating UI
+❌ avoids unnecessary processing of old results
+                    `,
+          code1: `// child component
+                    import React, { useState, useEffect } from 'react';
+
+function UserProfile({userId}) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    fetch(\`https://jsonplaceholder.typicode.com/users/\${userId}\`, { signal })
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(err => {
+        if (err.name === 'AbortError') {
+          console.log('Fetch request was aborted');
+        } else {
+          setError(err);
+        }
+      });
+
+    // Cleanup function to abort the fetch request if the component unmounts
+    return () => {
+      controller.abort();
+    };
+  }, [userId]); // Empty dependency array means this runs once after the initial render
+
+  if (error) {
+    return &lt;div&gt;Error: {error.message}&lt;/div&gt;;
+  }
+
+  return &lt;div&gt;Data: {data ? JSON.stringify(data) : &#39;Loading...&#39;}&lt;/div&gt;;
+}
+export default UserProfile;
+
+
+// parent component
+import { useState, useEffect } from 'react';
+import './App.css';
+import CircleComponent from './components/circle game/CircleComponent';
+function App() {
+
+  const [user, setUsername] = useState('ram')
+  const [userId, setUserId] = useState(1)
+  
+  useEffect(() => {
+    let mounted = true;
+    setTimeout(() => {
+      if (mounted) {
+        setUsername('hello world');
+      }
+    }, 4000);
+  
+    return () => mounted = false;
+  }, []);
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;input type=&#39;text&#39; value={userId} name=&#39;userId&#39; onChange={e =&gt; {setUserId(e.target.value)}}/&gt;
+      &lt;CircleComponent userId = {userId}/&gt;
+      { user }
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+
+// In this version of the "UserProfile" component, the "useEffect" cleanup function cancels the ongoing API request by calling the "abort" method on the "AbortController" instance. This ensures that the request is stopped when the component is unmounted, helping to prevent unnecessary network traffic and data inconsistencies.
+`
+        },
+      ]
     },
     {
       id: 24,
@@ -12780,26 +12805,7 @@ export default App;
         },
       ],
     },
-    {
-      id: 52,
-      title: "ApolloClient",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        },
-      ],
-    },
-    {
-      id: 52,
-      title: "ApolloClient",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        },
-      ],
-    },
+
     {
       id: 52,
       section: "HTTP request modules",
@@ -12834,15 +12840,149 @@ Error handling is tricky (fetch only rejects on network error, not on 404/500).`
           text1: `External library (npm install axios).
 Returns a Promise.
 
+Axios is a popular JavaScript HTTP client used to make requests from:
+Browser (frontend)
+Node.js (backend)
+
 <b>Pros</b>:
-Auto JSON parsing (no need .json()).
+Automatic JSON transformation (no need .json()).
 Better error handling (rejects on 404/500).
-Can set baseURL, headers, interceptors.
-Supports cancel requests easily.
+Can set baseURL, headers, Request & response interceptors.
+Supports cancel requests easily(Timeout support).
 Works in both browser + Node.js.
 
 <b>Cons</b>:
 Extra dependency (must install).
+
+
+
+<b>🔹 HTTP Methods</b>
+<b>1. GET Request</b>
+axios.get('https://api.example.com/users')
+  .then(response => console.log(response.data))
+  .catch(error => console.error(error));
+
+<b>2. POST Request</b>
+axios.post('https://api.example.com/users', {
+  name: "John",
+  age: 25
+})
+.then(res => console.log(res.data))
+.catch(err => console.error(err));
+
+<b>3. PUT Request</b>
+axios.put('/users/1', {
+  name: "Updated Name"
+});
+
+<b>4. DELETE Request</b>
+axios.delete('/users/1');
+
+<b>🔹 Axios Response Object</b>
+{
+  data: {},        // actual data
+  status: 200,     // HTTP status
+  statusText: "OK",
+  headers: {},
+  config: {},
+  request: {}
+}
+
+<b>🔹 Axios Config Object</b>
+axios({
+  method: 'get',
+  url: '/users',
+  headers: {
+    Authorization: 'Bearer token'
+  },
+  params: {
+    id: 1
+  }
+});
+
+<b>🔹 Query Parameters</b>
+axios.get('/users', {
+  params: {
+    page: 1,
+    limit: 10
+  }
+});
+
+<b>🔹 Headers</b>
+axios.get('/users', {
+  headers: {
+    Authorization: 'Bearer token'
+  }
+});
+
+<b>🔹 Error Handling</b>
+axios.get('/wrong-url')
+  .catch(error => {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+    } else if (error.request) {
+      console.log("No response received");
+    } else {
+      console.log(error.message);
+    }
+  });
+  
+<b>🔹 Async/Await Usage</b>
+async function fetchData() {
+  try {
+    const response = await axios.get('/users');
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+<b>🔹 Axios Instance</b>
+Create reusable instance:
+const api = axios.create({
+  baseURL: 'https://api.example.com',
+  timeout: 5000
+});
+api.get('/users');
+
+<b>🔹 Interceptors</b>
+Request Interceptor
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = 'Bearer token';
+  return config;
+});
+Response Interceptor
+axios.interceptors.response.use(
+  response => response,
+  error => Promise.reject(error)
+);
+
+<b>🔹 Timeout</b>
+axios.get('/users', {
+  timeout: 3000
+});
+
+<b>🔹 Cancel Requests</b>
+const controller = new AbortController();
+axios.get('/users', {
+  signal: controller.signal
+});
+controller.abort();
+
+<b>🔹 Sending Form Data</b>
+const formData = new FormData();
+formData.append('name', 'John');
+axios.post('/upload', formData);
+
+<b>🔹 File Upload</b>
+axios.post('/upload', file, {
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
+});
+
+<a href="https://github.com/anand-developer01/react-js-programs/tree/main/axios/complete%2C%20structured%20notes%20on%20Axios" target="_blank"> complete, structured notes on Axios </a>
 `,
           code1: `// ---------- Ex : 1 ---------
           import axios from "axios";

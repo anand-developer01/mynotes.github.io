@@ -50,14 +50,6 @@ Chaining Methods (Method Chaining): Some methods return objects or values that a
 `,
           code1: ``
         },
-        {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
       ]
     },
         {
@@ -142,14 +134,14 @@ Matches:
 letters, symbols
 not digits
 
-🔹 <b>|</b> &nbsp; &nbsp; - (OR)
+<b>|</b> &nbsp; &nbsp; - (OR)
 👉 Either left or right
 /cat|dog/
 Matches:
 cat
 dog
 
-🔹 <b>()</b> &nbsp; &nbsp; - (Grouping)
+<b>()</b> &nbsp; &nbsp; - (Grouping)
 👉 Group expressions
 /(ab)+/
 Matches:
@@ -157,7 +149,7 @@ ab
 abab
 ababab
 
-🔹 <b>\\</b> &nbsp; &nbsp; - (Escape character)
+<b>\\</b> &nbsp; &nbsp; - (Escape character)
 👉 Used to escape special symbols
 /<b>\\.</b>/   // matches "."
 
@@ -176,7 +168,57 @@ ababab
 <b>m</b>	&nbsp; &nbsp; - multiline
 
 `,
-          code1: ``
+          code1: `const text = "My number is 9876543210";
+
+const result = text.match(/\d+/g);
+console.log(result);
+// Output:
+// ["9876543210"]
+
+// 🔍 Step-by-step meaning
+// 1. \d
+// 👉 match one digit (0–9)
+
+// 2. +
+// 👉 repeat the previous pattern (\d) 1 or more times
+// So:
+// \d+
+// means:
+// 👉 match a sequence of digits continuously
+
+// 🧠 What actually happens internally
+// Given:
+// "My number is 9876543210"
+// Engine starts scanning:
+// sees 9 → matches \d
+// sees 8 → still digit → + continues
+// sees 7 → continue
+// ...
+// sees 0 → continue
+// next char is space/end → STOP
+// 👉 It groups everything into:
+// "9876543210"
+
+
+// ⚡ Without +
+// /\d/g
+// 👉 No repetition
+// 👉 So it matches:
+// 9 → stop
+// 8 → stop
+// 7 → stop
+// ✔ Result = individual matches
+
+
+// ------------------ Ex : 2 ---------------
+const text = 'My number is "hello world"';
+const result = text.replace(/"([^"]*)"/g, (match, group) => {
+  return \`"\${group.replace(/\s+/g, "_")}"\`;
+});
+console.log(result);
+// Output:
+// My number is "hello_world"
+`
         },
         {
           text1: ``,

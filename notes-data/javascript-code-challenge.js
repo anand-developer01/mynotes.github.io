@@ -501,6 +501,22 @@ console.log(compressString(str));
         },
       ],
     },
+        {
+      id: 52,
+      title: "eplace spaces with _ only inside the quoted substring (\"...\"), not the whole string.",
+      note: [
+        {
+          text1: ``,
+          code1: `const text = 'My number is "hello world"';
+
+const result = text.replace(/"([^"]*)"/g, (match, group) => {
+  return \`"\${group.replace(/\s+/g, "_")}"\`;
+});
+
+console.log(result);`
+        },
+      ],
+    },
     {
       id: 1,
       title: "Write a function to solve the coin change problem.",
