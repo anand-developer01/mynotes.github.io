@@ -11004,12 +11004,95 @@ Webpack, a popular module bundler for JavaScript applications, offers built-in s
         }
       ],
     },
+        {
+      id: 52,
+      title: "Resource Hints",
+      note: [
+        {
+          text1: `Use <b>preconnect</b> for your API URL (e.g., [https://api.yourdomain.com](https://api.yourdomain.com)).
+Use <b>preload</b> for your main brand font.
+Use <b>prefetch</b> for your other route chunks (via React.lazy).
+Use <b>prerender</b> ONLY for the "Happy Path"—like prerendering the "Success" page while the user is typing their credit card info.`,
+          code1: ``
+        }
+      ],
+    },
     {
       id: 52,
       title: "Preloading & Prefetching",
       note: [
         {
-          text1: ``,
+          text1: `<b>Preloading (rel="preload")</b>
+Preloading is high priority. It tells the browser: "I need this file for the current page right now. Don't wait—download it immediately."
+<b>Use case<b>/: Critical assets like fonts, hero images, or main CSS files that the browser might not discover until late in the rendering process.
+<b>Behavior</b>: The browser downloads it as a top priority and caches it.
+
+<b>Prefetching (rel="prefetch")</b>
+Prefetching is low priority. It tells the browser: "The user might need this file on the next page they visit. Download it when you're idle."
+<b>Use case</b>: JavaScript bundles for a "Settings" page or "Dashboard" that a user is likely to click on next.
+<b>Behavior</b>: The browser waits until it’s finished with everything important for the current page, then downloads the asset in the background.
+Preload resources you have high-confidence will be used in the current page.
+preload is a declarative fetch, allowing you to force the browser to make a request for a resource without blocking the document’s onload event.
+Preloading is a method of loading resources (e.g., script files, images, stylesheets) in advance by storing them in a browser’s local cache. Site developers can instruct browsers to preload resources by adding <link rel=”preload”> directives in a page’s <head> section. 
+
+<b>A. Using React.lazy and Suspense (Prefetching)</b>
+When you use dynamic imports, most bundlers automatically handle the code-splitting. You can add "magic comments" to tell Webpack or Vite how to handle the chunk.
+
+<b>Prefetch is a hint to the browser that a resource might be needed</b>, but delegates deciding whether and when loading it is a good idea or not to the browser.
+Prefetch resources likely to be used for future navigations across multiple navigation boundaries.
+
+// Prefetching a component for a future route
+const SettingsPage = React.lazy(() => 
+  import(/* webpackPrefetch: true */ './SettingsPage')
+);
+What happens: When the main page loads, the browser will wait for some idle time and then fetch the SettingsPage bundle so it's ready when the user clicks the link.
+
+<b>B. Using Vite or Webpack (Preloading)</b>
+If you are using Vite, it automatically generates <link rel="modulepreload"> tags for your entry chunks.
+If you need to preload a specific asset (like a heavy font) in a React app, you typically add it to your index.html head:
+
+<link rel="preload" href="/fonts/main-font.woff2" as="font" type="font/woff2" crossorigin>
+
+<b>C. Modern React Hooks (Experimental)</b>
+React 18+ introduced some "Secret" features (often used by frameworks like Next.js) to handle resource loading directly in your components:
+
+import { preload } from 'react-dom';
+function MyComponent() {
+  // This tells React to start preloading this script immediately
+  preload('https://example.com/script.js', { as: 'script' });
+  
+  return <div>My App</div>;
+}
+
+<b>1. Magic Comments</b>
+Those are "Magic Comments" specifically designed for the Webpack bundler. Because Vite uses a completely different engine (Rollup for production and esbuild for development), it doesn't recognize those specific names.
+
+Vite does not use webpackPrefetch or webpackPreload.
+<b>(The Webpack Era)</b>
+In Webpack, you used these comments inside a dynamic import() to tell the bundler how to handle the new chunk:
+<b>/* webpackPrefetch: true */</b>: Told Webpack to add <link rel="prefetch"> to the HTML head. It was low priority (for future use).
+<b>/* webpackPreload: true */</b>: Told Webpack to add <link rel="preload"> to the HTML head. It was high priority (for immediate use).
+
+
+<b>2. What does Vite use instead?</b>
+Vite is "opinionated," meaning it handles most of this automatically without you needing to write comments.
+
+Automatic "Module Preload"
+Vite uses a modern standard called Module Preload. When you use a dynamic import in Vite:  
+const AdminPanel = () => import('./AdminPanel')
+Vite <b>automatically</b> calculates which dependencies that chunk needs and injects <b><link rel="modulepreload"></b> tags for them. You don't have to type anything; Vite just does it to prevent "waterfalls" (where the browser downloads the chunk, then realizes it needs a library, then downloads that library).
+
+Vite's Equivalent to Prefetch
+If you want to manually prefetch a chunk in Vite (like the old <b>webpackPrefetch</b>), you have two main options in 2026:
+<b>A. Using Plugins (The Direct Equivalent)</b>
+If you really love the "comment" style, you can use a community plugin like vite-plugin-magic-comments. It allows you to write:
+import(/* prefetch: true */ './BigComponent')
+The plugin then translates that into the proper HTML tags during the build.
+
+<b>B. The Framework Way (Recommended)</b>
+If you are using Next.js or Remix, you don't use bundler comments. You use their components:
+Next.js: <Link href="/dashboard"> automatically prefetches the JS.
+`,
           code1: ``
         }
       ],
