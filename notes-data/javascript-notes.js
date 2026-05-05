@@ -119,8 +119,18 @@ console.log(obj1 == obj2); // false
 	},
 	  	{
       id: 1,
-      section: `General`,
+      section: `Design Patterns`,
       title: "JavaScript Event Loop",
+      note: [
+		        {
+		          text1: ``,
+					code1: ``,
+				}
+			]
+	},
+	  	  	{
+      id: 1,
+      title: "like Singleton",
       note: [
 		        {
 		          text1: ``,
