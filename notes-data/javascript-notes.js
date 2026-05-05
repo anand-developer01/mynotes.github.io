@@ -38,6 +38,96 @@ Project Estimations
         },
       ]
     },
+	{
+      id: 1,
+      section: `General`,
+      title: "Primitive and Non-Primitive",
+      note: [
+		        {
+		          text1: `<b>1. Primitive Types</b>
+There are 7 primitive types in JavaScript. They are <b>immutable</b>, meaning the value itself cannot be changed (though the variable assigned to it can be reassigned).
+
+<b>Number </b>:	Integers and floating-point numbers. -	let age = 25;
+<b>String </b>:	Sequences of characters. -	let name = "Alice";
+<b>Boolean </b>:	Logical values: true or false. -	let isTrue = true;
+<b>Undefined </b>:	A variable that has been declared but not assigned. -	let x;
+<b>Null	</b>: Intentional absence of any object value. -	let y = null;
+<b>Symbol </b>:	Unique and immutable identifiers (ES6).	- Symbol('id')
+<b>BigInt </b>:	Numbers too large for the standard Number type. - 9007199254740991n
+
+<b>2. Non-Primitive Types (Reference Types)</b>
+In JavaScript, there is essentially only one non-primitive type: <b>The Object</b>. Everything else that isn't a primitive—Arrays, Functions, Dates, and Maps—is technically an object under the hood.
+Object: { name: "John", age: 30 }
+Array: [1, 2, 3]
+Function: function sayHi() { ... }
+<b>Key Behavior</b>: When you copy a non-primitive, you copy the <b>reference</b> (the memory address), not the actual data.
+
+<b>Memory Location</b>
+<b>Primitive Types</b>: These are stored on the <b>Stack</b>. The Stack is a simple, fast data structure that stores the actual value directly in the memory space allocated to the variable.
+<b>Non-Primitive Types</b>: The actual data is stored on the <b>Heap</b>, while a "pointer" (reference) to that location is stored on the <b>Stack</b>. The Heap is a larger, more complex memory area for data that needs more space.
+
+<b>Size</b>
+<b>Primitive Types</b>: These have a <b>Fixed Size</b>. Because the engine knows exactly how much memory a number or boolean requires, it can allocate that space efficiently on the Stack.
+<b>Non-Primitive Types</b>: These have a <b>Dynamic Size</b>. Objects and arrays can grow or shrink as you add or remove properties, so they require the flexible memory of the Heap.
+
+<b>Comparison</b>
+<b>Primitive Types</b>: These are <b>Compared by Value</b>. If two variables hold the value 10, they are considered equal because the data inside them is identical.
+<b>Non-Primitive Types</b>: These are <b>Compared by Reference</b>. Two objects are only equal if they point to the exact same memory address. Even if two separate objects look identical ({} and {}), they are not equal because they live in different spots in memory.
+
+<b>Mutability</b>
+<b>Primitive Types</b>: These are <b>Immutable</b>. You cannot change the value of a primitive once it is created. For example, you cannot change a character inside a string; you must create an entirely new string.
+<b>Non-Primitive Types</b>: These are <b>Mutable</b>. You can modify, add, or delete properties within an object or elements within an array without creating a brand-new instance in memory.
+
+<b>Primitives are Immutable</b>: You cannot reach inside a String or Number and change it. If let name = "John", you can't change the "J" to a "P". You can only replace the whole word with a new one.
+<b>Objects are Mutable</b>: You can reach inside and change a part of it.
+
+<b>Ex : 3</b>
+<b>1. The Memory Address (Referential Identity)</b>
+Even though the properties and values are identical, <b>obj1</b> and <b>obj2</b> are two distinct entities.
+When you define <b>obj1</b>, JavaScript allocates a space in the <b>Heap</b> (e.g., Address #001).
+When you define <b>obj2</b>, JavaScript allocates a new space in the <b>Heap</b> (e.g., Address #002).
+The variables <b>obj1</b> and <b>obj2</b> actually hold these memory addresses, not the data itself.
+
+<b>2. The Strict Equality Comparison (===)</b>
+The === operator for objects checks for <b>Referential Equality</b>. It asks: "Do these two variables point to the exact same location in memory?"
+Address #001 === Address #002 is false.
+
+<b>3. The Loose Equality Comparison (==)</b>
+You might expect <b>==</b> to be "smarter" and look inside the object, but in JavaScript, <b>==</b> follows the same logic as <b>===</b> when comparing two objects. It does not perform "structural equality" (checking the keys and values). It still only checks if the references are the same.
+Address #001 == Address #002 is false.
+`,
+					code1: `// --------- primitive -----------
+					When you copy a primitive, you copy the value.
+					let a = 10;
+let b = a; // b gets a brand new copy of 10
+b = 20;    // Changing b does NOT change a
+
+// ---------------  Non-Primitive (Objects)  -----------------
+let obj1 = { score: 10 };
+let obj2 = obj1; // obj2 now points to the SAME memory address as obj1
+obj2.score = 99; 
+console.log(obj1.score); // 99 (It changed for both!)
+
+// ----------- Ex : 3 --------------
+const obj1 = { name: "John", age: 30 };
+const obj2 = { name: "John", age: 30 };
+console.log(obj1 === obj2); // false
+console.log(obj1 == obj2); // false
+					`,
+				}
+			]
+	},
+	  	{
+      id: 1,
+      section: `General`,
+      title: "JavaScript Event Loop",
+      note: [
+		        {
+		          text1: ``,
+					code1: ``,
+				}
+			]
+	},
     {
       id: 1,
       section: `JAVASCRIPT RUNTIME`,
