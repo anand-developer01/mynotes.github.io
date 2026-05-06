@@ -11027,7 +11027,7 @@ Use <b>prerender</b> ONLY for the "Happy Path"—like prerendering the "Success"
         {
           text1: `<b>Preloading (rel="preload")</b>
 Preloading is high priority. It tells the browser: "I need this file for the current page right now. Don't wait—download it immediately."
-<b>Use case<b/>: Critical assets like fonts, hero images, or main CSS files that the browser might not discover until late in the rendering process.
+<b>Use case</b>: Critical assets like fonts, hero images, or main CSS files that the browser might not discover until late in the rendering process.
 <b>Behavior</b>: The browser downloads it as a top priority and caches it.
 
 <b>Prefetching (rel="prefetch")</b>
