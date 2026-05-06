@@ -10986,9 +10986,12 @@ const App = () =&gt; (
       title: "Webpack and Code Splitting",
       note: [
         {
-          text1: `<b>Understanding Code-Splitting</b>
-At its core, code-splitting is a technique that involves breaking down a large JavaScript bundle into smaller, more manageable chunks. These chunks, also known as bundles, are loaded asynchronously, allowing for faster initial page loads and better overall performance. Code-splitting ensures that only the necessary code is loaded when a specific feature or page is accessed, reducing the time it takes for the application to become interactive.
+          text1: `<b>Understanding Bundle Splitting</b>
+Bundle Splitting is the process of taking a single, massive JavaScript file (the "bundle") and breaking it into several smaller files (chunks).
+Bundle splitting breaks your single large JS bundle into <b>Multiple smaller chunks</b> that load on demand, reducing the initial paylod the browser must download before the app becomes interactive
 
+The goal is to <b>improve Initial Load</b> Time and <b>Caching Efficiency</b>. In a large application, if you change one line of code in a component, you don't want the user to have to re-download the entire React library or your third-party dependencies.
+In a React application powered by Webpack, bundle splitting is the strategic separation of your code to ensure the browser doesn't download a single, massive file on the first load.
 Webpack, a popular module bundler for JavaScript applications, offers built-in support for code-splitting. It provides a seamless way to create dynamic bundles that are loaded on demand, revolutionizing the way we optimize web applications.`,
           code1: ``
         }
@@ -11024,7 +11027,7 @@ Use <b>prerender</b> ONLY for the "Happy Path"—like prerendering the "Success"
         {
           text1: `<b>Preloading (rel="preload")</b>
 Preloading is high priority. It tells the browser: "I need this file for the current page right now. Don't wait—download it immediately."
-<b>Use case<b>/: Critical assets like fonts, hero images, or main CSS files that the browser might not discover until late in the rendering process.
+<b>Use case<b/>: Critical assets like fonts, hero images, or main CSS files that the browser might not discover until late in the rendering process.
 <b>Behavior</b>: The browser downloads it as a top priority and caches it.
 
 <b>Prefetching (rel="prefetch")</b>
@@ -11051,7 +11054,7 @@ What happens: When the main page loads, the browser will wait for some idle time
 If you are using Vite, it automatically generates <link rel="modulepreload"> tags for your entry chunks.
 If you need to preload a specific asset (like a heavy font) in a React app, you typically add it to your index.html head:
 
-<link rel="preload" href="/fonts/main-font.woff2" as="font" type="font/woff2" crossorigin>
+&lt;link rel=&quot;preload&quot; href=&quot;/fonts/main-font.woff2&quot; as=&quot;font&quot; type=&quot;font/woff2&quot; crossorigin&gt;
 
 <b>C. Modern React Hooks (Experimental)</b>
 React 18+ introduced some "Secret" features (often used by frameworks like Next.js) to handle resource loading directly in your components:
@@ -11061,7 +11064,7 @@ function MyComponent() {
   // This tells React to start preloading this script immediately
   preload('https://example.com/script.js', { as: 'script' });
   
-  return <div>My App</div>;
+  return &lt;div&gt;My App&lt;/div&gt;;
 }
 
 <b>1. Magic Comments</b>
