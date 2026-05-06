@@ -1248,12 +1248,63 @@ const store = configureStore({
     },
     {
       id: 1,
-      section: 'Immer helpers (inside RTK)',
-      title: "current",
+      section: 'Immer & Immer helpers (inside RTK)',
+      title: "Immer",
+      note: [
+        {
+          text1: `Immer is a library that allows you to write <b>Mutating</b> Logic in reducers that actually produces <b>Immutable state updates</b> under the hood
+          
+          When you write a reducer in RTK, Immer follows a three-step lifecycle:
+<b>1) The Proxy Wrap </b>: Immer takes your current state and wraps it in a <b>Proxy</b> called the <b>draft</b>.
+<b>2) The "Mutation"</b>: You write code that looks like you are changing the data directly (e.g., <b>state.user.age = 30</b>). You aren't actually touching the real state; you are recording these changes on the Proxy.
+<b>3) The Finalization</b>: Once your reducer function finishes, Immer looks at all the changes you "recorded" on the draft. It then creates a brand-new state object that incorporates those changes, while keeping any parts of the state you didn't touch exactly as they were (this is called <b>structural sharing</b>).
+
+<b>Why this is better than "Standard" Redux</b>
+In standard Redux, if you had a deeply nested object, you had to manually spread every single level. If you forgot one <b>...state</b>, you would accidentally delete parts of your state.
+
+In standard Redux, you have to return a new object (using spreads like <b>...state</b>). RTK allows you to write "mutative" code (like <b>state.value = 5</b>) because Immer wraps your state in a <b>Proxy</b>.
+`,
+          code1: `// -------- Standard Redux (The "Manual" Way): ----------
+          return {
+  ...state,
+  posts: state.posts.map(post => 
+    post.id === action.id 
+      ? { ...post, comments: [...post.comments, action.comment] } 
+      : post
+  )
+};
+// ---------- RTK with Immer (The "Mutating" Way): -------
+const post = state.posts.find(p => p.id === action.id);
+post.comments.push(action.comment);
+          `
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "current(state)",
       note: [
         {
           text1: ``,
-          code1: ``
+          code1: `// ---------------------- 
+          import { createSlice, current } from '@reduxjs/toolkit';
+
+const mySlice = createSlice({
+  name: 'example',
+  initialState: { value: 0 },
+  reducers: {
+    increment(state) {
+      state.value += 1;
+      
+      // Standard log might look confusing or 'old'
+      console.log(state); 
+      
+      // This will show you the ACTUAL updated value
+      console.log(current(state)); 
+    },
+  },
+});
+          `
         }
       ]
     },
