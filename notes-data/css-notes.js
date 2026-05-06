@@ -5240,10 +5240,13 @@ Flexbox is a Grid layout with a one-dimensional system either within a row or a 
     },
      {
       id: 52,
-      title: "new topic",
+      title: "responsive images (adaptive images)",
       note: [
         {
-          text1: ``,
+          text1: `we have set of image in desktop so, we have to use different set images(which should match with desktop) in response(tab, mobile, etc..)
+          
+          <b>🚀 Interview Key Point (say this)</b>
+“For responsive images, we use <picture> or srcset so the browser automatically selects the correct image based on screen size and resolution. This improves performance and avoids unnecessary downloads.”`,
           code1: ``
         },
         {

@@ -263,7 +263,11 @@ Apps can run inside browsers on multiple devices.`,
         title: "Local Storage and Session Storage",
         note: [
             {
-                text1: `<b>Local Storage</b> and <b>Session Storage</b> are both part of the Web Storage API in HTML5. Local Storage keeps data permanently (even after closing the browser), while Session Storage keeps data only for the current session (cleared when tab closes). Both are bigger and faster than cookies.`,
+                text1: `<b>Local Storage</b> and <b>Session Storage</b> are both part of the Web Storage API in HTML5. Local Storage keeps data permanently (even after closing the browser), while Session Storage keeps data only for the current session (cleared when tab closes). Both are bigger and faster than cookies.
+                
+                <b>localStorage</b> is used for persistent data like user preferences, theme, or language that should remain even after closing the browser.
+<b>sessionStorage</b> is used for temporary data that should exist only for a single tab session, like multi-step form data or one-time UI states.
+`,
                 code1: `// -------- Local Storage --------
                 // Save data
 localStorage.setItem("username", "Anand");

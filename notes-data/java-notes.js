@@ -926,7 +926,7 @@ Longest Username: Christopher
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "Method Reference :: ",
       note: [
@@ -1520,6 +1520,87 @@ class Child extends Parent {
     },
     {
       id: 1,
+      title: "Method overloading",
+      note: [
+        {
+          text1: `Method overloading is when a class has multiple methods with the same name but different parameters (different number, type, or order of arguments).
+          
+          The compiler decides which version to call based on the arguments you pass — this is resolved at <b>compile time</b> (static polymorphism).
+          
+        <b>Key rules</b>:
+-> Parameters must differ (type, count, or order)
+-> Return type alone is <b>not enough</b> to overload — it won't compile
+-> Access modifiers can vary, but don't affect overloading
+`,
+          code1: `// -------------- Ex : 1 -------------
+          class Calculator {
+    int add(int a, int b) { return a + b; }
+    double add(double a, double b) { return a + b; }
+    int add(int a, int b, int c) { return a + b + c; }
+
+    //Calling add(1, 2) → uses the first. add(1.5, 2.5) → uses the second. add(1, 2, 3) → uses the third.
+
+    // ------------ Here are some real-world examples of method overloading: ------------
+    // ------------ 1. Print/Log System (like System.out.println in Java) ----------
+    class Logger {
+    void log(String message) { 
+        System.out.println("LOG: " + message); 
+    }
+    void log(String message, int errorCode) { 
+        System.out.println("LOG [" + errorCode + "]: " + message); 
+    }
+    void log(Exception e) { 
+        System.out.println("ERROR: " + e.getMessage()); 
+    }
+}
+
+// Usage
+logger.log("Server started");           // simple message
+logger.log("Not found", 404);           // with error code
+logger.log(new NullPointerException()); // with exception
+
+// ------------- 2. Payment System ---------------
+class PaymentService {
+    void processPayment(double amount) { 
+        // pay in default currency (USD)
+    }
+    void processPayment(double amount, String currency) { 
+        // pay in specific currency
+    }
+    void processPayment(double amount, String currency, String couponCode) { 
+        // pay with discount coupon
+    }
+}
+
+// Usage
+payment.processPayment(100.0);                   // simple payment
+payment.processPayment(100.0, "EUR");            // in Euros
+payment.processPayment(100.0, "USD", "SAVE20"); // with coupon
+
+
+// -------------- 3. Search Feature (like Google/e-commerce search) -----------------
+class SearchService {
+    List<Product> search(String keyword) { 
+        // search by name
+    }
+    List<Product> search(String keyword, String category) { 
+        // search within a category
+    }
+    List<Product> search(String keyword, double minPrice, double maxPrice) { 
+        // search with price range
+    }
+}
+
+// Usage
+search.search("shoes");                    // basic search
+search.search("shoes", "Sports");          // in sports category
+search.search("shoes", 500.0, 2000.0);    // within price range
+}`
+        }
+      ]
+    },
+    {
+      id: 1,
       title: "Packages",
       note: [
         {
@@ -1530,7 +1611,291 @@ class Child extends Parent {
     },
     {
       id: 1,
-      title: "Access Modifiers",
+      title: "Abstract",
+      note: [
+        {
+          text1: `<b>Abstraction</b> is the process of <b>hiding implementation details</b> and <b>showing only essential functionality</b> to the user.
+          
+          "Abstraction is the process of hiding implementation details and exposing only essential functionality. In Java, it is achieved using abstract classes and interfaces."
+          <b>Abstraction</b> is an OOP principle that hides implementation details and shows only essential features to the user. Java achieves abstraction through abstract classes and interfaces.
+          Abstraction reduces complexity, improves maintainability, and enforces design contracts
+          
+          <b> abstract class </b>
+          An abstract class is a class that is declared using the <b>abstract</b> keyword and <b>cannot be instantiated (you cannot create objects of it).</b>
+          
+          
+          <b>Simple Definition (Best for Interview)</b>
+An abstract class in Java is a class that cannot be instantiated and is used to achieve abstraction. It can have both abstract methods and non-abstract methods.
+
+It can contain:
+-> <b>Abstract methods</b> (methods without body)
+-> <b>Concrete methods</b> (methods with implementation)
+`,
+          code1: ` // -----------------  Ex : 1 -----------
+          abstract class Shape {
+    String color;
+
+    Shape(String color) {
+        this.color = color;
+    }
+
+    abstract double area();
+
+    void display() {
+        System.out.println("Color: " + color + ", Area: " + area());
+    }
+}
+
+class Circle extends Shape {
+    double radius;
+
+    Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
+    }
+
+    @Override
+    double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Rectangle extends Shape {
+    double width, height;
+
+    Rectangle(String color, double width, double height) {
+        super(color);
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    double area() {
+        return width * height;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape c = new Circle("Red", 5);
+        Shape r = new Rectangle("Blue", 4, 6);
+        c.display();  // Color: Red, Area: 78.53
+        r.display();  // Color: Blue, Area: 24.0
+    }
+}`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Encapsulation",
+      note: [
+        {
+          text1: `Encapsulation is one of the four core principles of Object-Oriented Programming (OOP). It refers to <b>bundling data (fields) and the methods that operate on that data into a single unit (a class), while restricting direct access to some of the object's components.</b>
+          
+          Encapsulation in java is a mechanism of wrapping the data(variables) and code acting on the data(members) together as single unit
+          Encapsulation is the process of <b>binding data (variables) and methods (functions) together into a single unit (class)</b> and <b>restricting direct access to the data.</b>
+          
+          <b>🔷 Key Idea</b>
+Instead of accessing variables directly, we control access using:
+-> private variables
+-> public getter and setter methods
+👉 This is also called <b>data hiding</b>
+
+🔷 Real-Time Example
+Think of a <b>bank account</b>:
+You <b>cannot directly access</b> balance
+You use methods like:
+-> deposit()
+-> withdraw()
+-> getBalance()
+👉 This is encapsulation
+
+<b>🔷 Why Encapsulation is Important</b>
+✅ Protects data from unauthorized access
+✅ Improves security
+✅ Provides control over data (validation)
+✅ Makes code maintainable
+✅ Supports abstraction
+
+<b>🔷 Interview-Ready Answer</b>
+Encapsulation in Java is the process of wrapping data and methods into a single unit, i.e., a class, and restricting direct access to the data using access modifiers. It is achieved using private variables and public getter and setter methods, which helps in data hiding and improves security and maintainability.`,
+          code1: `public class BankAccount {
+    private double balance;
+    private String owner;
+    private int transactionCount;
+
+    // Constructor
+    public BankAccount(String owner, double initialBalance) {
+        this.owner = owner;
+        this.balance = initialBalance;
+        this.transactionCount = 0;
+    }
+
+    // Getters
+    public double getBalance()       { return balance; }
+    public String getOwner()         { return owner; }
+    public int getTransactionCount() { return transactionCount; }
+
+    // Deposit with validation
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            transactionCount++;
+            System.out.println("  Deposited: $" + amount);
+        } else {
+            System.out.println("  Deposit failed: Amount must be positive.");
+        }
+    }
+
+    // Withdraw with validation
+    public void withdraw(double amount) {
+        if (amount <= 0) {
+            System.out.println("  Withdrawal failed: Amount must be positive.");
+        } else if (amount > balance) {
+            System.out.println("  Withdrawal failed: Insufficient funds. Balance is $" + balance);
+        } else {
+            balance -= amount;
+            transactionCount++;
+            System.out.println("  Withdrawn: $" + amount);
+        }
+    }
+
+    // Account summary
+    public void printSummary() {
+        System.out.println("  Owner        : " + owner);
+        System.out.println("  Balance      : $" + balance);
+        System.out.println("  Transactions : " + transactionCount);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("========================================");
+        System.out.println("       BANK ACCOUNT SIMULATION          ");
+        System.out.println("========================================");
+
+        BankAccount account = new BankAccount("Alice", 1000.0);
+
+        System.out.println("\n--- Initial Account Summary ---");
+        account.printSummary();
+
+        System.out.println("\n--- Depositing $500 ---");
+        account.deposit(500.0);
+        System.out.println("  Balance after deposit: $" + account.getBalance());
+
+        System.out.println("\n--- Withdrawing $200 ---");
+        account.withdraw(200.0);
+        System.out.println("  Balance after withdrawal: $" + account.getBalance());
+
+        System.out.println("\n--- Withdrawing $2000 (more than balance) ---");
+        account.withdraw(2000.0);
+
+        System.out.println("\n--- Depositing negative amount ---");
+        account.deposit(-100.0);
+
+        System.out.println("\n--- Withdrawing negative amount ---");
+        account.withdraw(-50.0);
+
+        System.out.println("\n--- Final Account Summary ---");
+        account.printSummary();
+
+        System.out.println("\n--- Encapsulation Demo ---");
+        System.out.println("  account.balance       --> ERROR: balance has private access");
+        System.out.println("  account.getBalance()  --> $" + account.getBalance());
+
+        System.out.println("========================================");
+    }
+}
+    
+
+//////////////////////////// OUTPUT /////////////////////////////
+// ========================================
+//        BANK ACCOUNT SIMULATION          
+// ========================================
+
+// --- Initial Account Summary ---
+//   Owner        : Alice
+//   Balance      : $1000.0
+//   Transactions : 0
+
+// --- Depositing $500 ---
+//   Deposited: $500.0
+//   Balance after deposit: $1500.0
+
+// --- Withdrawing $200 ---
+//   Withdrawn: $200.0
+//   Balance after withdrawal: $1300.0
+
+// --- Withdrawing $2000 (more than balance) ---
+//   Withdrawal failed: Insufficient funds. Balance is $1300.0
+
+// --- Depositing negative amount ---
+//   Deposit failed: Amount must be positive.
+
+// --- Withdrawing negative amount ---
+//   Withdrawal failed: Amount must be positive.
+
+// --- Final Account Summary ---
+//   Owner        : Alice
+//   Balance      : $1300.0
+//   Transactions : 2
+
+// --- Encapsulation Demo ---
+//   account.balance       --> ERROR: balance has private access
+//   account.getBalance()  --> $1300.0
+// ========================================
+
+// === Code Execution Successful ===
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "(Access specifiers) - Access Modifiers",
+      note: [
+        {
+          text1: `Access Modifiers in Java define who <b>can access a class, method, variable, or constructor</b>. They are used for <b>encapsulation (data hiding)</b> and controlling visibility.
+          
+          Access specifiers (also called access modifiers) control the visibility and accessibility of class members (variables, methods, constructors) in object-oriented programming.
+          
+        <b>The Three Main Access Specifiers</b>
+<b>1. Public</b>
+Accessible from anywhere — same class, same package, subclasses, other packages
+No restrictions
+public int age;
+public void display() { }
+
+<b>2. Private</b>
+Accessible only within the same class
+Not visible to subclasses or other classes
+private int salary;
+private void calculate() { }
+
+<b>3. Protected</b>
+Accessible within the same class, same package, and subclasses (even in other packages)
+Protected members are available outside the class.
+
+<b>4. Default (no keyword — package-private)</b>
+Accessible only within the same package
+Used when no specifier is written
+`,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Exceptions",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Wrapper classes",
       note: [
         {
           text1: ``,

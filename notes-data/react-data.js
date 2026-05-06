@@ -724,6 +724,41 @@ While we will separate the production and development specific bits out, note th
       ]
     },
     {
+      id: 52,
+      section:'debugging & error handling',
+      title: "debugging methods in react",
+      note: [
+        {
+          text1: `<b>🔥 Even stronger (senior-level framing):</b>
+“For debugging React issues, I usually start with React DevTools to inspect props, state, and re-renders. Then I use console logs for quick flow verification. If needed, I use browser source breakpoints to step through execution. I also validate API calls in the Network tab to ensure correct data is coming in before it reaches the UI.”
+
+“In React, I debug using React DevTools to inspect props/state, console logs for flow tracking, browser network tab for API issues, and breakpoints for step-by-step debugging. I also check useEffect dependencies, unnecessary re-renders, and use Redux DevTools when applicable. For production stability, I use error boundaries and linting tools like ESLint and TypeScript.”
+
+<b>1. React Developer Tools (Must know)</b>
+This is the first thing you should mention in interviews.
+Inspect component tree
+Check props and state values
+Identify unnecessary re-renders
+See context values
+
+<b>5. Network Tab (API debugging)</b>
+Use browser DevTools → Network tab:
+API request sent or not?
+Status code (200, 404, 500)
+Response data correct or not
+CORS issues
+👉 Very important for React + Axios apps.
+
+`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
       id: 3,
       section: `State and Props`,
       title: "What are props in React?",
@@ -8707,7 +8742,15 @@ export default PasswordField`
       title: "useTransition",
       note: [
         {
-          text1: ``,
+          text1: `<b>useTransition</b> is a React hook that lets you mark certain state updates as non-urgent, keeping the UI responsive during expensive re-renders.
+
+          useTransition lets you mark some state updates as non-urgent, so React can keep the UI responsive while doing heavy work in the background.
+          
+          const [isPending, startTransition] = useTransition();
+          
+          <b>isPending : true</b> while the transition is in progress 
+          <b>startTransition</b> Function to wrap non-urgent state updates
+          `,
           code1: ``
         }
       ],
@@ -11007,7 +11050,7 @@ Webpack, a popular module bundler for JavaScript applications, offers built-in s
         }
       ],
     },
-        {
+    {
       id: 52,
       title: "Resource Hints",
       note: [
@@ -11106,7 +11149,46 @@ Next.js: <Link href="/dashboard"> automatically prefetches the JS.
       note: [
         {
           text1: `<b>What is Server-Side Rendering (SSR)?</b>
-Server-side rendering (SSR) is the technique where the HTML of a web page is generated on the server rather than in the browser. When a user requests a page, the server sends a fully rendered HTML page to the browser, which is then displayed to the user. This contrasts with client-side rendering (CSR), where the browser loads an empty HTML page and then uses JavaScript to render the content dynamically.`,
+Server-side rendering (SSR) is the technique where the HTML of a web page is generated on the server rather than in the browser. When a user requests a page, the server sends a fully rendered HTML page to the browser, which is then displayed to the user. This contrasts with client-side rendering (CSR), where the browser loads an empty HTML page and then uses JavaScript to render the content dynamically.
+
+Server-side rendering (SSR) is when a web server generates the full HTML of a page before sending it to the browser, rather than having the browser build it using JavaScript.
+
+<b>How it works</b>:
+User requests a page
+Server fetches data, renders the HTML, and sends the complete page
+Browser displays it immediately — no waiting for JS to run
+
+<b>Contrast with client-side rendering (CSR)</b>:
+In CSR (typical React/SPA apps), the server sends a near-empty HTML shell, then the browser downloads JS, runs it, fetches data, and then renders the page
+In SSR, the user sees content much sooner
+
+<b>Key benefits</b>:
+-> Faster initial load — content is visible right away
+-> Better SEO — search engines can read the fully-rendered HTML
+-> Works without JS — content is accessible even if JS fails
+
+<b>Trade-offs</b>:
+-> More server load (the server does more work per request)
+-> Can feel slower on navigation between pages (unless combined with hydration)
+-> More complex infrastructure
+
+<b>Modern hybrid approach</b>: Frameworks like Next.js, Nuxt, and SvelteKit blend SSR with client-side interactivity — the first page load is server-rendered, then the browser "hydrates" it and takes over for subsequent navigation. This gives you the best of both worlds.
+
+<b>Drawbacks of Server-Side Rendering</b>
+<b>1. Higher Server Load</b>
+Every page request requires the server to fetch data, render HTML, and respond — all before sending anything. Under heavy traffic, this puts significant strain on your servers and increases hosting costs.
+<b>2. Slower Page Transitions</b>
+After the initial load, navigating to a new page triggers a full round-trip to the server (request → render → response). This can feel sluggish compared to CSR apps, where navigation is instant since only data is fetched, not a whole new page.
+<b>3. Time to Interactivity (TTI) Gap</b>
+SSR sends HTML quickly, so the user sees content fast — but the page isn't interactive until JavaScript downloads and "hydrates" it. This creates a frustrating window where buttons and links are visible but don't work yet.
+<b>4. Increased Complexity</b>
+SSR requires more moving parts — a running server, server-side data fetching logic, caching strategies, and careful handling of things that only exist in the browser (like window or localStorage). This raises development and operational overhead.
+<b>5. Caching is Harder</b>
+Static files (CSR) are trivially cached on a CDN. SSR responses are dynamic and personalized, making caching trickier. Without a smart caching strategy, every user gets a fresh server render, which is expensive.
+<b>6. Scalability Challenges</b>
+Because each request demands server computation, scaling an SSR app under traffic spikes requires more infrastructure compared to a CSR app, which mostly serves static files.
+<b>7. Latency Sensitivity</b>
+The rendered page is only as fast as your slowest data source. If the server needs to call a slow database or API before rendering, the user waits — whereas CSR apps can show a skeleton/loader immediately.`,
           code1: ``
         }
       ],

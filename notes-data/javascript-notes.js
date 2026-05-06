@@ -1510,7 +1510,164 @@ console.log("only a is accessible (global):", a);  // Only 'a' is accessible her
         },
       ]
     },
+    {
+      id: 1,
+      title: "Strict mode in JavaScript",
+      note: [
         {
+          text1: `Strict mode in JavaScript is a feature that enforces stricter parsing and error handling. It prevents unsafe actions like using undeclared variables, duplicate parameters, and modifies <b>this</b> behavior to be safer. It is enabled using "use strict".
+          
+          <b>🔹 Why Strict Mode?</b>
+It helps you write <b>cleaner, safer, and more optimized code</b> by catching errors early.
+
+<b>What it does</b>
+1. Prevents accidental global variables
+"use strict";
+x = 10; // ❌ ReferenceError — without strict mode, this silently creates a global (Uncaught ReferenceError: x is not defined)
+
+<b>2. Disallows duplicate parameter names</b>
+function add(a, a) { ... }       // ✅ allowed normally
+"use strict";
+function add(a, a) { ... }       // ❌ SyntaxError
+
+<b>3. Makes <i style="color:#1111aa">this</i> undefined in regular functions (instead of defaulting to the global object)</b>
+"use strict";
+function greet() { console.log(this); }
+greet(); // undefined — not \`window\`
+
+<b>4. Throws on assignments to read-only properties</b>
+"use strict";
+const obj = Object.freeze({ x: 1 });
+obj.x = 2; // ❌ TypeError — silently fails without strict mode
+
+<b>5. Disallows <i style="color:#1111aa">with</i> statements</b>
+"use strict";
+with (obj) { ... } // ❌ SyntaxError
+
+<b>6. Prevents deleting variables or functions</b>
+"use strict";
+let x = 5;
+delete x; // ❌ SyntaxError
+
+<b>7. Octal literals are forbidden</b>
+Octal Literals in JavaScript — Full Example
+<b>What is an Octal literal?</b>
+An octal number uses base-8 (digits 0–7). In old JavaScript, you could write octal by prefixing a number with <b>0</b>.
+
+Without Strict Mode (Silent / Unexpected Behavior)
+
+"use strict";
+let n = 010; // ❌ SyntaxError (octal)
+let n = 0o10; // ✅ ES6 octal syntax is fine
+
+<b> Scope: file-level vs. function-level </b>
+// Entire file in strict mode
+"use strict";
+// ...all code here is strict
+
+// Or just one function
+function onlyHere() {
+  "use strict";
+  // strict inside here only
+}
+
+<b>Modules are always strict</b>
+If you're using ES Modules <b>(import/export)</b>, strict mode is on by default — no need to declare it.
+
+<b>Why use it?</b>
+Catches silent bugs early (turns them into errors)
+Makes code easier to optimize for JS engines
+Prevents use of syntax reserved for future JS features
+Generally considered a best practice for all modern JS code
+
+
+
+<b>can use "use strict"; in production</b>
+Interview-style answer 🎯
+Yes, we can use "use strict"; in production. It improves code safety by preventing common mistakes and enabling better error handling. In modern JavaScript, strict mode is enabled by default in ES modules, so we often don’t need to explicitly add it.
+
+<b>Why it’s safe in production</b>
+Strict mode is <b>not a debugging feature</b> — it’s part of the JavaScript language. It:
+Prevents silent bugs (e.g., undeclared variables)
+Makes code more predictable
+Helps JavaScript engines optimize better
+Avoids risky behaviors
+👉 So it actually <b>improves production code quality</b>, not harms it.
+
+<b>✅ Modern JS (ES6+ Modules)</b>
+When you use import / export syntax, the file is treated as an ES Module — and strict mode is automatically enabled by the JavaScript spec itself. No need to write "use strict" at all.
+
+✅ If you use bundlers like:
+Webpack
+Vite
+Babel
+👉 They usually <b>enable strict mode automatically</b>
+
+<b>🔥 What actually happens in React apps</b>
+<b>1. ES Modules → Strict mode by default (MAIN reason)</b>
+import React from "react";
+👉 The moment you use import/export
+👉 The file becomes a module
+👉 Strict mode is automatically ON
+✅ This is the primary reason, not Babel
+
+<b>2. Babel behavior (secondary / historical)</b>
+Babel can add "use strict":
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+
+<b>👉 But this happens mainly when</b>:
+Transpiling to <b>CommonJS</b> (require)
+Older setups (Node.js, legacy builds)
+
+👉 In modern setups (Vite, Webpack + ES modules):
+Babel may NOT explicitly add it
+Because it's already strict due to modules
+
+<b>🔹 So your understanding should be</b>:
+❌ Incorrect thinking
+Strict mode is ON because Babel adds "use strict"
+
+<b>✅ Correct thinking</b>
+Strict mode is ON because the code is running as an ES Module. Babel may add "use strict" in some cases, but it's not required in modern setups.
+
+<b>🎯 Interview-ready answer</b>
+In modern React apps, strict mode is enabled automatically because the code uses ES Modules (<b>import/export</b>). While Babel may add <b>"use strict"</b> when transpiling to older formats like CommonJS, it’s not the primary reason in modern setups.
+`,
+          code1: `// ----------------- ✅ Modern JS (ES6+ Modules) --------------
+        // ✅ What’s happening in your example
+// math.js
+export function add(a, b) {
+  return a + b;
+}
+
+// main.js
+import { add } from "./math.js";
+
+undeclaredVar = 10; // ❌ ReferenceError
+console.log(add(2, 3));
+
+// 👉 Both files are ES Modules (because of import/export)
+// 🔥 Key Point
+// All ES Modules run in strict mode automatically
+// So even though you didn’t write:
+// "use strict";
+// 👉 JavaScript internally treats your code as strict mode.
+
+// 🔹 Why error occurs
+// undeclaredVar = 10; 
+// In non-strict mode:
+// ✔ This would create a global variable silently
+
+// In strict mode:
+// ❌ Throws:
+// ReferenceError: undeclaredVar is not defined
+// 👉 Because strict mode does not allow undeclared variables
+          `
+        },
+      ]
+    },
+    {
       id: 1,
       section: `Web APIs (Browser APIs)`,
       title: "Web APIs (Browser APIs)",
