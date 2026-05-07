@@ -2144,13 +2144,13 @@ Used when no specifier is written
       note: [
         {
           text1: `The differences between Abstract Class and Interface are as follows: 
-Abstract Class: 
+<b>Abstract Class</b>: 
 • Abstract classes have a default constructor and it is called whenever the concrete subclass is instantiated. 
 • It contains Abstract methods as well as Non-Abstract methods. 
 • The class which extends the Abstract class shouldn’t require the implementation of all the methods, only 
 Abstract methods need to be implemented in the concrete sub-class. 
 • Abstract class contains instance variables. 
-Interface: 
+<b>Interface</b>: 
 • It doesn’t have any constructor and couldn’t be instantiated. 
 • The abstract method alone should be declared. 
 • Classes that implement the interface should provide the implementation for all the methods. 
@@ -2164,8 +2164,146 @@ Interface:
       title: "Exceptions",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `An exception is an event that disrupts the normal flow of a program during execution. Java has a robust exception-handling mechanism built into the language.
+
+Throwable
+├── Error              (JVM errors — don't catch these)
+│   &nbsp; &nbsp; &nbsp; ├── OutOfMemoryError
+│   &nbsp; &nbsp; &nbsp; └── StackOverflowError
+└── Exception
+    &nbsp; &nbsp; &nbsp; ├── IOException         (Checked)
+    &nbsp; &nbsp; &nbsp; ├── SQLException        (Checked)
+    &nbsp; &nbsp; &nbsp; ├── FileNotFoundException (Checked)
+    &nbsp; &nbsp; &nbsp; └── RuntimeException    (Unchecked)
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── NullPointerException
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── ArithmeticException
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── ArrayIndexOutOfBoundsException
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; └── IllegalArgumentException
+
+
+        <b>Checked vs Unchecked Exceptions</b>
+<b>Checked Exceptions (Exception) </b>
+These are exceptions that the <b>compiler forces you to handle</b>. If you call a method that can throw a checked exception and you don't handle it, your code won't even compile.
+Think of it as: The compiler is saying "Hey, something could go wrong here — deal with it!"
+----------
+// This will NOT compile if you don't handle IOException
+public void readFile() {
+    FileReader fr = new FileReader("file.txt"); // ❌ Compile error!
+}
+
+// You MUST do one of these two things:
+
+// Option 1 — Handle it with try-catch
+public void readFile() {
+    try {
+        FileReader fr = new FileReader("file.txt"); // ✅
+    } catch (IOException e) {
+        System.out.println("File not found!");
+    }
+}
+
+// Option 2 — Declare it with throws
+public void readFile() throws IOException {
+    FileReader fr = new FileReader("file.txt"); // ✅
+}
+-------------
+Common examples: <b> IOException, SQLException, FileNotFoundException </b>
+
+
+<b>Unchecked Exceptions (RuntimeException)</b>
+These are exceptions the <b>compiler does NOT force you to handle</b>. They happen at runtime, usually due to bugs in your logic.
+Think of it as: The compiler trusts you — but if your logic is wrong, the program crashes at runtime.
+-------------
+// This compiles fine ✅ — but CRASHES at runtime ❌
+public void example() {
+    String name = null;
+    System.out.println(name.length()); // NullPointerException at runtime!
+}
+
+// Another example
+int[] arr = new int[3];
+arr[10] = 5; // ArrayIndexOutOfBoundsException — no compile error, crashes at runtime
+-------------
+Common examples: <b>NullPointerException, ArithmeticException, ArrayIndexOutOfBoundsException, IllegalArgumentException</b>
+
+**** Side-by-side Comparison  *****
+// ---- CHECKED ----
+public void saveToDatabase(String data) throws SQLException {
+    // compiler FORCES you to acknowledge this can fail
+    connection.execute(data);
+}
+
+// ---- UNCHECKED ----
+public void printLength(String s) {
+    // compiler says nothing — but crashes if s is null
+    System.out.println(s.length());
+}
+
+<b>Simple Rule to Remember</b>
+<b>Checked</b> = Problems <b>outside your control</b> (file missing, network down, DB unavailable) → compiler forces you to prepare for them.
+
+<b>Unchecked</b> = Problems <b>inside your code</b> (null values, bad index, wrong logic) → your responsibility to write correct code.
+                  `,
+          code1: `// Basic Syntax
+// try-catch-finally
+try {
+    int result = 10 / 0; // throws ArithmeticException
+} catch (ArithmeticException e) {
+    System.out.println("Error: " + e.getMessage());
+} finally {
+    System.out.println("Always runs — good for cleanup");
+}
+
+// -----------------  Multi-catch  ----------------
+try {
+    // risky code
+} catch (IOException | SQLException e) {
+    System.out.println("Caught: " + e.getMessage());
+}
+
+// ----------   try-with-resources (auto-closes resources)  ------------
+try (FileReader fr = new FileReader("file.txt")) {
+    // use fr — it closes automatically
+} catch (IOException e) {
+    e.printStackTrace();
+}
+
+// ------------- Throwing Exceptions ----------------
+public void setAge(int age) {
+    if (age < 0) {
+        throw new IllegalArgumentException("Age cannot be negative: " + age);
+    }
+    this.age = age;
+}
+
+// ------------- Declaring with \`throws\` --------------
+public void readFile(String path) throws IOException {
+    FileReader fr = new FileReader(path); // checked exception
+}
+
+
+
+// ---------------       Custom Exceptions      --------------
+// Checked custom exception
+public class InsufficientFundsException extends Exception {
+    private double amount;
+
+    public InsufficientFundsException(double amount) {
+        super("Insufficient funds. Short by: " + amount);
+        this.amount = amount;
+    }
+
+    public double getAmount() { return amount; }
+}
+
+// Usage
+public void withdraw(double amount) throws InsufficientFundsException {
+    if (amount > balance) {
+        throw new InsufficientFundsException(amount - balance);
+    }
+    balance -= amount;
+}
+`
         }
       ]
     },
