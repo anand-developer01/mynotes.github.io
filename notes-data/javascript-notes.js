@@ -3585,7 +3585,40 @@ clo(i)
           console.log(book1.getTitle()); // 'Clean Code'
           console.log(book1.getAuthor()); // 'Robert Cecil Martin'
           book1.setTitle('Code Complete');
-          console.log(book1.getTitle()); // 'Code Complete'`,
+          console.log(book1.getTitle()); // 'Code Complete'
+		  
+		  
+		  // --------------------------   Stored reference (Closure)     --------------------
+		  function main(a){
+    let inc = 0;
+    return function subA(b){
+        return function  subB(c){
+            inc++;
+            return a+b+c+inc;
+        }
+    }
+}
+
+// Scenario 1:
+// \`inc\` Variable	Created & destroyed 4 times.
+// Stateless: Every call is independent.
+// Direct execution.
+console.log(main(6)(3)(5))
+console.log(main(6)(3)(5))
+console.log(main(6)(3)(5))
+console.log(main(6)(3)(5))
+
+// Scenario 2:
+// \`inc\` Created once and updated 4 times.
+// Stateful: The function "remembers" previous calls.
+// Stored reference (Closure).
+const fun1 = main(2)
+const fun2 = fun1(3)
+console.log(fun2(4))
+console.log(fun2(4))
+console.log(fun2(4))
+console.log(fun2(4))
+		  `,
         },
         {
           text1: `<span style="color:#0987ac; font-size:22px;">Persistent state / State Retention</span>
