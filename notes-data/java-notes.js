@@ -8,10 +8,12 @@ const javaData = {
   javaNote: [
     {
       id: 1,
-      title: "Pagination",
+      title: "class",
       note: [
         {
-          text1: ``,
+          text1: `
+          <b> class rule </b>
+          This error is a classic Java "Rule of Law": In a single <b>.java</b> file, you can only have ONE <b>public</b> class, and its name must match the filename exactly.`,
           code1: ``
         }
       ]
@@ -357,6 +359,33 @@ public class Demo {
       note: [
         {
           text1: ``,
+          code1: ``
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "What are the differences between List and Set?",
+      note: [
+        {
+          text1: `List and Set both are interfaces. They both extends Collection interface. 
+ 
+1) List is an ordered collection it maintains the insertion order, which means upon displaying the list content it will 
+display the elements in the same order in which they got inserted into the list. 
+Set is an unordered collection, it doesn’t maintain any order. There are few implementations of Set which 
+maintains the order such as LinkedHashSet (It maintains the elements in insertion order). 
+2) List allows duplicates while Set doesn’t allow duplicate elements. All the elements of a Set should be unique if 
+you try to insert the duplicate element in Set it would replace the existing value. 
+ 
+3) List implementations: ArrayList, LinkedList etc. 
+Set implementations: HashSet, LinkedHashSet, TreeSet etc. 
+ 
+4) List allows any number of null values. Set can have only a single null value at most. 
+ 
+5) ListIterator can be used to traverse a List in both the directions (forward and backward) However it cannot be 
+used to traverse a Set. We can use Iterator (It works with List too) to traverse a Set. 
+ 
+6) List interface has one legacy class called Vector whereas Set interface does not have any legacy class.`,
           code1: ``
         }
       ]
@@ -1263,12 +1292,197 @@ Runnable r = () -> System.out.println("Hello");
         }
       ]
     },
-    {
+        {
       id: 1,
-      title: "Pagination",
+      title: "What is the usage to Consumer interface?",
       note: [
         {
-          text1: ``,
+          text1: `Use Java's Consumer interface to store a lambda expression in a variable: 
+          
+          <b>Consumer<T></b> is a built-in Functional Interface located in the java.util.function package.
+Here is the technical breakdown of what that means in practice:
+<b>1. Why is it called a "Functional Interface"?</b>
+A functional interface is an interface that has exactly one abstract method. This allows it to be used as the "target type" for <b>Lambda Expressions or Method References</b>.
+In the case of Consumer, that single method is:
+void accept(T t);
+
+<b>The Internal Code (Simplified) - (Ex : 2)</b>
+`,
+          code1: `import java.util.ArrayList; // For ArrayList
+import java.util.function.Consumer; // For the Consumer interface
+
+public class Main {
+    public static void main(String[] args){
+        
+        ArrayList<Integer> numbers = new ArrayList<Integer>(); 
+        numbers.add(5); 
+        numbers.add(9); 
+        numbers.add(8); 
+        numbers.add(1); 
+        
+        // This is a Lambda expression being assigned to a Consumer
+        Consumer<Integer> method = (n) -> { System.out.println(n); }; 
+        numbers.forEach( method ); 
+    }
+}
+// ----------------  The Internal Code (Simplified) Ex : 2  ----------------
+// If you were to look at the Java source code, it looks roughly like this:
+
+Java
+@FunctionalInterface
+public interface Consumer<T> {
+    
+    // The main method you must implement (usually via Lambda)
+    void accept(T t);
+
+    // A default method to chain consumers together
+    default Consumer<T> andThen(Consumer<? super T> after) {
+        // ... implementation ...
+    }
+}
+
+// -------------  Functional Interface  --------------
+interface FuncInterface 
+{ 
+    // An abstract function 
+    void abstractFun(int x); 
+   
+    // A non-abstract (or default) function 
+    default void normalFun() 
+    { 
+       System.out.println("Hello"); 
+    } 
+} 
+   
+class Test 
+{ 
+    public static void main(String args[]) 
+    { 
+        // lambda expression to implement above 
+        // functional interface. This interface 
+        // by default implements abstractFun() 
+        FuncInterface fobj = (int x)->System.out.println(2*x); 
+   
+        // This calls above lambda expression and prints 10. 
+        fobj.abstractFun(5); 
+    } 
+} 
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "What are the states in the lifecycle of a Thread?",
+      note: [
+        {
+          text1: `A thread can have one of the following states during its lifetime: 
+<b>New</b>:  
+In this state, a Thread class object is created using a new operator, but the thread is not alive. Thread doesn't start 
+until we call the start () method. 
+<b>Runnable</b>:  
+In this state, the thread is ready to run after calling the start () method. However, the thread is not yet selected by 
+the thread scheduler. 
+<b>Running</b>:  
+In this state, the thread scheduler picks the thread from the ready state, and the thread is running. 
+<b>Waiting/Blocked</b>:  
+In this state, a thread is not running but still alive, or it is waiting for the other thread to finish. 
+<b>Dead/Terminated</b>:  
+A thread is in terminated or dead state when the run () method exits. `,
+          code1: ``
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "Static Method",
+      note: [
+        {
+          text1: `A static method belongs to the class rather than the object. 
+There is no need to create the object to call the static methods. 
+A static method can access and change the value of the static variable. 
+          
+          This error highlights one of the most important rules in Java: <b>A static method belongs to the class, not to an object</b>.
+<b>The Problem Ex : 3</b>
+When you mark a method as static, it exists even if you haven't created a new MyClass(). However, variables like <b>c</b> or <b>b</b> are <b>instance variables</b>—they only exist when an object is created.
+static context: The "Class Level." It doesn't know which object's <b>c</b> or <b>b</b> you are talking about.
+this keyword: Refers to the current object. Since a static method doesn't have a "current object," using this inside it is impossible.`,
+          code1: `// -------------------- Ex : 3 -------------
+          // A static method belongs to the class, not to an object.
+          class MyClass {
+    public int a = 7;
+    public int b = 2;
+    MyClass(int a, int b){
+        this.a = a;
+        this.b = b;
+    }
+    
+    public static int Calc(){
+        return this.a + this.b;
+    }
+}
+public class Main {
+    public static void main(String[] args){
+        System.out.println(MyClass.Calc());
+    }
+}
+
+// Output:
+// ERROR!
+// Main.java:266: error: non-static variable this cannot be referenced from a static context
+//         return this.a + this.b;
+//                ^
+// Main.java:266: error: non-static variable this cannot be referenced from a static context
+//         return this.a + this.b;
+//                         ^
+// 2 errors
+// === Code Exited With Errors ===
+//========= Correct way ==========
+class MyClass {
+    static int x = 7;
+    static int y = 2;
+
+    public static int Calc() {
+        return x + y; // 'this' is removed
+    }
+}
+          `
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "Why is the main method static?",
+      note: [
+        {
+          text1: `Because the object is not required to call the static method.  
+If we make the main method non-static, JVM will have to create its object first and then call main() method which 
+will lead to the extra memory allocation. 
+You can write the main method in your program without the static modifier, the program gets compiled without 
+compilation errors.  
+But, at the time of execution JVM does not consider this new method (without static) as the entry point of the 
+program.  It searches for the main method which is public, static, with return type void, and a String array as an 
+argument. 
+If such a method is not found, a run time error is generated. 
+
+<span style="color:red">Error: Main method is not static in class Sample, please define the main method as − public static void main(String[] 
+args) </span>`,
+          code1: ``
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "Can we declare the main () method as final in Java?",
+      note: [
+        {
+          text1: `Yes, we can declare the main () method as final in Java. The compiler does not throw any error. 
+• If we declare any method as final by placing the final keyword then that method becomes the final method. 
+• The main use of the final method in Java is they are not overridden. 
+• We cannot override final methods in subclasses. 
+• If we are using inheritance and we need some methods not to overridden in subclasses then we need to 
+make it final so that those methods can't be overridden by subclasses. 
+• We can access final methods in the subclass but we cannot override final methods.`,
           code1: ``
         }
       ]
@@ -1279,7 +1493,8 @@ Runnable r = () -> System.out.println("Hello");
       note: [
         {
           text1: `Inheritance is an Object-Oriented Programming (OOP) concept in Java where one class acquires the properties (variables) and behaviors (methods) of another class using the extends keyword.
-          
+          Inheritance means one class can extend to another class. So that the codes can be reused from one class to another 
+class. The existing class is known as the Super class whereas the derived class is known as a sub class.
           It allows:
         -> Code reusability
         -> Method overriding
@@ -1423,12 +1638,42 @@ public class Main {
         }
       ]
     },
+        {
+      id: 1,
+      title: "Can you use this() and super() both in a constructor?",
+      note: [
+        {
+          text1: `No, because this() and super() must be the first statement in the class constructor. 
+• this() is used to call default/parameterized constructor of same class. it should be first statement inside 
+constructor. 
+• super() is used to call default/parameterized constructor of base class. it should be first statement inside 
+constructor. 
+so this() and super() both are used for constructor call but both want to execute at first. That’s why it'll show 
+compiler error like: 
+error: call to this must be first statement in constructor this(); or 
+error: call to this must be first statement in constructor super(); `,
+          code1: ``
+        }
+      ]
+    },
     {
       id: 1,
       title: "super Keyword",
       note: [
         {
           text1: ``,
+          code1: ``
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "Polymorphism",
+      note: [
+        {
+          text1: `Polymorphism means many forms. 
+A single object can refer to the super-class or sub-class depending on the reference type which is called 
+polymorphism.`,
           code1: ``
         }
       ]
@@ -1884,6 +2129,37 @@ Used when no specifier is written
       ]
     },
     {
+      id: 1,
+      title: "Difference between String, String Builder, and String Buffer.",
+      note: [
+        {
+          text1: ``,
+          code1: ``
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "Difference between Abstract class and Interface.",
+      note: [
+        {
+          text1: `The differences between Abstract Class and Interface are as follows: 
+Abstract Class: 
+• Abstract classes have a default constructor and it is called whenever the concrete subclass is instantiated. 
+• It contains Abstract methods as well as Non-Abstract methods. 
+• The class which extends the Abstract class shouldn’t require the implementation of all the methods, only 
+Abstract methods need to be implemented in the concrete sub-class. 
+• Abstract class contains instance variables. 
+Interface: 
+• It doesn’t have any constructor and couldn’t be instantiated. 
+• The abstract method alone should be declared. 
+• Classes that implement the interface should provide the implementation for all the methods. 
+• The interface contains only constants.`,
+          code1: ``
+        }
+      ]
+    },
+        {
       id: 1,
       title: "Exceptions",
       note: [
