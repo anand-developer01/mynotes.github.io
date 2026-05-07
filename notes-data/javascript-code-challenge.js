@@ -1838,6 +1838,26 @@ const reverse = arr.split('').reverse().join('')
 console.log(reverse)
 
 
+--------------------------------------------------------------------------------------
+<b>Numbers and Characters Partitioning</b>
+------------------------------------------------------------------------------------
+const str = "a3b2c1d2e4"
+let nums = '';
+let letters = '';
+for (let i = 0; i < str.length; i++){ 
+    // console.log(isNaN(str[i]))
+    if(!isNaN(str[i])){
+        nums += str[i]
+    } else {
+        letters += str[i]
+    }
+}
+console.log(nums + letters) // 32124abcde
+
+// --------------- OR ---------------
+const res = [...str.split('').filter(c => isNaN(c)), ...str.split('').filter(c => !isNaN(c))].join('')
+console.log(res) // abcde32124
+
 
 
 ------------------------------------------------------------------------------------------------
