@@ -588,7 +588,13 @@ my-react-app/
 └── ...
 
     <b>main.jsx</b>: Entry point that renders &lt;App /&gt;
-    <b>App.jsx</b>: The main React component`,
+    <b>App.jsx</b>: The main React component
+    
+    
+    <b>npm run dev</b>	Development server
+<b>npm run build</b>	Create production files
+<b>npm run preview</b>	Test production build locally
+    `,
           code1: ``
         }
       ]
@@ -5899,7 +5905,6 @@ export default ParentComponent;
         },
         {
           text1: `<b>Key Points to Remember</b>:
-
     <b>Function Signature: React.forwardRef</b> takes a render function that receives <b>props</b> and <b>ref</b>. The ref should be passed down to a DOM element or another component that you want to expose.
     <b>Handling Refs</b>: If the ref is forwarded to another component, that component must be able to handle refs, typically by using React.
     forwardRef itself.
@@ -5909,18 +5914,30 @@ export default ParentComponent;
 
 <b>Practical Use Cases</b>:
     <u>Integrating with Third-Party Libraries</u>: Forward refs to integrate with third-party libraries that require direct DOM manipulation.
-    <u>Custom Input Components</u>: Build custom input components that need to expose their internal DOM elements (e.g., focus, selection).`,
+    <u>Custom Input Components</u>: Build custom input components that need to expose their internal DOM elements (e.g., focus, selection).
+    
+    <b>Note</b>: In React 19+, <b>ref</b> is now a regular prop, so <b>forwardRef</b> is no longer needed — you can just accept <b>ref</b> directly in your component props.
+
+    Before React 19, passing ref as a prop didn't work because of how React treated ref specially — it was reserved and intercepted by React itself before props ever reached your component.
+<b>What happened internally</b>
+&lt;MyComponent ref={myRef} name=&quot;John&quot; /&gt;
+
+React processed this JSX and stripped <b>ref</b> out of the props object. So inside <b>MyComponent, props</b> would only contain <b>{ name: "John" } — ref</b> was simply never passed through.
+
+<b>Why React did this</b>
+React needed <b>ref</b> for its own internal reconciliation. When React renders a component, it uses the <b>ref</b> to attach to the DOM node or class instance after the render is committed. Since this was a framework-level concern, React claimed <b>ref</b> (along with <b>key</b>) as a reserved prop name.
+
+<b>The consequence</b>
+// This silently did NOTHING in React < 19
+function MyInput(props) {
+  console.log(props.ref); // undefined — ref is gone!
+  return &lt;input ref={props.ref} /&gt;;
+}
+No error, no warning — <b>ref</b> just disappeared silently, which made it confusing to debug.
+    `,
           code1: `const Component = forwardRef((props, ref) => {
       // Use ref on a DOM element or pass it to another component
     });`
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
         },
       ],
     },
@@ -11249,12 +11266,218 @@ Tools like Bundle Analyzer (webpack-bundle-analyzer, rollup-plugin-visualizer) l
           text1: `splitChunks is a <b>Webpack optimization configuration</b> that automatically splits your code into separate chunk files, so browsers can cache and load them more efficiently.
 It's configured under <b>optimization.splitChunks</b> in <b>webpack.config.js.</b>
 
-<b>splitChunks</b> in Webpack is used to automatically split the bundle into smaller chunks like vendor and common chunks to improve caching, performance, and reduce initial load time.`,
-          code1: ``
+splitChunks is a Webpack optimization feature used to <b>split your JavaScript bundle into smaller chunks automatically</b>, instead of putting everything into one big file.
+
+<b>splitChunks</b> in Webpack is used to automatically split the bundle into smaller chunks like vendor and common chunks to improve caching, performance, and reduce initial load time.
+
+<b>It helps improve</b>:
+Page load speed
+Caching efficiency
+Code reusability
+
+In Webpack config:
+Webpack
+-------------
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
+}
+--------------
+<b>🔹 Why splitChunks is needed?</b>
+<b>Without it</b>:
+One huge bundle.js
+Even unused code is loaded
+Poor caching (small change = full re-download)
+
+<b>With splitChunks</b>:
+Common code is separated
+Vendor libraries (React, lodash) go into separate chunk
+Only required code loads per page.
+
+<b>Before splitChunks</b>:
+bundle.js (React + App code + utilities + libraries)
+<b>After splitChunks</b>:
+vendor.js   → React, Redux
+common.js   → shared utilities
+app.js      → your application code
+
+
+<b>🔹 Types of chunks created</b>
+<b>Vendor chunk</b> → third-party libraries
+<b>Common chunk </b>→ shared code across pages
+<b>Async chunk </b>→ dynamic imports (import())
+
+<b>cacheGroups</b>
+Rules for creating separate bundles
+<b>Using cacheGroups, you can create</b>:
+vendors.js  → React + Redux
+charts.js   → Chart.js
+common.js   → shared utilities
+`,
+          code1: ` // ----------- Basic Usage ----------
+          // webpack.config.js
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
+}
+
+Key Options
+\`chunks\` — which chunks to optimize:
+
+\`async\` (default) — only lazy-loaded chunks
+\`initial\` — only synchronously imported chunks
+\`all\` — both (recommended)
+
+\`minSize\` — minimum size (bytes) for a chunk to be generated (default: 20000)
+\`maxSize\` — tries to split chunks larger than this value (split larger chunks)
+\`minChunks\` — minimum number of times a module must be shared before splitting (default: 1)
+\`maxInitialRequests / maxAsyncRequests\`— limits parallel requests
+
+// -------------- 
+splitChunks: {
+  chunks: 'all',
+  cacheGroups: {
+    vendors: {
+      test: /[\\/]node_modules[\\/]/,
+      name: 'vendors',
+      chunks: 'all',
+      priority: -10,
+    },
+    common: {
+      name: 'common',
+      minChunks: 2,       // shared by at least 2 entry points
+      chunks: 'all',
+      priority: -20,
+      reuseExistingChunk: true,
+    }
+  }
+}
+
+// Common Patterns
+// Separate vendor bundle:
+cacheGroups: {
+  vendors: {
+    test: /[\\/]node_modules[\\/]/,
+    name: 'vendors',
+    chunks: 'all'
+  }
+}
+
+// Per-package splitting (granular caching):
+cacheGroups: {
+  reactVendor: {
+    test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+    name: 'react-vendor',
+  },
+  lodash: {
+    test: /[\\/]node_modules[\\/]lodash[\\/]/,
+    name: 'lodash',
+  }
+}
+`
         }
       ],
     },
     {
+      id: 52,
+      title: "caching with content hashes",
+      note: [
+        {
+          text1: `A strategy where your output filenames include a hash derived from the file's actual content, so browsers know exactly when to re-download vs. reuse cached files.
+          
+          Webpack generates file names based on file content, so browsers cache files safely and reload them only when content changes.
+          
+          <b>🔹 Problem without content hash</b>
+Suppose build generates:
+-------
+main.js
+vendors.js
+-------
+Browser caches these files.
+Later you deploy new code.
+
+<b>Problem</b>:
+Browser may still use old cached main.js
+User sees outdated app
+
+
+
+<b>🔹 Solution → Content Hash</b>
+Webpack generates unique hash based on file content.
+<b>Example</b>:
+Webpack
+output: {
+  filename: '[name].[contenthash].js'
+}
+
+<b>Generated files</b>:
+main.a1b2c3.js
+vendors.x9y8z7.js
+
+
+<b>🔹 What happens when code changes?</b>
+Suppose only app code changes.
+New build:
+main.k7m9p2.js
+vendors.x9y8z7.js
+
+Notice:
+main.js hash changed
+vendors.js hash stayed same
+🔹 Browser behavior
+Browser sees:
+vendors.x9y8z7.js
+already cached.
+So:
+✅ no re-download
+
+But:
+main.k7m9p2.js
+is new.
+So browser downloads only changed file.`,
+          code1: `file content → SHA-256 (truncated) → hash string
+Same content → same hash → browser serves from cache
+Changed content → new hash → browser fetches fresh file
+
+
+// Full Webpack Setup
+module.exports = {
+  output: {
+    filename: '[name].[contenthash:8].js',   // :8 = first 8 chars
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
+  },
+
+  optimization: {
+    moduleIds: 'deterministic',   // stable module IDs across builds
+    runtimeChunk: 'single',       // extract webpack runtime separately
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        }
+      }
+    }
+  }
+}
+  
+// Webpack generates filenames like:
+// main.a1b2c3d4.js
+// vendors.x8y9z7k2.js
+`
+        }
+      ],
+    },
+        {
       id: 52,
       title: "Bundle Analysis & Optimization",
       note: [
@@ -11359,10 +11582,67 @@ In Webpack, you used these comments inside a dynamic import() to tell the bundle
     },
     {
       id: 52,
-      title: "new topic",
+      title: "Preconnect",
       note: [
         {
-          text1: ``,
+          text1: `Preconnect is a resource hint that tells the browser to establish an early connection with an external domain before the actual resource request happens. It reduces latency by performing DNS lookup, TCP connection, and SSL handshake in advance.
+          
+          <b>preconnect</b>	Open connection early
+<b>preload</b>	Download important resource immediately
+<b>prefetch</b>	Download resource for future navigation
+
+preconnect is a browser optimization technique used in React (or any web app) to establish an early connection to another domain before the actual request happens.
+
+It helps improve loading performance for external resources like:
+Fonts
+APIs
+CDN files
+Analytics scripts
+
+<b>Why use preconnect?</b>
+Normally, when the browser requests a resource from another domain, it must first:
+DNS lookup
+TCP connection
+SSL/TLS handshake
+
+<b>These steps take time.</b>
+preconnect tells the browser:
+“Start the connection early because we’ll need this domain soon.”
+So when the actual resource is requested later, it loads faster.
+
+<b>Example in React</b>
+Inside public/index.html (or index.html in Vite):
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot; /&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin /&gt;
+
+Then later:
+&lt;link
+  href=&quot;https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap&quot;
+  rel=&quot;stylesheet&quot;
+/&gt;
+
+Here:
+preconnect creates the connection early
+Font loads faster later
+Common Use Cases
+<b>Google Fonts</b>
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin /&gt;
+<b>API Server</b>
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://api.example.com&quot; /&gt;
+<b>CDN</b>
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://cdn.jsdelivr.net&quot; /&gt;
+
+<b>Important Note</b>
+Use preconnect only for critical third-party domains.
+Too many preconnects can:
+Waste browser connections
+Reduce performance instead of improving it
+<b>React/Vite Example</b>
+&lt;!-- index.html --&gt;
+&lt;head&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin /&gt;
+&lt;/head&gt;
+`,
           code1: ``
         },
       ],
@@ -13716,6 +13996,224 @@ module.exports = {
         {
           text1: ``,
           code1: ``
+        },
+      ],
+    },
+        {
+      id: 52,
+      title: "Vite Module Federation",
+      note: [
+        {
+          text1: `<b>🔷 Module Federation in Vite (Definition)</b>
+Module Federation in Vite is a micro-frontend architecture approach that allows multiple independently built and deployed React applications to share and load modules (components, pages, utilities) at runtime using dynamic imports.
+
+It enables a <b>host application</b> to consume code from one or more remote applications without bundling them together at build time.
+
+Module Federation in Vite is a micro-frontend technique that allows multiple independently deployed Vite applications to dynamically share and load modules at runtime using a remote entry file, enabling scalable and decoupled frontend architecture.
+
+<b>🔷 Simple Meaning</b>
+👉 One React app can use code from another React app at runtime, even if they are:
+built separately
+deployed separately
+hosted on different servers
+
+<b>In Vite, Module Federation is enabled using</b>:
+@originjs/vite-plugin-federation
+
+It works by generating a remote entry file that exposes modules:
+remoteEntry.js(example/default name)
+
+This file tells the host app:
+what modules are exposed
+where they are located
+how to load them dynamically
+
+<b>🔷 Architecture</b>
+Host App (React + Vite) - (Parent App)
+        ↓
+loads at runtime
+        ↓
+remoteEntry.js
+        ↓
+Remote App modules (Dashboard, Header, etc.)
+
+
+<b>🔷 Why is Host called Parent?</b>
+Loads other apps (remote apps)
+Controls the UI layout (shell)
+Acts as entry point for the user
+Dynamically imports remote modules
+
+<b>🔷 In your architecture</b>
+                &nbsp; &nbsp; &nbsp;    🏠 Host App (Parent)
+                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |
+         &nbsp; &nbsp; &nbsp;------------------------------------
+        &nbsp; &nbsp; &nbsp;   |   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;             |
+   (🚀 Remote App 1)      &nbsp; &nbsp;        (🚀 Remote App 2)
+   (Dashboard)          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;         (Profile)
+   
+ <b>  🏠 Host App (Parent) </b>
+Runs on localhost:3000
+Loads remote apps
+<b>Uses</b>:
+import("remoteApp/Dashboard")
+
+<b>🚀 Remote App (Child) </b>
+Runs on localhost:3001
+Exposes modules using:
+<b>exposes</b>: 
+{
+  "./Dashboard": "./src/Dashboard.jsx"
+}
+  
+
+<b>🔷  Correct Execution Flow</b>
+🚀 Remote App (MUST DO THIS)
+--------
+npm run build
+npm run preview
+---------
+Then check:
+http://localhost:3001/assets/remoteEntry.js
+When you run:
+** npm run build **
+Vite generates:
+dist/
+ └── assets/
+     &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  ├── remoteEntry.js   (or hashed version)
+      &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; ├── index-xxx.js
+      &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; └── other chunks
+
+<b>✔️ MUST open in browser</b>
+🏠 Host App
+npm run dev
+`,
+          code1: `// ------------- 🏠 Host App (Parent) --------
+          // ------------ vite.config.js --------
+          import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import federation from "@originjs/vite-plugin-federation";
+
+export default defineConfig({
+  plugins: [
+    react(),
+    federation({
+      name: "hostApp",
+
+      remotes: {
+        remoteApp: "http://localhost:3001/assets/remoteEntry.js",
+      },
+      // remotes defines external micro frontend applications
+// that the Host App can load dynamically at runtime.
+// remoteEntry.js acts as the manifest file for exposed modules.
+
+      shared: ["react", "react-dom"],
+    }),
+  ],
+
+  server: {
+    port: 3000,
+  },
+
+  build: {
+    target: "esnext",
+  },
+});
+
+
+// ------ App.js --------
+import React, { Suspense } from "react";
+
+const RemoteDashboard = React.lazy(() =>
+  import("remoteApp/Dashboard")
+);
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;🏠 Host App (Vite MF)&lt;/h1&gt;
+
+      &lt;Suspense fallback={&lt;div&gt;Loading Remote App...&lt;/div&gt;}&gt;
+        &lt;RemoteDashboard /&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+
+
+
+// ------------- 🚀 Remote App (Child) --------
+// ------------ vite.config.js --------
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import federation from "@originjs/vite-plugin-federation";
+
+export default defineConfig({
+  plugins: [
+    react(),
+    federation({
+      name: "remoteApp",
+
+      filename: "remoteEntry.js",
+      // filename defines the generated federation manifest file
+// used by the Host App to discover and load remote modules dynamically.
+
+      exposes: {
+        "./Dashboard": "./src/Dashboard.jsx",
+      },
+      // exposes defines which modules/components are shared
+// and made available to other applications at runtime.
+
+      shared: ["react", "react-dom"],
+    }),
+  ],
+
+  server: {
+    port: 3001,
+  },
+
+  preview: {
+    port: 3001,
+  },
+
+  build: {
+    target: "esnext",
+    minify: false,
+    cssCodeSplit: false,
+  },
+
+  base: "/",
+});
+
+// ------------ Dashboard.tsx ----------
+import React from "react";
+
+const Dashboard = () => {
+  return (
+    &lt;div style={{ padding: &quot;20px&quot;, background: &quot;#e3f2fd&quot; }}&gt;
+      &lt;h1&gt;🚀 Remote Dashboard (Vite MF)&lt;/h1&gt;
+      &lt;p&gt;This component is loaded from Remote App&lt;/p&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Dashboard;
+
+// ------------ Main.tsx ----------
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import Dashboard from "./Dashboard";
+
+createRoot(document.getElementById('root')).render(
+  &lt;StrictMode&gt;
+    &lt;Dashboard /&gt;
+  &lt;/StrictMode&gt;,
+)
+
+`
         },
       ],
     },
