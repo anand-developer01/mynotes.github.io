@@ -22,13 +22,13 @@ function mainDom(data) {
     document.getElementById("header").innerHTML = navHeader
     typeof subHeader !== 'undefined' ? document.getElementById('subHeader').innerHTML = subHeader : ''
 
-    if(document.getElementById('link1') || document.getElementById('link2')) {
+    if (document.getElementById('link1') || document.getElementById('link2')) {
         const eleLink1 = document.getElementById('link1').getAttribute("href");
         console.log(eleLink1.split('.')[0] === isHighlighted)
-        if(eleLink1.split('.')[0] === isHighlighted){
-            document.getElementById('link1').setAttribute("class","active"); 
+        if (eleLink1.split('.')[0] === isHighlighted) {
+            document.getElementById('link1').setAttribute("class", "active");
         }
-    
+
         const eleLink2 = document.getElementById('link2').getAttribute("href");
         console.log(eleLink2.split('.')[0] === isHighlighted)
         if(eleLink2.split('.')[0] === isHighlighted){
@@ -37,14 +37,14 @@ function mainDom(data) {
 
         const eleLink3 = document.getElementById('link3').getAttribute("href");
         console.log(eleLink3.split('.')[0] === isHighlighted)
-        if(eleLink3.split('.')[0] === isHighlighted){
-            document.getElementById('link3').setAttribute("class","active"); 
+        if (eleLink3.split('.')[0] === isHighlighted) {
+            document.getElementById('link3').setAttribute("class", "active");
         }
 
         const eleLink4 = document.getElementById('link4').getAttribute("href");
         console.log(eleLink4.split('.')[0] === isHighlighted)
-        if(eleLink4.split('.')[0] === isHighlighted){
-            document.getElementById('link4').setAttribute("class","active"); 
+        if (eleLink4.split('.')[0] === isHighlighted) {
+            document.getElementById('link4').setAttribute("class", "active");
         }
     }
 

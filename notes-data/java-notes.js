@@ -2309,6 +2309,122 @@ public void withdraw(double amount) throws InsufficientFundsException {
     },
     {
       id: 1,
+      title: "Multithreading in Java",
+      note: [
+        {
+          text1: `<b>The Core Idea</b>
+Java runs your program in a process. Inside that process, you can have many threads — each thread is an independent path of execution, but they all share the same memory.
+
+Multithreading in Java is a feature that allows a program to execute multiple threads (small units of a process) simultaneously.
+<b>🔹 What is a Thread?</b>
+A thread is a lightweight sub-process.
+It is the smallest unit of execution in a program.
+Process (Your Java App)
+&nbsp; &nbsp; &nbsp; ├── Thread 1 → handles UI
+&nbsp; &nbsp; &nbsp; ├── Thread 2 → downloads file
+&nbsp; &nbsp; &nbsp; └── Thread 3 → writes to DB
+
+<b>🔹 Why we use Multithreading?</b>
+Better performance
+Faster execution
+Efficient CPU usage
+Non-blocking operations (like UI, API calls)
+Parallel execution
+
+<b>🔹 Ways to create a Thread in Java </b>
+<b>1. By extending Thread class </b>
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running...");
+    }
+
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start(); // starts new thread
+    }
+}
+
+<b>2. By implementing Runnable interface (preferred)</b>
+Why prefer <b>Runnable</b>? Because Java doesn't allow multiple inheritance. If you <b>extend Thread</b>, you can't extend anything else. <b>Runnable</b> keeps your options open.
+
+class MyTask implements Runnable {
+    public void run() {
+        System.out.println("Runnable thread running...");
+    }
+
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new MyTask());
+        t1.start();
+    }
+}
+    <b>
+    NEW → RUNNABLE → RUNNING → (BLOCKED/WAITING) → TERMINATED
+       &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; start()              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;sleep/wait/join
+      </b>
+
+<b>🔹 Thread Lifecycle</b>
+<b>New</b> → Thread created
+<b>Runnable</b> → Ready to run
+<b>Running</b> → Executing
+<b>Blocked/Waiting</b> → Paused
+<b>Terminated</b> → Execution finished
+
+<b>start()</b>	Starts a new thread
+<b>run()</b>	Contains task logic
+<b>sleep()</b>	Pauses thread
+<b>join()</b>	Waits for thread to finish
+<b>yield()</b>	Suggests thread pause
+
+
+
+
+
+
+
+
+
+
+
+
+
+If you want, I can also explain:
+
+🔥 
+Synchronization in Java (very important)
+🔥 
+Deadlock, race condition
+🔥 
+Executor framework (advanced multithreading)
+🔥 
+Real interview questions with answers
+`,
+          code1: `// ------------ Two Ways to Create a Thread -------------
+// ----------- 1. Extend Thread -----------
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Running in: " + Thread.currentThread().getName());
+    }
+}
+
+MyThread t = new MyThread();
+t.start(); // DON'T call run() directly — that won't create a new thread
+
+
+// ------------  2. Implement Runnable ✅ (preferred) ------------
+class MyTask implements Runnable {
+    public void run() {
+        System.out.println("Task running!");
+    }
+}
+
+Thread t = new Thread(new MyTask());
+t.start();
+`
+        }
+      ]
+    },
+        {
+      id: 1,
       title: "Wrapper classes",
       note: [
         {

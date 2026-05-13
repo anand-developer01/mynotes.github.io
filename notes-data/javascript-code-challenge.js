@@ -2055,9 +2055,76 @@ const person = {
 };
 console.log(person.firstName); // Umair        
 
+-------------------------------
+<b>string to Title Case.</b>
+------------------------------
+let st = "hello world from javascript";
+const ar = st.split(' ');
+
+for (let i = 0; i < ar.length; i++) {
+    ar[i] = ar[i].charAt(0).toUpperCase() + ar[i].slice(1);
+}
+
+console.log(ar.join(' '));
+
+------ OR ---------
+
+let st = "hello world from javascript";
+const result = st
+    .split(' ')
+    .map(word => word[0].toUpperCase() + word.slice(1))
+    .join(' ');
+console.log(result);
 
 
+----------- Handles multiple spaces, tabs automatically ---------------
 
+let st = "hello     world   from    javascript";
+
+const result = st
+    .split(/\s+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+console.log(result);
+
+-----------------------------------------
+<b> To find common numbers between two arrays </b>
+-----------------------------------------
+const ar1 = [2, 5, 9, 6, 5, 4];
+const ar2 = [2, 5, 6, 1, 2, 8];
+
+const common = ar1.filter(num => ar2.includes(num));
+
+console.log(common);
+
+------------ OR ------------
+
+const ar1 = [2, 5, 9, 6, 5, 4];
+const ar2 = [2, 5, 6, 1, 2, 8];
+
+const common = [...new Set(
+    ar1.filter(num => ar2.includes(num))
+)];
+
+console.log(common);
+
+------------  Optimized Version (better for large arrays)  -------------
+
+const ar1 = [2, 5, 9, 6, 5, 4];
+const ar2 = [2, 5, 6, 1, 2, 8];
+
+const set2 = new Set(ar2);
+
+const common = [...new Set(
+    ar1.filter(num => set2.has(num))
+)];
+
+console.log(common);
+
+-----------------------------------------
+<b> Frequency comparison </b>
+-----------------------------------------
 
 link : https://namastedev.com/blog/js-interview-questions-on-arrays-and-objects/
 `,

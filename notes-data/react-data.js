@@ -10135,7 +10135,7 @@ export default PureComponent;
     },
     {
       id: 52,
-      section: `Code Splitting & Code Splitting`,
+      section: `Code Splitting & performance`,
       title: "Code splitting",
       note: [
         {
@@ -11753,6 +11753,41 @@ const MyList = () =&gt; (
           `
         },
       ]
+    },
+        {
+      id: 52,
+      section: "frequency maps improve performance",
+      title: "Rendering large lists causes unnecessary re-renders:",
+      note: [
+        {
+          text1: `users.map(user => &lt;UserCard user={user} /&gt;)
+          If same data comes again → React still re-renders.
+          ✅ Fix using Frequency Map (dedup + stable render tracking)
+          
+          const renderCountMap = new Map();
+
+          function UserList({ users }) {
+              return users.map(user => {
+                  const count = renderCountMap.get(user.id) || 0;
+                  renderCountMap.set(user.id, count + 1);
+
+                  return (
+                      &lt;UserCard
+                          key={user.id}
+                          user={user}
+                          renderCount={count}
+                      /&gt;
+                  );
+              });
+          }
+              `,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
     },
     {
       id: 13,
