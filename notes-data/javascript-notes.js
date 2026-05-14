@@ -3120,15 +3120,174 @@ function fib(n, prevVal = []) {
         {
           text1: ` In JavaScript, generators are a special type of function that allows you to control the flow of execution. Unlike regular functions, generators can be paused and resumed, enabling a more flexible and cooperative approach to handling asynchronous code and iterating over sequences of values.
 
-          Here are some key characteristics of generators:
+          👉 A generator is a special function in JavaScript that can <b>pause and resume execution</b>, and it returns <b>multiple values over time instead of returning once like a normal function</b>.
 
+          “A generator is a function that can pause execution using <b>yield</b> and resume later, allowing it to return multiple values over time instead of returning once.”
+
+          “A generator is a special function that can pause execution using yield and resume later using next(). It returns an iterator and is useful for lazy evaluation, pagination, and managing asynchronous flows.”
+
+          <b>👉 A generator is a special function that can:</b>
+-> pause execution
+-> resume later
+-> produce multiple values over time
+
+<b>🔥 Key points (interview keywords)</b>
+uses <b>function*</b>
+uses <b>yield</b>
+returns an iterator
+supports pause & resume
+produces values lazily (on demand)
+
+👉 Normal function = gives full result at once
+👉 Generator = gives result step-by-step like a playlist / stream
+
+<b>⚡ Key feature</b>
+Instead of returning once like normal functions:
+// normal function
+return value;  // ends execution
+
+Generators:
+yield value;   // pauses execution
+
+<b>yield</b>	pause + return value
+<b>next()</b>	resume execution
+<b>done</b>	finished or not
+
+          Here are some key characteristics of generators:
           Syntax:
           Generators are declared using the function* syntax. Inside a generator function, you use the yield keyword to produce a value and pause the generator's execution until the next value is requested.`,
-          code1: `          function* myGenerator() {
+          code1: `function* myGenerator() {
             yield 1;
             yield 2;
             yield 3;
-        }`
+        }
+        // -----------------  Ex : 1 -------------
+        function* demo() {
+            yield 1;
+            yield 2;
+            yield 3;
+        }
+
+        const gen = demo();
+
+        console.log(gen.next());
+        console.log(gen.next());
+        console.log(gen.next());
+        console.log(gen.next());
+        // Ourput:
+        { value: 1, done: false }
+        { value: 2, done: false }
+        { value: 3, done: false }
+        { value: undefined, done: true }
+//----
+        start → yield 1 → pause
+        &nbsp; &nbsp; &nbsp;  → yield 2 → pause
+        &nbsp; &nbsp; &nbsp;  → yield 3 → pause
+        &nbsp; &nbsp; &nbsp;  → done
+
+        // ---------------- 🚀 Generator with loop -----------
+        function* numbers() {
+            for (let i = 1; i <= 3; i++) {
+                yield i;
+            }
+        }
+
+      const gen = numbers();
+
+      console.log(gen.next());
+      console.log(gen.next());
+      console.log(gen.next());
+
+      //------------ ⚡ Real-world use cases ---------
+      //------------1. Lazy execution ----
+      // 👉 values generated only when needed
+
+      //------------ 2. Pagination ---------
+      function* paginate(data, size) {
+          let index = 0;
+
+          while (index < data.length) {
+              yield data.slice(index, index + size);
+              index += size;
+          }
+      }
+      //------------ 3. Infinite sequence -------
+      function* infinite() {
+          let i = 1;
+          while (true) {
+              yield i++;
+          }
+      }
+
+      / ------------- ⚡ Bonus: Generator + for...of --------
+      function* gen() {
+          yield 1;
+          yield 2;
+          yield 3;
+      }
+
+      for (let val of gen()) {
+          console.log(val);
+      }
+
+      // ------------  🚀 Consuming Async Generator ----------
+      async function* asyncNumbers() {
+
+    yield 1;
+
+    await new Promise(res => setTimeout(res, 1000));
+
+    yield 2;
+
+    await new Promise(res => setTimeout(res, 1000));
+
+    yield 3;
+}
+
+async function run() {
+
+    for await (let num of asyncNumbers()) {
+        console.log(num);
+    }
+
+}
+
+run();
+
+// output :
+1
+(after 1 sec)
+2
+(after 1 sec)
+3
+
+
+// -------------✅ Async Pagination Generator
+async function* fetchPages() {
+
+    let page = 1;
+
+    while (page <= 3) {
+
+        // fake API delay
+        await new Promise(res => setTimeout(res, 1000));
+
+        yield \`Page ${page} data\`;
+
+        page++;
+    }
+}
+
+async function run() {
+
+    for await (let data of fetchPages()) {
+        console.log(data);
+    }
+
+}
+
+run();
+        `
         },
         {
           text1: ` 

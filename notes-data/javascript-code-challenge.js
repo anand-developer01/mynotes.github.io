@@ -20,6 +20,627 @@ const jScodeChallengeData = {
         }
       ]
     },
+        {
+      id: 52,
+      title: "array manipulation",
+      note: [
+        {
+          text1: `-------------------------------------------------------------------------------------
+<b>second biggest value</b>
+-----------------------------------------------------------------
+const arr = [9,8,90,6,56,12,7]
+
+let firstVal = 0
+let secondVal = 0
+for(i of arr){
+    if(i > firstVal){
+        secondVal = firstVal
+        firstVal = i 
+    } else if (i !== firstVal && i > secondVal) {
+        secondVal = i
+    }
+}
+console.log(firstVal)
+console.log(secondVal)
+
+
+----------------------------------------------
+<b>remove duplicates</b>
+------------------------------------
+const arr = [9,8,6,90,6,7,56,12,7]
+
+const unique = []
+for (let i = 0; i < arr.length; i++) {
+    if(arr.indexOf(arr[i]) === i){
+        unique.push(arr[i])
+    }
+}
+
+console.log(unique)
+
+-------------------------------------------------
+<b>array reverse</b>
+-----------------------------------------------
+const arr = [9,8,6,90,6,7,56,12,7]
+const reverse = []
+for (let i = arr.length - 1; 0 <= i; i--) {
+    reverse.push(arr[i])
+}
+console.log(reverse)
+
+----------- OR -------------
+const arr = [9,8,6,90,6,7,56,12,7]
+const reverse = arr.reverse()
+console.log(reverse)
+
+
+--------------------------------------------------------------------------------------
+<b>String  reverse</b>
+------------------------------------------------------------------------------------
+const arr = "javascript";
+const reverse = arr.split('').reverse().join('')
+console.log(reverse)
+
+
+--------------------------------------------------------------------------------------
+<b>Numbers and Characters Partitioning</b>
+------------------------------------------------------------------------------------
+const str = "a3b2c1d2e4"
+let nums = '';
+let letters = '';
+for (let i = 0; i < str.length; i++){ 
+    // console.log(isNaN(str[i]))
+    if(!isNaN(str[i])){
+        nums += str[i]
+    } else {
+        letters += str[i]
+    }
+}
+console.log(nums + letters) // 32124abcde
+
+// --------------- OR ---------------
+const res = [...str.split('').filter(c => isNaN(c)), ...str.split('').filter(c => !isNaN(c))].join('')
+console.log(res) // abcde32124
+
+
+
+------------------------------------------------------------------------------------------------
+<b>Question</b>: How can you swap the values of two variables without using a temporary variable?
+<b>Answer</b>: Utilize destructuring assignment for an elegant swap:
+-------------------------------------------------------------------
+let a = 42, b = 24;
+[a, b] = [b, a];
+
+
+
+
+-------------------------------------------------------------------
+<b>Question</b>: Explain the process of cloning an object in JavaScript.
+<b>Answer</b>: Employ the spread operator for a simple object duplication:
+-------------------------------------------------------------------
+const originalObj = { one: 1, two: 2 };
+const clonedObj = { ...originalObj };
+
+
+
+
+
+-------------------------------------------------------------------
+<b>Question</b>: How do you eliminate duplicates from an array?
+<b>Answer</b>: Leverage the Set data structure to effortlessly remove duplicates:
+-------------------------------------------------------------------
+const arrayWithDupes = [1, 2, 3, 1, 2, 4];
+const noDupesArray = [...new Set(arrayWithDupes)];
+
+
+
+
+-------------------------------------------------------------------
+<b>Question</b>: Write a function to determine if a string is a palindrome.
+<b>Answer</b>: Craft a function using array methods:
+-------------------------------------------------------------------
+function isPalindrome(str) {
+  const reversed = str.split('').reverse().join('');
+  return str === reversed;
+}
+
+
+
+-------------------------------------------------------------------
+<b>Question</b>: How can you check if an object contains a specific property?
+<b>Answer</b>: Employ the "in" operator for a straightforward property check:
+-------------------------------------------------------------------
+const myObject = { name: 'JavaScript', age: 25 };
+const hasProperty = 'age' in myObject;
+
+
+
+-------------------------------------------------------------------
+<b>Question</b>: Add an element to the end of an array.
+<b>Answer</b>: Utilize the push() method for seamless array expansion:
+-------------------------------------------------------------------
+const array = ['apple', 'banana', 'cherry'];
+array.push('date');
+
+
+--------------------------------------------------
+<b>Question</b>: How do you determine if a value is NaN?
+<b>Answer</b>: Use Number.isNaN() to accurately identify NaN:
+--------------------------------------------------
+const mysteriousValue = NaN;
+const isItNaN = Number.isNaN(mysteriousValue);
+
+
+
+
+
+---------------------------------------------------
+<b>Question</b>: Merge two objects into one.
+<b>Answer</b>: Utilize the spread operator for a smooth object fusion:
+--------------------------------------------------
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+const fusedObject = { ...obj1, ...obj2 };
+
+
+
+
+--------------------------------------------
+<b>Question</b>: Remove falsy values from an array.
+<b>Answer</b>: Deploy the filter() method to sift out falsy elements:
+--------------------------------------------
+const questionableArray = [0, false, '', null, undefined, 42];
+const truthArray = questionableArray.filter(Boolean);
+
+
+
+
+-----------------------------------------------------
+<b>Question</b>: Find the missing number in an array of consecutive integers.
+<b>Answer</b>: Utilize the sum formula to deduce the missing number:
+---------------------------------------------------
+const detectiveArray = [1, 2, 3, 5, 6];
+const missingNumber = 15 - detectiveArray.reduce((sum, num) => sum + num, 0);
+
+----------------------------
+<b>1- Print unique values from an array</b>
+-----------------------------
+const arr = [1, 2, 3, 3, 4, 5, 5];
+const uniqueArr = [...new Set(arr)];
+console.log(uniqueArr);  // [1, 2, 3, 4, 5]
+
+--------------- OR -------------------
+
+const arr = [1, 2, 3, 3, 4, 5, 5];
+
+const uniqueArr = [];
+
+for (let i = 0; i < arr.length; i++) {
+    if (arr.indexOf(arr[i]) === i) {
+        uniqueArr.push(arr[i]);
+    }
+}
+
+console.log(uniqueArr);
+
+
+----------------------------------------
+<b>2- How do you use the reduce() method to sum elements in an array without using a loop?</b>
+----------------------------------------
+const arr = [1, 2, 3, 4, 5];
+const sum = arr.reduce((acc, current) => acc + current, 0);
+console.log(sum);  // 15
+
+----------------------------------------
+<b>3- How can you flatten a nested array into a single flat array?</b>
+----------------------------------------
+const arr = [1, [2, 3], [4, [5, 6]]];
+const flatArr = arr.flat(Infinity);
+console.log(flatArr);  // [1, 2, 3, 4, 5, 6]
+
+---------------- OR -------------
+const arr = [1, [2, 3], [4, [5, 6]]];
+
+function flattenArray(arr) {
+    let result = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            result = result.concat(flattenArray(arr[i]));
+        } else {
+            result.push(arr[i]);
+        }
+    }
+
+    return result;
+}
+
+console.log(flattenArray(arr));
+---------
+Output : 
+[
+   1, 2, 3, 4, 5,
+   6, 6, 7, 8, 9,
+  10
+]
+
+------------  ⚡ Alternative (stack-based, no recursion)   --------------
+const arr = [1, [2, 3], [4, [5, 6]]];
+
+function flatten(arr) {
+    let stack = [...arr];
+    let result = [];
+
+    while (stack.length) {
+        let val = stack.pop();
+
+        if (Array.isArray(val)) {
+            stack.push(...val);
+        } else {
+            result.push(val);
+        }
+    }
+
+    return result.reverse();
+}
+
+console.log(flatten(arr));
+
+
+---------------------------------------
+group nested objects
+Group by department
+---------------------------------------
+const users = [
+  { name: "A", dept: "IT" },
+  { name: "B", dept: "HR" },
+  { name: "C", dept: "IT" },
+  { name: "D", dept: "HR" },
+  { name: "E", dept: "Finance" }
+];
+
+function groupByDept(arr) {
+    return arr.reduce((acc, curr) => {
+
+        if (!acc[curr.dept]) {
+            acc[curr.dept] = [];
+        }
+
+        acc[curr.dept].push(curr);
+
+        return acc;
+    }, {});
+}
+
+console.log(groupByDept(users));
+
+<b>No problem in this case (safe mutation)</b>
+Because:
+acc is a new accumulator object created inside reduce
+we are not mutating external/global state
+no shared references outside reduce
+
+
+------------------------  pure functional style --------------------
+function groupByDept(arr) {
+    return arr.reduce((acc, curr) => {
+        return {
+            ...acc,
+            [curr.dept]: [
+                ...(acc[curr.dept] || []),
+                curr
+            ]
+        };
+    }, {});
+}
+
+console.log(groupByDept(users));
+
+----------------------------------------
+<b>4- How can you find the intersection of two arrays?</b>
+----------------------------------------
+const arr1 = [1, 2, 3, 4];
+const arr2 = [3, 4, 5, 6];
+const intersection = arr1.filter(item => arr2.includes(item));
+console.log(intersection);  // [3, 4]
+
+----------------------------------------
+<b>5- Write a function that swaps the first two elements in a given array (solve with destructing)</b>
+----------------------------------------
+function swapFirstTwo([first, second, ...rest]) {
+    return [second, first, ...rest];
+}
+const array = [3, 5, 1, 4, 2];
+console.log(swapFirstTwo(array));  // [5, 3, 1, 4, 2]
+
+<b>6- Explain different ways to reverse an array and show each with a code example</b>
+// Reversing Array Elements Method 1: Using the reverse() method
+const arr1 = [1, 2, 3, 4, 5];
+const reversedArr1 = arr1.reverse();
+console.log(reversedArr1); // [5, 4, 3, 2, 1]
+// Reversing Array Elements Method 2: Using the spread operator and reverse()
+const arr2 = [1, 2, 3, 4, 5];
+const reversedArr2 = [...arr2].reverse();
+console.log(reversedArr2); // [5, 4, 3, 2, 1]
+
+-------------------------------
+<b>7- Explain different ways to sort an array in descending order and show each with a code example.</b>
+------------------------------
+<b>Method 1</b>: Using sort() with a Compare Function
+The sort() method can take a compare function that defines the sort order.
+const arr = [3, 1, 4, 2, 5];
+arr.sort((a, b) => b - a);
+console.log(arr); // Output: [5, 4, 3, 2, 1]
+The compare function (a, b) => b - a sorts the array in descending numerical order.
+This method sorts the array in place, modifying the original array.
+
+<b>Method 2</b>: Using Spread Operator and sort()
+To avoid mutating the original array, you can create a copy using the spread operator and then sort it.
+const arr = [3, 1, 4, 2, 5];
+const sortedArr = [...arr].sort((a, b) => b - a);
+console.log(sortedArr); // Output: [5, 4, 3, 2, 1]
+console.log(arr);       // Original array remains unchanged
+[...arr] creates a shallow copy of the original array.
+Sorting the copied array does not affect the original array.
+
+
+
+
+<b>Method 3</b>:---------- <b>Bubble Sort </b>
+👉 the largest (or smallest) elements <b>“bubble up”</b> to the correct position step by step.
+const arr = [3, 1, 4, 2, 5];
+
+for (let i = 0; i < arr.length; i++) {
+
+    for (let j = 0; j < arr.length - 1; j++) {
+
+        if (arr[j] < arr[j + 1]) {
+
+            // using temp variable
+            let temp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+        }
+    }
+}
+
+console.log(arr); // [5, 4, 3, 2, 1]
+
+<b>⚡ Bubble sort context</b>
+let temp = arr[j];
+arr[j] = arr[j+1];
+arr[j+1] = temp;
+
+
+---------------------------
+<b>1. Working with Arrays</b>
+---------------------------
+Arrays are collections of values, indexed by numerical positions:
+const colors = ["red", "green", "blue"];
+console.log(colors[0]); // red      
+
+
+<b>Interview Question</b>: How can you determine the length of an array, and what array methods can you use to modify and manipulate its content?
+<b>Answer</b>: The length property gives the number of elements in an array. Array methods like push, pop, shift, and unshift allow you to add and remove elements, while methods like map, filter, and reduce provide powerful ways to transform and aggregate array data.
+
+<b>2. Array Spread and Rest</b>
+The spread operator can be used to clone arrays and combine arrays:
+const original = [1, 2, 3];
+const clone = [...original];
+const combined = [...original, 4, 5];        
+The rest operator collects remaining elements into an array:
+
+function sum(first, ...rest) {
+    return first + rest.reduce((total, num) => total + num, 0);
+}        
+
+<b>Interview Question</b>: How does the spread operator enhance array manipulation and copying compared to traditional methods?
+<b>Answer</b>: The spread operator simplifies the process of creating a shallow copy of an array, and it's particularly useful for merging arrays and function arguments.
+
+<b>3. Object Manipulation</b>
+Objects are collections of key-value pairs, where keys are strings and values can be of any data type:
+
+const person = {
+    firstName: "Umair",
+    lastName: "Hashmi",
+    age: 30
+};
+console.log(person.firstName); // Umair        
+
+-------------------------------
+<b>string to Title Case.</b>
+------------------------------
+let st = "hello world from javascript";
+const ar = st.split(' ');
+
+for (let i = 0; i < ar.length; i++) {
+    ar[i] = ar[i].charAt(0).toUpperCase() + ar[i].slice(1);
+}
+
+console.log(ar.join(' '));
+
+------ OR ---------
+
+let st = "hello world from javascript";
+const result = st
+    .split(' ')
+    .map(word => word[0].toUpperCase() + word.slice(1))
+    .join(' ');
+console.log(result);
+
+
+----------- Handles multiple spaces, tabs automatically ---------------
+
+let st = "hello     world   from    javascript";
+
+const result = st
+    .split(/\s+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+console.log(result);
+
+-----------------------------------------
+<b> To find common numbers between two arrays </b>
+-----------------------------------------
+const ar1 = [2, 5, 9, 6, 5, 4];
+const ar2 = [2, 5, 6, 1, 2, 8];
+
+const common = ar1.filter(num => ar2.includes(num));
+
+console.log(common);
+
+------------ OR ------------
+
+const ar1 = [2, 5, 9, 6, 5, 4];
+const ar2 = [2, 5, 6, 1, 2, 8];
+
+const common = [...new Set(
+    ar1.filter(num => ar2.includes(num))
+)];
+
+console.log(common);
+
+------------  Optimized Version (better for large arrays)  -------------
+
+const ar1 = [2, 5, 9, 6, 5, 4];
+const ar2 = [2, 5, 6, 1, 2, 8];
+const set2 = new Set(ar2);
+
+const common = [...new Set(
+    ar1.filter(num => set2.has(num))
+)];
+console.log(common);
+
+-----------------------------------------
+<b> Frequency comparison </b>
+-----------------------------------------
+ar2 = [2, 5, 6, 1, 2, 8]
+function getFrequency(arr) {
+    const freq = {};
+
+    for (let num of arr) {
+        freq[num] = (freq[num] || 0) + 1;
+    }
+
+    return freq;
+}
+console.log(getFrequency(ar2))
+
+------------------------------
+<a href="file:///home/srihas/project/mynotes.github.io/pages/javascript-code-challenge.html#Write%20a%20function%20to%20move%20all%20zeros%20in%20an%20array%20to%20the%20end." target="_blank">Write a function to move all zeros in an array to the end.</a>
+
+---------------------
+const arr = [0, 9, 8, 0, 90, 0, 6, 0, 56, 0, 12, 7];
+const or = arr.sort((a,b) => b - a)
+------------- OR ---------
+const finV = arr.reduce((c, a, i) => {
+    if(a !== 0){
+        c.push(a)
+    } else {
+        c.push(null)
+    }
+    return c
+},[])
+
+// now replace null with zeros at end
+const finalResult = [
+    ...finV.filter(x => x !== null),
+    ...finV.filter(x => x === null).map(() => 0)
+];
+
+console.log(finalResult);
+------------------------------
+
+------------------------------
+<a href="file:///home/srihas/project/mynotes.github.io/pages/javascript-code-challenge.html#Write%20a%20function%20to%20move%20all%20zeros%20in%20an%20array%20to%20the%20end." target="_blank">Write a function to move all zeros in an array to the first.</a>
+
+const arr = [0, 9, 8, 0, 90, 0, 6, 0, 56, 0, 12, 7];
+const or = arr.sort((a,b) => a - b)
+
+Output : 
+[
+   0,  0, 0, 0,  0,
+   6,  7, 8, 9, 12,
+  56, 90
+]
+
+
+-------------- reduce method ----------------
+const arr = [0, 9, 8, 0, 90, 0, 6, 0, 56, 0, 12, 7];
+const finV = arr.reduce((c, a, i) => {
+    if(a === 0){
+        c.unshift(0)
+    } else {
+        c.push(a)
+    }
+    return c
+},[])
+
+console.log(finV)
+------------------------------
+
+
+----------------------------------
+<b> only duplicate values, but unique duplicates (no repetition) in Array.</b>
+----------------------------------
+const arr = [0, 9, 8, 0, 90, 8, 6, 0, 56, 9, 12, 7];
+
+function uniqueDuplicates(arr){
+const unique = [];
+
+for(let i = 0; i < arr.length; i++){
+
+if(arr.indexOf(arr[i]) !== i){
+if(unique.indexOf(arr[i]) === -1){ // ✅ missing condition
+unique.push(arr[i]);
+}
+}
+}
+
+return unique;
+}
+
+console.log(uniqueDuplicates(arr));
+
+-------------------------- OR --------------------
+
+
+const arr = [0, 9, 8, 0, 90, 8, 6, 0, 56, 9, 12, 7];
+
+const result = arr.reduce((acc, curr, index) => {
+
+    // check if duplicate exists ahead
+    if (arr.indexOf(curr) !== index) {
+
+        // check if already added to result
+        if (acc.indexOf(curr) === -1) {
+            acc.push(curr);
+        }
+    }
+
+    return acc;
+
+}, []);
+
+console.log(result);
+
+
+----------------------------------------
+JSON API normalization
+----------------------------------------
+
+
+link : https://namastedev.com/blog/js-interview-questions-on-arrays-and-objects/
+`,
+          code1: ``
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
     {
       id: 1,
       title: "remove array duplicates",
@@ -1767,374 +2388,6 @@ console.log(groupConsecutiveNumbers(arr));
 `
         }
       ]
-    },
-    {
-      id: 52,
-      title: "array manipulation",
-      note: [
-        {
-          text1: `-------------------------------------------------------------------------------------------------------
-<b>second biggest value</b>
------------------------------------------------------------------
-
-
-const arr = [9,8,90,6,56,12,7]
-
-let firstVal = 0
-let secondVal = 0
-for(i of arr){
-    if(i > firstVal){
-        secondVal = firstVal
-        firstVal = i 
-    } else if (i !== firstVal && i > secondVal) {
-        secondVal = i
-    }
-}
-console.log(firstVal)
-console.log(secondVal)
-
-
----------------------------------------------------------------
-<b>remove duplicates</b>
-------------------------------------
-const arr = [9,8,6,90,6,7,56,12,7]
-
-const unique = []
-for (let i = 0; i < arr.length; i++) {
-    if(arr.indexOf(arr[i]) === i){
-        unique.push(arr[i])
-    }
-}
-
-console.log(unique)
-
-
-
-
-
---------------------------------------------------------------------------------------
-<b>array reverse</b>
-------------------------------------------------------------------------------------
-const arr = [9,8,6,90,6,7,56,12,7]
-const reverse = []
-for (let i = arr.length - 1; 0 <= i; i--) {
-    reverse.push(arr[i])
-}
-console.log(reverse)
-
------------ OR -------------
-const arr = [9,8,6,90,6,7,56,12,7]
-const reverse = arr.reverse()
-console.log(reverse)
-
-
-
-
---------------------------------------------------------------------------------------
-<b>String  reverse</b>
-------------------------------------------------------------------------------------
-const arr = "javascript";
-const reverse = arr.split('').reverse().join('')
-console.log(reverse)
-
-
---------------------------------------------------------------------------------------
-<b>Numbers and Characters Partitioning</b>
-------------------------------------------------------------------------------------
-const str = "a3b2c1d2e4"
-let nums = '';
-let letters = '';
-for (let i = 0; i < str.length; i++){ 
-    // console.log(isNaN(str[i]))
-    if(!isNaN(str[i])){
-        nums += str[i]
-    } else {
-        letters += str[i]
-    }
-}
-console.log(nums + letters) // 32124abcde
-
-// --------------- OR ---------------
-const res = [...str.split('').filter(c => isNaN(c)), ...str.split('').filter(c => !isNaN(c))].join('')
-console.log(res) // abcde32124
-
-
-
-------------------------------------------------------------------------------------------------
-<b>Question</b>: How can you swap the values of two variables without using a temporary variable?
-<b>Answer</b>: Utilize destructuring assignment for an elegant swap:
--------------------------------------------------------------------
-let a = 42, b = 24;
-[a, b] = [b, a];
-
-
-
-
--------------------------------------------------------------------
-<b>Question</b>: Explain the process of cloning an object in JavaScript.
-<b>Answer</b>: Employ the spread operator for a simple object duplication:
--------------------------------------------------------------------
-const originalObj = { one: 1, two: 2 };
-const clonedObj = { ...originalObj };
-
-
-
-
-
--------------------------------------------------------------------
-<b>Question</b>: How do you eliminate duplicates from an array?
-<b>Answer</b>: Leverage the Set data structure to effortlessly remove duplicates:
--------------------------------------------------------------------
-const arrayWithDupes = [1, 2, 3, 1, 2, 4];
-const noDupesArray = [...new Set(arrayWithDupes)];
-
-
-
-
--------------------------------------------------------------------
-<b>Question</b>: Write a function to determine if a string is a palindrome.
-<b>Answer</b>: Craft a function using array methods:
--------------------------------------------------------------------
-function isPalindrome(str) {
-  const reversed = str.split('').reverse().join('');
-  return str === reversed;
-}
-
-
-
--------------------------------------------------------------------
-<b>Question</b>: How can you check if an object contains a specific property?
-<b>Answer</b>: Employ the "in" operator for a straightforward property check:
--------------------------------------------------------------------
-const myObject = { name: 'JavaScript', age: 25 };
-const hasProperty = 'age' in myObject;
-
-
-
--------------------------------------------------------------------
-<b>Question</b>: Add an element to the end of an array.
-<b>Answer</b>: Utilize the push() method for seamless array expansion:
--------------------------------------------------------------------
-const array = ['apple', 'banana', 'cherry'];
-array.push('date');
-
-
---------------------------------------------------
-<b>Question</b>: How do you determine if a value is NaN?
-<b>Answer</b>: Use Number.isNaN() to accurately identify NaN:
---------------------------------------------------
-const mysteriousValue = NaN;
-const isItNaN = Number.isNaN(mysteriousValue);
-
-
-
-
-
----------------------------------------------------
-<b>Question</b>: Merge two objects into one.
-<b>Answer</b>: Utilize the spread operator for a smooth object fusion:
---------------------------------------------------
-const obj1 = { a: 1, b: 2 };
-const obj2 = { c: 3, d: 4 };
-const fusedObject = { ...obj1, ...obj2 };
-
-
-
-
---------------------------------------------
-<b>Question</b>: Remove falsy values from an array.
-<b>Answer</b>: Deploy the filter() method to sift out falsy elements:
---------------------------------------------
-const questionableArray = [0, false, '', null, undefined, 42];
-const truthArray = questionableArray.filter(Boolean);
-
-
-
-
------------------------------------------------------
-<b>Question</b>: Find the missing number in an array of consecutive integers.
-<b>Answer</b>: Utilize the sum formula to deduce the missing number:
----------------------------------------------------
-const detectiveArray = [1, 2, 3, 5, 6];
-const missingNumber = 15 - detectiveArray.reduce((sum, num) => sum + num, 0);
-
-
-
-
-
-----------------------------
-<b>1- Print unique values from an array</b>
-const arr = [1, 2, 3, 3, 4, 5, 5];
-const uniqueArr = [...new Set(arr)];
-console.log(uniqueArr);  // [1, 2, 3, 4, 5]
-
-<b>2- How do you use the reduce() method to sum elements in an array without using a loop?</b>
-const arr = [1, 2, 3, 4, 5];
-const sum = arr.reduce((acc, current) => acc + current, 0);
-console.log(sum);  // 15
-
-<b>3- How can you flatten a nested array into a single flat array?</b>
-const arr = [1, [2, 3], [4, [5, 6]]];
-const flatArr = arr.flat(Infinity);
-console.log(flatArr);  // [1, 2, 3, 4, 5, 6]
-
-<b>4- How can you find the intersection of two arrays?</b>
-const arr1 = [1, 2, 3, 4];
-const arr2 = [3, 4, 5, 6];
-const intersection = arr1.filter(item => arr2.includes(item));
-console.log(intersection);  // [3, 4]
-
-<b>5- Write a function that swaps the first two elements in a given array (solve with destructing)</b>
-function swapFirstTwo([first, second, ...rest]) {
-    return [second, first, ...rest];
-}
-const array = [3, 5, 1, 4, 2];
-console.log(swapFirstTwo(array));  // [5, 3, 1, 4, 2]
-
-<b>6- Explain different ways to reverse an array and show each with a code example</b>
-// Reversing Array Elements Method 1: Using the reverse() method
-const arr1 = [1, 2, 3, 4, 5];
-const reversedArr1 = arr1.reverse();
-console.log(reversedArr1); // [5, 4, 3, 2, 1]
-// Reversing Array Elements Method 2: Using the spread operator and reverse()
-const arr2 = [1, 2, 3, 4, 5];
-const reversedArr2 = [...arr2].reverse();
-console.log(reversedArr2); // [5, 4, 3, 2, 1]
-
-<b>7- Explain different ways to sort an array in descending order and show each with a code example.</b>
-<b>Method 1</b>: Using sort() with a Compare Function
-The sort() method can take a compare function that defines the sort order.
-const arr = [3, 1, 4, 2, 5];
-arr.sort((a, b) => b - a);
-console.log(arr); // Output: [5, 4, 3, 2, 1]
-The compare function (a, b) => b - a sorts the array in descending numerical order.
-This method sorts the array in place, modifying the original array.
-
-<b>Method 2</b>: Using Spread Operator and sort()
-To avoid mutating the original array, you can create a copy using the spread operator and then sort it.
-const arr = [3, 1, 4, 2, 5];
-const sortedArr = [...arr].sort((a, b) => b - a);
-console.log(sortedArr); // Output: [5, 4, 3, 2, 1]
-console.log(arr);       // Original array remains unchanged
-[...arr] creates a shallow copy of the original array.
-Sorting the copied array does not affect the original array.
-
-Method 3: Using slice() and sort()
-
-
-<b>1. Working with Arrays</b>
-Arrays are collections of values, indexed by numerical positions:
-const colors = ["red", "green", "blue"];
-console.log(colors[0]); // red      
-
-
-<b>Interview Question</b>: How can you determine the length of an array, and what array methods can you use to modify and manipulate its content?
-<b>Answer</b>: The length property gives the number of elements in an array. Array methods like push, pop, shift, and unshift allow you to add and remove elements, while methods like map, filter, and reduce provide powerful ways to transform and aggregate array data.
-
-<b>2. Array Spread and Rest</b>
-The spread operator can be used to clone arrays and combine arrays:
-const original = [1, 2, 3];
-const clone = [...original];
-const combined = [...original, 4, 5];        
-The rest operator collects remaining elements into an array:
-
-function sum(first, ...rest) {
-    return first + rest.reduce((total, num) => total + num, 0);
-}        
-
-<b>Interview Question</b>: How does the spread operator enhance array manipulation and copying compared to traditional methods?
-<b>Answer</b>: The spread operator simplifies the process of creating a shallow copy of an array, and it's particularly useful for merging arrays and function arguments.
-
-<b>3. Object Manipulation</b>
-Objects are collections of key-value pairs, where keys are strings and values can be of any data type:
-
-const person = {
-    firstName: "Umair",
-    lastName: "Hashmi",
-    age: 30
-};
-console.log(person.firstName); // Umair        
-
--------------------------------
-<b>string to Title Case.</b>
-------------------------------
-let st = "hello world from javascript";
-const ar = st.split(' ');
-
-for (let i = 0; i < ar.length; i++) {
-    ar[i] = ar[i].charAt(0).toUpperCase() + ar[i].slice(1);
-}
-
-console.log(ar.join(' '));
-
------- OR ---------
-
-let st = "hello world from javascript";
-const result = st
-    .split(' ')
-    .map(word => word[0].toUpperCase() + word.slice(1))
-    .join(' ');
-console.log(result);
-
-
------------ Handles multiple spaces, tabs automatically ---------------
-
-let st = "hello     world   from    javascript";
-
-const result = st
-    .split(/\s+/)
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-
-console.log(result);
-
------------------------------------------
-<b> To find common numbers between two arrays </b>
------------------------------------------
-const ar1 = [2, 5, 9, 6, 5, 4];
-const ar2 = [2, 5, 6, 1, 2, 8];
-
-const common = ar1.filter(num => ar2.includes(num));
-
-console.log(common);
-
------------- OR ------------
-
-const ar1 = [2, 5, 9, 6, 5, 4];
-const ar2 = [2, 5, 6, 1, 2, 8];
-
-const common = [...new Set(
-    ar1.filter(num => ar2.includes(num))
-)];
-
-console.log(common);
-
-------------  Optimized Version (better for large arrays)  -------------
-
-const ar1 = [2, 5, 9, 6, 5, 4];
-const ar2 = [2, 5, 6, 1, 2, 8];
-
-const set2 = new Set(ar2);
-
-const common = [...new Set(
-    ar1.filter(num => set2.has(num))
-)];
-
-console.log(common);
-
------------------------------------------
-<b> Frequency comparison </b>
------------------------------------------
-
-link : https://namastedev.com/blog/js-interview-questions-on-arrays-and-objects/
-`,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-      ],
     },
     {
       id: 1,
