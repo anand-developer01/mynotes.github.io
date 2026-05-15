@@ -3272,7 +3272,7 @@ async function* fetchPages() {
         // fake API delay
         await new Promise(res => setTimeout(res, 1000));
 
-        yield \`Page ${page} data\`;
+        yield \`Page \${page} data\`;
 
         page++;
     }

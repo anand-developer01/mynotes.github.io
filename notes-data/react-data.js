@@ -10136,6 +10136,25 @@ export default PureComponent;
     {
       id: 52,
       section: `Code Splitting & performance`,
+      title: "Enterprise-Level Optimization Flow",
+      note: [
+        {
+          text1: `1. Code Splitting
+                  2. Lazy Loading
+                  3. Tree Shaking
+                  4. Vendor Chunk Splitting
+                  5. Memoization
+                  6. Virtualization
+                  7. Image Optimization
+                  8. Compression (gzip/brotli)
+                  9. Bundle Analysis
+                  10. CDN Caching`,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
       title: "Code splitting",
       note: [
         {
@@ -11258,7 +11277,7 @@ Tools like Bundle Analyzer (webpack-bundle-analyzer, rollup-plugin-visualizer) l
         }
       ],
     },
-        {
+    {
       id: 52,
       title: "splitChunks",
       note: [
@@ -11477,7 +11496,7 @@ module.exports = {
         }
       ],
     },
-        {
+    {
       id: 52,
       title: "Bundle Analysis & Optimization",
       note: [
@@ -11487,13 +11506,172 @@ module.exports = {
         }
       ],
     },
-        {
+    {
       id: 52,
       title: "Image optimization",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `I optimize images by using modern formats like WebP/AVIF, lazy loading offscreen images, responsive images with srcSet, CDN delivery, compression tools, and proper caching. I also set width/height to avoid layout shift and preload important above-the-fold images for better LCP performance.
+          
+          In enterprise apps:
+          -> Product thumbnails → lazy loaded
+          -> Hero image → preloaded
+          -> CDN handles resizing
+          -> WebP preferred
+          -> Skeleton loaders used
+          -> Responsive images served
+          -> Cache headers configured
+
+          Image optimization in React/Web applications is mainly about:
+-> Reducing image size
+-> Loading images only when needed
+-> Serving correct image formats
+-> Improving Core Web Vitals (LCP, CLS, FCP)
+
+This is a very common frontend interview topic.
+<b>1. Why Image Optimization is Important</b>
+<b>Large images increase</b>:
+-> Bundle size
+-> Page load time
+-> Network usage
+-> LCP (Largest Contentful Paint)
+
+<b>Bad image optimization causes</b>:
+-> Slow initial render
+-> Layout shifts
+-> Poor mobile performance
+
+<b>2. Use Modern Image Formats</b>
+<b>Old Formats</b>
+JPEG
+PNG
+
+<b>Modern Formats</b>
+WebP
+AVIF
+
+<b>They provide</b>:
+Smaller size
+Better compression
+Faster loading
+
+<b>3. Lazy Loading Images</b>
+Load images only when they enter viewport.
+
+Without Lazy Loading
+All images load immediately.
+With Lazy Loading
+Only visible images load first.
+
+&lt;img
+  src=&quot;/products/shoe.webp&quot;
+  alt=&quot;shoe&quot;
+  loading=&quot;lazy&quot;
+/&gt;
+
+<b>4. Responsive Images</b>
+Serve different image sizes for different devices.
+&lt;img
+  src=&quot;small.jpg&quot;
+  srcSet=&quot;
+    small.jpg 480w,
+    medium.jpg 768w,
+    large.jpg 1200w
+  &quot;
+  sizes=&quot;
+    (max-width: 768px) 100vw,
+    50vw
+  &quot;
+  alt=&quot;banner&quot;
+/&gt;
+
+Why?
+Mobile should not download desktop-size images.
+
+<b>5. Use Width & Height Properly</b>
+Always specify dimensions.
+
+&lt;img
+  src=&quot;/banner.webp&quot;
+  width=&quot;1200&quot;
+  height=&quot;500&quot;
+  alt=&quot;banner&quot;
+/&gt;
+
+This prevents:
+CLS (Cumulative Layout Shift)
+
+Interview line:
+Setting width and height reserves layout space and prevents UI shifting.
+
+<b>6. CDN for Images</b>
+Use CDN like:
+-> Cloudflare
+-> Cloudinary
+-> ImageKit
+-> AWS S3 + CloudFront
+
+Benefits:
+-> Faster global delivery
+-> Automatic compression
+-> Caching
+-> Resizing
+
+<b>7. Use Compression Tools</b>
+Before uploading:
+Compress images
+
+Popular tools:
+TinyPNG
+Squoosh
+
+<b>8. Use Skeleton or Blur Placeholder</b>
+Instead of blank space:
+{loading ? &lt;Skeleton /&gt; : &lt;img src={url} /&gt;}
+
+Modern apps show:
+Blur placeholder
+Skeleton loading
+Improves perceived performance.
+
+<b>9. Avoid Putting Large Images Inside Bundle</b>
+Bad:
+import bigImage from './huge-image.png'
+`,
+          code1: `import LazyImage from "./LazyImage";
+
+function App() {
+  const images = [
+    "https://picsum.photos/id/1015/600/400",
+    "https://picsum.photos/id/1016/600/400",
+    "https://picsum.photos/id/1018/600/400",
+    "https://picsum.photos/id/1020/600/400",
+  ];
+
+  return (
+    <div>
+      <h1>React Lazy Loading Images</h1>
+
+      {images.map((img, index) => (
+        &lt;div
+          key={index}
+          style={{
+            marginBottom: &quot;30px&quot;,
+          }}
+        &gt;
+          &lt;LazyImage
+            src={img}
+            alt={\`img-\${index}\`}
+            width=&quot;600px&quot;
+            height=&quot;400px&quot;
+          /&gt;
+        &lt;/div&gt;
+      ))}
+    </div>
+  );
+}
+
+export default App;`
         }
       ],
     },
@@ -11704,6 +11882,8 @@ The rendered page is only as fast as your slowest data source. If the server nee
         {
           text1: `In React.js, <b>virtualization</b> (also called <b>windowing</b>) is a <b>performance optimization technique</b> used when rendering large lists or tables.
 
+          Virtualization is a performance optimization technique where React renders only the visible items instead of the entire list. Libraries like <b>react-window</b> help reduce DOM nodes, memory usage, and improve scrolling performance.
+
 Instead of rendering <b>all items in a list</b> into the DOM (which is slow and memory-heavy), virtualization renders <b>only the visible portion</b> of the list (plus a small buffer). As the user scrolls, React dynamically reuses and recycles DOM nodes for visible items, instead of creating thousands of DOM elements at once.
 
 &lt;ul&gt;
@@ -11754,7 +11934,7 @@ const MyList = () =&gt; (
         },
       ]
     },
-        {
+    {
       id: 52,
       section: "frequency maps improve performance",
       title: "Rendering large lists causes unnecessary re-renders:",
@@ -14034,7 +14214,7 @@ module.exports = {
         },
       ],
     },
-        {
+    {
       id: 52,
       title: "Vite Module Federation",
       note: [
