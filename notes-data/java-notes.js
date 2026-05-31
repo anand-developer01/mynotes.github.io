@@ -322,23 +322,258 @@ public class Demo {
         }
       ]
     },
-    {
+        {
       id: 1,
-      title: "Pagination",
+      title: "ArrayList",
       note: [
         {
-          text1: ``,
+          text1: `In Java, <b>ArrayList</b> is a resizable-array implementation of the <b>List</b> interface. It's part of the <b>java.util</b> package. Unlike arrays, <b>ArrayList</b> can dynamically grow and shrink in size as elements are added or removed.
+          
+          <b>Dynamic Sizing</b>: <b>ArrayList</b> can dynamically increase or decrease its size as elements are added or removed. You don't need to specify the size of the <b>ArrayList</b> initially.
+<b>Indexed Access</b>: Elements in an <b>ArrayList</b> can be accessed using an index, similar to arrays. The index starts from 0 for the first element and goes up to size-1 for the last element.
+<b>Ordered Collection</b>: <b>ArrayList</b> maintains the order of elements in which they are inserted.
+<b>Allows Duplicates</b>: <b>ArrayList</b> can contain duplicate elements.
+<b>Not Synchronized</b>: Unlike <b>Vector, ArrayList</b> is not synchronized. If multiple threads access an <b>ArrayList</b> concurrently and at least one of the threads modifies the list structurally, it must be synchronized externally.
+<b>Null Elements</b>: <b>ArrayList</b> allows storing <b>null</b> elements.
+
+<a href="https://medium.com/@Bharat2044/what-is-arraylist-in-java-and-how-to-create-and-all-predefined-methods-and-different-ways-to-print-fa3cc9f86f8b" target="_blank">ArrayList</a>`,
+          code1: `//-------------- Ex : 1 ------------
+          import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+
+        ArrayList<String> list = new ArrayList<>();
+
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Mango");
+
+        System.out.println(list);        // [Apple, Banana, Mango]
+
+        System.out.println(list.get(1));  // Banana
+
+        list.remove("Banana");
+
+        System.out.println(list);        // [Apple, Mango]
+    }
+}
+    
+// Output:
+// [Apple, Banana, Mango]
+// Banana
+// [Apple, Mango]
+`
+        }
+      ]
+    },
+    {
+      id: 1,
+      title: "LinkedList",
+      note: [
+        {
+          text1: `<b>LinkedList</b> is a class in the Java Collections Framework that implements both the <b>List</b> and <b>Deque</b> interfaces.
+          
+          Instead of storing elements in a continuous memory block like <b>ArrayList</b>, it stores elements as <b>nodes</b>, where each node contains:
+-> Data
+-> Reference to the next node
+-> Reference to the previous node (Doubly Linked List)
+
+A Linked List is a linear data structure where elements (called nodes) are connected using references (links). Unlike arrays, nodes are not stored in contiguous memory locations.
+
+
+<b>1. What Exactly Is a Linked List in Java?</b>
+A Linked List is a dynamic, node-based data structure where elements (called nodes) are linked using pointers (references). Unlike arrays, which occupy a single continuous block of memory, a Linked List's nodes can be scattered anywhere in memory but are connected through references.
+
+A Linked List node typically contains:
+-> The data it stores
+-> A reference (pointer/link) to the next node
+-> (For doubly linked lists) A reference to the previous node
+
+Think of Linked Lists as:
+"Chains of connected compartments spread across a warehouse."
+-> Each compartment knows where the next one is.
+-> You can easily insert or remove any compartment without disturbing the entire chain.
+-> But you can't jump directly to a compartment you must walk through the chain.
+
+This simple analogy explains both the power and the limitations of Linked Lists.
+
+<b>2. Internal Working of Linked Lists in Java</b>
+Java's LinkedList class is built on a Doubly Linked List implementation. Internally, it maintains:
+-> A head (first node)
+-> A tail (last node)
+-> Nodes connected through previous and next references
+-> A size counter
+
+Let's understand the major components of the internal architecture.
+
+<b>2.1 Nodes Are Objects on the Heap</b>
+Each node in a Linked List is a separate object with:
+-> A value
+-> A reference to the next node
+-> A reference to the previous node
+
+This creates flexibility, but it also means:
+-> More memory per element
+-> More allocation operations
+-> More fragmentation compared to arrays
+
+<b>2.2 No Contiguous Memory Requirement</b>
+Unlike arrays:
+-> Nodes can live anywhere in heap memory
+-> They are connected through references
+-> You don't need to predefine size
+
+This allows effortless resizing but results in slower traversal because pointers break CPU caching patterns.
+
+<b>2.3 Traversal Requires Reference Chaining</b>
+To reach the i-th element:
+-> Java must start from the head
+-> Follow the next references
+-> Continue until it reaches that node
+
+This means that indexing is O(n), unlike arrays which are O(1).
+However, inserting or removing a node once you have a reference is extremely efficient.
+
+<b>How the ArrayList works</b>
+The ArrayList class has a regular array inside it. When an element is added, it is placed into the array. If the array is not big enough, a new, larger array is created to replace the old one and the old one is removed.
+
+<b>How the LinkedList works</b>
+The LinkedList stores its elements in "containers." The list has a link to the first container and each container has a link to the next container in the list. To add an element to the list, the element is placed into a new container and that container is linked to one of the other containers in the list.
+
+
+<b>3. Types of Linked Lists Used in Java</b>
+Let's explore the most commonly used Linked List variants.
+
+<b>3.1 Singly Linked List</b>
+Each node has:
+-> Data
+-> Reference to next node
+
+Best for:
+-> Forward traversal
+-> Stack-like operations
+-> Basic dynamic collections
+
+<b>3.2 Doubly Linked List (used internally in Java's LinkedList)</b>
+Each node has:
+-> Data
+-> Reference to next node
+-> Reference to previous node
+
+Better for:
+-> Frequent insertions
+-> Bidirectional navigation
+-> Deque and queue-like structures
+
+<b>3.3 Circular Linked List</b>
+Last node's reference points to the first node.
+Used in:
+-> Round-robin scheduling
+-> Repeated cyclic processes (OS kernels, task switching)
+
+
+
+
+<b> Advantages of Linked Lists in Java </b>
+Linked Lists are not always the fastest, but they offer unique strengths you cannot ignore.
+
+4.1 Dynamic Sizing
+Unlike arrays:
+-> No need to define a fixed size
+-> Memory allocated only when needed
+-> Ideal when data continuously changes
+
+This prevents memory wastage and avoids resizing costs.
+
+<b>4.2 Fast Insertions and Deletions</b>
+Linked Lists excel in structural modifications:
+-> Insert anywhere without shifting
+-> Delete in O(1) once the node is found
+-> Perfect for systems with continuous updates
+
+Examples:
+-> Task queues
+-> Realtime update buffers
+-> Implementing Undo/Redo operations
+
+
+
+<b>LinkedList Methods :</b>
+<b>addFirst()</b>	Adds an element to the beginning of the list	
+<b>addLast()</b>	Add an element to the end of the list	
+<b>removeFirst()</b>	Remove an element from the beginning of the list	
+<b>removeLast()</b>	Remove an element from the end of the list	
+<b>getFirst()</b>	Get the element at the beginning of the list	
+<b>getLast()</b>	Get the element at the end of the list
+`,
           code1: ``
         }
       ]
     },
     {
       id: 1,
-      title: "Pagination",
+      title: "var",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `var is a feature introduced in Java 10 that allows the compiler to automatically infer the type of a local variable from its initializer. It reduces code verbosity while maintaining strong type checking at compile time.
+          
+          var name = "Anand";      // String
+var age = 30;            // int
+var salary = 50000.50;   // double
+
+Rules of var
+✅ Valid
+var num = 10;
+var name = "Java";
+var list = new LinkedList<String>();
+
+❌ Invalid
+var x;          // Error: no initial value
+
+❌ Invalid
+var a = null;   // Error: type cannot be inferred
+`,
+          code1: `// --------------- Ex : 1 ---------------
+          
+          import java.util.LinkedList;
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+
+        LinkedList<String> fruits = new LinkedList<>();
+
+        // Add elements
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Mango");
+
+        System.out.println("Original List: " + fruits);
+
+        // Add element at beginning
+        fruits.addFirst("Orange");
+
+        // Add element at end
+        fruits.addLast("Grapes");
+
+        System.out.println("After Adding: " + fruits);
+
+        // Remove first element
+        fruits.removeFirst();
+
+        System.out.println("After Removing First: " + fruits);
+
+        // Access element
+        System.out.println("Second Element: " + fruits.get(1));
+    }
+}
+    
+// Output : 
+// Original List: [Apple, Banana, Mango]
+// After Adding: [Orange, Apple, Banana, Mango, Grapes]
+// After Removing First: [Apple, Banana, Mango, Grapes]
+// Second Element: Banana
+`
         }
       ]
     },

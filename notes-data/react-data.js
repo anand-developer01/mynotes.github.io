@@ -4417,6 +4417,131 @@ export default App
       ],
     },
     {
+      id: 52,
+      section: `Grid/Table libraries in React.js`,
+      title: "AG Grid",
+      note: [
+        {
+          text1: `<b>1. AG Grid</b>
+One of the most powerful enterprise-grade data grids.
+<b>Features</b>
+-> Virtualization
+-> Sorting
+-> Filtering
+-> Pagination
+-> Row grouping
+-> Tree data
+-> Excel export
+-> Server-side rendering
+-> Infinite scrolling
+
+<b>Used In</b>
+Large enterprise apps, finance dashboards, admin panels.
+
+<b>Interview Comment</b>
+“AG Grid is best for enterprise-level applications where performance and advanced table features are required.”
+`,
+          code1: `import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+const rowData = [
+  { name: "Anand", age: 28 },
+  { name: "John", age: 30 },
+];
+
+const columnDefs = [
+  { field: "name" },
+  { field: "age" },
+];
+
+export default function App() {
+  return (
+    &lt;div
+      className=&quot;ag-theme-alpine&quot;
+      style={{ height: 300 }}
+    &gt;
+      &lt;AgGridReact
+        rowData={rowData}
+        columnDefs={columnDefs}
+      /&gt;
+    &lt;/div&gt;
+  );
+}`
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "TanStack Table (React Table)",
+      note: [
+        {
+          text1: `Most popular headless table library.
+
+<b>Features</b>
+-> Lightweight
+-> Fully customizable
+-> Headless architecture
+-> Sorting
+-> Filtering
+-> Pagination
+-> Virtualization support
+
+<b>Best For</b>
+Custom UI designs.
+
+<b>Interview Comment</b>
+“TanStack Table provides logic only, so developers can fully customize the table UI.”
+
+<b>Installation</b>
+npm install @tanstack/react-table`,
+          code1: ``
+        }
+      ],
+    },
+    {
+      id: 52,
+      title: "MUI Data Grid",
+      note: [
+        {
+          text1: `3. MUI Data Grid
+          Grid component from MUI ecosystem.
+
+<b>Features</b>
+-> Material UI integration
+-> Pagination
+-> Sorting
+-> Filtering
+-> Column resize
+-> Selection
+
+Best For
+Projects already using Material UI.
+
+<b>Installation</b>
+npm install @mui/x-data-grid`,
+          code1: `import { DataGrid } from '@mui/x-data-grid';
+
+const rows = [
+  { id: 1, name: 'Anand', age: 28 },
+];
+
+const columns = [
+  { field: 'name', headerName: 'Name', width: 150 },
+  { field: 'age', headerName: 'Age', width: 100 },
+];
+
+export default function App() {
+  return (
+    <div style={{ height: 300 }}>
+      <DataGrid rows={rows} columns={columns} />
+    </div>
+  );
+}`
+        }
+      ],
+    },
+    {
       id: 22,
       section: `Hooks`,
       title: "What is React Hooks?",
@@ -8498,7 +8623,9 @@ const Component = () => {
         React renders the tooltip.
         <b>useLayoutEffect</b> fires immediately. It measures the button and updates the tooltip position.
         The browser paints only the final result.
-        <b>Result</b>: A smooth, flicker-free experience.`,
+        <b>Result</b>: A smooth, flicker-free experience.
+        
+        <a href="https://github.com/anand-developer01/react-js-programs/blob/main/useLayoutEffect-vs-useEffect/TooltipExample.tsx" target="_blank">useEffect vs useLayoutEffect</a>`,
           code1: ``
         },
       ],
@@ -11911,6 +12038,70 @@ Popular libraries:
 📉 Reduced DOM nodes (only render visible items)
 🧠 Less memory usage
 ⚡ Better user experience (smooth scrolling)
+
+
+<b>🚀 react-window Flow (Step by Step)</b>
+<b>1. You give a big dataset</b>
+rowCount = 10000
+You are saying:
+
+“I have 10,000 rows”
+But React does NOT render all.
+
+<b>2. You give container size</b>
+height = 400
+rowHeight = 50
+
+Library calculates:
+visible rows = 400 / 50 = 8 rows
+So only ~8 rows fit on screen.
+
+<b>3. Only visible rows are rendered</b>
+At first render:
+Row 0
+Row 1
+Row 2
+...
+Row 7
+Only these exist in DOM.
+
+<b>4. Fake scroll space is created</b>
+Even though only 8 rows exist,
+react-window creates a big scroll area:
+
+total height = 10000 * 50 = 500000px
+So scrollbar behaves like full list exists.
+
+<b>5. Each row is positioned absolutely</b>
+Each row gets a computed style:
+
+style = {
+  position: "absolute",
+  top: index * rowHeight,
+  height: rowHeight
+}
+So rows are placed exactly where they should be.
+
+<b>6. On scroll → visible window changes</b>
+When user scrolls:
+Before:
+Row 0 - 7
+After scroll:
+Row 50 - 57
+Old rows are removed, new rows are rendered.
+
+<b>7. DOM is recycled (important)</b>
+Instead of creating new elements every time:
+old row components are reused
+only data changes
+This keeps performance fast.
+
+<b>8. Your Row component is reused</b>
+({ index, style, data }) => {
+  return &lt;div style={style}&gt;{data[index]}&lt;/div&gt;
+}
+
+Same component, different index.
 `,
           code1: `// Example with react-window:
           import { FixedSizeList as List } from &quot;react-window&quot;;
@@ -11930,7 +12121,53 @@ const MyList = () =&gt; (
 
 // Even though there are 10,000 rows, only about 11–15 rows exist in the DOM at any moment. The rest are rendered on-demand as you scroll.
           
-          `
+          
+
+// ------------------- Ex : 1 ----------------
+import React, { useState, useEffect } from "react";
+import { List } from "react-window";
+
+export default function App() {
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/comments")
+      .then((res) => res.json())
+      .then((data) => setList(data));
+  }, []);
+
+  const Row = ({ index, style, data }) => {
+    return (
+      &lt;div
+        style={{
+          ...style,
+          borderBottom: &quot;1px solid #ccc&quot;,
+          padding: &quot;10px&quot;,
+          boxSizing: &quot;border-box&quot;,
+        }}
+      &gt;
+        {data[index]?.name}
+      &lt;/div&gt;
+    );
+  };
+
+  return (
+    &lt;div style={{ padding: 50 }}&gt;
+      &lt;h2&gt;Virtualized List&lt;/h2&gt;
+
+      &lt;List
+        height={400}
+        width={600}
+        rowCount={list.length}
+        rowHeight={50}
+        rowComponent={Row}
+        rowProps={{
+          data: list,
+        }}
+      /&gt;
+    &lt;/div&gt;
+  );
+}`
         },
       ]
     },
