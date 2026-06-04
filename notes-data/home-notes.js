@@ -12,10 +12,13 @@ const commonData = {
             note: [
                 {
                     text1: `
-“Hi, I’m Anand. I have around 5 years of relevant experience in ReactJS development.
-In the initial phase of my career, I worked on Core PHP, which helped me understand backend fundamentals and web application flow.
-For the past 5 years, I’ve been working primarily on React-based frontend development, including building reusable components, integrating REST APIs, and working with Redux for state management.
-Currently, I’ve been working with the JPMC client on a CMS portal and case management system, where I handle UI development, API integration, and feature enhancements for a business-critical application. I’m now looking for similar frontend opportunities where I can contribute to scalable product development.”
+Hi everyone, I'm Anand.
+
+I have around 8 years of experience in software development. For the last 5 years, I have been primarily working on front-end development using React.js, JavaScript, TypeScript, Redux, HTML, and CSS.
+
+In my previous company, I worked in the financial services domain, where I was involved in developing and maintaining customer-facing web applications, implementing new features, integrating APIs, and supporting production issues.
+
+I'm excited to be part of the team and look forward to learning from everyone and contributing to the project.”
             `
                 }
             ]
