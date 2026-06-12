@@ -271,9 +271,130 @@ Collection
       title: "List",
       note: [
         {
-          text1: ``,
+          text1: `In Java, a List is a fundamental interface in the <b>java.util</b> package that represents an <b>ordered collection</b> of elements. Unlike a Set, a List allows <b>duplicate elements</b> and provides precise control over where each element is inserted. You can access elements by their integer index (position).
+
+          <b>Core Characteristics</b>
+    <b>Ordered</b>: Elements maintain the insertion order.
+    <b>Index-based</b>: You can access, insert, or remove elements at a specific index.
+    <b>Duplicates Allowed</b>: You can store the same object multiple times.
+    <b>Dynamic Size</b>: Lists automatically resize themselves as you add or remove elements.
+          
+    <b>Common Implementations</b>
+The most frequently used implementations of the <b>List</b> interface are <b>ArrayList</b> and <b>LinkedList</b>.
+
+<b>List is an Interface</b>
+<b>List</b> is not a class.
+<b>public interface List&lt;E&gt; extends Collection&lt;E&gt; </b>
+Since it's an interface, we cannot create an object directly.
+
+❌ Invalid
+List&lt;String&gt; list = new List&lt;&gt;();
+✅ Valid
+List&lt;String&gt; list = new ArrayList&lt;&gt;();
+
+
+<b>Why Use List Instead of Array?</b>
+<b>Array</b>
+String[] names = new String[3];
+<b>Problems</b>:
+-> Fixed size
+-> Cannot grow dynamically
+
+<b>List</b>
+List&lt;String&gt; names = new ArrayList&lt;&gt;();
+<b>Advantages</b>:
+-> Dynamic size
+-> Many built-in methods
+-> Easy insertion and deletion0
+
+<b>Common Implementations of List</b>
+ArrayList
+LinkedList
+Vector
+Stack
+
+<b>ArrayList</b>
+List&lt;String&gt; list = new ArrayList&lt;&gt;();
+Uses dynamic array internally
+Fast retrieval
+Slow insertion/deletion in the middle
+
+<b>LinkedList</b>
+List&lt;String&gt; list = new LinkedList&lt;&gt;();
+Uses doubly linked list
+Fast insertion/deletion
+Slow random access
+
+<b>Key Methods to Know</b>
+    <b>add(E e)</b>: Appends an element to the end.
+    <b>get(int index)</b>: Returns the element at the specified position.
+    <b>remove(int index) / remove(Object o)</b>: Removes the element.
+    <b>size()</b>: Returns the number of elements.
+    <b>contains(Object o)</b>: Returns true if the list contains the element.
+    <b>clear()</b>: Removes all elements from the list.
+
+    <b>Important Considerations</b>
+    <b>Generics</b>: Always use Generics (e.g., <b>List&lt;String&gt;</b>) to ensure type safety and avoid <b>ClassCastException</b> at runtime.
+
+    <b>Thread Safety</b>: The standard implementations (<b>ArrayList, LinkedList</b>) are not thread-safe. If you need a list for concurrent environments, use <b>CopyOnWriteArrayList</b> or wrap your list using <b>Collections.synchronizedList()</b>.
+
+<b>ArrayList is NOT Thread-Safe</b>
+
+If multiple threads modify an <b>ArrayList</b> simultaneously, you may get:
+-> Data inconsistency
+-> Race conditions
+-> ConcurrentModificationException
+
+Example:
+List&lt;String&gt; list = new ArrayList&lt;&gt;();
+
+Thread t1 = new Thread(() -> list.add("A"));
+Thread t2 = new Thread(() -> list.add("B"));
+
+t1.start();
+t2.start();
+The result is unpredictable because <b>ArrayList</b> does not synchronize access.
+
+<b>Option 1: Collections.synchronizedList()</b>
+List&lt;String&gt; list =
+        Collections.synchronizedList(new ArrayList<>());
+
+Every operation is synchronized internally.
+
+Example:
+list.add("Java");
+list.add("React");
+
+Safe for multiple threads.
+
+<b>Option 2: CopyOnWriteArrayList</b>
+List&lt;String&gt; list = new CopyOnWriteArrayList&lt;&gt;();
+
+Best when:
+Reads are very frequent
+Writes are rare
+
+Example:
+List&lt;String&gt; list = new CopyOnWriteArrayList&lt;&gt;();
+list.add("Java");
+for(String item : list) {
+    System.out.println(item);
+}
+Internally, every write creates a new copy of the array.
+
+<b>Advantages</b>
+Thread-safe
+No ConcurrentModificationException
+Excellent for read-heavy applications
+
+<b>Disadvantages</b>
+Expensive writes
+More memory usage
+
+    <b>Performance</b>: Always choose the implementation based on your specific access pattern—if you are mostly reading, choose <b>ArrayList</b>; if you are constantly modifying the middle of the list, consider <b>LinkedList</b> or other specialized structures.
+`,
           code1: `// ---------- Ex : 1 ---------
-           List<String> list = new ArrayList<>();
+           List&lt;String&gt; list = new ArrayList&lt;&gt;();
         list.add("Java");
         list.add("Spring");
         list.add("Java"); // duplicates allowed
@@ -579,11 +700,240 @@ public class LinkedListExample {
     },
     {
       id: 1,
-      title: "Pagination",
+      title: "What is Set?",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `A <b>Set</b> is a collection that <b>does not allow duplicate elements.</b>
+          Declaration
+public interface Set&lt;E&gt; extends Collection&lt;E&gt;
+
+In Java, a Set is a collection that cannot contain duplicate elements. It models the mathematical set abstraction and is defined by the <b>java.util.Set</b> interface.
+
+Unlike a <b>List</b>, which is ordered and allows duplicates, a <b>Set</b> focuses on uniqueness and usually does not guarantee the order of its elements (unless specific implementations are used).
+
+<b>Core Characteristics</b>
+    <b>Uniqueness</b>: It ensures that no two elements are equal (based on <b>.equals()</b> and <b>.hashCode())</b>.
+    <b>No Indexing</b>: Because most sets are unordered, you cannot access elements by an integer index (there is no get(int index) method).
+    <b>Efficiency</b>: Set implementations are highly optimized for testing whether an item is already contained within the collection.
+
+    Here are the common <b>Set</b> implementations in Java, broken down by their primary characteristics and use cases:
+
+    <b>HashSet</b>
+        <b>Ordering</b>: Unordered; it does not guarantee any specific sequence for elements.
+        <b>Performance</b>: Offers constant-time O(1) performance for basic operations (add, remove, contains).
+        <b>Best For</b>: General-purpose collections where you need fast lookups and don't care about the order of elements.
+
+    <b>LinkedHashSet</b>
+        <b>Ordering</b>: Maintains the insertion order of elements.
+        <b>Performance</b>: Maintains O(1) performance, similar to <b>HashSet</b>.
+        <b>Best For</b>: Scenarios where you need to ensure element uniqueness but also need to remember the order in which items were added.
+
+    <b>TreeSet</b>
+        <b>Ordering</b>: Keeps elements in their natural sorted order (or via a custom <b>Comparator</b>).
+        <b>Performance</b>: Operates in logarithmic <b>O(log n)</b> time.
+        <b>Best For</b>: Situations where you need the data to be kept in a specific sorted sequence, though it is slightly slower than the other two implementations.
+
+        <b>Important Set Methods</b>
+        <b>add(E e)</b>
+        -> Adds an element to the Set.
+        -> Returns <b>true</b> if the element was added successfully.
+        -> Duplicate elements are ignored.
+        
+        <b>remove(Object o)</b>
+        Removes the specified element from the Set.
+        Returns <b>true</b> if the element existed and was removed.
+        
+        <b>contains(Object o)</b>
+        Checks whether the specified element exists in the Set.
+        Returns <b>true</b> if found; otherwise <b>false</b>.
+        
+        <b>size()</b>
+        Returns the total number of elements present in the Set.
+        
+        <b>isEmpty()</b>
+        Checks whether the Set contains any elements.
+        Returns <b>true</b> if the Set is empty; otherwise <b>false</b>.
+        
+        <b>clear()</b>
+        Removes all elements from the Set.
+        The Set becomes empty after execution.
+`,
+          code1: `// ---------------   HashSet ----------
+          import java.util.*;
+
+public class SetExample {
+    public static void main(String[] args) {
+
+        Set<String> set = new HashSet<>();
+
+        set.add("Java");
+        set.add("React");
+        set.add("Java");
+
+        System.out.println(set);
+    }
+}
+    `
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "Map Interface",
+      note: [
+        {
+          text1: `In Java, a Map is a collection that stores data in key-value pairs. Unlike <b>List</b> or <b>Set</b>, which store individual elements, a <b>Map</b> is designed to map a unique key to a specific value.
+
+It is defined by the <b>java.util.Map</b> interface. Think of it like a real-world dictionary: the word is the key, and the definition is the value.
+
+public interface Map<K, V>
+K → Key type
+V → Value type
+
+<b>Core Characteristics</b>
+    <b>Key-Value Pairs</b>: Every entry consists of a key and its associated value.
+    <b>Unique Keys</b>: Each key must be unique; a Map cannot contain duplicate keys. However, values can be duplicated.
+    <b>Efficient Lookup</b>: Maps are designed for high-performance retrieval of values based on their keys.
+    <b>HashMap</b> and <b>LinkedHashMap</b> allow one null key, and <b>TreeMap</b> does NOT allow null keys (if natural ordering is used).
+
+    Not a Collection: While it is part of the "Collections Framework," a Map does not technically implement the Collection interface because it handles pairs rather than individual elements.
+
+    <b>HashMap</b>
+    A HashMap stores data in <b>key-value pairs</b> and provides <b>fast access (O(1) average time)</b>.
+    <b>Ordering</b>: Unordered; it does not guarantee any specific sequence for its entries. Does not maintain any order (no insertion or sorting order)
+    <b>Performance</b>: Offers constant-time O(1) performance for basic operations like <b>put</b> and <b>get</b>.
+    <b>Best For</b>: General-purpose data storage where speed is the priority and the order of elements does not matter.
+
+    Map&lt;Integer, String&gt; map = new HashMap&lt;&gt;();
+
+    <b>LinkedHashMap</b>
+    <b>Ordering</b>: Maintains the insertion order of keys. This means that when you iterate over the map, the keys will be returned in the same order they were added.
+    <b>Performance</b>: Maintains O(1) performance, similar to <b>HashMap</b>.
+    <b>Best For</b>: Scenarios where you need to preserve the order in which entries were added, such as implementing an LRU (Least Recently Used) cache or maintaining a logical sequence of items.
+
+    When using LinkedHashMap in a multi-threaded environment where multiple threads can access and modify the map at the same time, it’s important to synchronize access to it. This can be done by either using external synchronization or by using the synchronizedMap method provided by the Collections class.
+
+    Map&lt;Integer, String&gt; map = new LinkedHashMap&lt;&gt;();
+
+
+    <b>TreeMap</b>
+    <b>Ordering</b>: Keeps entries in their natural sorted order (by key) or via a custom <b>Comparator</b> provided at creation.
+    <b>Performance</b>: Operates in logarithmic O(log n) time.
+    <b>Best For</b>: Situations where you need to perform range queries or retrieve keys in a specific sorted sequence (e.g., sorting keys alphabetically or numerically).
+
+    Map&lt;Integer, String&gt; map = new TreeMap&lt;&gt;();
+
+
+    <b>Can Map contain duplicate keys?</b>
+❌ No
+If you insert same key again:
+map.put(1, "Java");
+map.put(1, "Spring");
+
+Final value:
+<b>{ 1=Spring }</b>
+Old value is replaced.
+
+--------------------------------
+<b>Common Interview Questions</b>
+What is hashing?
+What is hashCode()?
+What is a bucket?
+What is collision?
+How does HashMap handle collisions?
+Why is HashMap not thread-safe?
+Difference between HashMap and Hashtable?
+Difference between HashMap and ConcurrentHashMap?
+`,
+          code1: `//  --------------- Ex : 1 --------------
+          import java.util.*;
+
+          public class MapExample {
+              public static void main(String[] args) {
+
+                  Map<Integer, String> map = new HashMap<>();
+
+                  map.put(1, "Java");
+                  map.put(2, "React");
+                  map.put(3, "Spring");
+
+                  System.out.println(map);
+              }
+          }
+
+
+          // ------------------ Employee ----------------
+          class Employee {
+              int id;
+              String name;
+              String position;
+
+              Employee(int id, String name, String position){
+                  this.id = id;
+                  this.name = name;
+                  this.position = position;
+              }
+
+              @Override
+              public String toString() {
+                  return id + " " + name + " " + position;
+              }
+          }
+
+
+          // ------ EmployeeMapDemo -------
+import java.util.*;
+
+public class EmployeeMapDemo {
+    public static void main(String[] args) {
+
+        Map<Integer, Employee> empMap = new HashMap<>();
+
+        empMap.put(101, new Employee(101, "Anand", "Developer"));
+        empMap.put(102, new Employee(102, "John", "Tester"));
+        empMap.put(103, new Employee(103, "Priya", "Manager"));
+
+        // Fetch single employee
+        System.out.println(empMap.get(101));
+
+        // Iterate all employees
+        for (Map.Entry<Integer, Employee> entry : empMap.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+    }
+}
+    `
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "What is Queue?",
+      note: [
+        {
+          text1: `A Queue is a collection used to store elements in <b>FIFO order (First In First Out)</b>.
+          
+          👉 Think like:
+Bank queue
+Ticket counter
+Printer queue
+
+First Come → First Serve`,
+          code1: `//------------ Ex : 1 -------------
+          import java.util.*;
+
+public class QueueExample {
+    public static void main(String[] args) {
+
+        Queue<String> queue = new LinkedList<>();
+
+        queue.add("Anand");
+        queue.add("John");
+        queue.add("Priya");
+
+        System.out.println(queue);
+    }
+}`
         }
       ]
     },
@@ -869,16 +1219,6 @@ Hari
 
 
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "collect(Collectors.toMap())",
-      note: [
-        {
-          text1: ``,
-          code1: ``
         }
       ]
     },

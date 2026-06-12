@@ -2734,6 +2734,95 @@ const SubjectList = {
                 },
             ],
         },
+        {
+            id: 11,
+            topic: "comes across",
+            explain: 'come across = కనిపించడం / అనిపించడం (impression) దీనికి అర్థం → ఎలా కనిపిస్తున్నావో, ఎలా అనిపిస్తున్నావో.',
+            formation: 'Subject + come(s) across + as + adjective/noun',
+            content: [
+                {
+                    id: 1,
+                    eng: "He comes across as confident.",
+                    tel: 'అతను ఆత్మవిశ్వాసంగా కనిపిస్తాడు.',
+                    tense: 'Present tense'
+                },
+
+            ],
+        },
+        {
+            id: 11,
+            topic: "Replicate",
+            explain: 'పునరావృతం చేయడం / అదే విధంగా మళ్లీ సృష్టించడం / కాపీ చేసి తిరిగి తయారు చేయడం <b>దీనికి అర్థం</b> → ఏదైనా విషయం, సమస్య, డేటా, లేదా ఫలితాన్ని అచ్చం అదే విధంగా మళ్లీ రూపొందించడం లేదా తిరిగి జరిగేలా చేయడం.',
+            formation: 'Subject + replicate(s) + object',
+            content: [
+                {
+                    id: 1,
+                    eng: "I can replicate the issue.",
+                    tel: "నేను ఆ సమస్యను మళ్లీ సృష్టించగలుగుతున్నాను.",
+                    tense: "Present tense"
+                },
+                {
+                    id: 2,
+                    eng: "I cannot replicate the issue.",
+                    tel: "నేను ఆ సమస్యను మళ్లీ సృష్టించలేకపోతున్నాను.",
+                    tense: "Present tense"
+                },
+                {
+                    id: 3,
+                    eng: "Please provide steps to replicate.",
+                    tel: "సమస్యను మళ్లీ సృష్టించడానికి కావాల్సిన దశలను ఇవ్వండి.",
+                    tense: "Imperative sentence"
+                },
+                {
+                    id: 4,
+                    eng: "The issue was replicated in the test environment.",
+                    tel: "ఆ సమస్య Test Environment లో కూడా మళ్లీ కనిపించింది.",
+                    tense: "Past tense (Passive Voice)"
+                },
+                {
+                    id: 5,
+                    eng: "I replicated the bug on my local machine.",
+                    tel: "నేను నా లోకల్ మెషీన్‌లో ఆ బగ్‌ను మళ్లీ సృష్టించాను.",
+                    tense: "Past tense"
+                },
+                {
+                    id: 6,
+                    eng: "We replicated the production issue in QA.",
+                    tel: "మేము Production సమస్యను QA లో మళ్లీ సృష్టించాము.",
+                    tense: "Past tense"
+                },
+                {
+                    id: 7,
+                    eng: "Can you replicate the issue?",
+                    tel: "మీరు ఆ సమస్యను మళ్లీ సృష్టించగలరా?",
+                    tense: "Interrogative sentence"
+                },
+                {
+                    id: 8,
+                    eng: "The QA team replicated the issue successfully.",
+                    tel: "QA టీమ్ ఆ సమస్యను విజయవంతంగా మళ్లీ సృష్టించింది.",
+                    tense: "Past tense"
+                },
+                {
+                    id: 9,
+                    eng: "I am trying to replicate the issue.",
+                    tel: "నేను ఆ సమస్యను మళ్లీ సృష్టించడానికి ప్రయత్నిస్తున్నాను.",
+                    tense: "Present Continuous"
+                },
+                {
+                    id: 10,
+                    eng: "We have replicated the issue and started investigating.",
+                    tel: "మేము ఆ సమస్యను మళ్లీ సృష్టించి దర్యాప్తు ప్రారంభించాము.",
+                    tense: "Present Perfect"
+                },
+                {
+                    id: 11,
+                    eng: "To ensure data safety we regularly replicate our entire database to a secondary server.",
+                    tel: "డేటా భద్రత కోసం మేము మా మొత్తం డేటాబేస్‌ను రెగ్యులర్‌గా సెకండరీ సర్వర్‌కు కాపీ చేస్తాము.",
+                    tense: "Present tense"
+                }
+            ]
+        },
     ],
 
     Tense: [
@@ -3552,7 +3641,7 @@ const SubjectList = {
         },
         {
             id: 4,
-            topic: "Present perfect Continuous Tense",
+            topic: "Present perfect Continuous Tense - (have been)",
             explain: 'గతంలో ఏదో ఒక action మొదలై ఇప్పటికీ కొనసాగుతూనే ఉందని చెప్పడానికి వాడతాం.',
             formation: 'Subject + has/have been + verb(+ing)',
             content: [
@@ -3610,6 +3699,66 @@ const SubjectList = {
                     tel: 'నేను నీకోసం వేచి ఉన్నాను',
                     tense: ''
                 },
+                {
+                    id: 1,
+                    eng: "I have been working on resolving a critical production issue for the last 3 hours.",
+                    tel: "నేను గత 3 గంటలుగా ఒక కీలకమైన production సమస్యను పరిష్కరించడానికి పని చేస్తున్నాను.",
+                    tense: "Present Perfect Continuous"
+                },
+                {
+                    id: 2,
+                    eng: "The development team has been continuously improving the application performance since the last release.",
+                    tel: "డెవలప్మెంట్ టీమ్ last release నుండి application performance ను నిరంతరం మెరుగుపరుస్తూ వస్తోంది.",
+                    tense: "Present Perfect Continuous"
+                },
+                {
+                    id: 3,
+                    eng: "We have been discussing the API integration issues in multiple meetings throughout the day.",
+                    tel: "మేము రోజంతా జరిగిన అనేక meetings లో API integration సమస్యల గురించి చర్చిస్తూనే ఉన్నాము.",
+                    tense: "Present Perfect Continuous"
+                },
+                {
+                    id: 4,
+                    eng: "The QA team has been testing the new feature across different environments to ensure stability.",
+                    tel: "QA టీమ్ stability నిర్ధారించడానికి కొత్త feature ను వివిధ environments లో test చేస్తూ ఉంది.",
+                    tense: "Present Perfect Continuous"
+                },
+                {
+                    id: 5,
+                    eng: "I have been learning advanced React patterns and state management techniques for the past few months.",
+                    tel: "నేను గత కొన్ని నెలలుగా advanced React patterns మరియు state management techniques నేర్చుకుంటున్నాను.",
+                    tense: "Present Perfect Continuous"
+                },
+                {
+                    id: 6,
+                    eng: "The system has been experiencing intermittent latency issues since the latest deployment.",
+                    tel: "latest deployment నుండి system లో intermittent latency issues ఎదురవుతున్నాయి.",
+                    tense: "Present Perfect Continuous"
+                },
+                {
+                    id: 7,
+                    eng: "Our DevOps team has been monitoring server performance closely to prevent downtime.",
+                    tel: "మా DevOps టీమ్ downtime నివారించడానికి server performance ను దగ్గరగా monitor చేస్తోంది.",
+                    tense: "Present Perfect Continuous"
+                },
+                {
+                    id: 8,
+                    eng: "I have been collaborating with backend developers to fix authentication-related bugs.",
+                    tel: "నేను authentication-related bugs ను fix చేయడానికి backend developers తో కలిసి పని చేస్తున్నాను.",
+                    tense: "Present Perfect Continuous"
+                },
+                {
+                    id: 9,
+                    eng: "The product team has been gathering user feedback to improve the overall user experience.",
+                    tel: "product team overall user experience ను మెరుగుపరచడానికి user feedback సేకరిస్తోంది.",
+                    tense: "Present Perfect Continuous"
+                },
+                {
+                    id: 10,
+                    eng: "We have been migrating legacy services to a new cloud infrastructure for better scalability.",
+                    tel: "మేము మంచి scalability కోసం legacy services ను కొత్త cloud infrastructure కి migrate చేస్తూ ఉన్నాము.",
+                    tense: "Present Perfect Continuous"
+                }
             ],
         },
         {
@@ -4761,6 +4910,7 @@ const SubjectList = {
         },
         {
             id: 1,
+            section:"general",
             topic: "Conditional Sentences",
             explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
             formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
@@ -4774,11 +4924,6 @@ const SubjectList = {
                     id: 1,
                     eng: "If you heat water, it boils.",
                     tel: 'నీటిని వేడి చేస్తే, అది మరుగుతుంది.',
-                },
-                {
-                    id: 7,
-                    eng: '',
-                    tel: '',
                 },
                 {
                     id: 1,
@@ -5118,18 +5263,31 @@ const SubjectList = {
         },
         {
             id: 11,
-            topic: "comes across",
-            explain: 'come across = కనిపించడం / అనిపించడం (impression) దీనికి అర్థం → ఎలా కనిపిస్తున్నావో, ఎలా అనిపిస్తున్నావో.',
-            formation: 'Subject + come(s) across + as + adjective/noun',
+            topic: "general IT phrases",
+            explain: '',
+            formation: '',
             content: [
                 {
                     id: 1,
-                    eng: "He comes across as confident.",
-                    tel: 'అతను ఆత్మవిశ్వాసంగా కనిపిస్తాడు.',
-                    tense: 'Present tense'
+                    eng: "Two days ago, when I was installing Node.js, I noticed it displayed three specific commands. I am running them every time I open the terminal because Node.js is not working without them.",
+                    type: "",
+                    tense: "Simple Present",
+                    tel: ""
                 },
-            ],
+                {
+                    id: 1,
+                    eng: "When I install Node.js, it prompts specific commands. I need to use them every time I open the terminal.",
+                    type: "",
+                    tense: "Simple Present",
+                    tel: ""
+                }, {
+                    id: 1,
+                    eng: "When I installed Node.js, it prompted specific commands. I need to run them every time I open the terminal.",
+                    type: "",
+                    tense: "Past + present",
+                }],
         },
+
     ],
     // conditionalSentences: [
     //     {
