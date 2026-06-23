@@ -632,6 +632,37 @@ Examples:
         }
       ]
     },
+            {
+      id: 1,
+      title: "What is Queue?",
+      note: [
+        {
+          text1: `A Queue is a collection used to store elements in <b>FIFO order (First In First Out)</b>.
+          
+          👉 Think like:
+Bank queue
+Ticket counter
+Printer queue
+
+First Come → First Serve`,
+          code1: `//------------ Ex : 1 -------------
+          import java.util.*;
+
+public class QueueExample {
+    public static void main(String[] args) {
+
+        Queue<String> queue = new LinkedList<>();
+
+        queue.add("Anand");
+        queue.add("John");
+        queue.add("Priya");
+
+        System.out.println(queue);
+    }
+}`
+        }
+      ]
+    },
     {
       id: 1,
       title: "var",
@@ -779,7 +810,7 @@ public class SetExample {
     },
         {
       id: 1,
-      title: "Map Interface",
+      title: "What is Map (Interface)",
       note: [
         {
           text1: `In Java, a Map is a collection that stores data in key-value pairs. Unlike <b>List</b> or <b>Set</b>, which store individual elements, a <b>Map</b> is designed to map a unique key to a specific value.
@@ -908,32 +939,108 @@ public class EmployeeMapDemo {
     },
         {
       id: 1,
-      title: "What is Queue?",
+      title: "Set to Map Conversion",
       note: [
         {
-          text1: `A Queue is a collection used to store elements in <b>FIFO order (First In First Out)</b>.
+          text1: ``,
+          code1: `// --------------- Ex : 1 List&lt;Employee&gt; → Map&lt;Integer, String&gt; --------------
           
-          👉 Think like:
-Bank queue
-Ticket counter
-Printer queue
-
-First Come → First Serve`,
-          code1: `//------------ Ex : 1 -------------
           import java.util.*;
+import java.util.stream.Collectors;
 
-public class QueueExample {
+class Employee {
+    int id;
+    String name;
+
+    Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + name;
+    }
+}
+
+
+    class Main {
+        public static void main(String[] args) {
+            List<Employee> emp = new ArrayList<>();
+            
+            emp.add(new Employee(1,"ram"));
+            emp.add(new Employee(2,"Suman"));
+            
+            System.out.println("Set" + emp);
+            
+            Map<Integer, String> empMap = emp.stream()
+                .collect(Collectors.toMap(
+                        Employee::getId,
+                        Employee::getName
+                    ));
+                    
+            System.out.println("Map" +empMap);
+        }
+    }
+        
+    Output:
+Set[1 ram, 2 Suman]
+Map{1=ram, 2=Suman}
+
+
+// --------------- Ex : 2 List&lt;Employee&gt; → Map&lt;Integer, Employee&gt; --------------
+class Employee {
+    int id;
+    String name;
+    String position;
+
+    Employee(int id, String name, String position){
+        this.id = id;
+        this.name = name;
+        this.position = position;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + name + " " + position;
+    }
+}
+    
+public class EmployeeMapDemo {
     public static void main(String[] args) {
 
-        Queue<String> queue = new LinkedList<>();
+        List<Employee> empList = new ArrayList<>();
 
-        queue.add("Anand");
-        queue.add("John");
-        queue.add("Priya");
+        empList.add(new Employee(101, "Anand", "Developer"));
+        empList.add(new Employee(102, "John", "Tester"));
+        empList.add(new Employee(103, "Priya", "Manager"));
 
-        System.out.println(queue);
+        Map<Integer, Employee> empMap =  empList.stream()
+                .collect(Collectors.toMap(Employee::getId, emp -> emp));
+              // Since emp -> emp simply returns the same object,
+        System.out.println(empMap);
+
     }
-}`
+}
+    Output:
+{101=101 Anand Developer, 102=102 John Tester, 103=103 Priya Manager}
+`
         }
       ]
     },
@@ -1843,6 +1950,105 @@ Runnable r = new Runnable() {
 // ----------  Example 2: With Lambda (New Way)
 Runnable r = () -> System.out.println("Hello");
 `
+        }
+      ]
+    },
+        {
+      id: 1,
+      title: "Functional Interface in Java",
+      note: [
+        {
+          text1: `A <b>Functional Interface</b> is an interface that contains <b>exactly one abstract method.</b>
+        A functional interface can have:
+-> Only <b>one abstract method</b>
+-> Any number of <b>default</b> or <b>static</b> methods
+
+A Functional Interface in Java is an interface that contains exactly one abstract method.
+
+They are the foundation of functional programming in Java, enabling the use of <b>Lambda expressions</b> and <b>Method references</b>. Because they only have one method, the compiler can easily map a lambda expression directly to that method.
+
+<b>Key Characteristics</b>
+    -> <b>Single Abstract Method (SAM)</b>: While they can have any number of <b>default</b> or <b>static</b> methods, they must have exactly one abstract method.
+
+    -> <b>@FunctionalInterface Annotation</b>: This is an optional but highly recommended annotation. It instructs the compiler to verify that the interface has exactly one abstract method, providing a compile-time error if you accidentally add a second one.
+
+    <b>🧠 Why Functional Interfaces?</b>
+They are used for:
+Lambda expressions
+Stream API
+Functional programming style in Java
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Interface</th>
+      <th>Method</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Predicate&lt;T&gt;</code></td>
+      <td><code>test(T t)</code></td>
+      <td>Returns true/false</td>
+    </tr>
+    <tr>
+      <td><code>Function&lt;T,R&gt;</code></td>
+      <td><code>apply(T t)</code></td>
+      <td>Converts input to output</td>
+    </tr>
+    <tr>
+      <td><code>Consumer&lt;T&gt;</code></td>
+      <td><code>accept(T t)</code></td>
+      <td>Takes input, returns nothing</td>
+    </tr>
+    <tr>
+      <td><code>Supplier&lt;T&gt;</code></td>
+      <td><code>get()</code></td>
+      <td>Returns a value</td>
+    </tr>
+  </tbody>
+</table>
+
+          `,
+          code1: `// --------- Example 1: Functional Interface ---------
+          @FunctionalInterface
+          interface Greeting {
+              void sayHello(String name); // The one abstract method
+          }
+
+          public class Main {
+              public static void main(String[] args) {
+                  // Implementation using a Lambda Expression
+                  Greeting g = (name) -> System.out.println("Hello, " + name);
+                  
+                  g.sayHello("Java Developer");
+              }
+          }
+
+          // Output:
+Hello, Java Developer 
+
+// --------------------- Ex : 2 ---------------------
+@FunctionalInterface
+interface Calculator {
+    int calculate(int a, int b); // single abstract method
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Calculator add = (a, b) -> a + b;
+        Calculator multiply = (a, b) -> a * b;
+
+        System.out.println("Addition: " + add.calculate(10, 5));
+        System.out.println("Multiplication: " + multiply.calculate(10, 5));
+    }
+}
+    // Output:
+Addition: 15
+Multiplication: 50
+}     `
         }
       ]
     },
@@ -2951,17 +3157,6 @@ class MyTask implements Runnable {
 <b>yield()</b>	Suggests thread pause
 
 
-
-
-
-
-
-
-
-
-
-
-
 If you want, I can also explain:
 
 🔥 
@@ -3003,8 +3198,126 @@ t.start();
       title: "Wrapper classes",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `In Java, Wrapper classes are a set of classes that allow you to treat primitive data types (<b>like int, char, boolean</b>) as objects.
+
+Since Java is an object-oriented language, many features (such as Collections like <b>ArrayList, HashMap, or Generics</b>) only work with objects. Wrapper classes bridge the gap between the primitive world and the object world.
+
+Primitive types are <b>not objects</b>, but many Java APIs work only with objects.
+
+For example, Collections Framework (<b>ArrayList, HashMap</b>, etc.) stores objects, not primitives. If you want to store an int in an ArrayList, you need to wrap it in an Integer object.
+
+❌ Invalid:
+ArrayList&lt;int&gt; numbers = new ArrayList&lt;&gt;();
+
+✅ Valid:
+ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
+numbers.add(10);
+numbers.add(20);
+
+<b>Key Concepts: Autoboxing and Unboxing</b>
+To make working with these classes convenient, Java provides two automatic mechanisms:
+    <b>Autoboxing</b>: The automatic conversion of a primitive type into its corresponding wrapper class object.
+        &nbsp; &nbsp; => Example: <b>Integer myInt = 10;</b> (The compiler converts 10 to <b>Integer.valueOf(10)</b>).
+
+    <b>Unboxing</b>: The automatic conversion of a wrapper class object back into its corresponding primitive type.
+        &nbsp; &nbsp; => Example: <b>int val = myInt;</b> (The compiler converts <b>myInt</b> to <b>myInt.intValue()</b>).
+
+<b>Why Use Wrapper Classes?</b>
+    -> <b>Collections Framework</b>: You cannot store primitive types in a List or Set.
+       &nbsp; &nbsp; => Example: List&lt;int&gt; list = new ArrayList&lt;&gt;(); will cause a compile-time error. You must use List&lt;Integer&gt; list = new ArrayList&lt;&gt;();.
+    -> <b>Utility Methods</b>: Wrapper classes provide helpful static methods to manipulate data.
+       &nbsp; &nbsp; => Example: Converting a string to an integer: int num = Integer.parseInt("123");.
+    -> <b>Nullability</b>: A primitive type (like int) must have a value (defaults to 0). A wrapper object (like Integer) can be null, which is useful when representing the absence of a value (e.g., in database results).
+    -> <b>Synchronization</b>: In multithreading, you can only synchronize on objects, not primitives.
+
+
+
+        boolean[] arr1 = new boolean[3];
+        Boolean[] arr2 = new Boolean[3];
+        System.out.println(arr1[0]);
+        System.out.println(arr2[0]);
+
+        <b>The Result</b>
+    arr1[0] outputs: false
+    arr2[0] outputs: null
+
+<b>Why this happens</b>
+<b>1. Primitive Arrays (boolean[])</b>
+When you initialize an array of primitive types, Java automatically populates the array with the default value for that type.
+    -> For <b>boolean</b>, the default is <b>false</b>.
+    -> For numeric types (<b>int, double</b>, etc.), the default is <b>0</b> or <b>0.0</b>.
+    -> For <b>char</b>, the default is the null character <b>'\u0000'</b>.
+Because <b>arr1</b> holds actual primitive values, it is fully populated with <b>false</b> the moment it is created.
+
+<b>2. Wrapper Class Arrays (Boolean[])</b>
+When you initialize an array of objects (which is what a wrapper class array is), Java populates the array with the default reference value, which is null.
+    -> The array arr2 does not contain Boolean objects yet; it is simply an array of three empty sots (references) waiting to hold Boolean objects.
+    -> Since nothing has been assigned to index 0, it remains null.
+
+Important Caution: The <b>NullPointerException</b>
+Because <b>Boolean[]</b> (the wrapper array) defaults to <b>null</b>, you must be careful when unboxing. If you try to perform an operation that triggers unboxing on a null element, your code will crash:
+
+
+❌ Error:
+Boolean[] arr2 = new Boolean[3];
+boolean b = arr2[0]; // This will throw a NullPointerException!
+
+✅ Valid:
+if (arr2[0] != null && arr2[0]) {
+    // Safely perform logic
+}
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Primitive Type</th>
+      <th>Wrapper Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>byte</code></td>
+      <td><code>Byte</code></td>
+    </tr>
+    <tr>
+      <td><code>short</code></td>
+      <td><code>Short</code></td>
+    </tr>
+    <tr>
+      <td><code>int</code></td>
+      <td><code>Integer</code></td>
+    </tr>
+    <tr>
+      <td><code>long</code></td>
+      <td><code>Long</code></td>
+    </tr>
+    <tr>
+      <td><code>float</code></td>
+      <td><code>Float</code></td>
+    </tr>
+    <tr>
+      <td><code>double</code></td>
+      <td><code>Double</code></td>
+    </tr>
+    <tr>
+      <td><code>char</code></td>
+      <td><code>Character</code></td>
+    </tr>
+    <tr>
+      <td><code>boolean</code></td>
+      <td><code>Boolean</code></td>
+    </tr>
+  </tbody>
+</table>`,
+          code1: `// -------------- Ex : 1 -------------
+          class Main {
+    public static void main(String[] args) {
+        boolean[] arr1 = new boolean[3];
+        Boolean[] arr2 = new Boolean[3];
+        System.out.println(arr1[0]);
+        System.out.println(arr2[0]);
+    }
+}`
         }
       ]
     },

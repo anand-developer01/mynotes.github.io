@@ -2823,6 +2823,86 @@ const SubjectList = {
                 }
             ]
         },
+        {
+            id: 11,
+            topic: "Meticulous - (ఎక్కువ శ్రద్ధ పెట్టడం) - మె-టి-క్యూ-లస్",
+            explain: '👉 చాలా చాలా జాగ్రత్తగా, ప్రతి చిన్న detail ని కూడా overlook చేయకుండా చేసే పని 👉 అంటే “perfect accuracy కోసం ఎక్కువ శ్రద్ధ పెట్టడం”',
+            formation: 'అత్యంత జాగ్రత్తగా / సూక్ష్మంగా / ప్రతి చిన్న విషయాన్ని గమనిస్తూ చేసే పని',
+            content: [
+                {
+                    id: 1,
+                    title: "Code Review",
+                    eng: "He is meticulous while reviewing pull requests.",
+                    tel: "అతను PR లో ప్రతి చిన్న bug, naming issue కూడా జాగ్రత్తగా చెక్ చేస్తాడు."
+                },
+                {
+                    id: 2,
+                    title: "Bug Fixing",
+                    eng: "I was meticulous while debugging the production issue.",
+                    tel: "ప్రొడక్షన్ సమస్యను fix చేస్తూ ప్రతి log, API response చాలా జాగ్రత్తగా చూసాను."
+                },
+                {
+                    id: 3,
+                    title: "API Integration",
+                    eng: "She is meticulous in API integration.",
+                    tel: "API response structure, null values, error handling అన్నీ చాలా carefully handle చేస్తుంది."
+                },
+                {
+                    id: 4,
+                    title: "UI Development (React)",
+                    eng: "He meticulously checks UI alignment before release.",
+                    tel: "release ముందు buttons, spacing, responsiveness అన్నీ పర్ఫెక్ట్‌గా ఉందా అని చెక్ చేస్తాడు."
+                },
+                {
+                    id: 5,
+                    title: "Data Handling (Redux / State)",
+                    eng: "I meticulously manage state updates in Redux.",
+                    tel: "state update mistakes రాకుండా ప్రతి action/reducer ని చాలా carefully handle చేస్తాను."
+                },
+                {
+                    id: 6,
+                    title: "Deployment",
+                    eng: "DevOps team meticulously verifies deployment steps.",
+                    tel: "deployment ముందు environment variables, build logs, server configs అన్నీ చాలా carefully check చేస్తారు."
+                },
+                {
+                    id: 7,
+                    title: "Testing (QA / Automation)",
+                    eng: "QA engineer meticulously writes test cases.",
+                    tel: "ప్రతి edge case cover అయ్యేలా test cases చాలా detail గా రాస్తాడు."
+                },
+                {
+                    id: 8,
+                    title: "Logs Analysis",
+                    eng: "I meticulously analyze logs during production issues.",
+                    tel: "error trace, timestamps, request flow అన్నీ deep గా పరిశీలిస్తాను."
+                },
+                {
+                    id: 8,
+                    title: "My colleague is meticulous about his report.",
+                    eng: "నా సహోద్యోగి తన రిపోర్ట్ విషయంలో చాలా జాగ్రత్తగా ఉంటాడు.",
+                    tel: "error trace, timestamps, request flow అన్నీ deep గా పరిశీలిస్తాను."
+                },
+                {
+                    id: 1,
+                    eng: "I have been meticulously reviewing deployment logs during my lunch break to identify the root cause of the production issue.",
+                    tel: "ప్రొడక్షన్ సమస్యకు మూల కారణాన్ని గుర్తించడానికి నేను నా మధ్యాహ్న భోజన విరామ సమయంలో డిప్లాయ్‌మెంట్ లాగ్‌లను చాలా జాగ్రత్తగా పరిశీలిస్తున్నాను.",
+                    tense: "Present Perfect Continuous Tense"
+                },
+                {
+                    id: 5,
+                    eng: "I have been meticulously testing edge cases throughout my lunch hour to prevent unexpected production failures.",
+                    tel: "అనుకోని ప్రొడక్షన్ వైఫల్యాలను నివారించడానికి నేను నా భోజన విరామం మొత్తం ఎడ్జ్ కేసులను చాలా జాగ్రత్తగా పరీక్షిస్తున్నాను.",
+                    tense: "Present Perfect Continuous Tense"
+                },
+                {
+                    id: 3,
+                    eng: "I have been meticulously analyzing GraphQL queries during lunchtime to improve the application's performance.",
+                    tel: "అప్లికేషన్ పనితీరును మెరుగుపరచడానికి నేను మధ్యాహ్న భోజన సమయంలో GraphQL క్వెరీలను చాలా జాగ్రత్తగా విశ్లేషిస్తున్నాను.",
+                    tense: "Present Perfect Continuous Tense"
+                },
+            ],
+        },
     ],
 
     Tense: [
@@ -4910,7 +4990,7 @@ const SubjectList = {
         },
         {
             id: 1,
-            section:"general",
+            section: "general",
             topic: "Conditional Sentences",
             explain: 'ఒక పని జరిగి ఉంటే, మరొక పని జరిగి ఉండేది అని చెప్పే సంధర్బములో ఈ Structure ని ఉపయోగిస్తారు',
             formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
