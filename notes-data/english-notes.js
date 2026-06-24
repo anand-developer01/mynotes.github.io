@@ -2903,6 +2903,74 @@ const SubjectList = {
                 },
             ],
         },
+        {
+            id: 11,
+            topic: "Escalate",
+            explain: '👉 ఒక సమస్యను లేదా blocker ను మనం solve చేయలేకపోతే, higher authority లేదా relevant team కి raise చేయడం 👉 అంటే “issue ని next level కి తీసుకెళ్లి సహాయం కోరడం”',
+            formation: 'పై స్థాయికి తీసుకెళ్లడం / మేనేజర్ లేదా సంబంధిత టీమ్‌కి సమస్యను తెలియజేయడం / సహాయం కోసం issue ని raise చేయడం',
+            content: [
+                {
+                    id: 1,
+                    title: "Testing Blocker",
+                    eng: "I escalated the issue because the test environment was unavailable.",
+                    tel: "టెస్ట్ ఎన్విరాన్‌మెంట్ అందుబాటులో లేకపోవడంతో నేను సమస్యను పై స్థాయికి తెలియజేశాను."
+                },
+                {
+                    id: 2,
+                    title: "No Response from Another Team",
+                    eng: "The backend team has not responded for two days, so I escalated the concern.",
+                    tel: "బ్యాక్‌ఎండ్ టీమ్ రెండు రోజులుగా స్పందించకపోవడంతో నేను ఆ సమస్యను పై అధికారుల దృష్టికి తీసుకెళ్లాను."
+                },
+                {
+                    id: 3,
+                    title: "Production Issue",
+                    eng: "We immediately escalated the production issue to the support team.",
+                    tel: "ప్రొడక్షన్ సమస్యను వెంటనే సపోర్ట్ టీమ్‌కి తెలియజేశాము."
+                },
+                {
+                    id: 4,
+                    title: "Sprint Risk",
+                    eng: "I escalated the blocker because it may impact the sprint deadline.",
+                    tel: "ఈ సమస్య స్ప్రింట్ డెడ్‌లైన్‌ను ప్రభావితం చేసే అవకాశం ఉండటంతో నేను దాన్ని పై స్థాయికి తెలియజేశాను."
+                },
+                {
+                    id: 5,
+                    title: "Manager Discussion",
+                    eng: "I escalated the issue to my manager for further guidance.",
+                    tel: "మరింత మార్గదర్శకత్వం కోసం నేను సమస్యను నా మేనేజర్‌కి వివరించాను."
+                },
+                {
+                    id: 6,
+                    title: "Access Issue",
+                    eng: "The required access was not granted, so I escalated the request.",
+                    tel: "అవసరమైన అనుమతి ఇవ్వకపోవడంతో నేను ఆ అభ్యర్థనను పై అధికారుల దృష్టికి తీసుకెళ్లాను."
+                },
+                {
+                    id: 7,
+                    title: "Client Concern",
+                    eng: "The client reported a critical issue, and we escalated it immediately.",
+                    tel: "క్లయింట్ ఒక ముఖ్యమైన సమస్యను తెలియజేయడంతో మేము దాన్ని వెంటనే పై స్థాయికి తెలియజేశాము."
+                },
+                {
+                    id: 8,
+                    title: "Standup Update",
+                    eng: "My task is blocked, and I have already escalated the issue.",
+                    tel: "నా పని నిలిచిపోయింది, మరియు నేను ఇప్పటికే ఆ సమస్యను పై అధికారులకు తెలియజేశాను."
+                },
+                {
+                    id: 9,
+                    title: "Pending Approval",
+                    eng: "The approval is delayed, so I escalated it to the project lead.",
+                    tel: "అనుమతి ఆలస్యం కావడంతో నేను దాన్ని ప్రాజెక్ట్ లీడ్‌కి వివరించాను."
+                },
+                {
+                    id: 10,
+                    title: "Urgent Bug",
+                    eng: "The bug is affecting multiple users, so it has been escalated.",
+                    tel: "ఈ బగ్ చాలా మంది యూజర్లను ప్రభావితం చేస్తుండటంతో దాన్ని పై అధికారుల దృష్టికి తీసుకెళ్లారు."
+                }
+            ],
+        },
     ],
 
     Tense: [
@@ -4998,42 +5066,112 @@ const SubjectList = {
                 {
                     id: 1,
                     eng: "<b>0 (Zero)</b> : Real, Always, General truths, Scientific facts, Universal rules",
-                    tel: 'వాస్తవాలు, శాశ్వత నిజాలు - <b>Structure</b> : If + present, present',
+                    tel: 'వాస్తవాలు, శాశ్వత నిజాలు - <b>Structure</b> : If + Present Simple, Present Simple',
                 },
                 {
                     id: 1,
                     eng: "If you heat water, it boils.",
-                    tel: 'నీటిని వేడి చేస్తే, అది మరుగుతుంది.',
+                    tel: "నీటిని వేడి చేస్తే, అది మరుగుతుంది.",
+                },
+                {
+                    id: 2,
+                    eng: "If you click the button, the page reloads.",
+                    tel: "మీరు బటన్‌పై క్లిక్ చేస్తే, పేజీ మళ్లీ లోడ్ అవుతుంది.",
+                },
+                {
+                    id: 3,
+                    eng: "If you mix red and blue, you get purple.",
+                    tel: "మీరు ఎరుపు మరియు నీలం కలిపితే, ఊదా రంగు వస్తుంది.",
+                },
+                {
+                    id: 4,
+                    eng: "If you press Ctrl + S, it saves the file.",
+                    tel: "మీరు Ctrl + S నొక్కితే, ఫైల్ సేవ్ అవుతుంది.",
+                },
+                {
+                    id: 5,
+                    eng: "If the system has no internet, it shows an error.",
+                    tel: "సిస్టమ్‌కు ఇంటర్నెట్ లేకపోతే, అది ఎరర్ చూపిస్తుంది.",
+                },
+                {
+                    id: 6,
+                    eng: "If you log in with correct credentials, you access the dashboard.",
+                    tel: "మీరు సరైన లాగిన్ వివరాలతో లాగిన్ అయితే, డాష్‌బోర్డ్‌కి యాక్సెస్ వస్తుంది.",
                 },
                 {
                     id: 1,
                     eng: "<b>1 (First)</b> : Real future possibilities, ",
-                    tel: 'నిజంగా జరగే అవకాశాలు - <b>Structure</b> : If + present, will + verb',
+                    tel: 'నిజంగా జరగే అవకాశాలు - <b>Structure</b> :👉 If + Present Simple, will + V1(verb)',
+                },
+                {
+                    id: 1,
+                    eng: "If the build passes, we will deploy it to production.",
+                    tel: "బిల్డ్ పాస్ అయితే, మేము దాన్ని ప్రొడక్షన్‌కి డిప్లాయ్ చేస్తాము.",
+                },
+                {
+                    id: 2,
+                    eng: "If the API fails, I will check the logs.",
+                    tel: "API ఫెయిల్ అయితే, నేను లాగ్స్ చెక్ చేస్తాను.",
+                },
+                {
+                    id: 3,
+                    eng: "If you click the submit button, the form will be sent.",
+                    tel: "మీరు సబ్మిట్ బటన్‌పై క్లిక్ చేస్తే, ఫారమ్ పంపబడుతుంది.",
+                },
+                {
+                    id: 4,
+                    eng: "If the server goes down, the team will restart it.",
+                    tel: "సర్వర్ డౌన్ అయితే, టీమ్ దాన్ని రీస్టార్ట్ చేస్తుంది.",
+                },
+                {
+                    id: 5,
+                    eng: "If I finish my task early, I will help you with debugging.",
+                    tel: "నేను నా పని ముందుగా పూర్తి చేస్తే, నేను నీకు డీబగ్గింగ్‌లో సహాయం చేస్తాను.",
                 },
                 {
                     id: 6,
-                    eng: "If I study, I will pass the test.",
-                    tel: 'నేను చదివితే, పరీక్షలో ఉత్తీర్ణత పొందుతాను.',
+                    eng: "If the code is not working, we will raise a bug.",
+                    tel: "కోడ్ పనిచేయకపోతే, మేము బగ్ రైజ్ చేస్తాము.",
                 },
                 {
                     id: 1,
                     eng: "<b>2 (Second)</b> : Unreal present/future, Imaginary Condition (Present/Future) ",
-                    tel: 'కల్పిత పరిస్థితులు- <b>Structure</b> : If + simple past, would + base verb',
+                    tel: 'కల్పిత పరిస్థితులు- <b>Structure</b> : 👉 If + Past Simple, would + V1 (verb)',
+                },
+                {
+                    id: 1,
+                    eng: "If I were you, I would apply for that job.",
+                    tel: "నేను నీ స్థానంలో ఉంటే, ఆ ఉద్యోగానికి అప్లై చేస్తాను.",
+                },
+                {
+                    id: 2,
+                    eng: "If I had more time, I would learn React deeply.",
+                    tel: "నాకు ఎక్కువ సమయం ఉంటే, నేను React ని లోతుగా నేర్చుకుంటాను.",
+                },
+                {
+                    id: 3,
+                    eng: "If the system were faster, we would complete tasks sooner.",
+                    tel: "సిస్టమ్ వేగంగా ఉంటే, మేము పనులను త్వరగా పూర్తి చేసేవాళ్లం.",
+                },
+                {
+                    id: 4,
+                    eng: "If I knew Java well, I would switch to backend development.",
+                    tel: "నాకు Java బాగా తెలిసి ఉంటే, నేను బ్యాక్‌ఎండ్ డెవలప్‌మెంట్‌కి మారేవాడిని.",
+                },
+                {
+                    id: 5,
+                    eng: "If we had a better internet connection, we would deploy faster.",
+                    tel: "మాకు మంచి ఇంటర్నెట్ కనెక్షన్ ఉంటే, మేము వేగంగా డిప్లాయ్ చేసేవాళ్లం.",
                 },
                 {
                     id: 6,
-                    eng: "If I were you, I would apply for the job.",
-                    tel: 'నేను నీ స్థానం లో ఉంటే, నేను ఆ జాబ్‌కు అప్లై చేసేవాడిని.',
-                },
-                {
-                    id: 6,
-                    eng: "If she studied more, she would pass the exam.",
-                    tel: 'ఆమె ఎక్కువగా చదివితే, పరీక్షలో పాస్ అవుతుంది.',
+                    eng: "If I worked in a product-based company, I would learn more advanced systems.",
+                    tel: "నేను ప్రొడక్ట్ కంపెనీలో పని చేస్తే, నేను ఇంకా అడ్వాన్స్‌డ్ సిస్టమ్స్ నేర్చుకుంటాను.",
                 },
                 {
                     id: 1,
                     eng: "<b>3 (Third)</b> : Unreal Past (Regret or Hypothetical Past), did not happen ",
-                    tel: 'గతంలో జరగకపోయినవి- <b>Structure</b> : If + past perfect, would have + past participle (V3)',
+                    tel: 'గతంలో జరగకపోయినవి- <b>Structure</b> : If + past perfect, would have + past participle (V3) - (👉 If + had + V3, would have + V3)',
                 },
                 {
                     id: 1,
@@ -5043,27 +5181,58 @@ const SubjectList = {
                 {
                     id: 2,
                     eng: "You would have gotten wet if it had rained",
-                    tel: '',
+                    tel: "వర్షం పడిఉంటే, నువ్వు తడిసిపోయేవాడివి.",
                 },
                 {
                     id: 3,
                     eng: "You would have passed your exam if you had worked harder",
-                    tel: '',
-                }, {
+                    tel: "నువ్వు ఎక్కువ కష్టపడి చదివి ఉంటే, పరీక్షలో పాస్ అయ్యేవాడివి.",
+                },
+                {
                     id: 4,
                     eng: "If you had worked harder, you would have passed your exam",
-                    tel: '',
+                    tel: "నువ్వు ఎక్కువ కష్టపడి చదివి ఉంటే, పరీక్షలో పాస్ అయ్యేవాడివి.",
                 },
                 {
                     id: 5,
                     eng: "I would have believed you if you hadn't lied to me before",
-                    tel: '',
+                    tel: "నువ్వు ముందే నాతో అబద్ధం చెప్పి ఉండకపోతే, నేను నిన్ను నమ్మేవాడిని.",
                 },
                 {
                     id: 6,
                     eng: "If you hadn't lied to me before, I would have believed you",
-                    tel: '',
+                    tel: "నువ్వు ముందే నాతో అబద్ధం చెప్పి ఉండకపోతే, నేను నిన్ను నమ్మేవాడిని.",
                 },
+                {
+                    id: 1,
+                    eng: "If I had restarted the server, the issue would have been fixed.",
+                    tel: "నేను సర్వర్‌ని రీస్టార్ట్ చేసి ఉంటే, సమస్య ఫిక్స్ అయిపోయేది.",
+                },
+                {
+                    id: 2,
+                    eng: "If I had committed the code earlier, I would have avoided the bug.",
+                    tel: "నేను కోడ్‌ను ముందే commit చేసి ఉంటే, బగ్‌ని తప్పించుకునేవాడిని.",
+                },
+                {
+                    id: 3,
+                    eng: "If the team had tested properly, the production issue would not have occurred.",
+                    tel: "టీమ్ సరిగ్గా టెస్ట్ చేసి ఉంటే, ప్రొడక్షన్ ఇష్యూ వచ్చేది కాదు.",
+                },
+                {
+                    id: 4,
+                    eng: "If I had known about the deadline, I would have finished the task on time.",
+                    tel: "డెడ్‌లైన్ గురించి నాకు తెలిసి ఉంటే, నేను పని సమయానికి పూర్తి చేసేవాడిని.",
+                },
+                {
+                    id: 5,
+                    eng: "If the API had responded correctly, we would have saved debugging time.",
+                    tel: "API సరిగ్గా రెస్పాండ్ చేసి ఉంటే, మేము డీబగ్గింగ్ టైమ్ సేవ్ చేసుకునేవాళ్లం.",
+                },
+                {
+                    id: 6,
+                    eng: "If I had taken a backup, I would not have lost the data.",
+                    tel: "నేను బ్యాకప్ తీసుకుని ఉంటే, డేటా కోల్పోయేవాడిని కాదు.",
+                }
             ],
         },
         {
@@ -5088,38 +5257,6 @@ const SubjectList = {
 </br>
 ✅ Keep <span style="color:#d66313">the</span> akshanthas on <span style="color:#d66313">the</span> Lord Venkateshwara's foot.`,
             formation: 'If + Subject + had + past Participle - Subject + would have + past Participle',
-            content: [
-                {
-                    id: 1,
-                    eng: "If it had rained, you would have gotten wet",
-                    tel: 'వర్షం పడితే, మీరు తడిసిపోయేవారు',
-                    tense: 'Present tense'
-                },
-            ],
-        },
-        {
-            id: 11,
-            topic: "Prepositions (“on”, “at”, “in”, “to”)",
-            explain: `ఇవి స్థానం, సమయం, దిశ చూపించే మాటలు.
-</br>
-ఉదాహరణలు:
-</br>
-    Keep the book <span style="color:#d66313">on</span>  the table. (పుస్తకం టేబుల్ మీద పెట్టు)
-</br>
-    I will meet you <span style="color:#d66313">at</span>  the temple. (గుడి వద్ద కలుస్తాను)
-</br>
-    Flowers are <span style="color:#d66313">in</span>  the basket. (పూలు బుట్టలో ఉన్నాయి)
-</br>
-    Offer flowers <span style="color:#d66313">to</span>  the deity. (పూలు దేవుడికి సమర్పించు)
-</br>
-నీ తప్పు:
-</br>
-నువ్వు preposition మర్చిపోతావు.
-</br>
-❌ Keep flowers Lord's foot.
-</br>
-✅ Keep flowers <span style="color:#d66313">at</span> the Lord's feet.`,
-            formation: '',
             content: [
                 {
                     eng: "I saw <b>a</b> bird in <b>the</b> tree.",
@@ -5156,6 +5293,32 @@ const SubjectList = {
                     tel: "నక్షత్రాలు రాత్రి ఆకాశంలో ప్రకాశిస్తున్నాయి.",
                     tense: "Present continuous tense"
                 },
+            ],
+        },
+        {
+            id: 11,
+            topic: "Prepositions (“on”, “at”, “in”, “to”)",
+            explain: `ఇవి స్థానం, సమయం, దిశ చూపించే మాటలు.
+</br>
+ఉదాహరణలు:
+</br>
+    Keep the book <span style="color:#d66313">on</span>  the table. (పుస్తకం టేబుల్ మీద పెట్టు)
+</br>
+    I will meet you <span style="color:#d66313">at</span>  the temple. (గుడి వద్ద కలుస్తాను)
+</br>
+    Flowers are <span style="color:#d66313">in</span>  the basket. (పూలు బుట్టలో ఉన్నాయి)
+</br>
+    Offer flowers <span style="color:#d66313">to</span>  the deity. (పూలు దేవుడికి సమర్పించు)
+</br>
+నీ తప్పు:
+</br>
+నువ్వు preposition మర్చిపోతావు.
+</br>
+❌ Keep flowers Lord's foot.
+</br>
+✅ Keep flowers <span style="color:#d66313">at</span> the Lord's feet.`,
+            formation: '',
+            content: [
                 {
                     eng: "<b>in → a specific field / industry </b>",
                     tel: "",
@@ -5178,6 +5341,26 @@ const SubjectList = {
                     eng: "They work in finance.",
                     tel: "వాళ్లు ఫైనాన్స్ రంగంలో పని చేస్తున్నారు.",
                     type: "in → field / industry"
+                },
+                {
+                    id: 2,
+                    eng: "She is <b>in</b> the room.",
+                    tel: "ఆమె గదిలో ఉంది.",
+                },
+                {
+                    id: 3,
+                    eng: "We are <b>in</b> the office.",
+                    tel: "మేము ఆఫీసులో ఉన్నాము.",
+                },
+                {
+                    id: 4,
+                    eng: "There are many fish <b>in</b> the river.",
+                    tel: "నదిలో చాలా చేపలు ఉన్నాయి.",
+                },
+                {
+                    id: 5,
+                    eng: "He is <b>in</b> the car.",
+                    tel: "అతను కారులో ఉన్నాడు.",
                 },
                 {
                     eng: "<b>for → a company / employer</b>",
