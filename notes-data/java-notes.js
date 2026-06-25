@@ -443,7 +443,7 @@ public class Demo {
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "ArrayList",
       note: [
@@ -632,7 +632,7 @@ Examples:
         }
       ]
     },
-            {
+    {
       id: 1,
       title: "What is Queue?",
       note: [
@@ -808,7 +808,7 @@ public class SetExample {
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "What is Map (Interface)",
       note: [
@@ -937,7 +937,7 @@ public class EmployeeMapDemo {
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "Set to Map Conversion",
       note: [
@@ -1055,7 +1055,7 @@ public class EmployeeMapDemo {
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "What are the differences between List and Set?",
       note: [
@@ -1953,7 +1953,7 @@ Runnable r = () -> System.out.println("Hello");
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "Functional Interface in Java",
       note: [
@@ -2065,15 +2065,311 @@ Multiplication: 50
     },
     {
       id: 1,
-      title: "Pagination",
+      title: "Constructor",
       note: [
         {
-          text1: ``,
-          code1: ``
+          text1: `A constructor is a special block of code used to <b>initialize objects.</b> It has the same name as the class and does not have a return type, not even void. When you create an object of a class, the constructor is called automatically to set up the initial state of the object.
+
+In Java, a constructor is a block of codes similar to the method. It is called
+when an instance of the class is created. At the time of calling constructor,
+memory for the object is allocated in the memory.
+
+A constructor in Java is a special member that is called when an object is created. It initializes the new object’s state
+
+A constructor is a specialized block of code designed specifically to <b>initialize a newly created object.</b> It shares the same name as the class and does not have a return type, not even void. When you create an object of a class, the constructor is invoked automatically to set up the initial state of that object.
+
+Whenever you use the new keyword to create an object, at least one constructor is called. It sets up the initial state of the object by assigning values to its instance variables.
+
+<b>Rules of Constructors</b>
+To write a constructor in Java, you must follow three strict rules:
+  -> The name must match the class name exactly. If your class is <b>Student</b>, your constructor must be <b>Student()</b>.
+  -> It cannot have an explicit return type. Unlike methods, constructors do not return values, not even <b>void</b>.
+  -> It cannot be abstract, static, final, or synchronized. Constructors are tied directly to object instantiation, so these modifiers do not apply. (They can, however, be <b>public, private, protected</b>, or package-private).
+  -> It can accept parameters to initialize object properties.
+
+
+  <b> Types of Constructors </b>
+  -> <b>Default Constructor</b>: A constructor with no parameters. If you don’t define any constructor, Java provides a default one automatically.
+  If you do not write any constructor in your class, the Java compiler automatically inserts a hidden, no-argument constructor for you. It initializes all uninitialized instance variables to their default values (<b>0</b> for integers, <b>null</b> for objects, <b>false</b> for booleans).
+   <b>Note</b>: It is not necessary to write a constructor for a class because the Java compiler automatically creates a default constructor (a constructor with no arguments) if your class doesn’t have any. 
+
+  -> <b>Parameterized Constructor</b>: A constructor that takes arguments to initialize an object with specific values.
+It accepts arguments so you can dynamically assign different values to different objects the moment they are created.
+
+  -> <b>Copy Constructor</b>: A constructor that creates a new object as a copy of an existing object (not built-in in Java, but can be implemented manually). 
+
+  -> <b> No-Argument Constructor </b>: A constructor that takes no parameters, often used to create objects with default values.
+  This is a constructor you write yourself that takes no parameters. It is useful when you want to set specific default values for all objects of that class upon creation.
+
+  -> <b>Constructor Overloading</b>: Having multiple constructors in the same class with different parameter lists (number or type of parameters).
+  Just like methods, constructors can be overloaded. This means you can have <b>multiple constructors in the same class</b>, as long as their parameter lists (the number, type, or order of parameters) are different. This gives users of your class flexibility in how they create objects.
+
+  -> <b>Chained Constructor (The this() method) - Constructor Chaining</b>: A constructor that calls another constructor in the same class using <b>this()</b> or in the parent class using <b>super()</b>.
+  When you have overloaded constructors, they often share similar initialization logic. To avoid repeating code, one constructor can call another constructor within the same class using <b>this()</b>.
+  <b>this()</b> → call another constructor in the same class
+  <b>super()</b> → call a constructor in the parent class
+`,
+          code1: `// ----------------- Ex : 1 ----------------
+          class Student {
+    String name;
+
+    // Constructor
+    Student(String name) {
+        this.name = name;
+    }
+
+    void display() {
+        System.out.println("Name: " + name);
+    }
+
+    public static void main(String[] args) {
+        Student s1 = new Student("Vishnu");
+        s1.display();
+    }
+}
+
+// Output:
+// Name: Vishnu  
+
+
+// ------------------The Default Constructor ----------------
+public class Car {
+    String brand;
+    int year;
+
+    public static void main(String[] args) {
+        // We didn't write a constructor, but we can still create the object
+        Car myCar = new Car(); 
+        System.out.println(myCar.brand); // Output: null
+    }
+}
+    // Output:
+// null
+
+// ------------------ Parameterized Constructor ----------------
+public class Car {
+    String brand;
+    int year;
+
+    // Parameterized constructor
+    public Car(String b, int y) {
+        brand = b;
+        year = y;
+    }
+
+    public static void main(String[] args) {
+        Car honda = new Car("Honda", 2018);
+        Car toyota = new Car("Toyota", 2022);
+    }
+}
+    // Output:
+// No output, but two Car objects are created with specified brand and year
+          
+// ------------------ No-Argument Constructor ----------------
+public class Car {
+    String brand;
+    int year;
+
+    // User-defined no-argument constructor
+    public Car() {
+        brand = "Unknown Brand";
+        year = 2023;
+        System.out.println("Car object created!");
+    }
+}
+    // Output:
+// Car object created!
+          
+
+// ------------------ Constructor Overloading ----------------
+public class User {
+    String username;
+    String email;
+    int age;
+
+    // Constructor 1: Only username provided
+    public User(String username) {
+        this.username = username;
+        this.email = "Not provided";
+    }
+
+    // Constructor 2: Username and email provided
+    public User(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
+
+    // Constructor 3: All details provided
+    public User(String username, String email, int age) {
+        this.username = username;
+        this.email = email;
+        this.age = age;
+    }
+}
+    // Output:  
+
+
+// ------------------ Copy Constructor (this()) ----------------    
+// Copy constructor is not built-in in Java, but you can implement it manually. It creates a new object as a copy of an existing object.
+// 
+import java.io.*;
+
+class Geeks{
+    
+    // data members of the class
+    String name;
+    int id;
+
+    // Parameterized Constructor
+    Geeks(String name, int id)
+    {
+        this.name = name;
+        this.id = id;
+    }
+
+    // Copy Constructor
+    Geeks(Geeks obj2)
+    {
+        this.name = obj2.name;
+        this.id = obj2.id;
+    }
+}
+
+class GFG {
+    public static void main(String[] args)
+    {
+        // This would invoke the parameterized constructor
+        System.out.println("First Object");
+        Geeks geek1 = new Geeks("Sweta", 68);
+        System.out.println("GeekName: " + geek1.name
+                           + " and GeekId: " + geek1.id);
+
+        System.out.println();
+
+        // This would invoke the copy constructor
+        Geeks geek2 = new Geeks(geek1);
+        System.out.println(
+            "Copy Constructor used Second Object");
+        System.out.println("GeekName: " + geek2.name
+                           + " and GeekId: " + geek2.id);
+    }
+}
+    // Output:
+First Object
+GeekName: Sweta and GeekId: 68
+
+Copy Constructor used Second Object
+GeekName: Sweta and GeekId: 68
+
+// ------------------Copy Constructor (2) ----------------
+
+class Employee {
+    int id;
+    String name;
+
+    Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    // Copy Constructor
+    Employee(Employee e) {
+        this.id = e.id;
+        this.name = e.name;
+    }
+
+    void display() {
+        System.out.println(id + " " + name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Employee e1 = new Employee(101, "Anand");
+
+        // Copying e1 into e2
+        Employee e2 = new Employee(e1);
+
+        e2.display();
+    }
+}
+    // Output:
+101 Anand
+
+
+// ------------------Copy Constructor (super()) ----------------
+// 
+
+
+
+
+// ------------------ Chained Constructor Using this() ----------------
+
+class Employee {
+
+    Employee() {
+        this(101);
+        System.out.println("Default Constructor");
+    }
+
+    Employee(int id) {
+        this(id, "Anand");
+        System.out.println("One Parameter Constructor");
+    }
+
+    Employee(int id, String name) {
+        System.out.println(id + " " + name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        new Employee();
+    }
+}
+// Output
+// 101 Anand
+// One Parameter Constructor
+// Default Constructor
+
+// Execution flow:
+// Employee()
+//     ↓
+// Employee(int)
+//     ↓
+// Employee(int, String)
+
+
+// ----------------- Chained Constructor Using super() ------------------
+class Person {
+
+    Person() {
+        System.out.println("Person Constructor");
+    }
+}
+
+class Employee extends Person {
+
+    Employee() {
+        super();
+        System.out.println("Employee Constructor");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        new Employee();
+    }
+}
+// Output
+// Person Constructor
+// Employee Constructor
+`
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "What is the usage to Consumer interface?",
       note: [
@@ -2231,7 +2527,7 @@ class MyClass {
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "Why is the main method static?",
       note: [
@@ -2252,7 +2548,7 @@ args) </span>`,
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "Can we declare the main () method as final in Java?",
       note: [
@@ -2419,7 +2715,7 @@ public class Main {
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "Can you use this() and super() both in a constructor?",
       note: [
@@ -2447,7 +2743,7 @@ error: call to this must be first statement in constructor super(); `,
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "Polymorphism",
       note: [
@@ -2919,7 +3215,7 @@ Used when no specifier is written
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "Difference between Abstract class and Interface.",
       note: [
@@ -2940,7 +3236,7 @@ Abstract methods need to be implemented in the concrete sub-class.
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "Exceptions",
       note: [
@@ -3193,7 +3489,7 @@ t.start();
         }
       ]
     },
-        {
+    {
       id: 1,
       title: "Wrapper classes",
       note: [
