@@ -5,25 +5,105 @@ const Links3 = 'java-practice'
 const Links4 = 'vue3-projects'
 
 const javaData = {
-  javaNote: [
-    {
-      id: 1,
-      title: "class",
-      note: [
+    javaNote: [
         {
-          text1: `
+            id: 1,
+            title: "class",
+            note: [
+                {
+                    text1: `
           <b> class rule </b>
-          This error is a classic Java "Rule of Law": In a single <b>.java</b> file, you can only have ONE <b>public</b> class, and its name must match the filename exactly.`,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Difference between \"\" and '' in Java",
-      note: [
+          This error is a classic Java "Rule of Law": In a single <b>.java</b> file, you can only have ONE <b>public</b> class, and its name must match the filename exactly.
+          
+         -> cannot have two <b>public</b> classes in the same Java file.`,
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `"" → String
+            id: 1,
+            title: "compile time and run time",
+            note: [
+                {
+                    text1: `<b>compile time</b> and <b>run time</b> are two different phases of program execution.
+          compile time and run time refer to the two distinct phases a program goes through to go from the code you write to a fully functioning application.
+
+          <b> ** Compile Time (Before program runs) </b>
+         This is the phase where your <b>Java code is checked and converted into bytecode.</b>
+
+        <b> What happens here</b>:
+        -> Code is written in .java file
+        -> Java compiler (javac) checks syntax
+        -> Checks for errors like:
+        &nbsp; &nbsp; => Missing semicolons
+        &nbsp; &nbsp; => Wrong method calls
+        &nbsp; &nbsp; => Type mismatch
+        -> Converts code into bytecode (.class file)
+
+        <b>Example compile-time error</b>:
+int x = "hello"; // ❌ Type mismatch error
+👉 Error is shown before running the program
+
+
+This is the phase where you use the <b>javac</b> command. The Java compiler reads your human-readable source code (<b>.java</b> file) and translates it into machine-readable bytecode (<b>.class</b> file).
+
+During this phase, the compiler acts as a strict grammar checker. It doesn't run your program; it just makes sure the code follows all the rules of the Java language.
+
+<b>What happens here</b>:
+    -> Syntax checking (looking for missing semicolons, unclosed brackets).
+    -> Type checking (ensuring you aren't trying to store the word "Hello" in an <b>int</b> variable).
+    -> Verifying that classes and methods you reference actually exist.
+
+<b>Compile-Time Errors</b>:
+If the compiler finds a mistake, it halts and refuses to create the <b>.class</b> file. You saw this firsthand earlier with the <b>public class ConfigManager</b> error!
+
+    -> Example: Forgetting a semicolon: <b>int x = 5</b>
+    -> Example: Incompatible types: <b>String name = 100</b>;
+
+<b>** 🔵 Run Time (When program is executing)</b>
+This is the phase when the program is actually executed by JVM (Java Virtual Machine).
+<b>What happens here:</b>
+-> Bytecode is executed by JVM
+-> Memory is allocated
+-> Objects are created
+-> Methods are called
+
+<b>Example run-time error:</b>
+int[] arr = new int[3];
+System.out.println(arr[5]); // ❌ Runtime error (ArrayIndexOutOfBounds)
+👉 Code compiles fine, but crashes while running
+
+This is the phase where you use the <b>java</b> command. The Java Virtual Machine (JVM) takes the compiled bytecode (<b>.class</b> file) and actually executes the instructions step-by-step.
+During this phase, the program interacts with the computer's memory, the user, the network, and the file system.
+
+What happens here:
+    -> Memory is allocated for objects (like when you use the <b>new</b> keyword).
+    -> Constructors are executed.
+    -> User input is gathered.
+    -> Logic and math operations are actually calculated.
+
+<b>Run-Time Errors (Exceptions)</b>:
+Because the compiler cannot predict the future or know what data a user will type, some errors only reveal themselves while the program is running. The code was perfectly legal Java, but the action was impossible.
+    -> Example: Trying to divide by zero: <b>int result = 10 / 0;</b> (ArithmeticException)
+    -> Example: Trying to use an object that hasn't been initialized: <b>String name = null; System.out.println(name.length());</b> (NullPointerException)
+    -> Example: Trying to grab the 10th item from a list that only has 3 items. (ArrayIndexOutOfBoundsException)
+
+<b>🧠 Simple way to remember</b>:
+Compile time = checking stage
+Run time = execution stage
+
+
+         `,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Difference between \"\" and '' in Java",
+            note: [
+                {
+                    text1: `"" → String
 String name = "Anand";
 
 Key Points
@@ -50,17 +130,17 @@ Common Mistakes
 char ch = 'AB';   // ❌ ERROR (more than one character)
 ❌ Wrong
 String s = 'A';   // ❌ ERROR (char used instead of String)`,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      section: 'Java Collections Framework',
-      title: "Java Collections Framework",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `The <b>Java Collections Framework (JCF)</b> is a <b>set of interfaces, classes, and algorithms</b> used to <b>store, manipulate, and process groups of objects</b> efficiently.
+            id: 1,
+            section: 'Java Collections Framework',
+            title: "Java Collections Framework",
+            note: [
+                {
+                    text1: `The <b>Java Collections Framework (JCF)</b> is a <b>set of interfaces, classes, and algorithms</b> used to <b>store, manipulate, and process groups of objects</b> efficiently.
           
           Java Collection Framework (JCF) is a set of classes and interfaces that provide ready-made data structures to store and manipulate groups of objects efficiently.
 
@@ -92,7 +172,7 @@ Object Creation of Collection Interface
 Collection &lt; String&gt; fruits = new ArrayList&lt;&gt;();
 
 In Java, we cannot create an object of an interface directly. Instead, we create an object of the ArrayList class that implements the interface and assign it to the interface reference.`,
-          code1: `// ----------- Ex : 1 ---------
+                    code1: `// ----------- Ex : 1 ---------
           // We cannot instantiate interfaces directly in Java.
 // We create an object of a class that implements the interface and assign it to the interface reference.
 
@@ -133,15 +213,15 @@ Banana
 Mango
 
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Sub-Interfaces of Collection Interface",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `The Collection interface is the root of most Java collections. Its main sub-interfaces are: 
+            id: 1,
+            title: "Sub-Interfaces of Collection Interface",
+            note: [
+                {
+                    text1: `The Collection interface is the root of most Java collections. Its main sub-interfaces are: 
           
           <b>1. List</b>
 List represents an ordered collection that allows duplicates.
@@ -262,16 +342,16 @@ Collection
 </table>
 
 `,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "List",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `In Java, a List is a fundamental interface in the <b>java.util</b> package that represents an <b>ordered collection</b> of elements. Unlike a Set, a List allows <b>duplicate elements</b> and provides precise control over where each element is inserted. You can access elements by their integer index (position).
+            id: 1,
+            title: "List",
+            note: [
+                {
+                    text1: `In Java, a List is a fundamental interface in the <b>java.util</b> package that represents an <b>ordered collection</b> of elements. Unlike a Set, a List allows <b>duplicate elements</b> and provides precise control over where each element is inserted. You can access elements by their integer index (position).
 
           <b>Core Characteristics</b>
     <b>Ordered</b>: Elements maintain the insertion order.
@@ -393,7 +473,7 @@ More memory usage
 
     <b>Performance</b>: Always choose the implementation based on your specific access pattern—if you are mostly reading, choose <b>ArrayList</b>; if you are constantly modifying the middle of the list, consider <b>LinkedList</b> or other specialized structures.
 `,
-          code1: `// ---------- Ex : 1 ---------
+                    code1: `// ---------- Ex : 1 ---------
            List&lt;String&gt; list = new ArrayList&lt;&gt;();
         list.add("Java");
         list.add("Spring");
@@ -440,15 +520,15 @@ public class Demo {
  [Employee@6b95977, Employee@7e9e5f8a]
 [1 - ram - admin, 2 - vamshi - suman]
         `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "ArrayList",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `In Java, <b>ArrayList</b> is a resizable-array implementation of the <b>List</b> interface. It's part of the <b>java.util</b> package. Unlike arrays, <b>ArrayList</b> can dynamically grow and shrink in size as elements are added or removed.
+            id: 1,
+            title: "ArrayList",
+            note: [
+                {
+                    text1: `In Java, <b>ArrayList</b> is a resizable-array implementation of the <b>List</b> interface. It's part of the <b>java.util</b> package. Unlike arrays, <b>ArrayList</b> can dynamically grow and shrink in size as elements are added or removed.
           
           <b>Dynamic Sizing</b>: <b>ArrayList</b> can dynamically increase or decrease its size as elements are added or removed. You don't need to specify the size of the <b>ArrayList</b> initially.
 <b>Indexed Access</b>: Elements in an <b>ArrayList</b> can be accessed using an index, similar to arrays. The index starts from 0 for the first element and goes up to size-1 for the last element.
@@ -458,7 +538,7 @@ public class Demo {
 <b>Null Elements</b>: <b>ArrayList</b> allows storing <b>null</b> elements.
 
 <a href="https://medium.com/@Bharat2044/what-is-arraylist-in-java-and-how-to-create-and-all-predefined-methods-and-different-ways-to-print-fa3cc9f86f8b" target="_blank">ArrayList</a>`,
-          code1: `//-------------- Ex : 1 ------------
+                    code1: `//-------------- Ex : 1 ------------
           import java.util.ArrayList;
 
 public class Main {
@@ -485,15 +565,15 @@ public class Main {
 // Banana
 // [Apple, Mango]
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "LinkedList",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `<b>LinkedList</b> is a class in the Java Collections Framework that implements both the <b>List</b> and <b>Deque</b> interfaces.
+            id: 1,
+            title: "LinkedList",
+            note: [
+                {
+                    text1: `<b>LinkedList</b> is a class in the Java Collections Framework that implements both the <b>List</b> and <b>Deque</b> interfaces.
           
           Instead of storing elements in a continuous memory block like <b>ArrayList</b>, it stores elements as <b>nodes</b>, where each node contains:
 -> Data
@@ -628,16 +708,16 @@ Examples:
 <b>getFirst()</b>	Get the element at the beginning of the list	
 <b>getLast()</b>	Get the element at the end of the list
 `,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "What is Queue?",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `A Queue is a collection used to store elements in <b>FIFO order (First In First Out)</b>.
+            id: 1,
+            title: "What is Queue?",
+            note: [
+                {
+                    text1: `A Queue is a collection used to store elements in <b>FIFO order (First In First Out)</b>.
           
           👉 Think like:
 Bank queue
@@ -645,7 +725,7 @@ Ticket counter
 Printer queue
 
 First Come → First Serve`,
-          code1: `//------------ Ex : 1 -------------
+                    code1: `//------------ Ex : 1 -------------
           import java.util.*;
 
 public class QueueExample {
@@ -660,15 +740,15 @@ public class QueueExample {
         System.out.println(queue);
     }
 }`
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "var",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `var is a feature introduced in Java 10 that allows the compiler to automatically infer the type of a local variable from its initializer. It reduces code verbosity while maintaining strong type checking at compile time.
+            id: 1,
+            title: "var",
+            note: [
+                {
+                    text1: `var is a feature introduced in Java 10 that allows the compiler to automatically infer the type of a local variable from its initializer. It reduces code verbosity while maintaining strong type checking at compile time.
           
           var name = "Anand";      // String
 var age = 30;            // int
@@ -686,7 +766,7 @@ var x;          // Error: no initial value
 ❌ Invalid
 var a = null;   // Error: type cannot be inferred
 `,
-          code1: `// --------------- Ex : 1 ---------------
+                    code1: `// --------------- Ex : 1 ---------------
           
           import java.util.LinkedList;
 
@@ -726,15 +806,15 @@ public class LinkedListExample {
 // After Removing First: [Apple, Banana, Mango, Grapes]
 // Second Element: Banana
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "What is Set?",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `A <b>Set</b> is a collection that <b>does not allow duplicate elements.</b>
+            id: 1,
+            title: "What is Set?",
+            note: [
+                {
+                    text1: `A <b>Set</b> is a collection that <b>does not allow duplicate elements.</b>
           Declaration
 public interface Set&lt;E&gt; extends Collection&lt;E&gt;
 
@@ -789,7 +869,7 @@ Unlike a <b>List</b>, which is ordered and allows duplicates, a <b>Set</b> focus
         Removes all elements from the Set.
         The Set becomes empty after execution.
 `,
-          code1: `// ---------------   HashSet ----------
+                    code1: `// ---------------   HashSet ----------
           import java.util.*;
 
 public class SetExample {
@@ -805,15 +885,15 @@ public class SetExample {
     }
 }
     `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "What is Map (Interface)",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `In Java, a Map is a collection that stores data in key-value pairs. Unlike <b>List</b> or <b>Set</b>, which store individual elements, a <b>Map</b> is designed to map a unique key to a specific value.
+            id: 1,
+            title: "What is Map (Interface)",
+            note: [
+                {
+                    text1: `In Java, a Map is a collection that stores data in key-value pairs. Unlike <b>List</b> or <b>Set</b>, which store individual elements, a <b>Map</b> is designed to map a unique key to a specific value.
 
 It is defined by the <b>java.util.Map</b> interface. Think of it like a real-world dictionary: the word is the key, and the definition is the value.
 
@@ -876,7 +956,7 @@ Why is HashMap not thread-safe?
 Difference between HashMap and Hashtable?
 Difference between HashMap and ConcurrentHashMap?
 `,
-          code1: `//  --------------- Ex : 1 --------------
+                    code1: `//  --------------- Ex : 1 --------------
           import java.util.*;
 
           public class MapExample {
@@ -934,16 +1014,16 @@ public class EmployeeMapDemo {
     }
 }
     `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Set to Map Conversion",
-      note: [
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: `// --------------- Ex : 1 List&lt;Employee&gt; → Map&lt;Integer, String&gt; --------------
+            id: 1,
+            title: "Set to Map Conversion",
+            note: [
+                {
+                    text1: ``,
+                    code1: `// --------------- Ex : 1 List&lt;Employee&gt; → Map&lt;Integer, String&gt; --------------
           
           import java.util.*;
 import java.util.stream.Collectors;
@@ -1041,26 +1121,26 @@ public class EmployeeMapDemo {
     Output:
 {101=101 Anand Developer, 102=102 John Tester, 103=103 Priya Manager}
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      section: "Data Structures and Algorithms",
-      title: "Pagination",
-      note: [
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "What are the differences between List and Set?",
-      note: [
+            id: 1,
+            section: "Data Structures and Algorithms",
+            title: "Pagination",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `List and Set both are interfaces. They both extends Collection interface. 
+            id: 1,
+            title: "What are the differences between List and Set?",
+            note: [
+                {
+                    text1: `List and Set both are interfaces. They both extends Collection interface. 
  
 1) List is an ordered collection it maintains the insertion order, which means upon displaying the list content it will 
 display the elements in the same order in which they got inserted into the list. 
@@ -1078,17 +1158,17 @@ Set implementations: HashSet, LinkedHashSet, TreeSet etc.
 used to traverse a Set. We can use Iterator (It works with List too) to traverse a Set. 
  
 6) List interface has one legacy class called Vector whereas Set interface does not have any legacy class.`,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      section: "Stream API",
-      title: "Stream API",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `It allows you to filter, transform, and process data easily using pipelines.
+            id: 1,
+            section: "Stream API",
+            title: "Stream API",
+            note: [
+                {
+                    text1: `It allows you to filter, transform, and process data easily using pipelines.
 
 In simple words:
 Stream API is used to process collections (List, Set, etc.) using functional programming concepts.
@@ -1207,7 +1287,7 @@ Stream API is a feature introduced in Java 8 that allows processing collections 
     </tr>
   </tbody>
 </table>`,
-          code1: `//--------- 1: Filter Even Numbers -----------
+                    code1: `//--------- 1: Filter Even Numbers -----------
           import java.util.*;
 import java.util.stream.*;
 
@@ -1326,15 +1406,15 @@ Hari
 
 
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "collect(Collectors.toMap())",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `collect(Collectors.toMap()) is used to convert a collection (List/Set) into a Map.
+            id: 1,
+            title: "collect(Collectors.toMap())",
+            note: [
+                {
+                    text1: `collect(Collectors.toMap()) is used to convert a collection (List/Set) into a Map.
 
           <b>keyMapper</b>	Function to generate the Map key
           <b>valueMapper</b>	Function to generate the Map value
@@ -1346,7 +1426,7 @@ Hari
           joining()
           summarizingInt()
           `,
-          code1: `// ------------- Ex -----------
+                    code1: `// ------------- Ex -----------
           Map<Key, Value> map = list.stream()
                           .collect(Collectors.toMap(
                               keyMapper,
@@ -1433,56 +1513,56 @@ public class StreamExample {
     {1=Ram, 2=Shyam, 3=Hari}
 
                 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "stream map",
-      note: [
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "stream filter",
-      note: [
+            id: 1,
+            title: "stream map",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "stream reduce",
-      note: [
+            id: 1,
+            title: "stream filter",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "stream sorted(), distinct(), limit()",
-      note: [
+            id: 1,
+            title: "stream reduce",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "real-time examples",
-      note: [
+            id: 1,
+            title: "stream sorted(), distinct(), limit()",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: `//------------- Ex : 1 -----------
+            id: 1,
+            title: "real-time examples",
+            note: [
+                {
+                    text1: ``,
+                    code1: `//------------- Ex : 1 -----------
           import java.util.*;
 
 class User {
@@ -1634,15 +1714,15 @@ Longest Username: Christopher
 // 4️⃣ orElse("")
 // If list is empty → return empty string
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Method Reference :: ",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `n Java, the double colon :: is known as the Method Reference operator. Introduced in Java 8, it’s a shorthand syntax used to refer to a method without actually invoking it.
+            id: 1,
+            title: "Method Reference :: ",
+            note: [
+                {
+                    text1: `n Java, the double colon :: is known as the Method Reference operator. Introduced in Java 8, it’s a shorthand syntax used to refer to a method without actually invoking it.
           
           Think of it as a cleaner, more readable way to write a Lambda Expression. Instead of describing how to do something, you’re just pointing to an existing method that already does it.
           
@@ -1719,7 +1799,7 @@ String::length
   </tbody>
 </table>
     `,
-          code1: `// ----------- Ex : 1 -----------
+                    code1: `// ----------- Ex : 1 -----------
           import java.util.*;
           public class MethodRef {
               public static void main(String[] args) {
@@ -1862,16 +1942,16 @@ users.stream()
      .filter(User::isActive)
      .toList();
           `
-        }
-      ]
-    },
-    {
-      id: 1,
-      section: "Generics",
-      title: "Generics",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `<b>Definition of Generics in Java</b>
+            id: 1,
+            section: "Generics",
+            title: "Generics",
+            note: [
+                {
+                    text1: `<b>Definition of Generics in Java</b>
 <b>Generics in Java</b> is a feature that allows you to write <b>classes, interfaces, and methods with a placeholder for types</b>, so that you can use the same code with different data types <b>in a type-safe way</b>.
           <b>Why Use Generics?</b>
     <b>Type Safety</b>: The compiler checks that you’re only adding the correct type of data.
@@ -1901,7 +1981,7 @@ list.add("Anand");
 <b>Basic Syntax</b>
 ClassName&lt;T&gt; 
 T = Type parameter (can be anything like E, K, V)`,
-          code1: `//------ Example 1: Generic Class ---------
+                    code1: `//------ Example 1: Generic Class ---------
 class Box&lt;T&gt; {
     private T value;
 
@@ -1920,20 +2000,34 @@ stringBox.setValue("Hello");
 
 Box&lt;Integer&gt; intBox = new Box&lt;&gt;();
 intBox.setValue(100);`
-        }
-      ]
-    },
-    {
-      id: 1,
-      section: "Lambda functions",
-      title: "Lambda functions",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `Lambda functions in Java are a <b>short way to write anonymous functions (functions without a name).</b> They are mainly used with <b>functional interfaces</b> and introduced in Java 8 to support functional programming.
+            id: 1,
+            section: "Lambda functions",
+            title: "Lambda functions",
+            note: [
+                {
+                    text1: `Lambda functions in Java are a <b>short way to write anonymous functions (functions without a name).</b> They are mainly used with <b>functional interfaces</b> and introduced in Java 8 to support functional programming.
           
           ✅ Simple Definition
-A lambda expression is a concise way to represent a method with <b>no name, no modifier, and no return type declaration.</b>`,
-          code1: `// 🔹------  Basic Syntax -------
+A lambda expression is a concise way to represent a method with <b>no name, no modifier, and no return type declaration.</b>
+
+<b>Why break is Forbidden in Lambdas</b>
+Even though <b>list.forEach()</b> feels like a loop, at the language level, it is not.
+    Lambdas are just methods: A lambda expression in Java is essentially a compact way of writing an anonymous method (in this case, the <b>accept</b> method of the <b>Consumer</b> interface).
+
+    <b>break</b> requires a native loop: The <b>break</b> (and <b>continue</b>) keywords are strictly designed to control the flow of native language structures like <b>for, while, do-while</b>, and <b>switch</b> blocks.
+
+    No enclosing loop: Because the lambda is just a standalone method body being passed into <b>forEach</b>, there is no actual <b>for</b> or <b>while</b> loop surrounding the <b>break</b> statement for it to exit out of.
+    
+    <a href="https://github.com/anand-developer01/java-programs/blob/main/BreakInsideLambda.java" target="_blank">cannot use a statement inside a lambda expression.</a>
+
+    (<b>Note</b>: If you use <b>return;</b> inside this lambda, it will compile, but it acts like a <b>continue</b> statement, not a <b>break</b>. It simply exits the current method call for that specific element and moves on to the next one.)
+    
+    `,
+                    code1: `// 🔹------  Basic Syntax -------
 (parameters) -> expression
 // or
 (parameters) -> {
@@ -1950,15 +2044,15 @@ Runnable r = new Runnable() {
 // ----------  Example 2: With Lambda (New Way)
 Runnable r = () -> System.out.println("Hello");
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Functional Interface in Java",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `A <b>Functional Interface</b> is an interface that contains <b>exactly one abstract method.</b>
+            id: 1,
+            title: "Functional Interface in Java",
+            note: [
+                {
+                    text1: `A <b>Functional Interface</b> is an interface that contains <b>exactly one abstract method.</b>
         A functional interface can have:
 -> Only <b>one abstract method</b>
 -> Any number of <b>default</b> or <b>static</b> methods
@@ -2011,7 +2105,7 @@ Functional programming style in Java
 </table>
 
           `,
-          code1: `// --------- Example 1: Functional Interface ---------
+                    code1: `// --------- Example 1: Functional Interface ---------
           @FunctionalInterface
           interface Greeting {
               void sayHello(String name); // The one abstract method
@@ -2049,26 +2143,26 @@ public class Main {
 Addition: 15
 Multiplication: 50
 }     `
-        }
-      ]
-    },
-    {
-      id: 1,
-      section: "Oops",
-      title: "Pagination",
-      note: [
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Constructor",
-      note: [
+            id: 1,
+            section: "Oops",
+            title: "Pagination",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `A constructor is a special block of code used to <b>initialize objects.</b> It has the same name as the class and does not have a return type, not even void. When you create an object of a class, the constructor is called automatically to set up the initial state of the object.
+            id: 1,
+            title: "Constructor",
+            note: [
+                {
+                    text1: `A constructor is a special block of code used to <b>initialize objects.</b> It has the same name as the class and does not have a return type, not even void. When you create an object of a class, the constructor is called automatically to set up the initial state of the object.
 
 In Java, a constructor is a block of codes similar to the method. It is called
 when an instance of the class is created. At the time of calling constructor,
@@ -2093,6 +2187,55 @@ To write a constructor in Java, you must follow three strict rules:
   If you do not write any constructor in your class, the Java compiler automatically inserts a hidden, no-argument constructor for you. It initializes all uninitialized instance variables to their default values (<b>0</b> for integers, <b>null</b> for objects, <b>false</b> for booleans).
    <b>Note</b>: It is not necessary to write a constructor for a class because the Java compiler automatically creates a default constructor (a constructor with no arguments) if your class doesn’t have any. 
 
+   Because the default constructor is automatically injected by the Java compiler, it is completely invisible in your <b>.java</b> source code. You will never see it just by reading your code.
+
+However, you can prove it exists and identify it using three different methods, ranging from basic behavior to inspecting the actual compiled machinery.
+If you write any constructor, the default constructor disappears
+
+If a class does not contain any constructor and we can still create an object using <b>new ClassName()</b>, then the Java compiler has automatically provided a default constructor.
+
+
+//---------------- Ex ; 1 ---------------
+
+class Car {
+    String model;
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // We never wrote Car(), but this compiles perfectly.
+        // This is proof the default constructor is there.
+        Car myCar = new Car(); 
+    }
+}
+
+
+// -------------- Ex : 2 --------------
+class Car {
+    String model;
+    
+    Car(String model) {
+        this.model = model;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Car(); 
+    }
+}
+ //because Java no longer generates the default constructor.
+ERROR! 
+Main.java:15: error: constructor Car in class Car cannot be applied to given types;
+        Car myCar = new Car(); 
+                    ^
+  required: String
+  found:    no arguments
+  reason: actual and formal argument lists differ in length
+1 error
+
+ar myCar = new Car("BMW");   // ✅ Correct
+
   -> <b>Parameterized Constructor</b>: A constructor that takes arguments to initialize an object with specific values.
 It accepts arguments so you can dynamically assign different values to different objects the moment they are created.
 
@@ -2108,8 +2251,14 @@ It accepts arguments so you can dynamically assign different values to different
   When you have overloaded constructors, they often share similar initialization logic. To avoid repeating code, one constructor can call another constructor within the same class using <b>this()</b>.
   <b>this()</b> → call another constructor in the same class
   <b>super()</b> → call a constructor in the parent class
+
+  -> <b>The Private Constructor (The Pattern Enforcer)</b>
+While constructors are usually <b>public</b>, marking a constructor <b>private</b> strictly forbids other classes from using the <b>new</b> keyword to create an object of this class.
+    <b>Purpose</b>: Used primarily to control how and when objects are created. It is the backbone of two common scenarios:
+        -> Utility Classes: Classes that only contain <b>static</b> helper methods (<b>like java.lang.Math</b>). You don't want anyone instantiating a "Math" object, so you make the constructor private.
+        -> The Singleton Pattern: When you need to guarantee that only one single instance of a class can ever exist in your entire application (like a central configuration manager).
 `,
-          code1: `// ----------------- Ex : 1 ----------------
+                    code1: `// ----------------- Ex : 1 ----------------
           class Student {
     String name;
 
@@ -2145,6 +2294,49 @@ public class Car {
 }
     // Output:
 // null
+
+
+//---------------- default constructor No manual ---------------
+
+class Car {
+String model;
+}
+
+public class Main {
+public static void main(String[] args) {
+// We never wrote Car(), but this compiles perfectly.
+// This is proof the default constructor is there.
+Car myCar = new Car();
+}
+}
+
+
+// --------------default constructor Manual defined --------------
+class Car {
+String model;
+
+Car(String model) {
+this.model = model;
+}
+}
+
+public class Main {
+public static void main(String[] args) {
+Car myCar = new Car();
+}
+}
+//because Java no longer generates the default constructor.
+ERROR!
+Main.java:15: error: constructor Car in class Car cannot be applied to given types;
+Car myCar = new Car();
+^
+required: String
+found: no arguments
+reason: actual and formal argument lists differ in length
+1 error
+
+ar myCar = new Car("BMW"); // ✅ Correct
+
 
 // ------------------ Parameterized Constructor ----------------
 public class Car {
@@ -2365,16 +2557,124 @@ public class Main {
 // Output
 // Person Constructor
 // Employee Constructor
+
+// ----------------- The Private Constructor (The Pattern Enforcer) ------------------
+
+// Removed 'public' here so it can live happily inside Main.java
+class ConfigManager {
+
+    private static ConfigManager singleInstance = new ConfigManager();
+
+    private String databaseUrl;
+    private int maxConnections;
+
+    private ConfigManager() {
+        this.databaseUrl = "jdbc:mysql://localhost:3306/mydb";
+        this.maxConnections = 10;
+        System.out.println("--- ConfigManager Initialized! ---");
+    }
+
+    public static ConfigManager getInstance() {
+        return singleInstance;
+    }
+
+    public String getDatabaseUrl() {
+        return databaseUrl;
+    }
+
+    public void setDatabaseUrl(String databaseUrl) {
+        this.databaseUrl = databaseUrl;
+    }
+
+    public int getMaxConnections() {
+        return maxConnections;
+    }
+
+    public void setMaxConnections(int maxConnections) {
+        this.maxConnections = maxConnections;
+    }
+}
+
+// The main class that runs the program
+public class Main {
+    public static void main(String[] args) {
+        
+        ConfigManager config1 = ConfigManager.getInstance();
+        ConfigManager config2 = ConfigManager.getInstance();
+
+        System.out.println("Are config1 and config2 the same object? " + (config1 == config2));
+        System.out.println("Default DB URL: " + config1.getDatabaseUrl());
+
+        config1.setDatabaseUrl("jdbc:postgresql://live-server:5432/production_db");
+        System.out.println("Updated DB URL (read from config2): " + config2.getDatabaseUrl());
+    }
+}
+
+//output:
+// --- ConfigManager Initialized! ---
+// Are config1 and config2 the same object? true
+// Default DB URL: jdbc:mysql://localhost:3306/mydb
+// Updated DB URL (read from config2): jdbc:postgresql://live-server:5432/production_db
+  
+
+// ------------------- Ex Practical Example ----------------
+
+class Emp {
+    String id;
+    String name;
+    Emp(){
+        System.out.println("Constructor");
+    }
+    
+    Emp(String id, String name){
+        this.id = id;
+        this.name = name;
+        System.out.println("Param Constructor");
+    }
+    
+    public String getEmp(){
+        return "Ram";
+    }
+    
+    public String getFullEmp(){
+        return this.id + this.name;
+    }
+}
+
+public class Main {
+    public static void main(String[] args){
+        Emp ob1 = new Emp("9", "Vamshi");
+        System.out.println(ob1.getEmp());
+        System.out.println(ob1.getFullEmp());
+    }
+}
+
+// Output:
+// Param Constructor
+// Ram
+// 9Vamshi
+
+//It didn't print "Constructor" because of how you created your object in the // \`main// \` method:
+// \`Emp ob1 = new Emp("9", "Vamshi");// \`
+
+// When you use the new keyword and pass arguments inside the parentheses \`("9", "Vamshi")\`, Java looks at those arguments and finds the exact constructor that matches them. Because you passed two Strings, Java executed the Parameterized Constructor and completely ignored the No-Argument Constructor.
+// A constructor only runs if you specifically call it.
+// How to make it print
+
+// If you want to see "Constructor" print to the console, you have two options:
+// This calls the No-Argument Constructor
+    Emp ob2 = new Emp();
+
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "What is the usage to Consumer interface?",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `Use Java's Consumer interface to store a lambda expression in a variable: 
+            id: 1,
+            title: "What is the usage to Consumer interface?",
+            note: [
+                {
+                    text1: `Use Java's Consumer interface to store a lambda expression in a variable: 
           
           <b>Consumer<T></b> is a built-in Functional Interface located in the java.util.function package.
 Here is the technical breakdown of what that means in practice:
@@ -2385,7 +2685,7 @@ void accept(T t);
 
 <b>The Internal Code (Simplified) - (Ex : 2)</b>
 `,
-          code1: `import java.util.ArrayList; // For ArrayList
+                    code1: `import java.util.ArrayList; // For ArrayList
 import java.util.function.Consumer; // For the Consumer interface
 
 public class Main {
@@ -2445,15 +2745,15 @@ class Test
     } 
 } 
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "What are the states in the lifecycle of a Thread?",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `A thread can have one of the following states during its lifetime: 
+            id: 1,
+            title: "What are the states in the lifecycle of a Thread?",
+            note: [
+                {
+                    text1: `A thread can have one of the following states during its lifetime: 
 <b>New</b>:  
 In this state, a Thread class object is created using a new operator, but the thread is not alive. Thread doesn't start 
 until we call the start () method. 
@@ -2466,16 +2766,16 @@ In this state, the thread scheduler picks the thread from the ready state, and t
 In this state, a thread is not running but still alive, or it is waiting for the other thread to finish. 
 <b>Dead/Terminated</b>:  
 A thread is in terminated or dead state when the run () method exits. `,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Static Method",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `A static method belongs to the class rather than the object. 
+            id: 1,
+            title: "Static Method",
+            note: [
+                {
+                    text1: `A static method belongs to the class rather than the object. 
 There is no need to create the object to call the static methods. 
 A static method can access and change the value of the static variable. 
           
@@ -2484,7 +2784,7 @@ A static method can access and change the value of the static variable.
 When you mark a method as static, it exists even if you haven't created a new MyClass(). However, variables like <b>c</b> or <b>b</b> are <b>instance variables</b>—they only exist when an object is created.
 static context: The "Class Level." It doesn't know which object's <b>c</b> or <b>b</b> you are talking about.
 this keyword: Refers to the current object. Since a static method doesn't have a "current object," using this inside it is impossible.`,
-          code1: `// -------------------- Ex : 3 -------------
+                    code1: `// -------------------- Ex : 3 -------------
           // A static method belongs to the class, not to an object.
           class MyClass {
     public int a = 7;
@@ -2524,15 +2824,15 @@ class MyClass {
     }
 }
           `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Why is the main method static?",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `Because the object is not required to call the static method.  
+            id: 1,
+            title: "Why is the main method static?",
+            note: [
+                {
+                    text1: `Because the object is not required to call the static method.  
 If we make the main method non-static, JVM will have to create its object first and then call main() method which 
 will lead to the extra memory allocation. 
 You can write the main method in your program without the static modifier, the program gets compiled without 
@@ -2544,32 +2844,32 @@ If such a method is not found, a run time error is generated.
 
 <span style="color:red">Error: Main method is not static in class Sample, please define the main method as − public static void main(String[] 
 args) </span>`,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Can we declare the main () method as final in Java?",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `Yes, we can declare the main () method as final in Java. The compiler does not throw any error. 
+            id: 1,
+            title: "Can we declare the main () method as final in Java?",
+            note: [
+                {
+                    text1: `Yes, we can declare the main () method as final in Java. The compiler does not throw any error. 
 • If we declare any method as final by placing the final keyword then that method becomes the final method. 
 • The main use of the final method in Java is they are not overridden. 
 • We cannot override final methods in subclasses. 
 • If we are using inheritance and we need some methods not to overridden in subclasses then we need to 
 make it final so that those methods can't be overridden by subclasses. 
 • We can access final methods in the subclass but we cannot override final methods.`,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Inheritance",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `Inheritance is an Object-Oriented Programming (OOP) concept in Java where one class acquires the properties (variables) and behaviors (methods) of another class using the extends keyword.
+            id: 1,
+            title: "Inheritance",
+            note: [
+                {
+                    text1: `Inheritance is an Object-Oriented Programming (OOP) concept in Java where one class acquires the properties (variables) and behaviors (methods) of another class using the extends keyword.
           Inheritance means one class can extend to another class. So that the codes can be reused from one class to another 
 class. The existing class is known as the Super class whereas the derived class is known as a sub class.
           It allows:
@@ -2600,7 +2900,7 @@ hashCode()
 getClass()
 clone()
 finalize()  `,
-          code1: `
+                    code1: `
           1️⃣ Single Inheritance:
 class Vehicle {
     void start() {
@@ -2712,15 +3012,15 @@ public class Main {
 }
 
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Can you use this() and super() both in a constructor?",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `No, because this() and super() must be the first statement in the class constructor. 
+            id: 1,
+            title: "Can you use this() and super() both in a constructor?",
+            note: [
+                {
+                    text1: `No, because this() and super() must be the first statement in the class constructor. 
 • this() is used to call default/parameterized constructor of same class. it should be first statement inside 
 constructor. 
 • super() is used to call default/parameterized constructor of base class. it should be first statement inside 
@@ -2729,38 +3029,38 @@ so this() and super() both are used for constructor call but both want to execut
 compiler error like: 
 error: call to this must be first statement in constructor this(); or 
 error: call to this must be first statement in constructor super(); `,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "super Keyword",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Polymorphism",
-      note: [
+            id: 1,
+            title: "super Keyword",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `Polymorphism means many forms. 
+            id: 1,
+            title: "Polymorphism",
+            note: [
+                {
+                    text1: `Polymorphism means many forms. 
 A single object can refer to the super-class or sub-class depending on the reference type which is called 
 polymorphism.`,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Method Overriding",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `<b>Method Overriding</b> occurs when a <b>subclass (child class)</b> provides a <b>specific implementation</b> of a method that is already defined in its <b>superclass (parent class)</b>.  
+            id: 1,
+            title: "Method Overriding",
+            note: [
+                {
+                    text1: `<b>Method Overriding</b> occurs when a <b>subclass (child class)</b> provides a <b>specific implementation</b> of a method that is already defined in its <b>superclass (parent class)</b>.  
 It allows a <b>child class</b> to <b>change or extend</b> the behavior of the <b>parent class method</b>.
 
 
@@ -2779,7 +3079,7 @@ The <b>overriding happens</b> simply because the <b>child class method</b> has t
 
 The @Override annotation is optional, but it helps the compiler check that you are actually overriding a method.
 `,
-          code1: `// ---------------- Ex ---------------
+                    code1: `// ---------------- Ex ---------------
           // Parent class
 class Calc {
     int add(int a, int b) {
@@ -2837,15 +3137,15 @@ class Child extends Parent {
 }
 
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Method overloading",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `Method overloading is when a class has multiple methods with the same name but different parameters (different number, type, or order of arguments).
+            id: 1,
+            title: "Method overloading",
+            note: [
+                {
+                    text1: `Method overloading is when a class has multiple methods with the same name but different parameters (different number, type, or order of arguments).
           
           The compiler decides which version to call based on the arguments you pass — this is resolved at <b>compile time</b> (static polymorphism).
           
@@ -2854,7 +3154,7 @@ class Child extends Parent {
 -> Return type alone is <b>not enough</b> to overload — it won't compile
 -> Access modifiers can vary, but don't affect overloading
 `,
-          code1: `// -------------- Ex : 1 -------------
+                    code1: `// -------------- Ex : 1 -------------
           class Calculator {
     int add(int a, int b) { return a + b; }
     double add(double a, double b) { return a + b; }
@@ -2918,25 +3218,25 @@ search.search("shoes");                    // basic search
 search.search("shoes", "Sports");          // in sports category
 search.search("shoes", 500.0, 2000.0);    // within price range
 }`
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Packages",
-      note: [
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Abstract",
-      note: [
+            id: 1,
+            title: "Packages",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `<b>Abstraction</b> is the process of <b>hiding implementation details</b> and <b>showing only essential functionality</b> to the user.
+            id: 1,
+            title: "Abstract",
+            note: [
+                {
+                    text1: `<b>Abstraction</b> is the process of <b>hiding implementation details</b> and <b>showing only essential functionality</b> to the user.
           
           "Abstraction is the process of hiding implementation details and exposing only essential functionality. In Java, it is achieved using abstract classes and interfaces."
           <b>Abstraction</b> is an OOP principle that hides implementation details and shows only essential features to the user. Java achieves abstraction through abstract classes and interfaces.
@@ -2953,7 +3253,7 @@ It can contain:
 -> <b>Abstract methods</b> (methods without body)
 -> <b>Concrete methods</b> (methods with implementation)
 `,
-          code1: ` // -----------------  Ex : 1 -----------
+                    code1: ` // -----------------  Ex : 1 -----------
           abstract class Shape {
     String color;
 
@@ -3005,15 +3305,15 @@ public class Main {
         r.display();  // Color: Blue, Area: 24.0
     }
 }`
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Encapsulation",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `Encapsulation is one of the four core principles of Object-Oriented Programming (OOP). It refers to <b>bundling data (fields) and the methods that operate on that data into a single unit (a class), while restricting direct access to some of the object's components.</b>
+            id: 1,
+            title: "Encapsulation",
+            note: [
+                {
+                    text1: `Encapsulation is one of the four core principles of Object-Oriented Programming (OOP). It refers to <b>bundling data (fields) and the methods that operate on that data into a single unit (a class), while restricting direct access to some of the object's components.</b>
           
           Encapsulation in java is a mechanism of wrapping the data(variables) and code acting on the data(members) together as single unit
           Encapsulation is the process of <b>binding data (variables) and methods (functions) together into a single unit (class)</b> and <b>restricting direct access to the data.</b>
@@ -3042,7 +3342,7 @@ You use methods like:
 
 <b>🔷 Interview-Ready Answer</b>
 Encapsulation in Java is the process of wrapping data and methods into a single unit, i.e., a class, and restricting direct access to the data using access modifiers. It is achieved using private variables and public getter and setter methods, which helps in data hiding and improves security and maintainability.`,
-          code1: `public class BankAccount {
+                    code1: `public class BankAccount {
     private double balance;
     private String owner;
     private int transactionCount;
@@ -3168,15 +3468,15 @@ Encapsulation in Java is the process of wrapping data and methods into a single 
 
 // === Code Execution Successful ===
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "(Access specifiers) - Access Modifiers",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `Access Modifiers in Java define who <b>can access a class, method, variable, or constructor</b>. They are used for <b>encapsulation (data hiding)</b> and controlling visibility.
+            id: 1,
+            title: "(Access specifiers) - Access Modifiers",
+            note: [
+                {
+                    text1: `Access Modifiers in Java define who <b>can access a class, method, variable, or constructor</b>. They are used for <b>encapsulation (data hiding)</b> and controlling visibility.
           
           Access specifiers (also called access modifiers) control the visibility and accessibility of class members (variables, methods, constructors) in object-oriented programming.
           
@@ -3201,26 +3501,26 @@ Protected members are available outside the class.
 Accessible only within the same package
 Used when no specifier is written
 `,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Difference between String, String Builder, and String Buffer.",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: ``,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Difference between Abstract class and Interface.",
-      note: [
+            id: 1,
+            title: "Difference between String, String Builder, and String Buffer.",
+            note: [
+                {
+                    text1: ``,
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `The differences between Abstract Class and Interface are as follows: 
+            id: 1,
+            title: "Difference between Abstract class and Interface.",
+            note: [
+                {
+                    text1: `The differences between Abstract Class and Interface are as follows: 
 <b>Abstract Class</b>: 
 • Abstract classes have a default constructor and it is called whenever the concrete subclass is instantiated. 
 • It contains Abstract methods as well as Non-Abstract methods. 
@@ -3232,16 +3532,16 @@ Abstract methods need to be implemented in the concrete sub-class.
 • The abstract method alone should be declared. 
 • Classes that implement the interface should provide the implementation for all the methods. 
 • The interface contains only constants.`,
-          code1: ``
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Exceptions",
-      note: [
+                    code1: ``
+                }
+            ]
+        },
         {
-          text1: `An exception is an event that disrupts the normal flow of a program during execution. Java has a robust exception-handling mechanism built into the language.
+            id: 1,
+            title: "Exceptions",
+            note: [
+                {
+                    text1: `An exception is an event that disrupts the normal flow of a program during execution. Java has a robust exception-handling mechanism built into the language.
 
 Throwable
 ├── Error              (JVM errors — don't catch these)
@@ -3321,7 +3621,7 @@ public void printLength(String s) {
 
 <b>Unchecked</b> = Problems <b>inside your code</b> (null values, bad index, wrong logic) → your responsibility to write correct code.
                   `,
-          code1: `// Basic Syntax
+                    code1: `// Basic Syntax
 // try-catch-finally
 try {
     int result = 10 / 0; // throws ArithmeticException
@@ -3381,15 +3681,15 @@ public void withdraw(double amount) throws InsufficientFundsException {
     balance -= amount;
 }
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Multithreading in Java",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `<b>The Core Idea</b>
+            id: 1,
+            title: "Multithreading in Java",
+            note: [
+                {
+                    text1: `<b>The Core Idea</b>
 Java runs your program in a process. Inside that process, you can have many threads — each thread is an independent path of execution, but they all share the same memory.
 
 Multithreading in Java is a feature that allows a program to execute multiple threads (small units of a process) simultaneously.
@@ -3464,7 +3764,7 @@ Executor framework (advanced multithreading)
 🔥 
 Real interview questions with answers
 `,
-          code1: `// ------------ Two Ways to Create a Thread -------------
+                    code1: `// ------------ Two Ways to Create a Thread -------------
 // ----------- 1. Extend Thread -----------
 class MyThread extends Thread {
     public void run() {
@@ -3486,15 +3786,15 @@ class MyTask implements Runnable {
 Thread t = new Thread(new MyTask());
 t.start();
 `
-        }
-      ]
-    },
-    {
-      id: 1,
-      title: "Wrapper classes",
-      note: [
+                }
+            ]
+        },
         {
-          text1: `In Java, Wrapper classes are a set of classes that allow you to treat primitive data types (<b>like int, char, boolean</b>) as objects.
+            id: 1,
+            title: "Wrapper classes",
+            note: [
+                {
+                    text1: `In Java, Wrapper classes are a set of classes that allow you to treat primitive data types (<b>like int, char, boolean</b>) as objects.
 
 Since Java is an object-oriented language, many features (such as Collections like <b>ArrayList, HashMap, or Generics</b>) only work with objects. Wrapper classes bridge the gap between the primitive world and the object world.
 
@@ -3605,7 +3905,7 @@ if (arr2[0] != null && arr2[0]) {
     </tr>
   </tbody>
 </table>`,
-          code1: `// -------------- Ex : 1 -------------
+                    code1: `// -------------- Ex : 1 -------------
           class Main {
     public static void main(String[] args) {
         boolean[] arr1 = new boolean[3];
@@ -3614,10 +3914,36 @@ if (arr2[0] != null && arr2[0]) {
         System.out.println(arr2[0]);
     }
 }`
-        }
-      ]
-    },
-  ]
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "shallow copy and deep copy",
+            note: [
+                {
+                    text1: `A <b>shallow copy</b> creates a new object but copies only the references of nested objects, so both the original and copied objects share the same referenced data. In contrast, a <b>deep copy</b> creates completely independent copies of all nested objects, ensuring that changes made to the copied object do not affect the original. Shallow copies are faster and use less memory, while deep copies provide better isolation at the cost of additional memory and processing time.
+                    
+                    <b>1. Shallow Copy</b>
+A shallow copy creates a new object and copies the primitive values of the original object to it. However, for fields that are references (objects), it only copies the memory addresses (references), not the actual objects they point to.
+    <b>Result</b>: Both the original and the copied object share the same internal objects.
+    <b>Implication</b>: If you modify an internal object (e.g., changing a value inside a List held by the object), that change will be reflected in both the original and the copy.
+
+<b>2. Deep Copy</b>
+A deep copy creates a new object and recursively copies all objects found in the fields. It creates entirely new instances of all reference-type objects.
+    <b>Result</b>: The original and the copied object are completely independent.
+    <b>Implication</b>: Modifying the internal state of the copied object will have no effect on the original object.
+
+    <b>Implementing Shallow Copy</b>
+The standard way to perform a shallow copy is by implementing the <b>Cloneable</b> interface and overriding the <b>clone()</b> method. By default, <b>super.clone()</b> performs a shallow copy.
+
+<a href="https://github.com/anand-developer01/java-programs/blob/main/ShallowCopyVsDeepCopy.java" target="_blank">Shallow Copy Vs Deep Copy</a>
+    `,
+                    code1: ``
+                }
+            ]
+        },
+    ]
 }
 
 

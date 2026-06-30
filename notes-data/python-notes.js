@@ -1745,7 +1745,7 @@ print("Strings:", strings)  # ['a', 'b']
                 {
                     text1: `This is part of a <b>generator expression</b>, which is Python's compact way of writing a <b>for-loop inside a function call</b> — similar to JavaScript’s .map() or .forEach().
                     
-                    A generator expression in Python provides a concise and memory-efficient way to create a generator object. It is syntactically similar to a list comprehension but uses parentheses () instead of square brackets [].
+                    A generator expression in Python provides a concise and memory-efficient way to create a generator object. It is syntactically similar to a list comprehension but uses parentheses <b>()</b> instead of square brackets <b>[]</b>.
                     
                     In Python, generators are a special type of iterator created using the <b>def</b> keyword followed by the <b>yield</b> statement. Unlike regular functions that use <b>return</b> to provide a single value, generator functions use <b>yield</b> to produce a sequence of values on demand.
                     <b>Ex : 1</b>
@@ -1755,17 +1755,41 @@ print("Strings:", strings)  # ['a', 'b']
 
 The state of the generator is maintained through the <b>yield</b> keyword, and its code only executes when <b>next()</b> is called on the generator object. Generators also support advanced methods like <b>.send(), .throw()</b>, and <b>.close()</b> for more complex use cases.
 
+<b>The "Lazy" Magic</b>
+The core difference between a list comprehension and a generator expression is <b>lazy evaluation</b>.
+
+When you run a list comprehension, Python immediately calculates every single value and loads the entire list into your computer's RAM. A generator expression, on the other hand, is a recipe. It doesn't calculate anything until you explicitly ask for the next value. It yields one item, pauses, and waits for you to ask again.
+
 <b>List comprehensions</b>
 They are the most common type of comprehension in Python. They allow you to create a new list by applying an expression to each element of an existing iterable. The basic syntax of a list comprehension is as follows:
 
-new_list = [expression for item in iterable if condition]
+<b>new_list = [expression for item in iterable if condition]</b>
 Here's a breakdown of the components:
-
 -> <b>expression</b>: The operation or transformation applied to each element.
 -> <b>item</b>: The variable representing each element in the iterable.
 -> <b>iterable</b>: The sequence (list, tuple, string, etc.) being iterated over.
 -> <b>condition (optional)</b>: A conditional statement to filter elements.
+<b>Ex : 1</b>
+# List Comprehension (uses square brackets)
+squares_list = [x**2 for x in range(5)]
+print(squares_list) 
+# Output: [0, 1, 4, 9, 16]
+# Generator Expression (uses parentheses)
+squares_gen = (x**2 for x in range(5))
+print(squares_gen) 
+# Output: <generator object <genexpr> at 0x10a2b5350>
 
+<b>Ex : 2</b>
+arr = [1, 2, 3, 4, 5]
+
+# Incorrect ❌
+# eves = [num for num in arr: if num % 2 == 0]
+
+# Correct ✅
+eves = [num for num in arr if num % 2 == 0] 
+# Output: [2, 4]
+
+<b>Ex : 3</b>
 eves = [num for num in arr<b style="color:red">:</b> if num % 2 == 0] // SyntaxError: invalid syntax
 ❌ Problem:
 You added a colon (<b>:</b>) after arr, which is not allowed in list comprehensions.
@@ -1777,6 +1801,59 @@ This means:
 -> Outer loop: <b>for i in range(len(matrix[0]))</b> → loop over column indices (0, 1, 2)
 -> Inner loop: <b>for row in matrix</b> → for each row, get the <b>i</b>-th element
 -> So you're collecting all the i-th elements from each row → that becomes a new row in the transposed matrix
+
+
+<b>Equivalent Generator Function</b>
+A generator expression is shorthand for a generator function.
+Generator expression:
+squares = (x * x for x in range(5))
+
+Equivalent generator function:
+def generate_squares():
+    for x in range(5):
+        yield x * x
+
+squares = generate_squares()
+
+Both produce values lazily (on demand).
+
+
+<b>When to Use Generator Expressions</b>
+Use them when:
+Processing large datasets
+Passing values directly to functions like <b>sum(), max(), min(), join(), any(), all()</b>
+You don't need to store all results in memory
+
+Examples:
+-> total = sum(x * x for x in range(100))
+-> result = any(x > 10 for x in [1, 5, 15, 3])
+-> text = ",".join(str(x) for x in range(5))
+
+
+<b> *** List Comprehension [] vs Generator Expression () </b>
+<b>Syntax:</b>
+    List Comprehensions use square brackets: <b>[x for x in range(10)]</b>
+    Generator Expressions use parentheses: <b>(x for x in range(10))</b>
+
+<b>Execution Method (Eager vs. Lazy):</b>
+    -> <b>List Comprehensions are eager</b>. They compute the entire sequence immediately and return a fully populated list before moving to the next line of code.
+    -> <b>Generator Expressions are lazy</b>. They do not compute anything upfront. They simply create a generator object that pauses and yields the next item only when explicitly asked.
+
+<b>Memory Usage:</b>
+    -> <b>List Comprehensions require high memory</b>. If you generate 10 million items, your computer must allocate enough RAM to hold all 10 million items at once.
+    -> <b>Generator Expressions are highly memory-efficient</b>. They only hold one item in memory at a time alongside the state of the loop, meaning the memory footprint is tiny and constant regardless of the dataset size.
+
+<b>Reusability:</b> 
+    -> List Comprehensions are persistent. Because the data is saved in memory, you can loop over the list as many times as you need.
+    -> Generator Expressions are single-use. Once an item is generated, it is forgotten. If you finish iterating through the generator, it is "exhausted" and will be empty if you try to loop through it again.
+
+<b>Supported Operations:</b>
+    -> List Comprehensions support standard list features. You can check their length <b>(len(arr))</b>, slice them <b>(arr[1:4])</b>, and access specific indices directly <b>(arr[3])</b>.
+    -> Generator Expressions strictly forbid indexing, slicing, and len(). Because the values haven't been generated yet, Python doesn't know how long it is or what the 5th item will be without calculating the first 4.
+
+<b>Performance:</b>
+    -> List Comprehensions are faster overall if your final goal requires storing all the elements in memory anyway (like returning a complete dataset).
+    -> Generator Expressions have a nearly instant initialization time and are much faster when you are scanning through data looking for a specific condition (because you can break the loop early without having computed the rest of the sequence).
 `,
                     code1: `// ------------ Ex : 1 ---------
                     def count_up_to(max):
