@@ -2254,9 +2254,33 @@ It accepts arguments so you can dynamically assign different values to different
 
   -> <b>The Private Constructor (The Pattern Enforcer)</b>
 While constructors are usually <b>public</b>, marking a constructor <b>private</b> strictly forbids other classes from using the <b>new</b> keyword to create an object of this class.
+A <b>private constructor</b> is a constructor that cannot be accessed outside its own class.
+A private constructor is a constructor restricted by the private access modifier. This means it can only be called from within the same class where it is defined.
+
     <b>Purpose</b>: Used primarily to control how and when objects are created. It is the backbone of two common scenarios:
         -> Utility Classes: Classes that only contain <b>static</b> helper methods (<b>like java.lang.Math</b>). You don't want anyone instantiating a "Math" object, so you make the constructor private.
         -> The Singleton Pattern: When you need to guarantee that only one single instance of a class can ever exist in your entire application (like a central configuration manager).
+
+
+    <b>Why Do We Use Private Constructors?</b>
+    Private constructors are commonly used in:
+    <b> -> Singleton Pattern</b>: To ensure that only one instance of a class is created and provide a global point of access to it.
+    The most frequent use of a private constructor is to ensure that only one instance of a class exists throughout the application. By making the constructor private, you prevent other classes from using the new keyword to create instances.
+    <b> -> Utility Classes </b>: To prevent instantiation of classes that only contain static methods and fields (like java.lang.Math).
+    If a class contains only static methods or static constants (often called a "Utility" or "Helper" class), you don't want anyone to create an instance of it. Adding a private constructor ensures the class cannot be instantiated accidentally.
+    <b> -> Factory Method Pattern</b>: To delegate the instantiation logic to a separate method.
+    When you want to control the object creation process, you can make the constructor private and provide a public static method (a factory method) that returns an instance of the class. This allows you to perform validation, return cached instances, or return subclasses without changing the client code.
+    <b> -> Preventing Object Creation</b>: To prevent the creation of objects of a class that is not meant to be instantiated.
+
+    <b>Real-Time Java Examples</b>
+Java uses private constructors in many classes:
+-> java.lang.Math — prevents creating Math objects.
+-> java.util.Collections — contains only static utility methods.
+-> java.util.Arrays — helper methods for arrays.
+
+    A private constructor in Java restricts object creation from outside the class. It is mainly used to implement the Singleton pattern, create utility classes with only static methods, control object creation through factory methods, and prevent instantiation of a class. The constructor can still be accessed from within the same class, allowing the class to manage how and when its objects are created.
+
+<a href="https://github.com/anand-developer01/java-programs/blob/main/PrivateConstructor.java" target="_blank">Private Constructor</a>
 `,
                     code1: `// ----------------- Ex : 1 ----------------
           class Student {
@@ -3753,8 +3777,22 @@ class MyTask implements Runnable {
 <b>yield()</b>	Suggests thread pause
 
 
-If you want, I can also explain:
+The <b>run()</b> method is a core method in both the <b>Runnable</b> interface and the <b>Thread</b> class in Java. It defines the task or logic that should be executed by a thread.
 
+When a thread is started using the <b>start()</b> method, the JVM creates a new thread of execution and internally invokes the <b>run()</b> method to execute the task defined inside it.
+
+<b>Key Clarification (Important Interview Point)</b>
+-> You should not call <b>run()</b> directly if you want multithreading.
+-> You must call <b>start()</b> to execute <b>run()</b> in a new thread.
+
+Thread t = new Thread(() -> {
+    System.out.println("Running in thread: " + Thread.currentThread().getName());
+});
+
+t.start(); // New thread created
+
+
+-------------------------
 🔥 
 Synchronization in Java (very important)
 🔥 
@@ -3767,24 +3805,88 @@ Real interview questions with answers
                     code1: `// ------------ Two Ways to Create a Thread -------------
 // ----------- 1. Extend Thread -----------
 class MyThread extends Thread {
+
+    @Override
     public void run() {
-        System.out.println("Running in: " + Thread.currentThread().getName());
+        System.out.println("Thread is running...");
     }
 }
 
-MyThread t = new MyThread();
-t.start(); // DON'T call run() directly — that won't create a new thread
+public class Main {
+    public static void main(String[] args) {
+
+        MyThread t1 = new MyThread();
+
+        t1.start();   // Creates a new thread
+    }
+}
+
+// Output:
+// Thread is running...
 
 
 // ------------  2. Implement Runnable ✅ (preferred) ------------
 class MyTask implements Runnable {
+
+    @Override
     public void run() {
-        System.out.println("Task running!");
+        System.out.println("Task is executing...");
     }
 }
 
-Thread t = new Thread(new MyTask());
-t.start();
+public class Main {
+    public static void main(String[] args) {
+
+        Thread t1 = new Thread(new MyTask());
+
+        t1.start();
+    }
+}
+    //Output:
+    // Task is executing...
+
+    // ------------------ real-world example ----------------
+    class OrderTask implements Runnable {
+
+    private String taskName;
+
+    public OrderTask(String taskName) {
+        this.taskName = taskName;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(taskName + " started by: " + Thread.currentThread().getName());
+
+        try {
+            Thread.sleep(2000); // simulate processing time
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(taskName + " completed by: " + Thread.currentThread().getName());
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        Runnable orderProcessing = new OrderTask("Order Processing");
+        Runnable notification = new OrderTask("Sending Notification");
+
+        Thread t1 = new Thread(orderProcessing);
+        Thread t2 = new Thread(notification);
+
+        t1.start();
+        t2.start();
+    }
+}
+    // Output (order may vary due to concurrency):
+    // Order Processing started by: Thread-0
+    // Sending Notification started by: Thread-1
+    // Order Processing completed by: Thread-0
+    // Sending Notification completed by: Thread-1
 `
                 }
             ]
