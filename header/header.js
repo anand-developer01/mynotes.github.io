@@ -28,4 +28,5 @@ const navHeader = `
     <li><a href="./english.html">English</a></li>
     <li><a href="./MERN-notes.html">MERN</a></li>
     <li><a href="./java-notes.html">Java</a></li>
+    <li><a href="./DevOps-notes.html">DevOps</a></li>
 </ul>`
