@@ -206,6 +206,162 @@ git restore .`
                 }
             ]
         },
+                {
+            id: 1,
+            title: "Merge vs Rebase",
+            note: [
+                {
+                    text1: `<b>1. git merge</b>
+    <b>What it is</b>: A non-destructive way to integrate changes. It takes the contents of a source branch and combines them with the target branch.
+    <b>How it works</b>: It creates a brand-new "merge commit" on the target branch that has two parent commits (representing the meeting point of both branches).
+    <b>Pros</b>: Preserves the exact historical timeline and context of when branches diverged and came back together.
+    <b>Cons</b>: If you have many developers working concurrently, your project history can become cluttered with numerous merge commits.
+
+    <b>2. git rebase</b>
+    <b>What it is</b>: A linear history rewriting tool. It takes your feature branch commits and "re-plants" them on top of the tip of another branch (like main).
+    <b>How it works</b>: Instead of creating a merge commit, Git rewrites the commit history by generating brand-new commit hashes for your changes as if you had started your work from the latest version of the target branch.
+    <b>Pros</b>: Results in a clean, strictly linear project history that is much easier to read through tools like git log.
+    <b>Cons</b>: Rewrites history. You should never rebase commits that have already been pushed to a shared remote repository, as it forces other collaborators to deal with broken or mismatched history.
+    
+    <b>Merge</b> combines two branches by creating a new merge commit, preserving the original branch history.
+<b>Rebase</b> moves a branch to a new base by replaying its commits on top of another branch, creating a cleaner, linear history but rewriting commit hashes.
+Use <b>merge</b> for shared branches and rebase for cleaning up your own feature branch before integration.
+
+    <b>git merge</b> and <b>git rebase</b> are both used to integrate changes from one branch into another, but they do so in fundamentally different ways. The choice between them often depends on your team's workflow preferences and the importance of maintaining a clean commit history versus preserving the exact historical context of changes.
+    
+    <b>Visual Example</b>
+Suppose your Git history looks like this:
+main
+A --- B --- C
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;    \\
+feature       D --- E
+
+
+main has commits: A → B → C
+feature has commits: D → E
+
+Now, someone adds two commits to main:
+main
+A --- B --- C --- F --- G
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;    \\  
+feature     &nbsp; &nbsp; &nbsp; &nbsp;  D --- E
+
+You want to bring the latest changes from <b>main</b> into <b>feature</b>.
+
+<b>Option 1: Merge</b>
+git checkout feature
+git merge main
+
+Git creates a <b>new merge commit</b>.
+A --- B --- C --- F --- G
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \\     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     \\
+            &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; D --- E ---- M
+D and E stay exactly as they were.
+Git adds a merge commit M.
+History shows the actual branching and merging.
+<b>Advantages</b>
+-> Safe (doesn't rewrite history).
+-> Preserves the real development history.
+-> Good for shared/public branches.
+<b>Disadvantages</b>
+-> Creates extra merge commits.
+-> History can become cluttered.
+
+<b>Option 2: Rebase</b>
+git checkout feature
+git rebase main
+
+Git does <b>not</b> create a merge commit.
+<b>Instead it:</b>
+Temporarily removes D and E.
+Moves feature to G.
+Replays D and E on top of G.
+A --- B --- C --- F --- G --- D' --- E'
+
+<b>Notice:</b>
+D becomes D'
+E becomes E'
+
+These are <b>new commits</b> with new commit hashes.
+History becomes linear.
+
+<b>What Actually Happens During Rebase</b>
+Original:
+A --- B --- C
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \\
+            &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; D --- E
+
+Main moves ahead:
+A --- B --- C --- F --- G
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  \\    
+            &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; D --- E
+
+After rebase:
+A --- B --- C --- F --- G --- D' --- E' 
+Git literally copies your commits and reapplies them.
+
+
+<b>Which One is Better?</b>
+Use Merge
+Shared branches
+Team collaboration
+<b>main</b>
+<b>develop</b>
+Release branches
+
+Example:
+feature  ---> develop
+develop  ---> main
+Merge is usually preferred.
+
+<b>Use Rebase</b>
+Updating your own feature branch with the latest main
+Before creating a Pull Request
+Keeping history clean
+
+Example:
+git checkout feature
+git fetch origin
+git rebase origin/main
+
+<b>Rule You Should Remember</b>
+Never rebase public/shared branches.
+If others have already pulled the branch, rebasing changes commit history and can cause problems for collaborators.
+
+
+`,
+                    code1: `// ------------ Real-Time Team Workflow -------------
+// Suppose:
+main
+// Create feature:
+git checkout -b feature/login
+
+// You make commits:
+login-1
+login-2
+
+// Meanwhile:
+main
+// gets new commits:
+payment
+notification
+
+// Before raising a PR:
+git fetch origin
+git rebase origin/main
+
+// Resolve conflicts if needed:
+git add .
+git rebase --continue
+
+// Push the rebased branch:
+git push --force-with-lease
+
+// Then create the Pull Request.
+`
+                }
+            ]
+        },
         {
             id: 1,
             section: "Linux (Must Know)",
