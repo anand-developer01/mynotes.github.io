@@ -73,7 +73,7 @@ GitHub Actions basics`,
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "origin/main and origin/HEAD",
             note: [
@@ -119,7 +119,7 @@ origin/main
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "git restore",
             note: [
@@ -206,7 +206,7 @@ git restore .`
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "Merge vs Rebase",
             note: [
@@ -359,6 +359,178 @@ git push --force-with-lease
 
 // Then create the Pull Request.
 `
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "cherry-pick",
+            note: [
+                {
+                    text1: `git cherry-pick is a powerful Git command that allows you to take a specific commit from one branch and apply (or "copy") it onto your current working branch. Instead of merging an entire branch with all of its accumulated changes, cherry-picking lets you hand-pick a single commit or a specific range of commits.
+                    
+                    git cherry-pick is used to <b>copy a specific commit (or commits) from one branch and apply it to another branch</b> without merging the entire branch.
+                    
+                    <b>How It Works</b>             
+    <b>Identify the Commit</b>: You find the hash of the specific commit you want to copy (using git log).
+    <b>Switch to Target Branch</b>: Ensure you are checked out on the branch where you want to apply the change.
+    <b>Run the Command</b>: Execute git cherry-pick &lt;commit-hash&gt;.
+
+                    <b>When to use cherry-pick</b>
+Suppose you have:
+main
+feature/login
+
+You made three commits in <b>feature/login</b>:
+A -- B -- C
+But only commit <b>B</b> contains a bug fix that you need in <b>main</b>.
+Instead of merging the whole branch, you can cherry-pick commit <b>B</b>.
+
+
+<b>Example</b>
+<b>Step 1: Find the commit hash</b>
+git log --oneline
+
+<b>Output</b>:
+a1b2c3d Add login page
+d4e5f6g Fix login validation
+h7i8j9k Improve UI
+
+Suppose you want:
+d4e5f6g Fix login validation
+
+<b>Step 2: Switch to the target branch</b>
+git checkout main
+or
+git switch main
+
+<b>Step 3: Cherry-pick the commit</b>
+git cherry-pick d4e5f6g
+
+Git creates a new commit on main with the same changes.
+<b>Before:</b>
+feature
+A -- B -- C
+main
+A
+
+<b>After:</b>
+feature
+A -- B -- C
+main
+A -- B'
+
+<b>B'</b> is a new commit with a different commit ID but the same changes as <b>B</b>.
+
+
+<b>Cherry-pick multiple commits</b>
+Pick individual commits
+git cherry-pick abc123 def456 ghi789
+
+Pick a range of commits
+git cherry-pick A^..D
+
+This includes:
+A
+B
+C
+D
+
+<b>If there are conflicts</b>
+Git pauses and shows conflict files.
+Resolve the conflicts, then run:
+
+git add .
+git cherry-pick --continue
+
+To cancel the cherry-pick:
+git cherry-pick --abort
+
+<b>Common use cases</b>
+1. Move a bug fix to another branch
+feature
+|
+|-- Bug Fix
+|-- New Feature
+
+Only move the bug fix to main.
+`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Stash",
+            note: [
+                {
+                    text1: `<b>git stash</b> is used to <b>temporarily save your uncommitted changes</b> (both staged and unstaged) without committing them. This lets you switch branches, pull changes, or work on something else, then come back later and restore your work.
+                    
+                    git stash is a handy Git command that temporarily shelves (or "stashes") changes you've made to your working directory so you can work on something else, without needing to commit unfinished work.
+                    
+                    When you run git stash, it takes your uncommitted changes (both staged and unstaged) and saves them on a stack of unfinished changes, reverting your working directory to match the last commit.
+                    
+                    <b>1. Check your changes</b>
+git status
+Example:
+modified: src/App.js
+modified: src/index.css
+
+<b>2. Stash the changes</b>
+git stash
+
+Or add a descriptive message:
+git stash push -m "Working on login feature"
+Now your working directory becomes clean.
+
+<b>View all stashes</b>
+git stash list
+
+Example:
+stash@{0}: On feature/login: Working on login feature
+stash@{1}: On main: Fix navbar issue
+
+<b>Apply the latest stash</b>
+git stash apply
+This restores the changes but keeps the stash in the stash list.
+
+<b>Apply a specific stash</b>
+git stash apply stash@{1}
+
+<b>Apply and remove the stash</b>
+git stash pop
+This applies the most recent stashed changes back into your working directory and removes them from the stash list. (If you want to apply them without removing them from the list, use git stash apply instead).
+-> Restores the changes
+-> Removes the stash from the stash list
+
+<b>Delete a stash</b>
+Delete one stash:--
+git stash drop stash@{0}
+
+Delete all stashes:--
+git stash clear
+
+<b>Discard a stash</b>:
+Bash
+git stash drop
+
+<b>Create a new branch from a stash</b>
+Very useful if you decide the stashed work should be on a separate branch.
+git stash branch feature/new-work stash@{0}
+`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "untracked files",
+            note: [
+                {
+                    text1: `<b>Untracked files</b> are files that exist in your working directory but are not yet being tracked by Git.
+                    
+                    `,
+                    code1: ``
                 }
             ]
         },
