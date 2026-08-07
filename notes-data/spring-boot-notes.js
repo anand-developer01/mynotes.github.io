@@ -342,6 +342,20 @@ public class UserDAO {
         {
           text1: `Lombok is a Java library that helps you write less boilerplate code by automatically generating common code at compile time.
          
+          <b>What Lombok generates</b>:
+<b>@Data</b>
+-> Getters
+-> Setters
+-> toString()
+-> equals()
+-> hashCode()
+<b>@Builder</b>
+-> Builder pattern
+<b>@NoArgsConstructor</b>
+-> Default constructor
+<b>@AllArgsConstructor</b>
+-> Constructor with all fields
+
  <b>@Getter</b>
 Definition:
 Generates <b>getter methods</b> for all fields (or specific fields) of a class at compile time.

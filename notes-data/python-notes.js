@@ -3106,11 +3106,385 @@ for i in range(1, 10, 2):
         {
             id: 1,
             section: `File Handling`,
-            title: "What is Python?",
+            title: "File Handling",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `In Python, the built-in function open() is used to open a file. It returns a file object, which has methods and attributes to read, write, and manipulate the file.
+
+    Syntax: <b>file_object = open(file_name, mode) </b>
+    
+    <b>'r':-	Read (Default)</b> : Opens a file for reading. Raises an error if the file does not exist.
+<b>'w' :-	Write</b> : Opens a file for writing. Creates a new file if it doesn't exist or truncates (overwrites) an existing file.
+<b>'a' :-	Append</b> : Opens a file for appending. Appends data at the end of the file without overwriting existing content. Creates a file if it doesn't exist.
+<b>'x' :-	Exclusive Creation</b> : Creates a new file. Fails if the file already exists.
+<b>'b' :-	Binary Mode</b> : Used for non-text files like images or executables (e.g., 'rb', 'wb').
+<b>'+' :-	Open for Updating</b> : Reading and writing (e.g., 'r+').
+
+<b>Best Practice</b>: Always close files after use to free up system resources, or better yet, use the with statement (context manager) which handles closing automatically.
+Python automatically closes the file.
+<b>2. Using the with Statement (Context Manager)</b>
+The with statement ensures that the file is properly closed as soon as the block of code inside it finishes executing, even if exceptions occur.
+
+<b>3. Reading Files</b>
+You can read the contents of a file using different methods depending on your needs:
+    <b>read(size)</b>: Reads the entire file (or up to size bytes).
+    <b>readline()</b>: Reads a single line from the file.
+    <b>readlines()</b>: Reads all lines and returns them as a list of strings.
+<b>4. Writing and Appending Data</b>
+    <b>write(string)</b>: Writes a string to the file.
+    <b>writelines(list_of_strings)</b>: Writes a list of strings to the file.
+    <b>file.close()</b>       # Close the file
+
+<b>5. Working with File Paths (pathlib)</b>
+For robust file and path manipulation across different operating systems (Windows, macOS, Linux), Python provides the modern pathlib module.
+    pathlib is Python's modern way to work with files and directories. It is usually preferred over os.path because the code is cleaner and more object-oriented.
+    <b>Import Path</b>
+    <b>from pathlib import Path</b>
+    <b>Create a path</b>:
+    file_path = Path("data/sample.txt")
+    print(file_path)
+    Output:
+    data/sample.txt
+
+    <b>Path.cwd()</b> : Returns the current working directory.
+<b>Path("file.txt")</b> : Creates a Path object representing the specified file or directory path.
+<b>path.exists()</b> : Checks whether the specified file or directory exists.
+<b>path.is_file()</b> : Checks whether the path points to a file.
+<b>path.is_dir()</b> : Checks whether the path points to a directory.
+<b>path.mkdir()</b> : Creates a new directory at the specified path.
+<b>path.read_text()</b> : Reads the entire contents of a text file and returns it as a string.
+<b>path.write_text()</b> : Writes a string to a text file. If the file already exists, its contents are replaced.
+<b>path.unlink()</b> : Deletes the file represented by the path.
+<b>path.iterdir()</b> : Returns an iterator containing the files and directories inside the specified directory.
+<b>path.glob("*.txt")</b> : Finds files and directories matching a pattern within the specified directory.
+<b>path.rglob("*.txt")</b> : Finds files and directories matching a pattern recursively, including subdirectories.
+<b>path.name</b> : Returns the name of the file or directory, including its extension.
+<b>path.stem</b> : Returns the file or directory name without its extension.
+<b>path.suffix</b> : Returns the file extension, including the dot, such as \`.txt\` or \`.pdf\`.
+<b>path.parent</b> : Returns the parent directory of the current path.
+`,
+                    code1: `// ---------  # Writing to a file using 'with' --------
+                with open("example.txt", "w") as file:
+                    file.write("Hello, World!\n")
+                    file.write("Python file handling is easy.")
+                    
+                    // --------- Write ---------
+with open("sample.txt", "w") as file:
+    file.write("Hello Python")
+
+// --------- Append ---------
+with open("sample.txt", "a") as file:
+    file.write("\nWelcome to AI")
+
+// --------- 4. Read a File ---------
+Read entire file
+with open("sample.txt", "r") as file:
+    print(file.read())
+
+// --------- Read one line ---------
+with open("sample.txt", "r") as file:
+    print(file.readline())
+
+// --------- Read all lines ---------
+with open("sample.txt", "r") as file:
+    print(file.readlines())
+// Output:
+// ['Hello\\n', 'Python\\n', 'AI']
+ 
+// --------- 5. Read Line by Line ---------
+with open("sample.txt", "r") as file:
+    for line in file:
+        print(line.strip())
+
+// --------- 6. Check if File Exists ---------
+import os
+if os.path.exists("sample.txt"):
+    print("File exists")
+else:
+    print("File not found")
+
+// --------- 7. Delete a File ---------
+import os
+if os.path.exists("sample.txt"):
+    os.remove("sample.txt")
+
+// --------- 8. Working with Binary Files ---------
+with open("image.jpg", "rb") as file:
+    data = file.read()
+
+// --------- 9. Exception Handling ---------
+try:
+    with open("sample.txt", "r") as file:
+        print(file.read())
+except FileNotFoundError:
+    print("File not found")
+
+// ----------- Working with File Paths (pathlib) ---------
+from pathlib import Path
+
+// # Define a path
+file_path = Path("example.txt")
+
+// # Check if file exists
+if file_path.exists():
+    print("File found!")
+    content = file_path.read_text()
+    print(content)
+else:
+    print("File does not exist.")
+
+
+
+
+
+
+    // 1. Import Path 
+from pathlib import Path
+// Create a path:
+file_path = Path("data/sample.txt")
+print(file_path)
+// Output:
+// data/sample.txt
+
+
+// 2. Current Directory
+from pathlib import Path
+current = Path.cwd()
+print(current)
+// cwd() = Current Working Directory
+// For example:
+// /home/anand/python-project
+
+// 3. Create a Directory
+from pathlib import Path
+folder = Path("data")
+folder.mkdir()
+
+// This creates:
+python-project/
+└── data/
+
+
+// Create parent directories
+folder = Path("data/documents/pdf")
+folder.mkdir(parents=True)
+// parents=True creates all missing directories.
+
+
+// 4. Check Whether Something Exists
+path = Path("data/sample.txt")
+print(path.exists())
+// Returns:
+// True
+// or
+// False
+
+// You can also check specifically:
+path.is_file()
+path.is_dir()
+
+
+// 5. Create and Write a File
+// Instead of:
+with open("sample.txt", "w") as file:
+    file.write("Hello Python")
+
+// You can use:
+from pathlib import Path
+file = Path("sample.txt")
+file.write_text("Hello Python")
+// Very convenient.
+
+
+
+// 6. Read a File
+from pathlib import Path
+file = Path("sample.txt")
+content = file.read_text()
+print(content)
+
+
+// 7. Append to a File
+// Path doesn't have a direct append_text() method.
+// You can do:
+file = Path("sample.txt")
+with file.open("a") as f:
+    f.write("\\nHello AI")
+
+
+// 8. Delete a File
+file = Path("sample.txt")
+file.unlink()
+unlink() = delete a file.
+
+
+
+// 9. List Files in a Directory
+// Suppose:
+project/
+├── data/
+│   ├── users.json
+│   ├── users.csv
+│   └── notes.txt
+
+// You can do:
+from pathlib import Path
+data = Path("data")
+for file in data.iterdir():
+    print(file)
+// Output:
+// data/users.json
+// data/users.csv
+// data/notes.txt
+
+
+// 10. Find Specific Files
+All .txt files
+for file in Path("data").glob("*.txt"):
+    print(file)
+// All JSON files
+for file in Path("data").glob("*.json"):
+    print(file)
+// Search recursively
+
+// If you have:
+
+data/
+├── file1.txt
+├── documents/
+│   └── file2.txt
+└── backup/
+    └── file3.txt
+
+// Use:
+for file in Path("data").rglob("*.txt"):
+    print(file)
+
+// Output:
+data/file1.txt
+data/documents/file2.txt
+data/backup/file3.txt
+// rglob() = recursive glob.
+
+
+
+// 11. File Name and Extension
+file = Path("documents/report.pdf")
+
+print(file.name)
+print(file.stem)
+print(file.suffix)
+
+// Output:
+// report.pdf
+// report
+// .pdf
+
+// So:
+name → report.pdf
+stem → report
+suffix → .pdf
+
+
+
+// 12. Parent Directory
+file = Path("documents/report.pdf")
+print(file.parent)
+// Output:
+// documents
+
+
+// 13. Joining Paths ⭐
+// This is one of the most useful features.
+// Instead of:
+path = "data" + "/" + "users" + "/" + "users.json"
+
+// Use:
+from pathlib import Path
+path = Path("data") / "users" / "users.json"
+print(path)
+
+// Output:
+// data/users/users.json
+// The / operator joins paths.
+
+// 14. Very Important Example
+Imagine your AI project has:
+ai-project/
+│
+├── data/
+│   ├── documents/
+│   │   ├── book.pdf
+│   │   └── notes.txt
+│   │
+│   └── users.json
+│
+└── main.py
+// You can manage everything using:
+
+from pathlib import Path
+
+BASE_DIR = Path("data")
+
+documents = BASE_DIR / "documents"
+
+print(documents.exists())
+
+for file in documents.iterdir():
+    print(file.name)
+
+// Output:
+// True
+// book.pdf
+// notes.txt
+
+
+// 15. pathlib vs os.path
+
+// Old style:
+import os
+
+path = os.path.join("data", "documents", "file.txt")
+
+if os.path.exists(path):
+    print("Exists")
+
+Modern style:
+
+from pathlib import Path
+
+path = Path("data") / "documents" / "file.txt"
+
+if path.exists():
+    print("Exists")
+
+// I recommend learning the pathlib approach.
+
+
+
+
+
+
+    // ------------ Working with File Paths (pathlib) ---------
+    from pathlib import Path
+
+path = Path("data/example.txt")
+
+print(path.name)      # example.txt
+print(path.stem)      # example
+print(path.suffix)    # .txt
+print(path.parent)    # data
+print(path.exists())  # True/False
+// ------------ Handling Exceptions -----------
+// When dealing with files, errors can occur (e.g., file not found, permission denied). Use try-except blocks to handle them gracefully.
+try:
+    with open("non_existent_file.txt", "r") as file:
+        print(file.read())
+except FileNotFoundError:
+    print("Error: The file was not found.")
+except IOError:
+    print("Error: An I/O error occurred.")
+    `
                 }
             ]
         },
