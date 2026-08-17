@@ -1050,6 +1050,50 @@ print(ops["minus"](3, 2))  # Output: 1`
         },
         {
             id: 1,
+            title: "Python - in",
+            note: [
+                {
+                    text1: ` the <b>in</b> operator is a membership operator. It is used to check whether a specific value exists within a sequence or collection (such as strings, lists, tuples, sets, or dictionaries).
+                    
+                    The operator evaluates to a boolean value:
+                    <b>True</b> if the value is found in the sequence.
+                    <b>False</b> if the value is not found.
+    `,
+                    code1: `// ------ 1. Checking in Lists, Tuples, and Sets ------
+// You can quickly verify if an item is present in a collection.
+// Python
+fruits = ["apple", "banana", "cherry"]
+print("banana" in fruits)  # Output: True
+print("orange" in fruits)  # Output: False
+
+// ------ 2. Checking in Strings ------
+// When used with strings, the in operator checks for the existence of a substring.
+
+text = "Hello, welcome to Python programming."
+print("Python" in text)  # Output: True
+print("Java" in text)    # Output: False
+
+// ------ 3. Checking in Dictionaries  ------
+// When used with a dictionary, the in operator checks for the existence of a key, not a value.
+
+student = {"name": "Alice", "age": 25, "grade": "A"}
+print("name" in student)   # Output: True (checks keys)
+print("Alice" in student)  # Output: False (does not check values by default)
+
+// To check for a value in a dictionary, you must explicitly check the .values() method:
+print("Alice" in student.values())  # Output: True
+
+// The Opposite: not in
+// Python also provides a complementary operator, not in, which returns True if the specified value is not present in the sequence.
+numbers = [1, 2, 3, 4, 5]
+print(10 not in numbers)  # Output: True
+print(3 not in numbers)   # Output: False
+`
+                }
+            ]
+        },
+        {
+            id: 1,
             section: `Closure function`,
             title: "What is Python?",
             note: [
@@ -2797,6 +2841,179 @@ print(result)
         },
         {
             id: 1,
+            title: "Set comprehension",
+            note: [
+                {
+                    text1: `Set comprehension is a concise way to create a set using a <b>for</b> loop, optionally with an <b>if</b> condition.
+                    
+                    <b>Systex</b>:
+                    {expression for item in iterable}
+                    With a condition:
+                    {expression for item in iterable if condition}
+
+                    The important difference is the <b>{}</b> syntax and the fact that the result is a <b>set</b>, so duplicate values are automatically removed.
+                    `,
+                    code1: `// ------------------ Without comprehension: ------------
+                    numbers = [1, 2, 3, 4, 5]
+                    result = set()
+                    for num in numbers:
+                        result.add(num * 2)
+                    print(result)
+                    // Output:
+                    // {2, 4, 6, 8, 10}
+
+                    // --------------- Using set comprehension: --------------
+                    numbers = [1, 2, 3, 4, 5]
+                    result = {num * 2 for num in numbers}
+                    print(result)
+
+                    // Output:
+                    // {2, 4, 6, 8, 10}
+                    // So:
+                    {num * 2 for num in numbers}
+                    // means:
+                    // For every \`num\` in \`numbers\`, calculate \`num * 2\` and put the result into a set.
+
+                    // -------------- 3. Duplicate Values ---------
+// This is where set comprehension becomes particularly useful.
+
+numbers = [1, 2, 2, 3, 3, 4, 5, 5]
+result = {num for num in numbers}
+print(result)
+// Output:
+// {1, 2, 3, 4, 5}
+
+// Duplicates are automatically removed because a set cannot contain duplicate elements.
+// You can simplify this even further:
+result = set(numbers)
+// But set comprehension becomes more useful when you transform or filter values.
+
+// --------------  4. Set Comprehension with if -----------------
+
+Example: get only even numbers.
+numbers = [1, 2, 3, 4, 5, 6]
+even_numbers = {num for num in numbers if num % 2 == 0}
+print(even_numbers)
+
+// Output:
+// {2, 4, 6}
+
+// Here:
+{num for num in numbers if num % 2 == 0}
+// can be read as:
+// Take num from numbers if num is even, and add it to the set.
+
+// --------------  5. Transformation + Condition ----------------
+// You can transform the value as well.
+numbers = [1, 2, 3, 4, 5, 6]
+result = {num * 10 for num in numbers if num % 2 == 0}
+print(result)
+// Output:
+// {20, 40, 60}
+
+// Break it down:
+{num * 10 for num in numbers if num % 2 == 0}
+
+
+// Part	Meaning
+// num * 10	Expression/result
+// for num in numbers	Iterate through numbers
+// if num % 2 == 0	Keep only even numbers
+// { ... }	Create a set
+
+// -------- 6. Set Comprehension with Strings ------------
+name = "programming"
+letters = {char for char in name}
+print(letters)
+
+// Output could be:
+// {'p', 'r', 'o', 'g', 'a', 'm', 'i', 'n'}
+
+// Notice that repeated characters such as m, g, and r appear only once.
+
+// ---------- 7. Get Unique Even Numbers -----------------
+numbers = [1, 2, 2, 3, 4, 4, 6, 6, 7, 8]
+result = {num for num in numbers if num % 2 == 0}
+print(result)
+
+// Output:
+// {2, 4, 6, 8}
+// This is a very common interview-style example.
+
+// ------------- 8. Set Comprehension vs List Comprehension -------------
+// List comprehension
+result = [x * 2 for x in numbers]
+// Result:
+// [2, 4, 4, 6, 8]
+
+// Set comprehension
+result = {x * 2 for x in numbers}
+// Result:
+// {2, 4, 6, 8}
+
+// Main difference:
+// [] → List comprehension
+// {} → Set comprehension
+
+// But remember:
+
+{x for x in numbers}
+is a set comprehension, whereas:
+{x: x for x in numbers}
+is a dictionary comprehension.
+
+// ------------- 9. Nested for in Set Comprehension -------------------
+// You can also use multiple for loops.
+result = {x * y for x in [1, 2, 3] for y in [10, 20]}
+print(result)
+// Output:
+// {10, 20, 30, 40, 60}
+
+// Equivalent normal loops:
+result = set()
+for x in [1, 2, 3]:
+    for y in [10, 20]:
+        result.add(x * y)
+
+
+// ------------- 10. Important Interview Point ----------------
+// A set comprehension:
+// Creates a set by applying an expression to each item of an iterable, optionally filtering items using a condition.
+
+// General pattern:
+{expression for item in iterable if condition}
+
+// For example:
+squares = {x * x for x in range(1, 6)}
+
+// Output:
+{1, 4, 9, 16, 25}
+
+// --------- Easy way to remember ---------
+// Think of it as:
+
+SET
+ ↓
+{ expression
+  for item in iterable
+  if condition
+}
+
+// So the three comprehension types you've been learning are:
+# List comprehension
+[x * 2 for x in numbers]
+
+# Set comprehension
+{x * 2 for x in numbers}
+
+# Dictionary comprehension
+{x: x * 2 for x in numbers}
+                    `
+                }
+            ]
+        },
+        {
+            id: 1,
             section: `Dictionaries`,
             title: "Dictionaries",
             note: [
@@ -4539,14 +4756,14 @@ print(Calculator.div(5, 2))
     `
                 }
             ]
-        },    
+        },
         {
             id: 1,
             title: "@classmethod",
             note: [
                 {
-                text1: ``,
-                code1: `class Emp:
+                    text1: ``,
+                    code1: `class Emp:
                             emp_count = 101
                             def __init__(self, name, salary, designation):
                                 self.name = name
@@ -4703,7 +4920,7 @@ print(dog2.get_species())     # All dogs belong to the species: Canis lupus
             title: "MRO (Method Resolution Order)",
             note: [
                 {
-                text1: `<b>MRO (Method Resolution Order)</b> is the order in which Python <b>looks up methods and attributes</b> when you call them on an object — especially when <b>multiple inheritance</b> is involved.
+                    text1: `<b>MRO (Method Resolution Order)</b> is the order in which Python <b>looks up methods and attributes</b> when you call them on an object — especially when <b>multiple inheritance</b> is involved.
                 
                 <b>Why is MRO important?</b>
 When a class inherits from multiple parent classes, the same method or attribute might be defined in more than one parent.
@@ -4737,7 +4954,7 @@ Why is <b>object</b> important?
 ✅ Output:
 [&lt;class &#39;__main__.A&#39;&gt;, &lt;class &#39;object&#39;&gt;]
                 `,
-                code1: `// ----------- Ex : 1 -----------
+                    code1: `// ----------- Ex : 1 -----------
         class A:
             def show(self):
                 print("A")
