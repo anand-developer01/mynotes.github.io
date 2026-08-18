@@ -191,10 +191,10 @@ Memory / Message History	⭐⭐⭐⭐
         {
             id: 1,
             section: "LangChain",
-            title: "LangChain is a popular open-source framework designed to simplify the creation of applications using large language models (LLMs). It provides a standard interface for connecting LLMs to external data sources, APIs, memory systems, and computational tools.",
+            title: "LangChain",
             note: [
                 {
-                    text1: `What is Python?`,
+                    text1: `LangChain is a popular open-source framework designed to simplify the creation of applications using large language models (LLMs). It provides a standard interface for connecting LLMs to external data sources, APIs, memory systems, and computational tools.`,
                     code1: ``
                 }
             ]
@@ -431,11 +431,162 @@ LangChain provides different classes depending on the architecture of the model 
         {
             id: 1,
             section: "LLM Fundamentals",
-            title: "what are problem-solving skills",
+            title: "LLM Fundamentals",
             note: [
                 {
-                    text1: `What is Python?`,
+                    text1: `An LLM (Large Language Model) is a type of artificial intelligence built using deep learning architectures—specifically the Transformer architecture—that is trained on vast amounts of text data to understand, summarize, generate, and predict new text.
+
+Through this extensive training, LLMs learn grammar, facts about the world, reasoning patterns, and programming languages, allowing them to converse with humans in natural language and perform complex cognitive tasks.
+
+An LLM is a neural network with a huge number of learned parameters that processes tokens and predicts the next token based on the context.
+
+Examples:
+GPT
+Claude
+Gemini
+Llama
+Mistral
+Qwen
+
+An LLM predicts what token should come next based on the context it has received.
+For example:
+<b>The capital of India is</b>
+The model might predict:
+<b>Delhi</b>
+
+Another example:
+<b>I am going to drink a cup of</b>
+The model might predict:
+<b>coffee</b>
+It doesn't simply store a database of sentences and retrieve them.
+It has learned patterns in language from training.
+
+
+<b>2. Why is it called "Large"?</b>
+There are two important meanings.
+Large training data
+LLMs are trained using enormous amounts of text.
+For example:
+Books
+Web pages
+Articles
+Documentation
+Code
+Wikipedia
+Conversations
+
+Large number of parameters
+An LLM contains millions, billions, or even hundreds of billions of numerical values called parameters.
+
+For example:
+Llama 8B
+means approximately:
+8 billion parameters
+Similarly:-
+70B
+means approximately:-
+70 billion parameters
+
+<b>3. The basic LLM process</b>
+At a very high level:
+              Your prompt
+                   ↓
+              Tokenization
+                   ↓
+                 Tokens
+                   ↓
+             Neural Network
+                   ↓
+          Probability of tokens
+                   ↓
+          Select next token
+                   ↓
+            Generate output
+
+For example:
+Prompt:
+"Java is a"
+The model might calculate something conceptually like:
+
+language    → 45%
+programming → 30%
+platform    → 10%
+coffee      → 0.01%
+...
+
+It then selects a token according to its generation strategy.
+It generates another token, then uses the updated context to predict the next one.
+So generation happens approximately like:
+Java is a
+       ↓
+Java is a programming
+       ↓
+Java is a programming language
+       ↓
+Java is a programming language used
+
+<b>How LLMs Work</b>
+At their core, LLMs are statistical prediction engines. Given a sequence of text (a prompt), the model's primary job is to predict the most likely next word (or token) based on probability distributions learned during training.
+    <b>Tokens</b>: LLMs do not read whole words; they break text down into chunks called tokens (which can be words, parts of words, or punctuation marks).
+    <b>Parameters</b>: These are the internal variables (weights and biases) of the neural network adjusted during training. Larger models contain billions or even hundreds of billions of parameters, allowing them to capture nuanced patterns in data.
+
+    <b>Training Phases</b>:
+        <b>Pre-training</b>: The model consumes massive datasets (books, articles, codebases, websites) to learn language structure and general knowledge.
+        <b>Fine-Tuning (Alignment)</b>: The model is trained using techniques like Supervised Fine-Tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF) to behave safely, follow instructions accurately, and act as a helpful assistant rather than just a text predictor.
+                    
+                    `,
                     code1: ``
+                }
+            ]
+        },
+                {
+            id: 1,
+            title: "What is a token?",
+            note: [
+                {
+                    text1: `An LLM doesn't directly process normal human words.
+In an LLM, tokens are the small pieces of text that the model actually processes.
+It processes tokens.
+A token can be:
+-> a whole word
+-> part of a word
+-> punctuation
+-> sometimes whitespace or other pieces
+
+For example:--
+<i>I love programming</i>
+might be broken conceptually into:
+I
+love
+program
+ming
+
+For example:--
+<i>I love AI</i>
+might be broken roughly into:
+I → token
+love → token
+AI → token
+The exact tokenization depends on the model.
+So:
+<b>Text
+ ↓
+Tokens
+ ↓
+Numbers
+ ↓
+Neural network</b>
+This is why you will frequently hear:
+"This model has a 128K context window."
+That means it can process roughly 128,000 tokens of context, not necessarily 128,000 words.
+It is not exactly 128K words.
+For English, a rough rule is:
+1 token ≈ ¾ of an English word
+So:
+1,000 tokens ≈ 750 words
+`,
+                    code1: ``,
+                    img: `../assets/images/ai/token.png`
                 }
             ]
         },
@@ -486,7 +637,85 @@ LangChain provides different classes depending on the architecture of the model 
         {
             id: 1,
             section: "Vector Databases",
-            title: "what are problem-solving skills",
+            title: "Vectors in LLM and AI",
+            note: [
+                {
+                    text1: `In AI and Large Language Models, a vector is simply an ordered list of numbers (an array) that represents the <b>meaning</b> or <b>features</b> of a piece of data—such as a word, sentence, image, or audio file—in a high-dimensional mathematical space.
+                    
+                    Vectors are the fundamental bridge that allows computers to perform math and logic on human concepts like language, emotions, and objects.
+
+                    In LLM/AI, a vector is a list of numbers that represents something in a mathematical space.
+                    The important idea is:
+<b>AI converts text, images, audio, etc. into vectors so that it can mathematically compare their meaning or characteristics.</b>
+
+<b>First, what is a vector in mathematics?</b>
+You may already know vectors from mathematics:
+V=[3,4]
+This vector has two dimensions:
+X = 3
+Y = 4
+
+You can represent a point:
+
+       Y
+       ↑
+       |
+       |     &nbsp; &nbsp; &nbsp;  ● (3,4)
+       |
+       +----------------→ X
+                    
+
+       In AI, the same mathematical concept is used, but instead of 2 or 3 dimensions, we can have <b>hundreds or thousands</b> of dimensions.
+
+For example:
+[0.21, -0.73, 0.45, 0.12, ...]
+That could be a vector representing a piece of text.
+<b>What does a vector represent in AI?</b>
+Suppose we have these sentences:
+"I love dogs"
+
+"I like puppies"
+
+"I work with databases"
+
+An AI embedding model can convert them into vectors:
+"I love dogs"
+      ↓
+[0.21, 0.83, -0.14, 0.55, ...]
+
+"I like puppies"
+      ↓
+[0.19, 0.79, -0.11, 0.51, ...]
+
+"I work with databases"
+      ↓
+[-0.72, 0.13, 0.91, -0.44, ...]
+
+The actual numbers are generated by the model.
+The interesting part is that the first two vectors will generally be closer to each other than either is to the database sentence.
+So AI can understand something like:
+<b>"I love dogs"       ← close →       "I like puppies"
+
+
+                  far away
+
+
+"I work with databases"</b>
+
+                    <b>What is a Vector Embedding?</b>
+When people talk about vectors in AI, they are usually referring to vector embeddings.
+Computers cannot understand words like <b>"apple"</b> or <b>"king"</b> directly; they only understand numbers. To solve this, an AI model (an embedding model) converts data into a vector.
+
+<b>High-Dimensional Space</b>: Each number in the vector represents a specific hidden feature or characteristic learned by the model (e.g., <b>Is it alive? Is it edible? Is it formal?</b>). Modern LLMs use vectors with hundreds or thousands of dimensions (e.g., 1,536 dimensions for OpenAI's text-embedding-3-small).
+
+`,
+                    code1: ``
+                }
+            ]
+        },
+                {
+            id: 1,
+            title: "Vector vs Embedding",
             note: [
                 {
                     text1: `What is Python?`,

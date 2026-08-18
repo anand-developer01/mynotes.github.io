@@ -4980,6 +4980,90 @@ Why is <b>object</b> important?
                 }
             ]
         },
+                {
+            id: 1,
+            title: "Dependency Injection",
+            note: [
+                {
+                    text1: ` Dependency Injection means giving an object the dependencies it needs from outside, instead of creating those dependencies inside the object.
+
+                    Dependency Injection is a design pattern where an object's dependencies are provided from outside rather than being created by the object itself. It helps achieve loose coupling and improves testability and maintainability.
+                    
+                    This leads to loose coupling → easier testing → easier maintenance → easier replacement of implementations.
+                    
+                    <b>7. Types of Dependency Injection</b>
+                    There are three commonly discussed types:
+                    <b>1. Constructor Injection ⭐</b>
+                    Most common and recommended.
+                    class UserService:
+                        def __init__(self, database):
+                            self.database = database
+                    Dependency is passed through the constructor.
+
+                    <b>2. Setter/Property Injection</b>
+                    Dependency is assigned after object creation.
+                    class UserService:
+                        def set_database(self, database):
+                            self.database = database
+
+                    Usage:
+                    service = UserService()
+                    service.set_database(database)
+
+                    <b>3. Method Injection</b>
+                    Dependency is passed directly to a method.
+                    class UserService:
+                        def create_user(self, user, database):
+                            database.save(user)
+
+                    Usage:
+                    service = UserService()
+                    service.create_user("Anand", database)
+
+                    <a href="https://github.com/anand-developer01/python-programs/blob/main/DependencyInjection.py" target="_blank">Dependency Injection</a>
+                `,
+                    code1: `// --------------   -----------
+                    class MySQLDatabase:
+                    def save(self, user):
+                        print("Saving user to MySQL")
+
+
+                    class UserService:
+                        def __init__(self, database):
+                            self.database = database
+
+                        def create_user(self, user):
+                            self.database.save(user)
+                            
+                            database = MySQLDatabase()
+
+                    service = UserService(database)
+
+                    service.create_user("Anand")
+
+
+                    // -------- Real Example ---------
+                    class EmailService:
+                    def send(self, message):
+                        print("Sending email")
+
+
+                    class NotificationService:
+                        def __init__(self, email_service):
+                            self.email_service = email_service
+
+                        def notify(self, message):
+                            self.email_service.send(message)
+
+                    //We inject EmailService:
+
+            email_service = EmailService()
+            notification_service = NotificationService(email_service)
+            notification_service.notify("Welcome Anand")
+`
+                }
+            ]
+        },
         {
             id: 1,
             section: `Errors & Exceptions`,
