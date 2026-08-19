@@ -29,6 +29,20 @@ Start building real projects:
     Flask API
     Small AI using scikit-learn or transformers
     Web scraper with requests + BeautifulSoup
+
+
+
+    Vector Databases
+⬜ Retrieval
+⬜ Transformers
+⬜ Attention
+⬜ PyTorch
+⬜ Neural Networks
+⬜ Fine-tuning
+⬜ LoRA / QLoRA
+⬜ LLM Agents
+⬜ LLM Evaluation
+⬜ Inference & Quantization
 `,
                     code1: ``
                 }
@@ -418,7 +432,7 @@ LangChain provides different classes depending on the architecture of the model 
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "what are problem-solving skills",
             note: [
@@ -539,7 +553,7 @@ At their core, LLMs are statistical prediction engines. Given a sequence of text
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "What is a token?",
             note: [
@@ -623,13 +637,490 @@ So:
                 }
             ]
         },
+
         {
             id: 1,
             section: "RAG",
-            title: "what are problem-solving skills",
+            title: "What is RAG (Retrieval-Augmented Generation)?",
             note: [
                 {
-                    text1: `What is Python?`,
+                    text1: `RAG stands for <b>Retrieval-Augmented Generation</b>. It is an architectural pattern used in AI and LLM applications to fetch relevant external data and feed it into the model's prompt, allowing the LLM to answer questions accurately using specific, up-to-date, or private data it wasn't originally trained on.
+                    
+                    <b>What RAG does</b>
+                    RAG combines two things:
+                    <b>Retrieval + Generation</b>
+                    <span style="color:#ac4561">
+                    User Question
+                        ↓
+                    Retrieve relevant information
+                        ↓
+                    Your Documents / Database / Knowledge Base
+                        ↓
+                    Relevant text
+                        ↓
+                    LLM
+                        ↓
+                    Answer
+                    </span>
+                    For example:
+You have:
+company_policy.pdf
+employee_handbook.pdf
+leave_policy.pdf
+
+User asks:
+-> "How many casual leaves can I take?"
+RAG searches your documents and finds:
+-> "Employees are entitled to 12 casual leaves per year."
+That information is then given to the LLM.
+The LLM generates:
+-> "According to the company leave policy, you are entitled to 12 casual leaves per year."
+
+<b>>Where do vectors come in?</b>
+This connects directly to what we discussed about vectors and embeddings.
+The documents are first split into smaller pieces called chunks.
+<span style="color:#ac4561">
+PDF
+ ↓
+Chunks
+ ↓
+Embeddings
+ ↓
+Vectors
+ ↓
+Vector Database
+</span>
+For example:
+<u>Chunk 1</u>:
+"Employees are entitled to 12 casual leaves..."
+<u>Chunk 2</u>:
+"Employees can work remotely..."
+<u>Chunk 3</u>:
+"Medical insurance is provided..."
+
+Each chunk is converted into an <b>embedding/vector</b>.
+Then when the user asks:
+-> "How many casual leaves do I get?"
+The question is also converted into a vector.
+The system performs similarity search to find the most relevant chunks.
+<span style="color:#ac4561">
+Question
+   ↓
+Embedding
+   ↓
+Vector similarity search
+   ↓
+Relevant chunks
+   ↓
+LLM
+   ↓
+Answer
+</span>
+<b>Why RAG is useful</b>
+RAG is especially useful when your information is:
+-> Private — company documents
+-> Frequently changing — policies, prices, product information
+-> Large — thousands of documents
+-> Not known by the LLM — your own application's data
+
+<b>A RAG system has roughly 6 important steps:</b>
+<span style="color:#ac4561">
+Documents
+    ↓
+1. Loading
+    ↓
+2. Chunking
+    ↓
+3. Embeddings
+    ↓
+4. Vector Database
+    ↓
+5. Retrieval
+    ↓
+6. LLM Generation
+    ↓
+Answer
+</span>
+<div style="font-family: monospace;
+  white-space: pre;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-x: auto;">
+                         YOUR KNOWLEDGE
+                               │
+                 ┌─────────────┴─────────────┐
+                 │                           │
+              PDFs                       Database
+              Docs                       Websites
+                 │
+                 ↓
+              Chunking
+                 ↓
+             Embeddings
+                 ↓
+          ┌─────────────────┐
+          │    Vector DB    │
+          │                 │
+          │  Chunks+Vectors │
+          └────────┬────────┘
+                   │
+                   │ Retrieval
+                   ↓
+User → Question → Similarity Search
+                         │
+                         ↓
+                  Relevant Chunks
+                         │
+                         ↓
+                       LLM
+                         │
+                         ↓
+                      Answer
+</div>
+`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "What is Chunking?",
+            note: [
+                {
+                    text1: `Imagine you have a 100-page PDF.
+We don't want to send the entire PDF to the LLM every time the user asks a question.
+Instead, we split it into smaller pieces:
+
+Then each chunk gets an embedding and is stored in a vector database.
+When the user asks:
+--> "How many casual leaves do employees get?"
+RAG doesn't search the entire PDF.
+It finds the chunks that are <b>semantically similar</b> to the question.
+<span style="color:#ac4561">
+Question
+   ↓
+Embedding
+   ↓
+Vector Search
+   ↓
+Most relevant chunks
+   ↓
+LLM
+   ↓
+Answer
+</span>
+<div style="font-family: monospace;
+  white-space: pre;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-x: auto;">
+  Instead, we split it into smaller pieces:
+
+  100-page PDF
+     ↓
+┌───────────────┐
+│ Chunk 1       │
+│ Introduction  │
+└───────────────┘
+┌───────────────┐
+│ Chunk 2       │
+│ Leave Policy  │
+└───────────────┘
+┌───────────────┐
+│ Chunk 3       │
+│ Insurance     │
+└───────────────┘
+        ...
+
+So the connection between the concepts you've learned is:
+                      RAG
+               │
+       ┌───────┴────────┐
+       ↓                ↓
+   Documents         User Query
+       ↓                ↓
+    Chunking         Embedding
+       ↓                ↓
+   Embeddings        Vector
+       ↓                ↓
+       └───────┬────────┘
+               ↓
+        Similarity Search
+               ↓
+        Relevant Chunks
+               ↓
+              LLM
+               ↓
+            Answer
+</div>`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Chunking in RAG",
+            note: [
+                {
+                    text1: `<b>Chunking</b> is the process of breaking a large document into <b>smaller pieces</b> (chunks) before creating embeddings and storing them in a vector database.
+                    Chunking converts large documents into smaller meaningful pieces so RAG can retrieve the most relevant information instead of searching an entire document.
+
+                    The basic RAG flow is:
+                    <span style="color:#ac4561">
+                    Documents
+                    ↓
+                    Chunking
+                    ↓
+                    Embeddings
+                    ↓
+                    Vector Database
+                    ↓
+                    User Question
+                    ↓
+                    Similarity Search
+                    ↓
+                    Relevant Chunks
+                    ↓
+                    LLM
+                    ↓
+                    Answer
+                    </span>
+                    Why do we need chunking?
+    Imagine you have a <b>100-page PDF</b> containing:
+                    <span style="color:#ac4561">
+                    Page 1  → Introduction
+                    Page 2  → Customer details
+                    ...
+                    Page 45 → Refund Policy
+                    ...
+                    Page 100 → Contact information
+                    </span>
+                    If we put the <b>entire PDF into one embedding</b>, the embedding represents too much information.
+Suppose the user asks:
+--> "What is the refund period?"
+We want RAG to retrieve only the part containing the Refund Policy, not the entire 100-page document.
+So we split it:
+<span style="color:#ac4561">
+PDF
+ │
+ ├── Chunk 1 → Introduction
+ ├── Chunk 2 → Customer details
+ ├── Chunk 3 → Payment Policy
+ ├── Chunk 4 → Refund Policy
+ ├── Chunk 5 → Cancellation Policy
+ └── ...
+ </span>
+ Each chunk gets its <b>own embedding</b>.
+
+<b>Example</b>
+<span style="color:#ac4561">
+Suppose the document contains:
+Our company provides a 30-day refund policy.
+
+Customers can request a refund within 30 days
+of purchasing the product.
+
+Refunds are processed within 5 business days.
+
+Customers must provide their order ID when
+requesting a refund.
+</span>
+We could split this into chunks:
+<span style="color:#ac4561">
+Chunk 1:
+Our company provides a 30-day refund policy.
+Chunk 2:
+Customers can request a refund within 30 days
+of purchasing the product.
+Chunk 3:
+Refunds are processed within 5 business days.
+Chunk 4:
+Customers must provide their order ID when
+requesting a refund.
+</span>
+Then:
+<span style="color:#ac4561">
+Chunk 1 → Embedding → Vector
+Chunk 2 → Embedding → Vector
+Chunk 3 → Embedding → Vector
+Chunk 4 → Embedding → Vector
+</span>
+When the user asks:
+--> "How many days can I request a refund?"
+The vector search may find:
+Chunk 1
+Chunk 2
+
+Those chunks are then sent to the LLM.
+<b>Chunk Size</b>
+Chunking isn't simply "split every 100 words."
+We need to choose an appropriate chunk size.
+
+For example:
+<span style="color:#ac4561">
+Small chunks
+    ↓
+50 tokens
+
+Medium chunks
+    ↓
+300 tokens
+
+Large chunks
+    ↓
+1000 tokens
+</span>
+A common starting point is around <b>200–500 tokens</b>, but the best size depends on the document and retrieval task.
+<b>The problem with very small chunks</b>
+Suppose:
+<span style="color:#ac4561">
+Chunk 1:
+The refund period is
+
+Chunk 2:
+30 days from the date of purchase.
+</span>
+The meaning is split.
+Retrieving only Chunk 1 gives:
+--> "The refund period is..."
+Not enough information.
+
+<b>The problem with very large chunks</b>
+Suppose we have:
+<span style="color:#ac4561">
+Chunk 1
+--------------------------------
+Customer information
+Payment
+Refund
+Cancellation
+Shipping
+Terms
+Privacy
+Contact
+--------------------------------
+</span>
+The chunk contains too many unrelated topics.
+Retrieval becomes less precise.
+
+<b>Overlap</b>
+This is where chunk overlap becomes important.
+Instead of:
+<span style="color:#ac4561">
+Chunk 1:
+A B C D E F
+Chunk 2:
+G H I J K L
+
+we can use:
+Chunk 1:
+A B C D E F
+Chunk 2:
+E F G H I J
+Chunk 3:
+I J K L M N
+
+Here:
+Overlap = E F
+</span>
+The overlapping content helps prevent important information from being cut between chunks.
+For example:
+<span style="color:#ac4561">Chunk 1:
+Customers can request a refund within 30
+Chunk 2:
+within 30 days of purchasing the product.
+</span>
+The phrase "within 30 days" exists in both chunks.
+
+<b>Different Chunking Strategies</b>
+<b>1. Character-based chunking</b>
+Simply split based on number of characters.
+Every 1000 characters
+Simple, but it may break sentences.
+
+<b>2. Token-based chunking</b>
+Split based on tokens.
+Chunk size = 500 tokens
+Overlap = 50 tokens
+This is often more useful for LLM applications.
+
+<b>3. Sentence-based chunking</b>
+Split at sentence boundaries.
+Sentence 1
+Sentence 2
+Sentence 3
+   ↓
+Chunk
+This preserves meaning better than arbitrary character splitting.
+
+<b>4. Paragraph-based chunking</b>
+Use paragraphs as natural boundaries.
+Paragraph 1
+Paragraph 2
+Paragraph 3
+This works well for many documents.
+
+<b>5. Semantic chunking</b>
+This is more advanced.
+Instead of asking:
+--> "How many characters?"
+
+we ask:
+"Which sentences are talking about the same concept?"
+
+For example:
+<span style="color:#ac4561"> Customer Registration
+        ↓
+Name
+Email
+Phone
+Address
+        ↓
+Payment
+        ↓
+Credit Card
+UPI
+Net Banking
+</span>
+The system creates chunks based on <b>meaning</b>, rather than just size.
+<b>Very important concept</b>
+Think of chunking like <b>cutting a book into useful pieces.</b>
+
+Then when the user asks a question:<span style="color:#ac4561"> 
+Question
+   ↓
+Embedding
+   ↓
+Vector Search
+   ↓
+Most similar chunks
+   ↓
+LLM
+   ↓
+Answer</span>
+<div style="font-family: monospace;
+  white-space: pre;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-x: auto;">
+             DOCUMENT
+                 │
+                 ↓
+              CHUNKING
+                 │
+        ┌────────┼────────┐
+        ↓        ↓        ↓
+     Chunk 1  Chunk 2  Chunk 3
+        │        │        │
+        ↓        ↓        ↓
+    Embedding Embedding Embedding
+        │        │        │
+        └────────┼────────┘
+                 ↓
+          Vector Database
+</div>
+
+                    `,
                     code1: ``
                 }
             ]
@@ -713,7 +1204,7 @@ Computers cannot understand words like <b>"apple"</b> or <b>"king"</b> directly;
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "Vector vs Embedding",
             note: [
