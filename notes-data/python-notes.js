@@ -1342,17 +1342,65 @@ print(cube(5))    # 125
             title: "Decorators",
             note: [
                 {
-                    text1: `Dies when the main thread ends`,
-                    code1: ``
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "new topic",
-            note: [
-                {
-                    text1: `Dies when the main thread ends`,
+                    text1: `In Python, a <b>decorator</b> is a powerful design pattern that allows you to modify or enhance the behavior of a function or method without permanently changing its source code.
+decorators are a way to add or modify the behavior of a function or class without changing its original code.
+
+Think of a decorator as a wrapper: it takes a function, adds some functionality before or after the function runs, and returns the modified function.
+
+<b>How Decorators Work</b>
+To understand decorators, you first need to remember that in Python, functions are first-class citizens. This means functions can be passed around as arguments, returned from other functions, and assigned to variables.
+
+A decorator is simply a callable (usually a function) that takes another function as input, extends its behavior, and returns a new function.
+
+<b>What actually happens?</b>
+This:
+
+@my_decorator
+def hello():
+    print("Hello")
+
+// is basically equivalent to:
+def hello():
+    print("Hello")
+
+hello = my_decorator(hello)
+
+So Python takes the original <b>hello</b> function and <b>passes it to the decorator.</b>
+The decorator returns a new function (<b>wrapper</b>), and <b>hello</b> now refers to that wrapper.
+
+<b>Why are decorators useful?</b>
+They are useful when you want to add common functionality to many functions.
+For example:
+-> Logging
+-> Authentication/authorization
+-> Performance measurement
+-> Validation
+-> Caching
+-> Error handling
+-> Permission checking
+<b>Logging</b>: Automatically tracking when functions are called and with what arguments.
+<b>Access Control / Authentication</b>: Checking if a user is logged in before allowing them to access a route or endpoint.
+<b>Caching / Memoization</b>: Storing the results of expensive function calls to speed up future executions (e.g., using functools.lru_cache).
+<b>Execution Timing</b>: Measuring how long a function takes to run for performance profiling.
+
+<b>Important concept</b>
+There are three things to understand:
+<span style="color:#ac4561"> Decorator
+    ↓
+takes a function
+    ↓
+adds behavior
+    ↓
+returns a new function </span>
+
+<b>Python has built-in decorators</b>
+<b>@property</b> : decorator is used in classes to turn a method into a "getter" for an attribute. This lets you access a method like a normal attribute (without parentheses ()), while still allowing you to run logic (like validation or data formatting) behind the scenes.
+<b>@staticmethod </b> : Defines a method that doesn't receive an implicit first argument (self or cls). It behaves just like a regular function, but lives inside the class's namespace because it's logically related.
+<b>@classmethod </b> : Defines a method that receives the class itself (cls) as its first argument instead of an instance. This is often used to create alternative constructors.
+<b>@functools.lru_cache</b> : Found in the built-in functools module, this decorator automatically memoizes (caches) the return values of a function. If the function is called again with the exact same arguments, it returns the cached result instantly instead of recalculating it—which is amazing for recursive functions like Fibonacci sequences.
+
+<a href="https://github.com/anand-developer01/python-programs/blob/main/Decorators.py" target="_blank">Decorators Examples</a>
+`,
                     code1: ``
                 }
             ]
@@ -1382,7 +1430,7 @@ We use <b>*args</b> and <b>**kwargs</b> as an argument when we are unsure about 
 🔸 But * and ** have special meaning in function definitions:
 
     <b>*</b> unpacks positional arguments into a tuple
-    <b>**</b> unpacks keyword arguments into a dict
+    <b>**</b> unpacks Keyword/named arguments into a dict
      You can name them anything:
 
 def my_func(*values, **options):
@@ -1412,7 +1460,7 @@ We use **kwargs in function definitions to pass keyworded variable-length argume
 We use kwargs with double ** before the parameter name because it allows us to pass any number of arguments. 
 
 Key Points to Remember
--> The keyworded arguments are passed as a dictionary. 
+-> The keyworded arguments are passed as a <b>dictionary</b>. 
 -> A keyword argument allows you to provide a variable name as we pass it into the function.
 -> Python considers a variable name with two stars (**) before it a keyword argument.
 -> kwargs is like a dictionary that maps every keyword to the value passed alongside it. Therefore, when we iterate over kwargs, there is no order in which they are printed. 
@@ -1769,16 +1817,6 @@ print("Numbers:", nums)   # [1, 2]
 print("Strings:", strings)  # ['a', 'b']
 
 `
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "Decorators",
-            note: [
-                {
-                    text1: `What is Python?`,
-                    code1: ``
                 }
             ]
         },
@@ -4980,7 +5018,7 @@ Why is <b>object</b> important?
                 }
             ]
         },
-                {
+        {
             id: 1,
             title: "Dependency Injection",
             note: [
