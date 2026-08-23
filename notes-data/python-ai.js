@@ -434,6 +434,151 @@ LangChain provides different classes depending on the architecture of the model 
         },
         {
             id: 1,
+            title: "Output Parsers",
+            note: [
+                {
+                    text1: `In LangChain, an <b>Output Parser</b> is a specialized helper class designed to take the raw text string returned by a Large Language Model (LLM) and transform it into a structured, type-safe data format (such as JSON, Pydantic objects, or lists) that your application code can actually use.
+                    
+                    Because LLMs fundamentally only know how to generate strings of text, output parsers bridge the gap between unstructured AI responses and rigid backend logic (like APIs, databases, or UI components).
+                    <b> How LangChain Output Parsers Work </b>
+                    
+                    A typical output parser in LangChain performs two main jobs:
+    <b>Instructions (get_format_instructions())</b>: The parser provides prompt instructions that tell the LLM how it needs to format its output (e.g., "Return a JSON object with keys 'name' and 'age'"). LangChain automatically injects these into your prompt template.
+
+    <b>Parsing (parse())</b>: Once the LLM responds, the parser takes that raw string, strips out any unwanted markdown (like json), validates the structure, and converts it into a Python/JS object.
+    
+    <b>Common LangChain Output Parsers</b>
+    <b>StrOutputParser</b>: The simplest parser. It strips away LangChain's wrapper message objects (AIMessage) and just returns the raw string content.
+    <b>JsonOutputParser / JsonOutputKeyToolsParser</b>: Parses the LLM's response into a Python dictionary or JSON object.
+    <b>CommaSeparatedListOutputParser</b>: Takes a comma-separated string from an LLM and converts it directly into a list/array.
+    <b>PydanticOutputParser</b>: Highly popular for backend development. You define a data schema using a Pydantic model, and the parser ensures the LLM's output strictly matches that schema (including data types like integers, strings, or booleans). If the LLM fails, it throws a validation error.
+    <b>OutputFixingParser</b>: A clever wrapper that catches parsing errors and makes a second LLM call to automatically fix the malformed JSON or schema mistake.
+    
+    <b>Why Use LangChain Output Parsers?</b>
+    <b>Reliability</b>: They reduce the likelihood of downstream application crashes caused by unexpected text formatting from the AI.
+    <b>Developer Ergonomics</b>: Instead of writing complex Regular Expressions (regex) or manual JSON.parse blocks with try-catch handlers, LangChain standardizes error-handling and formatting instructions.
+    
+    The flow is:
+<span style="color:#ac4561"> User Input
+    ↓
+Prompt Template
+    ↓
+LLM
+    ↓
+Output Parser
+    ↓
+Structured Output
+</span>
+<b>Why do we need an Output Parser?</b>
+An LLM normally returns text.
+For example:
+LLM Response:
+The user's name is Anand and his age is 36.
+
+But your application may need structured data:
+{
+  "name": "Anand",
+  "age": 36
+}
+
+An <b>Output Parser</b> helps convert the model's response into a format your application can work with.
+In <b>LangChain</b>
+There are different approaches, including:
+-> <b>StrOutputParser</b> → returns plain text
+-> Structured output → returns data matching a defined schema
+-> JSON-oriented parsing → useful when you need JSON data
+
+For example:
+
+<span style="color:#ac4561"> Prompt
+   ↓
+LLM
+   ↓
+StrOutputParser
+   ↓
+"Hello Anand!"
+</span>
+Or:
+<span style="color:#ac4561"> Prompt
+   ↓
+LLM
+   ↓
+Structured Output
+   ↓
+{
+   name: "Anand",
+   age: 36
+}</span>
+`,
+                    code1: `// --------------- Ex : 1  Prompt → LLM → Output Parser -----------
+                    from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_ollama import ChatOllama
+
+# 1. Create the LLM
+llm = ChatOllama(
+    model="llama3.2",
+    temperature=0
+)
+
+# 2. Create prompt template
+prompt = ChatPromptTemplate.from_template(
+    "Explain {topic} in one simple sentence."
+)
+
+# 3. Create output parser
+parser = StrOutputParser()
+
+# 4. Create the chain
+chain = prompt | llm | parser
+
+# 5. Invoke the chain
+result = chain.invoke({
+    "topic": "RAG"
+})
+
+print(result)
+
+`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Runnables & LCEL",
+            note: [
+                {
+                    text1: `<b>LCEL (LangChain Expression Language)</b> is a declarative way to build complex, production-grade LLM applications by "piping" smaller components together.  
+                    <b>1. What is a Runnable?</b>
+A Runnable is a standardized interface implemented by almost every component in LangChain (prompts, LLMs, output parsers, retrievers, and custom functions).
+
+<b>Takes an input → does some processing → produces an output</b>
+
+Because they all share the exact same protocol, they can seamlessly talk to one another. Every Runnable exposes a standard set of execution methods:  
+<b>.invoke(input)</b>: Processes a single input and returns a single output.  
+<b>.stream(input)</b>: Streams output back chunk-by-chunk (great for responsive UI UX).
+<b>.batch(inputs)</b>: Processes a list of inputs concurrently to optimize performance.
+Async equivalents (ainvoke, astream, abatch) for high-concurrency backend environments.
+
+<b>The | Pipe Operator</b>
+LangChain lets us connect Runnables using:
+|
+For example:
+chain = prompt | model | parser
+Think of it as:
+<span style="color:#ac4561"> prompt
+   ↓
+model
+   ↓
+parser
+</span>
+The output of one component automatically becomes the input of the next.`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
             title: "what are problem-solving skills",
             note: [
                 {
@@ -1206,6 +1351,200 @@ Computers cannot understand words like <b>"apple"</b> or <b>"king"</b> directly;
         },
         {
             id: 1,
+            title: "Vector Database",
+            note: [
+                {
+                    text1: `A <b>Vector Database</b> is a database designed to store and search <b>vectors (embeddings)</b> efficiently.
+                    Vector Databases are especially important for <b>RAG</b>.
+
+                    Vector databases are specialized data stores designed to handle high-dimensional vectors efficiently. In the context of AI and Large Language Models (LLMs), they serve as the long-term memory, enabling systems to perform tasks like semantic search, recommendation, and Retrieval-Augmented Generation (RAG).
+
+                    <b>Why Vector Databases are Essential for LLMs</b>
+    <b>Knowledge Limitations</b>: LLMs are trained on static datasets with a fixed cutoff date and lack domain-specific or private data.
+    <b>Context Windows</b>: While context windows are expanding, passing an entire enterprise database or document repository into every prompt is computationally inefficient and expensive.
+    <b>Semantic Understanding</b>: Traditional databases search using exact keyword matches. Vector databases understand meaning, retrieving relevant information even if the exact words differ.
+                    
+    <b>Why do we need a Vector Database?</b>
+Suppose you have 10,000 PDF documents containing information about your company.
+A user asks:
+"What is our employee leave policy?"
+We don't want to send all 10,000 documents to the LLM.
+Instead:
+<span style="color:#ac4561"> PDF Documents
+     ↓
+   Chunking
+     ↓
+  Embeddings
+     ↓
+   Vectors
+     ↓
+Vector Database
+</span>
+When the user asks a question:
+<span style="color:#ac4561">  User Question
+     ↓
+Question Embedding
+     ↓
+Vector Database
+     ↓
+Find similar chunks
+     ↓
+Relevant Context
+     ↓
+LLM
+     ↓
+Answer
+</span> That's the core of RAG.
+
+<b>What exactly is stored?</b>
+Suppose we have this text:
+"Employees are entitled to 20 days of annual leave."
+An embedding model converts it into something like:
+[0.21, -0.45, 0.78, 0.12, ...]
+In reality, the vector could have hundreds or thousands of dimensions.
+The database stores something conceptually like:
+<span style="color:#ac4561">  ID: 101
+Text:
+"Employees are entitled to 20 days of annual leave."
+Vector:
+[0.21, -0.45, 0.78, 0.12, ...]
+</span>
+Usually, you also store <b>metadata</b>:
+<span style="color:#ac4561"> {
+    "document": "employee_policy.pdf",
+    "page": 12,
+    "department": "HR",
+    "text": "Employees are entitled to 20 days of annual leave."
+}</span>
+
+<b>How does searching work?</b>
+Suppose the user asks:
+"How many vacation days can an employee take?"
+
+The question is converted into an embedding:
+"How many vacation days can an employee take?"
+                ↓
+[0.19, -0.41, 0.75, 0.15, ...]
+
+The Vector Database compares this vector with stored vectors.
+It may find:
+Similarity Score<span style="color:#ac4561">
+Annual leave policy       0.94
+Employee benefits         0.82
+Work from home policy     0.31
+Salary policy             0.18</span>
+So it returns:
+Annual leave policy
+The important concept is:
+Vector databases search based on semantic similarity rather than simply matching exact words.
+
+For example:
+"vacation days"
+and
+"annual leave entitlement"
+can be recognized as semantically related even though the words are different.
+
+<b>Vector Database vs Normal Database</b>
+A normal database is excellent for structured queries:
+<span style="color:#ac4561">
+SELECT *
+FROM employees
+WHERE department = 'HR';</span>
+
+A vector database is designed for similarity searches:
+<span style="color:#ac4561">Find documents whose meaning is most similar
+to:
+"What is the employee vacation policy?"</span>
+
+Think of it like this:
+Database	Best for
+PostgreSQL	Structured data
+MySQL	Structured data
+MongoDB	Documents
+Vector DB	Semantic similarity
+Redis	Caching + various data structures
+Elasticsearch	Search + text/vector search
+Modern databases such as PostgreSQL with pgvector can also perform vector search, so you don't always need a dedicated vector database.
+
+Vector DB <b>Semantic similarity</b>
+
+<b>Popular Vector Databases</b>
+You'll commonly encounter:
+=> Pinecone
+=> Chroma
+=> Weaviate
+=> Milvus
+=> Qdrant
+=> FAISS
+=> pgvector
+
+For your learning journey, I recommend starting with:
+<b>Beginner</b>
+Chroma
+Very easy to understand locally.
+<b>Next
+FAISS</b>
+Excellent for understanding vector similarity/search fundamentals.
+Production
+Learn:
+<b>Qdrant / Pinecone / Weaviate / pgvector</b>
+You don't need to master all of them. Understanding the concepts is more important.
+
+LangChain can help connect these components.
+For example:
+<span style="color:#ac4561"> PDF
+ ↓
+Document Loader
+ ↓
+Text Splitter
+ ↓
+Embedding Model
+ ↓
+Vector Store
+ ↓
+Retriever
+ ↓
+LLM</span>
+<div style="font-family: monospace;
+  white-space: pre;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-x: auto;">    
+                YOUR KNOWLEDGE
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+        PDFs                Database
+        Docs                Websites
+          │
+          ↓
+       Chunking
+          ↓
+      Embeddings
+          ↓
+        Vectors
+          ↓
+   Vector Database
+          │
+          ↓
+       Retriever
+          │
+          ↓
+        LangChain
+          │
+          ↓
+         LLM
+          │
+          ↓
+        Answer
+        </div>
+`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
             title: "Vector vs Embedding",
             note: [
                 {
@@ -1228,6 +1567,218 @@ Computers cannot understand words like <b>"apple"</b> or <b>"king"</b> directly;
         {
             id: 1,
             section: "Agents",
+            title: "what are problem-solving skills",
+            note: [
+                {
+                    text1: `What is Python?`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            section: "Ollama",
+            title: "Ollama",
+            note: [
+                {
+                    text1: `<b>Ollama + LangChain Setup</b>
+<b>1. Install Ollama</b>
+On Ubuntu, we installed Ollama using Snap:
+<span style="color:#ac45ac"> sudo snap install ollama </span>
+Verify:
+<span style="color:#ac45ac">ollama --version</span>
+
+<b>2. Start Ollama</b>
+Your Snap installation automatically provides an Ollama service.
+Check:
+<span style="color:#ac45ac"> snap services ollama </span>
+You should see:
+<span style="color:#ac45ac"> Service          Startup  Current  Notes
+ollama.listener  enabled  active   - </span>
+<b>Important</b>
+Because the Snap service is already running, don't manually run:
+<span style="color:#ac45ac"> ollama serve </span>
+If you do, you may see:
+bind: address already in use
+That simply means port 11434 is already being used by Ollama.
+
+<b>3. Download Llama 3.2</b>
+Run:
+<span style="color:#ac45ac"> ollama pull llama3.2 </span>
+Verify:
+<span style="color:#ac45ac"> ollama list </span>
+You should see something similar to: <span style="color:#ac45ac">
+NAME               ID              SIZE
+llama3.2:latest    a80c4f17acd5    2.0 GB </span>
+Your model is: <span style="color:#ac45ac">
+Llama 3.2
+3.2B parameters
+Q4_K_M quantization </span>
+
+<b>4. Test Ollama Directly</b>
+Before connecting LangChain, we tested the model directly:
+<span style="color:#ac45ac"> ollama run llama3.2 </span>
+
+You'll get:
+>>>
+Then type:
+Say hello.
+Example:
+>>> Say hello.
+Hello.
+You can also test:
+>>> how are you
+and Llama will respond.
+This confirms:
+<span style="color:#ac45ac">
+Ollama       ✅
+Llama 3.2    ✅
+LLM inference ✅ </span>
+
+<b>5. Test Ollama API</b>
+We also checked that the Ollama API was available:
+<span style="color:#ac45ac"> curl http://localhost:11434/api/tags </span>
+This returned information about:
+<span style="color:#ac45ac"> llama3.2:latest </span>
+This confirms that Ollama is running on:
+<span style="color:#ac45ac"> localhost:11434</span>
+
+<b>6. Install LangChain</b>
+From your project directory:
+<span style="color:#ac45ac"> cd ~/project/python/LangChain </span>
+Install:
+<span style="color:#ac45ac">pip install langchain langchain-ollama</span>
+We successfully installed: <span style="color:#ac45ac">
+langchain       0.2.17
+langchain-core  0.2.43
+langchain-ollama 0.1.3 </span>
+
+<b>7. Create the Python Program</b>
+Create:
+test_chain.py
+Add:
+<span style="color:#ac45ac">from langchain_core.prompts import ChatPromptTemplate
+from langchain_ollama import ChatOllama
+from langchain_core.output_parsers import StrOutputParser
+
+# 1. Create Prompt
+prompt = ChatPromptTemplate.from_template(
+    "Explain {topic} in simple words."
+)
+
+# 2. Create LLM
+model = ChatOllama(
+    model="llama3.2"
+)
+
+# 3. Create Output Parser
+parser = StrOutputParser()
+
+# 4. Create LCEL Chain
+chain = prompt | model | parser
+
+# 5. Execute Chain
+result = chain.invoke({
+    "topic": "Vector Database"
+})
+
+# 6. Print Result
+print(result) </span>
+
+<b>8. Run the Program</b>
+Run: <span style="color:#ac45ac"> python3 test_chain.py </span>
+Your Llama 3.2 model generated the explanation of Vector Database successfully.
+So our application is:
+            <span style="color:#ac45ac">  Python Program
+                    │
+                    ▼
+            ChatPromptTemplate
+                    │
+                    ▼
+                   \`|\`
+                    │
+                    ▼
+              ChatOllama
+                    │
+                    ▼
+               Llama 3.2
+                    │
+                    ▼
+                   \`|\`
+                    │
+                    ▼
+             StrOutputParser
+                    │
+                    ▼
+               Final Answer </span>
+
+<b>9. What We Learned </b>
+This one program introduced several important LangChain concepts.
+<b>Prompt Template</b>
+<span style="color:#ac45ac"> prompt = ChatPromptTemplate.from_template(
+    "Explain {topic} in simple words."
+) </span>
+<i>{topic}</i> is a variable.
+We provide its value here:
+{
+    "topic": "Vector Database"
+}
+<b>Model</b>
+<span style="color:#ac45ac"> model = ChatOllama(
+    model="llama3.2"
+) </span>
+This tells LangChain:
+Use the locally running Ollama Llama 3.2 model.
+<b>Output Parser</b>
+<span style="color:#ac45ac">  parser = StrOutputParser() </span>
+The LLM returns an <b>AIMessage</b>.
+The parser extracts the actual text from that response.
+Conceptually:
+<span style="color:#ac45ac"> AIMessage
+    ↓
+StrOutputParser
+    ↓
+String </span>
+
+<b> 10. LCEL</b>
+This is the most important line:
+<span style="color:#ac45ac">  chain = prompt | model | parser </span>
+This is LCEL — LangChain Expression Language.
+The <b>|</b> means:
+
+Output of A → Input of B
+Therefore:
+<span style="color:#ac45ac">  prompt | model | parser </span>
+means:
+<span style="color:#ac45ac">  Prompt
+  ↓
+Model
+  ↓
+Parser </span>
+
+<b>11. Runnable</b>
+Each component participates in the Runnable pipeline:
+<span style="color:#ac45ac">  ChatPromptTemplate
+       ↓
+    Runnable
+
+ChatOllama
+       ↓
+    Runnable
+
+StrOutputParser
+       ↓
+    Runnable </span>
+And the entire chain is also executable:
+<span style="color:#ac45ac"> chain.invoke(...) </span>
+
+<a href="https://github.com/anand-developer01/python-programs/tree/main/LangChainOllama/JSONSubjectNotesAgent" target="_blank">JSON file containing your subject notes AI agent</a>`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
             title: "what are problem-solving skills",
             note: [
                 {
