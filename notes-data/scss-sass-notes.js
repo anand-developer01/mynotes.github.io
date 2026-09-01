@@ -88,7 +88,6 @@ body {
   font: 100% Helvetica, sans-serif;
   color: #333;
 }
-  
 `
         },
         {
@@ -273,10 +272,178 @@ body {
     },
     {
       id: 52,
-      title: "new topic",
+      title: "Mixins",
       note: [
         {
+          text1: `<b>A mixin is a class that provides methods or properties for other classes to use, but it’s not meant to stand on its own</b>. Instead of forming a parent-child relationship like inheritance, you "mix" it into another class.
+          
+          In SCSS, mixins allow you to create groups of CSS declarations that can be reused throughout the stylesheet. This can be helpful when working with vendor prefixes, complex animations, and other code that might need to be used in multiple places.
+
+          A <b>mixin</b> in SCSS is a <b>block of reusable CSS code</b> that you can "include" in any selector. Think of it like a function in programming: you write it once and use it wherever you need.
+
+          <b>Why use Mixins?</b>
+Avoid code duplication
+Encourage modularity and reusability
+Prevent deep and complex inheritance trees
+
+To create a mixin you use the <b>@mixin</b> directive and give it a name. We've named our mixin <b>theme</b>. We're also using the variable <b>$theme</b> inside the parentheses so we can pass in a <b>theme</b> of whatever we want. After you create your mixin, you can then use it as a CSS declaration starting with <b>@include</b> followed by the name of the mixin.
+`,
+          code1: `//------------ Ex : 1 ----------
+    @mixin border-radius { /* Creates a mixin for adding a border radius */
+    -webkit-border-radius: 12px; /* Adds vendor prefixes for different browsers */
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    border-radius: 12px;
+  }
+
+    .button {
+    @include border-radius;
+    /* Includes the mixin in the .button class */
+  }
+
+
+  //------------ Ex : 2 ----------
+  @mixin theme($theme: DarkGray) {
+  background: $theme;
+  box-shadow: 0 0 1px rgba($theme, .25);
+  color: #fff;
+}
+
+.info {
+  @include theme;
+}
+.alert {
+  @include theme($theme: DarkRed);
+}
+.success {
+  @include theme($theme: DarkGreen);
+}
+`
+        },
+        {
           text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "Extend/Inheritance",
+      note: [
+        {
+          text1: `Inheritance in SCSS allows you to share a set of CSS properties from one selector to another using the <b>@extend</b> directive. This differs from CSS, where inheritance is limited to certain properties.
+          
+          Using <b>@extend</b> lets you share a set of CSS properties from one selector to another. In our example we're going to create a simple series of messaging for errors, warnings and successes using another feature which goes hand in hand with extend, placeholder classes. A placeholder class is a special type of class that only prints when it is extended, and can help keep your compiled CSS neat and clean.
+
+          <b>@extend</b> allows one selector to inherit the styles of another. It's like saying:
+<b>I want this class to behave like that class.</b>
+          `,
+          code1: `    &lt;h1 class=&quot;message&quot;&gt;message&lt;/h1&gt;
+    &lt;h1 class=&quot;success&quot;&gt;success&lt;/h1&gt;
+    &lt;h1 class=&quot;error&quot;&gt;error&lt;/h1&gt;
+    &lt;h1 class=&quot;warning&quot;&gt;warning&lt;/h1&gt;
+
+/* This CSS will print because %message-shared is extended. */
+%message-shared {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+// This CSS won't print because %equal-heights is never extended.
+%equal-heights {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.message {
+  @extend %message-shared;
+}
+
+.success {
+  @extend %message-shared;
+  border-color: green;
+}
+
+.error {
+  @extend %message-shared;
+  border-color: red;
+}
+
+.warning {
+  @extend %message-shared;
+  border-color: yellow;
+}    
+  
+//--------------------
+
+
+// Base style
+.button {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+}
+
+// Another class inherits .button styles
+.primary-btn {
+  @extend .button;
+  font-weight: bold;
+}
+
+`
+        },
+        {
+          text1: ``,
+          code1: ``
+        },
+      ],
+    },
+    {
+      id: 52,
+      title: "@extend vs @mixin",
+      note: [
+        {
+          text1: `
+          
+          <table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>@mixin</th>
+      <th>@extend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Reusability</td>
+      <td>Very flexible with parameters</td>
+      <td>Only inherits from existing selectors</td>
+    </tr>
+    <tr>
+      <td>Output</td>
+      <td>Copies styles each time</td>
+      <td>Groups selectors together</td>
+    </tr>
+    <tr>
+      <td>Best for</td>
+      <td>Complex styles or dynamic logic</td>
+      <td>Simple shared styles</td>
+    </tr>
+    <tr>
+      <td>CSS size impact</td>
+      <td>Can increase CSS size</td>
+      <td>Can reduce size</td>
+    </tr>
+    <tr>
+      <td>Use case example</td>
+      <td>Media queries, dynamic spacing</td>
+      <td>Buttons, alerts, card styles</td>
+    </tr>
+  </tbody>
+</table>
+`,
           code1: ``
         },
         {
@@ -287,21 +454,7 @@ body {
     },
     {
       id: 52,
-      title: "new topic",
-      note: [
-        {
-          text1: ``,
-          code1: ``
-        },
-        {
-          text1: ``,
-          code1: ``
-        },
-      ],
-    },
-    {
-      id: 52,
-      title: "new topic",
+      title: "Operators",
       note: [
         {
           text1: ``,
