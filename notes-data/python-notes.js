@@ -2232,11 +2232,108 @@ print("Diagonal:", diagonal)
         },
         {
             id: 1,
-            title: "Iterators",
+            title: "Iterator",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `An <b>iterator</b> is an object that allows you to go through a collection <b>one item at a time.</b> In Python, an iterator is an object that implements the iterator protocol, which consists of the methods <b>__iter__()</b> and <b>__next__()</b>.
+                    
+                    <b>Iterable vs Iterator</b>
+An <b>iterable</b> is any Python object capable of returning its members one at a time, allowing it to be iterated over in a for-loop. Examples of iterables include lists, tuples, strings, and dictionaries.
+An <b>iterator</b> is an object that represents a stream of data; it returns the next item of the iterable when you call the <b>next()</b> function on it. An iterator keeps track of its current position in the iterable and raises a <b>StopIteration</b> exception when there are no more items to return.<span style="color:#ac4561">
+[10, 20, 30, 40]
+   ↓
+next() → 10
+next() → 20
+next() → 30
+next() → 40
+next() → StopIteration
+</span>
+<b>Creating an iterator with iter()</b>
+Python provides <b>iter()</b> to convert an iterable into an iterator.<span style="color:#ac4561">
+numbers = [10, 20, 30]
+iterator = iter(numbers)
+print(iterator)
+// Now use next():
+print(next(iterator))
+print(next(iterator))
+print(next(iterator))</span>
+// Output:
+// 10
+// 20
+// 30
+If you call next() again:
+print(next(iterator))
+You get:<span style="color:#ac4561">
+StopIteration</span>
+because there are no more elements.
+
+<b>How for loop uses iterators</b>
+This is an important concept.
+When you write:<span style="color:#ac4561">
+numbers = [10, 20, 30]
+for number in numbers:
+    print(number) </span>
+Python internally does something conceptually similar to:<span style="color:#ac4561">
+iterator = iter(numbers)
+while True:
+    try:
+        number = next(iterator)
+        print(number)
+    except StopIteration:
+        break </span>
+
+        <b>Creating your own iterator</b>
+An object becomes an iterator when it implements: (<b>__iter__()</b> and <b>__next__()</b>) methods.(<b> Ex : 1</b>)
+
+<b>Why do we need iterators?</b>
+The biggest advantage is that <b>we don't necessarily need to keep all data in memory at once.</b>
+
+<a href="https://github.com/anand-developer01/python-programs/blob/main/iterator.py" target="_blank">iterator examples</a>
+                    `,
+                    code1: `// ----------- Ex : 1 -----------        
+            class Numbers:
+                def __init__(self, max_number):
+                    self.number = 1
+                    self.max_number = max_number
+
+                def __iter__(self):
+                    return self
+
+                def __next__(self):
+                    if self.number <= self.max_number:
+                        result = self.number
+                        self.number += 1
+                        return result
+                    else:
+                        raise StopIteration
+            
+                // Use it:
+                numbers = Numbers(3)
+                print(next(numbers))
+                print(next(numbers))
+                print(next(numbers))
+
+                // Output:
+                // 1
+                // 2
+                // 3
+
+                // The next call:
+                print(next(numbers))
+                // raises:
+                StopIteration
+
+                // And you can also use it with a for loop:
+                numbers = Numbers(3)
+                for n in numbers:
+                    print(n)
+
+                // Output:
+                // 1
+                // 2
+                // 3
+            
+            `
                 }
             ]
         },
@@ -3147,22 +3244,311 @@ print(result)
         {
             id: 1,
             section: `Tuples`,
-            title: "What is Python?",
+            title: "Tuples in Python",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `<b>What is a Tuple?</b>
+                    A tuple is an ordered collection of values in Python. Tuples are similar to lists, but they are <b>immutable</b>, which means their items cannot be changed after the tuple is created.
+
+                    <b>Key features</b>
+                    -> Ordered: Items keep their position and can be accessed by index.
+                    -> Immutable: Items cannot be added, removed, or replaced.
+                    -> Heterogeneous: A tuple can contain different data types.
+                    -> Allows duplicates: The same value can appear more than once.
+                    -> Iterable: You can loop through its items.
+
+                    <b>Creating tuples</b>
+                    Tuples are usually written with parentheses, but the comma is what creates a tuple. An empty tuple is written as <b>()</b>. A one-item tuple needs a trailing comma: <b>(10,)</b>.
+
+                    <b>When should you use a tuple?</b>
+                    Use a tuple for a fixed collection of related values, such as coordinates, database records, or function results. Since tuples cannot be changed, they are useful for protecting data from accidental modification. A tuple containing only hashable values can also be used as a dictionary key or as a set item.
+
+                    <b>Tuple methods</b>
+                    Tuples have only two common methods: <b>count()</b>, which counts matching values, and <b>index()</b>, which returns the position of the first matching value. Other operations, such as sorting or appending, require creating a new object or converting the tuple to a list.
+
+                     <a href="https://github.com/anand-developer01/python-programs/blob/main/tuple.py" target="_blank">tuple examples</a>
+                    `,
+                    code1: `// ------------ Ex : 1 - Creating tuples ------------
+                    empty_tuple = ()
+numbers = (10, 20, 30)
+mixed_tuple = (1, "Python", True, 3.14)
+
+print(numbers)
+print(type(numbers))  # <class 'tuple'>
+
+// A one-item tuple needs a comma.
+one_item_tuple = (10,)
+not_a_tuple = (10)
+print(type(one_item_tuple))  # <class 'tuple'>
+print(type(not_a_tuple))     # <class 'int'>
+
+
+// ------------ Ex : 2 - Indexing and slicing ------------
+colors = ("red", "green", "blue", "yellow")
+
+print(colors[0])    # red
+print(colors[-1])   # yellow
+print(colors[1:3])  # ('green', 'blue')
+print(colors[::-1]) # ('yellow', 'blue', 'green', 'red')
+
+
+// ------------ Ex : 3 - Tuples are immutable ------------
+point = (10, 20)
+
+// point[0] = 100
+// TypeError: 'tuple' object does not support item assignment
+
+// Convert to a list when a change is required.
+point_as_list = list(point)
+point_as_list[0] = 100
+point = tuple(point_as_list)
+print(point)  # (100, 20)
+
+
+// ------------ Ex : 4 - Tuple packing and unpacking ------------
+// Packing: Python groups the values into a tuple.
+user = "Anand", 36, "Developer"
+print(user)  # ('Anand', 36, 'Developer')
+
+// Unpacking: assign each item to a variable.
+name, age, role = user
+print(name)
+print(age)
+print(role)
+
+// Extended unpacking with *
+first, *middle, last = (1, 2, 3, 4, 5)
+print(first)   # 1
+print(middle)  # [2, 3, 4]
+print(last)    # 5
+
+
+// ------------ Ex : 5 - Looping and membership ------------
+languages = ("Python", "JavaScript", "Java")
+
+for language in languages:
+    print(language)
+
+print("Python" in languages)  # True
+print("C++" not in languages) # True
+
+
+// ------------ Ex : 6 - Tuple methods ------------
+values = (10, 20, 10, 30, 10)
+
+print(values.count(10))  # 3
+print(values.index(30))  # 3
+print(len(values))       # 5
+
+
+// ------------ Ex : 7 - Nested tuples ------------
+coordinates = ((0, 0), (10, 20), (30, 40))
+print(coordinates[1])       # (10, 20)
+print(coordinates[1][0])    # 10
+
+
+// ------------ Ex : 8 - Returning multiple values ------------
+def get_user():
+    return "Anand", "anand@example.com"
+
+user_name, email = get_user()
+print(user_name)
+print(email)
+
+
+// ------------ Ex : 9 - Tuple as a dictionary key ------------
+locations = {
+    (17.3850, 78.4867): "Hyderabad",
+    (12.9716, 77.5946): "Bengaluru"
+}
+
+print(locations[(17.3850, 78.4867)])  # Hyderabad
+
+
+// ------------ Ex : 10 - Convert between list and tuple ------------
+items = ["pen", "book", "bag"]
+items_tuple = tuple(items)
+items_list = list(items_tuple)
+
+print(items_tuple)  # ('pen', 'book', 'bag')
+print(items_list)   # ['pen', 'book', 'bag']`
                 }
             ]
         },
         {
             id: 1,
             section: `Sets`,
-            title: "What is Python?",
+            title: "Sets in Python",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `<b>What is a Set?</b>
+                    A set is an unordered collection of <b>unique</b> values in Python. Sets are useful when you need to remove duplicate values or perform mathematical operations such as union, intersection, and difference.
+
+                    <b>Key features</b>
+                    -> Unordered: Sets do not store items by index, so indexing and slicing are not supported.
+                    -> Unique: Duplicate values are automatically removed.
+                    -> Mutable: You can add or remove items after creating a set.
+                    -> Iterable: You can loop through the values.
+                    -> Elements must be hashable: Numbers, strings, and tuples can be set items, but lists and dictionaries cannot.
+
+                    <b>Creating sets</b>
+                    Use curly braces with values, such as <b>{1, 2, 3}</b>. An empty set must be created with <b>set()</b> because <b>{}</b> creates an empty dictionary. Use a comma-separated sequence inside <b>set()</b> to remove duplicates from a list or string.
+
+                    <b>Set operations</b>
+                    -> Union: all values from both sets.
+                    -> Intersection: values common to both sets.
+                    -> Difference: values in the first set but not the second.
+                    -> Symmetric difference: values in either set, but not in both.
+
+                    <b>When should you use a set?</b>
+                    Use a set for membership checks, removing duplicate data, comparing groups, and finding common or different values. Sets are generally faster than lists for checking whether an item exists.
+
+                    <a href="https://github.com/anand-developer01/python-programs/blob/main/set.py" target="_blank">set examples</a>
+                    `,
+                    code1: `// ------------ Ex : 1 - Creating sets ------------
+                    numbers = {1, 2, 3, 4}
+fruits = {"apple", "banana", "orange"}
+mixed_set = {1, "Python", 3.14, True}
+
+print(numbers)
+print(type(numbers))  # <class 'set'>
+
+// An empty set must use set().
+empty_set = set()
+empty_dictionary = {}
+print(type(empty_set))        # <class 'set'>
+print(type(empty_dictionary)) # <class 'dict'>
+
+
+// ------------ Ex : 2 - Duplicate values are removed ------------
+values = {1, 2, 2, 3, 3, 3, 4}
+print(values)  # {1, 2, 3, 4}
+
+names = ["Anand", "Ravi", "Anand", "Meena"]
+unique_names = set(names)
+print(unique_names)  # {'Anand', 'Ravi', 'Meena'}
+
+
+// ------------ Ex : 3 - Adding items ------------
+skills = {"Python", "JavaScript"}
+
+skills.add("SQL")
+skills.update(["React", "Docker"])
+print(skills)
+
+
+// ------------ Ex : 4 - Removing items ------------
+colors = {"red", "green", "blue"}
+
+colors.remove("green")   # Raises KeyError if the value is missing.
+colors.discard("yellow") # Does not raise an error if the value is missing.
+removed_color = colors.pop() # Removes and returns an arbitrary item.
+print(colors)
+print(removed_color)
+
+colors.clear()
+print(colors)  # set()
+
+
+// ------------ Ex : 5 - Membership checks ------------
+allowed_roles = {"admin", "editor", "viewer"}
+
+print("admin" in allowed_roles)  # True
+print("guest" in allowed_roles)  # False
+print("guest" not in allowed_roles) # True
+
+
+// ------------ Ex : 6 - Union ------------
+frontend = {"HTML", "CSS", "JavaScript"}
+backend = {"Python", "SQL", "Docker"}
+
+all_skills = frontend | backend
+print(all_skills)
+print(frontend.union(backend))
+
+
+// ------------ Ex : 7 - Intersection ------------
+team_a = {"Python", "SQL", "Git"}
+team_b = {"Python", "Docker", "Git"}
+
+common_skills = team_a & team_b
+print(common_skills)  # {'Python', 'Git'}
+print(team_a.intersection(team_b))
+
+
+// ------------ Ex : 8 - Difference ------------
+only_in_team_a = team_a - team_b
+only_in_team_b = team_b - team_a
+
+print(only_in_team_a)  # {'SQL'}
+print(only_in_team_b)  # {'Docker'}
+print(team_a.difference(team_b))
+
+
+// ------------ Ex : 9 - Symmetric difference ------------
+different_skills = team_a ^ team_b
+print(different_skills)  # {'SQL', 'Docker'}
+print(team_a.symmetric_difference(team_b))
+
+
+// ------------ Ex : 10 - Subset and superset ------------
+small_set = {1, 2}
+large_set = {1, 2, 3, 4}
+
+print(small_set.issubset(large_set))   # True
+print(large_set.issuperset(small_set)) # True
+print(small_set <= large_set)          # True
+print(large_set >= small_set)          # True
+
+
+// ------------ Ex : 11 - Looping through a set ------------
+languages = {"Python", "JavaScript", "Java"}
+
+for language in languages:
+    print(language)
+
+// Set order is not guaranteed, so do not rely on the output order.
+for language in sorted(languages):
+    print(language)
+
+
+// ------------ Ex : 12 - Set methods ------------
+numbers = {1, 2, 3}
+
+print(len(numbers))       # 3
+print(numbers.copy())     # {1, 2, 3}
+print(numbers.isdisjoint({4, 5})) # True
+
+
+// ------------ Ex : 13 - Hashable and unhashable values ------------
+valid_set = {(1, 2), "Python", 10}
+print(valid_set)
+
+// invalid_set = {[1, 2], "Python"}
+// TypeError: unhashable type: 'list'
+
+
+// ------------ Ex : 14 - Practical example: common users ------------
+newsletter_users = {"anand", "ravi", "meena"}
+event_users = {"ravi", "meena", "suresh"}
+
+print(newsletter_users & event_users) # Users in both groups.
+print(newsletter_users | event_users) # Users in either group.
+print(event_users - newsletter_users) # New event users.
+
+
+// ------------ Ex : 15 - Convert a set back to a list ------------
+unique_numbers = {4, 1, 3, 2}
+sorted_numbers = sorted(unique_numbers)
+numbers_list = list(unique_numbers)
+
+print(sorted_numbers) # [1, 2, 3, 4]
+print(numbers_list)   # List order is not guaranteed.
+
+
+// ------------ Ex : 16 - Set comprehension ------------
+even_squares = {number * number for number in range(1, 6) if number % 2 == 0}
+print(even_squares)  # {4, 16}`
                 }
             ]
         },
@@ -6289,16 +6675,6 @@ async def main():
 
 asyncio.run(main())
 `
-                }
-            ]
-        },
-        {
-            id: 1,
-            title: "topic",
-            note: [
-                {
-                    text1: `What is Python?`,
-                    code1: ``
                 }
             ]
         },
