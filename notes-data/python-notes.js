@@ -1095,7 +1095,7 @@ print(3 not in numbers)   # Output: False
         {
             id: 1,
             section: `Closure function`,
-            title: "What is Python?",
+            title: "closure",
             note: [
                 {
                     text1: `Python closure is a nested function that allows us to access variables of the outer function even after the outer function is closed.
@@ -1455,15 +1455,96 @@ Key Points to Remember
 
 
 <b>Python **kwargs (Ex : 2)</b>
-We use **kwargs in function definitions to pass keyworded variable-length arguments to functions. Please note that we can’t use **kwargs in Python to pass keyword arguments.
+<b>**kwargs</b> in a function definition → collect keyword arguments into a dictionary.
+<b>**dict</b> in a function call → unpack a dictionary into keyword arguments.
 
-We use kwargs with double ** before the parameter name because it allows us to pass any number of arguments. 
+
+<a href="https://github.com/anand-developer01/python-programs/blob/main/dict_kwargs_unpacking.py" target="_blank">(*dict, **kwargs) Unpacking</a> <b>Ex : 3 </b>
+**kwargs in a function definition collects named arguments into a dictionary.
+**user in a function call unpacks dictionary values into keyword arguments.
+Added an AI model configuration example using **model_settings.
 
 Key Points to Remember
--> The keyworded arguments are passed as a <b>dictionary</b>. 
--> A keyword argument allows you to provide a variable name as we pass it into the function.
--> Python considers a variable name with two stars (**) before it a keyword argument.
--> kwargs is like a dictionary that maps every keyword to the value passed alongside it. Therefore, when we iterate over kwargs, there is no order in which they are printed. 
+<b>--></b> Keyword arguments are collected into a dictionary.(<b> Ex : 5 </b>)
+<b>--></b> A keyword argument is an argument passed using <b>name=value</b> syntax.
+    student(name="Anand", age=36)
+    Here:
+    name → keyword
+    "Anand" → value
+    age → keyword
+    36 → value
+
+<b>--></b> ** in a function definition tells Python to collect a variable number of keyword arguments into a dictionary.
+Here, <b>kwargs</b> is just a conventional name. You could use another name:
+def show_user(**user_details):
+	print(user_details)
+
+<b>--></b> <b>kwargs</b> behaves like a dictionary mapping each keyword to its value.
+def student(**kwargs):
+    print(kwargs["name"])
+    print(kwargs["age"])
+student(name="Anand", age=36)
+
+<b>--></b> In modern Python, when we iterate over kwargs, the keyword arguments are processed in the order they were provided.
+def student(**kwargs):
+    for key, value in kwargs.items():
+        print(key, value)
+student(name="Anand", age=36, city="Hyderabad")
+// The order is preserved.
+Output:
+name Anand
+age 36
+city Hyderabad
+
+<b>--></b> You can combine <b>*args</b> and <b>**kwargs</b> in a function definition to accept <b>both positional and keyword arguments</b>. The order is important: <b>*args</b> must come before <b>**kwargs</b>.
+def student(*args, **kwargs):
+    print(args)
+    print(kwargs)
+student("Anand", 36, city="Hyderabad", role="Developer")
+Output:
+('Anand', 36)
+{'city': 'Hyderabad', 'role': 'Developer'}
+ <b>Why?</b>
+"Anand"          → positional argument → *args
+36               → positional argument → *args
+city="Hyderabad" → keyword argument → **kwargs
+role="Developer" → keyword argument → **kwargs
+
+<b>--></b> You can also use <b>*args</b> and <b>**kwargs</b> when calling a function to unpack a list/tuple and dictionary into positional and keyword arguments, respectively.
+When <b>defining</b> a function, they <b>collect</b> arguments.
+When <b>calling</b> a function, they <b>unpack</b> arguments.
+1. * unpacks a list/tuple into positional arguments
+def add(a, b, c):
+    return a + b + c
+numbers = [10, 20, 30] 
+result = add(*numbers) # approximately like: add(10, 20, 30)
+print(result)
+# Output:
+# 60
+
+2. ** unpacks a dictionary into keyword arguments
+def student(name, age, city):
+    print(name, age, city)
+data = {
+    "name": "Anand",
+    "age": 36,
+    "city": "Hyderabad"
+}
+student(**data)
+//------
+// Python treats:
+student(**data) # approximately like:
+student(
+    name="Anand",
+    age=36,
+    city="Hyderabad"
+)
+
+<b>--></b> When using <b>*args</b> and <b>**kwargs</b>, you can provide default values for other parameters in the function definition. These default parameters should come before <b>*args</b> and <b>**kwargs</b>.
+
+<b> Note </b>:
+<b>One more important point</b>: kwargs is <b>not a special Python keyword</b>. The special part is **; the name kwargs is just a convention.
+<a href="https://github.com/anand-developer01/python-programs/blob/main/args_kwargs_examples.py" target="_blank">(*args, **kwargs) Examples</a>
 `,
                     code1: `//---------- Ex : 1 ---------
                     // *args
@@ -1482,6 +1563,7 @@ print(multiply_all(10))
 print(multiply_all()) 
 
 
+
 //---------- Ex : 2 ---------
 def print_kwargs(**kwargs):
     """Function to print key-value pairs passed as keyword arguments."""
@@ -1494,9 +1576,78 @@ print("---")
 print_kwargs(language="Python", version=3.10)
 print("---")
 print_kwargs(course="Data Science", duration="6 months", level="Intermediate")
+// Output: 
+// name: Raman
+// age: 30
+// city: New York
+// ---
+// language: Python
+// version: 3.1
+// ---
+// course: Data Science
+// duration: 6 months
+// level: Intermediate
 
 
-//---------- Ex : 2 ---------
+//---------- Ex : 3 ---------
+"""Understanding **kwargs in function definitions and calls."""
+# \`**kwargs\` in a function definition collects named arguments into a dictionary.
+# \`**user\` in a function call unpacks dictionary values into keyword arguments.
+# Added an AI model configuration example using **model_settings.
+
+# --------
+# 1. **kwargs in a function definition collects keyword arguments.
+def show_user(**user_details):
+	print(user_details)
+
+show_user(name="Maya", role="developer", active=True)
+# Expected output:
+# {'name': 'Maya', 'role': 'developer', 'active': True}
+
+# -------
+# 2. **dict in a function call unpacks a dictionary into keyword arguments.
+def introduce_user(name, role, active):
+	print(f"Name: {name}")
+	print(f"Role: {role}")
+	print(f"Active: {active}")
+
+user = {
+	"name": "Maya",
+	"role": "developer",
+	"active": True,
+}
+
+introduce_user(**user)
+# Expected output:
+# Name: Maya
+# Role: developer
+# Active: True
+
+# -------
+# 3. AI development example: pass model settings from a dictionary.
+def generate_text(prompt, model, temperature, max_tokens):
+	print("Prompt:", prompt)
+	print("Model:", model)
+	print("Temperature:", temperature)
+	print("Maximum tokens:", max_tokens)
+
+
+model_settings = {
+	"model": "text-model-v1",
+	"temperature": 0.2,
+	"max_tokens": 200,
+}
+
+generate_text("Summarize this document.", **model_settings)
+# Expected output:
+# Prompt: Summarize this document.
+# Model: text-model-v1
+# Temperature: 0.2
+# Maximum tokens: 200
+
+
+
+//---------- Ex : 4 ---------
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -1525,6 +1676,26 @@ if __name__ == "__main__":
 //   "year": 2025,
 //   "month": "June"
 // }
+
+
+
+
+// ---------------- Ex : 5 --------------
+def student(**kwargs):
+    print(kwargs)
+
+student(name="Anand", age=36, city="Hyderabad")
+
+// kwargs becomes:
+
+{
+    "name": "Anand",
+    "age": 36,
+    "city": "Hyderabad"
+}
+
+
+// ---------------- Ex : 6 --------------
       `
                 }
             ]
@@ -1597,6 +1768,8 @@ Another place you'll use lambda functions is in data science when creating a dat
 
 df["lower_name"] = df["name"].apply(lambda x: x.lower())
 The apply function will apply each element of the series to the lambda function. The lambda function will then return a value for each element based on the expression you passed to it. In our case, the expression was to lowercase each element.
+
+<a href="https://github.com/anand-developer01/python-programs/blob/main/lambda_function.py" target="_blank">lambda function examples</a>
 `,
                     code1: `// ------------- Ex : 1 ------------
                     s1 = 'GeeksforGeeks'
@@ -1770,6 +1943,10 @@ print(vowels)
                 {
                     text1: `The <b>reduce()</b> function in Python is a functional programming tool that applies a given function cumulatively to the items of an iterable, from left to right, so as to reduce the iterable to a single value. It is part of the functools module and needs to be imported. 
                     
+                    <b>reduce()</b> is used when you want to <b>combine all elements of a sequence into one final value.</b>
+It comes from the functools module:<span style="color:#ac4561">
+from functools import reduce </span>
+
                     The <b>reduce(fun,seq)</b> function is used to apply a particular function passed in its argument to all of the list elements mentioned in the sequence passed along. This function is defined in "functools" module.
                     
                     <b>Syntax of reduce()</b>
@@ -2217,10 +2394,122 @@ It lets you <b>install, upgrade, and manage</b> third-party Python libraries fro
         },
         {
             id: 1,
-            title: "What is Python?",
+            title: "[:]  slicing syntax",
             note: [
                 {
-                    text1: `What is Python?`,
+                    text1: `In Python, [:] is called slicing syntax. It is used to extract a portion of a sequence such as a list, string, tuple, or other sliceable objects.
+                    
+                    The general syntax is:
+<b> sequence[start:stop:step] </b>
+Think of it as:
+Start → where to begin
+Stop → where to stop (not included)
+Step → how many positions to move each time
+
+<b>1. Basic [:] </b>
+Suppose:
+numbers = [10, 20, 30, 40, 50]
+
+If you do:
+numbers[:]
+You get:
+[10, 20, 30, 40, 50]
+
+It means:
+"Take everything from the beginning to the end."
+So:
+numbers[:]
+is essentially a way to create a shallow copy of the list.
+
+<b>2. [start:stop]</b>
+numbers = [10, 20, 30, 40, 50]
+print(numbers[1:4])
+Output:
+[20, 30, 40]
+Why?
+Python indexes:
+Index:    0    1    2    3    4
+          ↓    ↓    ↓    ↓    ↓
+Value:   10   20   30   40   50
+
+[1:4] means:
+<b>Start at index 1</b>
+<b>Stop before index 4</b>
+
+Therefore:
+20, 30, 40
+
+<b>3. [start:]</b>
+If you don't provide the stop:
+numbers[2:]
+Output:
+[30, 40, 50]
+Meaning:
+Start at index 2 and continue until the end.
+
+<b>4. [:stop]</b>
+If you don't provide the start:
+numbers[:3]
+Output:
+[10, 20, 30]
+Meaning:
+Start from the beginning and stop before index 3.
+
+<b>5. [::step]</b>
+Now we have the third part: step.
+numbers = [10, 20, 30, 40, 50]
+print(numbers[::2])
+Output:
+[10, 30, 50]
+
+It takes every 2nd element.
+Think:
+10 → 20 → 30 → 40 → 50
+↑         ↑         ↑
+take      take      take
+
+<b>6. Reverse a list with [::-1]</b>
+This is one of the most important uses.
+numbers = [10, 20, 30, 40, 50]
+print(numbers[::-1])
+
+Output:
+[50, 40, 30, 20, 10]
+Why?
+[start : stop : step]
+   ↓      ↓      ↓
+   -      -     -1
+
+-1 means:
+Move backwards one position at a time.
+So:
+[::-1]
+means:
+Take everything, but move backwards.
+
+<b>7. Strings also support [:]</b>
+name = "Anand"
+print(name[:])
+Output:
+Anand
+You can also do:
+print(name[1:4])
+Output:
+nan
+And:
+print(name[::-1])
+Output:
+dnanA
+
+<b>8. Very important: [:] vs [::] vs [::-1]</b>
+These may look confusing initially.
+<b>[:]</b>	Everything
+<b>[start:]</b>	Start → end
+<b>[:stop]</b>	Beginning → stop
+<b>[start:stop]</b>	Start → stop
+<b>[::2]</b>	Everything, every 2nd element
+<b>[::-1]</b>	Everything in reverse
+`,
                     code1: ``
                 }
             ]

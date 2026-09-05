@@ -579,11 +579,112 @@ The output of one component automatically becomes the input of the next.`,
         },
         {
             id: 1,
-            title: "what are problem-solving skills",
+            title: "LangChain Agents",
             note: [
                 {
-                    text1: `What is Python?`,
-                    code1: ``
+                    text1: `<b>LangChain Agents</b> are AI systems powered by Large Language Models (LLMs) that use the model as a reasoning engine to determine an application's control flow. Instead of following a rigid, hardcoded sequence of steps, an agent dynamically plans, reasons, and loops through actions (such as calling external tools or APIs) until a user's goal is met.
+                    
+                    <b>Core Concepts</b>
+                    <b>The LLM as the Brain</b>: The model processes the user input, evaluates the current state, and decides what action to take next.  
+                    <b>Tools</b>: Functions, APIs, or computational modules (e.g., a calculator, a SQL database query tool, a web search API, or a file system utility) that extend the LLM's capabilities beyond its training data.  
+                    <b>The Agent Loop</b>: The core mechanism where the agent executes a continuous cycle: <b>Reason -> Act -> Observe -> Repeat</b> until the task is complete.  
+
+                    <b>Modern Architecture (langchain & langgraph)</b>
+                    In the modern LangChain ecosystem, agents are built on top of robust execution runtimes (frequently leveraging <b>LangGraph</b>) to handle state persistence, multi-step planning, and complex control flows seamlessly:  
+
+                    1) <b>Pre-built Patterns (create_agent)</b>: LangChain provides streamlined interfaces like create_agent to spin up standard ReAct (Reason + Act) agents with minimal boilerplate code.
+
+                    2) <b>Middleware & Customization</b>: You can easily inject middleware or hooks to alter agent behavior—such as adding human-in-the-loop approval steps, managing conversation memory, or filtering sensitive data.
+
+                    3) <b>Ecosystem Integration</b>: LangChain offers over 1,000 modular integrations for chat models, vector stores, and custom tools, ensuring you aren't locked into a single model provider.
+
+                    <b>Chain = follows a fixed sequence</b>
+                    to
+                    <b>Agent = decides what action/tool to use</b>
+
+                    <b>What is an AI Agent?</b>
+An AI Agent is an LLM that can decide what action to take to accomplish a goal.
+A normal LLM does:<span style="color:#ac4561">User → LLM → Answer</span>
+An Agent does:<span style="color:#ac4561">User
+  ↓
+LLM (Reason/Decide)
+  ↓
+Choose a Tool
+  ↓
+Execute Tool
+  ↓
+Observe Result
+  ↓
+LLM
+  ↓
+Final Answer</span>
+
+<b>Simple example</b>
+You ask:
+"What is 25 × 40?"
+
+An agent might decide:
+<span style="color:#ac4561">User question
+     ↓
+Agent
+     ↓
+"I need a calculator"
+     ↓
+Calculator Tool
+     ↓
+1000
+     ↓
+Agent
+     ↓
+"25 × 40 = 1000"
+</span>
+The important part is that the agent decides which tool to use.
+                    `,
+                    code1: `//agent syntax is roughly:
+
+from langchain.agents import create_agent
+
+// Then:
+agent = create_agent(
+    model=model,
+    tools=tools,
+    system_prompt="You are a helpful assistant."
+)
+
+// And invoke it:
+response = agent.invoke({
+    "messages": [
+        {"role": "user", "content": "What is 25 * 40?"}
+    ]
+})
+    
+// ---------------
+// Complete basic structure
+from langchain.agents import create_agent
+from langchain_ollama import ChatOllama
+
+model = ChatOllama(
+    model="llama3.2"
+)
+
+def calculator(a: int, b: int) -> int:
+    return a * b
+
+tools = [calculator]
+
+agent = create_agent(
+    model=model,
+    tools=tools,
+    system_prompt="You are a helpful assistant."
+)
+
+response = agent.invoke({
+    "messages": [
+        {"role": "user", "content": "Calculate 25 * 40"}
+    ]
+})
+
+print(response["messages"][-1].content)`
                 }
             ]
         },
