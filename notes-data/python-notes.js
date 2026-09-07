@@ -6103,6 +6103,477 @@ if __name__ == '__main__':
         },
         {
             id: 1,
+            title: "**try / except",
+            note: [
+                {
+                    text1: `Exception handling is used when your program encounters an error while running.
+                    
+                    The try...except block in Python is a control flow structure used to intercept runtime errors, preventing your program from crashing abruptly. When an error occurs inside the guarded section, Python stops normal execution and jumps to the handling block.
+
+    <b>Syntax Components</b>
+    <b>try</b>: Houses the risky code that has the potential to raise an exception.
+    <b>except</b>: Captures specific error types and executes fallback logic when an exception is triggered.
+    <b>else</b>: Runs only if the try block executes successfully without raising any exceptions.
+    <b>finally</b>: Executes unconditionally at the end, making it ideal for cleanup tasks like closing files or database connections.
+    
+    <b>For example:</b>
+num = int(input("Enter a number: "))
+print(10 / num)
+
+If the user enters:
+0
+Python raises:
+ZeroDivisionError: division by zero
+<b>Exception handling</b> lets a Python program respond to runtime errors without stopping unexpectedly.
+
+<b>1. Basic try / except</b>
+The basic syntax is:
+<span style="color:#ac4561">try:
+    # code that might cause an error
+except:
+    # code to execute if an error occurs</span>
+
+Example:
+<span style="color:#ac4561">try:
+    num = int(input("Enter a number: "))
+    result = 10 / num
+    print(result)
+
+except:
+    print("Something went wrong")</span>
+
+If the user enters <span style="color:#ac4561">2</span>, the output is <span style="color:#ac4561">5.0</span>.
+If the user enters <span style="color:#ac4561">0</span> or <span style="color:#ac4561">abc</span>, the output is <span style="color:#ac4561">Something went wrong</span>.
+
+Two different exceptions can occur:
+<span style="color:#ac4561">ValueError
+ZeroDivisionError</span>
+
+<b>2. Catching a specific exception</b>
+It is better to specify which exception you want to handle:
+<span style="color:#ac4561">try:
+    num = int(input("Enter a number: "))
+    result = 10 / num
+    print(result)
+
+except ValueError:
+    print("Please enter a valid number")
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")</span>
+
+Input <span style="color:#ac4561">abc</span> produces <span style="color:#ac4561">Please enter a valid number</span>.
+Input <span style="color:#ac4561">0</span> produces <span style="color:#ac4561">Cannot divide by zero</span>.
+Input <span style="color:#ac4561">5</span> produces <span style="color:#ac4561">2.0</span>.
+
+<b>3. Why specify the exception?</b>
+Using a bare <span style="color:#ac4561">except:</span> can hide programming bugs:
+<span style="color:#ac4561">try:
+    num = int(input("Enter number: "))
+    result = 10 / num
+    print(resultt)   # typo
+
+except:
+    print("Error")</span>
+
+The actual problem is <span style="color:#ac4561">NameError</span>, but the bare handler hides it. Prefer a specific handler such as <span style="color:#ac4561">except ValueError:</span> whenever possible.
+
+<b>4. Accessing the exception object</b>
+Use <span style="color:#ac4561">as</span> to store the exception in a variable:
+<span style="color:#ac4561">try:
+    num = int("abc")
+
+except ValueError as error:
+    print(error)
+
+# Output: invalid literal for int() with base 10: 'abc'</span>
+
+<b>5. Handling multiple exceptions together</b>
+Use a tuple when the same logic applies to multiple exception types:
+<span style="color:#ac4561">try:
+    num = int(input("Enter number: "))
+    print(10 / num)
+
+except (ValueError, ZeroDivisionError):
+    print("Invalid operation")</span>
+
+<b>6. try / except / else</b>
+The <span style="color:#ac4561">else</span> block executes only when no exception occurs:
+<span style="color:#ac4561">try:
+    num = int(input("Enter number: "))
+    result = 10 / num
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+else:
+    print("Result:", result)</span>
+
+The flow is:
+<span style="color:#ac4561">try
+ │
+ ├── error → except
+ │
+ └── no error → else</span>
+
+<b>7. try / except / finally</b>
+The <span style="color:#ac4561">finally</span> block always executes, whether an exception occurs or not:
+<span style="color:#ac4561">try:
+    num = int(input("Enter a number: "))
+    print(10 / num)
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+finally:
+    print("Program finished")</span>
+
+<b>8. Complete structure</b>
+<span style="color:#ac4561">try:
+    # risky code
+
+except SomeException:
+    # handle error
+
+else:
+    # executes when no error
+
+finally:
+    # always executes</span>
+
+<b>9. Real-world examples</b>
+File operations, API calls, database operations, network requests, and LLM calls can all fail:
+<span style="color:#ac4561">try:
+    file = open("data.txt")
+    data = file.read()
+
+except FileNotFoundError:
+    print("File does not exist")
+
+finally:
+    print("Finished")
+
+try:
+    response = model.generate(prompt)
+except TimeoutError:
+    print("Model request timed out")</span>
+
+<b>Important:</b> an exception is not the same as a syntax error.
+<span style="color:#ac4561">print("Hello"</span> causes a <span style="color:#ac4561">SyntaxError</span> because Python cannot parse the code.
+<span style="color:#ac4561">print(10 / 0)</span> is valid syntax but raises the runtime exception <span style="color:#ac4561">ZeroDivisionError</span>.
+`,
+                    code1: `// The basic syntax is:
+            try:
+                # code that might cause an error
+            except:
+                # code to execute if an error occurs
+                
+                // ------------ Ex : 1 ----------
+            try:
+                num = int(input("Enter a number: "))
+                result = 10 / num
+                print(result)
+
+            except:
+                print("Something went wrong")`
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "`raise` in Python",
+            note: [
+                {
+                    text1: `The <b>raise</b> keyword in Python is used to explicitly trigger an exception (an error) during the execution of a program. When a <b>raise</b> statement is encountered, normal program flow stops, and Python looks for a matching <b>try...except</b> block to handle the error.
+
+<b>Key Use Cases</b>
+-> <b>Enforcing conditions:</b> Stop code execution if an input or state is invalid, such as when a positive number is required but a negative number is provided.
+-> <b>Reraising exceptions:</b> Catch an error, log it or perform cleanup, and pass the same error up the call stack using a bare <b>raise</b>.
+-> <b>Custom errors:</b> Raise user-defined exception classes that inherit from Python's built-in <b>Exception</b> class.
+
+<b>1. Enforcing conditions</b>
+Use <span style="color:#ac4561">raise</span> when you want to stop execution because a value or state is invalid.
+<span style="color:#ac4561">age = -5
+
+if age &lt; 0:
+    raise ValueError("Age cannot be negative")</span>
+
+Here, we are saying: <b>"This value is invalid, so don't continue."</b> This is commonly used for <b>input validation</b>.
+
+<b>2. Reraising exceptions</b>
+Sometimes you catch an exception, do something with it, such as logging, and then send the same exception upward.
+<span style="color:#ac4561">try:
+    result = 10 / 0
+
+except ZeroDivisionError:
+    print("Logging the error...")
+    raise</span>
+
+The important part is:
+<span style="color:#ac4561">raise</span>
+
+A bare <span style="color:#ac4561">raise</span> inside <span style="color:#ac4561">except</span> means: <b>"Raise the exact same exception again."</b> It preserves the original exception and traceback.
+
+<b>3. Custom errors</b>
+You can create your own exception class by inheriting from <span style="color:#ac4561">Exception</span>.
+<span style="color:#ac4561">class InvalidAgeError(Exception):
+    pass</span>
+
+Then raise it:
+<span style="color:#ac4561">age = 15
+
+if age &lt; 18:
+    raise InvalidAgeError("Age must be 18 or above")</span>
+
+Python raises your custom exception:
+<span style="color:#ac4561">InvalidAgeError: Age must be 18 or above</span>
+
+This is useful when you want errors that are specific to your application's business logic.
+
+<b>In short</b>
+<span style="color:#ac4561">raise
+ │
+ ├── Validate → reject invalid values
+ │
+ ├── Reraise → pass an existing exception upward
+ │
+ └── Custom → raise your application's own errors</span>
+
+<b>raise</b> is used when <b>you want to manually create or trigger an exception</b>.
+raise is a keyword in Python that allows you to explicitly trigger an exception. It is commonly used for input validation, enforcing constraints, or signaling that an error condition has occurred. When raise is called, it interrupts the normal flow of the program and transfers control to the nearest enclosing exception handler.
+
+raise is a Python keyword used to manually trigger an exception when a specific condition occurs.
+
+<b>1. Basic example</b>
+<span style="color:#ac4561">age = 15
+
+if age &lt; 18:
+    raise ValueError("Age must be 18 or above")</span>
+
+Output:
+<span style="color:#ac4561">ValueError: Age must be 18 or above</span>
+
+Here, Python did not discover an unexpected error. <b>We intentionally raised the exception.</b>
+
+<b>2. raise with try / except</b>
+<span style="color:#ac4561">try:
+    age = 15
+
+    if age &lt; 18:
+        raise ValueError("You are not eligible")
+
+except ValueError as error:
+    print(error)</span>
+
+Output:
+<span style="color:#ac4561">You are not eligible</span>
+
+The flow is:
+<span style="color:#ac4561">condition
+   ↓
+raise ValueError
+   ↓
+except ValueError
+   ↓
+handle the error</span>
+
+<b>3. Why do we need raise?</b>
+Use <span style="color:#ac4561">raise</span> to validate input and stop an operation that cannot continue:
+<span style="color:#ac4561">def withdraw(balance, amount):
+
+    if amount &gt; balance:
+        raise ValueError("Insufficient balance")
+
+    return balance - amount
+
+print(withdraw(1000, 1500))</span>
+
+Instead of returning an incorrect value, the function tells the caller:
+<span style="color:#ac4561">ValueError: Insufficient balance</span>
+
+This is extremely useful for <b>validation</b>.
+
+<b>4. Re-raising an exception</b>
+The bare <span style="color:#ac4561">raise</span> inside an <span style="color:#ac4561">except</span> block raises the same exception again:
+<span style="color:#ac4561">try:
+    num = int("abc")
+
+except ValueError:
+    print("Logging the error")
+    raise</span>
+
+Output:
+<span style="color:#ac4561">Logging the error
+ValueError: invalid literal for int() with base 10: 'abc'</span>
+
+This pattern is useful when you want to log or perform an action and then let the error propagate to another layer.
+
+<b>5. raise vs except</b>
+Think of them as opposites:
+<span style="color:#ac4561">raise
+  ↓
+"I am creating or triggering an error"
+
+except
+  ↓
+"I am catching or handling an error"</span>
+
+Example:
+<span style="color:#ac4561">def divide(a, b):
+    if b == 0:
+        raise ZeroDivisionError("b cannot be zero")
+
+    return a / b
+
+try:
+    print(divide(10, 0))
+
+except ZeroDivisionError as error:
+    print(error)</span>
+
+Output:
+<span style="color:#ac4561">b cannot be zero</span>
+
+<a href="https://github.com/anand-developer01/python-programs/blob/main/raise.py" target="_blank">raise Examples</a>
+`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
+            title: "Custom Exceptions in Python",
+            note: [
+                {
+                    text1: `A <b>custom exception</b> is a user-defined exception that you create for a specific situation in your application.
+
+Python already provides built-in exceptions such as <span style="color:#ac4561">ValueError</span>, <span style="color:#ac4561">TypeError</span>, and <span style="color:#ac4561">IndexError</span>. But sometimes these do not clearly describe the problem in your application. That is when you create a custom exception.
+
+<b>1. Creating a Custom Exception</b>
+A custom exception is usually created by inheriting from Python's built-in <span style="color:#ac4561">Exception</span> class.
+<span style="color:#ac4561">class InsufficientBalanceError(Exception):
+    pass</span>
+
+Here:
+<span style="color:#ac4561">InsufficientBalanceError</span> is our custom exception.
+<span style="color:#ac4561">Exception</span> is the parent or base class.
+<span style="color:#ac4561">pass</span> means no additional behavior is needed.
+
+<b>2. Raising a Custom Exception</b>
+Use <span style="color:#ac4561">raise</span> to throw your custom exception.
+<span style="color:#ac4561">class InsufficientBalanceError(Exception):
+    pass
+
+balance = 500
+withdraw = 1000
+
+if withdraw &gt; balance:
+    raise InsufficientBalanceError("Insufficient balance")
+
+print("Withdrawal successful")</span>
+
+Output:
+<span style="color:#ac4561">InsufficientBalanceError: Insufficient balance</span>
+
+When Python reaches <span style="color:#ac4561">raise</span>, normal execution stops and the exception is thrown.
+
+<b>3. Handling a Custom Exception</b>
+Catch it using <span style="color:#ac4561">try-except</span>:
+<span style="color:#ac4561">class InsufficientBalanceError(Exception):
+    pass
+
+try:
+    balance = 500
+    withdraw = 1000
+
+    if withdraw &gt; balance:
+        raise InsufficientBalanceError("Insufficient balance")
+
+except InsufficientBalanceError as error:
+    print(error)</span>
+
+Output:
+<span style="color:#ac4561">Insufficient balance</span>
+
+<b>4. Custom Exception with Additional Data</b>
+A custom exception can also contain additional information.
+<span style="color:#ac4561">class InsufficientBalanceError(Exception):
+    def __init__(self, balance, amount):
+        self.balance = balance
+        self.amount = amount
+
+        super().__init__(
+            f"Balance is {balance}, but withdrawal amount is {amount}"
+        )
+
+try:
+    balance = 500
+    withdraw = 1000
+
+    if withdraw &gt; balance:
+        raise InsufficientBalanceError(balance, withdraw)
+
+except InsufficientBalanceError as error:
+    print(error)</span>
+
+Output:
+<span style="color:#ac4561">Balance is 500, but withdrawal amount is 1000</span>
+
+The exception object stores:
+<span style="color:#ac4561">error.balance
+error.amount</span>
+
+<b>5. Real-World Example</b>
+Suppose you are building a login system. Instead of using a generic error:
+<span style="color:#ac4561">raise ValueError("Invalid login")</span>
+
+Create a meaningful exception:
+<span style="color:#ac4561">class InvalidCredentialsError(Exception):
+    pass</span>
+
+Then use it:
+<span style="color:#ac4561">def login(username, password):
+    if username != "admin" or password != "1234":
+        raise InvalidCredentialsError("Invalid username or password")
+
+    return "Login successful"
+
+try:
+    print(login("admin", "wrong"))
+
+except InvalidCredentialsError as error:
+    print(error)</span>
+
+Output:
+<span style="color:#ac4561">Invalid username or password</span>
+
+<b>Why use Custom Exceptions?</b>
+Custom exceptions make your code:
+-> <b>More readable:</b> The exception name explains the problem.
+-> <b>More specific:</b> You can catch one particular type of error.
+-> <b>Easier to maintain:</b> Business-specific errors are clearly separated.
+-> <b>Better for large applications:</b> Different parts of the application can define and handle their own errors.
+
+<b>Key Pattern</b>
+<span style="color:#ac4561">class MyCustomError(Exception):
+    pass
+
+try:
+    if some_condition:
+        raise MyCustomError("Something went wrong")
+
+except MyCustomError as error:
+    print(error)</span>
+
+<b>In short:</b> A custom exception is a user-defined exception created by inheriting from <span style="color:#ac4561">Exception</span>, allowing you to represent and handle application-specific errors clearly.
+
+<a href="https://github.com/anand-developer01/python-programs/blob/main/custom_exceptions.py" target="_blank">Custom Exceptions Examples</a>`,
+                    code1: ``
+                }
+            ]
+        },
+        {
+            id: 1,
             section: `Multithreading`,
             title: "What is Multithreading?",
             note: [
